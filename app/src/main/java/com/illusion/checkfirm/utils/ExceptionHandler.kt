@@ -1,10 +1,11 @@
-package com.illusion.checkfirm
+package com.illusion.checkfirm.utils
 
 import java.io.PrintWriter
 import java.io.StringWriter
 import android.app.Activity
 import android.content.Intent
 import android.os.Build
+import com.illusion.checkfirm.activities.ErrorActivity
 
 import java.lang.Character.LINE_SEPARATOR
 
@@ -42,7 +43,7 @@ class ExceptionHandler internal constructor(private val myContext: Activity) : T
                 Build.VERSION.INCREMENTAL +
                 LINE_SEPARATOR
 
-        val intent = Intent(myContext, AnotherActivity::class.java)
+        val intent = Intent(myContext, ErrorActivity::class.java)
         intent.putExtra("error", errorReport)
         myContext.startActivity(intent)
 

@@ -1,11 +1,11 @@
-package com.illusion.checkfirm
+package com.illusion.checkfirm.adapters
 
 import android.app.Activity
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.illusion.checkfirm.R
 import java.util.ArrayList
 
 class ListAdapter internal constructor(private val context: Activity, private val firmware: ArrayList<String>) : BaseAdapter() {

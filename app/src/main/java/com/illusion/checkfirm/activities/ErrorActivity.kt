@@ -1,4 +1,4 @@
-package com.illusion.checkfirm
+package com.illusion.checkfirm.activities
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -9,9 +9,10 @@ import android.os.Bundle
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.illusion.checkfirm.utils.ExceptionHandler
 import java.util.Objects
 
-class AnotherActivity : AppCompatActivity() {
+class ErrorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +22,6 @@ class AnotherActivity : AppCompatActivity() {
     }
 
     companion object {
-
         fun restart(activity: Activity, delay: Int) {
             var delay = delay
             if (delay == 0) {
@@ -32,16 +32,8 @@ class AnotherActivity : AppCompatActivity() {
             val intent = PendingIntent.getActivity(activity, 0, restartIntent, PendingIntent.FLAG_ONE_SHOT)
             val manager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             Objects.requireNonNull(manager).set(AlarmManager.RTC, System.currentTimeMillis() + delay, intent)
-            finishAffinity(activity)
-        }
-
-        private fun finishAffinity(activity: Activity) {
             activity.setResult(Activity.RESULT_CANCELED)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                activity.finishAffinity()
-            } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-                activity.runOnUiThread { activity.finishAffinity() }
-            }
+            activity.finishAffinity()
         }
     }
 }
