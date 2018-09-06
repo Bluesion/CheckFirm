@@ -17,7 +17,7 @@ class BookMark {
     }
 
     companion object {
-        const val TABLE_NAME = "test5"
+        const val TABLE_NAME = "bookmark"
 
         const val COLUMN_ID = "_id"
         const val COLUMN_NAME = "name"

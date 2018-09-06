@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mDB: DatabaseHelper
 
     private val handler = MyHandler(this@MainActivity)
-    private class MyHandler (activity: MainActivity) : Handler() {
+    private class MyHandler (activity: MainActivity): Handler() {
         private val mActivity: WeakReference<MainActivity> = WeakReference(activity)
 
         override fun handleMessage(msg: Message) {
@@ -220,7 +220,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private fun isOnline(mContext: Context): Boolean {
+        fun isOnline(mContext: Context): Boolean {
             val connectivityManager = mContext.getSystemService(Context.CONNECTIVITY_SERVICE)
             return if (connectivityManager is ConnectivityManager) {
                 val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo

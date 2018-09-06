@@ -26,6 +26,9 @@
             android:label="북마크된 디바이스"
             android:name=".activities.BookMarkActivity"
             android:theme="@style/BookMarkTheme" />
-        <activity android:name=".activities.ErrorActivity" />
+        <activity
+            android:label="오류 보고"
+            android:name=".activities.ErrorActivity"
+            android:theme="@style/BookMarkTheme" />
     </application>
 </manifest>

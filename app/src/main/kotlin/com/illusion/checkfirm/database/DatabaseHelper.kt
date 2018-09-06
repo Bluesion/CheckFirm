@@ -106,6 +106,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     companion object {
         private const val DATABASE_VERSION = 1
-        private const val DATABASE_NAME = "test5.db"
+        private const val DATABASE_NAME = "bookmark.db"
     }
 }
