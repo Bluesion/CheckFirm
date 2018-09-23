@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var testHeader: ArrayList<String>
     private lateinit var officialHashMap: HashMap<String, ArrayList<String>>
     private lateinit var testHashMap: HashMap<String, ArrayList<String>>
-	private lateinit var mResult: LinearLayout
 
     private val handler = MyHandler(this@MainActivity)
     private class MyHandler (activity: MainActivity): Handler() {
@@ -83,7 +82,6 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-		mResult = findViewById(R.id.result)
         mOfficialListView = findViewById(R.id.mOfficialListView)
         mTestListView = findViewById(R.id.mTestListView)
         device = findViewById(R.id.model)
@@ -226,7 +224,6 @@ class MainActivity : AppCompatActivity() {
                     testHashMap[testHeader[0]] = testFirmware
                     mAdapter = MyExpandableAdapter(this@MainActivity, officialHeader, officialHashMap)
                     mAdapter2 = MyExpandableAdapter(this@MainActivity, testHeader, testHashMap)
-					mResult.visibility = View.VISIBLE
                     mOfficialListView.setAdapter(mAdapter)
                     mTestListView.setAdapter(mAdapter2)
                     mOfficialListView.setOnGroupClickListener { parent, _, groupPosition, _ ->
