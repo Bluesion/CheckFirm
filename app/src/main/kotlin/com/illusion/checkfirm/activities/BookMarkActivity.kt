@@ -2,13 +2,7 @@ package com.illusion.checkfirm.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
 import android.text.InputFilter
 import android.view.View
 import java.util.*
@@ -21,6 +15,12 @@ import com.illusion.checkfirm.database.DatabaseHelper
 import com.illusion.checkfirm.utils.RecyclerTouchListener
 import android.content.Intent
 import android.content.res.Resources
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class BookMarkActivity : AppCompatActivity() {
 
@@ -104,10 +104,10 @@ class BookMarkActivity : AppCompatActivity() {
     }
 
     private fun showActionsDialog(position: Int) {
-        val colors = arrayOf<CharSequence>("수정", "삭제")
+        val colors = arrayOf<CharSequence>(getString(R.string.edit), getString(R.string.delete))
 
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("옵션")
+        builder.setTitle(R.string.options)
         builder.setItems(colors) { _, which ->
             if (which == 0) {
                 showBookMarkDialog(true, mBookMarkList[position], position)
@@ -123,7 +123,7 @@ class BookMarkActivity : AppCompatActivity() {
         val inflater = layoutInflater
         val dialogView = inflater.inflate(R.layout.alertdialog, null, false)
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("디바이스 추가")
+        builder.setTitle(R.string.add)
         val margin = dpToPx(20)
         builder.setView(dialogView, margin, margin, margin, 0)
         val inputName = dialogView.findViewById<EditText>(R.id.name)

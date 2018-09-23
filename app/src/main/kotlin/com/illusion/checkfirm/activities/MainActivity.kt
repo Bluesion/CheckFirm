@@ -7,20 +7,23 @@ import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.*
+import android.text.Editable
 import android.text.InputFilter
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.text.TextWatcher
+import android.view.*
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import com.illusion.checkfirm.utils.ExceptionHandler
-import com.illusion.checkfirm.adapters.ListAdapter
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.adapters.FastBookMarkAdapter
+import com.illusion.checkfirm.adapters.MyExpandableAdapter
 import com.illusion.checkfirm.database.BookMark
 import com.illusion.checkfirm.database.DatabaseHelper
 import com.illusion.checkfirm.utils.RecyclerTouchListener
@@ -45,15 +48,19 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     internal lateinit var latestOfficialFirmware: TextView
     internal lateinit var latestTestFirmware: TextView
-    private lateinit var device: AppCompatEditText
-    internal lateinit var csc: AppCompatEditText
-    internal lateinit var mAdapter: ListAdapter
-    internal lateinit var mAdapter2: ListAdapter
-    internal lateinit var mOfficialListView: ListView
-    internal lateinit var mTestListView: ListView
+    private lateinit var device: TextInputEditText
+    internal lateinit var csc: TextInputEditText
+    internal lateinit var mAdapter: MyExpandableAdapter
+    internal lateinit var mAdapter2: MyExpandableAdapter
+    internal lateinit var mOfficialListView: ExpandableListView
+    internal lateinit var mTestListView: ExpandableListView
     private lateinit var mBookMarkAdapter: FastBookMarkAdapter
     private val mBookMarkList = ArrayList<BookMark>()
     private lateinit var mDB: DatabaseHelper
+    private lateinit var officialHeader: ArrayList<String>
+    private lateinit var testHeader: ArrayList<String>
+    private lateinit var officialHashMap: HashMap<String, ArrayList<String>>
+    private lateinit var testHashMap: HashMap<String, ArrayList<String>>
 
     private val handler = MyHandler(this@MainActivity)
     private class MyHandler (activity: MainActivity): Handler() {
@@ -100,12 +107,20 @@ class MainActivity : AppCompatActivity() {
         newCSCFilters[cscFilters.size] = InputFilter.AllCaps()
         csc.filters = newCSCFilters
 
-        val search = findViewById<AppCompatButton>(R.id.search)
+        device.setupClearButtonWithAction()
+        csc.setupClearButtonWithAction()
+
+        officialHeader = ArrayList()
+        testHeader = ArrayList()
+        officialHeader.add(getString(R.string.previous_official))
+        testHeader.add(getString(R.string.previous_test))
+
+        val search = findViewById<MaterialButton>(R.id.search)
         search.setOnClickListener {
             if (isOnline(applicationContext)) {
                 networkTask()
             } else {
-                Toast.makeText(applicationContext, "네트워크에 연결해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -203,12 +218,22 @@ class MainActivity : AppCompatActivity() {
                 } catch (e: IOException) {}
 
                 mHandler.post {
-                    mAdapter = ListAdapter(this@MainActivity, officialFirmware)
-                    mAdapter2 = ListAdapter(this@MainActivity, testFirmware)
-                    mOfficialListView.adapter = mAdapter
-                    mTestListView.adapter = mAdapter2
-                    setListViewHeightBasedOnChildren(mOfficialListView)
-                    setListViewHeightBasedOnChildren(mTestListView)
+                    officialHashMap = HashMap()
+                    officialHashMap[officialHeader[0]] = officialFirmware
+                    testHashMap = HashMap()
+                    testHashMap[testHeader[0]] = testFirmware
+                    mAdapter = MyExpandableAdapter(this@MainActivity, officialHeader, officialHashMap)
+                    mAdapter2 = MyExpandableAdapter(this@MainActivity, testHeader, testHashMap)
+                    mOfficialListView.setAdapter(mAdapter)
+                    mTestListView.setAdapter(mAdapter2)
+                    mOfficialListView.setOnGroupClickListener { parent, _, groupPosition, _ ->
+                        setListViewHeight(parent, groupPosition)
+                        false
+                    }
+                    mTestListView.setOnGroupClickListener { parent, _, groupPosition, _ ->
+                        setListViewHeight(parent, groupPosition)
+                        false
+                    }
                     latestOfficialFirmware.text = latestOfficial
                     latestTestFirmware.text = latestTest
                     mSwipeRefreshLayout.isEnabled = false
@@ -219,6 +244,56 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
+    private fun TextInputEditText.setupClearButtonWithAction() {
+        addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+                val clearIcon = if (editable?.isNotEmpty() == true) R.drawable.ic_clear else 0
+                setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
+        })
+
+        setOnTouchListener(View.OnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= (this.right - this.compoundPaddingRight)) {
+                    this.setText("")
+                    return@OnTouchListener true
+                }
+            }
+            return@OnTouchListener false
+        })
+    }
+
+    private fun setListViewHeight(listView: ExpandableListView, group: Int) {
+        val listAdapter = listView.expandableListAdapter as ExpandableListAdapter
+        var totalHeight = 0
+        val desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.width, View.MeasureSpec.EXACTLY)
+        for (i in 0 until listAdapter.groupCount) {
+            val groupItem = listAdapter.getGroupView(i, false, null, listView)
+            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
+
+            totalHeight += groupItem.measuredHeight
+
+            if (listView.isGroupExpanded(i) && i != group || !listView.isGroupExpanded(i) && i == group) {
+                for (j in 0 until listAdapter.getChildrenCount(i)) {
+                    val listItem = listAdapter.getChildView(i, j, false, null, listView)
+                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
+                    totalHeight += listItem.measuredHeight
+                }
+            }
+        }
+
+        val params = listView.layoutParams
+        var height = totalHeight + listView.dividerHeight * (listAdapter.groupCount - 1)
+        if (height < 10)
+            height = 200
+        params.height = height
+        listView.layoutParams = params
+        listView.requestLayout()
+    }
+
     companion object {
         fun isOnline(mContext: Context): Boolean {
             val connectivityManager = mContext.getSystemService(Context.CONNECTIVITY_SERVICE)
@@ -226,24 +301,6 @@ class MainActivity : AppCompatActivity() {
                 val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
                 networkInfo?.isConnected ?: false
             } else false
-        }
-
-        fun setListViewHeightBasedOnChildren(listView: ListView) {
-            val listAdapter = listView.adapter ?: return
-
-            var totalHeight = 0
-            val desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.width, View.MeasureSpec.AT_MOST)
-
-            for (i in 0 until listAdapter.count) {
-                val listItem = listAdapter.getView(i, null, listView)
-                listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
-                totalHeight += listItem.measuredHeight
-            }
-
-            val params = listView.layoutParams
-            params.height = totalHeight + listView.dividerHeight * (listAdapter.count - 1)
-            listView.layoutParams = params
-            listView.requestLayout()
         }
     }
 }

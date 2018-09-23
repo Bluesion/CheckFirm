@@ -4,18 +4,18 @@
     android:id="@+id/alertDialog"
     android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="북마크 이름"
+            android:hint="@string/name"
             android:id="@+id/name"
             android:maxLines="1" />
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,34 +23,36 @@
         android:orientation="horizontal"
         android:baselineAligned="false">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6">
 
-            <android.support.v7.widget.AppCompatEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="모델명"
-                android:text="SM-"
+                android:hint="@string/model"
+                android:text="@string/default_string"
+                android:privateImeOptions="defaultInputmode=english;symbol=false"
                 android:id="@+id/model"
                 android:maxLines="1" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4">
 
-            <android.support.v7.widget.AppCompatEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CSC"
+                android:hint="@string/csc"
                 android:id="@+id/csc"
+                android:privateImeOptions="defaultInputmode=english;symbol=false"
                 android:maxLines="1" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

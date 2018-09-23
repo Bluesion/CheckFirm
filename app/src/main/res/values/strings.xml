@@ -1,3 +1,35 @@
 <resources>
-    <string name="app_name">CheckFirm</string>
+    <!-- General -->
+    <string name="app_name" translatable="false">CheckFirm</string>
+    <string name="check_network">Please check your network</string>
+    <string name="csc" translatable="false">CSC</string>
+    <string name="default_string" translatable="false">SM-</string>
+    <string name="default_symbol" translatable="false">&#160;·&#160;</string>
+
+    <!-- Main -->
+    <string name="latest_official">Latest Official Firmware</string>
+    <string name="latest_test">Latest Test Firmware</string>
+    <string name="model">Model</string>
+    <string name="previous_official">Previous Official Firmware</string>
+    <string name="previous_test">Previous Test Firmware</string>
+    <string name="search">Search</string>
+
+    <!-- BookMark -->
+    <string name="add">Add Device</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="name">Bookmark Name</string>
+    <string name="options">Options</string>
+
+    <!-- Error -->
+    <string name="alert">Alert</string>
+    <string name="button_report">Report log</string>
+    <string name="button_restart">Restart</string>
+    <string name="brand">Brand</string>
+    <string name="error_info">Error Information</string>
+    <string name="message">Error detected. Most of errors are occurred because of wrong device name or csc.\nYou can send me a error log or restart the app.</string>
+    <string name="sdk" translatable="false">SDK</string>
+    <string name="toast">Thank you for reporting log</string>
+    <string name="version">App Version</string>
 </resources>

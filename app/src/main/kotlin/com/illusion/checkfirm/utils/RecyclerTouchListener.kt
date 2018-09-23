@@ -1,11 +1,10 @@
 package com.illusion.checkfirm.utils
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerTouchListener(context: Context, recycleView: RecyclerView, private val clickListener: ClickListener?): RecyclerView.OnItemTouchListener {
     private val gestureDetector: GestureDetector

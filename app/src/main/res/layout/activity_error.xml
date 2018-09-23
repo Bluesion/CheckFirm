@@ -1,10 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -17,7 +16,7 @@
         android:layout_margin="4dp"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp">
@@ -31,14 +30,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="알림"
+                    android:text="@string/alert"
                     android:textColor="@color/appColor"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="오류가 발생하였습니다. 모델명과 국가코드를 제대로 입력하지 않아 오류가 발생했을 가능성이 높습니다.\n우측 하단의 버튼을 통해 오류를 보고하시거나 앱을 재시작해주세요."
+                    android:text="@string/message"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <LinearLayout
@@ -48,30 +47,30 @@
                     android:gravity="end"
                     android:orientation="horizontal">
 
-                    <Button
-                        android:layout_width="70dp"
-                        android:layout_height="40dp"
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/report"
-                        android:background="@drawable/error_button"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="오류 보고" />
+                        android:text="@string/button_report" />
 
-                    <Button
-                        android:layout_width="60dp"
-                        android:layout_height="40dp"
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/restart"
                         android:layout_marginStart="8dp"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:background="@drawable/error_button"
-                        android:text="재시작" />
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:text="@string/button_restart" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <android.support.v7.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp">
@@ -85,7 +84,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="제조사"
+                    android:text="@string/brand"
                     android:textColor="@color/appColor"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -97,9 +96,9 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <android.support.v7.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp">
@@ -113,7 +112,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="모델"
+                    android:text="@string/model"
                     android:textColor="@color/appColor"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -125,9 +124,9 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <android.support.v7.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp">
@@ -141,7 +140,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SDK 버전"
+                    android:text="@string/sdk"
                     android:textColor="@color/appColor"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -153,9 +152,9 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <android.support.v7.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp">
@@ -169,7 +168,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="앱 버전"
+                    android:text="@string/version"
                     android:textColor="@color/appColor"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -181,9 +180,9 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <android.support.v7.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp">
@@ -197,7 +196,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="오류 내용"
+                    android:text="@string/error_info"
                     android:textColor="@color/appColor"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -218,7 +217,7 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

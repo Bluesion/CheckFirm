@@ -9,11 +9,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.google.android.material.button.MaterialButton
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.utils.ExceptionHandler
 import com.illusion.checkfirm.utils.GMailSender
@@ -53,17 +54,17 @@ class ErrorActivity : AppCompatActivity() {
         versionString = intent.getStringExtra("version")
         errorString = intent.getStringExtra("error")
 
-        val reportButton = findViewById<Button>(R.id.report)
+        val reportButton = findViewById<MaterialButton>(R.id.report)
         reportButton.setOnClickListener {
             if (MainActivity.isOnline(applicationContext)) {
                 sendError()
                 restart(this, 0)
             } else {
-                Toast.makeText(applicationContext, "네트워크를 확인해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
             }
         }
 
-        val restartButton = findViewById<Button>(R.id.restart)
+        val restartButton = findViewById<MaterialButton>(R.id.restart)
         restartButton.setOnClickListener {
             restart(this, 0)
         }
@@ -93,7 +94,7 @@ class ErrorActivity : AppCompatActivity() {
             override fun run() {
                 mHandler.post {}
                 try {
-                    val message = "제조사:\n" + brandString +
+                    val message = "브랜드:\n" + brandString +
                             "\n" +
                             "\n" +
                             "모델:\n" +
@@ -118,7 +119,7 @@ class ErrorActivity : AppCompatActivity() {
                 } catch (ignored: Exception) {}
 
                 mHandler.post {
-                    Toast.makeText(applicationContext, "정상적으로 오류가 전송되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, R.string.toast, Toast.LENGTH_SHORT).show()
                     handler.sendEmptyMessage(0)
                 }
             }

@@ -26,6 +26,7 @@
         <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/build/tmp/kotlin-classes/debug" />
+          <option name="classpath" value="$MODULE_DIR$/libs/activation.jar;C:/Users/Illusion/Desktop/AndroidStudioProjects/CheckFirm/app/libs/additionnal.jar;C:/Users/Illusion/Desktop/AndroidStudioProjects/CheckFirm/app/libs/mail.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7232056fe60879a09524ffa48176c49a/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.0.aar/f13cc0006a6741b47bc9ff6402784c90/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/cardview-1.0.0.aar/455cf7545031e3b290d87235c2d6e891/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/77c2287de640257134819f6ca2c72c56/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/f401a5c1d8c847a999c25c0919c0b08c/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.0.0.aar/d732d73796381e2b8cb85382fdb85dab/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/c2bf8346b08c8e8dc761bab5805f36cf/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/92d25cdc2c5249d10ab7af81802522cb/jars/classes.jar;C:/Users/Illusion/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.2.70/9318bb9dadaa56534ac8b0728a1ffa2bd0e48b28/kotlin-stdlib-jdk7-1.2.70.jar;C:/Users/Illusion/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.11.3/36da09a8f68484523fa2aaa100399d612b247d67/jsoup-1.11.3.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/cb15c9d444daaa0824306c271f36efeb/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.0.0.aar/2454b4859ef0ef5d034b3bcdac95c827/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/7bc6f94c95f60a4bc930a3fc6e4c1d4b/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/ccd1cfd70fdd196e69f1927c1d555b7d/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/3d6b7413b01fd166e1abad26dac2f7ae/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/0a756ac51aae72baafe1238e06494ef2/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/transition-1.0.0.aar/9cd52f5e4dd2b4141344a3191dd6dcaf/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/499f0900c442c8572b2a6b282822e4ef/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/37003ff39fd065949e4219d8739e7fa3/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/329b72249a3ac47e63070efbeec36156/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/6c6a7423db15d0b1b8c7a68ab21d5bfd/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/5bc02f30b9727b9e4986ddf94bcddfda/jars/classes.jar;C:/Users/Illusion/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.0.0/42858b26cafdaa69b6149f45dfc2894007bc2c7a/collection-1.0.0.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/84f81f9d5bb023d273d70417a13a031c/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/0319b36fc46971c9e28c81df6d41ef48/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/0fec9a21fe4cd58ecf8938070e973073/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/c81dbc84eac4c1b0d29aa809321dae8c/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/27c2fefae12d80c0355e7318d2f23773/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/68bb6450b9255bad657c938ff54a4c86/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/3684861075d90462714c61593154d631/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/b06d58b3585e305b7070c533c40d29f6/jars/classes.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/d47a958db42a9fa14443f82db5369eed/jars/classes.jar;C:/Users/Illusion/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.0.0/e070ffae07452331bc5684734fce6831d531785c/lifecycle-common-2.0.0.jar;C:/Users/Illusion/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/7e42f8e310bfa8a863da0b9f9f7e4090/jars/classes.jar;C:/Users/Illusion/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.0.0/bb21b9a11761451b51624ac428d1f1bb5deeac38/core-common-2.0.0.jar;C:/Users/Illusion/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.0.0/45599f2cd5965ac05a1488fa2a5c0cdd7c499ead/annotation-1.0.0.jar;C:/Users/Illusion/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.70/b5b9449f73ce7bf312e89a7560cb3c209a0fa13e/kotlin-stdlib-1.2.70.jar;C:/Users/Illusion/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.2.70/6ea722d7d0b9451293e739076ddb6a4108d57b6b/kotlin-stdlib-common-1.2.70.jar;C:/Users/Illusion/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar;C:/SDK/platforms/android-28/android.jar" />
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="app_debug" />
@@ -120,6 +121,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-main-apk-res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifest-checker" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
@@ -141,45 +143,45 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: org.jsoup:jsoup:1.11.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\Illusion\Desktop\AndroidStudioProjects\CheckFirm\app\libs\additionnal.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.slidingpanelayout:slidingpanelayout-1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\Illusion\Desktop\AndroidStudioProjects\CheckFirm\app\libs\mail.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:documentfile-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.61@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:print-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-annotations:28.0.0-rc02@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:interpolator-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:versionedparcelable-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:drawerlayout-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: android.arch.lifecycle:viewmodel-1.1.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:loader-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable-28.0.0-rc02" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-runtime-2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.drawerlayout:drawerlayout-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.70@jar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core-2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.core:core-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.cardview:cardview-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.material:material-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.transition:transition-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.versionedparcelable:versionedparcelable-1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\Illusion\Desktop\AndroidStudioProjects\CheckFirm\app\libs\activation.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-28.0.0-rc02" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-utils-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.fragment:fragment-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.0.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.swiperefreshlayout:swiperefreshlayout-1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: android.arch.core:common:1.1.1@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:asynclayoutinflater-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:swiperefreshlayout-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61@jar" level="project" />
-    <orderEntry type="library" name="Gradle: android.arch.core:runtime-1.1.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:cardview-v7-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:viewpager-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-28.0.0-rc01" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:localbroadcastmanager-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-fragment-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-compat-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.github.traex.expandablelayout:library-1.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:design-28.0.0-rc01" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:collections:28.0.0-rc02@jar" level="project" />
-    <orderEntry type="library" name="Gradle: android.arch.lifecycle:common:1.1.1@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:slidingpanelayout-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: android.arch.lifecycle:livedata-core-1.1.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.61@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:cursoradapter-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime-1.1.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:customview-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:transition-28.0.0-rc01" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:coordinatorlayout-28.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-28.0.0-rc02" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-viewmodel-2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.coordinatorlayout:coordinatorlayout-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.70@jar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.documentfile:documentfile-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.70@jar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.0.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.viewpager:viewpager-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.recyclerview:recyclerview-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime-2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-ui-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.0.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.interpolator:interpolator-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.vectordrawable:vectordrawable-animated-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.vectordrawable:vectordrawable-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.loader:loader-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.customview:customview-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.localbroadcastmanager:localbroadcastmanager-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.asynclayoutinflater:asynclayoutinflater-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.cursoradapter:cursoradapter-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.print:print-1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.collection:collection:1.0.0@jar" level="project" />
   </component>
 </module>

@@ -15,20 +15,17 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme">
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:label="북마크된 디바이스"
-            android:name=".activities.BookMarkActivity"
-            android:theme="@style/BookMarkTheme" />
+            android:label="@string/bookmark"
+            android:name=".activities.BookMarkActivity" />
         <activity
-            android:label="오류 보고"
-            android:name=".activities.ErrorActivity"
-            android:theme="@style/BookMarkTheme" />
+            android:label="@string/button_report"
+            android:name=".activities.ErrorActivity" />
     </application>
 </manifest>
