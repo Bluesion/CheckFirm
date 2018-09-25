@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var testHeader: ArrayList<String>
     private lateinit var officialHashMap: HashMap<String, ArrayList<String>>
     private lateinit var testHashMap: HashMap<String, ArrayList<String>>
+    private lateinit var mResult: LinearLayout
 
     private val handler = MyHandler(this@MainActivity)
     private class MyHandler (activity: MainActivity): Handler() {
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        mResult = findViewById(R.id.result)
         mOfficialListView = findViewById(R.id.mOfficialListView)
         mTestListView = findViewById(R.id.mTestListView)
         device = findViewById(R.id.model)
@@ -175,8 +177,9 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onRestart() {
         super.onRestart()
-        finish()
-        startActivity(intent)
+        mBookMarkList.clear()
+        mBookMarkList.addAll(mDB.allBookMark)
+        mBookMarkAdapter.notifyDataSetChanged()
     }
 
     private fun networkTask() {
@@ -234,6 +237,7 @@ class MainActivity : AppCompatActivity() {
                         setListViewHeight(parent, groupPosition)
                         false
                     }
+                    mResult.visibility = View.VISIBLE
                     latestOfficialFirmware.text = latestOfficial
                     latestTestFirmware.text = latestTest
                     mSwipeRefreshLayout.isEnabled = false
