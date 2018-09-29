@@ -6,7 +6,7 @@ android {
     buildToolsVersion "28.0.2"
 
     defaultConfig {
-        applicationId "com.illusion.checkfirm"
+        applicationId "com.tanzentlab.checksamfirm"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 9

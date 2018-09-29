@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.database
+package com.tanzentlab.checksamfirm.database
 
 import android.content.ContentValues
 import android.content.Context

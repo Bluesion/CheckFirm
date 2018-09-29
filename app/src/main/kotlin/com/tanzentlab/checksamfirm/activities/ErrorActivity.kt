@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.activities
+package com.tanzentlab.checksamfirm.activities
 
 import android.app.Activity
 import android.app.AlarmManager
@@ -15,9 +15,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.button.MaterialButton
-import com.illusion.checkfirm.R
-import com.illusion.checkfirm.utils.ExceptionHandler
-import com.illusion.checkfirm.utils.GMailSender
+import com.tanzentlab.checksamfirm.R
+import com.tanzentlab.checksamfirm.utils.ExceptionHandler
+import com.tanzentlab.checksamfirm.utils.GMailSender
 import java.lang.ref.WeakReference
 
 class ErrorActivity : AppCompatActivity() {
@@ -113,7 +113,7 @@ class ErrorActivity : AppCompatActivity() {
                             errorString
                     val sender = GMailSender("illusionkernel@gmail.com", "illusion")
                     try {
-                        sender.sendMail("CheckFirm 애플리케이션", message, "test@gmail.com", "dnjscjf098@gmail.com")
+                        sender.sendMail("CheckSamFirm 애플리케이션", message, "test@gmail.com", "dnjscjf098@gmail.com")
                     } catch (ignored: Exception) {}
 
                 } catch (ignored: Exception) {}

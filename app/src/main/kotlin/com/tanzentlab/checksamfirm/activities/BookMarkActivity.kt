@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.activities
+package com.tanzentlab.checksamfirm.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,12 +7,12 @@ import android.text.InputFilter
 import android.view.View
 import java.util.*
 import android.widget.EditText
-import com.illusion.checkfirm.utils.ExceptionHandler
-import com.illusion.checkfirm.R
-import com.illusion.checkfirm.adapters.BookMarkAdapter
-import com.illusion.checkfirm.database.BookMark
-import com.illusion.checkfirm.database.DatabaseHelper
-import com.illusion.checkfirm.utils.RecyclerTouchListener
+import com.tanzentlab.checksamfirm.utils.ExceptionHandler
+import com.tanzentlab.checksamfirm.R
+import com.tanzentlab.checksamfirm.adapters.BookMarkAdapter
+import com.tanzentlab.checksamfirm.database.BookMark
+import com.tanzentlab.checksamfirm.database.DatabaseHelper
+import com.tanzentlab.checksamfirm.utils.RecyclerTouchListener
 import android.content.Intent
 import android.content.res.Resources
 import androidx.appcompat.app.AlertDialog

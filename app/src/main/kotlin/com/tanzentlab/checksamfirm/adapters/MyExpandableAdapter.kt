@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.adapters
+package com.tanzentlab.checksamfirm.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.illusion.checkfirm.R
+import com.tanzentlab.checksamfirm.R
 import java.util.ArrayList
 import java.util.HashMap
 

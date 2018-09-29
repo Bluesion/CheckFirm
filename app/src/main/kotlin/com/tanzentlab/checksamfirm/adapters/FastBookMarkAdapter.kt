@@ -1,12 +1,12 @@
-package com.illusion.checkfirm.adapters
+package com.tanzentlab.checksamfirm.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.illusion.checkfirm.R
-import com.illusion.checkfirm.database.BookMark
+import com.tanzentlab.checksamfirm.R
+import com.tanzentlab.checksamfirm.database.BookMark
 
 class FastBookMarkAdapter(private val bookmarkList: List<BookMark>): RecyclerView.Adapter<FastBookMarkAdapter.MyViewHolder>() {
 

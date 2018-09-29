@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.activities
+package com.tanzentlab.checksamfirm.activities
 
 import android.content.Context
 import android.content.Intent
@@ -20,13 +20,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.illusion.checkfirm.utils.ExceptionHandler
-import com.illusion.checkfirm.R
-import com.illusion.checkfirm.adapters.FastBookMarkAdapter
-import com.illusion.checkfirm.adapters.MyExpandableAdapter
-import com.illusion.checkfirm.database.BookMark
-import com.illusion.checkfirm.database.DatabaseHelper
-import com.illusion.checkfirm.utils.RecyclerTouchListener
+import com.tanzentlab.checksamfirm.utils.ExceptionHandler
+import com.tanzentlab.checksamfirm.R
+import com.tanzentlab.checksamfirm.adapters.FastBookMarkAdapter
+import com.tanzentlab.checksamfirm.adapters.MyExpandableAdapter
+import com.tanzentlab.checksamfirm.database.BookMark
+import com.tanzentlab.checksamfirm.database.DatabaseHelper
+import com.tanzentlab.checksamfirm.utils.RecyclerTouchListener
 import org.jsoup.Jsoup
 import org.jsoup.parser.Parser
 import java.io.IOException

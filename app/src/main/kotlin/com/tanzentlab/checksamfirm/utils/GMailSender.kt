@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.utils
+package com.tanzentlab.checksamfirm.utils
 
 import javax.activation.DataHandler
 import javax.activation.DataSource

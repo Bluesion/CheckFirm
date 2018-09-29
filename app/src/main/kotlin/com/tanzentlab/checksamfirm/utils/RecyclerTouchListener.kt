@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.utils
+package com.tanzentlab.checksamfirm.utils
 
 import android.content.Context
 import android.view.GestureDetector

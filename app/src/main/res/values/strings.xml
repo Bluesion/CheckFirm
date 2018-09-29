@@ -1,6 +1,6 @@
 <resources>
     <!-- General -->
-    <string name="app_name" translatable="false">CheckFirm</string>
+    <string name="app_name" translatable="false">CheckSamFirm</string>
     <string name="check_network">Please check your network</string>
     <string name="csc" translatable="false">CSC</string>
     <string name="default_string" translatable="false">SM-</string>
