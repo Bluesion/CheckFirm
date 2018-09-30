@@ -69,6 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:gravity="end"
         android:orientation="horizontal">
 
@@ -79,14 +80,11 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:text="@android:string/cancel" />
 
-        <View
-            android:layout_width="4dp"
-            android:layout_height="wrap_content" />
-
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/save"
+            android:layout_marginStart="4dp"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:text="@string/save" />
 

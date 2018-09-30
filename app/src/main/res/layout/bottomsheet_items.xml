@@ -1,7 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
+    android:gravity="center_vertical"
+    android:paddingTop="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="8dp"
     android:orientation="horizontal">
 
     <ImageView
@@ -9,13 +13,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/image" />
 
-    <View
-        android:layout_width="16dp"
-        android:layout_height="wrap_content" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text" />
+        android:layout_marginStart="16dp"
+        android:id="@+id/text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>
