@@ -15,12 +15,12 @@
     <string name="search">Search</string>
 
     <!-- BookMark -->
-    <string name="add">Add Device</string>
     <string name="bookmark">Bookmark</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="name">Bookmark Name</string>
     <string name="options">Options</string>
+    <string name="save">Save</string>
 
     <!-- Error -->
     <string name="alert">Alert</string>

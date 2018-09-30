@@ -144,7 +144,11 @@ class MainActivity : AppCompatActivity() {
                 if (position != RecyclerView.NO_POSITION) {
                     device.setText(mBookMarkList[position].model)
                     csc.setText(mBookMarkList[position].csc)
-                    networkTask()
+                    if (isOnline(applicationContext)) {
+                        networkTask()
+                    } else {
+                        Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 

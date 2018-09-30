@@ -1,5 +1,5 @@
 <resources>
-    <string name="check_network">Please check your network</string>
+    <string name="check_network">네트워크를 확인해주세요.</string>
     <string name="message">오류가 발생하였습니다. 모델명과 국가코드를 제대로 입력하지 않아 오류가 발생했을 가능성이 높습니다.\n우측 하단의 버튼을 통해 오류를 보고하시거나 앱을 재시작해주세요.</string>
     <string name="latest_official">최신 공식 펌웨어</string>
     <string name="latest_test">최신 테스트 펌웨어</string>
@@ -7,7 +7,6 @@
     <string name="previous_official">이전 공식 펌웨어</string>
     <string name="previous_test">이전 테스트 펌웨어</string>
     <string name="search">검색</string>
-    <string name="add">기기 추가</string>
     <string name="bookmark">북마크</string>
     <string name="delete">삭제</string>
     <string name="edit">수정</string>
@@ -20,4 +19,5 @@
     <string name="brand">브랜드</string>
     <string name="version">앱 버전</string>
     <string name="toast">오류가 성공적으로 전송되었습니다.</string>
+    <string name="save">저장</string>
 </resources>
