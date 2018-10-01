@@ -8,7 +8,7 @@ CheckSamFirm is a fast and beautiful open source samsung firmware checking appli
 
 ## Contact
 - [TanzenT Lab. Discord](https://discord.gg/CGMXVZj)
-- [E-mail (admin@tanzentlab.com)](admin@tanzentlab.com)
+- admin@tanzentlab.com
 
 ## Download
 
