@@ -1,4 +1,4 @@
-package com.tanzentlab.checksamfirm.adapters
+package com.illusion.checkfirm.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.tanzentlab.checksamfirm.R
-import com.tanzentlab.checksamfirm.dialogs.Options
+import com.illusion.checkfirm.R
+import com.illusion.checkfirm.dialogs.Options
 
 class OptionsAdapter(private val optionList: List<Options>): RecyclerView.Adapter<OptionsAdapter.MyViewHolder>() {
 

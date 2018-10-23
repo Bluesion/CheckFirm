@@ -1,12 +1,12 @@
-package com.tanzentlab.checksamfirm.utils
+package com.illusion.checkfirm.utils
 
-import java.io.PrintWriter
-import java.io.StringWriter
 import android.app.Activity
 import android.content.Intent
 import android.os.Build
-import com.tanzentlab.checksamfirm.BuildConfig
-import com.tanzentlab.checksamfirm.activities.ErrorActivity
+import com.illusion.checkfirm.BuildConfig
+import com.illusion.checkfirm.activities.ErrorActivity
+import java.io.PrintWriter
+import java.io.StringWriter
 
 class ExceptionHandler internal constructor(private val myContext: Activity) : Thread.UncaughtExceptionHandler {
 

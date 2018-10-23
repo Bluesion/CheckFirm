@@ -1,5 +1,10 @@
-package com.tanzentlab.checksamfirm.utils
+package com.illusion.checkfirm.utils
 
+import java.io.ByteArrayInputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
+import java.util.*
 import javax.activation.DataHandler
 import javax.activation.DataSource
 import javax.mail.Message
@@ -8,11 +13,7 @@ import javax.mail.Session
 import javax.mail.Transport
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
-import java.io.ByteArrayInputStream
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
-import java.util.Properties
+
 
 class GMailSender(private val user: String, private val password: String) : javax.mail.Authenticator() {
     private val session: Session
@@ -28,7 +29,7 @@ class GMailSender(private val user: String, private val password: String) : java
         props["mail.smtp.socketFactory.fallback"] = "false"
         props.setProperty("mail.smtp.quitwait", "false")
 
-        session = Session.getDefaultInstance(props, this)
+        session = Session.getDefaultInstance(props)
     }
 
     override fun getPasswordAuthentication(): PasswordAuthentication {

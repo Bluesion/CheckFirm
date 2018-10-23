@@ -1,10 +1,12 @@
 <resources>
     <!-- General -->
-    <string name="app_name" translatable="false">CheckSamFirm</string>
-    <string name="check_network">Please check your network</string>
+    <string name="app_name" translatable="false">CheckFirm</string>
+    <string name="check_input">Please input model and CSC correctly.</string>
+    <string name="check_network">Please check network</string>
     <string name="csc" translatable="false">CSC</string>
     <string name="default_string" translatable="false">SM-</string>
     <string name="default_symbol" translatable="false">&#160;·&#160;</string>
+    <string name="only_wifi">Please check Wi-Fi</string>
 
     <!-- Main -->
     <string name="latest_official">Latest Official Firmware</string>
@@ -26,10 +28,22 @@
     <string name="alert">Alert</string>
     <string name="button_report">Report log</string>
     <string name="button_restart">Restart</string>
-    <string name="brand">Brand</string>
-    <string name="error_info">Error Information</string>
+    <string name="description">Description</string>
+    <string name="description_detail">Tell me how error occurred. You don\'t have to write description.</string>
+    <string name="email">Email</string>
+    <string name="email_detail">Write your email if you want the developer to explain why error occurred.\nYour email address will be delivered to the developer and I promise you I will never use your email address except for explaining what caused error.\nYou don\'t have to write email.</string>
     <string name="message">Error detected. Most of errors are occurred because of wrong device name or csc.\nYou can send me a error log or restart the app.</string>
-    <string name="sdk" translatable="false">SDK</string>
+    <string name="must">MUST READ</string>
+    <string name="must_detail">CheckFirm is really careful about your private information. If you use this error report function, 6 minimum private information will be sent to the developer.\n\nHere is lists:\nBrand, model, SDK, app version, error log, email address(optional)</string>
     <string name="toast">Thank you for reporting log</string>
-    <string name="version">App Version</string>
+
+    <!-- Settings -->
+    <string name="app_version">App version</string>
+    <string name="data_saver">Data Saver</string>
+    <string name="data_saver_description">Check firmware information only when connected to Wi-Fi</string>
+    <string name="dark_theme">Dark Mode</string>
+    <string name="dark_theme_description">Set dark theme.</string>
+    <string name="settings">Settings</string>
+    <string name="information">Information</string>
+    <string name="summary">You can toggle theme and data saver</string>
 </resources>

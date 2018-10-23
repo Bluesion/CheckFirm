@@ -1,4 +1,4 @@
-package com.tanzentlab.checksamfirm.dialogs
+package com.illusion.checkfirm.dialogs
 
 import android.os.Bundle
 import android.text.InputFilter
@@ -9,10 +9,10 @@ import androidx.appcompat.view.ContextThemeWrapper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.tanzentlab.checksamfirm.R
-import com.tanzentlab.checksamfirm.database.BookMark
-import com.tanzentlab.checksamfirm.database.DatabaseHelper
-import java.util.ArrayList
+import com.illusion.checkfirm.R
+import com.illusion.checkfirm.database.BookMark
+import com.illusion.checkfirm.database.DatabaseHelper
+import java.util.*
 
 class AddEditFragment: BottomSheetDialogFragment() {
 

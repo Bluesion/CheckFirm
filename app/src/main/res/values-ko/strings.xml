@@ -1,23 +1,45 @@
 <resources>
+    <!-- General -->
+    <string name="check_input">모델명과 국가코드를 정확하게 입력해주세요.</string>
     <string name="check_network">네트워크를 확인해주세요.</string>
-    <string name="message">오류가 발생하였습니다. 모델명과 국가코드를 제대로 입력하지 않아 오류가 발생했을 가능성이 높습니다.\n우측 하단의 버튼을 통해 오류를 보고하시거나 앱을 재시작해주세요.</string>
+    <string name="only_wifi">와이파이 환경에서만 검색이 가능합니다.</string>
+
+    <!-- Main -->
     <string name="latest_official">최신 공식 펌웨어</string>
     <string name="latest_test">최신 테스트 펌웨어</string>
     <string name="model">모델</string>
     <string name="previous_official">이전 공식 펌웨어</string>
     <string name="previous_test">이전 테스트 펌웨어</string>
     <string name="search">검색</string>
+
+    <!-- BookMark -->
     <string name="bookmark">북마크</string>
     <string name="delete">삭제</string>
     <string name="edit">수정</string>
     <string name="name">북마크 이름</string>
     <string name="options">옵션</string>
+    <string name="save">저장</string>
+
+    <!-- Error -->
+    <string name="alert">알림</string>
     <string name="button_report">오류 제보</string>
     <string name="button_restart">재시작</string>
-    <string name="error_info">오류 정보</string>
-    <string name="alert">알림</string>
-    <string name="brand">브랜드</string>
-    <string name="version">앱 버전</string>
+    <string name="description">설명</string>
+    <string name="description_detail">어떻게 오류가 발생했는지 자세히 설명해주세요. 빈칸으로 놔두셔도 괜찮습니다.</string>
+    <string name="email">이메일</string>
+    <string name="email_detail">오류 보고에 대해 개인적으로 답변을 받고 싶다면 아래 빈칸에 개인 이메일 주소를 적어주세요.\n입력된 이메일 주소는 개발자에게 전송되며, 수집한 이메일 주소는 오류 로그 답변 목적 외에는 절대로 사용하지 않습니다.\n빈칸으로 놔두셔도 괜찮습니다.</string>
+    <string name="message">오류가 발생하였습니다. 모델명과 국가코드를 제대로 입력하지 않아 오류가 발생했을 가능성이 높습니다.\n화면 하단 우측의 버튼을 통해 오류를 보고하시거나 앱을 재시작해주세요.</string>
+    <string name="must">필독</string>
+    <string name="must_detail">CheckFirm은 이용자의 개인정보를 소중하게 생각합니다. 오류 보고 기능을 사용하면 오류 보고에 꼭 필요한 최소한의 개인정보만 제작자에게 전송됩니다.\n\n개발자에게 전송되는 개인정보:\n브랜드, 기기명, SDK 버전, 앱 버전, 오류 로그, 사용자 이메일 주소(선택)</string>
     <string name="toast">오류가 성공적으로 전송되었습니다.</string>
-    <string name="save">저장</string>
+
+    <!-- Settings -->
+    <string name="app_version">앱 버전</string>
+    <string name="data_saver">데이터 세이버</string>
+    <string name="data_saver_description">와이파이 환경에서만 펌웨어 정보를 불러옵니다.</string>
+    <string name="dark_theme">다크 모드</string>
+    <string name="dark_theme_description">앱 테마를 어둡게 설정합니다.</string>
+    <string name="settings">설정</string>
+    <string name="information">정보</string>
+    <string name="summary">테마, 데이터 세이버 설정을 변경합니다.</string>
 </resources>

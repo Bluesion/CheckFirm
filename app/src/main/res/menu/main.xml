@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_bookmark"
         app:showAsAction="ifRoom" />
 
+    <item android:id="@+id/settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="ifRoom" />
+
 </menu>

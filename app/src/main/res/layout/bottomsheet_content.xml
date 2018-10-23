@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name"
+            android:inputType="text"
             android:id="@+id/name"
             android:maxLines="1" />
 
@@ -43,6 +44,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/model"
             android:text="@string/default_string"
+            android:inputType="textCapWords"
             android:privateImeOptions="defaultInputmode=english;symbol=false"
             android:id="@+id/model"
             android:maxLines="1" />
@@ -59,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/csc"
+            android:inputType="textCapWords"
             android:id="@+id/csc"
             android:privateImeOptions="defaultInputmode=english;symbol=false"
             android:maxLines="1" />

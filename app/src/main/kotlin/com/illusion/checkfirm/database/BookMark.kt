@@ -1,4 +1,4 @@
-package com.tanzentlab.checksamfirm.database
+package com.illusion.checkfirm.database
 
 class BookMark {
 

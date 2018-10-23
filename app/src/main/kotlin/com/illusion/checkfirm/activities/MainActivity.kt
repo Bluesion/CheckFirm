@@ -1,16 +1,14 @@
-package com.tanzentlab.checksamfirm.activities
+package com.illusion.checkfirm.activities
 
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.text.Editable
 import android.text.InputFilter
-import android.text.TextWatcher
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -20,19 +18,24 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.tanzentlab.checksamfirm.utils.ExceptionHandler
-import com.tanzentlab.checksamfirm.R
-import com.tanzentlab.checksamfirm.adapters.FastBookMarkAdapter
-import com.tanzentlab.checksamfirm.adapters.MyExpandableAdapter
-import com.tanzentlab.checksamfirm.database.BookMark
-import com.tanzentlab.checksamfirm.database.DatabaseHelper
-import com.tanzentlab.checksamfirm.utils.RecyclerTouchListener
+import com.illusion.checkfirm.R
+import com.illusion.checkfirm.adapters.FastBookMarkAdapter
+import com.illusion.checkfirm.adapters.MyExpandableAdapter
+import com.illusion.checkfirm.database.BookMark
+import com.illusion.checkfirm.database.DatabaseHelper
+import com.illusion.checkfirm.settings.Settings
+import com.illusion.checkfirm.utils.ExceptionHandler
+import com.illusion.checkfirm.utils.RecyclerTouchListener
+import com.illusion.checkfirm.utils.ThemeChanger
+import com.illusion.checkfirm.utils.Tools
 import org.jsoup.Jsoup
 import org.jsoup.parser.Parser
 import java.io.IOException
 import java.lang.ref.WeakReference
 import java.net.URL
 import java.util.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.set
 
 class MainActivity : AppCompatActivity() {
 
@@ -78,6 +81,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler(this))
+        ThemeChanger.setAppTheme(this)
         setContentView(R.layout.activity_main)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -109,20 +113,32 @@ class MainActivity : AppCompatActivity() {
         newCSCFilters[cscFilters.size] = InputFilter.AllCaps()
         csc.filters = newCSCFilters
 
-        device.setupClearButtonWithAction()
-        csc.setupClearButtonWithAction()
-
         officialHeader = ArrayList()
         testHeader = ArrayList()
         officialHeader.add(getString(R.string.previous_official))
         testHeader.add(getString(R.string.previous_test))
 
+        val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val save = sharedPrefs.getBoolean("saver", true)
+
         val search = findViewById<MaterialButton>(R.id.search)
         search.setOnClickListener {
-            if (isOnline(applicationContext)) {
-                networkTask()
+            if (!save) {
+                if (Tools.isWifi(applicationContext)) {
+                    if (Tools.isOnline(applicationContext)) {
+                        networkTask()
+                    } else {
+                        Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(applicationContext, R.string.only_wifi, Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
+                if (Tools.isOnline(applicationContext)) {
+                    networkTask()
+                } else {
+                    Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -144,10 +160,22 @@ class MainActivity : AppCompatActivity() {
                 if (position != RecyclerView.NO_POSITION) {
                     device.setText(mBookMarkList[position].model)
                     csc.setText(mBookMarkList[position].csc)
-                    if (isOnline(applicationContext)) {
-                        networkTask()
+                    if (!save) {
+                        if (Tools.isWifi(applicationContext)) {
+                            if (Tools.isOnline(applicationContext)) {
+                                networkTask()
+                            } else {
+                                Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            Toast.makeText(applicationContext, R.string.only_wifi, Toast.LENGTH_SHORT).show()
+                        }
                     } else {
-                        Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
+                        if (Tools.isOnline(applicationContext)) {
+                            networkTask()
+                        } else {
+                            Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -164,7 +192,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.bookmark, menu)
+        menuInflater.inflate(R.menu.main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -172,6 +200,11 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.bookmark -> {
                 val intent = Intent(this, BookMarkActivity::class.java)
+                this.startActivity(intent)
+                return true
+            }
+            R.id.settings -> {
+                val intent = Intent(this, Settings::class.java)
                 this.startActivity(intent)
                 return true
             }
@@ -187,91 +220,76 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun networkTask() {
-        officialFinalURL = baseURL + csc.text!!.toString() + "/" + device.text!!.toString() + officialURL
-        testFinalURL = baseURL + csc.text!!.toString() + "/" + device.text!!.toString() + testURL
+        val cscString = csc.text!!.toString()
+        val deviceString = device.text!!.toString()
 
-        val mHandler = MyHandler(this@MainActivity)
-        object : Thread() {
-            override fun run() {
-                mHandler.post {
-                    mSwipeRefreshLayout.isEnabled = true
-                    mSwipeRefreshLayout.isRefreshing = true
+        if (cscString.isBlank() || deviceString.isBlank()) {
+            Toast.makeText(applicationContext, R.string.check_input, Toast.LENGTH_SHORT).show()
+        } else {
+            officialFinalURL = "$baseURL$cscString/$deviceString$officialURL"
+            testFinalURL = "$baseURL$cscString/$deviceString$testURL"
+
+            val mHandler = MyHandler(this@MainActivity)
+            object : Thread() {
+                override fun run() {
+                    mHandler.post {
+                        mSwipeRefreshLayout.isEnabled = true
+                        mSwipeRefreshLayout.isRefreshing = true
+                    }
+                    try {
+                        officialFirmware = ArrayList()
+                        val official = Jsoup.parse(URL(officialFinalURL).openStream(), "UTF-8", "", Parser.xmlParser())
+
+                        for (el in official.select("latest")) {
+                            latestOfficial = el.text()
+                        }
+
+                        for (el in official.select("value")) {
+                            val firmwares = el.text()
+                            officialFirmware.add(firmwares)
+                        }
+
+                        testFirmware = ArrayList()
+                        val test = Jsoup.parse(URL(testFinalURL).openStream(), "UTF-8", "", Parser.xmlParser())
+
+                        for (el in test.select("latest")) {
+                            latestTest = el.text()
+                        }
+
+                        for (el in test.select("value")) {
+                            val firmwares = el.text()
+                            testFirmware.add(firmwares)
+                        }
+
+                    } catch (e: IOException) {}
+
+                    mHandler.post {
+                        officialHashMap = HashMap()
+                        officialHashMap[officialHeader[0]] = officialFirmware
+                        testHashMap = HashMap()
+                        testHashMap[testHeader[0]] = testFirmware
+                        mAdapter = MyExpandableAdapter(this@MainActivity, officialHeader, officialHashMap)
+                        mAdapter2 = MyExpandableAdapter(this@MainActivity, testHeader, testHashMap)
+                        mOfficialListView.setAdapter(mAdapter)
+                        mTestListView.setAdapter(mAdapter2)
+                        mOfficialListView.setOnGroupClickListener { parent, _, groupPosition, _ ->
+                            setListViewHeight(parent, groupPosition)
+                            false
+                        }
+                        mTestListView.setOnGroupClickListener { parent, _, groupPosition, _ ->
+                            setListViewHeight(parent, groupPosition)
+                            false
+                        }
+                        mResult.visibility = View.VISIBLE
+                        latestOfficialFirmware.text = latestOfficial
+                        latestTestFirmware.text = latestTest
+                        mSwipeRefreshLayout.isEnabled = false
+                        mSwipeRefreshLayout.isRefreshing = false
+                        handler.sendEmptyMessage(0)
+                    }
                 }
-                try {
-                    officialFirmware = ArrayList()
-                    val official = Jsoup.parse(URL(officialFinalURL).openStream(), "UTF-8", "", Parser.xmlParser())
-
-                    for (el in official.select("latest")) {
-                        latestOfficial = el.text()
-                    }
-
-                    for (el in official.select("value")) {
-                        val firmwares = el.text()
-                        officialFirmware.add(firmwares)
-                    }
-
-                    testFirmware = ArrayList()
-                    val test = Jsoup.parse(URL(testFinalURL).openStream(), "UTF-8", "", Parser.xmlParser())
-
-                    for (el in test.select("latest")) {
-                        latestTest = el.text()
-                    }
-
-                    for (el in test.select("value")) {
-                        val firmwares = el.text()
-                        testFirmware.add(firmwares)
-                    }
-
-                } catch (e: IOException) {}
-
-                mHandler.post {
-                    officialHashMap = HashMap()
-                    officialHashMap[officialHeader[0]] = officialFirmware
-                    testHashMap = HashMap()
-                    testHashMap[testHeader[0]] = testFirmware
-                    mAdapter = MyExpandableAdapter(this@MainActivity, officialHeader, officialHashMap)
-                    mAdapter2 = MyExpandableAdapter(this@MainActivity, testHeader, testHashMap)
-                    mOfficialListView.setAdapter(mAdapter)
-                    mTestListView.setAdapter(mAdapter2)
-                    mOfficialListView.setOnGroupClickListener { parent, _, groupPosition, _ ->
-                        setListViewHeight(parent, groupPosition)
-                        false
-                    }
-                    mTestListView.setOnGroupClickListener { parent, _, groupPosition, _ ->
-                        setListViewHeight(parent, groupPosition)
-                        false
-                    }
-                    mResult.visibility = View.VISIBLE
-                    latestOfficialFirmware.text = latestOfficial
-                    latestTestFirmware.text = latestTest
-                    mSwipeRefreshLayout.isEnabled = false
-                    mSwipeRefreshLayout.isRefreshing = false
-                    handler.sendEmptyMessage(0)
-                }
-            }
-        }.start()
-    }
-
-    private fun TextInputEditText.setupClearButtonWithAction() {
-        addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
-                val clearIcon = if (editable?.isNotEmpty() == true) R.drawable.ic_clear else 0
-                setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
-        })
-
-        setOnTouchListener(View.OnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                if (event.rawX >= (this.right - this.compoundPaddingRight)) {
-                    this.setText("")
-                    return@OnTouchListener true
-                }
-            }
-            return@OnTouchListener false
-        })
+            }.start()
+        }
     }
 
     private fun setListViewHeight(listView: ExpandableListView, group: Int) {
@@ -300,15 +318,5 @@ class MainActivity : AppCompatActivity() {
         params.height = height
         listView.layoutParams = params
         listView.requestLayout()
-    }
-
-    companion object {
-        fun isOnline(mContext: Context): Boolean {
-            val connectivityManager = mContext.getSystemService(Context.CONNECTIVITY_SERVICE)
-            return if (connectivityManager is ConnectivityManager) {
-                val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
-                networkInfo?.isConnected ?: false
-            } else false
-        }
     }
 }

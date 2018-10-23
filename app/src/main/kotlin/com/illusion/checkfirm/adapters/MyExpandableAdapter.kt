@@ -1,4 +1,4 @@
-package com.tanzentlab.checksamfirm.adapters
+package com.illusion.checkfirm.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.tanzentlab.checksamfirm.R
-import java.util.ArrayList
-import java.util.HashMap
+import com.illusion.checkfirm.R
+import java.util.*
 
 class MyExpandableAdapter(private val context: Context, private val header: List<String>, private val child: HashMap<String, ArrayList<String>>) : BaseExpandableListAdapter() {
 

@@ -1,23 +1,24 @@
-package com.tanzentlab.checksamfirm.activities
+package com.illusion.checkfirm.activities
 
-import android.os.Bundle
-import androidx.recyclerview.widget.RecyclerView
-import android.view.View
-import java.util.*
-import com.tanzentlab.checksamfirm.utils.ExceptionHandler
-import com.tanzentlab.checksamfirm.R
-import com.tanzentlab.checksamfirm.adapters.BookMarkAdapter
-import com.tanzentlab.checksamfirm.database.BookMark
-import com.tanzentlab.checksamfirm.database.DatabaseHelper
-import com.tanzentlab.checksamfirm.utils.RecyclerTouchListener
 import android.content.Intent
+import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.tanzentlab.checksamfirm.dialogs.AddEditFragment
-import com.tanzentlab.checksamfirm.dialogs.OptionsFragment
+import com.illusion.checkfirm.R
+import com.illusion.checkfirm.adapters.BookMarkAdapter
+import com.illusion.checkfirm.database.BookMark
+import com.illusion.checkfirm.database.DatabaseHelper
+import com.illusion.checkfirm.dialogs.AddEditFragment
+import com.illusion.checkfirm.dialogs.OptionsFragment
+import com.illusion.checkfirm.utils.ExceptionHandler
+import com.illusion.checkfirm.utils.RecyclerTouchListener
+import com.illusion.checkfirm.utils.ThemeChanger
+import java.util.*
 
 class BookMarkActivity : AppCompatActivity() {
 
@@ -29,6 +30,7 @@ class BookMarkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler(this))
+        ThemeChanger.setAppTheme(this)
         setContentView(R.layout.activity_bookmark)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)

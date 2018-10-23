@@ -6,11 +6,11 @@ android {
     buildToolsVersion "28.0.3"
 
     defaultConfig {
-        applicationId "com.tanzentlab.checksamfirm"
+        applicationId "com.illusion.checkfirm"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 11
-        versionName "2.6"
+        versionCode 12
+        versionName "2.7"
     }
 
     buildTypes {
@@ -34,11 +34,12 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$sv"
     implementation "androidx.cardview:cardview:$sv"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$sv"
+    implementation "androidx.legacy:legacy-preference-v14:$sv"
+    implementation "androidx.preference:preference:$sv"
     implementation "androidx.recyclerview:recyclerview:$sv"
     implementation "com.google.android.material:material:$sv"
+    implementation 'com.sun.mail:android-mail:1.6.0'
+    implementation 'com.sun.mail:android-activation:1.6.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jsoup:jsoup:1.11.3"
-    implementation files("libs/activation.jar")
-    implementation files("libs/additionnal.jar")
-    implementation files("libs/mail.jar")
 }

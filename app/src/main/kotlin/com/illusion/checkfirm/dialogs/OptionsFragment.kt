@@ -1,4 +1,4 @@
-package com.tanzentlab.checksamfirm.dialogs
+package com.illusion.checkfirm.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.tanzentlab.checksamfirm.R
-import com.tanzentlab.checksamfirm.adapters.OptionsAdapter
-import com.tanzentlab.checksamfirm.database.BookMark
-import com.tanzentlab.checksamfirm.database.DatabaseHelper
-import com.tanzentlab.checksamfirm.utils.RecyclerTouchListener
+import com.illusion.checkfirm.R
+import com.illusion.checkfirm.adapters.OptionsAdapter
+import com.illusion.checkfirm.database.BookMark
+import com.illusion.checkfirm.database.DatabaseHelper
+import com.illusion.checkfirm.utils.RecyclerTouchListener
 
 class OptionsFragment: BottomSheetDialogFragment() {
 
