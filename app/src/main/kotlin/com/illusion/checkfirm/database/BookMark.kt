@@ -1,7 +1,6 @@
 package com.illusion.checkfirm.database
 
 class BookMark {
-
     var id: Int = 0
     var name: String? = null
     var model: String? = null

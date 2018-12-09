@@ -16,6 +16,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val sharedPrefs = activity!!.getSharedPreferences("settings", Context.MODE_PRIVATE)
         val editor = sharedPrefs.edit()
+        val one = findPreference("one")
+        one.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, _ ->
+            val on = (preference as SwitchPreference).isChecked
+            if (on) {
+                editor.putBoolean("one", true)
+            } else {
+                editor.putBoolean("one", false)
+            }
+            editor.apply()
+            Tools.restart(activity!!, 0)
+            true
+        }
+
         val dark = findPreference("dark")
         dark.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, _ ->
             val on = (preference as SwitchPreference).isChecked

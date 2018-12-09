@@ -2,6 +2,11 @@
 
     <androidx.preference.PreferenceCategory android:title="@string/settings">
         <SwitchPreference
+            android:title="@string/one_ui"
+            android:summary="@string/one_ui_description"
+            android:defaultValue="false"
+            android:key="one" />
+        <SwitchPreference
             android:title="@string/dark_theme"
             android:summary="@string/dark_theme_description"
             android:defaultValue="false"

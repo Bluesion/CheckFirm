@@ -10,21 +10,20 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.adapters.FastBookMarkAdapter
-import com.illusion.checkfirm.adapters.MyExpandableAdapter
 import com.illusion.checkfirm.database.BookMark
 import com.illusion.checkfirm.database.DatabaseHelper
-import com.illusion.checkfirm.settings.Settings
-import com.illusion.checkfirm.utils.ExceptionHandler
 import com.illusion.checkfirm.utils.RecyclerTouchListener
 import com.illusion.checkfirm.utils.ThemeChanger
 import com.illusion.checkfirm.utils.Tools
@@ -32,10 +31,9 @@ import org.jsoup.Jsoup
 import org.jsoup.parser.Parser
 import java.io.IOException
 import java.lang.ref.WeakReference
+import java.net.MalformedURLException
 import java.net.URL
 import java.util.ArrayList
-import kotlin.collections.HashMap
-import kotlin.collections.set
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,18 +51,12 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var latestTestFirmware: TextView
     private lateinit var device: TextInputEditText
     internal lateinit var csc: TextInputEditText
-    internal lateinit var mAdapter: MyExpandableAdapter
-    internal lateinit var mAdapter2: MyExpandableAdapter
-    internal lateinit var mOfficialListView: ExpandableListView
-    internal lateinit var mTestListView: ExpandableListView
     private lateinit var mBookMarkAdapter: FastBookMarkAdapter
     private val mBookMarkList = ArrayList<BookMark>()
     private lateinit var mDB: DatabaseHelper
-    private lateinit var officialHeader: ArrayList<String>
-    private lateinit var testHeader: ArrayList<String>
-    private lateinit var officialHashMap: HashMap<String, ArrayList<String>>
-    private lateinit var testHashMap: HashMap<String, ArrayList<String>>
     private lateinit var mResult: LinearLayout
+    private var previousOfficial = ""
+    private var previousTest = ""
 
     private val handler = MyHandler(this@MainActivity)
     private class MyHandler (activity: MainActivity): Handler() {
@@ -80,16 +72,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler(this))
         ThemeChanger.setAppTheme(this)
         setContentView(R.layout.activity_main)
+
+        val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val one = sharedPrefs.getBoolean("one", true)
+        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        if (!one) {
+            mAppBar.setExpanded(true)
+        } else {
+            mAppBar.setExpanded(false)
+        }
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         mResult = findViewById(R.id.result)
-        mOfficialListView = findViewById(R.id.mOfficialListView)
-        mTestListView = findViewById(R.id.mTestListView)
         device = findViewById(R.id.model)
         csc = findViewById(R.id.csc)
 
@@ -113,14 +111,7 @@ class MainActivity : AppCompatActivity() {
         newCSCFilters[cscFilters.size] = InputFilter.AllCaps()
         csc.filters = newCSCFilters
 
-        officialHeader = ArrayList()
-        testHeader = ArrayList()
-        officialHeader.add(getString(R.string.previous_official))
-        testHeader.add(getString(R.string.previous_test))
-
-        val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val save = sharedPrefs.getBoolean("saver", true)
-
         val search = findViewById<MaterialButton>(R.id.search)
         search.setOnClickListener {
             if (!save) {
@@ -189,6 +180,24 @@ class MainActivity : AppCompatActivity() {
 
         mDB = DatabaseHelper(this)
         mBookMarkList.addAll(mDB.allBookMark)
+
+        val previousOfficialAlertDialog = findViewById<LinearLayout>(R.id.previousOfficial)
+        previousOfficialAlertDialog.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(R.string.previous_official)
+            builder.setMessage(previousOfficial)
+            builder.setPositiveButton(android.R.string.ok, null)
+            builder.show()
+        }
+
+        val previousTestAlertDialog = findViewById<LinearLayout>(R.id.previousTest)
+        previousTestAlertDialog.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(R.string.previous_test)
+            builder.setMessage(previousTest)
+            builder.setPositiveButton(android.R.string.ok, null)
+            builder.show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -204,7 +213,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.settings -> {
-                val intent = Intent(this, Settings::class.java)
+                val intent = Intent(this, SettingsActivity::class.java)
                 this.startActivity(intent)
                 return true
             }
@@ -220,6 +229,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun networkTask() {
+        officialFirmware = ArrayList()
+        officialFirmware.clear()
+
+        testFirmware = ArrayList()
+        testFirmware.clear()
+
+        latestOfficial = ""
+        latestTest = ""
+
         val cscString = csc.text!!.toString()
         val deviceString = device.text!!.toString()
 
@@ -237,49 +255,39 @@ class MainActivity : AppCompatActivity() {
                         mSwipeRefreshLayout.isRefreshing = true
                     }
                     try {
-                        officialFirmware = ArrayList()
                         val official = Jsoup.parse(URL(officialFinalURL).openStream(), "UTF-8", "", Parser.xmlParser())
-
                         for (el in official.select("latest")) {
                             latestOfficial = el.text()
                         }
-
                         for (el in official.select("value")) {
                             val firmwares = el.text()
                             officialFirmware.add(firmwares)
                         }
 
-                        testFirmware = ArrayList()
                         val test = Jsoup.parse(URL(testFinalURL).openStream(), "UTF-8", "", Parser.xmlParser())
-
                         for (el in test.select("latest")) {
                             latestTest = el.text()
                         }
-
                         for (el in test.select("value")) {
                             val firmwares = el.text()
                             testFirmware.add(firmwares)
                         }
 
-                    } catch (e: IOException) {}
+                    } catch (e: MalformedURLException) {
+                        e.printStackTrace()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
 
                     mHandler.post {
-                        officialHashMap = HashMap()
-                        officialHashMap[officialHeader[0]] = officialFirmware
-                        testHashMap = HashMap()
-                        testHashMap[testHeader[0]] = testFirmware
-                        mAdapter = MyExpandableAdapter(this@MainActivity, officialHeader, officialHashMap)
-                        mAdapter2 = MyExpandableAdapter(this@MainActivity, testHeader, testHashMap)
-                        mOfficialListView.setAdapter(mAdapter)
-                        mTestListView.setAdapter(mAdapter2)
-                        mOfficialListView.setOnGroupClickListener { parent, _, groupPosition, _ ->
-                            setListViewHeight(parent, groupPosition)
-                            false
-                        }
-                        mTestListView.setOnGroupClickListener { parent, _, groupPosition, _ ->
-                            setListViewHeight(parent, groupPosition)
-                            false
-                        }
+                        previousOfficial = officialFirmware.toString()
+                                .replace(", ", "\n")
+                                .replace("[", "")
+                                .replace("]", "")
+                        previousTest = testFirmware.toString()
+                                .replace(", ", "\n")
+                                .replace("[", "")
+                                .replace("]", "")
                         mResult.visibility = View.VISIBLE
                         latestOfficialFirmware.text = latestOfficial
                         latestTestFirmware.text = latestTest
@@ -290,33 +298,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }.start()
         }
-    }
-
-    private fun setListViewHeight(listView: ExpandableListView, group: Int) {
-        val listAdapter = listView.expandableListAdapter as ExpandableListAdapter
-        var totalHeight = 0
-        val desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.width, View.MeasureSpec.EXACTLY)
-        for (i in 0 until listAdapter.groupCount) {
-            val groupItem = listAdapter.getGroupView(i, false, null, listView)
-            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
-
-            totalHeight += groupItem.measuredHeight
-
-            if (listView.isGroupExpanded(i) && i != group || !listView.isGroupExpanded(i) && i == group) {
-                for (j in 0 until listAdapter.getChildrenCount(i)) {
-                    val listItem = listAdapter.getChildView(i, j, false, null, listView)
-                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
-                    totalHeight += listItem.measuredHeight
-                }
-            }
-        }
-
-        val params = listView.layoutParams
-        var height = totalHeight + listView.dividerHeight * (listAdapter.groupCount - 1)
-        if (height < 10)
-            height = 200
-        params.height = height
-        listView.layoutParams = params
-        listView.requestLayout()
     }
 }

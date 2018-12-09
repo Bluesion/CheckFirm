@@ -11,9 +11,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     val allBookMark: List<BookMark>
         get() {
             val bookmark = ArrayList<BookMark>()
-
             val selectQuery = "SELECT * FROM " + BookMark.TABLE_NAME + " ORDER BY " + BookMark.COLUMN_ID + " DESC"
-
             val db = this.writableDatabase
             val cursor = db.rawQuery(selectQuery, null)
 

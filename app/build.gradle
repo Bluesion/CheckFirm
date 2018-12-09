@@ -9,13 +9,13 @@ android {
         applicationId "com.illusion.checkfirm"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 12
-        versionName "2.7"
+        versionCode 13
+        versionName "3.0"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -31,15 +31,12 @@ ext {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:$sv"
-    implementation "androidx.cardview:cardview:$sv"
+    implementation "androidx.appcompat:appcompat:1.0.2"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$sv"
     implementation "androidx.legacy:legacy-preference-v14:$sv"
     implementation "androidx.preference:preference:$sv"
     implementation "androidx.recyclerview:recyclerview:$sv"
     implementation "com.google.android.material:material:$sv"
-    implementation 'com.sun.mail:android-mail:1.6.0'
-    implementation 'com.sun.mail:android-activation:1.6.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jsoup:jsoup:1.11.3"
 }

@@ -1,39 +1,58 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:layout_height="300dp"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        android:minHeight="?attr/actionBarSize" />
+        android:fitsSystemWindows="true"
+        android:id="@+id/appbar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleGravity="center"
+            app:title="@string/app_name"
+            app:titleEnabled="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+                app:layout_collapseMode="pin" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/mSwipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:id="@+id/mSwipeRefreshLayout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    app:contentPadding="8dp"
-                    app:cardCornerRadius="8dp">
+                    android:layout_margin="8dp"
+                    app:contentPadding="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -75,33 +94,24 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/mRecyclerView"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_marginTop="4dp"
-                            android:layout_marginBottom="4dp">
+                            android:layout_marginBottom="4dp"
+                            android:layout_marginStart="-4dp"
+                            android:layout_marginEnd="-4dp"
+                            android:minHeight="45dp" />
 
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/mRecyclerView"
-                                android:layout_weight="7.7"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent" />
-
-                            <View
-                                android:layout_weight="0.3"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent" />
-
-                            <com.google.android.material.button.MaterialButton
-                                android:layout_weight="2"
-                                android:layout_width="0dp"
-                                android:id="@+id/search"
-                                android:layout_height="wrap_content"
-                                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                                android:text="@string/search" />
-
-                        </LinearLayout>
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/search"
+                            android:text="@string/search"
+                            android:layout_gravity="end"
+                            style="@style/Widget.MaterialComponents.Button.Icon"
+                            app:icon="@drawable/ic_search" />
 
                     </LinearLayout>
 
@@ -112,14 +122,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone"
+                    android:layout_margin="4dp"
                     android:id="@+id/result">
 
                     <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        app:contentPadding="8dp"
-                        app:cardCornerRadius="8dp">
+                        style="@style/CardTheme">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -141,16 +148,40 @@
                                 android:layout_marginTop="4dp"
                                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="#808080" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:id="@+id/previousOfficial">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_chevron_right" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/previous_official"
+                                    android:layout_marginStart="4dp"
+                                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            </LinearLayout>
+
                         </LinearLayout>
 
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        app:contentPadding="8dp"
-                        app:cardCornerRadius="8dp">
+                        style="@style/CardTheme">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -172,39 +203,35 @@
                                 android:textIsSelectable="true"
                                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="#808080" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:id="@+id/previousTest">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_chevron_right" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/previous_test"
+                                    android:layout_marginStart="4dp"
+                                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            </LinearLayout>
+
                         </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        app:contentPadding="8dp"
-                        app:cardCornerRadius="8dp">
-
-                        <ExpandableListView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/mOfficialListView"
-                            android:groupIndicator="@null"
-                            android:divider="@null" />
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        app:contentPadding="8dp"
-                        app:cardCornerRadius="8dp">
-
-                        <ExpandableListView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/mTestListView"
-                            android:groupIndicator="@null"
-                            android:divider="@null" />
 
                     </com.google.android.material.card.MaterialCardView>
 
@@ -212,8 +239,8 @@
 
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

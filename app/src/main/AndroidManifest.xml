@@ -26,10 +26,7 @@
             android:label="@string/bookmark"
             android:name=".activities.BookMarkActivity" />
         <activity
-            android:label="@string/button_report"
-            android:name=".activities.ErrorActivity" />
-        <activity
             android:label="@string/settings"
-            android:name=".settings.Settings" />
+            android:name=".activities.SettingsActivity" />
     </application>
 </manifest>
