@@ -3,12 +3,15 @@ package com.illusion.checkfirm.utils
 import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.app.UiModeManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
+import androidx.core.content.ContextCompat.getSystemService
 import java.util.*
 
 object Tools {
@@ -34,16 +37,25 @@ object Tools {
     }
 
     fun restart(activity: Activity, delay: Int) {
-        var delay = delay
-        if (delay == 0) {
-            delay = 1
+        var time = delay
+        if (time == 0) {
+            time = 1
         }
+
         val restartIntent = activity.packageManager.getLaunchIntentForPackage(activity.packageName)
         restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         val intent = PendingIntent.getActivity(activity, 0, restartIntent, PendingIntent.FLAG_ONE_SHOT)
         val manager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        Objects.requireNonNull(manager).set(AlarmManager.RTC, System.currentTimeMillis() + delay, intent)
+        Objects.requireNonNull(manager).set(AlarmManager.RTC, System.currentTimeMillis() + time, intent)
         activity.setResult(Activity.RESULT_CANCELED)
         activity.finishAffinity()
+    }
+
+    fun pxToDp(px: Int): Int {
+        return (px / Resources.getSystem().displayMetrics.density).toInt()
+    }
+
+    fun dpToPx(dp: Int): Int {
+        return (dp * Resources.getSystem().displayMetrics.density).toInt()
     }
 }

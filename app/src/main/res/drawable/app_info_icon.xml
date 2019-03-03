@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap android:src="@drawable/tw_ic_ab_app_info_mtrl" android:tint="?actionMenuTextColor"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

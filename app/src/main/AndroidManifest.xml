@@ -11,10 +11,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -23,10 +23,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="@string/bookmark"
-            android:name=".activities.BookMarkActivity" />
+            android:label="@string/search"
+            android:name="com.illusion.checkfirm.search.SearchActivity" />
+        <activity
+            android:label="@string/about"
+            android:name="com.illusion.checkfirm.settings.AboutActivity" />
+        <activity
+            android:label="@string/license"
+            android:name="com.illusion.checkfirm.settings.LicenseActivity" />
+        <activity
+            android:label="@string/help"
+            android:name="com.illusion.checkfirm.help.HelpActivity" />
+        <activity
+            android:label="@string/help"
+            android:name="com.illusion.checkfirm.help.HelpSearch" />
+        <activity
+            android:label="@string/help"
+            android:name="com.illusion.checkfirm.help.HelpFirmware" />
         <activity
             android:label="@string/settings"
-            android:name=".activities.SettingsActivity" />
+            android:name="com.illusion.checkfirm.settings.SettingsActivity" />
     </application>
 </manifest>

@@ -1,32 +1,84 @@
 <resources>
     <!-- General -->
-    <string name="check_input">모델명과 국가코드를 정확하게 입력해주세요.</string>
     <string name="check_network">네트워크를 확인해주세요.</string>
     <string name="only_wifi">와이파이 환경에서만 검색이 가능합니다.</string>
+    <string name="help">도움말</string>
+    <string name="online">네트워크를 확인해주세요</string>
+    <string name="wifi">와이파이에 연결해주세요</string>
 
-    <!-- Main -->
+    <!-- Contact Us -->
+    <string name="contact_us">문의하기</string>
+    <string name="contact_dialog_title">안녕하세요 :)</string>
+    <string name="contact_dialog_text">건의사항이나 질문이 있다면 아래 메일 주소로 연락주세요.\n\nwork@newfitlab.com (Designer, Newfit)\ndnjscjf098@gmail.com (Developer, Illusion)</string>
+
+    <!-- Firmware -->
+    <string name="firmware">펌웨어</string>
     <string name="latest_official">최신 공식 펌웨어</string>
     <string name="latest_test">최신 테스트 펌웨어</string>
     <string name="model">모델</string>
     <string name="previous_official">이전 공식 펌웨어</string>
     <string name="previous_test">이전 테스트 펌웨어</string>
     <string name="search">검색</string>
+    <string name="welcome_disabled">자동 검색 기능이 비활성화 되어 있습니다. 설정에서 자동 검색 기능을 사용해보세요.</string>
+    <string name="welcome_wifi">데이터 절약 기능이 켜져 있습니다. 자동 검색 기능을 사용하시려면 와이파이에 연결해주세요.</string>
+    <string name="welcome_online">자동 검색 기능을 사용하시려면 네트워크에 연결해주세요.</string>
+    <string name="clipboard">클립보드에 복사했습니다.</string>
 
     <!-- BookMark -->
     <string name="bookmark">북마크</string>
-    <string name="delete">삭제</string>
-    <string name="edit">수정</string>
     <string name="name">북마크 이름</string>
-    <string name="options">옵션</string>
     <string name="save">저장</string>
 
+    <!-- Help Search -->
+    <string name="search_0">검색하기</string>
+    <string name="search_1">모델명과 CSC 코드를 알고 있어야 검색이 가능합니다.\n현재 이 디바이스의 모델명은 %s이며, CSC 코드의 경우 아래와 같습니다.\n\n통신사가 SKT인 경우 -> SKC 입력\n통신사가 KT인 경우 -> KTC 입력\n통신사가 U+인 경우 -> LUC 입력\n자급제/태블릿인 경우 -> KOO 입력 (알파벳 대문자 O)\n\n* 타 통신사 유심으로 바꾸어 쓰시고 계시다면, 유심 바꾸기 전의 통신사 CSC 코드로 검색해주세요.\n* 해외 기종인 경우 CSC 코드를 직접 알아내셔야 합니다.\n\n모델명과 CSC 코드를 입력한 후 검색 버튼을 눌러보세요.</string>
+    <string name="search_2">좋아요! 이곳에서 최신 펌웨어를 확인할 수 있어요.\n이 카드를 터치하면 이전 펌웨어 리스트도 볼 수 있답니다. 터치해보시겠어요?</string>
+    <string name="search_3">훌륭해요!</string>
+    <string name="search_4">이곳에서 이전 펌웨어 리스트를 확인할 수 있어요.</string>
+    <string name="search_5">완료</string>
+    <string name="search_6">기초 검색 가이드가 끝났습니다. 이제 다양한 디바이스의 펌웨어를 검색해보세요.</string>
+
+    <!-- Help Firmware -->
+    <string name="firmware_0">기본 펌웨어 정보</string>
+    <string name="firmware_1">펌웨어 정보는 빌드 번호, CSC 버전, 기저대역 버전 정보로 이루어져 있습니다.\n\n예를 들어, 펌웨어 정보 검색 결과가 아래와 같다면\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\n맨 앞의 정보(A720SKSU3BRK1)는 빌드 번호를 나타내며,\n가운데 정보(A720SSKC3BRK1)는 CSC 버전,\n마지막 정보(A720NKOU3BRK1)는 기저대역 버전을 뜻합니다.</string>
+    <string name="firmware_2">펌웨어 정보 읽기</string>
+    <string name="firmware_3">펌웨어 정보를 알고 싶다면 빌드 번호를 읽는 법을 알아야 합니다.\n아래 예시 빌드 번호를 통해 알아보세요:</string>
+    <string name="firmware_10">빨간색 글자</string>
+    <string name="firmware_11">빨간색 글자(예시: U3)는 부트로더 버전을 의미합니다.\n\n삼성의 보안 정책상, 부트로더 버전이 높은 펌웨어에서 낮은 펌웨어로 다운그레이드가 불가능합니다.</string>
+    <string name="firmware_12">노란색 글자</string>
+    <string name="firmware_13">노란색 글자(예시: B)는 안드로이드 버전을 의미합니다.\n이 부분이 바뀌면 안드로이드 OS 버전이 업그레이드 됨을 나타냅니다.\n\nA는 초기 출시 안드로이드 버전을 뜻하며,\nB는 안드로이드 업데이트를 1번 받았음을 의미하고,\nC는 안드로이드 업데이트를 2번 받았음을 의미합니다.\n.\n.\n.\nZ는 베타 펌웨어임을 의미합니다.</string>
+    <string name="firmware_14">초록색 글자</string>
+    <string name="firmware_15">초록색 글자(예시: R)는 연도를 의미합니다.\n\nR은 2018년,\nS는 2019년,\nT는 2020년을 의미합니다.</string>
+    <string name="firmware_16">파란색 글자</string>
+    <string name="firmware_17">파란색 글자(예시: K)는 달을 의미합니다.\n\nA는 1월,\nB는 2월,\n.\n.\n.\nL은 12월을 의미합니다.</string>
+    <string name="firmware_18">보라색 글자</string>
+    <string name="firmware_19">보라색 글자(예시: 1)는 펌웨어가 몇 번 빌드되었는지를 의미합니다.\n\n1은 펌웨어가 1번,\n.\n.\n.\n9는 펌웨어가 9번,\nA는 펌웨어가 10번,\n.\n.\n.\nZ는 펌웨어가 35번 빌드되었음을 의미합니다.</string>
+    <string name="firmware_20">테스트 펌웨어는 언제 출시되나요?</string>
+    <string name="firmware_21">펌웨어는 통신사 검수 과정을 거쳐서 출시되기 때문에 테스트 펌웨어 출시 일정을 정확히 알 수가 없습니다.\n대략 3주 전후로 테스트 펌웨어가 출시되며, 중요한 패치가 포함된 펌웨어는 며칠 내로 출시됩니다.</string>
+
+    <!-- About -->
+    <string name="app_information">앱 정보</string>
+    <string name="version">버전</string>
+    <string name="latest">최신 버전입니다.</string>
+    <string name="update">업데이트</string>
+    <string name="license">라이선스</string>
+    <string name="legal">법적 고지</string>
+    <string name="legal_text">정식 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml 에서 불러오며,\n테스트 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml 에서 불러옵니다.\n위 링크는 삼성전자가 소비자에게 정식으로 펌웨어 정보를 제공하는 경로가 아니며, 이 정보의 이용에 대한 책임은 모두 사용자에게 있습니다.</string>
+
     <!-- Settings -->
-    <string name="app_version">앱 버전</string>
-    <string name="data_saver">데이터 세이버</string>
+    <string name="feature">기능</string>
+    <string name="theme">테마</string>
+    <string name="about">CheckFirm 정보</string>
+    <string name="welcome_search">자동 검색</string>
+    <string name="welcome_search_description">앱 실행 시 지정된 디바이스의 펌웨어 정보를 검색합니다.</string>
+    <string name="data_saver">데이터 절약</string>
     <string name="data_saver_description">와이파이 환경에서만 펌웨어 정보를 불러옵니다.</string>
     <string name="dark_theme">다크 모드</string>
     <string name="dark_theme_description">앱 테마를 어둡게 설정합니다.</string>
-    <string name="one_ui_description">One UI를 사용합니다.</string>
+    <string name="system">시스템 테마 사용</string>
+    <string name="system_description">디바이스가 야간 모드를 지원하는 경우, 앱 테마를 시스템 테마와 맞춥니다.</string>
+    <string name="expandable_bar">확장바</string>
+    <string name="expandable_bar_description">확장바를 사용합니다.</string>
     <string name="settings">설정</string>
     <string name="information">정보</string>
 </resources>

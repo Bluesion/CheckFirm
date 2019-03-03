@@ -7,10 +7,10 @@ android {
 
     defaultConfig {
         applicationId "com.illusion.checkfirm"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 28
-        versionCode 13
-        versionName "3.0"
+        versionCode 14
+        versionName "4.0"
     }
 
     buildTypes {
@@ -25,18 +25,13 @@ android {
     }
 }
 
-ext {
-    sv = '1.0.0'
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:1.0.2"
-    implementation "androidx.coordinatorlayout:coordinatorlayout:$sv"
-    implementation "androidx.legacy:legacy-preference-v14:$sv"
-    implementation "androidx.preference:preference:$sv"
-    implementation "androidx.recyclerview:recyclerview:$sv"
-    implementation "com.google.android.material:material:$sv"
+    implementation "androidx.appcompat:appcompat:1.1.0-alpha02"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0-alpha01"
+    implementation "androidx.preference:preference:1.1.0-alpha03"
+    implementation "androidx.recyclerview:recyclerview:1.1.0-alpha02"
+    implementation "com.google.android.material:material:1.1.0-alpha04"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jsoup:jsoup:1.11.3"
 }
