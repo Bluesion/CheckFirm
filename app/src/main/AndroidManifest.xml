@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:label="@string/search"
-            android:name="com.illusion.checkfirm.search.SearchActivity"
+            android:name="com.illusion.checkfirm.search.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

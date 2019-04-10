@@ -2,6 +2,7 @@ package com.illusion.checkfirm.search
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.InputFilter
@@ -77,6 +78,13 @@ class SearchActivity : AppCompatActivity() {
         System.arraycopy(cscFilters, 0, newCSCFilters, 0, cscFilters.size)
         newCSCFilters[cscFilters.size] = InputFilter.AllCaps()
         csc.filters = newCSCFilters
+
+        if (Intent.ACTION_VIEW == intent.action) {
+            val url = intent.data!!
+            model.setText(url.getQueryParameter("model"))
+            csc.setText(url.getQueryParameter("csc"))
+            search()
+        }
 
         bookmarkRecyclerView = findViewById(R.id.bookmarkRecyclerView)
         bookmarkAdapter = FastBookmarkAdapter(bookmarkList)
