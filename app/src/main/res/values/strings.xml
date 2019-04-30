@@ -86,8 +86,6 @@
     <string name="data_saver_description">Check firmware information only when connected to Wi-Fi.</string>
     <string name="dark_theme">Dark Mode</string>
     <string name="dark_theme_description">Set dark theme.</string>
-    <string name="system">Use System Theme</string>
-    <string name="system_description">App theme will be same as your system theme if your device supports night mode.</string>
     <string name="expandable_bar">Expandable Bar</string>
     <string name="expandable_bar_description">Use expandable bar.</string>
     <string name="settings">Settings</string>

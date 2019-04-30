@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="materialCardViewStyle">@style/CardTheme</item>
+        <item name="switchStyle">@style/SwitchTheme</item>
+        <item name="actionOverflowMenuStyle">@style/ToolbarPopupTheme</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView</item>
+        <item name="bottomSheetDialogTheme">@style/BottomDialog</item>
+        <item name="textAppearanceHeadline6">@style/CardViewTitle</item>
+        <item name="toolbarStyle">@style/Toolbar</item>
+        <item name="tabStyle">@style/Tab</item>
+        <item name="android:windowBackground">@color/backgroundColor</item>
+        <item name="android:statusBarColor">@color/backgroundColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+        <item name="android:navigationBarColor" tools:targetApi="27">@color/backgroundColor</item>
+    </style>
+
+</resources>

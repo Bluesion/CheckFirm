@@ -18,7 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="11dp"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
@@ -29,10 +29,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="13dp"
+                    android:layout_margin="14dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -55,16 +52,13 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8.8dp"
+                android:layout_marginTop="8dp"
                 android:id="@+id/firmware">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="13dp"
+                    android:layout_margin="14dp"
                     android:orientation="vertical">
 
                     <ImageView

@@ -7,10 +7,10 @@
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="6.6dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="6.6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="6dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -5,16 +5,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.CompoundButton
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.WelcomeDialog
-import com.illusion.checkfirm.utils.ThemeChanger
 import com.illusion.checkfirm.utils.Tools
 
 class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
@@ -24,13 +24,11 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ThemeChanger.setAppTheme(this)
         setContentView(R.layout.activity_settings)
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val one = sharedPrefs.getBoolean("one", true)
         val dark= sharedPrefs.getBoolean("dark", false)
-        val system = sharedPrefs.getBoolean("system", false)
         val welcome= sharedPrefs.getBoolean("welcome", false)
         val saver= sharedPrefs.getBoolean("saver", false)
 
@@ -63,10 +61,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         darkSwitch.isChecked = dark
         darkSwitch.setOnCheckedChangeListener(this)
 
-        val systemSwitch = findViewById<SwitchMaterial>(R.id.system_theme)
-        systemSwitch.isChecked = system
-        systemSwitch.setOnCheckedChangeListener(this)
-
         val welcomeSwitch = findViewById<SwitchMaterial>(R.id.welcome_search)
         welcomeSwitch.isChecked = welcome
         welcomeSwitch.setOnCheckedChangeListener(this)
@@ -75,27 +69,22 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         saverSwitch.isChecked = saver
         saverSwitch.setOnCheckedChangeListener(this)
 
-        val oneLayout = findViewById<RelativeLayout>(R.id.expanded)
+        val oneLayout = findViewById<ConstraintLayout>(R.id.expanded)
         oneLayout.setOnClickListener {
             oneSwitch.toggle()
         }
 
-        val darkLayout = findViewById<RelativeLayout>(R.id.dark)
+        val darkLayout = findViewById<ConstraintLayout>(R.id.dark)
         darkLayout.setOnClickListener {
             darkSwitch.toggle()
         }
 
-        val systemLayout = findViewById<RelativeLayout>(R.id.system)
-        systemLayout.setOnClickListener {
-            systemSwitch.toggle()
-        }
-
-        val welcomeLayout = findViewById<RelativeLayout>(R.id.welcome)
+        val welcomeLayout = findViewById<ConstraintLayout>(R.id.welcome)
         welcomeLayout.setOnClickListener {
             welcomeSwitch.toggle()
         }
 
-        val saverLayout = findViewById<RelativeLayout>(R.id.saver)
+        val saverLayout = findViewById<ConstraintLayout>(R.id.saver)
         saverLayout.setOnClickListener {
             saverSwitch.toggle()
         }
@@ -122,20 +111,14 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             p0.id == R.id.dark_mode -> {
                 if (isChecked) {
                     mEditor.putBoolean("dark", true)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
                 } else {
                     mEditor.putBoolean("dark", false)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
                 }
                 mEditor.apply()
-                Tools.restart(this, 0)
-            }
-            p0.id == R.id.system_theme -> {
-                if (isChecked) {
-                    mEditor.putBoolean("system", true)
-                } else {
-                    mEditor.putBoolean("system", false)
-                }
-                mEditor.apply()
-                Tools.restart(this, 0)
             }
             p0.id == R.id.welcome_search -> {
                 if (isChecked) {

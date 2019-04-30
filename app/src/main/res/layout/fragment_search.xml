@@ -12,7 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="11dp"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
@@ -24,10 +24,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="13dp"
+                    android:layout_margin="14dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -69,10 +66,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="13dp"
+                        android:layout_margin="14dp"
                         android:orientation="vertical">
 
                         <ImageView
@@ -109,15 +103,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/testCardView"
-                    android:layout_marginTop="8.8dp">
+                    android:layout_marginTop="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="13dp"
+                        android:layout_margin="14dp"
                         android:orientation="vertical">
 
                         <ImageView

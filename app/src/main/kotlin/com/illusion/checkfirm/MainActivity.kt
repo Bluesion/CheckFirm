@@ -17,7 +17,6 @@ import com.illusion.checkfirm.dialogs.BookmarkDialog
 import com.illusion.checkfirm.bookmark.Bookmark
 import com.illusion.checkfirm.search.Search
 import com.illusion.checkfirm.utils.NonSwipeableViewPager
-import com.illusion.checkfirm.utils.ThemeChanger
 import android.graphics.Typeface
 import android.view.ViewGroup
 
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ThemeChanger.setAppTheme(this)
         setContentView(R.layout.activity_main)
 
         val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)

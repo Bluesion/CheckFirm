@@ -12,13 +12,11 @@ import androidx.appcompat.widget.Toolbar
 import com.google.android.material.card.MaterialCardView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.HelpDialog
-import com.illusion.checkfirm.utils.ThemeChanger
 
 class HelpSearch : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ThemeChanger.setAppTheme(this)
         setContentView(R.layout.activity_help_search)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)

@@ -23,7 +23,6 @@ import com.illusion.checkfirm.database.BookmarkDBHelper
 import com.illusion.checkfirm.database.HistoryDB
 import com.illusion.checkfirm.database.HistoryDBHelper
 import com.illusion.checkfirm.utils.RecyclerTouchListener
-import com.illusion.checkfirm.utils.ThemeChanger
 import com.illusion.checkfirm.utils.Tools
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,7 +43,6 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ThemeChanger.setAppTheme(this)
         setContentView(R.layout.activity_search)
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)

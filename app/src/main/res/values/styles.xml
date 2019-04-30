@@ -1,39 +1,5 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
-        <item name="colorAccent">@color/blue</item>
-        <item name="materialCardViewStyle">@style/CardTheme</item>
-        <item name="switchStyle">@style/SwitchThemeLight</item>
-        <item name="actionOverflowMenuStyle">@style/ToolbarPopupThemeLight</item>
-        <item name="dropDownListViewStyle">@style/DropDownListViewLight</item>
-        <item name="bottomSheetDialogTheme">@style/BottomDialogLight</item>
-        <item name="textAppearanceHeadline6">@style/CardViewTitle</item>
-        <item name="toolbarStyle">@style/Toolbar</item>
-        <item name="tabStyle">@style/TabLight</item>\
-        <item name="android:windowBackground">@color/backgroundColor</item>
-        <item name="android:statusBarColor">@color/backgroundColor</item>
-        <item name="android:windowLightStatusBar">true</item>
-    </style>
-
-    <style name="DarkTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
-        <item name="colorAccent">@color/blue</item>
-        <item name="materialCardViewStyle">@style/CardTheme</item>
-        <item name="switchStyle">@style/SwitchThemeDark</item>
-        <item name="actionOverflowMenuStyle">@style/ToolbarPopupThemeDark</item>
-        <item name="dropDownListViewStyle">@style/DropDownListViewDark</item>
-        <item name="bottomSheetDialogTheme">@style/BottomDialogDark</item>
-        <item name="textAppearanceHeadline6">@style/CardViewTitle</item>
-        <item name="toolbarStyle">@style/Toolbar</item>
-        <item name="tabStyle">@style/TabDark</item>
-        <item name="android:windowBackground">@android:color/black</item>
-        <item name="android:statusBarColor">@android:color/black</item>
-        <item name="android:windowLightStatusBar">false</item>
-    </style>
-
     <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="titleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Title</item>
     </style>
@@ -48,14 +14,7 @@
         <item name="android:minHeight">48dp</item>
     </style>
 
-    <style name="BottomDialogLight" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
-        <item name="colorAccent">@color/blue</item>
-        <item name="bottomSheetStyle">@style/DialogBackground</item>
-    </style>
-
-    <style name="BottomDialogDark" parent="Theme.MaterialComponents.BottomSheetDialog">
+    <style name="BottomDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/blue</item>
         <item name="colorAccent">@color/blue</item>
@@ -67,16 +26,7 @@
         <item name="backgroundTint">@android:color/transparent</item>
     </style>
 
-    <style name="SwitchThemeDark" parent="Widget.MaterialComponents.CompoundButton.Switch">
-        <item name="android:background">@drawable/switch_background</item>
-        <item name="android:thumb">@drawable/switch_thumb_dark_selector</item>
-        <item name="showText">false</item>
-        <item name="switchPadding">0dp</item>
-        <item name="track">@drawable/switch_track_dark_selector</item>
-        <item name="useMaterialThemeColors">false</item>
-    </style>
-
-    <style name="SwitchThemeLight" parent="Widget.MaterialComponents.CompoundButton.Switch">
+    <style name="SwitchTheme" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="android:background">@drawable/switch_background</item>
         <item name="android:thumb">@drawable/switch_thumb_selector</item>
         <item name="android:minWidth">43dp</item>
@@ -87,28 +37,16 @@
         <item name="useMaterialThemeColors">false</item>
     </style>
 
-    <style name="ToolbarPopupThemeLight" parent="Widget.MaterialComponents.PopupMenu.Overflow">
+    <style name="ToolbarPopupTheme" parent="Widget.MaterialComponents.PopupMenu.Overflow">
         <item name="android:popupBackground">@drawable/toolbar_popup_background</item>
     </style>
 
-    <style name="DropDownListViewLight" parent="Widget.AppCompat.Light.ListView.DropDown">
+    <style name="DropDownListView" parent="Widget.AppCompat.Light.ListView.DropDown">
         <item name="android:listSelector">@drawable/toolbar_menu_selector</item>
     </style>
 
-    <style name="ToolbarPopupThemeDark" parent="Widget.MaterialComponents.PopupMenu.Overflow">
-        <item name="android:popupBackground">@drawable/toolbar_popup_background_dark</item>
-    </style>
-
-    <style name="DropDownListViewDark" parent="Widget.AppCompat.ListView.DropDown">
-        <item name="android:listSelector">@drawable/toolbar_menu_selector_dark</item>
-    </style>
-
-    <style name="TabLight" parent="Widget.MaterialComponents.TabLayout">
+    <style name="Tab" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabRippleColor">#99CCCCCC</item>
-    </style>
-
-    <style name="TabDark" parent="Widget.MaterialComponents.TabLayout">
-        <item name="tabRippleColor">#99525252</item>
     </style>
 
 </resources>

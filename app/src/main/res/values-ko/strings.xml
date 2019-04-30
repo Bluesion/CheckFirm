@@ -75,8 +75,6 @@
     <string name="data_saver_description">와이파이 환경에서만 펌웨어 정보를 불러옵니다.</string>
     <string name="dark_theme">다크 모드</string>
     <string name="dark_theme_description">앱 테마를 어둡게 설정합니다.</string>
-    <string name="system">시스템 테마 사용</string>
-    <string name="system_description">디바이스가 야간 모드를 지원하는 경우, 앱 테마를 시스템 테마와 맞춥니다.</string>
     <string name="expandable_bar">확장바</string>
     <string name="expandable_bar_description">확장바를 사용합니다.</string>
     <string name="settings">설정</string>

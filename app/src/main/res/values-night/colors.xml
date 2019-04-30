@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="switch_track_on_disabled_stroke_color">#00ffffff</color>
+    <color name="switch_track_on_stroke_color">#00ffffff</color>
+    <color name="toolbar_stroke">#ff525252</color>
+    <color name="toolbar_background">#ff3d3d3d</color>
+</resources>

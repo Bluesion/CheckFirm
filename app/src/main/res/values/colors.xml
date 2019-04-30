@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="ic_launcher_background">#FFFFFF</color>
     <color name="backgroundColor">#f2f2f2</color>
     <color name="red">#f64141</color>
     <color name="yellow">#FEC006</color>
@@ -19,7 +20,7 @@
     <color name="switch_track_off_stroke_color">#cc8f8f8f</color>
     <color name="switch_track_on_disabled_color">#668f8f8f</color>
     <color name="switch_track_on_disabled_stroke_color">#66ffffff</color>
-    <color name="switch_track_on_disabled_stroke_color_dark">#00ffffff</color>
     <color name="switch_track_on_stroke_color">#66ffffff</color>
-    <color name="switch_track_on_stroke_color_dark">#00ffffff</color>
+    <color name="toolbar_stroke">#ffcccccc</color>
+    <color name="toolbar_background">#fffcfcfc</color>
 </resources>

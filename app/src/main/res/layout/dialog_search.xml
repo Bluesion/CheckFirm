@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_dialog_background"
     android:paddingTop="24dp"
-    android:paddingStart="26dp"
-    android:paddingEnd="26dp"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
     android:paddingBottom="16dp"
     android:orientation="vertical">
 
