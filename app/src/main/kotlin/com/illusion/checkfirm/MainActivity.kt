@@ -7,18 +7,18 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.illusion.checkfirm.dialogs.BookmarkDialog
 import com.illusion.checkfirm.bookmark.Bookmark
 import com.illusion.checkfirm.search.Search
-import com.illusion.checkfirm.utils.NonSwipeableViewPager
 import android.graphics.Typeface
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 
 class MainActivity : AppCompatActivity() {
 
@@ -76,12 +76,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        val mViewPager = findViewById<NonSwipeableViewPager>(R.id.mViewPager)
-        val adapter = ContentsAdapter(supportFragmentManager, 2)
-
-        mViewPager.adapter = adapter
-        mViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        val mViewPager = findViewById<ViewPager2>(R.id.mViewPager)
+        mViewPager.adapter = MyAdapter(2)
+        mViewPager.isUserInputEnabled = false
+        mViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
@@ -97,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         tabLayout.addOnTabSelectedListener(onTabSelectedListener(mViewPager))
     }
 
-    private fun onTabSelectedListener(pager: ViewPager): TabLayout.OnTabSelectedListener {
+    private fun onTabSelectedListener(pager: ViewPager2): TabLayout.OnTabSelectedListener {
         return object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 pager.currentItem = tab.position
@@ -112,11 +110,13 @@ class MainActivity : AppCompatActivity() {
                 text.setTextColor(Color.parseColor("#7A7A7A"))
             }
 
-            override fun onTabReselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {
+                pager.currentItem = tab.position
+            }
         }
     }
 
-    inner class ContentsAdapter internal constructor(fm: FragmentManager, private var numOfTabs: Int) : FragmentStatePagerAdapter(fm) {
+    inner class MyAdapter internal constructor(private var numOfTabs: Int) : FragmentStateAdapter(this) {
         override fun getItem(position: Int): Fragment {
             when (position) {
                 0 -> return Search()
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             return Search()
         }
 
-        override fun getCount(): Int {
+        override fun getItemCount(): Int {
             return numOfTabs
         }
     }

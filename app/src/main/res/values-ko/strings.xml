@@ -5,13 +5,15 @@
     <string name="help">도움말</string>
     <string name="online">네트워크를 확인해주세요</string>
     <string name="wifi">와이파이에 연결해주세요</string>
+    <string name="switch_on">켜짐</string>
+    <string name="switch_off">꺼짐</string>
 
     <!-- Contact Us -->
     <string name="contact_us">문의하기</string>
     <string name="contact_dialog_title">안녕하세요 :)</string>
     <string name="contact_dialog_text">건의사항이나 질문이 있다면 아래 메일 주소로 연락주세요.\n\nwork@newfitlab.com (Designer, Newfit)\ndnjscjf098@gmail.com (Developer, Illusion)</string>
 
-    <!-- Firmware -->
+    <!-- Search -->
     <string name="firmware">펌웨어</string>
     <string name="latest_official">최신 공식 펌웨어</string>
     <string name="latest_test">최신 테스트 펌웨어</string>
@@ -23,8 +25,9 @@
     <string name="welcome_wifi">데이터 절약 기능이 켜져 있습니다. 자동 검색 기능을 사용하시려면 와이파이에 연결해주세요.</string>
     <string name="welcome_online">자동 검색 기능을 사용하시려면 네트워크에 연결해주세요.</string>
     <string name="clipboard">클립보드에 복사했습니다.</string>
+    <string name="search_error">검색에 실패하였습니다. 모델명과 CSC 코드를 정확히 입력하여 검색하세요.</string>
 
-    <!-- BookMark -->
+    <!-- Bookmark -->
     <string name="bookmark">북마크</string>
     <string name="name">북마크 이름</string>
     <string name="save">저장</string>
@@ -75,8 +78,26 @@
     <string name="data_saver_description">와이파이 환경에서만 펌웨어 정보를 불러옵니다.</string>
     <string name="dark_theme">다크 모드</string>
     <string name="dark_theme_description">앱 테마를 어둡게 설정합니다.</string>
+    <string name="system">시스템 테마 사용</string>
+    <string name="system_description">디바이스가 야간 모드를 지원하는 경우, 앱 테마를 시스템 테마와 맞춥니다.</string>
     <string name="expandable_bar">확장바</string>
     <string name="expandable_bar_description">확장바를 사용합니다.</string>
+    <string name="beta">실험실</string>
+    <string name="beta_description">실험실에서 더 많은 기능을 사용해보세요.</string>
     <string name="settings">설정</string>
     <string name="information">정보</string>
+
+    <!-- Beta -->
+    <string name="beta_text">베타 서비스를 활성화하여 새로운 기능을 체험해보세요.</string>
+    <string name="smart_search_title">스마트 서치</string>
+    <string name="smart_search_description">스마트 서치는 최신 테스트 펌웨어의 정보를 예측하는 기능입니다.</string>
+    <string name="smart_search_info">최신 테스트 펌웨어 정보</string>
+    <string name="smart_search_date">최초 발견일</string>
+    <string name="smart_search_release">예상 릴리즈 날짜</string>
+    <string name="smart_search_downgrade">다운그레이드</string>
+    <string name="smart_search_downgrade_possible">가능</string>
+    <string name="smart_search_downgrade_impossible">불가능</string>
+    <string name="smart_search_changelog">주요 변경점</string>
+    <string name="smart_search_changelog_os">안드로이드 업데이트</string>
+    <string name="smart_search_changelog_bugfix">버그 픽스</string>
 </resources>

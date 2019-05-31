@@ -1,6 +1,5 @@
 package com.illusion.checkfirm.bookmark
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -8,13 +7,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.illusion.checkfirm.help.HelpActivity
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.BookmarkDB
 import com.illusion.checkfirm.database.BookmarkDBHelper
 import com.illusion.checkfirm.dialogs.BookmarkDialog
-import com.illusion.checkfirm.dialogs.ContactDialog
-import com.illusion.checkfirm.settings.SettingsActivity
 import java.util.ArrayList
 
 class Bookmark : Fragment() {
@@ -68,33 +64,5 @@ class Bookmark : Fragment() {
         }
 
         return rootView
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-        menu.findItem(R.id.search).isVisible = false
-        menu.findItem(R.id.search_help).isVisible = false
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.bookmark_help -> {
-                val intent = Intent(activity!!, HelpActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.settings -> {
-                val intent = Intent(activity!!, SettingsActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.contact -> {
-                val bottomSheetFragment = ContactDialog()
-                bottomSheetFragment.show(activity!!.supportFragmentManager, bottomSheetFragment.tag)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

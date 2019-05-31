@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="48dp">
+        android:layout_marginBottom="?actionBarSize">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -22,7 +22,6 @@
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/collapsingToolbarLayout"
                     app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
 
                     <TextView
@@ -62,10 +61,10 @@
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <com.illusion.checkfirm.utils.NonSwipeableViewPager
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/mViewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/mViewPager" />
+                    android:layout_height="match_parent" />
 
             </FrameLayout>
 
@@ -86,7 +85,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/mTabLayout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?actionBarSize"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
         app:tabTextColor="#808080"
@@ -94,22 +93,5 @@
         app:tabIndicatorAnimationDuration="0"
         app:tabIndicatorColor="@android:color/transparent"
         app:tabIndicatorFullWidth="false" />
-
-    <!--
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/mTabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent"
-        app:tabBackground="@drawable/tab_background_selector"
-        app:tabRippleColor="@android:color/transparent"
-        app:tabTextColor="#808080"
-        app:tabSelectedTextColor="?colorAccent"
-        app:tabIndicatorAnimationDuration="0"
-        app:tabIndicator="@drawable/tab_indicator"
-        app:tabIndicatorColor="@color/blue"
-        app:tabIndicatorFullWidth="false" />
-    -->
 
 </RelativeLayout>

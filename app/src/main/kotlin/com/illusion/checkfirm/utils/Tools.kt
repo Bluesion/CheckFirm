@@ -10,6 +10,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Tools {
     fun isWifi(mContext: Context): Boolean {
@@ -54,5 +56,14 @@ object Tools {
 
     fun dpToPx(dp: Int): Int {
         return (dp * Resources.getSystem().displayMetrics.density).toInt()
+    }
+
+    fun dateToString(date: Date, format: String = "yyyy/MM/dd", locale: Locale = Locale.KOREAN): String {
+        val formatter = SimpleDateFormat(format, locale)
+        return formatter.format(date)
+    }
+
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
     }
 }

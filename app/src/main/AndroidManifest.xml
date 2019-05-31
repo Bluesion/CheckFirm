@@ -40,6 +40,9 @@
             android:label="@string/about"
             android:name="com.illusion.checkfirm.settings.AboutActivity" />
         <activity
+            android:label="@string/beta"
+            android:name="com.illusion.checkfirm.settings.BetaActivity" />
+        <activity
             android:label="@string/license"
             android:name="com.illusion.checkfirm.settings.LicenseActivity" />
         <activity

@@ -10,13 +10,16 @@
     <string name="help">Help</string>
     <string name="online">Connect to network</string>
     <string name="wifi">Connect to Wi-Fi</string>
+    <string name="switch_on">On</string>
+    <string name="switch_off">Off</string>
+    <string name="error" translatable="false">Error</string>
 
     <!-- Contact Us -->
     <string name="contact_us">Contact Us</string>
     <string name="contact_dialog_title">Hello, we are CheckFirm :)</string>
     <string name="contact_dialog_text">Email us if you want to say something.\n\nwork@newfitlab.com (Designer, Newfit)\ndnjscjf098@gmail.com (Developer, Illusion)</string>
 
-    <!-- Firmware -->
+    <!-- Search -->
     <string name="firmware">Firmware</string>
     <string name="latest_official">Latest Official Firmware</string>
     <string name="latest_test">Latest Test Firmware</string>
@@ -28,15 +31,16 @@
     <string name="welcome_wifi">Data Saver is on. Please turn on Wi-Fi to use Welcome Search.</string>
     <string name="welcome_online">Please connect to network to use Welcome Search.</string>
     <string name="clipboard">Copied to clipboard.</string>
+    <string name="search_error">Search failed. Please check if you wrote model and CSC code correctly.</string>
 
-    <!-- BookMark -->
+    <!-- Bookmark -->
     <string name="bookmark">Bookmark</string>
     <string name="name">Bookmark Name</string>
     <string name="save">Save</string>
 
     <!-- Help Search -->
     <string name="search_0">How to search</string>
-    <string name="search_1">Before you search, you need to know model and csc code.\nYour model is %s and I cannot inform your csc code because I don\'t know which SIM card you use. You need to google your own csc code.</string>
+    <string name="search_1">Before you search, you need to know model and CSC code.\nYour model is %s and I cannot inform your CSC code because I don\'t know which SIM card you use. You need to google your own CSC code.</string>
     <string name="search_2">Fantastic! You can see latest firmware information here.\nAmazing thing will happen if you click this card.</string>
     <string name="search_3">Great!</string>
     <string name="search_4">You can check previous firmwares here.</string>
@@ -81,13 +85,31 @@
     <string name="theme">Theme</string>
     <string name="about">About CheckFirm</string>
     <string name="welcome_search">Welcome Search</string>
-    <string name="welcome_search_description">Search specified device firmware on first start.</string>
+    <string name="welcome_search_description">Search firmware on start.</string>
     <string name="data_saver">Data Saver</string>
     <string name="data_saver_description">Check firmware information only when connected to Wi-Fi.</string>
     <string name="dark_theme">Dark Mode</string>
     <string name="dark_theme_description">Set dark theme.</string>
+    <string name="system">Use System Theme</string>
+    <string name="system_description">App theme will be same as your system theme if your device supports night mode.</string>
     <string name="expandable_bar">Expandable Bar</string>
     <string name="expandable_bar_description">Use expandable bar.</string>
+    <string name="beta">Beta Lab</string>
+    <string name="beta_description">Do what you can do more with CheckFirm Beta Lab.</string>
     <string name="settings">Settings</string>
     <string name="information">Information</string>
+
+    <!-- Beta -->
+    <string name="beta_text">Enable beta service to experience new feature.</string>
+    <string name="smart_search_title">Smart Search</string>
+    <string name="smart_search_description">Smart Search will let you know the information of latest test firmware.</string>
+    <string name="smart_search_info">Latest Test Firmware Info</string>
+    <string name="smart_search_date">First discovery date</string>
+    <string name="smart_search_release">Expected release date</string>
+    <string name="smart_search_downgrade">Downgrade</string>
+    <string name="smart_search_downgrade_possible">Possible</string>
+    <string name="smart_search_downgrade_impossible">Impossible</string>
+    <string name="smart_search_changelog">What\'s new</string>
+    <string name="smart_search_changelog_os">Android Update</string>
+    <string name="smart_search_changelog_bugfix">Bug fixes</string>
 </resources>

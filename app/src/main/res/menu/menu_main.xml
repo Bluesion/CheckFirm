@@ -6,21 +6,12 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/search_help"
+    <item android:id="@+id/help"
         android:title="@string/help"
         app:showAsAction="never" />
-
-    <item android:id="@+id/bookmark_help"
-        android:title="@string/help"
-        android:icon="@drawable/ic_help"
-        app:showAsAction="ifRoom" />
 
     <item android:id="@+id/settings"
         android:title="@string/settings"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/contact"
-        android:title="@string/contact_us"
         app:showAsAction="never" />
 
 </menu>
