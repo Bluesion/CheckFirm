@@ -90,7 +90,7 @@
     <!-- Beta -->
     <string name="beta_text">베타 서비스를 활성화하여 새로운 기능을 체험해보세요.</string>
     <string name="smart_search_title">스마트 서치</string>
-    <string name="smart_search_description">스마트 서치는 최신 테스트 펌웨어의 정보를 예측하는 기능입니다.</string>
+    <string name="smart_search_description">스마트 서치는 최신 테스트 펌웨어의 정보를 예측하는 기능입니다. 첫 발견일, 예상 릴리즈 날짜, 다운그레이드 가능 여부, 주요 변경점을 예측합니다.\n단순 예측값들이기 때문에 실제와 다를 수 있으며, 참고용으로만 사용해주세요.\n\n펌웨어 정보가 암호화 되어 있는 경우엔 제대로 된 결과 값이 나오지 않을 수 있습니다.</string>
     <string name="smart_search_info">최신 테스트 펌웨어 정보</string>
     <string name="smart_search_date">최초 발견일</string>
     <string name="smart_search_release">예상 릴리즈 날짜</string>
@@ -100,4 +100,5 @@
     <string name="smart_search_changelog">주요 변경점</string>
     <string name="smart_search_changelog_os">OS 업데이트</string>
     <string name="smart_search_changelog_bugfix">버그 픽스</string>
+    <string name="smart_search_notice">위 내용은 삼성 공식 발표값이 아닌, CheckFirm의 단순 예측값입니다.\n위 내용은 실제와 다를 수 있으며, 참고용으로만 사용해주세요.</string>
 </resources>

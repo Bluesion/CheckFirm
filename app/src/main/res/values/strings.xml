@@ -102,7 +102,7 @@
     <!-- Beta -->
     <string name="beta_text">Enable beta service to experience new feature.</string>
     <string name="smart_search_title">Smart Search</string>
-    <string name="smart_search_description">Smart Search will let you know the information of latest test firmware.</string>
+    <string name="smart_search_description">Smart Search will let you know the information of latest test firmware. You can see the first discovery date, expected release date, downgrade possibility, and changelog.\nThis is just CheckFirm prediction. You have to know that this may differ from actual firmware.\n\nThe result may not be correct if firmware information is encrypted.</string>
     <string name="smart_search_info">Latest Test Firmware Info</string>
     <string name="smart_search_date">First discovery date</string>
     <string name="smart_search_release">Expected release date</string>
@@ -112,4 +112,5 @@
     <string name="smart_search_changelog">What\'s new</string>
     <string name="smart_search_changelog_os">OS Update</string>
     <string name="smart_search_changelog_bugfix">Bug fixes</string>
+    <string name="smart_search_notice">This is not the accurate information from Samsung. This is just CheckFirm prediction.\nKeep in mind that this may differ from actual firmware.</string>
 </resources>

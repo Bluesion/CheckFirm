@@ -76,7 +76,9 @@ class Search : Fragment() {
     private lateinit var downGradePrevious: String
 
     // ETC
-    private var save: Boolean = false
+    private class MyHandler : Handler() {
+        override fun handleMessage(msg: Message) {}
+    }
     private val mHandler = MyHandler()
     private lateinit var sharedPrefs: SharedPreferences
     private var previousOfficial = ""
@@ -95,7 +97,6 @@ class Search : Fragment() {
         firstDiscoveryDate = rootView.findViewById(R.id.smart_search_date)
 
         welcomeCardView = rootView.findViewById(R.id.welcome)
-        sharedPrefs = activity!!.getSharedPreferences("settings", Context.MODE_PRIVATE)
         welcomeTitle = rootView.findViewById(R.id.welcome_title)
         welcomeText = rootView.findViewById(R.id.welcome_text)
 
@@ -116,6 +117,8 @@ class Search : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        sharedPrefs = activity!!.getSharedPreferences("settings", Context.MODE_PRIVATE)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -124,8 +127,15 @@ class Search : Fragment() {
         db = FirebaseFirestore.getInstance()
 
         init(rootView)
-        welcomeSearch()
-        save = sharedPrefs.getBoolean("saver", false)
+
+        val welcome = sharedPrefs.getBoolean("welcome", false)
+        if (welcome) {
+            welcomeSearch()
+        } else {
+            welcomeTitle.text = getString(R.string.welcome_search)
+            welcomeText.text = getString(R.string.welcome_disabled)
+            welcomeCardView.visibility = View.VISIBLE
+        }
 
         clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val infoOfficialFirmware = rootView.findViewById<MaterialCardView>(R.id.officialCardView)
@@ -184,6 +194,7 @@ class Search : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        val save = sharedPrefs.getBoolean("saver", false)
         if (requestCode == 1 && resultCode == RESULT_OK) {
             model = data!!.getStringExtra("model")
             csc = data.getStringExtra("csc")
@@ -207,34 +218,29 @@ class Search : Fragment() {
     }
 
     private fun welcomeSearch() {
-        val welcome = sharedPrefs.getBoolean("welcome", false)
+        val save = sharedPrefs.getBoolean("saver", false)
 
         model = sharedPrefs.getString("welcome_model", "SM-A720S") as String
         csc = sharedPrefs.getString("welcome_csc", "SKC") as String
-        if (welcome) {
-            val official = "$baseURL$csc/$model$officialURL"
-            val test = "$baseURL$csc/$model$testURL"
-            if (save) {
-                if (Tools.isWifi(activity!!)) {
-                    networkTask(official, test)
-                } else {
-                    welcomeTitle.text = getString(R.string.wifi)
-                    welcomeText.text = getString(R.string.welcome_wifi)
-                    welcomeCardView.visibility = View.VISIBLE
-                }
+        val official = "$baseURL$csc/$model$officialURL"
+        val test = "$baseURL$csc/$model$testURL"
+
+        if (save) {
+            if (Tools.isWifi(activity!!)) {
+                networkTask(official, test)
             } else {
-                if (Tools.isOnline(activity!!)) {
-                    networkTask(official, test)
-                } else {
-                    welcomeTitle.text = getString(R.string.online)
-                    welcomeText.text = getString(R.string.welcome_online)
-                    welcomeCardView.visibility = View.VISIBLE
-                }
+                welcomeTitle.text = getString(R.string.wifi)
+                welcomeText.text = getString(R.string.welcome_wifi)
+                welcomeCardView.visibility = View.VISIBLE
             }
         } else {
-            welcomeTitle.text = getString(R.string.welcome_search)
-            welcomeText.text = getString(R.string.welcome_disabled)
-            welcomeCardView.visibility = View.VISIBLE
+            if (Tools.isOnline(activity!!)) {
+                networkTask(official, test)
+            } else {
+                welcomeTitle.text = getString(R.string.online)
+                welcomeText.text = getString(R.string.welcome_online)
+                welcomeCardView.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -257,36 +263,52 @@ class Search : Fragment() {
                 if (dateLatest == "null") {
                     add()
                 } else {
-                    val currentOfficial = if (latestOfficial.contains(".")) {
-                        val index = latestOfficial.indexOf(".")
-                        latestOfficial.substring(index - 6, index)
-                    } else {
-                        val index = latestOfficial.indexOf("/")
-                        latestOfficial.substring(index - 6, index)
+                    val currentOfficial = when {
+                        latestOfficial.contains(".") -> {
+                            val index = latestOfficial.indexOf(".")
+                            latestOfficial.substring(index - 6, index)
+                        }
+                        latestOfficial.contains("/") -> {
+                            val index = latestOfficial.indexOf("/")
+                            latestOfficial.substring(index - 6, index)
+                        }
+                        else -> latestOfficial
                     }
 
-                    val currentTest = if (latestTest.contains(".")) {
-                        val index = latestTest.indexOf(".")
-                        latestTest.substring(index - 6, index)
-                    } else {
-                        val index = latest.indexOf("/")
-                        latestTest.substring(index - 6, index)
+                    val currentTest = when {
+                        latestTest.contains(".") -> {
+                            val index = latestTest.indexOf(".")
+                            latestTest.substring(index - 6, index)
+                        }
+                        latestTest.contains("/") -> {
+                            val index = latestTest.indexOf("/")
+                            latestTest.substring(index - 6, index)
+                        }
+                        else -> latestTest
                     }
 
-                    val firestoreLatest = if (latest.contains(".")) {
-                        val index = latest.indexOf(".")
-                        latest.substring(index - 6, index)
-                    } else {
-                        val index = latest.indexOf("/")
-                        latest.substring(index - 6, index)
+                    val firestoreLatest = when {
+                        latest.contains(".") -> {
+                            val index = latest.indexOf(".")
+                            latest.substring(index - 6, index)
+                        }
+                        latest.contains("/") -> {
+                            val index = latest.indexOf("/")
+                            latest.substring(index - 6, index)
+                        }
+                        else -> latest
                     }
 
-                    val firestorePrevious = if (previous.contains(".")) {
-                        val index = previous.indexOf(".")
-                        previous.substring(index - 6, index)
-                    } else {
-                        val index = previous.indexOf("/")
-                        previous.substring(index - 6, index)
+                    val firestorePrevious = when {
+                        previous.contains(".") -> {
+                            val index = previous.indexOf(".")
+                            previous.substring(index - 6, index)
+                        }
+                        previous.contains("/") -> {
+                            val index = previous.indexOf("/")
+                            previous.substring(index - 6, index)
+                        }
+                        else -> previous
                     }
 
                     firstDiscoveryDate.text = dateLatest
@@ -381,20 +403,28 @@ class Search : Fragment() {
 
         firstDiscoveryDate.text = date
 
-        val currentOfficial = if (latestOfficial.contains(".")) {
-            val index = latestOfficial.indexOf(".")
-            latestOfficial.substring(index - 6, index)
-        } else {
-            val index = latestOfficial.indexOf("/")
-            latestOfficial.substring(index - 6, index)
+        val currentOfficial = when {
+            latestOfficial.contains(".") -> {
+                val index = latestOfficial.indexOf(".")
+                latestOfficial.substring(index - 6, index)
+            }
+            latestOfficial.contains("/") -> {
+                val index = latestOfficial.indexOf("/")
+                latestOfficial.substring(index - 6, index)
+            }
+            else -> latestOfficial
         }
 
-        val currentTest = if (latestTest.contains(".")) {
-            val index = latestTest.indexOf(".")
-            latestTest.substring(index - 6, index)
-        } else {
-            val index = latestTest.indexOf("/")
-            latestTest.substring(index - 6, index)
+        val currentTest = when {
+            latestTest.contains(".") -> {
+                val index = latestTest.indexOf(".")
+                latestTest.substring(index - 6, index)
+            }
+            latestTest.contains("/") -> {
+                val index = latestTest.indexOf("/")
+                latestTest.substring(index - 6, index)
+            }
+            else -> latestTest
         }
 
         if (currentOfficial == currentTest) {
@@ -546,11 +576,5 @@ class Search : Fragment() {
                 }
             }
         }.start()
-    }
-
-    companion object {
-        private class MyHandler : Handler() {
-            override fun handleMessage(msg: Message) {}
-        }
     }
 }
