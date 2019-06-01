@@ -3,7 +3,6 @@ package com.illusion.checkfirm.help
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.telephony.TelephonyManager
 import android.text.InputFilter
 import android.view.View
 import android.widget.EditText
@@ -23,10 +22,6 @@ class HelpSearch : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-
-        val tel = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        val test1 = findViewById<TextView>(R.id.test1)
-        test1.text = tel.networkOperator
 
         val myDevice = findViewById<TextView>(R.id.my_device)
         myDevice.text = String.format(getString(R.string.search_1), Build.MODEL)

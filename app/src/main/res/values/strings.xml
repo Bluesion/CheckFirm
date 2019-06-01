@@ -110,6 +110,6 @@
     <string name="smart_search_downgrade_possible">Possible</string>
     <string name="smart_search_downgrade_impossible">Impossible</string>
     <string name="smart_search_changelog">What\'s new</string>
-    <string name="smart_search_changelog_os">Android Update</string>
+    <string name="smart_search_changelog_os">OS Update</string>
     <string name="smart_search_changelog_bugfix">Bug fixes</string>
 </resources>

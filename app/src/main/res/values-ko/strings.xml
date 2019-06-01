@@ -98,6 +98,6 @@
     <string name="smart_search_downgrade_possible">가능</string>
     <string name="smart_search_downgrade_impossible">불가능</string>
     <string name="smart_search_changelog">주요 변경점</string>
-    <string name="smart_search_changelog_os">안드로이드 업데이트</string>
+    <string name="smart_search_changelog_os">OS 업데이트</string>
     <string name="smart_search_changelog_bugfix">버그 픽스</string>
 </resources>

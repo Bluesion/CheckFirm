@@ -257,32 +257,36 @@ class Search : Fragment() {
                 if (dateLatest == "null") {
                     add()
                 } else {
-                    val currentOfficial = if (latest.contains(".")) {
-                        val index = latest.indexOf(".")
-                        latest.substring(index - 6, index)
+                    val currentOfficial = if (latestOfficial.contains(".")) {
+                        val index = latestOfficial.indexOf(".")
+                        latestOfficial.substring(index - 6, index)
                     } else {
-                        latest.substring(latest.length - 6, latest.length)
+                        val index = latestOfficial.indexOf("/")
+                        latestOfficial.substring(index - 6, index)
                     }
 
                     val currentTest = if (latestTest.contains(".")) {
                         val index = latestTest.indexOf(".")
                         latestTest.substring(index - 6, index)
                     } else {
-                        latestTest.substring(latestTest.length - 6, latestTest.length)
+                        val index = latest.indexOf("/")
+                        latestTest.substring(index - 6, index)
                     }
 
                     val firestoreLatest = if (latest.contains(".")) {
                         val index = latest.indexOf(".")
                         latest.substring(index - 6, index)
                     } else {
-                        latest.substring(latest.length - 6, latest.length)
+                        val index = latest.indexOf("/")
+                        latest.substring(index - 6, index)
                     }
 
                     val firestorePrevious = if (previous.contains(".")) {
                         val index = previous.indexOf(".")
                         previous.substring(index - 6, index)
                     } else {
-                        previous.substring(previous.length - 6, previous.length)
+                        val index = previous.indexOf("/")
+                        previous.substring(index - 6, index)
                     }
 
                     firstDiscoveryDate.text = dateLatest
@@ -381,20 +385,28 @@ class Search : Fragment() {
             val index = latestOfficial.indexOf(".")
             latestOfficial.substring(index - 6, index)
         } else {
-            latestOfficial.substring(latestOfficial.length - 6, latestOfficial.length)
+            val index = latestOfficial.indexOf("/")
+            latestOfficial.substring(index - 6, index)
         }
 
         val currentTest = if (latestTest.contains(".")) {
             val index = latestTest.indexOf(".")
             latestTest.substring(index - 6, index)
         } else {
-            latestTest.substring(latestTest.length - 6, latestTest.length)
+            val index = latestTest.indexOf("/")
+            latestTest.substring(index - 6, index)
         }
 
         if (currentOfficial == currentTest) {
             items["expected_date_latest"] = date
             items["expected_date_previous"] = date
+            items["changelog_latest"] = "bug_fix"
+            items["changelog_previous"] = "bug_fix"
+            items["downgrade_latest"] = "possible"
+            items["downgrade_previous"] = "possible"
             expectedReleaseDate.text = date
+            changelog.text = getString(R.string.smart_search_changelog_bugfix)
+            downgrade.text = getString(R.string.smart_search_downgrade_possible)
         } else {
             val transFormat = SimpleDateFormat("yyyy/MM/dd", Locale.KOREAN)
             val newDate = transFormat.parse(date)
@@ -425,7 +437,7 @@ class Search : Fragment() {
             items["expected_date_previous"] = h
             expectedReleaseDate.text = h
 
-            if (currentOfficial.substring(0, 1) == currentTest.substring(0, 1)) {
+            if (currentOfficial.substring(0, 2) == currentTest.substring(0, 2)) {
                 items["downgrade_latest"] = "possible"
                 items["downgrade_previous"] = "possible"
                 downgrade.text = getString(R.string.smart_search_downgrade_possible)
@@ -443,14 +455,6 @@ class Search : Fragment() {
     }
 
     private fun testResult() {
-        if (latestOfficial.isNotBlank() && latestOfficial.isNotEmpty() && latestTest.isNotBlank() && latestTest.isNotEmpty()) {
-            latestOfficialFirmwareText.text = latestOfficial
-            latestTestFirmwareText.text = latestTest
-        } else {
-            latestOfficialFirmwareText.text = getString(R.string.search_error)
-            latestTestFirmwareText.text = getString(R.string.search_error)
-            detailCardView.visibility = View.GONE
-        }
         welcomeCardView.visibility = View.GONE
         previousOfficial = officialFirmware.toString()
                 .replace(", ", "\n")
@@ -463,6 +467,9 @@ class Search : Fragment() {
         modelOfficial.text = String.format(getString(R.string.device_format), model, csc)
         modelTest.text = String.format(getString(R.string.device_format), model, csc)
         mResult.visibility = View.VISIBLE
+
+        mSwipeRefreshLayout.isEnabled = false
+        mSwipeRefreshLayout.isRefreshing = false
     }
 
     private fun networkTask(officialURL: String, testURL: String) {
@@ -520,13 +527,20 @@ class Search : Fragment() {
                 }
 
                 mHandler.post {
-                    smartSearch()
-                    if (beta) {
-                        detailCardView.visibility = View.VISIBLE
+                    if (latestOfficial.isNotBlank() && latestOfficial.isNotEmpty() && latestTest.isNotBlank() && latestTest.isNotEmpty()) {
+                        smartSearch()
+                        latestOfficialFirmwareText.text = latestOfficial
+                        latestTestFirmwareText.text = latestTest
+
+                        if (beta) {
+                            detailCardView.visibility = View.VISIBLE
+                        } else {
+                            detailCardView.visibility = View.GONE
+                        }
                     } else {
+                        latestOfficialFirmwareText.text = getString(R.string.search_error)
+                        latestTestFirmwareText.text = getString(R.string.search_error)
                         detailCardView.visibility = View.GONE
-                        mSwipeRefreshLayout.isEnabled = false
-                        mSwipeRefreshLayout.isRefreshing = false
                     }
                     testResult()
                 }
