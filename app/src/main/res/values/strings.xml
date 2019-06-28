@@ -12,7 +12,8 @@
     <string name="wifi">Connect to Wi-Fi</string>
     <string name="switch_on">On</string>
     <string name="switch_off">Off</string>
-    <string name="error" translatable="false">Error</string>
+    <string name="error">Error</string>
+    <string name="notification_channel_name">New Firmware</string>
 
     <!-- Contact Us -->
     <string name="contact_us">Contact Us</string>
@@ -32,6 +33,7 @@
     <string name="welcome_online">Please connect to network to use Welcome Search.</string>
     <string name="clipboard">Copied to clipboard.</string>
     <string name="search_error">Search failed. Please check if you wrote model and CSC code correctly.</string>
+    <string name="searching">Still searching… Please wait for seconds</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Bookmark</string>
@@ -71,6 +73,30 @@
     <string name="firmware_20">When will test firmware be released?</string>
     <string name="firmware_21">We cannot exactly assume it. But test firmware will be released soon if build version doesn\'t change more.</string>
 
+    <!-- Help Questions -->
+    <string name="question_0">Most asked questions</string>
+    <string name="question_1">Firmware information is incorrect</string>
+    <string name="question_2">CheckFirm gets firmware information from Samsung server. If something is wrong with information, please report it to Samsung.</string>
+    <string name="question_3">Searching is not working</string>
+    <string name="question_4">If you wrote wrong model and CSC or network is unstable, searching might not be working properly. You can check your model in CheckFirm Help - Search.</string>
+    <string name="question_5">I found a bug</string>
+    <string name="question_6">If you found a bug or you want to say something to developer, please send a mail or write your comment on Google Play. You can check my mail on CheckFirm Settings - Information.</string>
+
+    <!-- Help Functions -->
+    <string name="function_0">CheckFirm Functions</string>
+    <string name="function_1">Expandable Bar</string>
+    <string name="function_2">You can use one of greatest feature of One UI - Expandable Bar on CheckFirm. According to One UI guideline, Expandable uses about 40% of device\'s height pixel.</string>
+    <string name="function_3">Dark Theme</string>
+    <string name="function_4">It saves battery. You can use CheckFirm at night really comfortably thanks to Dark Theme. CheckFirm also supports System Theme functions. If you enable this, App theme will follow your device theme.</string>
+    <string name="function_5">Welcome Search</string>
+    <string name="function_6">Search specific device\'s firmware on app start. For preventing overload, only one device is allowed.</string>
+    <string name="function_7">Data Saver</string>
+    <string name="function_8">Firmware searching / Checking latest version / Info Catcher requires internet connection. Data Saver makes these processes working only on Wi-Fi.</string>
+    <string name="function_9">Smart Search</string>
+    <string name="function_10">It predicts latest test firmware information. Whenever user searches firmware, Smart Search will connect to database and saves search results. CheckFirm predicts information using these saved information. Turning on Smart Search will make search speed slow.</string>
+    <string name="function_11">Info Catcher</string>
+    <string name="function_12">If something is changed in DB, FCM will send a notification to users who subscribed to specific topic. Before use Info Catcher, you should turn on Smart Search because Smart Search is a bridge CheckFirm to DB. Turning on Info Catcher will make search speed slow.\n\nI will not make realtime update notification because it is not efficient. Since there are a lot of data in DB, it is extremely inefficient to check changes.</string>
+
     <!-- About -->
     <string name="app_information">App information</string>
     <string name="version">Version</string>
@@ -84,25 +110,26 @@
     <string name="feature">Features</string>
     <string name="theme">Theme</string>
     <string name="about">About CheckFirm</string>
-    <string name="welcome_search">Welcome Search</string>
-    <string name="welcome_search_description">Search firmware on start.</string>
     <string name="data_saver">Data Saver</string>
-    <string name="data_saver_description">Check firmware information only when connected to Wi-Fi.</string>
+    <string name="data_saver_description">Do all progresses that need Internet connection only when connected to Wi-Fi.</string>
     <string name="dark_theme">Dark Mode</string>
     <string name="dark_theme_description">Set dark theme.</string>
     <string name="system">Use System Theme</string>
     <string name="system_description">App theme will be same as your system theme if your device supports night mode.</string>
     <string name="expandable_bar">Expandable Bar</string>
     <string name="expandable_bar_description">Use expandable bar.</string>
-    <string name="beta">Beta Lab</string>
-    <string name="beta_description">Do what you can do more with CheckFirm Beta Lab.</string>
     <string name="settings">Settings</string>
     <string name="information">Information</string>
+    <string name="welcome_search_saved">Saved</string>
 
-    <!-- Beta -->
-    <string name="beta_text">Enable beta service to experience new feature.</string>
-    <string name="smart_search_title">Smart Search</string>
-    <string name="smart_search_description">Smart Search will let you know the information of latest test firmware. You can see the first discovery date, expected release date, downgrade possibility, and changelog.\nThis is just CheckFirm prediction. You have to know that this may differ from actual firmware.\n\nThe result may not be correct if firmware information is encrypted.</string>
+    <!-- Welcome Search -->
+    <string name="welcome_search">Welcome Search</string>
+    <string name="welcome_search_description">Search firmware on start.</string>
+    <string name="welcome_search_text">Please input device that you want to search on start.</string>
+
+    <!-- Smart Search -->
+    <string name="smart_search">Smart Search</string>
+    <string name="smart_search_description">Predict the latest test firmware. The result may not be correct if firmware information is encrypted.</string>
     <string name="smart_search_info">Latest Test Firmware Info</string>
     <string name="smart_search_date">First discovery date</string>
     <string name="smart_search_release">Expected release date</string>
@@ -113,4 +140,17 @@
     <string name="smart_search_changelog_os">OS Update</string>
     <string name="smart_search_changelog_bugfix">Bug fixes</string>
     <string name="smart_search_notice">This is not the accurate information from Samsung. This is just CheckFirm prediction.\nKeep in mind that this may differ from actual firmware.</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher">Info Catcher</string>
+    <string name="info_catcher_description">Info Catcher will send you a notification when firmware has been updated.</string>
+    <string name="info_catcher_text">When someone discovers new firmware, CheckFirm will send a notification to you automatically.\nPlease input device that you want to catch.</string>
+    <string name="info_catcher_caution">Caution</string>
+    <string name="info_catcher_caution_text">1. This is beta function. There may be errors or this might be unstable.\n2. Info Catcher will work properly when Smart Search is turned on. If you want to try Info Catcher, you have to enable Smart Search.</string>
+    <string name="info_catcher_notification_title">%1$s (%2$s) new firmware found!</string>
+    <string name="info_catcher_notification_text">Check it now.</string>
+    <string name="info_catcher_error">Please check if you wrote model and CSC code correctly.</string>
+
+    <!-- Beta -->
+    <string name="beta">Beta</string>
 </resources>

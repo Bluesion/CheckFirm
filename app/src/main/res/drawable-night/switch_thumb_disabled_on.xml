@@ -1,9 +1,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:gravity="center" android:left="3dp" android:right="3dp">
+    <item android:gravity="center" android:width="-3dp">
         <shape android:shape="oval">
             <size android:height="22dp" android:width="22dp" />
             <solid android:color="@color/switch_thumb_on_disabled_color" />
-            <stroke android:width="1dp" android:color="@color/switch_track_on_disabled_stroke_color" />
+            <stroke android:width="1dp" android:color="@android:color/transparent" />
         </shape>
     </item>
 </layer-list>

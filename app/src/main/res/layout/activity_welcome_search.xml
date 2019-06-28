@@ -18,7 +18,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/beta"
+                android:text="@string/welcome_search"
                 android:id="@+id/expanded_title"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/title"
-                    android:text="@string/beta"
+                    android:text="@string/welcome_search"
                     android:gravity="center_vertical"
                     style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
@@ -65,7 +65,7 @@
                 android:layout_marginTop="4dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/beta"
+                    android:id="@+id/welcome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
@@ -74,7 +74,7 @@
                     android:minHeight="?android:attr/listPreferredItemHeight">
 
                     <LinearLayout
-                        android:id="@+id/beta_layout"
+                        android:id="@+id/welcome_layout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="14dp"
@@ -83,7 +83,7 @@
                         android:layout_marginBottom="13dp"
                         android:orientation="vertical"
                         app:layout_constrainedWidth="true"
-                        app:layout_constraintEnd_toStartOf="@id/beta_switch"
+                        app:layout_constraintEnd_toStartOf="@id/welcome_switch"
                         app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintHorizontal_weight="1"
@@ -105,7 +105,7 @@
                     </LinearLayout>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/beta_switch"
+                        android:id="@+id/welcome_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="14dp"
@@ -113,7 +113,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/beta_layout" />
+                        app:layout_constraintStart_toEndOf="@id/welcome_layout" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -123,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="14dp"
-                android:text="@string/beta_text" />
+                android:text="@string/welcome_search_text" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -138,18 +138,66 @@
                     android:layout_marginBottom="13dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="@string/smart_search_title"
-                        style="?textAppearanceBody1" />
+                        android:overScrollMode="never"
+                        android:scrollbars="none">
 
-                    <TextView
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:singleLine="true"
+                            app:singleSelection="true" />
+
+                    </HorizontalScrollView>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/model"
+                            android:hint="@string/model"
+                            android:text="@string/default_string"
+                            android:inputType="textCapCharacters"
+                            android:backgroundTint="@android:color/transparent"
+                            android:privateImeOptions="defaultInputmode=english"
+                            android:maxLines="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/smart_search_description" />
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/csc"
+                            android:hint="@string/csc"
+                            android:inputType="textCapCharacters"
+                            android:backgroundTint="@android:color/transparent"
+                            android:privateImeOptions="defaultInputmode=english"
+                            android:maxLines="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/save"
+                        android:id="@+id/save"
+                        style="@style/Widget.MaterialComponents.Button.TextButton" />
 
                 </LinearLayout>
 

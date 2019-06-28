@@ -5,24 +5,23 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.InputFilter
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.BookmarkDB
 import com.illusion.checkfirm.database.BookmarkDBHelper
 import com.illusion.checkfirm.database.HistoryDB
 import com.illusion.checkfirm.database.HistoryDBHelper
-import com.illusion.checkfirm.utils.RecyclerTouchListener
 import com.illusion.checkfirm.utils.Tools
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,16 +29,14 @@ import java.util.*
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var sharedPrefs: SharedPreferences
-    private lateinit var bookmarkRecyclerView: RecyclerView
-    private lateinit var bookmarkAdapter: FastBookmarkAdapter
     private val bookmarkList = ArrayList<BookmarkDB>()
-    private lateinit var bookmarkHelper: BookmarkDBHelper
     private lateinit var historyRecyclerView: RecyclerView
     private lateinit var historyAdapter: HistoryAdapter
     private val historyList = ArrayList<HistoryDB>()
     private lateinit var historyHelper: HistoryDBHelper
     private lateinit var model: EditText
     private lateinit var csc: EditText
+    private lateinit var imm: InputMethodManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,51 +60,42 @@ class SearchActivity : AppCompatActivity() {
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
         })
 
+        imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+
         model = findViewById(R.id.model)
         csc = findViewById(R.id.csc)
-        val modelFilters = model.filters
-        val newModelFilters = arrayOfNulls<InputFilter>(modelFilters.size + 1)
-        System.arraycopy(modelFilters, 0, newModelFilters, 0, modelFilters.size)
-        newModelFilters[modelFilters.size] = InputFilter.AllCaps()
-        model.filters = newModelFilters
-
-        val cscFilters = csc.filters
-        val newCSCFilters = arrayOfNulls<InputFilter>(cscFilters.size + 1)
-        System.arraycopy(cscFilters, 0, newCSCFilters, 0, cscFilters.size)
-        newCSCFilters[cscFilters.size] = InputFilter.AllCaps()
-        csc.filters = newCSCFilters
-
-        if (Intent.ACTION_VIEW == intent.action) {
-            val url = intent.data!!
-            model.setText(url.getQueryParameter("model"))
-            csc.setText(url.getQueryParameter("csc"))
-            search()
+        model.setSelection(model.text.length)
+        csc.setOnEditorActionListener { _, i, _ ->
+            when (i) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    search()
+                    true
+                }
+                else -> true
+            }
         }
 
-        bookmarkRecyclerView = findViewById(R.id.bookmarkRecyclerView)
-        bookmarkAdapter = FastBookmarkAdapter(bookmarkList)
-        val bookmarkLayout = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        bookmarkRecyclerView.layoutManager = bookmarkLayout
-        bookmarkRecyclerView.itemAnimator = DefaultItemAnimator()
-        bookmarkRecyclerView.adapter = bookmarkAdapter
-        bookmarkRecyclerView.addOnItemTouchListener(RecyclerTouchListener(this, bookmarkRecyclerView, object: RecyclerTouchListener.ClickListener {
-            override fun onClick(view: View, position: Int) {
-                if (position != RecyclerView.NO_POSITION) {
-                    model.setText(bookmarkList[position].model)
-                    csc.setText(bookmarkList[position].csc)
-                    search()
-                }
-            }
+        if (Intent.ACTION_VIEW == intent.action) {
+            //val url = intent.data!!
+            //model.setText(url.getQueryParameter("model"))
+            //csc.setText(url.getQueryParameter("csc"))
+            //search()
+        }
 
-            override fun onLongClick(view: View?, position: Int) {}
-        }))
-
-        bookmarkHelper = BookmarkDBHelper(this)
+        val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chipGroup)
+        val bookmarkHelper = BookmarkDBHelper(this)
         bookmarkList.addAll(bookmarkHelper.allBookmarkDB)
-        if (bookmarkList.isEmpty()) {
-            bookmarkRecyclerView.visibility = View.GONE
-        } else {
-            bookmarkRecyclerView.visibility = View.VISIBLE
+
+        for (i in bookmarkList.indices) {
+            val bookmarkChip = Chip(this)
+            bookmarkChip.text = bookmarkList[i].name
+            bookmarkChip.isCheckable = false
+            bookmarkChip.setOnClickListener {
+                model.setText(bookmarkList[i].model)
+                csc.setText(bookmarkList[i].csc)
+                search()
+            }
+            bookmarkChipGroup.addView(bookmarkChip)
         }
 
         historyRecyclerView = findViewById(R.id.historyRecyclerView)
@@ -133,10 +121,14 @@ class SearchActivity : AppCompatActivity() {
 
         historyHelper = HistoryDBHelper(this)
         historyList.addAll(historyHelper.allHistoryDB)
-        if (historyList.isEmpty()) {
+
+        val quick = findViewById<MaterialCardView>(R.id.quick)
+        if (historyList.isEmpty() && bookmarkList.isEmpty()) {
+           quick.visibility = View.GONE
+        } else if (historyList.isEmpty()) {
             historyRecyclerView.visibility = View.GONE
-        } else {
-            historyRecyclerView.visibility = View.VISIBLE
+        } else if (bookmarkList.isEmpty()) {
+            bookmarkChipGroup.visibility = View.GONE
         }
 
         val back = findViewById<ImageView>(R.id.back)
@@ -164,8 +156,8 @@ class SearchActivity : AppCompatActivity() {
 
     private fun search() {
         hideKeyboard()
-        val modelString = model.text!!.toString()
-        val cscString = csc.text!!.toString()
+        val modelString = model.text!!.trim().toString().toUpperCase()
+        val cscString = csc.text!!.trim().toString().toUpperCase()
         val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val save = sharedPrefs.getBoolean("saver", false)
         if (save) {
@@ -191,8 +183,12 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun showKeyboard() {
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    }
+
     private fun hideKeyboard() {
-        val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(findViewById<View>(android.R.id.content).windowToken, 0)
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
     }
 }

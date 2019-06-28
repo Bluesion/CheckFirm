@@ -19,4 +19,11 @@
         <item name="android:navigationBarColor" tools:targetApi="27">@color/backgroundColor</item>
     </style>
 
+    <style name="TransparentTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
 </resources>

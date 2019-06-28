@@ -23,7 +23,25 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcut"/>
         </activity>
+        <activity
+            android:label="@string/help"
+            android:name="com.illusion.checkfirm.help.HelpActivity" />
+        <activity
+            android:label="@string/firmware"
+            android:name="com.illusion.checkfirm.help.HelpFirmware" />
+        <activity
+            android:label="@string/function_0"
+            android:name="com.illusion.checkfirm.help.HelpFunctions" />
+        <activity
+            android:label="@string/question_0"
+            android:name="com.illusion.checkfirm.help.HelpQuestions" />
+        <activity
+            android:label="@string/search"
+            android:name="com.illusion.checkfirm.help.HelpSearch" />
         <activity
             android:label="@string/search"
             android:name="com.illusion.checkfirm.search.SearchActivity">
@@ -36,26 +54,38 @@
                     android:scheme="checkfirm" />
             </intent-filter>
         </activity>
+        <activity android:name=".search.TransparentActivity"
+            android:theme="@style/TransparentTheme" />
         <activity
             android:label="@string/about"
             android:name="com.illusion.checkfirm.settings.AboutActivity" />
         <activity
             android:label="@string/beta"
-            android:name="com.illusion.checkfirm.settings.BetaActivity" />
+            android:name="com.illusion.checkfirm.settings.InfoCatcherActivity" />
         <activity
             android:label="@string/license"
             android:name="com.illusion.checkfirm.settings.LicenseActivity" />
         <activity
-            android:label="@string/help"
-            android:name="com.illusion.checkfirm.help.HelpActivity" />
-        <activity
-            android:label="@string/help"
-            android:name="com.illusion.checkfirm.help.HelpSearch" />
-        <activity
-            android:label="@string/help"
-            android:name="com.illusion.checkfirm.help.HelpFirmware" />
-        <activity
             android:label="@string/settings"
             android:name="com.illusion.checkfirm.settings.SettingsActivity" />
+        <activity
+            android:label="@string/welcome_search"
+            android:name="com.illusion.checkfirm.settings.WelcomeSearchActivity" />
+		<meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/blue"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/app_name" />
+		<service
+			android:name=".fcm.MyFirebaseMessagingService"
+            android:exported="false">
+			<intent-filter>
+				<action android:name="com.google.firebase.MESSAGING_EVENT"/>
+			</intent-filter>
+		</service>
     </application>
 </manifest>

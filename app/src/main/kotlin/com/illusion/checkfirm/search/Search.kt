@@ -3,8 +3,6 @@ package com.illusion.checkfirm.search
 import android.app.Activity.RESULT_OK
 import android.content.*
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
@@ -12,21 +10,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.card.MaterialCardView
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
 import com.illusion.checkfirm.help.HelpActivity
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.SearchDialog
 import com.illusion.checkfirm.settings.SettingsActivity
 import com.illusion.checkfirm.utils.Tools
-import org.jsoup.Jsoup
-import org.jsoup.parser.Parser
-import java.io.IOException
-import java.net.MalformedURLException
-import java.net.URL
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.HashMap
 
 class Search : Fragment() {
 
@@ -42,10 +30,6 @@ class Search : Fragment() {
 
     // Search Result
     private lateinit var mResult: LinearLayout
-    internal lateinit var latestOfficial: String
-    internal lateinit var latestTest: String
-    internal lateinit var officialFirmware: ArrayList<String>
-    internal lateinit var testFirmware: ArrayList<String>
     private lateinit var latestOfficialFirmware: TextView
     private lateinit var latestTestFirmware: TextView
     private lateinit var latestOfficialFirmwareText: TextView
@@ -58,61 +42,13 @@ class Search : Fragment() {
     private lateinit var changelog: TextView
     private lateinit var detailCardView: MaterialCardView
 
-    // Clipboard
-    private var clipboard: ClipboardManager? = null
-    private var clip: ClipData? = null
-
-    // Firebase
-    private lateinit var db: FirebaseFirestore
-    private lateinit var dateLatest: String
-    private lateinit var datePrevious: String
-    private lateinit var latest: String
-    private lateinit var previous: String
-    private lateinit var expectedDateLatest: String
-    private lateinit var expectedDatePrevious: String
-    private lateinit var changeLogLatest: String
-    private lateinit var changeLogPrevious: String
-    private lateinit var downGradeLatest: String
-    private lateinit var downGradePrevious: String
-
     // ETC
-    private class MyHandler : Handler() {
-        override fun handleMessage(msg: Message) {}
-    }
-    private val mHandler = MyHandler()
     private lateinit var sharedPrefs: SharedPreferences
-    private var previousOfficial = ""
-    private var previousTest = ""
-    private var model = ""
-    private var csc = ""
-    internal lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     private lateinit var modelOfficial: TextView
     private lateinit var modelTest: TextView
-
-    private fun init(rootView: View) {
-        downgrade = rootView.findViewById(R.id.smart_search_downgrade)
-        detailCardView = rootView.findViewById(R.id.detail)
-        expectedReleaseDate = rootView.findViewById(R.id.smart_search_release)
-        changelog = rootView.findViewById(R.id.smart_search_changelog)
-        firstDiscoveryDate = rootView.findViewById(R.id.smart_search_date)
-
-        welcomeCardView = rootView.findViewById(R.id.welcome)
-        welcomeTitle = rootView.findViewById(R.id.welcome_title)
-        welcomeText = rootView.findViewById(R.id.welcome_text)
-
-        mResult = rootView.findViewById(R.id.result)
-
-        mSwipeRefreshLayout = rootView.findViewById(R.id.mSwipeRefreshLayout)
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.green)
-        mSwipeRefreshLayout.isEnabled = false
-
-        modelOfficial = rootView.findViewById(R.id.model_official)
-        modelTest = rootView.findViewById(R.id.model_test)
-        latestOfficialFirmware = rootView.findViewById(R.id.latestOfficialFirmware)
-        latestTestFirmware = rootView.findViewById(R.id.latestTestFirmware)
-        latestOfficialFirmwareText = rootView.findViewById(R.id.latestOfficialFirmwareText)
-        latestTestFirmwareText = rootView.findViewById(R.id.latestTestFirmwareText)
-    }
+    private lateinit var infoOfficialFirmware: MaterialCardView
+    private lateinit var infoTestFirmware: MaterialCardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,9 +60,22 @@ class Search : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_search, container, false)
 
-        db = FirebaseFirestore.getInstance()
+        // UI
+        mSwipeRefreshLayout = rootView.findViewById(R.id.mSwipeRefreshLayout)
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.green)
+        mSwipeRefreshLayout.isEnabled = false
 
-        init(rootView)
+        // Smart Search
+        detailCardView = rootView.findViewById(R.id.detail)
+        firstDiscoveryDate = rootView.findViewById(R.id.smart_search_date)
+        expectedReleaseDate = rootView.findViewById(R.id.smart_search_release)
+        changelog = rootView.findViewById(R.id.smart_search_changelog)
+        downgrade = rootView.findViewById(R.id.smart_search_downgrade)
+
+        // Welcome Search
+        welcomeCardView = rootView.findViewById(R.id.welcome)
+        welcomeTitle = rootView.findViewById(R.id.welcome_title)
+        welcomeText = rootView.findViewById(R.id.welcome_text)
 
         val welcome = sharedPrefs.getBoolean("welcome", false)
         if (welcome) {
@@ -137,30 +86,16 @@ class Search : Fragment() {
             welcomeCardView.visibility = View.VISIBLE
         }
 
-        clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val infoOfficialFirmware = rootView.findViewById<MaterialCardView>(R.id.officialCardView)
-        infoOfficialFirmware.setOnClickListener {
-            val bottomSheetFragment = SearchDialog.newInstance(true, previousOfficial, model, csc)
-            bottomSheetFragment.show(activity!!.supportFragmentManager, bottomSheetFragment.tag)
-        }
-        infoOfficialFirmware.setOnLongClickListener {
-            clip = ClipData.newPlainText("checkfirmLatestOfficial", latestOfficial)
-            clipboard?.primaryClip = clip!!
-            Toast.makeText(activity!!, R.string.clipboard, Toast.LENGTH_SHORT).show()
-            true
-        }
-
-        val infoTestFirmware = rootView.findViewById<MaterialCardView>(R.id.testCardView)
-        infoTestFirmware.setOnClickListener {
-            val bottomSheetFragment = SearchDialog.newInstance(false, previousTest, model, csc)
-            bottomSheetFragment.show(activity!!.supportFragmentManager, bottomSheetFragment.tag)
-        }
-        infoTestFirmware.setOnLongClickListener {
-            clip = ClipData.newPlainText("checkfirmLatestTest", latestTest)
-            clipboard?.primaryClip = clip!!
-            Toast.makeText(activity!!, R.string.clipboard, Toast.LENGTH_SHORT).show()
-            true
-        }
+        // Search Result
+        mResult = rootView.findViewById(R.id.result)
+        modelOfficial = rootView.findViewById(R.id.model_official)
+        modelTest = rootView.findViewById(R.id.model_test)
+        latestOfficialFirmware = rootView.findViewById(R.id.latestOfficialFirmware)
+        latestTestFirmware = rootView.findViewById(R.id.latestTestFirmware)
+        latestOfficialFirmwareText = rootView.findViewById(R.id.latestOfficialFirmwareText)
+        latestTestFirmwareText = rootView.findViewById(R.id.latestTestFirmwareText)
+        infoOfficialFirmware = rootView.findViewById(R.id.officialCardView)
+        infoTestFirmware = rootView.findViewById(R.id.testCardView)
 
         return rootView
     }
@@ -196,385 +131,144 @@ class Search : Fragment() {
 
         val save = sharedPrefs.getBoolean("saver", false)
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            model = data!!.getStringExtra("model")
-            csc = data.getStringExtra("csc")
-            val official = "$baseURL$csc/$model$officialURL"
-            val test = "$baseURL$csc/$model$testURL"
+            val model = data!!.getStringExtra("model") as String
+            val csc = data.getStringExtra("csc") as String
 
             if (save) {
                 if (Tools.isWifi(activity!!)) {
-                    networkTask(official, test)
+                    welcomeCardView.visibility = View.GONE
+                    networkTask(model, csc)
                 } else {
                     Toast.makeText(activity!!, R.string.only_wifi, Toast.LENGTH_SHORT).show()
                 }
             } else {
                 if (Tools.isOnline(activity!!)) {
-                    networkTask(official, test)
+                    welcomeCardView.visibility = View.GONE
+                    networkTask(model, csc)
                 } else {
                     Toast.makeText(activity!!, R.string.check_network, Toast.LENGTH_SHORT).show()
                 }
             }
+        } else if (requestCode == 2 && resultCode == RESULT_OK) {
+            mResult.visibility = View.VISIBLE
+            detailCardView.visibility = View.GONE
+
+            val model = data!!.getStringExtra("model") as String
+            val csc = data.getStringExtra("csc") as String
+            val latestOfficial = data.getStringExtra("latestOfficial") as String
+            val latestTest = data.getStringExtra("latestTest") as String
+            val previousOfficial = data.getStringExtra("previousOfficial") as String
+            val previousTest = data.getStringExtra("previousTest") as String
+
+            modelOfficial.text = String.format(getString(R.string.device_format), model, csc)
+            modelTest.text = String.format(getString(R.string.device_format), model, csc)
+
+            if (latestOfficial.isBlank()) {
+                latestOfficialFirmwareText.text = getString(R.string.search_error)
+            } else {
+                latestOfficialFirmwareText.text = latestOfficial
+            }
+
+            if (latestTest.isBlank()) {
+                latestTestFirmwareText.text = getString(R.string.search_error)
+            } else {
+                latestTestFirmwareText.text = latestTest
+            }
+
+            val clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            infoOfficialFirmware.setOnClickListener {
+                val bottomSheetFragment = SearchDialog.newInstance(true, previousOfficial, model, csc)
+                bottomSheetFragment.show(activity!!.supportFragmentManager, bottomSheetFragment.tag)
+            }
+            infoOfficialFirmware.setOnLongClickListener {
+                val clip = ClipData.newPlainText("checkfirmLatestOfficial", latestOfficial)
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(activity!!, R.string.clipboard, Toast.LENGTH_SHORT).show()
+                true
+            }
+            infoTestFirmware.setOnClickListener {
+                val bottomSheetFragment = SearchDialog.newInstance(false, previousTest, model, csc)
+                bottomSheetFragment.show(activity!!.supportFragmentManager, bottomSheetFragment.tag)
+            }
+            infoTestFirmware.setOnLongClickListener {
+                val clip = ClipData.newPlainText("checkfirmLatestTest", latestTest)
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(activity!!, R.string.clipboard, Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            val smart = sharedPrefs.getBoolean("smart", false)
+            if (smart) {
+                detailCardView.visibility = View.VISIBLE
+                val srFirstDiscoveryDate = data.getStringExtra("firstDiscoveryDate")
+                val srExpectedReleaseDate = data.getStringExtra("expectedReleaseDate")
+                val srChangelog = data.getStringExtra("changelog")
+                val srDowngrade = data.getStringExtra("downgrade")
+                val detail = data.getBooleanExtra("detailCardView", true)
+
+                if (detail) {
+                    detailCardView.visibility = View.VISIBLE
+                } else {
+                    detailCardView.visibility = View.GONE
+                }
+
+                firstDiscoveryDate.text = srFirstDiscoveryDate
+                expectedReleaseDate.text = srExpectedReleaseDate
+                changelog.text = srChangelog
+                downgrade.text = srDowngrade
+            }
+
+            mSwipeRefreshLayout.isEnabled = false
+            mSwipeRefreshLayout.isRefreshing = false
         }
     }
 
     private fun welcomeSearch() {
         val save = sharedPrefs.getBoolean("saver", false)
 
-        model = sharedPrefs.getString("welcome_model", "SM-A720S") as String
-        csc = sharedPrefs.getString("welcome_csc", "SKC") as String
-        val official = "$baseURL$csc/$model$officialURL"
-        val test = "$baseURL$csc/$model$testURL"
+        val model = sharedPrefs.getString("welcome_model", "SM-A720S")!!.trim()
+        val csc = sharedPrefs.getString("welcome_csc", "SKC")!!.trim()
 
-        if (save) {
-            if (Tools.isWifi(activity!!)) {
-                networkTask(official, test)
-            } else {
-                welcomeTitle.text = getString(R.string.wifi)
-                welcomeText.text = getString(R.string.welcome_wifi)
-                welcomeCardView.visibility = View.VISIBLE
-            }
-        } else {
-            if (Tools.isOnline(activity!!)) {
-                networkTask(official, test)
-            } else {
-                welcomeTitle.text = getString(R.string.online)
-                welcomeText.text = getString(R.string.welcome_online)
-                welcomeCardView.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun smartSearch() {
-        val docRef = db.collection(model).document(csc)
-        docRef.get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val doc = task.result as DocumentSnapshot
-                dateLatest = doc.get("date_latest").toString()
-                datePrevious = doc.get("date_previous").toString()
-                latest = doc.get("firmware_latest").toString()
-                previous = doc.get("firmware_previous").toString()
-                expectedDateLatest = doc.get("expected_date_latest").toString()
-                expectedDatePrevious = doc.get("expected_date_previous").toString()
-                changeLogLatest = doc.get("changelog_latest").toString()
-                changeLogPrevious = doc.get("changelog_previous").toString()
-                downGradeLatest = doc.get("downgrade_latest").toString()
-                downGradePrevious = doc.get("downgrade_previous").toString()
-
-                if (dateLatest == "null") {
-                    add()
+        if (model.isNotBlank() && csc.isNotBlank()) {
+            if (save) {
+                if (Tools.isWifi(activity!!)) {
+                    welcomeCardView.visibility = View.GONE
+                    networkTask(model, csc)
                 } else {
-                    val currentOfficial = when {
-                        latestOfficial.contains(".") -> {
-                            val index = latestOfficial.indexOf(".")
-                            latestOfficial.substring(index - 6, index)
-                        }
-                        latestOfficial.contains("/") -> {
-                            val index = latestOfficial.indexOf("/")
-                            latestOfficial.substring(index - 6, index)
-                        }
-                        else -> latestOfficial
-                    }
-
-                    val currentTest = when {
-                        latestTest.contains(".") -> {
-                            val index = latestTest.indexOf(".")
-                            latestTest.substring(index - 6, index)
-                        }
-                        latestTest.contains("/") -> {
-                            val index = latestTest.indexOf("/")
-                            latestTest.substring(index - 6, index)
-                        }
-                        else -> latestTest
-                    }
-
-                    val firestoreLatest = when {
-                        latest.contains(".") -> {
-                            val index = latest.indexOf(".")
-                            latest.substring(index - 6, index)
-                        }
-                        latest.contains("/") -> {
-                            val index = latest.indexOf("/")
-                            latest.substring(index - 6, index)
-                        }
-                        else -> latest
-                    }
-
-                    val firestorePrevious = when {
-                        previous.contains(".") -> {
-                            val index = previous.indexOf(".")
-                            previous.substring(index - 6, index)
-                        }
-                        previous.contains("/") -> {
-                            val index = previous.indexOf("/")
-                            previous.substring(index - 6, index)
-                        }
-                        else -> previous
-                    }
-
-                    firstDiscoveryDate.text = dateLatest
-                    expectedReleaseDate.text = expectedDateLatest
-
-                    when (changeLogLatest) {
-                        "bug_fix" -> changelog.text = getString(R.string.smart_search_changelog_bugfix)
-                        "os_update" -> changelog.text = getString(R.string.smart_search_changelog_os)
-                        else -> changelog.text = getString(R.string.error)
-                    }
-
-                    when (downGradeLatest) {
-                        "possible" -> downgrade.text = getString(R.string.smart_search_downgrade_possible)
-                        "impossible" -> downgrade.text = getString(R.string.smart_search_downgrade_impossible)
-                        else -> downgrade.text = getString(R.string.error)
-                    }
-
-                    if (latest != latestTest) {
-                        var tempChangelog = ""
-                        var tempDowngrade = ""
-                        val transFormat = SimpleDateFormat("yyyy/MM/dd", Locale.KOREAN)
-                        val newDate = transFormat.parse(dateLatest)
-                        val calendar = Calendar.getInstance()
-                        calendar.time = newDate
-
-                        val date = Tools.dateToString(Tools.getCurrentDateTime())
-                        firstDiscoveryDate.text = date
-
-                        if (currentOfficial[2] == currentTest[2]) {
-                            tempChangelog = "bug_fix"
-                            changelog.text = getString(R.string.smart_search_changelog_bugfix)
-                            calendar.add(Calendar.DAY_OF_YEAR, 21)
-                        } else {
-                            tempChangelog = "os_update"
-                            changelog.text = getString(R.string.smart_search_changelog_os)
-                            if (currentTest[2] == firestorePrevious[2]) {
-                                calendar.add(Calendar.DAY_OF_YEAR, 35)
-                            } else {
-                                calendar.add(Calendar.MONTH, 2)
-                            }
-                        }
-
-                        val day = calendar.get(Calendar.DAY_OF_WEEK)
-                        if (day == Calendar.SUNDAY) {
-                            calendar.add(Calendar.DAY_OF_YEAR, 1)
-                        } else if (day == Calendar.SATURDAY) {
-                            calendar.add(Calendar.DAY_OF_YEAR, 2)
-                        }
-                        val d = Date(calendar.timeInMillis)
-                        expectedReleaseDate.text = transFormat.format(d)
-
-                        if (currentTest.substring(0, 1) == firestoreLatest.substring(0, 1)) {
-                            tempDowngrade = "possible"
-                            downgrade.text = getString(R.string.smart_search_downgrade_possible)
-                        } else {
-                            tempDowngrade = "impossible"
-                            downgrade.text = getString(R.string.smart_search_downgrade_impossible)
-                        }
-
-                        update(transFormat.format(d), tempChangelog, tempDowngrade)
-                    }
+                    welcomeTitle.text = getString(R.string.wifi)
+                    welcomeText.text = getString(R.string.welcome_wifi)
+                    welcomeCardView.visibility = View.VISIBLE
                 }
-
-                mSwipeRefreshLayout.isEnabled = false
-                mSwipeRefreshLayout.isRefreshing = false
+            } else {
+                if (Tools.isOnline(activity!!)) {
+                    welcomeCardView.visibility = View.GONE
+                    networkTask(model, csc)
+                } else {
+                    welcomeTitle.text = getString(R.string.online)
+                    welcomeText.text = getString(R.string.welcome_online)
+                    welcomeCardView.visibility = View.VISIBLE
+                }
             }
-        }
-    }
-
-    private fun update(expectedDate: String, changeLog: String, downgrade: String) {
-        val date = Tools.dateToString(Tools.getCurrentDateTime())
-        val docRef = db.collection(model).document(csc)
-        docRef.update("date_latest", date)
-        docRef.update("date_previous", dateLatest)
-        docRef.update("firmware_latest", latestTest)
-        docRef.update("firmware_previous", latest)
-        docRef.update("expected_date_latest", expectedDate)
-        docRef.update("expected_date_previous", expectedDateLatest)
-        docRef.update("changelog_latest", changeLog)
-        docRef.update("changelog_previous", changeLogLatest)
-        docRef.update("downgrade_latest", downgrade)
-        docRef.update("downgrade_previous", downGradeLatest)
-    }
-
-    private fun add() {
-        val date = Tools.dateToString(Tools.getCurrentDateTime())
-        val items = HashMap<String, Any>()
-        items["date_latest"] = date
-        items["date_previous"] = date
-        items["firmware_latest"] = latestTest
-        items["firmware_previous"] = latestTest
-
-        firstDiscoveryDate.text = date
-
-        val currentOfficial = when {
-            latestOfficial.contains(".") -> {
-                val index = latestOfficial.indexOf(".")
-                latestOfficial.substring(index - 6, index)
-            }
-            latestOfficial.contains("/") -> {
-                val index = latestOfficial.indexOf("/")
-                latestOfficial.substring(index - 6, index)
-            }
-            else -> latestOfficial
-        }
-
-        val currentTest = when {
-            latestTest.contains(".") -> {
-                val index = latestTest.indexOf(".")
-                latestTest.substring(index - 6, index)
-            }
-            latestTest.contains("/") -> {
-                val index = latestTest.indexOf("/")
-                latestTest.substring(index - 6, index)
-            }
-            else -> latestTest
-        }
-
-        if (currentOfficial == currentTest) {
-            items["expected_date_latest"] = date
-            items["expected_date_previous"] = date
-            items["changelog_latest"] = "bug_fix"
-            items["changelog_previous"] = "bug_fix"
-            items["downgrade_latest"] = "possible"
-            items["downgrade_previous"] = "possible"
-            expectedReleaseDate.text = date
-            changelog.text = getString(R.string.smart_search_changelog_bugfix)
-            downgrade.text = getString(R.string.smart_search_downgrade_possible)
         } else {
-            val transFormat = SimpleDateFormat("yyyy/MM/dd", Locale.KOREAN)
-            val newDate = transFormat.parse(date)
-            val calendar = Calendar.getInstance()
-            calendar.time = newDate
-
-            if (currentOfficial[2] == currentTest[2]) {
-                items["changelog_latest"] = "bug_fix"
-                items["changelog_previous"] = "bug_fix"
-                changelog.text = getString(R.string.smart_search_changelog_bugfix)
-                calendar.add(Calendar.DAY_OF_YEAR, 21)
-            } else {
-                items["changelog_latest"] = "os_update"
-                items["changelog_previous"] = "os_update"
-                changelog.text = getString(R.string.smart_search_changelog_os)
-                calendar.add(Calendar.MONTH, 2)
-            }
-
-            val day = calendar.get(Calendar.DAY_OF_WEEK)
-            if (day == Calendar.SUNDAY) {
-                calendar.add(Calendar.DAY_OF_YEAR, 1)
-            } else if (day == Calendar.SATURDAY) {
-                calendar.add(Calendar.DAY_OF_YEAR, 2)
-            }
-            val d = Date(calendar.timeInMillis)
-            val h = transFormat.format(d)
-            items["expected_date_latest"] = h
-            items["expected_date_previous"] = h
-            expectedReleaseDate.text = h
-
-            if (currentOfficial.substring(0, 2) == currentTest.substring(0, 2)) {
-                items["downgrade_latest"] = "possible"
-                items["downgrade_previous"] = "possible"
-                downgrade.text = getString(R.string.smart_search_downgrade_possible)
-            } else {
-                items["downgrade_latest"] = "impossible"
-                items["downgrade_previous"] = "impossible"
-                downgrade.text = getString(R.string.smart_search_downgrade_impossible)
-            }
+            welcomeTitle.text = getString(R.string.error)
+            welcomeText.text = getString(R.string.search_error)
+            welcomeCardView.visibility = View.VISIBLE
         }
-
-        db.collection(model).document(csc).set(items)
-                .addOnFailureListener { e ->
-                    e.printStackTrace()
-                }
     }
 
-    private fun testResult() {
-        welcomeCardView.visibility = View.GONE
-        previousOfficial = officialFirmware.toString()
-                .replace(", ", "\n")
-                .replace("[", "")
-                .replace("]", "")
-        previousTest = testFirmware.toString()
-                .replace(", ", "\n")
-                .replace("[", "")
-                .replace("]", "")
-        modelOfficial.text = String.format(getString(R.string.device_format), model, csc)
-        modelTest.text = String.format(getString(R.string.device_format), model, csc)
-        mResult.visibility = View.VISIBLE
+    private fun networkTask(model: String, csc: String) {
+        mSwipeRefreshLayout.isEnabled = true
+        mSwipeRefreshLayout.isRefreshing = true
 
-        mSwipeRefreshLayout.isEnabled = false
-        mSwipeRefreshLayout.isRefreshing = false
-    }
+        val officialURL = "$baseURL$csc/$model$officialURL"
+        val testURL = "$baseURL$csc/$model$testURL"
 
-    private fun networkTask(officialURL: String, testURL: String) {
-        val beta = sharedPrefs.getBoolean("beta", false)
-
-        officialFirmware = ArrayList()
-        officialFirmware.clear()
-
-        testFirmware = ArrayList()
-        testFirmware.clear()
-
-        latestOfficial = ""
-        latestTest = ""
-
-        dateLatest = ""
-        datePrevious = ""
-        latest = ""
-        previous = ""
-        expectedDateLatest = ""
-        expectedDatePrevious = ""
-        changeLogLatest = ""
-        changeLogPrevious = ""
-        downGradeLatest = ""
-        downGradePrevious = ""
-
-        object : Thread() {
-            override fun run() {
-                mHandler.post {
-                    mSwipeRefreshLayout.isEnabled = true
-                    mSwipeRefreshLayout.isRefreshing = true
-                }
-                try {
-                    val official = Jsoup.parse(URL(officialURL).openStream(), "UTF-8", "", Parser.xmlParser())
-                    for (el in official.select("latest")) {
-                        latestOfficial = el.text()
-                    }
-                    for (el in official.select("value")) {
-                        val firmwares = el.text()
-                        officialFirmware.add(firmwares)
-                    }
-
-                    val test = Jsoup.parse(URL(testURL).openStream(), "UTF-8", "", Parser.xmlParser())
-                    for (el in test.select("latest")) {
-                        latestTest = el.text()
-                    }
-                    for (el in test.select("value")) {
-                        val firmwares = el.text()
-                        testFirmware.add(firmwares)
-                    }
-
-                } catch (e: MalformedURLException) {
-                    e.printStackTrace()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-
-                mHandler.post {
-                    if (latestOfficial.isNotBlank() && latestOfficial.isNotEmpty() && latestTest.isNotBlank() && latestTest.isNotEmpty()) {
-                        smartSearch()
-                        latestOfficialFirmwareText.text = latestOfficial
-                        latestTestFirmwareText.text = latestTest
-
-                        if (beta) {
-                            detailCardView.visibility = View.VISIBLE
-                        } else {
-                            detailCardView.visibility = View.GONE
-                        }
-                    } else {
-                        latestOfficialFirmwareText.text = getString(R.string.search_error)
-                        latestTestFirmwareText.text = getString(R.string.search_error)
-                        detailCardView.visibility = View.GONE
-                    }
-                    testResult()
-                }
-            }
-        }.start()
+        val intent = Intent(activity!!, TransparentActivity::class.java)
+        intent.putExtra("officialURL", officialURL)
+        intent.putExtra("testURL", testURL)
+        intent.putExtra("model", model)
+        intent.putExtra("csc", csc)
+        startActivityForResult(intent, 2)
+        activity!!.overridePendingTransition(0, 0)
     }
 }

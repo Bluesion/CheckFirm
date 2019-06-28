@@ -1,9 +1,7 @@
 package com.illusion.checkfirm.help
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.text.InputFilter
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -33,20 +31,11 @@ class HelpSearch : AppCompatActivity() {
 
         val model = findViewById<EditText>(R.id.model)
         val csc = findViewById<EditText>(R.id.csc)
-        val modelFilters = model.filters
-        val newModelFilters = arrayOfNulls<InputFilter>(modelFilters.size + 1)
-        System.arraycopy(modelFilters, 0, newModelFilters, 0, modelFilters.size)
-        newModelFilters[modelFilters.size] = InputFilter.AllCaps()
-        model.filters = newModelFilters
-
-        val cscFilters = csc.filters
-        val newCSCFilters = arrayOfNulls<InputFilter>(cscFilters.size + 1)
-        System.arraycopy(cscFilters, 0, newCSCFilters, 0, cscFilters.size)
-        newCSCFilters[cscFilters.size] = InputFilter.AllCaps()
-        csc.filters = newCSCFilters
+        model.setSelection(model.text.length)
 
         search.setOnClickListener {
-            device.text = String.format(getString(R.string.device_format), model.text!!.toString(), csc.text!!.toString())
+            device.text = String.format(getString(R.string.device_format),
+                    model.text!!.toString().trim().toUpperCase(), csc.text!!.toString().trim().toUpperCase())
             card0.visibility = View.VISIBLE
         }
 

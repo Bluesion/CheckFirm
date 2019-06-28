@@ -76,10 +76,11 @@
                             android:id="@+id/model"
                             android:hint="@string/model"
                             android:text="@string/default_string"
-                            android:inputType="textCapWords"
+                            android:inputType="textCapCharacters"
                             android:translationY="2dp"
                             android:backgroundTint="@android:color/transparent"
                             android:privateImeOptions="defaultInputmode=english"
+                            android:imeOptions="actionNext"
                             android:maxLines="1" />
 
                         <View
@@ -94,10 +95,11 @@
                             android:layout_weight="1"
                             android:id="@+id/csc"
                             android:hint="@string/csc"
-                            android:inputType="textCapWords"
+                            android:inputType="textCapCharacters"
                             android:translationY="2dp"
                             android:backgroundTint="@android:color/transparent"
                             android:privateImeOptions="defaultInputmode=english"
+                            android:imeOptions="actionSearch"
                             android:maxLines="1" />
 
                         <ImageView
@@ -116,6 +118,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/quick"
                 android:layout_marginTop="8dp">
 
                 <LinearLayout
@@ -124,12 +127,20 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/bookmarkRecyclerView"
-                        android:layout_width="wrap_content"
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:minHeight="45dp" />
+                        android:overScrollMode="never"
+                        android:scrollbars="none">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:singleLine="true"
+                            app:singleSelection="true" />
+
+                    </HorizontalScrollView>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/historyRecyclerView"

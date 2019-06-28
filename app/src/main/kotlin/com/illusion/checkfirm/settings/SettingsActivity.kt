@@ -1,6 +1,5 @@
 package com.illusion.checkfirm.settings
 
-import android.app.UiModeManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -13,26 +12,34 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.firebase.messaging.FirebaseMessaging
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.ContactDialog
-import com.illusion.checkfirm.dialogs.WelcomeDialog
-import com.illusion.checkfirm.utils.Tools
 
 class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
 
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
+    private lateinit var oneSwitch: SwitchMaterial
+    private lateinit var darkSwitch: SwitchMaterial
+    private lateinit var systemSwitch: SwitchMaterial
+    private lateinit var welcomeSwitch: SwitchMaterial
+    private lateinit var saverSwitch: SwitchMaterial
+    private lateinit var smartSwitch: SwitchMaterial
+    private lateinit var catcherSwitch: SwitchMaterial
+    private var one: Boolean = true
+    private var dark: Boolean = false
+    private var system: Boolean = false
+    private var welcome: Boolean = false
+    private var saver: Boolean = false
+    private var smart: Boolean = false
+    private var catcher: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val one = sharedPrefs.getBoolean("one", true)
-        val dark= sharedPrefs.getBoolean("dark", false)
-        val system = sharedPrefs.getBoolean("system", false)
-        val welcome= sharedPrefs.getBoolean("welcome", false)
-        val saver= sharedPrefs.getBoolean("saver", false)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.title = ""
@@ -55,85 +62,84 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             title.alpha = percentage * -1
         })
 
-        val oneSwitch = findViewById<SwitchMaterial>(R.id.expanded_bar)
-        oneSwitch.isChecked = one
+        oneSwitch = findViewById(R.id.expanded_switch)
+        darkSwitch = findViewById(R.id.dark_switch)
+        systemSwitch = findViewById(R.id.system_switch)
+        welcomeSwitch = findViewById(R.id.welcome_switch)
+        saverSwitch = findViewById(R.id.saver_switch)
+        smartSwitch = findViewById(R.id.smart_switch)
+        catcherSwitch = findViewById(R.id.catcher_switch)
+        initSwitch()
         oneSwitch.setOnCheckedChangeListener(this)
-
-        val darkSwitch = findViewById<SwitchMaterial>(R.id.dark_mode)
-        darkSwitch.isChecked = dark
         darkSwitch.setOnCheckedChangeListener(this)
-
-        val systemSwitch = findViewById<SwitchMaterial>(R.id.system_theme)
-        systemSwitch.isChecked = system
         systemSwitch.setOnCheckedChangeListener(this)
-
-        val welcomeSwitch = findViewById<SwitchMaterial>(R.id.welcome_search)
-        welcomeSwitch.isChecked = welcome
         welcomeSwitch.setOnCheckedChangeListener(this)
-
-        val saverSwitch = findViewById<SwitchMaterial>(R.id.data_saver)
-        saverSwitch.isChecked = saver
         saverSwitch.setOnCheckedChangeListener(this)
+        smartSwitch.setOnCheckedChangeListener(this)
+        catcherSwitch.setOnCheckedChangeListener(this)
 
-        val oneLayout = findViewById<ConstraintLayout>(R.id.expanded)
+        val oneLayout = findViewById<ConstraintLayout>(R.id.expanded_layout)
         oneLayout.setOnClickListener {
             oneSwitch.toggle()
         }
 
-        val darkLayout = findViewById<ConstraintLayout>(R.id.dark)
+        val darkLayout = findViewById<ConstraintLayout>(R.id.dark_layout)
         darkLayout.setOnClickListener {
             darkSwitch.toggle()
         }
 
-        val systemLayout = findViewById<ConstraintLayout>(R.id.system)
+        val systemLayout = findViewById<ConstraintLayout>(R.id.system_layout)
         systemLayout.setOnClickListener {
             systemSwitch.toggle()
         }
 
-        val welcomeLayout = findViewById<ConstraintLayout>(R.id.welcome)
+        val welcomeLayout = findViewById<ConstraintLayout>(R.id.welcome_layout)
         welcomeLayout.setOnClickListener {
-            welcomeSwitch.toggle()
+            val intent = Intent(this, WelcomeSearchActivity::class.java)
+            startActivity(intent)
         }
 
-        val saverLayout = findViewById<ConstraintLayout>(R.id.saver)
+        val saverLayout = findViewById<ConstraintLayout>(R.id.saver_layout)
         saverLayout.setOnClickListener {
             saverSwitch.toggle()
         }
 
-        val beta = findViewById<ConstraintLayout>(R.id.beta)
-        beta.setOnClickListener {
-            val intent = Intent(this, BetaActivity::class.java)
+        val smartLayout = findViewById<ConstraintLayout>(R.id.smart_layout)
+        smartLayout.setOnClickListener {
+            smartSwitch.toggle()
+        }
+
+        val catcherLayout = findViewById<ConstraintLayout>(R.id.catcher_layout)
+        catcherLayout.setOnClickListener {
+            val intent = Intent(this, InfoCatcherActivity::class.java)
             startActivity(intent)
         }
 
-        val about = findViewById<ConstraintLayout>(R.id.about)
-        about.setOnClickListener {
+        val aboutLayout = findViewById<ConstraintLayout>(R.id.about_layout)
+        aboutLayout.setOnClickListener {
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
         }
 
-        val contact = findViewById<ConstraintLayout>(R.id.contact)
-        contact.setOnClickListener {
+        val contactLayout = findViewById<ConstraintLayout>(R.id.contact_layout)
+        contactLayout.setOnClickListener {
             val bottomSheetFragment = ContactDialog()
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
     }
 
-    override fun onCheckedChanged(p0: CompoundButton?, isChecked: Boolean) {
+    override fun onCheckedChanged(p0: CompoundButton, isChecked: Boolean) {
         mEditor = sharedPrefs.edit()
-        val system = sharedPrefs.getBoolean("system", false)
-        val dark= sharedPrefs.getBoolean("dark", false)
         when {
-            p0!!.id == R.id.expanded_bar -> {
+            p0.id == R.id.expanded_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("one", true)
                 } else {
                     mEditor.putBoolean("one", false)
                 }
                 mEditor.apply()
-                Tools.restart(this, 0)
             }
-            p0.id == R.id.dark_mode -> {
+            p0.id == R.id.dark_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("dark", true)
                     if (system) {
@@ -155,7 +161,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
-            p0.id == R.id.system_theme -> {
+            p0.id == R.id.system_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("system", true)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
@@ -172,16 +178,15 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
-            p0.id == R.id.welcome_search -> {
+            p0.id == R.id.welcome_switch -> {
                 if (isChecked) {
-                    val bottomSheetFragment = WelcomeDialog()
-                    bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                    mEditor.putBoolean("welcome", true)
                 } else {
                     mEditor.putBoolean("welcome", false)
-                    mEditor.apply()
                 }
+                mEditor.apply()
             }
-            else -> {
+            p0.id == R.id.saver_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("saver", true)
                 } else {
@@ -189,7 +194,36 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
+            p0.id == R.id.smart_switch -> {
+                if (isChecked) {
+                    mEditor.putBoolean("smart", true)
+                } else {
+                    mEditor.putBoolean("smart", false)
+                }
+                mEditor.apply()
+            }
+            else -> {
+                val model = sharedPrefs.getString("catcher_model", "CheckFirm") as String
+                val csc = sharedPrefs.getString("catcher_csc", "Catcher") as String
+                if (isChecked) {
+                    mEditor.putBoolean("catcher", true)
+                    if (model.isNotBlank() && csc.isNotBlank()) {
+                        FirebaseMessaging.getInstance().subscribeToTopic(model+csc)
+                    }
+                } else {
+                    mEditor.putBoolean("catcher", false)
+                    if (model.isNotBlank() && csc.isNotBlank()) {
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic(model+csc)
+                    }
+                }
+                mEditor.apply()
+            }
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        initSwitch()
     }
 
     override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
@@ -200,5 +234,23 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initSwitch() {
+        one = sharedPrefs.getBoolean("one", true)
+        dark = sharedPrefs.getBoolean("dark", false)
+        system = sharedPrefs.getBoolean("system", false)
+        welcome = sharedPrefs.getBoolean("welcome", false)
+        saver = sharedPrefs.getBoolean("saver", false)
+        smart = sharedPrefs.getBoolean("smart", false)
+        catcher = sharedPrefs.getBoolean("catcher", false)
+
+        oneSwitch.isChecked = one
+        darkSwitch.isChecked = dark
+        systemSwitch.isChecked = system
+        welcomeSwitch.isChecked = welcome
+        saverSwitch.isChecked = saver
+        smartSwitch.isChecked = smart
+        catcherSwitch.isChecked = catcher
     }
 }

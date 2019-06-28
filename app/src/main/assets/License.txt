@@ -10,6 +10,7 @@ https://github.com/gpillusion/CheckFirm
 CheckFirm uses these following third party libraries.
 
 AndroidX | Copyright (C) Google | Apache 2.0
+Firebase | Copyright (C) Google | Apache 2.0
 Jsoup | Copyright (C) Jonathan Hedley | MIT
 Material Components | Copyright (C) Google | Apache 2.0
 Kotlin | Copyright (C) JetBrains | Apache 2.0

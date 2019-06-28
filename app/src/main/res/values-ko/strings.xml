@@ -7,6 +7,8 @@
     <string name="wifi">와이파이에 연결해주세요</string>
     <string name="switch_on">켜짐</string>
     <string name="switch_off">꺼짐</string>
+    <string name="error">오류</string>
+    <string name="notification_channel_name">새 펌웨어</string>
 
     <!-- Contact Us -->
     <string name="contact_us">문의하기</string>
@@ -26,6 +28,7 @@
     <string name="welcome_online">자동 검색 기능을 사용하시려면 네트워크에 연결해주세요.</string>
     <string name="clipboard">클립보드에 복사했습니다.</string>
     <string name="search_error">검색에 실패하였습니다. 모델명과 CSC 코드를 정확히 입력하여 검색하세요.</string>
+    <string name="searching">검색 중입니다. 잠시만 기다려주세요.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">북마크</string>
@@ -59,6 +62,30 @@
     <string name="firmware_20">테스트 펌웨어는 언제 출시되나요?</string>
     <string name="firmware_21">펌웨어는 통신사 검수 과정을 거쳐서 출시되기 때문에 테스트 펌웨어 출시 일정을 정확히 알 수가 없습니다.\n대략 3주 전후로 테스트 펌웨어가 출시되며, 중요한 패치가 포함된 펌웨어는 며칠 내로 출시됩니다.</string>
 
+    <!-- Help Questions -->
+    <string name="question_0">자주하는 질문</string>
+    <string name="question_1">펌웨어 정보가 이상해요</string>
+    <string name="question_2">CheckFirm은 펌웨어 정보를 삼성 서버에서 그대로 가져오기 때문에 제작자가 펌웨어 정보를 임의로 바꾸거나 수정할 수 없습니다. 펌웨어 정보에 이상이 있는 경우엔 삼성 측에 문의를 해주세요.</string>
+    <string name="question_3">검색이 안돼요</string>
+    <string name="question_4">모델명과 CSC를 제대로 입력하지 않거나, 네트워크가 불안정할 때 검색이 제대로 안될 수 있습니다. 본인 디바이스의 모델명과 CSC 코드는 도움말 - 검색에서 확인 가능합니다.</string>
+    <string name="question_5">버그를 발견했어요</string>
+    <string name="question_6">버그를 발견하거나 앱에 대한 따끔한 조언을 해주시고 싶으신 천사분들은 설정 - 문의하기에 적힌 개발자 이메일 주소로 의견 보내주세요. 플레이 스토어 리뷰창에 적어주셔도 괜찮습니다.</string>
+
+    <!-- Help Functions -->
+    <string name="function_0">CheckFirm 기능</string>
+    <string name="function_1">확장바</string>
+    <string name="function_2">One UI의 가장 큰 특징인 확장바 기능을 CheckFirm에서도 사용하실 수 있도록 구현했습니다. One UI 가이드라인에 맞추어 디바이스 세로 화면 픽셀의 약 40%를 확장바 영역으로 사용합니다.</string>
+    <string name="function_3">다크 모드</string>
+    <string name="function_4">앱 테마를 어둡게 만들어줍니다. 배터리 소모량을 약간이나마 줄여주며, 밤에도 앱을 편하게 사용하실 수 있습니다. 시스템 테마에 맞추어 앱의 테마를 가변적으로 설정할 수 있는 기능 역시 지원합니다.</string>
+    <string name="function_5">자동 검색</string>
+    <string name="function_6">앱 실행 시 특정 디바이스의 펌웨어 정보를 자동으로 검색해주는 기능입니다. 원활한 앱 사용을 위해 하나의 디바이스만 자동으로 검색이 가능합니다.</string>
+    <string name="function_7">데이터 절약</string>
+    <string name="function_8">펌웨어 검색 / 앱 최신 버전 확인 / 알리미 등 인터넷 연결이 필요한 모든 기능을 와이파이 환경에서만 진행합니다. 이 기능들이 데이터를 많이 소모하지는 않습니다만, 여러분의 데이터는 소중하니까요 :)</string>
+    <string name="function_9">스마트 서치</string>
+    <string name="function_10">최신 테스트 펌웨어 정보를 예측하는 기능입니다. 사용자가 검색을 하는 경우 검색 결과를 데이터 베이스에 저장합니다. 이 저장된 정보를 이용하여 최신 테스트 펌웨어 정보를 예측합니다. 스마트 서치는 DB와 연동하여 작동하기 때문에 활성화 할 경우 검색 속도가 느려집니다.</string>
+    <string name="function_11">알리미</string>
+    <string name="function_12">스마트 서치로 저장한 검색 결과를 DB에 저장해놓고, DB에 변동이 생기면 FCM을 통해 특정 주제를 구독한 사람들에게 푸시 메시지를 보내는 기능입니다. 따라서 스마트 서치 기능이 활성화되어 있지 않으면 알리미 기능을 사용하실 수 없습니다. 알리미 기능 역시 DB와 연동하여 작동하기 때문에 활성화 할 경우 검색 속도가 느려집니다.\n\n많은 사용자분들께서 실시간 업데이트 알림을 원하셨는데, 여러가지 난관에 많이 부딪혔기 때문에 알리미 서비스로 타협을 했습니다. 이론적으로 실시간 업데이트 알림은 구현이 가능하지만, 너무 비효율적이기 때문에 현재까지는 실시간 업데이트 알림은 계획이 없습니다.</string>
+
     <!-- About -->
     <string name="app_information">앱 정보</string>
     <string name="version">버전</string>
@@ -72,25 +99,26 @@
     <string name="feature">기능</string>
     <string name="theme">테마</string>
     <string name="about">CheckFirm 정보</string>
-    <string name="welcome_search">자동 검색</string>
-    <string name="welcome_search_description">앱 실행 시 지정된 디바이스의 펌웨어 정보를 검색합니다.</string>
     <string name="data_saver">데이터 절약</string>
-    <string name="data_saver_description">와이파이 환경에서만 펌웨어 정보를 불러옵니다.</string>
+    <string name="data_saver_description">인터넷 연결이 필요한 모든 작업을 와이파이 환경에서만 진행합니다.</string>
     <string name="dark_theme">다크 모드</string>
     <string name="dark_theme_description">앱 테마를 어둡게 설정합니다.</string>
     <string name="system">시스템 테마 사용</string>
     <string name="system_description">디바이스가 야간 모드를 지원하는 경우, 앱 테마를 시스템 테마와 맞춥니다.</string>
     <string name="expandable_bar">확장바</string>
     <string name="expandable_bar_description">확장바를 사용합니다.</string>
-    <string name="beta">실험실</string>
-    <string name="beta_description">실험실에서 더 많은 기능을 사용해보세요.</string>
     <string name="settings">설정</string>
     <string name="information">정보</string>
+    <string name="welcome_search_saved">저장되었습니다</string>
 
-    <!-- Beta -->
-    <string name="beta_text">베타 서비스를 활성화하여 새로운 기능을 체험해보세요.</string>
-    <string name="smart_search_title">스마트 서치</string>
-    <string name="smart_search_description">스마트 서치는 최신 테스트 펌웨어의 정보를 예측하는 기능입니다. 첫 발견일, 예상 릴리즈 날짜, 다운그레이드 가능 여부, 주요 변경점을 예측합니다.\n단순 예측값들이기 때문에 실제와 다를 수 있으며, 참고용으로만 사용해주세요.\n\n펌웨어 정보가 암호화 되어 있는 경우엔 제대로 된 결과 값이 나오지 않을 수 있습니다.</string>
+    <!-- Welcome Search -->
+    <string name="welcome_search">자동 검색</string>
+    <string name="welcome_search_description">앱 실행 시 지정된 디바이스의 펌웨어 정보를 검색합니다.</string>
+    <string name="welcome_search_text">자동 검색을 원하는 디바이스 정보를 아래에 입력해주세요.</string>
+
+    <!-- Smart Search -->
+    <string name="smart_search">스마트 서치</string>
+    <string name="smart_search_description">최신 테스트 펌웨어의 정보를 예측합니다. 암호화 된 펌웨어는 결과가 정확하지 않을 수 있습니다.</string>
     <string name="smart_search_info">최신 테스트 펌웨어 정보</string>
     <string name="smart_search_date">최초 발견일</string>
     <string name="smart_search_release">예상 릴리즈 날짜</string>
@@ -101,4 +129,17 @@
     <string name="smart_search_changelog_os">OS 업데이트</string>
     <string name="smart_search_changelog_bugfix">버그 픽스</string>
     <string name="smart_search_notice">위 내용은 삼성 공식 발표값이 아닌, CheckFirm의 단순 예측값입니다.\n위 내용은 실제와 다를 수 있으며, 참고용으로만 사용해주세요.</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher">알리미</string>
+    <string name="info_catcher_description">사용자가 지정한 디바이스의 펌웨어가 업데이트 되었을 때 알림을 표시합니다.</string>
+    <string name="info_catcher_text">알리미는 누군가 새로운 펌웨어를 발견했을 때 그 정보를 다른 사용자들에게 전송하는 방식으로 작동합니다.\n알림을 원하는 디바이스 정보를 아래에 입력해주세요.</string>
+    <string name="info_catcher_caution">주의</string>
+    <string name="info_catcher_caution_text">1. 베타 기능이므로 제대로 작동이 안되거나 오류가 발생할 수 있습니다.\n2. 알리미는 스마트 서치가 활성화 되어 있는 경우에만 정상적으로 작동합니다. 알리미 기능을 사용하려면 꼭 스마트서치 기능을 켜주세요.</string>
+    <string name="info_catcher_notification_title">%1$s (%2$s)의 새로운 펌웨어가 발견되었어요!</string>
+    <string name="info_catcher_notification_text">지금 바로 확인해보세요.</string>
+    <string name="info_catcher_error">모델명과 CSC 코드를 정확히 입력해주세요.</string>
+
+    <!-- Beta -->
+    <string name="beta">베타</string>
 </resources>

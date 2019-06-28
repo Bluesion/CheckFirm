@@ -24,17 +24,18 @@
     <style name="DialogBackground" parent="Widget.MaterialComponents.BottomSheet.Modal">
         <item name="enforceMaterialTheme">false</item>
         <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:elevation">8dp</item>
     </style>
 
     <style name="SwitchTheme" parent="Widget.MaterialComponents.CompoundButton.Switch">
-        <item name="android:background">@drawable/switch_background</item>
+        <item name="android:thumbOffset">0dp</item>
         <item name="android:thumb">@drawable/switch_thumb_selector</item>
-        <item name="android:minWidth">43dp</item>
-        <item name="android:minHeight">43dp</item>
+        <item name="android:switchMinWidth">20dp</item>
         <item name="showText">false</item>
         <item name="switchPadding">0dp</item>
         <item name="track">@drawable/switch_track_selector</item>
         <item name="useMaterialThemeColors">false</item>
+        <item name="enforceMaterialTheme">false</item>
     </style>
 
     <style name="ToolbarPopupTheme" parent="Widget.MaterialComponents.PopupMenu.Overflow">

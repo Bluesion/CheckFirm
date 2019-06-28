@@ -11,9 +11,9 @@
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,8 +23,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/search">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -32,18 +31,18 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:tint="?colorAccent"
-                        android:src="@drawable/cardview_point" />
+                        android:text="@string/question_1"
+                        style="?textAppearanceHeadline6" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/search"
-                        android:layout_marginTop="14dp"
-                        style="?textAppearanceHeadline6" />
+                        android:layout_marginTop="4dp"
+                        android:text="@string/question_2"
+                        style="?textAppearanceBody2" />
 
                 </LinearLayout>
 
@@ -52,8 +51,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:id="@+id/firmware">
+                android:layout_marginTop="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -61,18 +59,18 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:tint="@color/green"
-                        android:src="@drawable/cardview_point" />
+                        android:text="@string/question_3"
+                        style="?textAppearanceHeadline6" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/firmware"
-                        android:layout_marginTop="14dp"
-                        style="?textAppearanceHeadline6" />
+                        android:layout_marginTop="4dp"
+                        android:text="@string/question_4"
+                        style="?textAppearanceBody2" />
 
                 </LinearLayout>
 
@@ -81,8 +79,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:id="@+id/questions">
+                android:layout_marginTop="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -90,47 +87,18 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:tint="@color/yellow"
-                        android:src="@drawable/cardview_point" />
-
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/question_0"
-                        android:layout_marginTop="14dp"
+                        android:text="@string/question_5"
                         style="?textAppearanceHeadline6" />
 
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:id="@+id/functions">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:tint="@color/purple"
-                        android:src="@drawable/cardview_point" />
-
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/function_0"
-                        android:layout_marginTop="14dp"
-                        style="?textAppearanceHeadline6" />
+                        android:layout_marginTop="4dp"
+                        android:text="@string/question_6"
+                        style="?textAppearanceBody2" />
 
                 </LinearLayout>
 
@@ -138,6 +106,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

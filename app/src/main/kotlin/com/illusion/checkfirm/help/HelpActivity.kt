@@ -27,6 +27,18 @@ class HelpActivity : AppCompatActivity() {
             val intent = Intent(this, HelpFirmware::class.java)
             startActivity(intent)
         }
+
+        val functions = findViewById<MaterialCardView>(R.id.functions)
+        functions.setOnClickListener {
+            val intent = Intent(this, HelpFunctions::class.java)
+            startActivity(intent)
+        }
+
+        val questions = findViewById<MaterialCardView>(R.id.questions)
+        questions.setOnClickListener {
+            val intent = Intent(this, HelpQuestions::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {

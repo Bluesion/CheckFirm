@@ -1,6 +1,7 @@
 package com.illusion.checkfirm
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
@@ -15,41 +16,30 @@ import com.illusion.checkfirm.bookmark.Bookmark
 import com.illusion.checkfirm.search.Search
 import android.graphics.Typeface
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tabLayout: TabLayout
+    private lateinit var sharedPrefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val one = sharedPrefs.getBoolean("one", true)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = ""
-        toolbar.overflowIcon = getDrawable(R.drawable.ic_more)
-        setSupportActionBar(toolbar)
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        val height = (resources.displayMetrics.heightPixels * 0.3976)
-        val lp = mAppBar.layoutParams
-        lp.height = height.toInt()
-        if (one) {
-            mAppBar.setExpanded(true)
-        } else {
-            mAppBar.setExpanded(false)
+        sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val catcher = sharedPrefs.getBoolean("catcher", false)
+        if (catcher) {
+            val model = sharedPrefs.getString("catcher_model", "CheckFirm") as String
+            val csc = sharedPrefs.getString("catcher_csc", "Catcher") as String
+            if (model.isNotBlank() && csc.isNotBlank()) {
+                FirebaseMessaging.getInstance().subscribeToTopic(model+csc)
+            }
         }
-        val title = findViewById<TextView>(R.id.title)
-        val expandedTitle = findViewById<TextView>(R.id.expanded_title)
-        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
-            val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
-            expandedTitle.alpha = 1 - (percentage * 2 * -1)
-            title.alpha = percentage * -1
-        })
+
+        initToolbar()
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.hide()
@@ -95,6 +85,30 @@ class MainActivity : AppCompatActivity() {
         tabLayout.addOnTabSelectedListener(onTabSelectedListener(mViewPager))
     }
 
+    private fun initToolbar() {
+        val one = sharedPrefs.getBoolean("one", true)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar.title = ""
+        toolbar.overflowIcon = getDrawable(R.drawable.ic_more)
+        setSupportActionBar(toolbar)
+        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        val height = (resources.displayMetrics.heightPixels * 0.3976)
+        val lp = mAppBar.layoutParams
+        lp.height = height.toInt()
+        if (one) {
+            mAppBar.setExpanded(true)
+        } else {
+            mAppBar.setExpanded(false)
+        }
+        val title = findViewById<TextView>(R.id.title)
+        val expandedTitle = findViewById<TextView>(R.id.expanded_title)
+        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+            val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
+            expandedTitle.alpha = 1 - (percentage * 2 * -1)
+            title.alpha = percentage * -1
+        })
+    }
+
     private fun onTabSelectedListener(pager: ViewPager2): TabLayout.OnTabSelectedListener {
         return object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -117,7 +131,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class MyAdapter internal constructor(private var numOfTabs: Int) : FragmentStateAdapter(this) {
-        override fun getItem(position: Int): Fragment {
+        override fun createFragment(position: Int): Fragment {
             when (position) {
                 0 -> return Search()
                 1 -> return Bookmark()

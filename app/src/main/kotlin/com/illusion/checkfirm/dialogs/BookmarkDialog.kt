@@ -1,7 +1,6 @@
 package com.illusion.checkfirm.dialogs
 
 import android.os.Bundle
-import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,22 +30,11 @@ class BookmarkDialog: BottomSheetDialogFragment() {
 
         name = rootView.findViewById(R.id.name)
         model = rootView.findViewById(R.id.model)
+        model.setSelection(model.text!!.length)
         csc = rootView.findViewById(R.id.csc)
 
         mDB = BookmarkDBHelper(context!!)
         mBookMarkList.addAll(mDB.allBookmarkDB)
-
-        val modelFilters = model.filters
-        val newModelFilters = arrayOfNulls<InputFilter>(modelFilters.size + 1)
-        System.arraycopy(modelFilters, 0, newModelFilters, 0, modelFilters.size)
-        newModelFilters[modelFilters.size] = InputFilter.AllCaps()
-        model.filters = newModelFilters
-
-        val cscFilters = csc.filters
-        val newCscFilters2 = arrayOfNulls<InputFilter>(cscFilters.size + 1)
-        System.arraycopy(cscFilters, 0, newCscFilters2, 0, cscFilters.size)
-        newCscFilters2[cscFilters.size] = InputFilter.AllCaps()
-        csc.filters = newCscFilters2
 
         val shouldUpdate = arguments!!.getBoolean("shouldUpdate")
         val bundleName = arguments!!.getString("name")
@@ -72,8 +60,8 @@ class BookmarkDialog: BottomSheetDialogFragment() {
 
         saveButton.setOnClickListener {
             val name = name.text.toString()
-            val model = model.text.toString()
-            val csc = csc.text.toString()
+            val model = model.text!!.trim().toString().toUpperCase()
+            val csc = csc.text!!.trim().toString().toUpperCase()
 
             if (shouldUpdate) {
                 updateBookMark(name, model, csc, position)
