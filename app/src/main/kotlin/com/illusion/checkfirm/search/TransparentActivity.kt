@@ -121,7 +121,7 @@ class TransparentActivity : AppCompatActivity() {
                             finish()
                             overridePendingTransition(0, 0)
                         }
-                    } else if (latestOfficial.isBlank() && latestTest.isNotBlank()) {
+                    } else if (latestOfficial.isNotBlank() && latestTest.isBlank()) {
                         if (smart) {
                             smartSearch(1)
                         } else {
@@ -168,7 +168,9 @@ class TransparentActivity : AppCompatActivity() {
                 downGradePrevious = doc.get("downgrade_previous").toString()
 
                 if (dateLatest == "null") {
-                    add(check)
+                    if (check == 2 || check == 3) {
+                        add(check)
+                    }
                 } else {
                     intent.putExtra("firstDiscoveryDate", dateLatest)
                     intent.putExtra("expectedReleaseDate", expectedDateLatest)
@@ -217,28 +219,38 @@ class TransparentActivity : AppCompatActivity() {
                         }
                     }
 
-                    val firestoreLatest = when {
-                        latest.contains(".") -> {
-                            val index = latest.indexOf(".")
-                            latest.substring(index - 6, index)
+                    var firestoreLatest = ""
+                    firestoreLatest = if (latest == "null" || latest.isBlank()) {
+                        "&&&&&&"
+                    } else {
+                        when {
+                            latest.contains(".") -> {
+                                val index = latest.indexOf(".")
+                                latest.substring(index - 6, index)
+                            }
+                            latest.contains("/") -> {
+                                val index = latest.indexOf("/")
+                                latest.substring(index - 6, index)
+                            }
+                            else -> latest
                         }
-                        latest.contains("/") -> {
-                            val index = latest.indexOf("/")
-                            latest.substring(index - 6, index)
-                        }
-                        else -> latest
                     }
 
-                    val firestorePrevious = when {
-                        previous.contains(".") -> {
-                            val index = previous.indexOf(".")
-                            previous.substring(index - 6, index)
+                    var firestorePrevious = ""
+                    firestorePrevious = if (previous == "null" || previous.isBlank()) {
+                        "&&&&&&"
+                    } else {
+                        when {
+                            previous.contains(".") -> {
+                                val index = previous.indexOf(".")
+                                previous.substring(index - 6, index)
+                            }
+                            previous.contains("/") -> {
+                                val index = previous.indexOf("/")
+                                previous.substring(index - 6, index)
+                            }
+                            else -> previous
                         }
-                        previous.contains("/") -> {
-                            val index = previous.indexOf("/")
-                            previous.substring(index - 6, index)
-                        }
-                        else -> previous
                     }
 
                     if (latest != latestTest) {
