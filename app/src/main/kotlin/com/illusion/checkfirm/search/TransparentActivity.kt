@@ -290,7 +290,7 @@ class TransparentActivity : AppCompatActivity() {
                         val d = Date(calendar.timeInMillis)
                         intent.putExtra("expectedReleaseDate", transFormat.format(d))
 
-                        if (currentTest.substring(0, 1) == firestoreLatest.substring(0, 1)) {
+                        if (currentTest.substring(0, 2) == firestoreLatest.substring(0, 2)) {
                             tempDowngrade = "possible"
                             intent.putExtra("downgrade", getString(R.string.smart_search_downgrade_possible))
                         } else {
