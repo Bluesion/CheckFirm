@@ -257,18 +257,22 @@ class Search : Fragment() {
     }
 
     private fun networkTask(model: String, csc: String) {
-        mSwipeRefreshLayout.isEnabled = true
-        mSwipeRefreshLayout.isRefreshing = true
+        if (model.isBlank() || csc.isBlank()) {
+            Toast.makeText(activity!!, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
+        } else {
+            mSwipeRefreshLayout.isEnabled = true
+            mSwipeRefreshLayout.isRefreshing = true
 
-        val officialURL = "$baseURL$csc/$model$officialURL"
-        val testURL = "$baseURL$csc/$model$testURL"
+            val officialURL = "$baseURL$csc/$model$officialURL"
+            val testURL = "$baseURL$csc/$model$testURL"
 
-        val intent = Intent(activity!!, TransparentActivity::class.java)
-        intent.putExtra("officialURL", officialURL)
-        intent.putExtra("testURL", testURL)
-        intent.putExtra("model", model)
-        intent.putExtra("csc", csc)
-        startActivityForResult(intent, 2)
-        activity!!.overridePendingTransition(0, 0)
+            val intent = Intent(activity!!, TransparentActivity::class.java)
+            intent.putExtra("officialURL", officialURL)
+            intent.putExtra("testURL", testURL)
+            intent.putExtra("model", model)
+            intent.putExtra("csc", csc)
+            startActivityForResult(intent, 2)
+            activity!!.overridePendingTransition(0, 0)
+        }
     }
 }

@@ -158,27 +158,31 @@ class SearchActivity : AppCompatActivity() {
         hideKeyboard()
         val modelString = model.text!!.trim().toString().toUpperCase()
         val cscString = csc.text!!.trim().toString().toUpperCase()
-        val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val save = sharedPrefs.getBoolean("saver", false)
-        if (save) {
-            if (Tools.isWifi(applicationContext)) {
-                createHistory(modelString, cscString)
-                intent.putExtra("model", modelString)
-                intent.putExtra("csc", cscString)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
-            } else {
-                Toast.makeText(applicationContext, R.string.only_wifi, Toast.LENGTH_SHORT).show()
-            }
+        if (modelString.isBlank() || cscString.isBlank()) {
+            Toast.makeText(this, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
         } else {
-            if (Tools.isOnline(applicationContext)) {
-                createHistory(modelString, cscString)
-                intent.putExtra("model", modelString)
-                intent.putExtra("csc", cscString)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
+            val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+            val save = sharedPrefs.getBoolean("saver", false)
+            if (save) {
+                if (Tools.isWifi(applicationContext)) {
+                    createHistory(modelString, cscString)
+                    intent.putExtra("model", modelString)
+                    intent.putExtra("csc", cscString)
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                } else {
+                    Toast.makeText(applicationContext, R.string.only_wifi, Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
+                if (Tools.isOnline(applicationContext)) {
+                    createHistory(modelString, cscString)
+                    intent.putExtra("model", modelString)
+                    intent.putExtra("csc", cscString)
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                } else {
+                    Toast.makeText(applicationContext, R.string.check_network, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

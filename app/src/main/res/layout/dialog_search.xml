@@ -33,12 +33,11 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:id="@+id/scrollView">
+        android:layout_marginBottom="16dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -48,7 +47,7 @@
             android:lineSpacingExtra="4dp"
             style="?textAppearanceBody1" />
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"

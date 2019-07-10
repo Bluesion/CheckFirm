@@ -101,6 +101,10 @@ class TransparentActivity : AppCompatActivity() {
                 }
 
                 mHandler.post {
+                    officialFirmware.sort()
+                    testFirmware.sort()
+                    officialFirmware.reverse()
+                    testFirmware.reverse()
                     previousOfficial = officialFirmware.toString()
                             .replace(", ", "\n")
                             .replace("[", "")
