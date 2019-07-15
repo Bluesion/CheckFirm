@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         val mViewPager = findViewById<ViewPager2>(R.id.mViewPager)
+        mViewPager.offscreenPageLimit = 2
         mViewPager.adapter = MyAdapter(2)
         mViewPager.isUserInputEnabled = false
         mViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -130,7 +131,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inner class MyAdapter internal constructor(private var numOfTabs: Int) : FragmentStateAdapter(this) {
+    inner class MyAdapter internal constructor(private var numOfTabs: Int) : FragmentStateAdapter(supportFragmentManager, lifecycle) {
         override fun createFragment(position: Int): Fragment {
             when (position) {
                 0 -> return Search()

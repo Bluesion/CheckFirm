@@ -97,14 +97,15 @@
 
     <!-- Settings -->
     <string name="feature">기능</string>
+    <string name="design">디자인</string>
     <string name="theme">테마</string>
+    <string name="theme_description">앱 테마를 설정합니다.</string>
+    <string name="theme_light">밝은 테마</string>
+    <string name="theme_dark">어두운 테마</string>
+    <string name="theme_system">시스템 테마</string>
     <string name="about">CheckFirm 정보</string>
     <string name="data_saver">데이터 절약</string>
     <string name="data_saver_description">인터넷 연결이 필요한 모든 작업을 와이파이 환경에서만 진행합니다.</string>
-    <string name="dark_theme">다크 모드</string>
-    <string name="dark_theme_description">앱 테마를 어둡게 설정합니다.</string>
-    <string name="system">시스템 테마 사용</string>
-    <string name="system_description">디바이스가 야간 모드를 지원하는 경우, 앱 테마를 시스템 테마와 맞춥니다.</string>
     <string name="expandable_bar">확장바</string>
     <string name="expandable_bar_description">확장바를 사용합니다.</string>
     <string name="settings">설정</string>
@@ -128,6 +129,8 @@
     <string name="smart_search_changelog">주요 변경점</string>
     <string name="smart_search_changelog_os">OS 업데이트</string>
     <string name="smart_search_changelog_bugfix">버그 픽스</string>
+    <string name="smart_search_changelog_rollback">롤백 상태</string>
+    <string name="smart_search_unknown">알 수 없음</string>
     <string name="smart_search_notice">위 내용은 삼성 공식 발표값이 아닌, CheckFirm의 단순 예측값입니다.\n위 내용은 실제와 다를 수 있으며, 참고용으로만 사용해주세요.</string>
 
     <!-- Info Catcher -->

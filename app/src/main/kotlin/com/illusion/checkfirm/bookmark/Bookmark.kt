@@ -1,5 +1,6 @@
 package com.illusion.checkfirm.bookmark
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -11,6 +12,8 @@ import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.BookmarkDB
 import com.illusion.checkfirm.database.BookmarkDBHelper
 import com.illusion.checkfirm.dialogs.BookmarkDialog
+import com.illusion.checkfirm.search.Search
+import com.illusion.checkfirm.search.TransparentActivity
 import java.util.ArrayList
 
 class Bookmark : Fragment() {

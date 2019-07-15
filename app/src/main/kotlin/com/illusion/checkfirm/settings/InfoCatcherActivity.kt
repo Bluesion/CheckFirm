@@ -26,6 +26,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
 
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
+    private lateinit var switchText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +58,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
             title.alpha = percentage * -1
         })
 
-        val switchText = findViewById<TextView>(R.id.switch_text)
+        switchText = findViewById<TextView>(R.id.switch_text)
         val catcherSwitch = findViewById<SwitchMaterial>(R.id.catcher_switch)
         if (catcher) {
             catcherSwitch.isChecked = true
@@ -140,11 +141,13 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
                     if (model.isNotBlank() && csc.isNotBlank()) {
                         FirebaseMessaging.getInstance().subscribeToTopic(model+csc)
                     }
+                    switchText.text = getString(R.string.switch_on)
                 } else {
                     mEditor.putBoolean("catcher", false)
                     if (model.isNotBlank() && csc.isNotBlank()) {
                         FirebaseMessaging.getInstance().unsubscribeFromTopic(model+csc)
                     }
+                    switchText.text = getString(R.string.switch_off)
                 }
                 mEditor.apply()
             }

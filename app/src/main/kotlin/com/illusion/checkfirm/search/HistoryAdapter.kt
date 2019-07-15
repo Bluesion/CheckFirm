@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.HistoryDB
+import kotlin.math.min
 
 class HistoryAdapter(private val historyList: List<HistoryDB>, val onClickListener: MyAdapterListener): RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
 
@@ -40,7 +41,7 @@ class HistoryAdapter(private val historyList: List<HistoryDB>, val onClickListen
     }
 
     override fun getItemCount(): Int {
-        return Math.min(historyList.size, 10)
+        return min(historyList.size, 10)
     }
 
     interface MyAdapterListener {

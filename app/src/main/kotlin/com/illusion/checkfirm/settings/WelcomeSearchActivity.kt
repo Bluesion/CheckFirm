@@ -14,7 +14,6 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
 import com.illusion.checkfirm.R
@@ -26,6 +25,7 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
 
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
+    private lateinit var switchText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +57,7 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
             title.alpha = percentage * -1
         })
 
-        val switchText = findViewById<TextView>(R.id.switch_text)
+        switchText = findViewById<TextView>(R.id.switch_text)
         val welcomeSwitch = findViewById<SwitchMaterial>(R.id.welcome_switch)
         if (welcome) {
             welcomeSwitch.isChecked = true
@@ -129,8 +129,10 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
             p0.id == R.id.welcome_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("welcome", true)
+                    switchText.text = getString(R.string.switch_on)
                 } else {
                     mEditor.putBoolean("welcome", false)
+                    switchText.text = getString(R.string.switch_off)
                 }
                 mEditor.apply()
             }

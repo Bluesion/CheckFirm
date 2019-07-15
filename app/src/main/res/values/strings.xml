@@ -108,14 +108,15 @@
 
     <!-- Settings -->
     <string name="feature">Features</string>
+    <string name="design">Design</string>
     <string name="theme">Theme</string>
+    <string name="theme_description">Set app theme.</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">System default</string>
     <string name="about">About CheckFirm</string>
     <string name="data_saver">Data Saver</string>
     <string name="data_saver_description">Do all progresses that need Internet connection only when connected to Wi-Fi.</string>
-    <string name="dark_theme">Dark Mode</string>
-    <string name="dark_theme_description">Set dark theme.</string>
-    <string name="system">Use System Theme</string>
-    <string name="system_description">App theme will be same as your system theme if your device supports night mode.</string>
     <string name="expandable_bar">Expandable Bar</string>
     <string name="expandable_bar_description">Use expandable bar.</string>
     <string name="settings">Settings</string>
@@ -139,6 +140,8 @@
     <string name="smart_search_changelog">What\'s new</string>
     <string name="smart_search_changelog_os">OS Update</string>
     <string name="smart_search_changelog_bugfix">Bug fixes</string>
+    <string name="smart_search_changelog_rollback">Roll back</string>
+    <string name="smart_search_unknown">Unknown</string>
     <string name="smart_search_notice">This is not the accurate information from Samsung. This is just CheckFirm prediction.\nKeep in mind that this may differ from actual firmware.</string>
 
     <!-- Info Catcher -->

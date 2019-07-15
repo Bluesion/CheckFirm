@@ -3,8 +3,11 @@ package com.illusion.checkfirm.bookmark
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.RecyclerView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.BookmarkDB
@@ -12,8 +15,8 @@ import com.illusion.checkfirm.database.BookmarkDB
 class BookmarkAdapter(private var bookmarkList: List<BookmarkDB>, val onClickListener: MyAdapterListener): RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val edit: ImageView = view.findViewById(R.id.edit)
-        private val delete: ImageView = view.findViewById(R.id.delete)
+        private val edit: ImageButton = view.findViewById(R.id.edit)
+        private val delete: ImageButton = view.findViewById(R.id.delete)
         var name: TextView = view.findViewById(R.id.name)
         var model: TextView = view.findViewById(R.id.model)
         var csc: TextView = view.findViewById(R.id.csc)

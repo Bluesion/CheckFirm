@@ -19,9 +19,9 @@ import com.illusion.checkfirm.utils.Tools
 class Search : Fragment() {
 
     // URL
-    private var baseURL = "https://fota-cloud-dn.ospserver.net/firmware/"
-    private var officialURL = "/version.xml"
-    private var testURL = "/version.test.xml"
+    private val baseURL = "https://fota-cloud-dn.ospserver.net/firmware/"
+    private val officialURL = "/version.xml"
+    private val testURL = "/version.test.xml"
 
     // Welcome Search
     private lateinit var welcomeCardView: MaterialCardView
@@ -153,12 +153,12 @@ class Search : Fragment() {
             mResult.visibility = View.VISIBLE
             detailCardView.visibility = View.GONE
 
-            val model = data!!.getStringExtra("model") as String
-            val csc = data.getStringExtra("csc") as String
-            val latestOfficial = data.getStringExtra("latestOfficial") as String
-            val latestTest = data.getStringExtra("latestTest") as String
-            val previousOfficial = data.getStringExtra("previousOfficial") as String
-            val previousTest = data.getStringExtra("previousTest") as String
+            val model = data!!.getStringExtra("model")!!
+            val csc = data.getStringExtra("csc")!!
+            val latestOfficial = data.getStringExtra("latestOfficial")!!
+            val latestTest = data.getStringExtra("latestTest")!!
+            val previousOfficial = data.getStringExtra("previousOfficial")!!
+            val previousTest = data.getStringExtra("previousTest")!!
 
             modelOfficial.text = String.format(getString(R.string.device_format), model, csc)
             modelTest.text = String.format(getString(R.string.device_format), model, csc)

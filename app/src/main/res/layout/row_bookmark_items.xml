@@ -1,18 +1,37 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bookmark_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="14dp">
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="?android:attr/listPreferredItemHeight">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/bookmark_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="13dp"
+            android:orientation="vertical"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/edit"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
                 android:id="@+id/name"
@@ -50,24 +69,29 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/edit"
-            android:layout_toStartOf="@id/delete"
-            android:layout_centerVertical="true"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:src="@drawable/ic_edit" />
+            android:src="@drawable/ic_edit"
+            android:layout_marginEnd="8dp"
+            android:background="?selectableItemBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bookmark_text"
+            app:layout_constraintEnd_toStartOf="@id/delete" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/delete"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_delete" />
+            android:src="@drawable/ic_delete"
+            android:layout_marginEnd="14dp"
+            android:background="?selectableItemBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -7,32 +7,35 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
+import android.os.Build
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Tools {
     fun isWifi(mContext: Context): Boolean {
-        val manager = mContext.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        if (manager.isWifiEnabled) {
-            val wifiInfo = manager.connectionInfo as WifiInfo
-            if (wifiInfo.networkId == -1) {
-                return false
-            }
-            return true
+        val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val n = cm.activeNetwork
+        val nc = cm.getNetworkCapabilities(n)
+        return if (n != null) {
+            (nc!!.hasTransport(NetworkCapabilities.TRANSPORT_WIFI))
         } else {
-            return false
+            false
         }
     }
 
     fun isOnline(mContext: Context): Boolean {
-        val connectivityManager = mContext.getSystemService(Context.CONNECTIVITY_SERVICE)
-        return if (connectivityManager is ConnectivityManager) {
-            val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
-            networkInfo?.isConnected ?: false
-        } else false
+        val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val n = cm.activeNetwork
+        val nc = cm.getNetworkCapabilities(n)
+        return if (n != null) {
+            (nc!!.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) || (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI))
+        } else {
+            false
+        }
     }
 
     fun restart(activity: Activity, delay: Int) {

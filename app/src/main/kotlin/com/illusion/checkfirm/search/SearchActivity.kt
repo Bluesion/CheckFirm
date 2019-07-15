@@ -75,13 +75,6 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        if (Intent.ACTION_VIEW == intent.action) {
-            //val url = intent.data!!
-            //model.setText(url.getQueryParameter("model"))
-            //csc.setText(url.getQueryParameter("csc"))
-            //search()
-        }
-
         val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chipGroup)
         val bookmarkHelper = BookmarkDBHelper(this)
         bookmarkList.addAll(bookmarkHelper.allBookmarkDB)
