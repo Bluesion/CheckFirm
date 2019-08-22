@@ -18,8 +18,10 @@ class HelpSearch : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_help_search)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        val back = findViewById<ImageView>(R.id.back)
+        back.setOnClickListener {
+            finish()
+        }
 
         val myDevice = findViewById<TextView>(R.id.my_device)
         myDevice.text = String.format(getString(R.string.search_1), Build.MODEL)

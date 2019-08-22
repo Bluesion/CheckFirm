@@ -142,6 +142,72 @@
                         android:background="#4D808080" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/help_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:minHeight="?android:attr/listPreferredItemHeight">
+
+                        <LinearLayout
+                            android:id="@+id/help_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="13dp"
+                            android:orientation="vertical"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintEnd_toStartOf="@id/help_switch"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="marquee"
+                                android:fadingEdge="horizontal"
+                                android:singleLine="true"
+                                android:text="@string/help_settings"
+                                android:textSize="18sp"
+                                style="?android:attr/textAppearanceLarge" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/help_description"
+                                style="?android:attr/textAppearanceSmall" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/help_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/help_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="#4D808080" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/theme_layout"
@@ -196,7 +262,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="14dp"
-                android:text="@string/feature" />
+                android:text="@string/search" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -288,6 +354,150 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/smart_layout"
+                        android:background="?selectableItemBackground"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:id="@+id/smart_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="13dp"
+                            android:orientation="vertical"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/smart_switch">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="marquee"
+                                android:singleLine="true"
+                                android:text="@string/smart_search"
+                                android:fadingEdge="horizontal"
+                                android:textSize="18sp"
+                                style="?android:attr/textAppearanceLarge" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/smart_search_description"
+                                style="?android:attr/textAppearanceSmall" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/smart_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/smart_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="#4D808080" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/quick_layout"
+                        android:background="?selectableItemBackground"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:id="@+id/quick_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="13dp"
+                            android:orientation="vertical"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/quick_switch">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="marquee"
+                                android:singleLine="true"
+                                android:text="@string/quick_search"
+                                android:fadingEdge="horizontal"
+                                android:textSize="18sp"
+                                style="?android:attr/textAppearanceLarge" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/quick_search_description"
+                                style="?android:attr/textAppearanceSmall" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/quick_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/quick_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="14dp"
+                android:text="@string/feature" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/saver_layout"
                         android:background="?selectableItemBackground"
                         android:focusable="true"
@@ -354,14 +564,14 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/smart_layout"
+                        android:id="@+id/catcher_layout"
                         android:background="?selectableItemBackground"
                         android:focusable="true"
                         android:clickable="true"
                         android:gravity="center_vertical">
 
                         <LinearLayout
-                            android:id="@+id/smart_text"
+                            android:id="@+id/catcher_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
@@ -376,14 +586,14 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/smart_switch">
+                            app:layout_constraintEnd_toStartOf="@id/catcher_divider">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
                                 android:singleLine="true"
-                                android:text="@string/smart_search"
+                                android:text="@string/info_catcher"
                                 android:fadingEdge="horizontal"
                                 android:textSize="18sp"
                                 style="?android:attr/textAppearanceLarge" />
@@ -391,13 +601,25 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/smart_search_description"
+                                android:text="@string/info_catcher_description"
                                 style="?android:attr/textAppearanceSmall" />
 
                         </LinearLayout>
 
+                        <View
+                            android:id="@+id/catcher_divider"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:background="#4D808080"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/catcher_switch"
+                            app:layout_constraintStart_toEndOf="@id/catcher_text" />
+
                         <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/smart_switch"
+                            android:id="@+id/catcher_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
@@ -405,95 +627,11 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/smart_text" />
+                            app:layout_constraintStart_toEndOf="@id/catcher_divider" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="14dp"
-                android:text="@string/beta" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/catcher_layout"
-                    android:background="?selectableItemBackground"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:gravity="center_vertical">
-
-                    <LinearLayout
-                        android:id="@+id/catcher_text"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginEnd="14dp"
-                        android:layout_marginBottom="13dp"
-                        android:orientation="vertical"
-                        app:layout_constrainedWidth="true"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintHorizontal_weight="1"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/catcher_divider">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:singleLine="true"
-                            android:text="@string/info_catcher"
-                            android:fadingEdge="horizontal"
-                            android:textSize="18sp"
-                            style="?android:attr/textAppearanceLarge" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/info_catcher_description"
-                            style="?android:attr/textAppearanceSmall" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:id="@+id/catcher_divider"
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        android:background="#4D808080"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/catcher_switch"
-                        app:layout_constraintStart_toEndOf="@id/catcher_text" />
-
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/catcher_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginEnd="14dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/catcher_divider" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 

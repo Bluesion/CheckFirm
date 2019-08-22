@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -42,16 +43,22 @@ class BookmarkDialog: BottomSheetDialogFragment() {
         val bundleCSC = arguments!!.getString("csc")
         val position = arguments!!.getInt("position")
 
-        if (shouldUpdate && bundleName != "") {
-            name.setText(bundleName)
-        }
+        val title = rootView.findViewById<TextView>(R.id.title)
+        if (shouldUpdate) {
+            title.text = getString(R.string.edit_bookmark)
+            if (bundleName != "") {
+                name.setText(bundleName)
+            }
 
-        if (shouldUpdate && bundleDevice != "") {
-            model.setText(bundleDevice)
-        }
+            if (bundleDevice != "") {
+                model.setText(bundleDevice)
+            }
 
-        if (shouldUpdate && bundleCSC != "") {
-            csc.setText(bundleCSC)
+            if (bundleCSC != "") {
+                csc.setText(bundleCSC)
+            }
+        } else {
+            title.text = getString(R.string.new_bookmark)
         }
 
         cancelButton.setOnClickListener {

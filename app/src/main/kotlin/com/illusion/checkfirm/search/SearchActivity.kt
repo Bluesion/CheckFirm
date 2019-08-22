@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -22,6 +23,7 @@ import com.illusion.checkfirm.database.BookmarkDB
 import com.illusion.checkfirm.database.BookmarkDBHelper
 import com.illusion.checkfirm.database.HistoryDB
 import com.illusion.checkfirm.database.HistoryDBHelper
+import com.illusion.checkfirm.help.HelpSearch
 import com.illusion.checkfirm.utils.Tools
 import java.text.SimpleDateFormat
 import java.util.*
@@ -133,6 +135,18 @@ class SearchActivity : AppCompatActivity() {
         val search = findViewById<ImageView>(R.id.search)
         search.setOnClickListener {
             search()
+        }
+
+        val helpButton = findViewById<MaterialButton>(R.id.help)
+        helpButton.setOnClickListener {
+            val intent = Intent(this, HelpSearch::class.java)
+            startActivity(intent)
+        }
+        val help = sharedPrefs.getBoolean("help", true)
+        if (help) {
+            helpButton.visibility = View.VISIBLE
+        } else {
+            helpButton.visibility = View.GONE
         }
     }
 

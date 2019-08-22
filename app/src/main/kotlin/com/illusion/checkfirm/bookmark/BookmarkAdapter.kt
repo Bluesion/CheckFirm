@@ -15,6 +15,7 @@ import com.illusion.checkfirm.database.BookmarkDB
 class BookmarkAdapter(private var bookmarkList: List<BookmarkDB>, val onClickListener: MyAdapterListener): RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val layout: ConstraintLayout = view.findViewById(R.id.bookmark_layout)
         private val edit: ImageButton = view.findViewById(R.id.edit)
         private val delete: ImageButton = view.findViewById(R.id.delete)
         var name: TextView = view.findViewById(R.id.name)
@@ -22,6 +23,7 @@ class BookmarkAdapter(private var bookmarkList: List<BookmarkDB>, val onClickLis
         var csc: TextView = view.findViewById(R.id.csc)
 
         init {
+            layout.setOnClickListener { v -> onClickListener.onLayoutClicked(v, adapterPosition) }
             edit.setOnClickListener { v -> onClickListener.onEditClicked(v, adapterPosition) }
             delete.setOnClickListener { v -> onClickListener.onDeleteClicked(v, adapterPosition) }
         }
@@ -46,6 +48,7 @@ class BookmarkAdapter(private var bookmarkList: List<BookmarkDB>, val onClickLis
     }
 
     interface MyAdapterListener {
+        fun onLayoutClicked(v: View, position: Int)
         fun onEditClicked(v: View, position: Int)
         fun onDeleteClicked(v: View, position: Int)
     }

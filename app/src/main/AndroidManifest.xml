@@ -26,20 +26,13 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcut"/>
         </activity>
+        <activity android:label="@string/bookmark"
+            android:name=".bookmark.BookmarkActivity" />
         <activity
             android:label="@string/help"
-            android:name="com.illusion.checkfirm.help.HelpActivity" />
-        <activity
-            android:label="@string/firmware"
             android:name="com.illusion.checkfirm.help.HelpFirmware" />
         <activity
-            android:label="@string/function_0"
-            android:name="com.illusion.checkfirm.help.HelpFunctions" />
-        <activity
-            android:label="@string/question_0"
-            android:name="com.illusion.checkfirm.help.HelpQuestions" />
-        <activity
-            android:label="@string/search"
+            android:label="@string/help"
             android:name="com.illusion.checkfirm.help.HelpSearch" />
         <activity
             android:label="@string/search"

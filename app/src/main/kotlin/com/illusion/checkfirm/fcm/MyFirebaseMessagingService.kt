@@ -13,8 +13,6 @@ import com.illusion.checkfirm.R
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    override fun onNewToken(token: String?) {}
-
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         if (remoteMessage.data != null) {
             sendNotification(remoteMessage.data["model"].toString(), remoteMessage.data["csc"].toString())

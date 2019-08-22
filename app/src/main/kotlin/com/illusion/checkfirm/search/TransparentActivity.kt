@@ -240,6 +240,7 @@ class TransparentActivity : AppCompatActivity() {
                             }
                             compare > 0 -> {
                                 intent.putExtra("changelog", getString(R.string.smart_search_changelog_rollback))
+                                calendar.add(Calendar.DAY_OF_YEAR, 14)
                             }
                             else -> {
                                 intent.putExtra("changelog", getString(R.string.smart_search_changelog_bugfix))
@@ -366,6 +367,7 @@ class TransparentActivity : AppCompatActivity() {
                     }
                     compare > 0 -> {
                         intent.putExtra("changelog", getString(R.string.smart_search_changelog_rollback))
+                        calendar.add(Calendar.DAY_OF_YEAR, 14)
                     }
                     else -> {
                         intent.putExtra("changelog", getString(R.string.smart_search_changelog_bugfix))

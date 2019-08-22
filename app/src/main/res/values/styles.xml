@@ -38,16 +38,4 @@
         <item name="enforceMaterialTheme">false</item>
     </style>
 
-    <style name="ToolbarPopupTheme" parent="Widget.MaterialComponents.PopupMenu.Overflow">
-        <item name="android:popupBackground">@drawable/toolbar_popup_background</item>
-    </style>
-
-    <style name="DropDownListView" parent="Widget.AppCompat.Light.ListView.DropDown">
-        <item name="android:listSelector">@drawable/toolbar_menu_selector</item>
-    </style>
-
-    <style name="Tab" parent="Widget.MaterialComponents.TabLayout">
-        <item name="tabRippleColor">#99CCCCCC</item>
-    </style>
-
 </resources>

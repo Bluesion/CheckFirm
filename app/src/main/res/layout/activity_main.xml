@@ -1,97 +1,340 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="?actionBarSize">
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar"
+        android:background="?android:windowBackground"
+        app:elevation="0dp">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
 
-            <com.google.android.material.appbar.AppBarLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/appbar"
-                android:background="?android:windowBackground"
-                app:elevation="0dp">
+                android:text="@string/app_name"
+                android:id="@+id/expanded_title"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="40sp"
+                style="@style/TextAppearance.Design.CollapsingToolbar.Expanded" />
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="8dp"
+                app:layout_collapseMode="pin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title"
+                    android:gravity="center_vertical"
+                    android:text="@string/app_name"
+                    style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mSwipeRefreshLayout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <HorizontalScrollView
+                    android:id="@+id/chipScroll"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:overScrollMode="never"
+                    android:scrollbars="none">
 
-                    <TextView
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:singleLine="true"
+                        app:singleSelection="true" />
+
+                </HorizontalScrollView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/welcome">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:id="@+id/expanded_title"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textSize="40sp"
-                        style="@style/TextAppearance.Design.CollapsingToolbar.Expanded" />
+                        android:layout_margin="14dp"
+                        android:orientation="vertical">
 
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        android:layout_gravity="bottom"
-                        android:layout_marginEnd="8dp"
-                        app:layout_collapseMode="pin">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:tint="@color/red"
+                            android:src="@drawable/cardview_point" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/title"
-                            android:gravity="center_vertical"
-                            android:text="@string/app_name"
-                            style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+                            android:layout_marginTop="14dp"
+                            android:id="@+id/welcome_title"
+                            style="?textAppearanceHeadline6" />
 
-                    </androidx.appcompat.widget.Toolbar>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:id="@+id/welcome_text"
+                            style="?textAppearanceBody2" />
 
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
+                    </LinearLayout>
 
-            </com.google.android.material.appbar.AppBarLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/mViewPager"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/result"
+                    android:orientation="vertical">
 
-            </FrameLayout>
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/officialCardView">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                app:backgroundTint="?colorAccent"
-                app:tint="@android:color/white"
-                app:srcCompat="@drawable/ic_add" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="14dp"
+                            android:orientation="vertical">
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tint="?colorAccent"
+                                android:src="@drawable/cardview_point" />
 
-    </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/model_official"
+                                android:layout_marginTop="14dp"
+                                style="?textAppearanceHeadline6" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/mTabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent"
-        app:tabTextColor="#808080"
-        app:tabSelectedTextColor="?colorAccent"
-        app:tabIndicatorAnimationDuration="0"
-        app:tabIndicatorColor="@android:color/transparent"
-        app:tabIndicatorFullWidth="false" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/latestOfficialFirmware"
+                                android:text="@string/latest_official"
+                                android:layout_marginTop="8dp"
+                                style="?textAppearanceBody2" />
 
-</RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/latestOfficialFirmwareText"
+                                style="?textAppearanceBody2" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/testCardView"
+                        android:layout_marginTop="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="14dp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tint="@color/yellow"
+                                android:src="@drawable/cardview_point" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/model_test"
+                                android:layout_marginTop="14dp"
+                                style="?textAppearanceHeadline6" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/latest_test"
+                                android:id="@+id/latestTestFirmware"
+                                android:layout_marginTop="8dp"
+                                style="?textAppearanceBody2" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/latestTestFirmwareText"
+                                style="?textAppearanceBody2" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detail"
+                        android:layout_marginTop="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="14dp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tint="@color/green"
+                                android:src="@drawable/cardview_point" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/smart_search_info"
+                                android:layout_marginTop="14dp"
+                                style="?textAppearanceHeadline6" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:text="@string/smart_search_date" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:id="@+id/smart_search_date"
+                                    style="?textAppearanceBody2" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:text="@string/smart_search_release" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:id="@+id/smart_search_release"
+                                    style="?textAppearanceBody2" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:text="@string/smart_search_downgrade" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:id="@+id/smart_search_downgrade"
+                                    style="?textAppearanceBody2" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:text="@string/smart_search_changelog" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:id="@+id/smart_search_changelog"
+                                    style="?textAppearanceBody2" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/smart_search_notice"
+                                style="?textAppearanceBody2" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/help"
+                        android:text="@string/firmware_help" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

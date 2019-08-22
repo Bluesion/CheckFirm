@@ -16,12 +16,11 @@
     <string name="notification_channel_name">New Firmware</string>
 
     <!-- Contact Us -->
-    <string name="contact_us">Contact Us</string>
-    <string name="contact_dialog_title">Hello, we are CheckFirm :)</string>
+    <string name="contact_us">About Developers</string>
+    <string name="contact_dialog_title">Hello :)</string>
     <string name="contact_dialog_text">Email us if you want to say something.\n\nwork@newfitlab.com (Designer, Newfit)\ndnjscjf098@gmail.com (Developer, Illusion)</string>
 
     <!-- Search -->
-    <string name="firmware">Firmware</string>
     <string name="latest_official">Latest Official Firmware</string>
     <string name="latest_test">Latest Test Firmware</string>
     <string name="model">Model</string>
@@ -37,11 +36,15 @@
 
     <!-- Bookmark -->
     <string name="bookmark">Bookmark</string>
+    <string name="new_bookmark">New bookmark</string>
+    <string name="edit_bookmark">Edit bookmark</string>
     <string name="name">Bookmark Name</string>
     <string name="save">Save</string>
+    <string name="bookmark_search_error">Check if model and CSC code is correctly saved in bookmark.</string>
 
     <!-- Help Search -->
-    <string name="search_0">How to search</string>
+    <string name="search_help">How to search?</string>
+    <string name="search_0">Searching</string>
     <string name="search_1">Before you search, you need to know model and CSC code.\nYour model is %s and I cannot inform your CSC code because I don\'t know which SIM card you use. You need to google your own CSC code.</string>
     <string name="search_2">Fantastic! You can see latest firmware information here.\nAmazing thing will happen if you click this card.</string>
     <string name="search_3">Great!</string>
@@ -50,6 +53,7 @@
     <string name="search_6">Basic search guide is over. You can enjoy CheckFirm now!</string>
 
     <!-- Help Firmware -->
+    <string name="firmware_help">How to read firmware info?</string>
     <string name="firmware_0">Basic Firmware Information</string>
     <string name="firmware_1">Firmware information is made of 3 information. Build version, CSC version, and baseband version.\n\nLet\'s suppose that firmware search result is\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nFirst one(A720SKSU3BRK1) refers build version,\nsecond one(A720SSKC3BRK1) refers CSC version,\nlast one(A720NKOU3BRK1) refers baseband version.</string>
     <string name="firmware_2">What do we know with firmware version?</string>
@@ -73,30 +77,6 @@
     <string name="firmware_20">When will test firmware be released?</string>
     <string name="firmware_21">We cannot exactly assume it. But test firmware will be released soon if build version doesn\'t change more.</string>
 
-    <!-- Help Questions -->
-    <string name="question_0">Most asked questions</string>
-    <string name="question_1">Firmware information is incorrect</string>
-    <string name="question_2">CheckFirm gets firmware information from Samsung server. If something is wrong with information, please report it to Samsung.</string>
-    <string name="question_3">Searching is not working</string>
-    <string name="question_4">If you wrote wrong model and CSC or network is unstable, searching might not be working properly. You can check your model in CheckFirm Help - Search.</string>
-    <string name="question_5">I found a bug</string>
-    <string name="question_6">If you found a bug or you want to say something to developer, please send a mail or write your comment on Google Play. You can check my mail on CheckFirm Settings - Information.</string>
-
-    <!-- Help Functions -->
-    <string name="function_0">CheckFirm Functions</string>
-    <string name="function_1">Expandable Bar</string>
-    <string name="function_2">You can use one of greatest feature of One UI - Expandable Bar on CheckFirm. According to One UI guideline, Expandable uses about 40% of device\'s height pixel.</string>
-    <string name="function_3">Dark Theme</string>
-    <string name="function_4">It saves battery. You can use CheckFirm at night really comfortably thanks to Dark Theme. CheckFirm also supports System Theme functions. If you enable this, App theme will follow your device theme.</string>
-    <string name="function_5">Welcome Search</string>
-    <string name="function_6">Search specific device\'s firmware on app start. For preventing overload, only one device is allowed.</string>
-    <string name="function_7">Data Saver</string>
-    <string name="function_8">Firmware searching / Checking latest version / Info Catcher requires internet connection. Data Saver makes these processes working only on Wi-Fi.</string>
-    <string name="function_9">Smart Search</string>
-    <string name="function_10">It predicts latest test firmware information. Whenever user searches firmware, Smart Search will connect to database and saves search results. CheckFirm predicts information using these saved information. Turning on Smart Search will make search speed slow.</string>
-    <string name="function_11">Info Catcher</string>
-    <string name="function_12">If something is changed in DB, FCM will send a notification to users who subscribed to specific topic. Before use Info Catcher, you should turn on Smart Search because Smart Search is a bridge CheckFirm to DB. Turning on Info Catcher will make search speed slow.\n\nI will not make realtime update notification because it is not efficient. Since there are a lot of data in DB, it is extremely inefficient to check changes.</string>
-
     <!-- About -->
     <string name="app_information">App information</string>
     <string name="version">Version</string>
@@ -119,6 +99,8 @@
     <string name="data_saver_description">Do all progresses that need Internet connection only when connected to Wi-Fi.</string>
     <string name="expandable_bar">Expandable Bar</string>
     <string name="expandable_bar_description">Use expandable bar.</string>
+    <string name="help_settings">How to Button</string>
+    <string name="help_description">Show how to buttons.</string>
     <string name="settings">Settings</string>
     <string name="information">Information</string>
     <string name="welcome_search_saved">Saved</string>
@@ -149,10 +131,14 @@
     <string name="info_catcher_description">Info Catcher will send you a notification when firmware has been updated.</string>
     <string name="info_catcher_text">When someone discovers new firmware, CheckFirm will send a notification to you automatically.\nPlease input device that you want to catch.</string>
     <string name="info_catcher_caution">Caution</string>
-    <string name="info_catcher_caution_text">1. This is beta function. There may be errors or this might be unstable.\n2. Info Catcher will work properly when Smart Search is turned on. If you want to try Info Catcher, you have to enable Smart Search.</string>
+    <string name="info_catcher_caution_text">Info Catcher works properly when Smart Search is turned on. If you want to try Info Catcher, you have to enable Smart Search.</string>
     <string name="info_catcher_notification_title">%1$s (%2$s) new firmware found!</string>
     <string name="info_catcher_notification_text">Check it now.</string>
     <string name="info_catcher_error">Please check if you wrote model and CSC code correctly.</string>
+
+    <!-- Quick Search -->
+    <string name="quick_search">Quick Search</string>
+    <string name="quick_search_description">Show bookmarks on main screen.</string>
 
     <!-- Beta -->
     <string name="beta">Beta</string>

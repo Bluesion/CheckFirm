@@ -21,14 +21,18 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
     private lateinit var oneSwitch: SwitchMaterial
+    private lateinit var helpSwitch: SwitchMaterial
     private lateinit var welcomeSwitch: SwitchMaterial
-    private lateinit var saverSwitch: SwitchMaterial
     private lateinit var smartSwitch: SwitchMaterial
+    private lateinit var quickSwitch: SwitchMaterial
+    private lateinit var saverSwitch: SwitchMaterial
     private lateinit var catcherSwitch: SwitchMaterial
     private var one: Boolean = true
+    private var help: Boolean = true
     private var welcome: Boolean = false
-    private var saver: Boolean = false
     private var smart: Boolean = false
+    private var quick: Boolean = false
+    private var saver: Boolean = false
     private var catcher: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +41,11 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         oneSwitch = findViewById(R.id.expanded_switch)
+        helpSwitch = findViewById(R.id.help_switch)
         welcomeSwitch = findViewById(R.id.welcome_switch)
-        saverSwitch = findViewById(R.id.saver_switch)
         smartSwitch = findViewById(R.id.smart_switch)
+        quickSwitch = findViewById(R.id.quick_switch)
+        saverSwitch = findViewById(R.id.saver_switch)
         catcherSwitch = findViewById(R.id.catcher_switch)
         initSwitch()
 
@@ -65,14 +71,21 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         })
 
         oneSwitch.setOnCheckedChangeListener(this)
+        helpSwitch.setOnCheckedChangeListener(this)
         welcomeSwitch.setOnCheckedChangeListener(this)
-        saverSwitch.setOnCheckedChangeListener(this)
         smartSwitch.setOnCheckedChangeListener(this)
+        quickSwitch.setOnCheckedChangeListener(this)
+        saverSwitch.setOnCheckedChangeListener(this)
         catcherSwitch.setOnCheckedChangeListener(this)
 
         val oneLayout = findViewById<ConstraintLayout>(R.id.expanded_layout)
         oneLayout.setOnClickListener {
             oneSwitch.toggle()
+        }
+
+        val helpLayout = findViewById<ConstraintLayout>(R.id.help_layout)
+        helpLayout.setOnClickListener {
+            helpSwitch.toggle()
         }
 
         val themeLayout = findViewById<ConstraintLayout>(R.id.theme_layout)
@@ -87,14 +100,19 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             startActivity(intent)
         }
 
-        val saverLayout = findViewById<ConstraintLayout>(R.id.saver_layout)
-        saverLayout.setOnClickListener {
-            saverSwitch.toggle()
-        }
-
         val smartLayout = findViewById<ConstraintLayout>(R.id.smart_layout)
         smartLayout.setOnClickListener {
             smartSwitch.toggle()
+        }
+
+        val quickLayout = findViewById<ConstraintLayout>(R.id.quick_layout)
+        quickLayout.setOnClickListener {
+            quickSwitch.toggle()
+        }
+
+        val saverLayout = findViewById<ConstraintLayout>(R.id.saver_layout)
+        saverLayout.setOnClickListener {
+            saverSwitch.toggle()
         }
 
         val catcherLayout = findViewById<ConstraintLayout>(R.id.catcher_layout)
@@ -127,6 +145,14 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
+            p0.id == R.id.help_switch -> {
+                if (isChecked) {
+                    mEditor.putBoolean("help", true)
+                } else {
+                    mEditor.putBoolean("help", false)
+                }
+                mEditor.apply()
+            }
             p0.id == R.id.welcome_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("welcome", true)
@@ -135,19 +161,27 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
-            p0.id == R.id.saver_switch -> {
-                if (isChecked) {
-                    mEditor.putBoolean("saver", true)
-                } else {
-                    mEditor.putBoolean("saver", false)
-                }
-                mEditor.apply()
-            }
             p0.id == R.id.smart_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("smart", true)
                 } else {
                     mEditor.putBoolean("smart", false)
+                }
+                mEditor.apply()
+            }
+            p0.id == R.id.quick_switch -> {
+                if (isChecked) {
+                    mEditor.putBoolean("quick", true)
+                } else {
+                    mEditor.putBoolean("quick", false)
+                }
+                mEditor.apply()
+            }
+            p0.id == R.id.saver_switch -> {
+                if (isChecked) {
+                    mEditor.putBoolean("saver", true)
+                } else {
+                    mEditor.putBoolean("saver", false)
                 }
                 mEditor.apply()
             }
@@ -187,15 +221,19 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
 
     private fun initSwitch() {
         one = sharedPrefs.getBoolean("one", true)
+        help = sharedPrefs.getBoolean("help", true)
         welcome = sharedPrefs.getBoolean("welcome", false)
-        saver = sharedPrefs.getBoolean("saver", false)
         smart = sharedPrefs.getBoolean("smart", false)
+        quick = sharedPrefs.getBoolean("quick", false)
+        saver = sharedPrefs.getBoolean("saver", false)
         catcher = sharedPrefs.getBoolean("catcher", false)
 
         oneSwitch.isChecked = one
+        helpSwitch.isChecked = help
         welcomeSwitch.isChecked = welcome
-        saverSwitch.isChecked = saver
         smartSwitch.isChecked = smart
+        quickSwitch.isChecked = quick
+        saverSwitch.isChecked = saver
         catcherSwitch.isChecked = catcher
     }
 }

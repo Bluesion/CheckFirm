@@ -1,29 +1,71 @@
 package com.illusion.checkfirm
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.graphics.Color
+import android.app.Activity
+import android.content.*
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.HorizontalScrollView
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.tabs.TabLayout
-import com.illusion.checkfirm.dialogs.BookmarkDialog
-import com.illusion.checkfirm.bookmark.Bookmark
-import com.illusion.checkfirm.search.Search
-import android.graphics.Typeface
-import android.view.ViewGroup
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.firebase.messaging.FirebaseMessaging
+import com.illusion.checkfirm.bookmark.BookmarkActivity
+import com.illusion.checkfirm.database.BookmarkDB
+import com.illusion.checkfirm.database.BookmarkDBHelper
+import com.illusion.checkfirm.dialogs.SearchDialog
+import com.illusion.checkfirm.help.HelpFirmware
+import com.illusion.checkfirm.search.SearchActivity
+import com.illusion.checkfirm.search.TransparentActivity
+import com.illusion.checkfirm.settings.SettingsActivity
+import com.illusion.checkfirm.utils.Tools
+import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var tabLayout: TabLayout
+    // URL
+    private val baseURL = "https://fota-cloud-dn.ospserver.net/firmware/"
+    private val officialURL = "/version.xml"
+    private val testURL = "/version.test.xml"
+
+    // Welcome Search
+    private lateinit var welcomeCardView: MaterialCardView
+    private lateinit var welcomeTitle: TextView
+    private lateinit var welcomeText: TextView
+
+    // Search Result
+    private lateinit var mResult: LinearLayout
+    private lateinit var latestOfficialFirmware: TextView
+    private lateinit var latestTestFirmware: TextView
+    private lateinit var latestOfficialFirmwareText: TextView
+    private lateinit var latestTestFirmwareText: TextView
+
+    // Smart Search
+    private lateinit var firstDiscoveryDate: TextView
+    private lateinit var expectedReleaseDate: TextView
+    private lateinit var downgrade: TextView
+    private lateinit var changelog: TextView
+    private lateinit var detailCardView: MaterialCardView
+
+    // Quick Search
+    private var bookmarkList = ArrayList<BookmarkDB>()
+
+    // ETC
     private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var modelOfficial: TextView
+    private lateinit var modelTest: TextView
+    private lateinit var infoOfficialFirmware: MaterialCardView
+    private lateinit var infoTestFirmware: MaterialCardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,51 +81,178 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // UI
+        mSwipeRefreshLayout = findViewById(R.id.mSwipeRefreshLayout)
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.green)
+        mSwipeRefreshLayout.isEnabled = false
+
+        // Smart Search
+        detailCardView = findViewById(R.id.detail)
+        firstDiscoveryDate = findViewById(R.id.smart_search_date)
+        expectedReleaseDate = findViewById(R.id.smart_search_release)
+        changelog = findViewById(R.id.smart_search_changelog)
+        downgrade = findViewById(R.id.smart_search_downgrade)
+
+        // Welcome Search
+        welcomeCardView = findViewById(R.id.welcome)
+        welcomeTitle = findViewById(R.id.welcome_title)
+        welcomeText = findViewById(R.id.welcome_text)
+
+        val welcome = sharedPrefs.getBoolean("welcome", false)
+        if (welcome) {
+            welcomeSearch()
+        } else {
+            welcomeTitle.text = getString(R.string.welcome_search)
+            welcomeText.text = getString(R.string.welcome_disabled)
+            welcomeCardView.visibility = View.VISIBLE
+        }
+
+        // Search Result
+        mResult = findViewById(R.id.result)
+        modelOfficial = findViewById(R.id.model_official)
+        modelTest = findViewById(R.id.model_test)
+        latestOfficialFirmware = findViewById(R.id.latestOfficialFirmware)
+        latestTestFirmware = findViewById(R.id.latestTestFirmware)
+        latestOfficialFirmwareText = findViewById(R.id.latestOfficialFirmwareText)
+        latestTestFirmwareText = findViewById(R.id.latestTestFirmwareText)
+        infoOfficialFirmware = findViewById(R.id.officialCardView)
+        infoTestFirmware = findViewById(R.id.testCardView)
+
         initToolbar()
+        initQuick()
+        initHelpButton()
+    }
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.hide()
-        fab.setOnClickListener {
-            val bottomSheetFragment = BookmarkDialog.newInstance(false, "", "", "", -1)
-            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-        }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-        tabLayout = findViewById(R.id.mTabLayout)
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.firmware))
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.bookmark))
-        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-        for (i in 0 until tabLayout.tabCount) {
-            val tab = tabLayout.getTabAt(i)
-            if (tab != null) {
-                val tabTextView = TextView(this)
-                tab.customView = tabTextView
-                tabTextView.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-                tabTextView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-                tabTextView.text = tab.text
-                if (i == 0) {
-                    tabTextView.setTypeface(null, Typeface.BOLD)
-                    tabTextView.setTextColor(Color.parseColor("#4297ff"))
-                }
-            }
-        }
-        val mViewPager = findViewById<ViewPager2>(R.id.mViewPager)
-        mViewPager.offscreenPageLimit = 2
-        mViewPager.adapter = MyAdapter(2)
-        mViewPager.isUserInputEnabled = false
-        mViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+        val save = sharedPrefs.getBoolean("saver", false)
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            val model = data!!.getStringExtra("model") as String
+            val csc = data.getStringExtra("csc") as String
 
-            override fun onPageSelected(position: Int) {
-                if (position == 0) {
-                    fab.hide()
+            if (save) {
+                if (Tools.isWifi(this)) {
+                    welcomeCardView.visibility = View.GONE
+                    networkTask(model, csc)
                 } else {
-                    fab.show()
+                    Toast.makeText(this, R.string.only_wifi, Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                if (Tools.isOnline(this)) {
+                    welcomeCardView.visibility = View.GONE
+                    networkTask(model, csc)
+                } else {
+                    Toast.makeText(this, R.string.check_network, Toast.LENGTH_SHORT).show()
                 }
             }
+        } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
+            mResult.visibility = View.VISIBLE
+            detailCardView.visibility = View.GONE
 
-            override fun onPageScrollStateChanged(state: Int) {}
-        })
-        tabLayout.addOnTabSelectedListener(onTabSelectedListener(mViewPager))
+            val model = data!!.getStringExtra("model")!!
+            val csc = data.getStringExtra("csc")!!
+            val latestOfficial = data.getStringExtra("latestOfficial")!!
+            val latestTest = data.getStringExtra("latestTest")!!
+            val previousOfficial = data.getStringExtra("previousOfficial")!!
+            val previousTest = data.getStringExtra("previousTest")!!
+
+            modelOfficial.text = String.format(getString(R.string.device_format), model, csc)
+            modelTest.text = String.format(getString(R.string.device_format), model, csc)
+
+            if (latestOfficial.isBlank()) {
+                latestOfficialFirmwareText.text = getString(R.string.search_error)
+            } else {
+                latestOfficialFirmwareText.text = latestOfficial
+            }
+
+            if (latestTest.isBlank()) {
+                latestTestFirmwareText.text = getString(R.string.search_error)
+            } else {
+                latestTestFirmwareText.text = latestTest
+            }
+
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            infoOfficialFirmware.setOnClickListener {
+                val bottomSheetFragment = SearchDialog.newInstance(true, previousOfficial, model, csc)
+                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            }
+            infoOfficialFirmware.setOnLongClickListener {
+                val clip = ClipData.newPlainText("checkfirmLatestOfficial", latestOfficial)
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(this, R.string.clipboard, Toast.LENGTH_SHORT).show()
+                true
+            }
+            infoTestFirmware.setOnClickListener {
+                val bottomSheetFragment = SearchDialog.newInstance(false, previousTest, model, csc)
+                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            }
+            infoTestFirmware.setOnLongClickListener {
+                val clip = ClipData.newPlainText("checkfirmLatestTest", latestTest)
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(this, R.string.clipboard, Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            val smart = sharedPrefs.getBoolean("smart", false)
+            if (smart) {
+                detailCardView.visibility = View.VISIBLE
+                val srFirstDiscoveryDate = data.getStringExtra("firstDiscoveryDate")
+                val srExpectedReleaseDate = data.getStringExtra("expectedReleaseDate")
+                val srChangelog = data.getStringExtra("changelog")
+                val srDowngrade = data.getStringExtra("downgrade")
+                val detail = data.getBooleanExtra("detailCardView", true)
+
+                if (detail) {
+                    detailCardView.visibility = View.VISIBLE
+                } else {
+                    detailCardView.visibility = View.GONE
+                }
+
+                firstDiscoveryDate.text = srFirstDiscoveryDate
+                expectedReleaseDate.text = srExpectedReleaseDate
+                changelog.text = srChangelog
+                downgrade.text = srDowngrade
+            }
+
+            mSwipeRefreshLayout.isEnabled = false
+            mSwipeRefreshLayout.isRefreshing = false
+        } else {
+            mSwipeRefreshLayout.isEnabled = false
+            mSwipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.search -> {
+                val intent = Intent(this, SearchActivity::class.java)
+                startActivityForResult(intent, 1)
+                return true
+            }
+            R.id.bookmark -> {
+                val intent = Intent(this, BookmarkActivity::class.java)
+                startActivityForResult(intent, 1)
+                return true
+            }
+            R.id.settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        initHelpButton()
+        initQuick()
     }
 
     private fun initToolbar() {
@@ -110,38 +279,100 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun onTabSelectedListener(pager: ViewPager2): TabLayout.OnTabSelectedListener {
-        return object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                pager.currentItem = tab.position
-                val text = tab.customView as TextView
-                text.setTypeface(null, Typeface.BOLD)
-                text.setTextColor(Color.parseColor("#4297ff"))
-            }
+    private fun initQuick() {
+        bookmarkList = ArrayList()
+        bookmarkList.clear()
+        val chipScroll = findViewById<HorizontalScrollView>(R.id.chipScroll)
+        val quick = sharedPrefs.getBoolean("quick", false)
+        if (quick) {
+            val bookmarkHelper = BookmarkDBHelper(this)
+            bookmarkList.addAll(bookmarkHelper.allBookmarkDB)
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                val text = tab.customView as TextView
-                text.setTypeface(null, Typeface.NORMAL)
-                text.setTextColor(Color.parseColor("#7A7A7A"))
+            if (bookmarkList.isEmpty()) {
+                chipScroll.visibility = View.GONE
+            } else {
+                val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chipGroup)
+                bookmarkChipGroup.removeAllViews()
+                chipScroll.visibility = View.VISIBLE
+                for (i in bookmarkList.indices) {
+                    val bookmarkChip = Chip(this)
+                    bookmarkChip.text = bookmarkList[i].name
+                    bookmarkChip.isCheckable = false
+                    bookmarkChip.setOnClickListener {
+                        welcomeCardView.visibility = View.GONE
+                        networkTask(bookmarkList[i].model!!, bookmarkList[i].csc!!)
+                    }
+                    bookmarkChipGroup.addView(bookmarkChip)
+                }
             }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-                pager.currentItem = tab.position
-            }
+        } else {
+            chipScroll.visibility = View.GONE
         }
     }
 
-    inner class MyAdapter internal constructor(private var numOfTabs: Int) : FragmentStateAdapter(supportFragmentManager, lifecycle) {
-        override fun createFragment(position: Int): Fragment {
-            when (position) {
-                0 -> return Search()
-                1 -> return Bookmark()
-            }
-            return Search()
+    private fun initHelpButton() {
+        val helpButton = findViewById<MaterialButton>(R.id.help)
+        helpButton.setOnClickListener {
+            val intent = Intent(this, HelpFirmware::class.java)
+            startActivity(intent)
         }
+        val help = sharedPrefs.getBoolean("help", true)
+        if (help) {
+            helpButton.visibility = View.VISIBLE
+        } else {
+            helpButton.visibility = View.GONE
+        }
+    }
 
-        override fun getItemCount(): Int {
-            return numOfTabs
+    private fun welcomeSearch() {
+        val save = sharedPrefs.getBoolean("saver", false)
+        val model = sharedPrefs.getString("welcome_model", "SM-A720S")!!.trim()
+        val csc = sharedPrefs.getString("welcome_csc", "SKC")!!.trim()
+
+        if (model.isNotBlank() && csc.isNotBlank()) {
+            if (save) {
+                if (Tools.isWifi(this)) {
+                    welcomeCardView.visibility = View.GONE
+                    networkTask(model, csc)
+                } else {
+                    welcomeTitle.text = getString(R.string.wifi)
+                    welcomeText.text = getString(R.string.welcome_wifi)
+                    welcomeCardView.visibility = View.VISIBLE
+                }
+            } else {
+                if (Tools.isOnline(this)) {
+                    welcomeCardView.visibility = View.GONE
+                    networkTask(model, csc)
+                } else {
+                    welcomeTitle.text = getString(R.string.online)
+                    welcomeText.text = getString(R.string.welcome_online)
+                    welcomeCardView.visibility = View.VISIBLE
+                }
+            }
+        } else {
+            welcomeTitle.text = getString(R.string.error)
+            welcomeText.text = getString(R.string.search_error)
+            welcomeCardView.visibility = View.VISIBLE
+        }
+    }
+
+    private fun networkTask(model: String, csc: String) {
+        if (model.isBlank() || csc.isBlank()) {
+            Toast.makeText(this, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
+        } else {
+            mSwipeRefreshLayout.isEnabled = true
+            mSwipeRefreshLayout.isRefreshing = true
+
+            val officialURL = "$baseURL$csc/$model$officialURL"
+            val testURL = "$baseURL$csc/$model$testURL"
+
+            val intent = Intent(this, TransparentActivity::class.java)
+            intent.putExtra("officialURL", officialURL)
+            intent.putExtra("testURL", testURL)
+            intent.putExtra("model", model)
+            intent.putExtra("csc", csc)
+            startActivityForResult(intent, 2)
+            overridePendingTransition(0, 0)
         }
     }
 }

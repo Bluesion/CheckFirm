@@ -7,16 +7,4 @@
         <item name="bottomSheetStyle">@style/DialogBackground</item>
     </style>
 
-    <style name="ToolbarPopupTheme" parent="Widget.MaterialComponents.PopupMenu.Overflow.Dark">
-        <item name="android:popupBackground">@drawable/toolbar_popup_background</item>
-    </style>
-
-    <style name="DropDownListView" parent="Widget.AppCompat.ListView.DropDown">
-        <item name="android:listSelector">@drawable/toolbar_menu_selector</item>
-    </style>
-
-    <style name="Tab" parent="Widget.MaterialComponents.TabLayout">
-        <item name="tabRippleColor">#99525252</item>
-    </style>
-
 </resources>
