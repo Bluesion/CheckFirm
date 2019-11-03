@@ -31,7 +31,7 @@
         android:id="@+id/ok"
         android:text="@android:string/ok"
         android:textStyle="bold"
-        app:rippleColor="?actionMenuTextColor"
+        app:rippleColor="@color/button_ripple_color"
         style="@style/Widget.MaterialComponents.Button.TextButton" />
 
 </LinearLayout>

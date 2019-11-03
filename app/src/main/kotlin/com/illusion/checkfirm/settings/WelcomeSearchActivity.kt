@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,13 +20,14 @@ import com.google.android.material.textfield.TextInputEditText
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.BookmarkDB
 import com.illusion.checkfirm.database.BookmarkDBHelper
-import java.util.ArrayList
+import java.util.*
 
 class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
 
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
     private lateinit var switchText: TextView
+    private lateinit var switchCard: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,14 +59,17 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
             title.alpha = percentage * -1
         })
 
-        switchText = findViewById<TextView>(R.id.switch_text)
+        switchCard = findViewById(R.id.switch_card)
+        switchText = findViewById(R.id.switch_text)
         val welcomeSwitch = findViewById<SwitchMaterial>(R.id.welcome_switch)
         if (welcome) {
             welcomeSwitch.isChecked = true
             switchText.text = getString(R.string.switch_on)
+            switchCard.background = getDrawable(R.color.switch_card_background_on)
         } else {
             welcomeSwitch.isChecked = false
             switchText.text = getString(R.string.switch_off)
+            switchCard.background = getDrawable(R.color.switch_card_background_off)
         }
         welcomeSwitch.setOnCheckedChangeListener(this)
 
@@ -110,8 +115,8 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
 
         val saveButton = findViewById<MaterialButton>(R.id.save)
         saveButton.setOnClickListener {
-            val modelText = model.text!!.trim().toString().toUpperCase()
-            val cscText = csc.text!!.trim().toString().toUpperCase()
+            val modelText = model.text!!.trim().toString().toUpperCase(Locale.US)
+            val cscText = csc.text!!.trim().toString().toUpperCase(Locale.US)
             if (modelText.isNotBlank() && cscText.isNotBlank()) {
                 mEditor.putString("welcome_model", modelText)
                 mEditor.putString("welcome_csc", cscText)
@@ -128,9 +133,11 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         when {
             p0.id == R.id.welcome_switch -> {
                 if (isChecked) {
+                    switchCard.background = getDrawable(R.color.switch_card_background_on)
                     mEditor.putBoolean("welcome", true)
                     switchText.text = getString(R.string.switch_on)
                 } else {
+                    switchCard.background = getDrawable(R.color.switch_card_background_off)
                     mEditor.putBoolean("welcome", false)
                     switchText.text = getString(R.string.switch_off)
                 }

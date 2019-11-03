@@ -1,0 +1,59 @@
+<resources>
+    <!-- General -->
+
+    <!-- Notification -->
+    <string name="notification_channel_new_firmware">新固件</string>
+    <string name="notification_channel_new_update">CheckFirm更新</string>
+    <string name="notification_new_update_title">有新的更新可用</string>
+
+    <!-- Contact Us -->
+    <string name="contact_dialog_title">你好 :)</string>
+
+    <!-- Search -->
+    <string name="latest_official">最新的官方固件</string>
+    <string name="previous_official">以前的官方固件</string>
+    <string name="search">搜索</string>
+    <string name="firmware_info">固件信息</string>
+	
+    <!-- Bookmark -->
+    <string name="save">保存</string>
+
+    <!-- Help Search -->
+    <string name="search_help">如何搜索?</string>
+    <string name="search_3">你做得很好!</string>
+    <string name="search_5">完成</string>
+
+    <!-- Help Firmware -->
+    <string name="firmware_help">如何读取固件信息？</string>
+    <string name="firmware_0">基本固件信息</string>
+    <string name="firmware_2">了解固件版本</string>
+    <string name="firmware_18">紫色字</string>
+
+    <!-- About -->
+    <string name="version">版本</string>
+    <string name="update">更新</string>
+    <string name="legal">法律信息</string>
+
+    <!-- Settings -->
+    <string name="feature">功能</string>
+    <string name="theme_dark">深色</string>
+    <string name="about">CheckFirm 信息</string>
+    <string name="information">信息</string>
+    <string name="welcome_search_saved">保存了</string>
+
+    <!-- Welcome Search -->
+
+    <!-- Smart Search -->
+    <string name="smart_search_downgrade_possible">可能</string>
+    <string name="smart_search_downgrade_impossible">不可能</string>
+    <string name="smart_search_unknown">未知</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher">消息通知</string>
+    <string name="info_catcher_caution">注意</string>
+
+    <!-- Quick Search -->
+    <string name="quick_search">快搜索</string>
+
+    <!-- Beta -->
+</resources>

@@ -18,6 +18,7 @@ import com.google.android.material.button.MaterialButton
 import com.illusion.checkfirm.BuildConfig
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.LegalDialog
+import com.illusion.checkfirm.search.WebViewActivity
 import com.illusion.checkfirm.utils.Tools
 import org.jsoup.Jsoup
 import java.io.IOException

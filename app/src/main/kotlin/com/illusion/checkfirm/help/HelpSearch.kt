@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import com.google.android.material.card.MaterialCardView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.HelpDialog
+import java.util.*
 
 class HelpSearch : AppCompatActivity() {
 
@@ -37,7 +38,7 @@ class HelpSearch : AppCompatActivity() {
 
         search.setOnClickListener {
             device.text = String.format(getString(R.string.device_format),
-                    model.text!!.toString().trim().toUpperCase(), csc.text!!.toString().trim().toUpperCase())
+                    model.text!!.toString().trim().toUpperCase(Locale.US), csc.text!!.toString().trim().toUpperCase(Locale.US))
             card0.visibility = View.VISIBLE
         }
 

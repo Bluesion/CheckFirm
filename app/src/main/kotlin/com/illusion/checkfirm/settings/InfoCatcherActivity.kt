@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,13 +21,14 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.BookmarkDB
 import com.illusion.checkfirm.database.BookmarkDBHelper
-import java.util.ArrayList
+import java.util.*
 
 class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
 
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
     private lateinit var switchText: TextView
+    private lateinit var switchCard: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +60,8 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
             title.alpha = percentage * -1
         })
 
-        switchText = findViewById<TextView>(R.id.switch_text)
+        switchCard = findViewById(R.id.switch_card)
+        switchText = findViewById(R.id.switch_text)
         val catcherSwitch = findViewById<SwitchMaterial>(R.id.catcher_switch)
         if (catcher) {
             catcherSwitch.isChecked = true
@@ -115,8 +118,8 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
             if (sharedModel.isNotBlank() && sharedCSC.isNotBlank()) {
                 FirebaseMessaging.getInstance().unsubscribeFromTopic(sharedModel+sharedCSC)
             }
-            val modelText = model.text!!.trim().toString().toUpperCase()
-            val cscText = csc.text!!.trim().toString().toUpperCase()
+            val modelText = model.text!!.trim().toString().toUpperCase(Locale.US)
+            val cscText = csc.text!!.trim().toString().toUpperCase(Locale.US)
 
             if (modelText.isBlank() || cscText.isBlank()) {
                 Toast.makeText(this, getString(R.string.info_catcher_error), Toast.LENGTH_SHORT).show()
@@ -137,12 +140,14 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
                 val model = sharedPrefs.getString("catcher_model", "CheckFirm") as String
                 val csc = sharedPrefs.getString("catcher_csc", "Catcher") as String
                 if (isChecked) {
+                    switchCard.background = getDrawable(R.color.switch_card_background_on)
                     mEditor.putBoolean("catcher", true)
                     if (model.isNotBlank() && csc.isNotBlank()) {
                         FirebaseMessaging.getInstance().subscribeToTopic(model+csc)
                     }
                     switchText.text = getString(R.string.switch_on)
                 } else {
+                    switchCard.background = getDrawable(R.color.switch_card_background_off)
                     mEditor.putBoolean("catcher", false)
                     if (model.isNotBlank() && csc.isNotBlank()) {
                         FirebaseMessaging.getInstance().unsubscribeFromTopic(model+csc)

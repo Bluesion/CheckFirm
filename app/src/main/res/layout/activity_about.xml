@@ -92,8 +92,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
             android:textColor="?actionMenuTextColor"
-            app:cornerRadius="26dp"
-            app:backgroundTint="#99BDBDBD" />
+            app:backgroundTint="@color/button_ripple_color"
+            app:cornerRadius="26dp" />
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
@@ -105,7 +105,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="?actionMenuTextColor"
             app:cornerRadius="26dp"
-            app:backgroundTint="#99BDBDBD" />
+            app:backgroundTint="@color/button_ripple_color" />
 
     </RelativeLayout>
 

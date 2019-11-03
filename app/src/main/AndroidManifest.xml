@@ -10,6 +10,7 @@
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
@@ -17,52 +18,75 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="www.checkfirm.com" />
+                <data android:scheme="https" android:host="www.checkfirm.com" />
+                <data android:scheme="http" android:host="checkfirm.com" />
+                <data android:scheme="https" android:host="checkfirm.com" />
+                <data android:scheme="checkfirm" android:host="search" />
             </intent-filter>
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcut"/>
         </activity>
-        <activity android:label="@string/bookmark"
-            android:name=".bookmark.BookmarkActivity" />
+        <activity
+            android:label="@string/bookmark"
+            android:name=".bookmark.BookmarkActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
         <activity
             android:label="@string/help"
-            android:name="com.illusion.checkfirm.help.HelpFirmware" />
+            android:name="com.illusion.checkfirm.help.HelpFirmware"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
         <activity
             android:label="@string/help"
-            android:name="com.illusion.checkfirm.help.HelpSearch" />
+            android:name="com.illusion.checkfirm.help.HelpSearch"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
         <activity
             android:label="@string/search"
-            android:name="com.illusion.checkfirm.search.SearchActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="search"
-                    android:scheme="checkfirm" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".search.TransparentActivity"
-            android:theme="@style/TransparentTheme" />
+            android:name="com.illusion.checkfirm.search.SearchActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
+        <activity
+            android:name=".search.TransparentActivity"
+            android:theme="@style/TransparentTheme"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
+        <activity
+            android:name=".search.WebViewActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
         <activity
             android:label="@string/about"
-            android:name="com.illusion.checkfirm.settings.AboutActivity" />
+            android:name="com.illusion.checkfirm.settings.AboutActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
         <activity
             android:label="@string/beta"
-            android:name="com.illusion.checkfirm.settings.InfoCatcherActivity" />
+            android:name="com.illusion.checkfirm.settings.InfoCatcherActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
         <activity
             android:label="@string/license"
-            android:name="com.illusion.checkfirm.settings.LicenseActivity" />
+            android:name="com.illusion.checkfirm.settings.LicenseActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
         <activity
             android:label="@string/settings"
-            android:name="com.illusion.checkfirm.settings.SettingsActivity" />
+            android:name="com.illusion.checkfirm.settings.SettingsActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
         <activity
             android:label="@string/welcome_search"
-            android:name="com.illusion.checkfirm.settings.WelcomeSearchActivity" />
+            android:name="com.illusion.checkfirm.settings.WelcomeSearchActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+        <meta-data
+            android:name="android.allow_multiple_resumed_activities"
+            android:value="true" />
 		<meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher"/>

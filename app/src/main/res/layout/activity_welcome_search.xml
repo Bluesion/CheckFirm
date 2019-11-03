@@ -64,58 +64,65 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/welcome"
+                <LinearLayout
+                    android:id="@+id/switch_card"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:minHeight="?android:attr/listPreferredItemHeight">
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
-                        android:id="@+id/welcome_layout"
-                        android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/welcome"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginEnd="14dp"
-                        android:layout_marginBottom="13dp"
-                        android:orientation="vertical"
-                        app:layout_constrainedWidth="true"
-                        app:layout_constraintEnd_toStartOf="@id/welcome_switch"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintHorizontal_weight="1"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        android:background="?selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:minHeight="?android:attr/listPreferredItemHeight">
 
-                        <TextView
-                            style="?android:attr/textAppearanceLarge"
-                            android:id="@+id/switch_text"
+                        <LinearLayout
+                            android:id="@+id/welcome_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="13dp"
+                            android:orientation="vertical"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintEnd_toStartOf="@id/welcome_switch"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <TextView
+                                style="?android:attr/textAppearanceLarge"
+                                android:id="@+id/switch_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="marquee"
+                                android:fadingEdge="horizontal"
+                                android:singleLine="true"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/welcome_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:fadingEdge="horizontal"
-                            android:singleLine="true"
-                            android:textSize="18sp" />
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/welcome_layout" />
 
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/welcome_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginEnd="14dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/welcome_layout" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 

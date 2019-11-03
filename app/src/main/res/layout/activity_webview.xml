@@ -11,18 +11,9 @@
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back" />
 
-    <androidx.core.widget.NestedScrollView
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:autoLink="web|email"
-            android:id="@+id/txtContent" />
-
-    </androidx.core.widget.NestedScrollView>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

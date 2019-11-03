@@ -13,7 +13,15 @@
     <string name="switch_on">On</string>
     <string name="switch_off">Off</string>
     <string name="error">Error</string>
-    <string name="notification_channel_name">New Firmware</string>
+    <string name="close">Close</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_new_firmware">New Firmware</string>
+    <string name="notification_channel_new_update">App Update</string>
+    <string name="notification_new_update_title">New CheckFirm available!</string>
+    <string name="notification_new_update_text">Please update me from Play Store now.</string>
+    <string name="info_catcher_notification_title">%1$s (%2$s) new firmware found!</string>
+    <string name="info_catcher_notification_text">Check it now.</string>
 
     <!-- Contact Us -->
     <string name="contact_us">About Developers</string>
@@ -30,9 +38,13 @@
     <string name="welcome_disabled">How about turning on Welcome Search? Go to settings if you want to activate it.</string>
     <string name="welcome_wifi">Data Saver is on. Please turn on Wi-Fi to use Welcome Search.</string>
     <string name="welcome_online">Please connect to network to use Welcome Search.</string>
+    <string name="firmware_info">Firmware Info</string>
     <string name="clipboard">Copied to clipboard.</string>
     <string name="search_error">Search failed. Please check if you wrote model and CSC code correctly.</string>
     <string name="searching">Still searching… Please wait for seconds</string>
+    <string name="changelog">Changelog</string>
+    <string name="link_share">Link Share</string>
+    <string name="link_shared">Link copied.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Bookmark</string>
@@ -55,7 +67,7 @@
     <!-- Help Firmware -->
     <string name="firmware_help">How to read firmware info?</string>
     <string name="firmware_0">Basic Firmware Information</string>
-    <string name="firmware_1">Firmware information is made of 3 information. Build version, CSC version, and baseband version.\n\nLet\'s suppose that firmware search result is\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nFirst one(A720SKSU3BRK1) refers build version,\nsecond one(A720SSKC3BRK1) refers CSC version,\nlast one(A720NKOU3BRK1) refers baseband version.</string>
+    <string name="firmware_1">Firmware information consists of 3 information. Build version, CSC version, and baseband version.\n\nLet\'s suppose that firmware search result is\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nFirst one(A720SKSU3BRK1) refers build version,\nsecond one(A720SSKC3BRK1) refers CSC version,\nlast one(A720NKOU3BRK1) refers baseband version.</string>
     <string name="firmware_2">What do we know with firmware version?</string>
     <string name="firmware_3">All we need to care is build version. We can analyze firmware with build version.\nHere is example build version:</string>
     <string name="firmware_4" translatable="false">A720SKS</string>
@@ -94,6 +106,7 @@
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_system">System default</string>
+    <string name="theme_battery">Set by Battery Saver</string>
     <string name="about">About CheckFirm</string>
     <string name="data_saver">Data Saver</string>
     <string name="data_saver_description">Do all progresses that need Internet connection only when connected to Wi-Fi.</string>
@@ -132,8 +145,6 @@
     <string name="info_catcher_text">When someone discovers new firmware, CheckFirm will send a notification to you automatically.\nPlease input device that you want to catch.</string>
     <string name="info_catcher_caution">Caution</string>
     <string name="info_catcher_caution_text">Info Catcher works properly when Smart Search is turned on. If you want to try Info Catcher, you have to enable Smart Search.</string>
-    <string name="info_catcher_notification_title">%1$s (%2$s) new firmware found!</string>
-    <string name="info_catcher_notification_text">Check it now.</string>
     <string name="info_catcher_error">Please check if you wrote model and CSC code correctly.</string>
 
     <!-- Quick Search -->

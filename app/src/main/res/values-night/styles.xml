@@ -5,6 +5,7 @@
         <item name="colorPrimaryDark">@color/blue</item>
         <item name="colorAccent">@color/blue</item>
         <item name="bottomSheetStyle">@style/DialogBackground</item>
+        <item name="android:backgroundDimAmount">0.9</item>
     </style>
 
 </resources>

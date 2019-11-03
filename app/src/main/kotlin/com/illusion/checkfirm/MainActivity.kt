@@ -98,15 +98,6 @@ class MainActivity : AppCompatActivity() {
         welcomeTitle = findViewById(R.id.welcome_title)
         welcomeText = findViewById(R.id.welcome_text)
 
-        val welcome = sharedPrefs.getBoolean("welcome", false)
-        if (welcome) {
-            welcomeSearch()
-        } else {
-            welcomeTitle.text = getString(R.string.welcome_search)
-            welcomeText.text = getString(R.string.welcome_disabled)
-            welcomeCardView.visibility = View.VISIBLE
-        }
-
         // Search Result
         mResult = findViewById(R.id.result)
         modelOfficial = findViewById(R.id.model_official)
@@ -121,13 +112,29 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initQuick()
         initHelpButton()
+
+        if (Intent.ACTION_VIEW == intent.action) {
+            val url = intent.data!!
+            val model = url.pathSegments[0].toString()
+            val csc = url.pathSegments[1].toString()
+            networkTask(model, csc)
+        } else {
+            val welcome = sharedPrefs.getBoolean("welcome", false)
+            if (welcome) {
+                welcomeSearch()
+            } else {
+                welcomeTitle.text = getString(R.string.welcome_search)
+                welcomeText.text = getString(R.string.welcome_disabled)
+                welcomeCardView.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        val save = sharedPrefs.getBoolean("saver", false)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            val save = sharedPrefs.getBoolean("saver", false)
             val model = data!!.getStringExtra("model") as String
             val csc = data.getStringExtra("csc") as String
 
@@ -174,7 +181,7 @@ class MainActivity : AppCompatActivity() {
 
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             infoOfficialFirmware.setOnClickListener {
-                val bottomSheetFragment = SearchDialog.newInstance(true, previousOfficial, model, csc)
+                val bottomSheetFragment = SearchDialog.newInstance(true, latestOfficialFirmwareText.text.toString(), previousOfficial, model, csc)
                 bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
             }
             infoOfficialFirmware.setOnLongClickListener {
@@ -184,7 +191,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             infoTestFirmware.setOnClickListener {
-                val bottomSheetFragment = SearchDialog.newInstance(false, previousTest, model, csc)
+                val bottomSheetFragment = SearchDialog.newInstance(false, latestTestFirmwareText.text.toString(), previousTest, model, csc)
                 bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
             }
             infoTestFirmware.setOnLongClickListener {

@@ -13,7 +13,7 @@ import com.illusion.checkfirm.database.BookmarkDB
 import com.illusion.checkfirm.database.BookmarkDBHelper
 import java.util.*
 
-class BookmarkDialog: BottomSheetDialogFragment() {
+class BookmarkDialog : BottomSheetDialogFragment() {
 
     private lateinit var cancelButton: MaterialButton
     private lateinit var saveButton: MaterialButton
@@ -67,8 +67,8 @@ class BookmarkDialog: BottomSheetDialogFragment() {
 
         saveButton.setOnClickListener {
             val name = name.text.toString()
-            val model = model.text!!.trim().toString().toUpperCase()
-            val csc = csc.text!!.trim().toString().toUpperCase()
+            val model = model.text!!.trim().toString().toUpperCase(Locale.US)
+            val csc = csc.text!!.trim().toString().toUpperCase(Locale.US)
 
             if (shouldUpdate) {
                 updateBookMark(name, model, csc, position)

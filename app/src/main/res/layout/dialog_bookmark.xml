@@ -93,7 +93,7 @@
             android:id="@+id/cancel"
             android:text="@android:string/cancel"
             android:textStyle="bold"
-            app:rippleColor="?actionMenuTextColor"
+            app:rippleColor="@color/button_ripple_color"
             style="@style/Widget.MaterialComponents.Button.TextButton" />
 
         <com.google.android.material.button.MaterialButton
@@ -103,7 +103,7 @@
             android:id="@+id/save"
             android:text="@string/save"
             android:textStyle="bold"
-            app:rippleColor="?actionMenuTextColor"
+            app:rippleColor="@color/button_ripple_color"
             style="@style/Widget.MaterialComponents.Button.TextButton" />
 
     </LinearLayout>

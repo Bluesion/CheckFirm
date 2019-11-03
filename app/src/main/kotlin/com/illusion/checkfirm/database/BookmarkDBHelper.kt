@@ -26,6 +26,7 @@ class BookmarkDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
                     bookmark.add(info)
                 } while (cursor.moveToNext())
             }
+            cursor.close()
             db.close()
 
             return bookmark
@@ -80,7 +81,7 @@ class BookmarkDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
                 cursor.getString(cursor.getColumnIndex(BookmarkDB.COLUMN_MODEL)),
                 cursor.getString(cursor.getColumnIndex(BookmarkDB.COLUMN_CSC)))
 
-        cursor.close();
+        cursor.close()
 
         return bookmark
     }

@@ -1,0 +1,115 @@
+<resources>
+    <!-- General -->
+    <string name="check_network">请检查您的网络。</string>
+    <string name="only_wifi">请检查Wi-Fi</string>
+    <string name="help">帮助</string>
+    <string name="online">请连接到网络</string>
+    <string name="wifi">请连接到Wi-Fi</string>
+    <string name="switch_on">开启</string>
+    <string name="switch_off">关闭</string>
+    <string name="error">错误</string>
+    <string name="close">关</string>
+
+    <!-- Notification -->
+    <string name="notification_new_update_text">请从Play商店更新。</string>
+    <string name="info_catcher_notification_title">发现了新固件: %1$s (%2$s)</string>
+    <string name="info_catcher_notification_text">请确认。</string>
+
+    <!-- Contact Us -->
+    <string name="contact_us">关于开发人员</string>
+    <string name="contact_dialog_text">如果您需要帮助，请发送电子邮件至: dnjscjf098@gmail.com</string>
+
+    <!-- Search -->
+    <string name="latest_test">最新测试固件</string>
+    <string name="model">机型</string>
+    <string name="previous_test">先前的测试固件</string>
+    <string name="welcome_disabled">如果要激活欢迎搜索，请转到设置。</string>
+    <string name="welcome_wifi">移动数据珍惜已打开。 자请打开Wi-Fi以使用“欢迎搜索”。</string>
+    <string name="welcome_online">如果要使用欢迎搜索，请连接到网络。</string>
+    <string name="clipboard">复制到剪贴板。</string>
+    <string name="search_error">搜索失败。 请检查您是否正确编写了模型和CSC代码。</string>
+    <string name="searching">仍在搜寻中…请稍等片刻</string>
+    <string name="changelog">变更日志</string>
+    <string name="link_share">链接分享</string>
+    <string name="link_shared">链接复制了</string>
+
+    <!-- Bookmark -->
+    <string name="bookmark">书签</string>
+    <string name="new_bookmark">添加书签</string>
+    <string name="edit_bookmark">编辑书签</string>
+    <string name="name">书签名称</string>
+    <string name="bookmark_search_error">检查型号和CSC代码是否正确保存在书签中。</string>
+
+    <!-- Help Search -->
+    <string name="search_0">搜寻</string>
+    <string name="search_1">在搜索之前，您需要知道型号和CSC代码。\n您的型号是%s。\n我不知您的SIM卡，因此我无法通知您的CSC代码。 您需要搜索自己的CSC代码。</string>
+    <string name="search_2">太棒了！ 您可以在此处查看最新的固件信息。\n如果您单击此卡，将会发生惊人的事情。</string>
+    <string name="search_4">您可以在此处查看以前的固件。</string>
+    <string name="search_6">基本搜索指南已结束。 您可以立即享受CheckFirm！</string>
+
+    <!-- Help Firmware -->
+    <string name="firmware_1">固件信息包含3个信息。 编译版本，CSC版本和基带版本。\n\n假设固件搜索结果为\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\n第一个（A720SKSU3BRK1）表示编译版本，\n第二个（A720SSKC3BRK1）表示CSC版本，\n最后一个（A720NKOU3BRK1）表示基带版本。</string>
+    <string name="firmware_3">您只需要关心编译版本。 您可以从版本获取固件信息。\n示例：</string>
+    <string name="firmware_10">红色字</string>
+    <string name="firmware_11">红色字（例如U3）表示引导程序版本。\n\n由于三星的安全策略，您无法从较高的引导程序版本固件降级为较低的引导程序版本固件。</string>
+    <string name="firmware_12">黄色字</string>
+    <string name="firmware_13">黄色字（例如B）表示Android OS版本。\n如果黄色字已更新，则表示Android OS即将更新或已经更新。\n\nA表示第一个Android OS版本。\nB表示AndroidOS已更新一次。\nC表示Android OS已更新两次。\n.\n.\n.\nZ表示Beta固件。</string>
+    <string name="firmware_14">绿色字</string>
+    <string name="firmware_15">绿色字（例如R）表示年份。\n\nR表示2018年，\nS表示2019年，\nT表示2020年，依此类推。</string>
+    <string name="firmware_16">蓝色字</string>
+    <string name="firmware_17">蓝色字（例如K）表示月份。\n\nA表示一月，\nB表示二月，\n.\n,\n,\nL表示十二月。</string>
+    <string name="firmware_19">紫色字（例如1）表示编译固件的次数。\n\n1表示固件编译了一次。\n.\n.\n.\n9表示固件编译了9次。\nA表示固件编译了10次。\n.\n.\n.\nZ表示固件编译了35次。</string>
+    <string name="firmware_20">测试固件什么时候发布？</string>
+    <string name="firmware_21">您无法确切知道。 但是如果编译版本没有更多变化，测试固件将很快发布。</string>
+
+    <!-- About -->
+    <string name="app_information">应用程式资讯</string>
+    <string name="latest">已经安装了最新版本。</string>
+    <string name="license">执照</string>
+    <string name="legal_text">官方固件信息来自https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml。\n测试固件信息来自https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml。\n这不是三星电子向客户提供固件信息的正式方式。 使用此信息的风险自负。</string>
+
+    <!-- Settings -->
+    <string name="design">设计</string>
+    <string name="theme">主题背景</string>
+    <string name="theme_description">设置主题背景。</string>
+    <string name="theme_light">浅色</string>
+    <string name="theme_system">系统默认</string>
+    <string name="theme_battery">由省电模式设置</string>
+    <string name="data_saver">移动数据珍惜</string>
+    <string name="data_saver_description">仅在连接到Wi-Fi时进行互联网工作。</string>
+    <string name="expandable_bar">折叠工具</string>
+    <string name="expandable_bar_description">使用折叠工具。</string>
+    <string name="help_settings">帮助提示</string>
+    <string name="help_description">显示帮助提示按钮。</string>
+    <string name="settings">设定</string>
+
+    <!-- Welcome Search -->
+    <string name="welcome_search">欢迎搜寻</string>
+    <string name="welcome_search_description">启动时搜索固件。</string>
+    <string name="welcome_search_text">请在启动时输入要搜索的设备。</string>
+
+    <!-- Smart Search -->
+    <string name="smart_search">聪明搜索</string>
+    <string name="smart_search_description">预测最新的测试固件。 如果固件信息已加密，则结果可能不正确。</string>
+    <string name="smart_search_info">最新测试固件信息</string>
+    <string name="smart_search_date">首次发现日期</string>
+    <string name="smart_search_release">预计发布日期</string>
+    <string name="smart_search_downgrade">操作系统降级</string>
+    <string name="smart_search_changelog">变更日志</string>
+    <string name="smart_search_changelog_os">操作系统更新</string>
+    <string name="smart_search_changelog_bugfix">错误修复</string>
+    <string name="smart_search_changelog_rollback">回滚</string>
+    <string name="smart_search_notice">这不是三星提供的准确信息。 这只是CheckFirm预测。\n请注意，这可能与实际固件有所不同。</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher_description">固件更新后，消息通知会向您发送通知。</string>
+    <string name="info_catcher_text">当有人发现新固件时，CheckFirm将自动向您发送通知。\n请输入要获取通知的设备。</string>
+    <string name="info_catcher_caution_text">如果要尝试使用消息通知，则必须启用聪明搜索。</string>
+    <string name="info_catcher_error">请检查您是否正确编写了模型和CSC代码。</string>
+
+    <!-- Quick Search -->
+    <string name="quick_search_description">在主屏幕上显示书签。</string>
+
+    <!-- Beta -->
+    <string name="beta">贝塔</string>
+</resources>

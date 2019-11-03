@@ -8,6 +8,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="SearchCardTheme" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">16dp</item>
+        <item name="cardCornerRadius">14dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
     <style name="CardTheme" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">0dp</item>
         <item name="cardCornerRadius">14dp</item>
@@ -19,12 +25,13 @@
         <item name="colorPrimaryDark">@color/blue</item>
         <item name="colorAccent">@color/blue</item>
         <item name="bottomSheetStyle">@style/DialogBackground</item>
+        <item name="android:backgroundDimAmount">0.8</item>
     </style>
 
     <style name="DialogBackground" parent="Widget.MaterialComponents.BottomSheet.Modal">
         <item name="enforceMaterialTheme">false</item>
         <item name="backgroundTint">@android:color/transparent</item>
-        <item name="android:elevation">8dp</item>
+        <item name="android:elevation">0dp</item>
     </style>
 
     <style name="SwitchTheme" parent="Widget.MaterialComponents.CompoundButton.Switch">

@@ -163,8 +163,8 @@ class SearchActivity : AppCompatActivity() {
 
     private fun search() {
         hideKeyboard()
-        val modelString = model.text!!.trim().toString().toUpperCase()
-        val cscString = csc.text!!.trim().toString().toUpperCase()
+        val modelString = model.text!!.trim().toString().toUpperCase(Locale.US)
+        val cscString = csc.text!!.trim().toString().toUpperCase(Locale.US)
         if (modelString.isBlank() || cscString.isBlank()) {
             Toast.makeText(this, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
         } else {

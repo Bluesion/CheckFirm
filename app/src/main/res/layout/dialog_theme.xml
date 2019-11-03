@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/light"
-            android:checked="false" />
+            android:checked="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,6 +75,7 @@
             android:checked="false" />
 
         <TextView
+            android:id="@+id/system_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/theme_system"
@@ -86,9 +87,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ok"
-        android:text="@android:string/ok"
+        android:text="@string/close"
         android:textStyle="bold"
-        app:rippleColor="?actionMenuTextColor"
+        app:rippleColor="@color/button_ripple_color"
         style="@style/Widget.MaterialComponents.Button.TextButton" />
 
 </LinearLayout>
