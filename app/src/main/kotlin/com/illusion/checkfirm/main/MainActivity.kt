@@ -3,7 +3,6 @@ package com.illusion.checkfirm.main
 import android.app.Activity
 import android.content.*
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -393,13 +392,13 @@ class MainActivity : AppCompatActivity() {
             val tempCsc = searchDevicePrefs.getString("welcome_search_csc_$i", "")
 
             model += if (tempModel!!.isBlank()) {
-                sharedPrefs.getString("saved_model", "SM-A720S") + "%"
+                sharedPrefs.getString("new_saved_model", "SM-A720S") + "%"
             } else {
                 "$tempModel%"
             }
 
             csc += if (tempCsc!!.isBlank()) {
-                sharedPrefs.getString("saved_csc", "SKC") + "%"
+                sharedPrefs.getString("new_saved_csc", "SKC") + "%"
             } else {
                 "$tempCsc%"
             }

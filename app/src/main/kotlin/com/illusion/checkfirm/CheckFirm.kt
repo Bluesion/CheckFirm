@@ -15,7 +15,7 @@ class CheckFirm : Application() {
         FirebaseMessaging.getInstance().subscribeToTopic("update")
 
         val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val savedModel = sharedPrefs.getString("saved_model", "")!!
+        val savedModel = sharedPrefs.getString("new_saved_model", "")!!
         if (savedModel.isEmpty()) {
             val mEditor = sharedPrefs.edit()
             val tempModel = Build.MODEL
@@ -23,10 +23,10 @@ class CheckFirm : Application() {
             val realCSC = if (tempCsc.isEmpty()) {
                 getString(R.string.unknown)
             } else {
-                tempCsc.substring(tempCsc.length - 8, tempCsc.length - 5)
+                tempCsc
             }
-            mEditor.putString("saved_model", tempModel)
-            mEditor.putString("saved_csc", realCSC)
+            mEditor.putString("new_saved_model", tempModel)
+            mEditor.putString("new_saved_csc", realCSC)
             mEditor.apply()
         }
 
@@ -47,7 +47,7 @@ class CheckFirm : Application() {
 
     private fun getCsc(): String {
         val process = Runtime.getRuntime().exec(
-                arrayOf("/system/bin/getprop", "ril.official_cscver")
+                arrayOf("/system/bin/getprop", "ro.csc.sales_code")
         )
         val reader = BufferedReader(InputStreamReader(process.inputStream))
         return reader.readLine()

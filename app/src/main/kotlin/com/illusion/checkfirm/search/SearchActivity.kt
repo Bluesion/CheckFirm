@@ -449,8 +449,8 @@ class SearchActivity : AppCompatActivity() {
     private fun initHelp() {
         if (sharedPrefs.getBoolean("help", true)) {
             helpLayout.visibility = View.VISIBLE
-            val savedModel = sharedPrefs.getString("saved_model", "")!!
-            val savedCsc = sharedPrefs.getString("saved_csc", "")!!
+            val savedModel = sharedPrefs.getString("new_saved_model", "")!!
+            val savedCsc = sharedPrefs.getString("new_saved_csc", "")!!
 
             helpModel.text = String.format(getString(R.string.my_model), savedModel)
             helpCsc.text = String.format(getString(R.string.my_csc), savedCsc)
