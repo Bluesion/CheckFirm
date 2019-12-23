@@ -11,7 +11,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.switchmaterial.SwitchMaterial
-import com.google.firebase.messaging.FirebaseMessaging
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.ContactDialog
 import com.illusion.checkfirm.dialogs.ThemeDialog
@@ -136,8 +135,8 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
 
     override fun onCheckedChanged(p0: CompoundButton, isChecked: Boolean) {
         mEditor = sharedPrefs.edit()
-        when {
-            p0.id == R.id.expanded_switch -> {
+        when (p0.id) {
+            R.id.expanded_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("one", true)
                 } else {
@@ -145,7 +144,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
-            p0.id == R.id.help_switch -> {
+            R.id.help_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("help", true)
                 } else {
@@ -153,7 +152,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
-            p0.id == R.id.welcome_switch -> {
+            R.id.welcome_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("welcome", true)
                 } else {
@@ -161,7 +160,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
-            p0.id == R.id.smart_switch -> {
+            R.id.smart_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("smart", true)
                 } else {
@@ -169,7 +168,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
-            p0.id == R.id.quick_switch -> {
+            R.id.quick_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("quick", true)
                 } else {
@@ -177,7 +176,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 }
                 mEditor.apply()
             }
-            p0.id == R.id.saver_switch -> {
+            R.id.saver_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("saver", true)
                 } else {
@@ -186,18 +185,10 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 mEditor.apply()
             }
             else -> {
-                val model = sharedPrefs.getString("catcher_model", "CheckFirm") as String
-                val csc = sharedPrefs.getString("catcher_csc", "Catcher") as String
                 if (isChecked) {
                     mEditor.putBoolean("catcher", true)
-                    if (model.isNotBlank() && csc.isNotBlank()) {
-                        FirebaseMessaging.getInstance().subscribeToTopic(model+csc)
-                    }
                 } else {
                     mEditor.putBoolean("catcher", false)
-                    if (model.isNotBlank() && csc.isNotBlank()) {
-                        FirebaseMessaging.getInstance().unsubscribeFromTopic(model+csc)
-                    }
                 }
                 mEditor.apply()
             }
@@ -223,7 +214,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         one = sharedPrefs.getBoolean("one", true)
         help = sharedPrefs.getBoolean("help", true)
         welcome = sharedPrefs.getBoolean("welcome", false)
-        smart = sharedPrefs.getBoolean("smart", false)
+        smart = sharedPrefs.getBoolean("smart", true)
         quick = sharedPrefs.getBoolean("quick", false)
         saver = sharedPrefs.getBoolean("saver", false)
         catcher = sharedPrefs.getBoolean("catcher", false)

@@ -1,4 +1,6 @@
 <resources>
+    <!-- Test -->
+
     <!-- General -->
     <string name="check_network">请检查您的网络。</string>
     <string name="only_wifi">请检查Wi-Fi</string>
@@ -7,11 +9,11 @@
     <string name="wifi">请连接到Wi-Fi</string>
     <string name="switch_on">开启</string>
     <string name="switch_off">关闭</string>
-    <string name="error">错误</string>
     <string name="close">关</string>
 
     <!-- Notification -->
-    <string name="notification_new_update_text">请从Play商店更新。</string>
+    <string name="notification_new_update_title">CheckFirm紧急更新</string>
+    <string name="notification_new_update_text">报告了严重的错误。请立即从Play商店对其进行更新。</string>
     <string name="info_catcher_notification_title">发现了新固件: %1$s (%2$s)</string>
     <string name="info_catcher_notification_text">请确认。</string>
 
@@ -24,14 +26,22 @@
     <string name="model">机型</string>
     <string name="previous_test">先前的测试固件</string>
     <string name="welcome_disabled">如果要激活欢迎搜索，请转到设置。</string>
-    <string name="welcome_wifi">移动数据珍惜已打开。 자请打开Wi-Fi以使用“欢迎搜索”。</string>
+    <string name="welcome_wifi">流量节省已打开。 자请打开Wi-Fi以使用“欢迎搜索”。</string>
     <string name="welcome_online">如果要使用欢迎搜索，请连接到网络。</string>
     <string name="clipboard">复制到剪贴板。</string>
-    <string name="search_error">搜索失败。 请检查您是否正确编写了模型和CSC代码。</string>
+    <string name="search_error">搜索失败。 请检查您是否正确编写了型号和CSC代码。</string>
     <string name="searching">仍在搜寻中…请稍等片刻</string>
     <string name="changelog">变更日志</string>
     <string name="link_share">链接分享</string>
     <string name="link_shared">链接复制了</string>
+    <string name="single_search">单次搜寻</string>
+    <string name="multi_search">多重搜寻</string>
+    <string name="my_device">提示：我的手机</string>
+    <string name="my_model">机型: %s,</string>
+    <string name="my_device_search">搜索我的手机</string>
+    <string name="multi_search_lists">搜索%d个手机。</string>
+    <string name="multi_search_limit">您最多可以搜索4个手机</string>
+    <string name="tab_main_2">测试</string>
 
     <!-- Bookmark -->
     <string name="bookmark">书签</string>
@@ -39,13 +49,6 @@
     <string name="edit_bookmark">编辑书签</string>
     <string name="name">书签名称</string>
     <string name="bookmark_search_error">检查型号和CSC代码是否正确保存在书签中。</string>
-
-    <!-- Help Search -->
-    <string name="search_0">搜寻</string>
-    <string name="search_1">在搜索之前，您需要知道型号和CSC代码。\n您的型号是%s。\n我不知您的SIM卡，因此我无法通知您的CSC代码。 您需要搜索自己的CSC代码。</string>
-    <string name="search_2">太棒了！ 您可以在此处查看最新的固件信息。\n如果您单击此卡，将会发生惊人的事情。</string>
-    <string name="search_4">您可以在此处查看以前的固件。</string>
-    <string name="search_6">基本搜索指南已结束。 您可以立即享受CheckFirm！</string>
 
     <!-- Help Firmware -->
     <string name="firmware_1">固件信息包含3个信息。 编译版本，CSC版本和基带版本。\n\n假设固件搜索结果为\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\n第一个（A720SKSU3BRK1）表示编译版本，\n第二个（A720SSKC3BRK1）表示CSC版本，\n最后一个（A720NKOU3BRK1）表示基带版本。</string>
@@ -75,7 +78,7 @@
     <string name="theme_light">浅色</string>
     <string name="theme_system">系统默认</string>
     <string name="theme_battery">由省电模式设置</string>
-    <string name="data_saver">移动数据珍惜</string>
+    <string name="data_saver">流量节省</string>
     <string name="data_saver_description">仅在连接到Wi-Fi时进行互联网工作。</string>
     <string name="expandable_bar">折叠工具</string>
     <string name="expandable_bar_description">使用折叠工具。</string>
@@ -90,22 +93,18 @@
 
     <!-- Smart Search -->
     <string name="smart_search">聪明搜索</string>
-    <string name="smart_search_description">预测最新的测试固件。 如果固件信息已加密，则结果可能不正确。</string>
-    <string name="smart_search_info">最新测试固件信息</string>
+    <string name="smart_search_description">分析最新的测试固件。这可能是不正确。</string>
     <string name="smart_search_date">首次发现日期</string>
-    <string name="smart_search_release">预计发布日期</string>
     <string name="smart_search_downgrade">操作系统降级</string>
     <string name="smart_search_changelog">变更日志</string>
     <string name="smart_search_changelog_os">操作系统更新</string>
     <string name="smart_search_changelog_bugfix">错误修复</string>
     <string name="smart_search_changelog_rollback">回滚</string>
-    <string name="smart_search_notice">这不是三星提供的准确信息。 这只是CheckFirm预测。\n请注意，这可能与实际固件有所不同。</string>
 
     <!-- Info Catcher -->
     <string name="info_catcher_description">固件更新后，消息通知会向您发送通知。</string>
     <string name="info_catcher_text">当有人发现新固件时，CheckFirm将自动向您发送通知。\n请输入要获取通知的设备。</string>
-    <string name="info_catcher_caution_text">如果要尝试使用消息通知，则必须启用聪明搜索。</string>
-    <string name="info_catcher_error">请检查您是否正确编写了模型和CSC代码。</string>
+    <string name="info_catcher_error">请检查您是否正确编写了型号和CSC代码。</string>
 
     <!-- Quick Search -->
     <string name="quick_search_description">在主屏幕上显示书签。</string>

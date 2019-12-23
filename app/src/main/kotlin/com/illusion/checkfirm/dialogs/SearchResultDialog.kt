@@ -16,16 +16,16 @@ import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.search.WebViewActivity
 
-class SearchDialog : BottomSheetDialogFragment() {
+class SearchResultDialog : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val rootView = inflater.inflate(R.layout.dialog_search, container, false)
+        val rootView = inflater.inflate(R.layout.dialog_search_result, container, false)
 
-        val firmwareList = arguments!!.getString("firmwareList")
         val isOfficial = arguments!!.getBoolean("isOfficial")
         val model = arguments!!.getString("model")
         val csc = arguments!!.getString("csc")
         val latest = arguments!!.getString("latest")
+        val previous = arguments!!.getString("previous")
 
         val latestTitle = rootView.findViewById<MaterialTextView>(R.id.latest_title)
         val latestText = rootView.findViewById<MaterialTextView>(R.id.latest_text)
@@ -46,15 +46,14 @@ class SearchDialog : BottomSheetDialogFragment() {
                 intent.putExtra("number", 1)
                 startActivity(intent)
             }
-            list.text = firmwareList
         } else {
             latestTitle.text = getString(R.string.latest_test)
             previousTitle.text = getString(R.string.previous_test)
             changelog.visibility = View.GONE
-            list.text = firmwareList
         }
 
         latestText.text = latest
+        list.text = previous
 
         val clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         copy.setOnClickListener {
@@ -79,15 +78,15 @@ class SearchDialog : BottomSheetDialogFragment() {
     }
 
     companion object {
-        fun newInstance(isOfficial: Boolean, latestFirmware: String, firmwareList: String, model: String, csc: String): SearchDialog {
-            val f = SearchDialog()
+        fun newInstance(isOfficial: Boolean, model: String, csc:String, latest: String, previous: String): SearchResultDialog {
+            val f = SearchResultDialog()
 
             val args = Bundle()
             args.putBoolean("isOfficial", isOfficial)
-            args.putString("latest", latestFirmware)
-            args.putString("firmwareList", firmwareList)
             args.putString("model", model)
             args.putString("csc", csc)
+            args.putString("latest", latest)
+            args.putString("previous", previous)
             f.arguments = args
 
             return f

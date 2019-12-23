@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.database.BookmarkDB
-import com.illusion.checkfirm.database.BookmarkDBHelper
+import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import java.util.*
 
 class BookmarkDialog : BottomSheetDialogFragment() {
@@ -20,8 +20,7 @@ class BookmarkDialog : BottomSheetDialogFragment() {
     private lateinit var name: TextInputEditText
     private lateinit var model: TextInputEditText
     private lateinit var csc: TextInputEditText
-    private lateinit var mDB: BookmarkDBHelper
-    private val mBookMarkList = ArrayList<BookmarkDB>()
+    private lateinit var viewModel: BookmarkViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val rootView = inflater.inflate(R.layout.dialog_bookmark, container, false)
@@ -34,14 +33,13 @@ class BookmarkDialog : BottomSheetDialogFragment() {
         model.setSelection(model.text!!.length)
         csc = rootView.findViewById(R.id.csc)
 
-        mDB = BookmarkDBHelper(context!!)
-        mBookMarkList.addAll(mDB.allBookmarkDB)
+        viewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
 
         val shouldUpdate = arguments!!.getBoolean("shouldUpdate")
+        val bundleId = arguments!!.getLong("id")
         val bundleName = arguments!!.getString("name")
-        val bundleDevice = arguments!!.getString("device")
+        val bundleModel = arguments!!.getString("model")
         val bundleCSC = arguments!!.getString("csc")
-        val position = arguments!!.getInt("position")
 
         val title = rootView.findViewById<TextView>(R.id.title)
         if (shouldUpdate) {
@@ -50,8 +48,8 @@ class BookmarkDialog : BottomSheetDialogFragment() {
                 name.setText(bundleName)
             }
 
-            if (bundleDevice != "") {
-                model.setText(bundleDevice)
+            if (bundleModel != "") {
+                model.setText(bundleModel)
             }
 
             if (bundleCSC != "") {
@@ -71,9 +69,9 @@ class BookmarkDialog : BottomSheetDialogFragment() {
             val csc = csc.text!!.trim().toString().toUpperCase(Locale.US)
 
             if (shouldUpdate) {
-                updateBookMark(name, model, csc, position)
+                viewModel.update(name, bundleId, model, csc)
             } else {
-                createBookMark(name, model, csc)
+                viewModel.insert(name, model, csc)
             }
             dismiss()
         }
@@ -81,34 +79,16 @@ class BookmarkDialog : BottomSheetDialogFragment() {
         return rootView
     }
 
-    private fun createBookMark(name: String, model: String, csc: String) {
-        val id = mDB.insertBookMark(name, model, csc)
-
-        val n = mDB.getBookMark(id)
-        mBookMarkList.add(n)
-    }
-
-    private fun updateBookMark(name: String, model: String, csc: String, position: Int) {
-        val b = mBookMarkList[position]
-        b.name = name
-        b.model = model
-        b.csc = csc
-
-        mDB.updateBookMark(b)
-
-        mBookMarkList[position] = b
-    }
-
     companion object {
-        fun newInstance(shouldUpdate: Boolean, name: String, device: String, csc: String, position: Int): BookmarkDialog {
+        fun newInstance(shouldUpdate: Boolean, id: Long, name: String, model: String, csc: String): BookmarkDialog {
             val f = BookmarkDialog()
 
             val args = Bundle()
             args.putBoolean("shouldUpdate", shouldUpdate)
+            args.putLong("id", id)
             args.putString("name", name)
-            args.putString("device", device)
+            args.putString("model", model)
             args.putString("csc", csc)
-            args.putInt("position", position)
             f.arguments = args
 
             return f

@@ -3,26 +3,25 @@ package com.illusion.checkfirm.search
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.database.HistoryDB
 import kotlin.math.min
 
-class HistoryAdapter(private val historyList: List<HistoryDB>, val onClickListener: MyAdapterListener): RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
+class HistoryAdapter(private val historyList: List<HistoryItem>, val onClickListener: MyAdapterListener): RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val delete: ImageView = view.findViewById(R.id.delete)
-        private val touch: RelativeLayout = view.findViewById(R.id.touchArea)
-        var model: TextView = view.findViewById(R.id.model)
-        var csc: TextView = view.findViewById(R.id.csc)
-        var date: TextView = view.findViewById(R.id.date)
+        private val delete: AppCompatImageView = view.findViewById(R.id.delete)
+        private val touch: ConstraintLayout = view.findViewById(R.id.touchArea)
+        var model: MaterialTextView = view.findViewById(R.id.model)
+        var csc: MaterialTextView = view.findViewById(R.id.csc)
+        var date: MaterialTextView = view.findViewById(R.id.date)
 
         init {
-            touch.setOnClickListener { v -> onClickListener.onItemClicked(v, adapterPosition) }
-            delete.setOnClickListener { v -> onClickListener.onDeleteClicked(v, adapterPosition) }
+            touch.setOnClickListener { onClickListener.onItemClicked(adapterPosition) }
+            delete.setOnClickListener { onClickListener.onDeleteClicked(adapterPosition) }
         }
     }
 
@@ -35,17 +34,17 @@ class HistoryAdapter(private val historyList: List<HistoryDB>, val onClickListen
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val history = historyList[position]
 
-        holder.model.text = history.model
-        holder.csc.text = history.csc
-        holder.date.text = history.date
+        holder.model.text = history.getModel()
+        holder.csc.text = history.getCsc()
+        holder.date.text = history.getDate()
     }
 
     override fun getItemCount(): Int {
-        return min(historyList.size, 10)
+        return min(historyList.size, 4)
     }
 
     interface MyAdapterListener {
-        fun onItemClicked(v: View, position: Int)
-        fun onDeleteClicked(v: View, position: Int)
+        fun onItemClicked(position: Int)
+        fun onDeleteClicked(position: Int)
     }
 }

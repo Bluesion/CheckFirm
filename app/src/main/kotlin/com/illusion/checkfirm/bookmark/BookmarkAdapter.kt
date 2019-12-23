@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.RecyclerView
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.database.BookmarkDB
+import com.illusion.checkfirm.database.bookmark.BookmarkEntity
 
-class BookmarkAdapter(private var bookmarkList: List<BookmarkDB>, val onClickListener: MyAdapterListener): RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
+class BookmarkAdapter(private var bookmarkList: List<BookmarkEntity>,
+                      val onClickListener: MyAdapterListener): RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val layout: ConstraintLayout = view.findViewById(R.id.bookmark_layout)
@@ -23,9 +22,21 @@ class BookmarkAdapter(private var bookmarkList: List<BookmarkDB>, val onClickLis
         var csc: TextView = view.findViewById(R.id.csc)
 
         init {
-            layout.setOnClickListener { v -> onClickListener.onLayoutClicked(v, adapterPosition) }
-            edit.setOnClickListener { v -> onClickListener.onEditClicked(v, adapterPosition) }
-            delete.setOnClickListener { v -> onClickListener.onDeleteClicked(v, adapterPosition) }
+            layout.setOnClickListener {
+                onClickListener.onLayoutClicked(
+                        bookmarkList[adapterPosition].model,
+                        bookmarkList[adapterPosition].csc
+                )
+            }
+            edit.setOnClickListener {
+                onClickListener.onEditClicked(
+                        bookmarkList[adapterPosition].id!!,
+                        bookmarkList[adapterPosition].name,
+                        bookmarkList[adapterPosition].model,
+                        bookmarkList[adapterPosition].csc
+                )
+            }
+            delete.setOnClickListener { onClickListener.onDeleteClicked(bookmarkList[adapterPosition].device) }
         }
     }
 
@@ -36,20 +47,23 @@ class BookmarkAdapter(private var bookmarkList: List<BookmarkDB>, val onClickLis
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val bookmark = bookmarkList[position]
-
-        holder.name.text = bookmark.name
-        holder.model.text = bookmark.model
-        holder.csc.text = bookmark.csc
+        holder.name.text = bookmarkList[position].name
+        holder.model.text = bookmarkList[position].model
+        holder.csc.text = bookmarkList[position].csc
     }
 
     override fun getItemCount(): Int {
         return bookmarkList.size
     }
 
+    internal fun setBookmarks(bookmarkList: List<BookmarkEntity>) {
+        this.bookmarkList = bookmarkList
+        notifyDataSetChanged()
+    }
+
     interface MyAdapterListener {
-        fun onLayoutClicked(v: View, position: Int)
-        fun onEditClicked(v: View, position: Int)
-        fun onDeleteClicked(v: View, position: Int)
+        fun onLayoutClicked(model: String, csc: String)
+        fun onEditClicked(id: Long, name: String, model: String, csc: String)
+        fun onDeleteClicked(device: String)
     }
 }

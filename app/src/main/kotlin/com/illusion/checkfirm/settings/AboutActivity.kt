@@ -31,7 +31,7 @@ class AboutActivity : AppCompatActivity() {
     private lateinit var progress: ProgressBar
     private var latestVersion = 0
 
-    private val handler = MyHandler(this@AboutActivity)
+    private val mHandler = MyHandler(this@AboutActivity)
     private class MyHandler (activity: AboutActivity) : Handler() {
         private val mActivity: WeakReference<AboutActivity> = WeakReference(activity)
 
@@ -119,10 +119,8 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun networkTask() {
-        val mHandler = MyHandler(this@AboutActivity)
         object : Thread() {
             override fun run() {
-                mHandler.post { }
                 try {
                     val doc = Jsoup.connect("https://github.com/gpillusion/CheckFirm/blob/master/VERSION").get()
                     val version = doc.select("#LC4")
@@ -144,7 +142,7 @@ class AboutActivity : AppCompatActivity() {
                         latest.visibility = View.GONE
                         update.visibility = View.VISIBLE
                     }
-                    handler.sendEmptyMessage(0)
+                    mHandler.sendEmptyMessage(0)
                 }
             }
         }.start()

@@ -4,9 +4,9 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/appbar"
         android:background="?android:windowBackground"
         app:elevation="0dp">
 
@@ -15,11 +15,11 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/expanded_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/welcome_search"
-                android:id="@+id/expanded_title"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="40sp"
@@ -34,10 +34,10 @@
                 app:contentInsetStartWithNavigation="0dp"
                 app:layout_collapseMode="pin">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/title"
                     android:text="@string/welcome_search"
                     android:gravity="center_vertical"
                     style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
@@ -97,7 +97,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
                                 style="?android:attr/textAppearanceLarge"
                                 android:id="@+id/switch_text"
                                 android:layout_width="wrap_content"
@@ -134,20 +134,21 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginBottom="13dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:orientation="vertical">
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:overScrollMode="never"
                         android:scrollbars="none">
 
@@ -198,13 +199,44 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
                         android:layout_marginTop="8dp"
-                        android:text="@string/save"
-                        android:id="@+id/save"
+                        android:layout_gravity="end"
+                        android:text="@string/info_catcher_insert"
                         style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/saved_devices_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="13dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/saved_devices_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?textAppearanceBody1" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/welcome_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp" />
 
                 </LinearLayout>
 

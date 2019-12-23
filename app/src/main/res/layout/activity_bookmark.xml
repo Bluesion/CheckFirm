@@ -15,15 +15,32 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/bookmark"
-                android:id="@+id/expanded_title"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="40sp"
-                style="@style/TextAppearance.Design.CollapsingToolbar.Expanded" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bookmark"
+                    android:id="@+id/expanded_title"
+                    android:textSize="40sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    style="@style/TextAppearance.Design.CollapsingToolbar.Expanded" />
+
+                <TextView
+                    android:id="@+id/expanded_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    style="@style/TextAppearance.MaterialComponents.Caption" />
+
+            </LinearLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

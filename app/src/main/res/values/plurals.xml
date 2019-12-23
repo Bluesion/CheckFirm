@@ -1,0 +1,11 @@
+<resources>
+    <plurals name="bookmark_subtitle">
+        <item quantity="one">%d bookmark</item>
+        <item quantity="other">%d bookmarks</item>
+    </plurals>
+
+    <plurals name="saved_devices">
+        <item quantity="one">Saved device</item>
+        <item quantity="other">Saved devices</item>
+    </plurals>
+</resources>

@@ -1,5 +1,6 @@
 package com.illusion.checkfirm.settings
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,16 +12,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.database.BookmarkDB
-import com.illusion.checkfirm.database.BookmarkDBHelper
+import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
+import com.illusion.checkfirm.database.catcher.InfoCatcherViewModel
 import java.util.*
 
 class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
@@ -29,7 +35,10 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
     private lateinit var mEditor: SharedPreferences.Editor
     private lateinit var switchText: TextView
     private lateinit var switchCard: LinearLayout
+    private lateinit var icViewModel: InfoCatcherViewModel
+    private lateinit var bmViewModel: BookmarkViewModel
 
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_catcher)
@@ -78,80 +87,83 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
             catcherSwitch.toggle()
         }
 
-        val bookmarkList = ArrayList<BookmarkDB>()
+        val savedDevicesLayout = findViewById<MaterialCardView>(R.id.saved_devices_layout)
+        val savedDevicesText = findViewById<MaterialTextView>(R.id.saved_devices_text)
         val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-        val bookmarkHelper = BookmarkDBHelper(this)
-        bookmarkList.addAll(bookmarkHelper.allBookmarkDB)
-        if (bookmarkList.isEmpty()) {
-            bookmarkChipGroup.visibility = View.GONE
-        } else {
-            bookmarkChipGroup.visibility = View.VISIBLE
-        }
-
         val model = findViewById<TextInputEditText>(R.id.model)
         val csc = findViewById<TextInputEditText>(R.id.csc)
 
-        for (i in bookmarkList.indices) {
-            val bookmarkChip = Chip(this)
-            bookmarkChip.text = bookmarkList[i].name
-            bookmarkChip.isCheckable = false
-            bookmarkChip.setOnClickListener {
-                model.setText(bookmarkList[i].model)
-                csc.setText(bookmarkList[i].csc)
+        bmViewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
+        bmViewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { bookmarks ->
+            bookmarks?.let {
+                if (it.isEmpty()) {
+                    bookmarkChipGroup.visibility = View.GONE
+                } else {
+                    for (element in it) {
+                        val bookmarkChip = Chip(this)
+                        bookmarkChip.text = element.name
+                        bookmarkChip.isCheckable = false
+                        bookmarkChip.setOnClickListener {
+                            icViewModel.insert(element.model, element.csc)
+                            FirebaseMessaging.getInstance().subscribeToTopic(element.model+element.csc)
+                        }
+                        bookmarkChipGroup.addView(bookmarkChip)
+                    }
+                    bookmarkChipGroup.visibility = View.VISIBLE
+                }
+
             }
-            bookmarkChipGroup.addView(bookmarkChip)
-        }
+        })
 
-        val sharedModel = sharedPrefs.getString("catcher_model", "SM-") as String
-        if (sharedModel.isBlank()) {
-            model.setText(getString(R.string.default_string))
-        } else {
-            model.setText(sharedModel)
-        }
+        model.setText(getString(R.string.default_string))
         model.setSelection(model.text!!.length)
-
-        val sharedCSC = sharedPrefs.getString("catcher_csc", "") as String
-        csc.setText(sharedCSC)
 
         val saveButton = findViewById<MaterialButton>(R.id.save)
         saveButton.setOnClickListener {
-            if (sharedModel.isNotBlank() && sharedCSC.isNotBlank()) {
-                FirebaseMessaging.getInstance().unsubscribeFromTopic(sharedModel+sharedCSC)
-            }
             val modelText = model.text!!.trim().toString().toUpperCase(Locale.US)
             val cscText = csc.text!!.trim().toString().toUpperCase(Locale.US)
 
             if (modelText.isBlank() || cscText.isBlank()) {
                 Toast.makeText(this, getString(R.string.info_catcher_error), Toast.LENGTH_SHORT).show()
             } else {
-                mEditor.putString("catcher_model", modelText)
-                mEditor.putString("catcher_csc", cscText)
-                mEditor.apply()
+                icViewModel.insert(modelText, cscText)
                 FirebaseMessaging.getInstance().subscribeToTopic(modelText+cscText)
-                Toast.makeText(this, getString(R.string.welcome_search_saved), Toast.LENGTH_SHORT).show()
-                finish()
             }
         }
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = InfoCatcherAdapter(this, ArrayList(), object : InfoCatcherAdapter.MyAdapterListener {
+            override fun onDeleteClicked(device: String) {
+                icViewModel.delete(device)
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(device)
+            }
+        })
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        icViewModel = ViewModelProviders.of(this).get(InfoCatcherViewModel::class.java)
+        icViewModel.allDevices.observe(this, androidx.lifecycle.Observer { devices ->
+            devices?.let {
+                adapter.setDevices(it)
+                if (it.isEmpty()) {
+                    savedDevicesLayout.visibility = View.GONE
+                } else {
+                    savedDevicesLayout.visibility = View.VISIBLE
+                    savedDevicesText.text = resources.getQuantityText(R.plurals.saved_devices, it.size)
+                }
+            }
+        })
     }
 
     override fun onCheckedChanged(p0: CompoundButton, isChecked: Boolean) {
-        when {
-            p0.id == R.id.catcher_switch -> {
-                val model = sharedPrefs.getString("catcher_model", "CheckFirm") as String
-                val csc = sharedPrefs.getString("catcher_csc", "Catcher") as String
+        when (p0.id) {
+            R.id.catcher_switch -> {
                 if (isChecked) {
                     switchCard.background = getDrawable(R.color.switch_card_background_on)
                     mEditor.putBoolean("catcher", true)
-                    if (model.isNotBlank() && csc.isNotBlank()) {
-                        FirebaseMessaging.getInstance().subscribeToTopic(model+csc)
-                    }
                     switchText.text = getString(R.string.switch_on)
                 } else {
                     switchCard.background = getDrawable(R.color.switch_card_background_off)
                     mEditor.putBoolean("catcher", false)
-                    if (model.isNotBlank() && csc.isNotBlank()) {
-                        FirebaseMessaging.getInstance().unsubscribeFromTopic(model+csc)
-                    }
                     switchText.text = getString(R.string.switch_off)
                 }
                 mEditor.apply()

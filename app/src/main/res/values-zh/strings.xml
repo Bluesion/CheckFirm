@@ -1,10 +1,11 @@
 <resources>
+    <!-- Test -->
+
     <!-- General -->
 
     <!-- Notification -->
     <string name="notification_channel_new_firmware">新固件</string>
     <string name="notification_channel_new_update">CheckFirm更新</string>
-    <string name="notification_new_update_title">有新的更新可用</string>
 
     <!-- Contact Us -->
     <string name="contact_dialog_title">你好 :)</string>
@@ -13,15 +14,11 @@
     <string name="latest_official">最新的官方固件</string>
     <string name="previous_official">以前的官方固件</string>
     <string name="search">搜索</string>
-    <string name="firmware_info">固件信息</string>
-	
+    <string name="unknown">未知</string>
+    <string name="tab_main_1">官方</string>
+
     <!-- Bookmark -->
     <string name="save">保存</string>
-
-    <!-- Help Search -->
-    <string name="search_help">如何搜索?</string>
-    <string name="search_3">你做得很好!</string>
-    <string name="search_5">完成</string>
 
     <!-- Help Firmware -->
     <string name="firmware_help">如何读取固件信息？</string>
@@ -50,7 +47,7 @@
 
     <!-- Info Catcher -->
     <string name="info_catcher">消息通知</string>
-    <string name="info_catcher_caution">注意</string>
+    <string name="info_catcher_insert">加</string>
 
     <!-- Quick Search -->
     <string name="quick_search">快搜索</string>

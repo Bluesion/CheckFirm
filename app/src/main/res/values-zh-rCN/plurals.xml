@@ -1,0 +1,9 @@
+<resources>
+    <plurals name="bookmark_subtitle">
+        <item quantity="other">%d个书签</item>
+    </plurals>
+
+    <plurals name="saved_devices">
+        <item quantity="other">保存的手机</item>
+    </plurals>
+</resources>

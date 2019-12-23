@@ -1,4 +1,6 @@
 <resources>
+    <!-- Test -->
+
     <!-- General -->
     <string name="app_name" translatable="false">CheckFirm</string>
     <string name="check_network">Please check network</string>
@@ -12,14 +14,13 @@
     <string name="wifi">Connect to Wi-Fi</string>
     <string name="switch_on">On</string>
     <string name="switch_off">Off</string>
-    <string name="error">Error</string>
     <string name="close">Close</string>
 
     <!-- Notification -->
     <string name="notification_channel_new_firmware">New Firmware</string>
     <string name="notification_channel_new_update">App Update</string>
-    <string name="notification_new_update_title">New CheckFirm available!</string>
-    <string name="notification_new_update_text">Please update me from Play Store now.</string>
+    <string name="notification_new_update_title">CheckFirm urgent update</string>
+    <string name="notification_new_update_text">Critical bugs are reported. Please update it from Play Store right now.</string>
     <string name="info_catcher_notification_title">%1$s (%2$s) new firmware found!</string>
     <string name="info_catcher_notification_text">Check it now.</string>
 
@@ -38,13 +39,23 @@
     <string name="welcome_disabled">How about turning on Welcome Search? Go to settings if you want to activate it.</string>
     <string name="welcome_wifi">Data Saver is on. Please turn on Wi-Fi to use Welcome Search.</string>
     <string name="welcome_online">Please connect to network to use Welcome Search.</string>
-    <string name="firmware_info">Firmware Info</string>
     <string name="clipboard">Copied to clipboard.</string>
     <string name="search_error">Search failed. Please check if you wrote model and CSC code correctly.</string>
     <string name="searching">Still searching… Please wait for seconds</string>
     <string name="changelog">Changelog</string>
     <string name="link_share">Link Share</string>
     <string name="link_shared">Link copied.</string>
+    <string name="single_search">Single Search</string>
+    <string name="multi_search">Multiple Search</string>
+    <string name="my_device">TIP: My device</string>
+    <string name="my_model">Model: %s,</string>
+    <string name="my_csc" translatable="false">CSC: %s</string>
+    <string name="unknown">Unknown</string>
+    <string name="my_device_search">Search my device</string>
+    <string name="multi_search_lists">Search %d devices below.</string>
+    <string name="multi_search_limit">You can search up to 4 devices</string>
+    <string name="tab_main_1">Official</string>
+    <string name="tab_main_2">Test</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Bookmark</string>
@@ -54,18 +65,8 @@
     <string name="save">Save</string>
     <string name="bookmark_search_error">Check if model and CSC code is correctly saved in bookmark.</string>
 
-    <!-- Help Search -->
-    <string name="search_help">How to search?</string>
-    <string name="search_0">Searching</string>
-    <string name="search_1">Before you search, you need to know model and CSC code.\nYour model is %s and I cannot inform your CSC code because I don\'t know which SIM card you use. You need to google your own CSC code.</string>
-    <string name="search_2">Fantastic! You can see latest firmware information here.\nAmazing thing will happen if you click this card.</string>
-    <string name="search_3">Great!</string>
-    <string name="search_4">You can check previous firmwares here.</string>
-    <string name="search_5">Complete</string>
-    <string name="search_6">Basic search guide is over. You can enjoy CheckFirm now!</string>
-
     <!-- Help Firmware -->
-    <string name="firmware_help">How to read firmware info?</string>
+    <string name="firmware_help">TIP: How to read firmware info?</string>
     <string name="firmware_0">Basic Firmware Information</string>
     <string name="firmware_1">Firmware information consists of 3 information. Build version, CSC version, and baseband version.\n\nLet\'s suppose that firmware search result is\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nFirst one(A720SKSU3BRK1) refers build version,\nsecond one(A720SSKC3BRK1) refers CSC version,\nlast one(A720NKOU3BRK1) refers baseband version.</string>
     <string name="firmware_2">What do we know with firmware version?</string>
@@ -112,8 +113,8 @@
     <string name="data_saver_description">Do all progresses that need Internet connection only when connected to Wi-Fi.</string>
     <string name="expandable_bar">Expandable Bar</string>
     <string name="expandable_bar_description">Use expandable bar.</string>
-    <string name="help_settings">How to Button</string>
-    <string name="help_description">Show how to buttons.</string>
+    <string name="help_settings">TIP Button</string>
+    <string name="help_description">Show TIP buttons.</string>
     <string name="settings">Settings</string>
     <string name="information">Information</string>
     <string name="welcome_search_saved">Saved</string>
@@ -125,10 +126,8 @@
 
     <!-- Smart Search -->
     <string name="smart_search">Smart Search</string>
-    <string name="smart_search_description">Predict the latest test firmware. The result may not be correct if firmware information is encrypted.</string>
-    <string name="smart_search_info">Latest Test Firmware Info</string>
-    <string name="smart_search_date">First discovery date</string>
-    <string name="smart_search_release">Expected release date</string>
+    <string name="smart_search_description">Analyze the latest test firmware. It may be incorrect.</string>
+    <string name="smart_search_date">When discovered</string>
     <string name="smart_search_downgrade">Downgrade</string>
     <string name="smart_search_downgrade_possible">Possible</string>
     <string name="smart_search_downgrade_impossible">Impossible</string>
@@ -137,15 +136,13 @@
     <string name="smart_search_changelog_bugfix">Bug fixes</string>
     <string name="smart_search_changelog_rollback">Roll back</string>
     <string name="smart_search_unknown">Unknown</string>
-    <string name="smart_search_notice">This is not the accurate information from Samsung. This is just CheckFirm prediction.\nKeep in mind that this may differ from actual firmware.</string>
 
     <!-- Info Catcher -->
     <string name="info_catcher">Info Catcher</string>
     <string name="info_catcher_description">Info Catcher will send you a notification when firmware has been updated.</string>
     <string name="info_catcher_text">When someone discovers new firmware, CheckFirm will send a notification to you automatically.\nPlease input device that you want to catch.</string>
-    <string name="info_catcher_caution">Caution</string>
-    <string name="info_catcher_caution_text">Info Catcher works properly when Smart Search is turned on. If you want to try Info Catcher, you have to enable Smart Search.</string>
     <string name="info_catcher_error">Please check if you wrote model and CSC code correctly.</string>
+    <string name="info_catcher_insert">Add</string>
 
     <!-- Quick Search -->
     <string name="quick_search">Quick Search</string>
