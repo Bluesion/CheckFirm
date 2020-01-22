@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import java.util.*
@@ -41,7 +41,7 @@ class BookmarkDialog : BottomSheetDialogFragment() {
         val bundleModel = arguments!!.getString("model")
         val bundleCSC = arguments!!.getString("csc")
 
-        val title = rootView.findViewById<TextView>(R.id.title)
+        val title = rootView.findViewById<MaterialTextView>(R.id.title)
         if (shouldUpdate) {
             title.text = getString(R.string.edit_bookmark)
             if (bundleName != "") {

@@ -8,56 +8,56 @@
         android:id="@+id/touchArea"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:background="?selectableItemBackground"
         app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/delete"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/delete"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/model"
+            style="?textAppearanceBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/csc"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/csc"
-            app:layout_constraintBottom_toBottomOf="parent"
-            style="?textAppearanceBody1" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/csc"
+            style="?textAppearanceBody2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:maxLines="1"
             android:textColor="#7A7A7A"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/model"
-            app:layout_constraintEnd_toStartOf="@id/date"
             app:layout_constraintBottom_toBottomOf="parent"
-            style="?textAppearanceBody2" />
+            app:layout_constraintEnd_toStartOf="@id/date"
+            app:layout_constraintStart_toEndOf="@id/model"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/date"
+            style="?textAppearanceBody2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:maxLines="1"
             android:textColor="#7A7A7A"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            style="?textAppearanceBody2" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -65,13 +65,13 @@
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_close"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/touchArea"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/touchArea"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

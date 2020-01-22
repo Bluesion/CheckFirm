@@ -19,7 +19,9 @@
 
     <!-- Contact Us -->
     <string name="contact_us">關於開發人員</string>
-    <string name="contact_dialog_text">如果您需要幫助，請發送電子郵件至: dnjscjf098@gmail.com</string>
+    <string name="contact_dialog_text">如果您需要幫助，請發送電子郵件至。</string>
+    <string name="contact_developer">開發人員 (gpillusion)</string>
+    <string name="contact_designer">設計師 (Newfit)</string>
 
     <!-- Search -->
     <string name="latest_test">最新測試固件</string>
@@ -69,7 +71,7 @@
     <string name="app_information">應用程式資訊</string>
     <string name="latest">已經安裝了最新版本。</string>
     <string name="license">執照</string>
-    <string name="legal_text">官方固件信息來自https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml。\n測試固件信息來自https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml。\n這不是三星電子向客戶提供固件信息的正式方式。 使用此信息的風險自負。</string>
+    <string name="legal_text">官方固件信息來自https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml。\n\n測試固件信息來自https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml。\n\n這不是三星電子向客戶提供固件信息的正式方式。 使用此信息的風險自負。</string>
 
     <!-- Settings -->
     <string name="design">設計</string>
@@ -77,7 +79,6 @@
     <string name="theme_description">設置主題背景。</string>
     <string name="theme_light">淺色</string>
     <string name="theme_system">系統默認</string>
-    <string name="theme_battery">由省電模式設置</string>
     <string name="data_saver">流量節省</string>
     <string name="data_saver_description">僅在連接到Wi-Fi時進行互聯網工作。</string>
     <string name="expandable_bar">摺疊工具</string>
@@ -85,6 +86,9 @@
     <string name="help_settings">幫助提示</string>
     <string name="help_description">顯示幫助提示按鈕。</string>
     <string name="settings">設定</string>
+    <string name="nation">國家</string>
+    <string name="china_title">防止在中國出現搜索錯誤</string>
+    <string name="china_text">防止在中國無限加載。如果您在中國，請打開此設置。</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">歡迎搜尋</string>

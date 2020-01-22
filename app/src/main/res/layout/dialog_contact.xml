@@ -3,35 +3,65 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_dialog_background"
-    android:paddingTop="24dp"
+    android:orientation="vertical"
     android:paddingStart="24dp"
+    android:paddingTop="24dp"
     android:paddingEnd="24dp"
-    android:paddingBottom="16dp"
-    android:orientation="vertical">
+    android:paddingBottom="16dp">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        style="?textAppearanceHeadline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?actionMenuTextColor"
         android:text="@string/contact_dialog_title"
-        style="?textAppearanceHeadline6"
+        android:textColor="?actionMenuTextColor"
         android:textStyle="bold" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autoLink="email"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
+        android:autoLink="email"
         android:text="@string/contact_dialog_text" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.textview.MaterialTextView
+        style="?textAppearanceBody1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/contact_developer" />
+
+    <com.google.android.material.textview.MaterialTextView
+        style="?textAppearanceBody2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:autoLink="email"
+        android:text="dnjscjf098@gmail.com" />
+
+    <com.google.android.material.textview.MaterialTextView
+        style="?textAppearanceBody1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/contact_designer" />
+
+    <com.google.android.material.textview.MaterialTextView
+        style="?textAppearanceBody2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:autoLink="email"
+        android:text="work@newfitlab.com" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/ok"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@android:string/ok"
         android:textStyle="bold"
-        app:rippleColor="@color/button_ripple_color"
-        style="@style/Widget.MaterialComponents.Button.TextButton" />
+        app:rippleColor="@color/button_ripple_color" />
 
 </LinearLayout>

@@ -3,78 +3,78 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_dialog_background"
-    android:paddingTop="24dp"
+    android:orientation="vertical"
     android:paddingStart="24dp"
+    android:paddingTop="24dp"
     android:paddingEnd="24dp"
-    android:paddingBottom="16dp"
-    android:orientation="vertical">
+    android:paddingBottom="16dp">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
+        style="?textAppearanceHeadline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/bookmark"
         android:textColor="?actionMenuTextColor"
-        style="?textAppearanceHeadline6"
-        android:textStyle="bold"
-        android:text="@string/bookmark" />
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:hintTextColor="?colorAccent"
         app:boxStrokeColor="?colorAccent"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:hintTextColor="?colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name"
             android:inputType="text"
-            android:id="@+id/name"
-            android:textColor="?actionMenuTextColor"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="?actionMenuTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:hintTextColor="?colorAccent"
         app:boxStrokeColor="?colorAccent"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:hintTextColor="?colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/model"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/model"
-            android:text="@string/default_string"
             android:inputType="textCapCharacters"
+            android:maxLines="1"
             android:privateImeOptions="defaultInputmode=english"
-            android:id="@+id/model"
-            android:textColor="?actionMenuTextColor"
-            android:maxLines="1" />
+            android:text="@string/default_string"
+            android:textColor="?actionMenuTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:hintTextColor="?colorAccent"
         app:boxStrokeColor="?colorAccent"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:hintTextColor="?colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/csc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/csc"
             android:inputType="textCapCharacters"
-            android:id="@+id/csc"
+            android:maxLines="1"
             android:privateImeOptions="defaultInputmode=english"
-            android:textColor="?actionMenuTextColor"
-            android:maxLines="1" />
+            android:textColor="?actionMenuTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,28 +83,28 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:weightSum="2"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/cancel"
             android:text="@android:string/cancel"
             android:textStyle="bold"
-            app:rippleColor="@color/button_ripple_color"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+            app:rippleColor="@color/button_ripple_color" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/save"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/save"
             android:text="@string/save"
             android:textStyle="bold"
-            app:rippleColor="@color/button_ripple_color"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+            app:rippleColor="@color/button_ripple_color" />
 
     </LinearLayout>
 

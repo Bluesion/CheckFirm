@@ -3,35 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_dialog_background"
-    android:paddingTop="24dp"
+    android:orientation="vertical"
     android:paddingStart="24dp"
+    android:paddingTop="24dp"
     android:paddingEnd="24dp"
-    android:paddingBottom="16dp"
-    android:orientation="vertical">
+    android:paddingBottom="16dp">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        style="?textAppearanceHeadline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?actionMenuTextColor"
         android:text="@string/legal"
-        style="?textAppearanceHeadline6"
+        android:textColor="?actionMenuTextColor"
         android:textStyle="bold" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autoLink="web"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:autoLink="web"
         android:text="@string/legal_text" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/ok"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ok"
         android:text="@android:string/ok"
         android:textStyle="bold"
-        app:rippleColor="@color/button_ripple_color"
-        style="@style/Widget.MaterialComponents.Button.TextButton" />
+        app:rippleColor="@color/button_ripple_color" />
 
 </LinearLayout>

@@ -1,13 +1,22 @@
 <resources>
     <!-- Test -->
 
-    <!-- General -->
+    <!-- Non-translatable -->
     <string name="app_name" translatable="false">CheckFirm</string>
-    <string name="check_network">Please check network</string>
     <string name="csc" translatable="false">CSC</string>
     <string name="default_string" translatable="false">SM-</string>
     <string name="default_symbol" translatable="false">&#160;·&#160;</string>
     <string name="device_format" translatable="false">%1$s (%2$s)</string>
+    <string name="my_csc" translatable="false">CSC: %s</string>
+    <string name="firmware_4" translatable="false">A720SKS</string>
+    <string name="firmware_5" translatable="false">U3</string>
+    <string name="firmware_6" translatable="false">B</string>
+    <string name="firmware_7" translatable="false">R</string>
+    <string name="firmware_8" translatable="false">K</string>
+    <string name="firmware_9" translatable="false">1</string>
+
+    <!-- General -->
+    <string name="check_network">Please check network</string>
     <string name="only_wifi">Please check Wi-Fi</string>
     <string name="help">Help</string>
     <string name="online">Connect to network</string>
@@ -27,7 +36,9 @@
     <!-- Contact Us -->
     <string name="contact_us">About Developers</string>
     <string name="contact_dialog_title">Hello :)</string>
-    <string name="contact_dialog_text">Email us if you want to say something.\n\nwork@newfitlab.com (Designer, Newfit)\ndnjscjf098@gmail.com (Developer, Illusion)</string>
+    <string name="contact_dialog_text">Email us if you want to say something.</string>
+    <string name="contact_developer">Developer (gpillusion)</string>
+    <string name="contact_designer">Designer (Newfit)</string>
 
     <!-- Search -->
     <string name="latest_official">Latest Official Firmware</string>
@@ -40,7 +51,7 @@
     <string name="welcome_wifi">Data Saver is on. Please turn on Wi-Fi to use Welcome Search.</string>
     <string name="welcome_online">Please connect to network to use Welcome Search.</string>
     <string name="clipboard">Copied to clipboard.</string>
-    <string name="search_error">Search failed. Please check if you wrote model and CSC code correctly.</string>
+    <string name="search_error">Search failed. There is no data on Samsung server for this device.</string>
     <string name="searching">Still searching… Please wait for seconds</string>
     <string name="changelog">Changelog</string>
     <string name="link_share">Link Share</string>
@@ -49,7 +60,6 @@
     <string name="multi_search">Multiple Search</string>
     <string name="my_device">TIP: My device</string>
     <string name="my_model">Model: %s,</string>
-    <string name="my_csc" translatable="false">CSC: %s</string>
     <string name="unknown">Unknown</string>
     <string name="my_device_search">Search my device</string>
     <string name="multi_search_lists">Search %d devices below.</string>
@@ -71,12 +81,6 @@
     <string name="firmware_1">Firmware information consists of 3 information. Build version, CSC version, and baseband version.\n\nLet\'s suppose that firmware search result is\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nFirst one(A720SKSU3BRK1) refers build version,\nsecond one(A720SSKC3BRK1) refers CSC version,\nlast one(A720NKOU3BRK1) refers baseband version.</string>
     <string name="firmware_2">What do we know with firmware version?</string>
     <string name="firmware_3">All we need to care is build version. We can analyze firmware with build version.\nHere is example build version:</string>
-    <string name="firmware_4" translatable="false">A720SKS</string>
-    <string name="firmware_5" translatable="false">U3</string>
-    <string name="firmware_6" translatable="false">B</string>
-    <string name="firmware_7" translatable="false">R</string>
-    <string name="firmware_8" translatable="false">K</string>
-    <string name="firmware_9" translatable="false">1</string>
     <string name="firmware_10">Red text</string>
     <string name="firmware_11">Red text (ex. U3) means bootloader version.\n\nDue to Samsung\'s security policy, you cannot downgrade from higher bootloader version firmware to lower bootloader version firmware.</string>
     <string name="firmware_12">Yellow text</string>
@@ -97,7 +101,7 @@
     <string name="update">Update</string>
     <string name="license">License</string>
     <string name="legal">Legal Information</string>
-    <string name="legal_text">Official firmware information came from https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml.\nTest firmware information came from https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml.\nIt isn\'t the official way that Samsung Electronics provide firmware information to customers. Any use of this information is at your own risk.</string>
+    <string name="legal_text">Official firmware information came from https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml.\n\nTest firmware information came from https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml.\n\nThey are not the official ways that Samsung Electronics provides firmware information to customers. Any use of this information is at your own risk.</string>
 
     <!-- Settings -->
     <string name="feature">Features</string>
@@ -107,7 +111,6 @@
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_system">System default</string>
-    <string name="theme_battery">Set by Battery Saver</string>
     <string name="about">About CheckFirm</string>
     <string name="data_saver">Data Saver</string>
     <string name="data_saver_description">Do all progresses that need Internet connection only when connected to Wi-Fi.</string>
@@ -117,7 +120,9 @@
     <string name="help_description">Show TIP buttons.</string>
     <string name="settings">Settings</string>
     <string name="information">Information</string>
-    <string name="welcome_search_saved">Saved</string>
+    <string name="nation">Nation</string>
+    <string name="china_title">Prevent search error in China</string>
+    <string name="china_text">Prevents infinite loading in China. Turn on this setting if you are in China.</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">Welcome Search</string>

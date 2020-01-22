@@ -1,25 +1,24 @@
 package com.illusion.checkfirm.dialogs
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
+import androidx.browser.trusted.TrustedWebActivityIntentBuilder
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
+import com.google.androidbrowserhelper.trusted.TwaLauncher
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.search.WebViewActivity
 
-class SearchResultDialog : BottomSheetDialogFragment() {
+class SearchDialog : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val rootView = inflater.inflate(R.layout.dialog_search_result, container, false)
+        val rootView = inflater.inflate(R.layout.dialog_search, container, false)
 
         val isOfficial = arguments!!.getBoolean("isOfficial")
         val model = arguments!!.getString("model")
@@ -33,7 +32,7 @@ class SearchResultDialog : BottomSheetDialogFragment() {
         val copy = rootView.findViewById<MaterialButton>(R.id.copy)
         val share = rootView.findViewById<MaterialButton>(R.id.share)
         val previousTitle = rootView.findViewById<MaterialTextView>(R.id.previous_title)
-        val list = rootView.findViewById<TextView>(R.id.list)
+        val list = rootView.findViewById<MaterialTextView>(R.id.list)
 
         if (isOfficial) {
             latestTitle.text = getString(R.string.latest_official)
@@ -41,10 +40,15 @@ class SearchResultDialog : BottomSheetDialogFragment() {
             changelog.visibility = View.VISIBLE
             changelog.setOnClickListener {
                 val link = "http://doc.samsungmobile.com/$model/$csc/doc.html"
-                val intent = Intent(activity!!, WebViewActivity::class.java)
-                intent.putExtra("url", link)
-                intent.putExtra("number", 1)
-                startActivity(intent)
+                try {
+                    val builder = TrustedWebActivityIntentBuilder(Uri.parse(link))
+                    TwaLauncher(activity!!).launch(builder, null, null)
+                } catch (e: ActivityNotFoundException) {
+                    val intent = Intent(activity!!, WebViewActivity::class.java)
+                    intent.putExtra("url", link)
+                    intent.putExtra("number", 1)
+                    startActivity(intent)
+                }
             }
         } else {
             latestTitle.text = getString(R.string.latest_test)
@@ -78,8 +82,8 @@ class SearchResultDialog : BottomSheetDialogFragment() {
     }
 
     companion object {
-        fun newInstance(isOfficial: Boolean, model: String, csc:String, latest: String, previous: String): SearchResultDialog {
-            val f = SearchResultDialog()
+        fun newInstance(isOfficial: Boolean, model: String, csc: String, latest: String, previous: String): SearchDialog {
+            val f = SearchDialog()
 
             val args = Bundle()
             args.putBoolean("isOfficial", isOfficial)

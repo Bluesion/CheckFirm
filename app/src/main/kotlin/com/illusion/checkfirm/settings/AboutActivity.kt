@@ -10,15 +10,13 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.BuildConfig
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.LegalDialog
-import com.illusion.checkfirm.search.WebViewActivity
 import com.illusion.checkfirm.utils.Tools
 import org.jsoup.Jsoup
 import java.io.IOException
@@ -26,13 +24,14 @@ import java.lang.ref.WeakReference
 
 class AboutActivity : AppCompatActivity() {
 
-    private lateinit var latest: TextView
+    private lateinit var latest: MaterialTextView
     private lateinit var update: MaterialButton
     private lateinit var progress: ProgressBar
     private var latestVersion = 0
 
     private val mHandler = MyHandler(this@AboutActivity)
-    private class MyHandler (activity: AboutActivity) : Handler() {
+
+    private class MyHandler(activity: AboutActivity) : Handler() {
         private val mActivity: WeakReference<AboutActivity> = WeakReference(activity)
 
         override fun handleMessage(msg: Message) {
@@ -47,11 +46,10 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = ""
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val version = findViewById<TextView>(R.id.version)
+        val version = findViewById<MaterialTextView>(R.id.version)
         version.text = BuildConfig.VERSION_NAME
 
         progress = findViewById(R.id.progress)

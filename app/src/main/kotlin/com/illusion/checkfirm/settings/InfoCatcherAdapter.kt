@@ -11,7 +11,7 @@ import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.catcher.InfoCatcherEntity
 
 class InfoCatcherAdapter(private val context: Context, private var deviceList: List<InfoCatcherEntity>,
-                         val onClickListener: MyAdapterListener): RecyclerView.Adapter<InfoCatcherAdapter.MyViewHolder>() {
+                         val onClickListener: MyAdapterListener) : RecyclerView.Adapter<InfoCatcherAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val delete: AppCompatImageButton = view.findViewById(R.id.delete)

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RadioButton
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
@@ -19,11 +18,9 @@ class ThemeDialog : BottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val rootView = inflater.inflate(R.layout.dialog_theme, container, false)
 
-        val light = rootView.findViewById(R.id.light) as RadioButton
-        val dark = rootView.findViewById(R.id.dark) as RadioButton
-        val system = rootView.findViewById(R.id.system) as RadioButton
-
-        val systemText = rootView.findViewById<TextView>(R.id.system_text)
+        val light = rootView.findViewById<RadioButton>(R.id.light)
+        val dark = rootView.findViewById<RadioButton>(R.id.dark)
+        val system = rootView.findViewById<RadioButton>(R.id.system)
 
         val lightLayout = rootView.findViewById<LinearLayout>(R.id.light_layout)
         val darkLayout = rootView.findViewById<LinearLayout>(R.id.dark_layout)
@@ -32,14 +29,9 @@ class ThemeDialog : BottomSheetDialogFragment() {
         if (Build.VERSION.SDK_INT == 28) {
             if (Build.MANUFACTURER != "samsung") {
                 systemLayout.visibility = View.GONE
-                systemText.text = getString(R.string.theme_battery)
             }
         } else if (Build.VERSION.SDK_INT < 28) {
             systemLayout.visibility = View.GONE
-            systemText.text = getString(R.string.theme_battery)
-        } else {
-            systemLayout.visibility = View.VISIBLE
-            systemText.text = getString(R.string.theme_system)
         }
 
         val sharedPrefs = activity!!.getSharedPreferences("settings", Context.MODE_PRIVATE)

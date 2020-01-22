@@ -1,7 +1,6 @@
 package com.illusion.checkfirm.search
 
 class HistoryItem {
-
     private var model = "SM-"
     private var csc = ""
     private var date = ""

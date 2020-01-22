@@ -5,33 +5,33 @@
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
+        style="@style/CardTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        style="@style/CardTheme">
+        android:layout_marginEnd="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
             android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
             android:layout_marginEnd="14dp"
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/latest_title"
+                style="?textAppearanceBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                style="?textAppearanceBody1" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/latest_text"
+                style="?textAppearanceBody2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                style="?textAppearanceBody2" />
+                android:layout_marginTop="4dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,27 +40,27 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/changelog"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/changelog"
-                    style="@style/Widget.MaterialComponents.Button.TextButton" />
+                    android:text="@string/changelog" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/copy"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@android:string/copy"
-                    style="@style/Widget.MaterialComponents.Button.TextButton" />
+                    android:text="@android:string/copy" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/share"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/link_share"
-                    style="@style/Widget.MaterialComponents.Button.TextButton" />
+                    android:text="@string/link_share" />
 
             </LinearLayout>
 
@@ -69,13 +69,13 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        style="@style/CardTheme"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="12dp"
-        style="@style/CardTheme">
+        android:layout_marginBottom="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,23 +85,23 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/previous_title"
+                style="?textAppearanceBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                style="?textAppearanceBody1" />
+                android:textStyle="bold" />
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/list"
+                    style="?textAppearanceBody1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/list"
-                    android:textSize="13sp"
                     android:lineSpacingExtra="4dp"
-                    style="?textAppearanceBody1" />
+                    android:textSize="13sp" />
 
             </androidx.core.widget.NestedScrollView>
 
@@ -110,16 +110,16 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/ok"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="14dp"
-        android:id="@+id/ok"
         android:text="@android:string/ok"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        app:rippleColor="@color/button_ripple_color"
-        style="@style/Widget.MaterialComponents.Button.TextButton" />
+        app:rippleColor="@color/button_ripple_color" />
 
 </LinearLayout>

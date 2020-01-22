@@ -1,7 +1,6 @@
 package com.illusion.checkfirm.main
 
 class PreviousItem {
-
     private var officialPrevious = ""
     private var testPrevious = ""
 

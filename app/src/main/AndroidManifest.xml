@@ -58,7 +58,7 @@
             android:name=".search.WebViewActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
         <activity
-            android:label="@string/about"
+            android:label=""
             android:name="com.illusion.checkfirm.settings.AboutActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
         <activity

@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 
-class SearchAdapter(val context: Context, private var searchList: List<SearchItem>, val onClickListener: MyAdapterListener): RecyclerView.Adapter<SearchAdapter.MyViewHolder>() {
+class SearchAdapter(val context: Context, private var searchList: List<SearchItem>,
+                    val onClickListener: MyAdapterListener): RecyclerView.Adapter<SearchAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var device: MaterialTextView = view.findViewById(R.id.device)

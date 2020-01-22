@@ -1,6 +1,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_enabled="false" android:state_checked="true" android:drawable="@drawable/switch_track_disabled_on" />
-    <item android:state_enabled="false" android:drawable="@drawable/switch_track_disabled_off" />
-    <item android:state_checked="true" android:drawable="@drawable/switch_track_on" />
+    <item android:drawable="@drawable/switch_track_disabled_on" android:state_checked="true" android:state_enabled="false" />
+    <item android:drawable="@drawable/switch_track_disabled_off" android:state_enabled="false" />
+    <item android:drawable="@drawable/switch_track_on" android:state_checked="true" />
     <item android:drawable="@drawable/switch_track_off" />
 </selector>

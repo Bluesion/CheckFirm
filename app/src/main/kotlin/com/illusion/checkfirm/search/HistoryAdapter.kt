@@ -10,7 +10,8 @@ import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import kotlin.math.min
 
-class HistoryAdapter(private val historyList: List<HistoryItem>, val onClickListener: MyAdapterListener): RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
+class HistoryAdapter(private val historyList: List<HistoryItem>,
+                     val onClickListener: MyAdapterListener): RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val delete: AppCompatImageView = view.findViewById(R.id.delete)
@@ -40,7 +41,7 @@ class HistoryAdapter(private val historyList: List<HistoryItem>, val onClickList
     }
 
     override fun getItemCount(): Int {
-        return min(historyList.size, 4)
+        return min(historyList.size, 10)
     }
 
     interface MyAdapterListener {

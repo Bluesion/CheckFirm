@@ -11,12 +11,11 @@ android {
         applicationId "com.illusion.checkfirm"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 27
-        versionName "7.1"
+        versionCode 28
+        versionName "7.2"
     }
 
     compileOptions {
-        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -32,7 +31,7 @@ android {
         }
     }
 
-    sourceSets{
+    sourceSets {
         main.java.srcDirs += 'src/main/kotlin/'
     }
 }
@@ -40,6 +39,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:1.2.0-alpha01"
+    implementation "androidx.browser:browser:1.3.0-alpha01"
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta4"
     implementation "androidx.constraintlayout:constraintlayout-solver:2.0.0-beta4"
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
@@ -51,7 +51,8 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.3"
     kapt "androidx.room:room-compiler:2.2.3"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03"
-    implementation "com.google.android.material:material:1.2.0-alpha03"
+    implementation "com.google.androidbrowserhelper:androidbrowserhelper:1.0.0"
+    implementation "com.google.android.material:material:1.2.0-alpha04"
     implementation 'com.google.firebase:firebase-firestore:21.3.1'
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

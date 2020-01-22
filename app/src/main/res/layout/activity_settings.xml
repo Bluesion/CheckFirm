@@ -4,9 +4,9 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/appbar"
         android:background="?android:windowBackground"
         app:elevation="0dp">
 
@@ -15,34 +15,34 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/expanded_title"
+                style="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings"
-                android:id="@+id/expanded_title"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="40sp"
-                style="@style/TextAppearance.Design.CollapsingToolbar.Expanded" />
+                android:text="@string/settings"
+                android:textSize="40sp" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom"
-                app:navigationIcon="@drawable/ic_back"
                 app:contentInsetStartWithNavigation="0dp"
-                app:layout_collapseMode="pin">
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_back">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
+                    style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/title"
-                    android:text="@string/settings"
                     android:gravity="center_vertical"
-                    style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+                    android:text="@string/settings" />
 
-            </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -59,7 +59,7 @@
             android:layout_margin="10dp"
             android:orientation="vertical">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
@@ -94,30 +94,30 @@
                             android:layout_marginBottom="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/expanded_switch"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceLarge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
                                 android:fadingEdge="horizontal"
                                 android:singleLine="true"
                                 android:text="@string/expandable_bar"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
+                                android:textSize="18sp" />
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceSmall"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/expandable_bar_description"
-                                style="?android:attr/textAppearanceSmall" />
+                                android:text="@string/expandable_bar_description" />
 
                         </LinearLayout>
 
@@ -127,10 +127,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
                             android:layout_marginEnd="14dp"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/expandable_text" />
+                            app:layout_constraintStart_toEndOf="@id/expandable_text"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -160,30 +160,30 @@
                             android:layout_marginBottom="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/help_switch"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceLarge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
                                 android:fadingEdge="horizontal"
                                 android:singleLine="true"
                                 android:text="@string/help_settings"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
+                                android:textSize="18sp" />
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceSmall"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/help_description"
-                                style="?android:attr/textAppearanceSmall" />
+                                android:text="@string/help_description" />
 
                         </LinearLayout>
 
@@ -193,10 +193,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
                             android:layout_marginEnd="14dp"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/help_text" />
+                            app:layout_constraintStart_toEndOf="@id/help_text"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -207,61 +207,46 @@
                         android:layout_marginEnd="12dp"
                         android:background="#4D808080" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
+                        android:id="@+id/theme_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/theme_layout"
                         android:background="?selectableItemBackground"
-                        android:focusable="true"
                         android:clickable="true"
-                        android:gravity="center_vertical">
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?textAppearanceBody1"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
                             android:layout_marginTop="13dp"
                             android:layout_marginEnd="14dp"
+                            android:singleLine="true"
+                            android:text="@string/theme"
+                            android:textSize="18sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
                             android:layout_marginBottom="13dp"
-                            android:orientation="vertical"
-                            app:layout_constrainedWidth="true"
-                            app:layout_constraintHorizontal_bias="0"
-                            app:layout_constraintHorizontal_chainStyle="packed"
-                            app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
+                            android:text="@string/theme_description" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="marquee"
-                                android:singleLine="true"
-                                android:text="@string/theme"
-                                android:fadingEdge="horizontal"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/theme_description"
-                                style="?android:attr/textAppearanceSmall" />
-
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/search" />
 
             <com.google.android.material.card.MaterialCardView
@@ -275,12 +260,12 @@
                     android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/welcome_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/welcome_layout"
                         android:background="?selectableItemBackground"
-                        android:focusable="true"
                         android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center_vertical">
 
                         <LinearLayout
@@ -293,29 +278,29 @@
                             android:layout_marginBottom="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/welcome_divider"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/welcome_divider">
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceLarge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
+                                android:fadingEdge="horizontal"
                                 android:singleLine="true"
                                 android:text="@string/welcome_search"
-                                android:fadingEdge="horizontal"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
+                                android:textSize="18sp" />
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceSmall"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/welcome_search_description"
-                                style="?android:attr/textAppearanceSmall" />
+                                android:text="@string/welcome_search_description" />
 
                         </LinearLayout>
 
@@ -323,13 +308,13 @@
                             android:id="@+id/welcome_divider"
                             android:layout_width="1dp"
                             android:layout_height="0dp"
-                            android:background="#4D808080"
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="20dp"
-                            app:layout_constraintTop_toTopOf="parent"
+                            android:background="#4D808080"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/welcome_switch"
-                            app:layout_constraintStart_toEndOf="@id/welcome_text" />
+                            app:layout_constraintStart_toEndOf="@id/welcome_text"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/welcome_switch"
@@ -337,10 +322,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
                             android:layout_marginEnd="14dp"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/welcome_divider" />
+                            app:layout_constraintStart_toEndOf="@id/welcome_divider"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -352,12 +337,12 @@
                         android:background="#4D808080" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/smart_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/smart_layout"
                         android:background="?selectableItemBackground"
-                        android:focusable="true"
                         android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center_vertical">
 
                         <LinearLayout
@@ -370,29 +355,29 @@
                             android:layout_marginBottom="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/smart_switch"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/smart_switch">
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceLarge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
+                                android:fadingEdge="horizontal"
                                 android:singleLine="true"
                                 android:text="@string/smart_search"
-                                android:fadingEdge="horizontal"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
+                                android:textSize="18sp" />
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceSmall"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/smart_search_description"
-                                style="?android:attr/textAppearanceSmall" />
+                                android:text="@string/smart_search_description" />
 
                         </LinearLayout>
 
@@ -402,10 +387,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
                             android:layout_marginEnd="14dp"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/smart_text" />
+                            app:layout_constraintStart_toEndOf="@id/smart_text"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -417,12 +402,12 @@
                         android:background="#4D808080" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/quick_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/quick_layout"
                         android:background="?selectableItemBackground"
-                        android:focusable="true"
                         android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center_vertical">
 
                         <LinearLayout
@@ -435,29 +420,29 @@
                             android:layout_marginBottom="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/quick_switch"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/quick_switch">
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceLarge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
+                                android:fadingEdge="horizontal"
                                 android:singleLine="true"
                                 android:text="@string/quick_search"
-                                android:fadingEdge="horizontal"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
+                                android:textSize="18sp" />
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceSmall"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/quick_search_description"
-                                style="?android:attr/textAppearanceSmall" />
+                                android:text="@string/quick_search_description" />
 
                         </LinearLayout>
 
@@ -467,10 +452,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
                             android:layout_marginEnd="14dp"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/quick_text" />
+                            app:layout_constraintStart_toEndOf="@id/quick_text"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -478,11 +463,11 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/feature" />
 
             <com.google.android.material.card.MaterialCardView
@@ -496,12 +481,12 @@
                     android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/saver_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/saver_layout"
                         android:background="?selectableItemBackground"
-                        android:focusable="true"
                         android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center_vertical">
 
                         <LinearLayout
@@ -514,30 +499,30 @@
                             android:layout_marginBottom="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/saver_switch"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceLarge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
+                                android:fadingEdge="horizontal"
                                 android:singleLine="true"
                                 android:text="@string/data_saver"
-                                android:fadingEdge="horizontal"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
+                                android:textSize="18sp" />
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceSmall"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/data_saver_description"
-                                style="?android:attr/textAppearanceSmall" />
+                                android:text="@string/data_saver_description" />
 
                         </LinearLayout>
 
@@ -547,10 +532,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
                             android:layout_marginEnd="14dp"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/saver_text" />
+                            app:layout_constraintStart_toEndOf="@id/saver_text"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -562,12 +547,12 @@
                         android:background="#4D808080" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/catcher_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/catcher_layout"
                         android:background="?selectableItemBackground"
-                        android:focusable="true"
                         android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center_vertical">
 
                         <LinearLayout
@@ -580,29 +565,29 @@
                             android:layout_marginBottom="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/catcher_divider"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/catcher_divider">
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceLarge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
+                                android:fadingEdge="horizontal"
                                 android:singleLine="true"
                                 android:text="@string/info_catcher"
-                                android:fadingEdge="horizontal"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
+                                android:textSize="18sp" />
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
+                                style="?android:attr/textAppearanceSmall"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/info_catcher_description"
-                                style="?android:attr/textAppearanceSmall" />
+                                android:text="@string/info_catcher_description" />
 
                         </LinearLayout>
 
@@ -610,13 +595,13 @@
                             android:id="@+id/catcher_divider"
                             android:layout_width="1dp"
                             android:layout_height="0dp"
-                            android:background="#4D808080"
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="20dp"
-                            app:layout_constraintTop_toTopOf="parent"
+                            android:background="#4D808080"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/catcher_switch"
-                            app:layout_constraintStart_toEndOf="@id/catcher_text" />
+                            app:layout_constraintStart_toEndOf="@id/catcher_text"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/catcher_switch"
@@ -624,10 +609,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="14dp"
                             android:layout_marginEnd="14dp"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/catcher_divider" />
+                            app:layout_constraintStart_toEndOf="@id/catcher_divider"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -635,11 +620,80 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/nation" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/china_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:id="@+id/china_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginEnd="14dp"
+                        android:layout_marginBottom="13dp"
+                        android:orientation="vertical"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/china_switch"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?textAppearanceBody1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="@string/china_title"
+                            android:textSize="18sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/china_text" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/china_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="14dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/china_text"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/information" />
 
             <com.google.android.material.card.MaterialCardView
@@ -652,45 +706,21 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/about_layout"
+                        style="?textAppearanceBody1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/about_layout"
                         android:background="?selectableItemBackground"
-                        android:focusable="true"
                         android:clickable="true"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="14dp"
-                            android:layout_marginBottom="13dp"
-                            android:orientation="vertical"
-                            app:layout_constrainedWidth="true"
-                            app:layout_constraintHorizontal_bias="0"
-                            app:layout_constraintHorizontal_chainStyle="packed"
-                            app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="marquee"
-                                android:singleLine="true"
-                                android:text="@string/about"
-                                android:fadingEdge="horizontal"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
-
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:focusable="true"
+                        android:paddingStart="14dp"
+                        android:paddingTop="13dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="13dp"
+                        android:singleLine="true"
+                        android:text="@string/about"
+                        android:textSize="18sp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -699,45 +729,21 @@
                         android:layout_marginEnd="12dp"
                         android:background="#4D808080" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/contact_layout"
+                        style="?textAppearanceBody1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/contact_layout"
                         android:background="?selectableItemBackground"
-                        android:focusable="true"
                         android:clickable="true"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="14dp"
-                            android:layout_marginBottom="13dp"
-                            android:orientation="vertical"
-                            app:layout_constrainedWidth="true"
-                            app:layout_constraintHorizontal_bias="0"
-                            app:layout_constraintHorizontal_chainStyle="packed"
-                            app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="marquee"
-                                android:singleLine="true"
-                                android:text="@string/contact_us"
-                                android:fadingEdge="horizontal"
-                                android:textSize="18sp"
-                                style="?android:attr/textAppearanceLarge" />
-
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:focusable="true"
+                        android:paddingStart="14dp"
+                        android:paddingTop="13dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="13dp"
+                        android:singleLine="true"
+                        android:text="@string/contact_us"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 

@@ -4,22 +4,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkEntity
 
 class BookmarkAdapter(private var bookmarkList: List<BookmarkEntity>,
-                      val onClickListener: MyAdapterListener): RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
+                      val onClickListener: MyAdapterListener) : RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val layout: ConstraintLayout = view.findViewById(R.id.bookmark_layout)
         private val edit: ImageButton = view.findViewById(R.id.edit)
         private val delete: ImageButton = view.findViewById(R.id.delete)
-        var name: TextView = view.findViewById(R.id.name)
-        var model: TextView = view.findViewById(R.id.model)
-        var csc: TextView = view.findViewById(R.id.csc)
+        var name: MaterialTextView = view.findViewById(R.id.name)
+        var model: MaterialTextView = view.findViewById(R.id.model)
+        var csc: MaterialTextView = view.findViewById(R.id.csc)
 
         init {
             layout.setOnClickListener {

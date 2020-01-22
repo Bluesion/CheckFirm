@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -15,97 +15,97 @@
         android:layout_height="match_parent"
         android:layout_margin="24dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/app_name"
+            style="?textAppearanceHeadline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
-            android:id="@+id/app_name"
-            android:textColor="?actionMenuTextColor"
-            style="@style/TextAppearance.MaterialComponents.Headline4" />
+            android:layout_marginTop="16dp"
+            android:text="@string/app_name"
+            android:textColor="?actionMenuTextColor" />
 
         <LinearLayout
+            android:id="@+id/version_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/version_layout"
             android:layout_below="@id/app_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                style="?textAppearanceBody2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/version"
-                style="?textAppearanceBody2" />
+                android:text="@string/version" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/version"
+                style="?textAppearanceBody2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/version"
-                android:layout_marginStart="4dp"
-                style="?textAppearanceBody2" />
+                android:layout_marginStart="4dp" />
 
         </LinearLayout>
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_below="@id/version_layout"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/version_layout">
+            android:layout_marginTop="8dp">
 
             <ProgressBar
+                android:id="@+id/progress"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progress" />
+                android:layout_height="wrap_content" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/latest"
+                style="?textAppearanceBody2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/latest"
-                android:id="@+id/latest"
                 android:textColor="#909090"
-                android:visibility="gone"
-                style="?textAppearanceBody2" />
+                android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/update"
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/update"
-                android:visibility="gone"
                 android:text="@string/update"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
 
         </FrameLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/legal"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/legal"
-            android:text="@string/legal"
             android:layout_above="@id/license"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
+            android:text="@string/legal"
             android:textColor="?actionMenuTextColor"
             app:backgroundTint="@color/button_ripple_color"
             app:cornerRadius="26dp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/license"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/license"
-            android:text="@string/license"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:text="@string/license"
             android:textColor="?actionMenuTextColor"
-            app:cornerRadius="26dp"
-            app:backgroundTint="@color/button_ripple_color" />
+            app:backgroundTint="@color/button_ripple_color"
+            app:cornerRadius="26dp" />
 
     </RelativeLayout>
 

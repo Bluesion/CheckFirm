@@ -5,12 +5,14 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.CompoundButton
-import android.widget.TextView
+import android.widget.LinearLayout
+
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.ContactDialog
 import com.illusion.checkfirm.dialogs.ThemeDialog
@@ -26,6 +28,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
     private lateinit var quickSwitch: SwitchMaterial
     private lateinit var saverSwitch: SwitchMaterial
     private lateinit var catcherSwitch: SwitchMaterial
+    private lateinit var chinaSwitch: SwitchMaterial
     private var one: Boolean = true
     private var help: Boolean = true
     private var welcome: Boolean = false
@@ -33,6 +36,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
     private var quick: Boolean = false
     private var saver: Boolean = false
     private var catcher: Boolean = false
+    private var china: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +50,10 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         quickSwitch = findViewById(R.id.quick_switch)
         saverSwitch = findViewById(R.id.saver_switch)
         catcherSwitch = findViewById(R.id.catcher_switch)
+        chinaSwitch = findViewById(R.id.china_switch)
         initSwitch()
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.title = ""
         setSupportActionBar(toolbar)
         val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
@@ -61,8 +66,8 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             mAppBar.setExpanded(false)
         }
 
-        val title = findViewById<TextView>(R.id.title)
-        val expandedTitle = findViewById<TextView>(R.id.expanded_title)
+        val title = findViewById<MaterialTextView>(R.id.title)
+        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
@@ -76,6 +81,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         quickSwitch.setOnCheckedChangeListener(this)
         saverSwitch.setOnCheckedChangeListener(this)
         catcherSwitch.setOnCheckedChangeListener(this)
+        chinaSwitch.setOnCheckedChangeListener(this)
 
         val oneLayout = findViewById<ConstraintLayout>(R.id.expanded_layout)
         oneLayout.setOnClickListener {
@@ -87,7 +93,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             helpSwitch.toggle()
         }
 
-        val themeLayout = findViewById<ConstraintLayout>(R.id.theme_layout)
+        val themeLayout = findViewById<LinearLayout>(R.id.theme_layout)
         themeLayout.setOnClickListener {
             val bottomSheetFragment = ThemeDialog()
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
@@ -120,13 +126,18 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             startActivity(intent)
         }
 
-        val aboutLayout = findViewById<ConstraintLayout>(R.id.about_layout)
+        val chinaLayout = findViewById<ConstraintLayout>(R.id.china_layout)
+        chinaLayout.setOnClickListener {
+            chinaSwitch.toggle()
+        }
+
+        val aboutLayout = findViewById<MaterialTextView>(R.id.about_layout)
         aboutLayout.setOnClickListener {
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
         }
 
-        val contactLayout = findViewById<ConstraintLayout>(R.id.contact_layout)
+        val contactLayout = findViewById<MaterialTextView>(R.id.contact_layout)
         contactLayout.setOnClickListener {
             val bottomSheetFragment = ContactDialog()
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
@@ -142,7 +153,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 } else {
                     mEditor.putBoolean("one", false)
                 }
-                mEditor.apply()
             }
             R.id.help_switch -> {
                 if (isChecked) {
@@ -150,7 +160,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 } else {
                     mEditor.putBoolean("help", false)
                 }
-                mEditor.apply()
             }
             R.id.welcome_switch -> {
                 if (isChecked) {
@@ -158,7 +167,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 } else {
                     mEditor.putBoolean("welcome", false)
                 }
-                mEditor.apply()
             }
             R.id.smart_switch -> {
                 if (isChecked) {
@@ -166,7 +174,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 } else {
                     mEditor.putBoolean("smart", false)
                 }
-                mEditor.apply()
             }
             R.id.quick_switch -> {
                 if (isChecked) {
@@ -174,7 +181,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 } else {
                     mEditor.putBoolean("quick", false)
                 }
-                mEditor.apply()
             }
             R.id.saver_switch -> {
                 if (isChecked) {
@@ -182,17 +188,23 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                 } else {
                     mEditor.putBoolean("saver", false)
                 }
-                mEditor.apply()
             }
-            else -> {
+            R.id.catcher_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("catcher", true)
                 } else {
                     mEditor.putBoolean("catcher", false)
                 }
-                mEditor.apply()
+            }
+            else -> {
+                if (isChecked) {
+                    mEditor.putBoolean("china", true)
+                } else {
+                    mEditor.putBoolean("china", false)
+                }
             }
         }
+        mEditor.apply()
     }
 
     override fun onRestart() {
@@ -218,6 +230,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         quick = sharedPrefs.getBoolean("quick", false)
         saver = sharedPrefs.getBoolean("saver", false)
         catcher = sharedPrefs.getBoolean("catcher", false)
+        china = sharedPrefs.getBoolean("china", false)
 
         oneSwitch.isChecked = one
         helpSwitch.isChecked = help
@@ -226,5 +239,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         quickSwitch.isChecked = quick
         saverSwitch.isChecked = saver
         catcherSwitch.isChecked = catcher
+        chinaSwitch.isChecked = china
     }
 }

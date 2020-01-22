@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -31,18 +31,18 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceHeadline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/firmware_0"
-                        style="?textAppearanceHeadline6" />
+                        android:text="@string/firmware_0" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceBody2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/firmware_1"
-                        style="?textAppearanceBody2" />
+                        android:text="@string/firmware_1" />
 
                 </LinearLayout>
 
@@ -59,64 +59,64 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceHeadline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/firmware_2"
-                        style="?textAppearanceHeadline6" />
+                        android:text="@string/firmware_2" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceBody2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/firmware_3"
-                        style="?textAppearanceBody2" />
+                        android:text="@string/firmware_3" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?textAppearanceBody2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/firmware_4"
-                            style="?textAppearanceBody2" />
+                            android:text="@string/firmware_4" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?textAppearanceBody2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/firmware_5"
-                            android:textColor="@color/red"
-                            style="?textAppearanceBody2" />
+                            android:textColor="@color/red" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?textAppearanceBody2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/firmware_6"
-                            android:textColor="@color/yellow"
-                            style="?textAppearanceBody2" />
+                            android:textColor="@color/yellow" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?textAppearanceBody2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/firmware_7"
-                            android:textColor="@color/green"
-                            style="?textAppearanceBody2" />
+                            android:textColor="@color/green" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?textAppearanceBody2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/firmware_8"
-                            android:textColor="?colorPrimary"
-                            style="?textAppearanceBody2" />
+                            android:textColor="?colorPrimary" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?textAppearanceBody2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/firmware_9"
-                            android:textColor="@color/purple"
-                            style="?textAppearanceBody2" />
+                            android:textColor="@color/purple" />
 
                     </LinearLayout>
 
@@ -135,19 +135,19 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceHeadline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/firmware_10"
-                        android:textColor="@color/red"
-                        style="?textAppearanceHeadline6" />
+                        android:textColor="@color/red" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceBody2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/firmware_11"
-                        style="?textAppearanceBody2" />
+                        android:text="@string/firmware_11" />
 
                 </LinearLayout>
 
@@ -164,19 +164,19 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceHeadline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/firmware_12"
-                        android:textColor="@color/yellow"
-                        style="?textAppearanceHeadline6" />
+                        android:textColor="@color/yellow" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceBody2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/firmware_13"
-                        style="?textAppearanceBody2" />
+                        android:text="@string/firmware_13" />
 
                 </LinearLayout>
 
@@ -193,19 +193,19 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceHeadline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/firmware_14"
-                        android:textColor="@color/green"
-                        style="?textAppearanceHeadline6" />
+                        android:textColor="@color/green" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceBody2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/firmware_15"
-                        style="?textAppearanceBody2" />
+                        android:text="@string/firmware_15" />
 
                 </LinearLayout>
 
@@ -222,19 +222,19 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceHeadline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/firmware_16"
-                        android:textColor="?colorPrimary"
-                        style="?textAppearanceHeadline6" />
+                        android:textColor="?colorPrimary" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceBody2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/firmware_17"
-                        style="?textAppearanceBody2" />
+                        android:text="@string/firmware_17" />
 
                 </LinearLayout>
 
@@ -251,19 +251,19 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceHeadline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/firmware_18"
-                        android:textColor="@color/purple"
-                        style="?textAppearanceHeadline6" />
+                        android:textColor="@color/purple" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceBody2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/firmware_19"
-                        style="?textAppearanceBody2" />
+                        android:text="@string/firmware_19" />
 
                 </LinearLayout>
 
@@ -280,18 +280,18 @@
                     android:layout_margin="14dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceHeadline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/firmware_20"
-                        style="?textAppearanceHeadline6" />
+                        android:text="@string/firmware_20" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="?textAppearanceBody2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/firmware_21"
-                        style="?textAppearanceBody2" />
+                        android:text="@string/firmware_21" />
 
                 </LinearLayout>
 

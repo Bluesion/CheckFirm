@@ -1,7 +1,6 @@
 package com.illusion.checkfirm.search
 
 class SearchItem {
-
     private var model = "SM-"
     private var csc = ""
 

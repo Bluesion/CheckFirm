@@ -6,7 +6,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import com.illusion.checkfirm.R
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -19,10 +19,11 @@ class WebViewActivity : AppCompatActivity() {
         val number = intent.getIntExtra("number", 1)
         val url = intent.getStringExtra("url")
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.setNavigationOnClickListener {
             finish()
         }
+
         if (number == 1) {
             toolbar.title = getString(R.string.changelog)
         } else {

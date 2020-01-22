@@ -10,7 +10,7 @@ import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 
 class WelcomeSearchAdapter(private val context: Context, private val modelList: List<String>, private val cscList: List<String>,
-                           val onClickListener: MyAdapterListener): RecyclerView.Adapter<WelcomeSearchAdapter.MyViewHolder>() {
+                           val onClickListener: MyAdapterListener) : RecyclerView.Adapter<WelcomeSearchAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val delete: AppCompatImageButton = view.findViewById(R.id.delete)

@@ -7,10 +7,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +32,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
 
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
-    private lateinit var switchText: TextView
+    private lateinit var switchText: MaterialTextView
     private lateinit var switchCard: LinearLayout
     private lateinit var icViewModel: InfoCatcherViewModel
     private lateinit var bmViewModel: BookmarkViewModel
@@ -48,7 +47,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
         val one = sharedPrefs.getBoolean("one", true)
         val catcher = sharedPrefs.getBoolean("catcher", false)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.title = ""
         setSupportActionBar(toolbar)
         val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
@@ -61,8 +60,8 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
             mAppBar.setExpanded(false)
         }
 
-        val title = findViewById<TextView>(R.id.title)
-        val expandedTitle = findViewById<TextView>(R.id.expanded_title)
+        val title = findViewById<MaterialTextView>(R.id.title)
+        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
@@ -105,7 +104,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
                         bookmarkChip.isCheckable = false
                         bookmarkChip.setOnClickListener {
                             icViewModel.insert(element.model, element.csc)
-                            FirebaseMessaging.getInstance().subscribeToTopic(element.model+element.csc)
+                            FirebaseMessaging.getInstance().subscribeToTopic(element.model + element.csc)
                         }
                         bookmarkChipGroup.addView(bookmarkChip)
                     }
@@ -127,7 +126,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
                 Toast.makeText(this, getString(R.string.info_catcher_error), Toast.LENGTH_SHORT).show()
             } else {
                 icViewModel.insert(modelText, cscText)
-                FirebaseMessaging.getInstance().subscribeToTopic(modelText+cscText)
+                FirebaseMessaging.getInstance().subscribeToTopic(modelText + cscText)
             }
         }
 

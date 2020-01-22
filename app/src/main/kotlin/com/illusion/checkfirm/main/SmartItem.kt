@@ -1,7 +1,6 @@
 package com.illusion.checkfirm.main
 
 class SmartItem {
-
     private var date = ""
     private var downgrade = ""
     private var changelog = ""

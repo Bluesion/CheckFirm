@@ -1,5 +1,4 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,40 +17,40 @@
             android:src="@drawable/cardview_point" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/model"
+            style="?textAppearanceHeadline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/model"
-            android:layout_marginTop="14dp"
-            style="?textAppearanceHeadline6" />
+            android:layout_marginTop="14dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
+            style="?textAppearanceBody2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            style="?textAppearanceBody2" />
+            android:layout_marginTop="8dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
+            style="?textAppearanceBody2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="?textAppearanceBody2" />
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:id="@+id/detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:baselineAligned="false"
             android:orientation="horizontal"
-            android:weightSum="3"
-            android:baselineAligned="false">
+            android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
@@ -61,10 +60,10 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/smart_search_date"
+                    style="?textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    style="?textAppearanceBody2" />
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -72,8 +71,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
@@ -83,10 +82,10 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/smart_search_downgrade"
+                    style="?textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    style="?textAppearanceBody2" />
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -94,8 +93,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
@@ -105,10 +104,10 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/smart_search_changelog"
+                    style="?textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    style="?textAppearanceBody2" />
+                    android:gravity="center" />
 
             </LinearLayout>
 

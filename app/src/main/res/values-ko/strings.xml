@@ -22,7 +22,9 @@
     <!-- Contact Us -->
     <string name="contact_us">제작자 정보</string>
     <string name="contact_dialog_title">안녕하세요 :)</string>
-    <string name="contact_dialog_text">건의사항이나 질문이 있다면 아래 메일 주소로 연락주세요.\n\nwork@newfitlab.com (Designer, Newfit)\ndnjscjf098@gmail.com (Developer, Illusion)</string>
+    <string name="contact_dialog_text">건의사항이나 질문이 있다면 아래 메일 주소로 연락주세요.</string>
+    <string name="contact_developer">개발자 (gpillusion)</string>
+    <string name="contact_designer">디자이너 (Newfit)</string>
 
     <!-- Search -->
     <string name="latest_official">최신 공식 펌웨어</string>
@@ -35,7 +37,7 @@
     <string name="welcome_wifi">데이터 절약 기능이 켜져 있습니다. 자동 검색 기능을 사용하시려면 와이파이에 연결해주세요.</string>
     <string name="welcome_online">자동 검색 기능을 사용하시려면 네트워크에 연결해주세요.</string>
     <string name="clipboard">클립보드에 복사했습니다.</string>
-    <string name="search_error">검색에 실패하였습니다. 모델명과 CSC 코드를 정확히 입력하여 검색하세요.</string>
+    <string name="search_error">검색에 실패하였습니다. 해당 디바이스의 정보가 삼성 서버에 존재하지 않습니다.</string>
     <string name="searching">검색 중입니다. 잠시만 기다려주세요.</string>
     <string name="changelog">업데이트 내역</string>
     <string name="link_share">링크 공유</string>
@@ -85,7 +87,7 @@
     <string name="update">업데이트</string>
     <string name="license">라이선스</string>
     <string name="legal">법적 고지</string>
-    <string name="legal_text">정식 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml 에서 불러오며,\n테스트 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml 에서 불러옵니다.\n위 링크는 삼성전자가 소비자에게 정식으로 펌웨어 정보를 제공하는 경로가 아니며, 이 정보의 이용에 대한 책임은 모두 사용자에게 있습니다.</string>
+    <string name="legal_text">정식 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml 에서 불러옵니다.\n\n테스트 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml 에서 불러옵니다.\n\n위 링크는 삼성전자가 소비자에게 정식으로 펌웨어 정보를 제공하는 경로가 아니며, 이 정보의 이용에 대한 책임은 모두 사용자에게 있습니다.</string>
 
     <!-- Settings -->
     <string name="feature">기능</string>
@@ -95,7 +97,6 @@
     <string name="theme_light">밝은 테마</string>
     <string name="theme_dark">어두운 테마</string>
     <string name="theme_system">시스템 테마</string>
-    <string name="theme_battery">절전 모드에서 설정</string>
     <string name="about">CheckFirm 정보</string>
     <string name="data_saver">데이터 절약</string>
     <string name="data_saver_description">인터넷 연결이 필요한 모든 작업을 와이파이 환경에서만 진행합니다.</string>
@@ -105,7 +106,9 @@
     <string name="help_description">도움말을 표시합니다.</string>
     <string name="settings">설정</string>
     <string name="information">정보</string>
-    <string name="welcome_search_saved">저장되었습니다</string>
+    <string name="nation">국가</string>
+    <string name="china_title">중국 검색 오류 방지</string>
+    <string name="china_text">중국에서의 검색 오류를 수정합니다. 중국에 계신다면 이 설정을 켜주세요.</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">자동 검색</string>

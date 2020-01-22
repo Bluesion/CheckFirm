@@ -1,8 +1,8 @@
 <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/appbar"
     android:background="?android:windowBackground"
     app:elevation="0dp">
 
@@ -11,17 +11,17 @@
         android:layout_height="match_parent"
         app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/expanded_title"
+            style="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:id="@+id/expanded_title"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="40sp"
-            style="@style/TextAppearance.Design.CollapsingToolbar.Expanded" />
+            android:text="@string/app_name"
+            android:textSize="40sp" />
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -29,15 +29,15 @@
             android:layout_marginEnd="8dp"
             app:layout_collapseMode="pin">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/title"
                 android:gravity="center_vertical"
-                android:text="@string/app_name"
-                style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+                android:text="@string/app_name" />
 
-        </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 

@@ -7,15 +7,15 @@
         android:id="@+id/main_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constrainedWidth="true"
         app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/tab_layout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tab_layout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <include layout="@layout/activity_main_toolbar" />
 
@@ -66,16 +66,16 @@
                             android:id="@+id/search_result"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:overScrollMode="never"
-                            android:nestedScrollingEnabled="false" />
+                            android:nestedScrollingEnabled="false"
+                            android:overScrollMode="never" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/help"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
                             android:text="@string/firmware_help"
-                            style="@style/Widget.MaterialComponents.Button.TextButton" />
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
@@ -92,32 +92,32 @@
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
         android:orientation="horizontal"
-        android:weightSum="2"
         android:visibility="gone"
+        android:weightSum="2"
         app:layout_constrainedWidth="true"
-        app:layout_constraintTop_toBottomOf="@id/main_layout"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_layout">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_official"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:rippleColor="@color/button_ripple_color"
             android:text="@string/tab_main_1"
             android:textStyle="bold"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+            app:rippleColor="@color/button_ripple_color" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_test"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:rippleColor="@color/button_ripple_color"
             android:text="@string/tab_main_2"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+            app:rippleColor="@color/button_ripple_color" />
 
     </LinearLayout>
 

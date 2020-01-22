@@ -8,10 +8,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +24,7 @@ import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.bookmark.BookmarkActivity
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
-import com.illusion.checkfirm.dialogs.SearchResultDialog
+import com.illusion.checkfirm.dialogs.SearchDialog
 import com.illusion.checkfirm.help.HelpFirmwareActivity
 import com.illusion.checkfirm.search.TransparentActivity
 import com.illusion.checkfirm.search.SearchActivity
@@ -139,6 +138,9 @@ class MainActivity : AppCompatActivity() {
 
             val tab = findViewById<LinearLayout>(R.id.tab_layout)
             var smart = sharedPrefs.getBoolean("smart", true)
+            if (sharedPrefs.getBoolean("china", false)) {
+                smart = false
+            }
 
             var model: String
             var csc: String
@@ -180,12 +182,12 @@ class MainActivity : AppCompatActivity() {
                 val mAdapter = SingleAdapter(this, model, csc, latestOfficial, latestTest,
                         smart, date, downgrade, changelog,object : SingleAdapter.MyAdapterListener {
                     override fun onOfficialCardClicked(v: View, position: Int) {
-                        val bottomSheetFragment = SearchResultDialog.newInstance(true, model, csc, latestOfficial, previousOfficial)
+                        val bottomSheetFragment = SearchDialog.newInstance(true, model, csc, latestOfficial, previousOfficial)
                         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
 
                     override fun onTestCardClicked(v: View, position: Int) {
-                        val bottomSheetFragment = SearchResultDialog.newInstance(false, model, csc, latestTest, previousTest)
+                        val bottomSheetFragment = SearchDialog.newInstance(false, model, csc, latestTest, previousTest)
                         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
                 })
@@ -240,7 +242,7 @@ class MainActivity : AppCompatActivity() {
 
                 var mAdapter = MultiAdapter(this, isOfficial, smart, resultList, smartList, object : MultiAdapter.MyAdapterListener {
                     override fun onLayoutClicked(v: View, position: Int) {
-                        val bottomSheetFragment = SearchResultDialog.newInstance(isOfficial, resultList[position].getModel(),
+                        val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].getModel(),
                                 resultList[position].getCsc(), resultList[position].getOfficialLatest(), previousList[position].getOfficialPrevious())
                         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
@@ -254,7 +256,7 @@ class MainActivity : AppCompatActivity() {
                     smart = false
                     mAdapter = MultiAdapter(this, isOfficial, smart, resultList, smartList, object : MultiAdapter.MyAdapterListener {
                         override fun onLayoutClicked(v: View, position: Int) {
-                            val bottomSheetFragment = SearchResultDialog.newInstance(isOfficial, resultList[position].getModel(),
+                            val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].getModel(),
                                     resultList[position].getCsc(), resultList[position].getOfficialLatest(), previousList[position].getOfficialPrevious())
                             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                         }
@@ -266,10 +268,10 @@ class MainActivity : AppCompatActivity() {
                     tab1.setTextAppearance(R.style.SearchButton_Unselected)
                     tab2.setTextAppearance(R.style.SearchButton_Selected)
                     isOfficial = false
-                    smart = true
+                    smart = !sharedPrefs.getBoolean("china", false)
                     mAdapter = MultiAdapter(this, isOfficial, smart, resultList, smartList, object : MultiAdapter.MyAdapterListener {
                         override fun onLayoutClicked(v: View, position: Int) {
-                            val bottomSheetFragment = SearchResultDialog.newInstance(isOfficial, resultList[position].getModel(),
+                            val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].getModel(),
                                     resultList[position].getCsc(), resultList[position].getTestLatest(), previousList[position].getTestPrevious())
                             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                         }
@@ -320,7 +322,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         val one = sharedPrefs.getBoolean("one", true)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.title = ""
         toolbar.overflowIcon = getDrawable(R.drawable.ic_more)
         setSupportActionBar(toolbar)
@@ -333,8 +335,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             mAppBar.setExpanded(false)
         }
-        val title = findViewById<TextView>(R.id.title)
-        val expandedTitle = findViewById<TextView>(R.id.expanded_title)
+        val title = findViewById<MaterialTextView>(R.id.title)
+        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)

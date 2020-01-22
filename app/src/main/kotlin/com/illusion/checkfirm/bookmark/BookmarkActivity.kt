@@ -3,15 +3,15 @@ package com.illusion.checkfirm.bookmark
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import com.illusion.checkfirm.dialogs.BookmarkDialog
@@ -21,7 +21,7 @@ class BookmarkActivity : AppCompatActivity() {
 
     private lateinit var mAdapter: BookmarkAdapter
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var expandedSubTitle: TextView
+    private lateinit var expandedSubTitle: MaterialTextView
     lateinit var viewModel: BookmarkViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class BookmarkActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bookmark)
 
         val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.title = ""
         setSupportActionBar(toolbar)
         val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
@@ -42,8 +42,8 @@ class BookmarkActivity : AppCompatActivity() {
             mAppBar.setExpanded(false)
         }
 
-        val title = findViewById<TextView>(R.id.title)
-        val expandedTitle = findViewById<TextView>(R.id.expanded_title)
+        val title = findViewById<MaterialTextView>(R.id.title)
+        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)

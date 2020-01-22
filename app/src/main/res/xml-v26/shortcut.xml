@@ -6,9 +6,9 @@
         android:shortcutShortLabel="@string/search">
         <intent
             android:action="android.intent.action.MAIN"
+            android:data="checkfirm://search/shortcut"
             android:targetClass="com.illusion.checkfirm.main.MainActivity"
-            android:targetPackage="com.illusion.checkfirm"
-            android:data="checkfirm://search/shortcut" />
+            android:targetPackage="com.illusion.checkfirm" />
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.illusion.checkfirm.search.SearchActivity"

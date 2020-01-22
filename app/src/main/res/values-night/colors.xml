@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="backgroundColor">#ff000000</color>
+    <color name="background_color">#ff000000</color>
     <color name="switch_card_background_on">#4197fe</color>
     <color name="switch_card_background_off">#252525</color>
     <color name="button_ripple_color">#515151</color>

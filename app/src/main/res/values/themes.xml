@@ -9,11 +9,11 @@
         <item name="bottomSheetDialogTheme">@style/BottomDialog</item>
         <item name="textAppearanceHeadline6">@style/CardViewTitle</item>
         <item name="toolbarStyle">@style/Toolbar</item>
-        <item name="android:windowBackground">@color/backgroundColor</item>
-        <item name="android:statusBarColor">@color/backgroundColor</item>
+        <item name="android:windowBackground">@color/background_color</item>
+        <item name="android:statusBarColor">@color/background_color</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
-        <item name="android:navigationBarColor" tools:targetApi="27">@color/backgroundColor</item>
+        <item name="android:navigationBarColor" tools:targetApi="27">@color/background_color</item>
         <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
     </style>
 

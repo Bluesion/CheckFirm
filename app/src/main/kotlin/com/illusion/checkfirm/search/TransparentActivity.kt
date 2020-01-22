@@ -20,11 +20,11 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class TransparentActivity : AppCompatActivity() {
-
     private val baseURL = "https://fota-cloud-dn.ospserver.net/firmware/"
     private val officialURL = "/version.xml"
     private val testURL = "/version.test.xml"
 
+    private lateinit var sharedPrefs: SharedPreferences
     private lateinit var searchDevice: SharedPreferences
     private lateinit var searchResult: SharedPreferences
     private lateinit var resultEditor: SharedPreferences.Editor
@@ -44,6 +44,7 @@ class TransparentActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         unknown = getString(R.string.smart_search_unknown)
 
+        sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         searchDevice = getSharedPreferences("search_device", Context.MODE_PRIVATE)
         searchResult = getSharedPreferences("search_result", Context.MODE_PRIVATE)
         resultEditor = searchResult.edit()
@@ -58,7 +59,6 @@ class TransparentActivity : AppCompatActivity() {
     }
 
     inner class SearchThread(private val total: Int, private val current: Int, private val model: String, private val csc: String) : Thread() {
-
         private var latestOfficial = ""
         private var latestTest = ""
         private lateinit var officialFirmware: ArrayList<String>
@@ -116,7 +116,7 @@ class TransparentActivity : AppCompatActivity() {
             intent.putExtra("total", total - 1)
             resultEditor.commit()
 
-            if (latestOfficial.isBlank() && latestTest.isBlank()) {
+            if (sharedPrefs.getBoolean("china", false)) {
                 resultEditor.putString("first_discovery_date_$current", unknown)
                 resultEditor.putString("changelog_$current", unknown)
                 resultEditor.putString("downgrade_$current", unknown)
@@ -124,18 +124,28 @@ class TransparentActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_OK, intent)
                 finish()
                 overridePendingTransition(0, 0)
-            } else if (latestOfficial.isNotBlank() && latestTest.isBlank()) {
-                resultEditor.putString("first_discovery_date_$current", unknown)
-                resultEditor.putString("changelog_$current", unknown)
-                resultEditor.putString("downgrade_$current", unknown)
-                resultEditor.apply()
-                setResult(Activity.RESULT_OK, intent)
-                finish()
-                overridePendingTransition(0, 0)
-            } else if (latestOfficial.isBlank() && latestTest.isNotBlank()) {
-                smartSearch(1, current)
             } else {
-                smartSearch(0, current)
+                if (latestOfficial.isBlank() && latestTest.isBlank()) {
+                    resultEditor.putString("first_discovery_date_$current", unknown)
+                    resultEditor.putString("changelog_$current", unknown)
+                    resultEditor.putString("downgrade_$current", unknown)
+                    resultEditor.apply()
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                    overridePendingTransition(0, 0)
+                } else if (latestOfficial.isNotBlank() && latestTest.isBlank()) {
+                    resultEditor.putString("first_discovery_date_$current", unknown)
+                    resultEditor.putString("changelog_$current", unknown)
+                    resultEditor.putString("downgrade_$current", unknown)
+                    resultEditor.apply()
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                    overridePendingTransition(0, 0)
+                } else if (latestOfficial.isBlank() && latestTest.isNotBlank()) {
+                    smartSearch(1, current)
+                } else {
+                    smartSearch(0, current)
+                }
             }
         }
     }

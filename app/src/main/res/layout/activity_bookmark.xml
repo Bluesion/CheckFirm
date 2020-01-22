@@ -4,9 +4,9 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/appbar"
         android:background="?android:windowBackground"
         app:elevation="0dp">
 
@@ -22,44 +22,44 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bookmark"
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/expanded_title"
-                    android:textSize="40sp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    style="@style/TextAppearance.Design.CollapsingToolbar.Expanded" />
-
-                <TextView
-                    android:id="@+id/expanded_subtitle"
+                    style="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    style="@style/TextAppearance.MaterialComponents.Caption" />
+                    android:text="@string/bookmark"
+                    android:textSize="40sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/expanded_subtitle"
+                    style="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom"
-                app:navigationIcon="@drawable/ic_back"
                 app:contentInsetStartWithNavigation="0dp"
-                app:layout_collapseMode="pin">
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_back">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
+                    style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/title"
-                    android:text="@string/bookmark"
                     android:gravity="center_vertical"
-                    style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+                    android:text="@string/bookmark" />
 
-            </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -69,8 +69,8 @@
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="6dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="6dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

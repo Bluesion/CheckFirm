@@ -8,7 +8,7 @@ import android.widget.CompoundButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,7 +45,7 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         val one = sharedPrefs.getBoolean("one", true)
         val welcome = sharedPrefs.getBoolean("welcome", false)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.title = ""
         setSupportActionBar(toolbar)
         val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
@@ -98,7 +98,7 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
                         val bookmarkChip = Chip(this)
                         bookmarkChip.text = element.name
                         bookmarkChip.isCheckable = false
-                        bookmarkChip.setOnClickListener { _ ->
+                        bookmarkChip.setOnClickListener {
                             if (modelList.size >= 4) {
                                 Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
                             } else {

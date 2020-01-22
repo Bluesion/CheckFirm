@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -81,7 +81,7 @@ class SearchActivity : AppCompatActivity() {
 
         val addButton = findViewById<AppCompatImageView>(R.id.add)
         addButton.setOnClickListener {
-            if (searchList.size >= 4) {
+            if (searchList.size >= 10) {
                 Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
             } else {
                 val modelString = model.text!!.trim().toString().toUpperCase(Locale.US)
@@ -123,7 +123,7 @@ class SearchActivity : AppCompatActivity() {
                             searchList.add(item)
                             search()
                         } else {
-                            if (searchList.size >= 4) {
+                            if (searchList.size >= 10) {
                                 Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
                             } else {
                                 addToSearchList(item)
@@ -175,7 +175,7 @@ class SearchActivity : AppCompatActivity() {
                                 searchList.add(item)
                                 search()
                             } else {
-                                if (searchList.size >= 4) {
+                                if (searchList.size >= 10) {
                                     Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
                                 } else {
                                     addToSearchList(item)
@@ -208,7 +208,7 @@ class SearchActivity : AppCompatActivity() {
                         searchList.add(item)
                         search()
                     } else {
-                        if (searchList.size >= 4) {
+                        if (searchList.size >= 10) {
                             Toast.makeText(this@SearchActivity, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
                         } else {
                             addToSearchList(item)
@@ -223,7 +223,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onDeleteClicked(position: Int) {
                 historyList.removeAt(position)
 
-                for (i in 0..4) {
+                for (i in 0..9) {
                     historyEditor.putString("search_history_model_$i", "")
                     historyEditor.putString("search_history_csc_$i", "")
                     historyEditor.putString("search_history_date_$i", "")
@@ -244,7 +244,7 @@ class SearchActivity : AppCompatActivity() {
         historyRecyclerView.layoutManager = historyLayout
         historyRecyclerView.adapter = historyAdapter
 
-        for (i in 0..4) {
+        for (i in 0..9) {
             val model = historyPrefs.getString("search_history_model_$i", "")!!
             val csc = historyPrefs.getString("search_history_csc_$i", "")!!
             val date = historyPrefs.getString("search_history_date_$i", "")!!
@@ -328,7 +328,7 @@ class SearchActivity : AppCompatActivity() {
         val formatter = SimpleDateFormat("yyyy.MM.dd", Locale.KOREAN)
         val date = formatter.format(today)
 
-        for (i in 0..4) {
+        for (i in 0..9) {
             val tempModel = historyPrefs.getString("search_history_model_$i", "")
             val tempCsc = historyPrefs.getString("search_history_csc_$i", "")
             if (model == tempModel && csc == tempCsc) {
@@ -338,8 +338,8 @@ class SearchActivity : AppCompatActivity() {
         }
 
         if (!duplicated) {
-            if (historyList.size >= 5) {
-                for (i in 4 downTo 0) {
+            if (historyList.size >= 10) {
+                for (i in 9 downTo 0) {
                     val index = i + 1
                     historyEditor.putString("search_history_model_$index", historyPrefs.getString("search_history_model_$i", ""))
                     historyEditor.putString("search_history_csc_$index", historyPrefs.getString("search_history_csc_$i", ""))
@@ -422,7 +422,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.title = ""
         setSupportActionBar(toolbar)
 
@@ -437,8 +437,8 @@ class SearchActivity : AppCompatActivity() {
             mAppBar.setExpanded(false)
         }
 
-        val title = findViewById<TextView>(R.id.title)
-        val expandedTitle = findViewById<TextView>(R.id.expanded_title)
+        val title = findViewById<MaterialTextView>(R.id.title)
+        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)

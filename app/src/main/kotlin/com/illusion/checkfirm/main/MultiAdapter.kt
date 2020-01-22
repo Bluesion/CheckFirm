@@ -17,13 +17,6 @@ class MultiAdapter(val context: Context, private val isOfficial: Boolean, privat
                    private var itemList: List<MainItem>, private var smartList: List<SmartItem>,
                    val onClickListener: MyAdapterListener) : RecyclerView.Adapter<MultiAdapter.MyViewHolder>() {
 
-    enum class Colors(val color: String) {
-        GREEN("#8BC34A"),
-        AMBER("#FFC107"),
-        GRAY("#607D8B"),
-        BROWN("#795548")
-    }
-
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val card: MaterialCardView = view.findViewById(R.id.card)
         var image: AppCompatImageView = view.findViewById(R.id.image)
