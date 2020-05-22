@@ -10,7 +10,7 @@
         android:layout_height="?attr/actionBarSize"
         app:navigationIcon="@drawable/ic_back" />
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="24dp">
@@ -20,19 +20,23 @@
             style="?textAppearanceHeadline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:text="@string/app_name"
-            android:textColor="?actionMenuTextColor" />
+            android:textColor="?actionMenuTextColor"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <LinearLayout
             android:id="@+id/version_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/app_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/app_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textview.MaterialTextView
                 style="?textAppearanceBody2"
@@ -52,9 +56,10 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/version_layout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/version_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <ProgressBar
                 android:id="@+id/progress"
@@ -83,17 +88,34 @@
         </FrameLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/contributor"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:text="@string/contributor"
+            android:textColor="?actionMenuTextColor"
+            app:backgroundTint="@color/button_ripple_color"
+            app:cornerRadius="26dp"
+            app:layout_constraintBottom_toTopOf="@id/legal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/legal"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_above="@id/license"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
             android:text="@string/legal"
             android:textColor="?actionMenuTextColor"
             app:backgroundTint="@color/button_ripple_color"
-            app:cornerRadius="26dp" />
+            app:cornerRadius="26dp"
+            app:layout_constraintBottom_toTopOf="@id/license"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/license"
@@ -105,8 +127,11 @@
             android:text="@string/license"
             android:textColor="?actionMenuTextColor"
             app:backgroundTint="@color/button_ripple_color"
-            app:cornerRadius="26dp" />
+            app:cornerRadius="26dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -24,19 +24,19 @@ class BookmarkAdapter(private var bookmarkList: List<BookmarkEntity>,
         init {
             layout.setOnClickListener {
                 onClickListener.onLayoutClicked(
-                        bookmarkList[adapterPosition].model,
-                        bookmarkList[adapterPosition].csc
+                        bookmarkList[bindingAdapterPosition].model,
+                        bookmarkList[bindingAdapterPosition].csc
                 )
             }
             edit.setOnClickListener {
                 onClickListener.onEditClicked(
-                        bookmarkList[adapterPosition].id!!,
-                        bookmarkList[adapterPosition].name,
-                        bookmarkList[adapterPosition].model,
-                        bookmarkList[adapterPosition].csc
+                        bookmarkList[bindingAdapterPosition].id!!,
+                        bookmarkList[bindingAdapterPosition].name,
+                        bookmarkList[bindingAdapterPosition].model,
+                        bookmarkList[bindingAdapterPosition].csc
                 )
             }
-            delete.setOnClickListener { onClickListener.onDeleteClicked(bookmarkList[adapterPosition].device) }
+            delete.setOnClickListener { onClickListener.onDeleteClicked(bookmarkList[bindingAdapterPosition].device) }
         }
     }
 

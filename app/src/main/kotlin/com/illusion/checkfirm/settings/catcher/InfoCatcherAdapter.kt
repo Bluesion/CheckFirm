@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.settings
+package com.illusion.checkfirm.settings.catcher
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -18,7 +18,7 @@ class InfoCatcherAdapter(private val context: Context, private var deviceList: L
         var device: MaterialTextView = view.findViewById(R.id.device)
 
         init {
-            delete.setOnClickListener { onClickListener.onDeleteClicked(deviceList[adapterPosition].device) }
+            delete.setOnClickListener { onClickListener.onDeleteClicked(deviceList[bindingAdapterPosition].device) }
         }
     }
 

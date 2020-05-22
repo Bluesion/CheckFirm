@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import java.util.*
@@ -33,13 +34,13 @@ class BookmarkDialog : BottomSheetDialogFragment() {
         model.setSelection(model.text!!.length)
         csc = rootView.findViewById(R.id.csc)
 
-        viewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
+        viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
 
-        val shouldUpdate = arguments!!.getBoolean("shouldUpdate")
-        val bundleId = arguments!!.getLong("id")
-        val bundleName = arguments!!.getString("name")
-        val bundleModel = arguments!!.getString("model")
-        val bundleCSC = arguments!!.getString("csc")
+        val shouldUpdate = requireArguments().getBoolean("shouldUpdate")
+        val bundleId = requireArguments().getLong("id")
+        val bundleName = requireArguments().getString("name")
+        val bundleModel = requireArguments().getString("model")
+        val bundleCSC = requireArguments().getString("csc")
 
         val title = rootView.findViewById<MaterialTextView>(R.id.title)
         if (shouldUpdate) {
@@ -69,9 +70,9 @@ class BookmarkDialog : BottomSheetDialogFragment() {
             val csc = csc.text!!.trim().toString().toUpperCase(Locale.US)
 
             if (shouldUpdate) {
-                viewModel.update(name, bundleId, model, csc)
+                viewModel.update(name, bundleId, model, csc, "")
             } else {
-                viewModel.insert(name, model, csc)
+                viewModel.insert(name, model, csc, "")
             }
             dismiss()
         }

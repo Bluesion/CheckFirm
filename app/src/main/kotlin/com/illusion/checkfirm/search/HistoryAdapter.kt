@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.primitive.HistoryItem
 import kotlin.math.min
 
 class HistoryAdapter(private val historyList: List<HistoryItem>,
@@ -21,8 +22,8 @@ class HistoryAdapter(private val historyList: List<HistoryItem>,
         var date: MaterialTextView = view.findViewById(R.id.date)
 
         init {
-            touch.setOnClickListener { onClickListener.onItemClicked(adapterPosition) }
-            delete.setOnClickListener { onClickListener.onDeleteClicked(adapterPosition) }
+            touch.setOnClickListener { onClickListener.onItemClicked(bindingAdapterPosition) }
+            delete.setOnClickListener { onClickListener.onDeleteClicked(bindingAdapterPosition) }
         }
     }
 
@@ -35,9 +36,9 @@ class HistoryAdapter(private val historyList: List<HistoryItem>,
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val history = historyList[position]
 
-        holder.model.text = history.getModel()
-        holder.csc.text = history.getCsc()
-        holder.date.text = history.getDate()
+        holder.model.text = history.model
+        holder.csc.text = history.csc
+        holder.date.text = history.date
     }
 
     override fun getItemCount(): Int {

@@ -12,7 +12,7 @@ class InfoCatcherViewModel(application: Application) : AndroidViewModel(applicat
     val allDevices: LiveData<List<InfoCatcherEntity>>
 
     init {
-        val catcherDao = InfoCatcherDatabase.getDatabase(application, viewModelScope).catcherDao()
+        val catcherDao = InfoCatcherDatabase.getDatabase(application).catcherDao()
         repository = InfoCatcherRepository(catcherDao)
         allDevices = repository.allDevices
     }

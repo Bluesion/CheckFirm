@@ -15,7 +15,7 @@ abstract class InfoCatcherDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: InfoCatcherDatabase? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope): InfoCatcherDatabase {
+        fun getDatabase(context: Context): InfoCatcherDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(context.applicationContext, InfoCatcherDatabase::class.java, "catcher_database").build()
                 INSTANCE = instance

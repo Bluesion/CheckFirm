@@ -7,9 +7,6 @@
     <string name="notification_channel_new_firmware">新固件</string>
     <string name="notification_channel_new_update">CheckFirm更新</string>
 
-    <!-- Contact Us -->
-    <string name="contact_dialog_title">你好 :)</string>
-
     <!-- Search -->
     <string name="latest_official">最新的官方固件</string>
     <string name="previous_official">以前的官方固件</string>
@@ -17,11 +14,16 @@
     <string name="unknown">未知</string>
     <string name="tab_main_1">官方</string>
 
+    <!-- Sherlock -->
+    <string name="sherlock">夏洛克</string>
+    <string name="sherlock_build">内部版本</string>
+    <string name="sherlock_correct">相同</string>
+
     <!-- Bookmark -->
     <string name="save">保存</string>
 
-    <!-- Help Firmware -->
-    <string name="firmware_help">如何读取固件信息？</string>
+    <!-- Help -->
+    <string name="help_manual_description">固件信息</string>
     <string name="firmware_0">基本固件信息</string>
     <string name="firmware_2">了解固件版本</string>
     <string name="firmware_18">紫色字</string>
@@ -30,9 +32,10 @@
     <string name="version">版本</string>
     <string name="update">更新</string>
     <string name="legal">法律信息</string>
+    <string name="contributor_localization">本土化</string>
 
     <!-- Settings -->
-    <string name="feature">功能</string>
+    <string name="notification">通知</string>
     <string name="theme_dark">深色</string>
     <string name="about">CheckFirm 信息</string>
     <string name="information">信息</string>
@@ -40,16 +43,37 @@
     <!-- Welcome Search -->
 
     <!-- Smart Search -->
+    <string name="smart_search_description">分析最新固件。 可能不正确。</string>
     <string name="smart_search_downgrade_possible">可能</string>
     <string name="smart_search_downgrade_impossible">不可能</string>
-    <string name="smart_search_unknown">未知</string>
+    <string name="smart_search_type_minor">小更新</string>
+    <string name="smart_search_type_major">重大更新</string>
+    <string name="smart_search_major_version">主要版本</string>
+    <string name="smart_search_build_date">建立日期</string>
+    <string name="smart_search_minor_version">次要版本</string>
+    <string name="smart_search_date_format">%1$s (%2$s年 %3$s)</string>
+    <string name="january">1月</string>
+    <string name="february">2月</string>
+    <string name="march">3月</string>
+    <string name="april">4月</string>
+    <string name="may">5月</string>
+    <string name="june">6月</string>
+    <string name="july">7月</string>
+    <string name="august">8月</string>
+    <string name="september">9月</string>
+    <string name="october">10月</string>
+    <string name="november">11月</string>
+    <string name="december">12月</string>
 
     <!-- Info Catcher -->
     <string name="info_catcher">消息通知</string>
     <string name="info_catcher_insert">加</string>
 
     <!-- Quick Search -->
-    <string name="quick_search">快搜索</string>
+
+    <!-- Inquiry -->
+    <string name="inquiry_new">新的主意</string>
+    <string name="contributor_chinese">中文</string>
 
     <!-- Beta -->
 </resources>

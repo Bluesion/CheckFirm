@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.primitive.SearchItem
 
 class SearchAdapter(val context: Context, private var searchList: List<SearchItem>,
                     val onClickListener: MyAdapterListener): RecyclerView.Adapter<SearchAdapter.MyViewHolder>() {
@@ -17,7 +18,7 @@ class SearchAdapter(val context: Context, private var searchList: List<SearchIte
         private val delete: AppCompatImageButton = view.findViewById(R.id.delete)
 
         init {
-            delete.setOnClickListener { onClickListener.onDeleteClicked(adapterPosition) }
+            delete.setOnClickListener { onClickListener.onDeleteClicked(bindingAdapterPosition) }
         }
     }
 
@@ -29,7 +30,7 @@ class SearchAdapter(val context: Context, private var searchList: List<SearchIte
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = searchList[position]
-        holder.device.text = String.format(context.getString(R.string.device_format), data.getModel(), data.getCsc())
+        holder.device.text = String.format(context.getString(R.string.device_format), data.model, data.csc)
     }
 
     override fun getItemCount(): Int {

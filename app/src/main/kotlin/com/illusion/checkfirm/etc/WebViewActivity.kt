@@ -1,6 +1,5 @@
-package com.illusion.checkfirm.search
+package com.illusion.checkfirm.etc
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -9,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.illusion.checkfirm.R
 
-@SuppressLint("SetJavaScriptEnabled")
 class WebViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +29,6 @@ class WebViewActivity : AppCompatActivity() {
         }
 
         val webView = findViewById<WebView>(R.id.webview)
-        webView.settings.javaScriptEnabled = true
         webView.settings.setAppCacheEnabled(true)
         webView.settings.cacheMode = WebSettings.LOAD_DEFAULT
         webView.settings.setAppCachePath(cacheDir.path)

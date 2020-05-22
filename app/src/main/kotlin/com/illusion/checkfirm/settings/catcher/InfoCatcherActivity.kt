@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.settings
+package com.illusion.checkfirm.settings.catcher
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,7 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.ViewModelProviders
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
@@ -23,6 +24,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.messaging.FirebaseMessaging
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import com.illusion.checkfirm.database.catcher.InfoCatcherViewModel
@@ -44,30 +46,10 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         mEditor = sharedPrefs.edit()
-        val one = sharedPrefs.getBoolean("one", true)
+
+        initToolbar()
+
         val catcher = sharedPrefs.getBoolean("catcher", false)
-
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        toolbar.title = ""
-        setSupportActionBar(toolbar)
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        val height = (resources.displayMetrics.heightPixels * 0.3976)
-        val lp = mAppBar.layoutParams
-        lp.height = height.toInt()
-        if (one) {
-            mAppBar.setExpanded(true)
-        } else {
-            mAppBar.setExpanded(false)
-        }
-
-        val title = findViewById<MaterialTextView>(R.id.title)
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
-        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
-            val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
-            expandedTitle.alpha = 1 - (percentage * 2 * -1)
-            title.alpha = percentage * -1
-        })
-
         switchCard = findViewById(R.id.switch_card)
         switchText = findViewById(R.id.switch_text)
         val catcherSwitch = findViewById<SwitchMaterial>(R.id.catcher_switch)
@@ -78,7 +60,6 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
             catcherSwitch.isChecked = false
             switchText.text = getString(R.string.switch_off)
         }
-
         catcherSwitch.setOnCheckedChangeListener(this)
 
         val catcherLayout = findViewById<ConstraintLayout>(R.id.catcher_layout)
@@ -92,7 +73,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
         val model = findViewById<TextInputEditText>(R.id.model)
         val csc = findViewById<TextInputEditText>(R.id.csc)
 
-        bmViewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
+        bmViewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
         bmViewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { bookmarks ->
             bookmarks?.let {
                 if (it.isEmpty()) {
@@ -139,7 +120,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
         })
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-        icViewModel = ViewModelProviders.of(this).get(InfoCatcherViewModel::class.java)
+        icViewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(InfoCatcherViewModel::class.java)
         icViewModel.allDevices.observe(this, androidx.lifecycle.Observer { devices ->
             devices?.let {
                 adapter.setDevices(it)
@@ -157,11 +138,11 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
         when (p0.id) {
             R.id.catcher_switch -> {
                 if (isChecked) {
-                    switchCard.background = getDrawable(R.color.switch_card_background_on)
+                    switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_on)
                     mEditor.putBoolean("catcher", true)
                     switchText.text = getString(R.string.switch_on)
                 } else {
-                    switchCard.background = getDrawable(R.color.switch_card_background_off)
+                    switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_off)
                     mEditor.putBoolean("catcher", false)
                     switchText.text = getString(R.string.switch_off)
                 }
@@ -178,5 +159,30 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initToolbar() {
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val toolbarText = getString(R.string.info_catcher)
+        val title = findViewById<MaterialTextView>(R.id.title)
+        title.text = toolbarText
+        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        expandedTitle.text = toolbarText
+
+        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
+        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+            val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
+            expandedTitle.alpha = 1 - (percentage * 2 * -1)
+            title.alpha = percentage * -1
+        })
+
+        val one = sharedPrefs.getBoolean("one", true)
+        if (one) {
+            mAppBar.setExpanded(true)
+        } else {
+            mAppBar.setExpanded(false)
+        }
     }
 }

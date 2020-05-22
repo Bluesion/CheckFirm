@@ -1,0 +1,11 @@
+<resources>
+    <plurals name="bookmark_subtitle">
+        <item quantity="one">%d закладка</item>
+        <item quantity="other">%d закладок</item>
+    </plurals>
+
+    <plurals name="saved_devices">
+        <item quantity="one">Сохраненные устройства:</item>
+        <item quantity="other">Сохраненные устройства:</item>
+    </plurals>
+</resources>

@@ -10,8 +10,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.MaterialToolbar
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +21,11 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textview.MaterialTextView
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
+import com.illusion.checkfirm.primitive.HistoryItem
+import com.illusion.checkfirm.primitive.SearchItem
 import com.illusion.checkfirm.utils.Tools
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,9 +44,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var model: EditText
     private lateinit var csc: EditText
     private lateinit var imm: InputMethodManager
-    private lateinit var helpLayout: MaterialCardView
-    private lateinit var helpModel: MaterialTextView
-    private lateinit var helpCsc: MaterialTextView
     private lateinit var viewModel: BookmarkViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,9 +89,7 @@ class SearchActivity : AppCompatActivity() {
                 if (modelString.isBlank() || cscString.isBlank()) {
                     Toast.makeText(this, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
                 } else {
-                    val item = SearchItem()
-                    item.setModel(modelString)
-                    item.setCsc(cscString)
+                    val item = SearchItem(modelString, cscString)
                     addToSearchList(item)
                     searchAdapter.notifyDataSetChanged()
                     searchLists.text = String.format(getString(R.string.multi_search_lists), searchList.size)
@@ -104,7 +102,7 @@ class SearchActivity : AppCompatActivity() {
             search()
         }
 
-        // 공통
+        // COMMON
         model = findViewById(R.id.model)
         csc = findViewById(R.id.csc)
         model.setSelection(model.text!!.length)
@@ -116,9 +114,7 @@ class SearchActivity : AppCompatActivity() {
                     if (modelString.isBlank() || cscString.isBlank()) {
                         Toast.makeText(this, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
                     } else {
-                        val item = SearchItem()
-                        item.setModel(modelString)
-                        item.setCsc(cscString)
+                        val item = SearchItem(modelString, cscString)
                         if (sharedPrefs.getString("search_mode", "single") == "single") {
                             searchList.add(item)
                             search()
@@ -140,8 +136,8 @@ class SearchActivity : AppCompatActivity() {
         }
 
         val quick = findViewById<MaterialCardView>(R.id.quick)
-        val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-        viewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
+        val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chip_group)
+        viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
         viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer {
             if (it.isEmpty()) {
                 if (historyList.isEmpty()) {
@@ -168,9 +164,7 @@ class SearchActivity : AppCompatActivity() {
                                 Toast.makeText(this, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            val item = SearchItem()
-                            item.setModel(modelString)
-                            item.setCsc(cscString)
+                            val item = SearchItem(modelString, cscString)
                             if (sharedPrefs.getString("search_mode", "single") == "single") {
                                 searchList.add(item)
                                 search()
@@ -191,19 +185,17 @@ class SearchActivity : AppCompatActivity() {
             }
         })
 
-        historyRecyclerView = findViewById(R.id.historyRecyclerView)
+        historyRecyclerView = findViewById(R.id.history_recyclerview)
         historyAdapter = HistoryAdapter(historyList, object : HistoryAdapter.MyAdapterListener {
             override fun onItemClicked(position: Int) {
-                model.setText(historyList[position].getModel())
-                csc.setText(historyList[position].getCsc())
+                model.setText(historyList[position].model)
+                csc.setText(historyList[position].csc)
                 val modelString = model.text!!.trim().toString().toUpperCase(Locale.US)
                 val cscString = csc.text!!.trim().toString().toUpperCase(Locale.US)
                 if (modelString.isBlank() || cscString.isBlank()) {
                     Toast.makeText(this@SearchActivity, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
                 } else {
-                    val item = SearchItem()
-                    item.setModel(modelString)
-                    item.setCsc(cscString)
+                    val item = SearchItem(modelString, cscString)
                     if (sharedPrefs.getString("search_mode", "single") == "single") {
                         searchList.add(item)
                         search()
@@ -230,9 +222,9 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 for (i in 0 until historyList.size) {
-                    historyEditor.putString("search_history_model_$i", historyList[i].getModel())
-                    historyEditor.putString("search_history_csc_$i", historyList[i].getCsc())
-                    historyEditor.putString("search_history_date_$i", historyList[i].getDate())
+                    historyEditor.putString("search_history_model_$i", historyList[i].model)
+                    historyEditor.putString("search_history_csc_$i", historyList[i].csc)
+                    historyEditor.putString("search_history_date_$i", historyList[i].date)
                 }
 
                 historyEditor.apply()
@@ -250,19 +242,12 @@ class SearchActivity : AppCompatActivity() {
             val date = historyPrefs.getString("search_history_date_$i", "")!!
 
             if (model.isNotBlank() && csc.isNotBlank()) {
-                val item = HistoryItem()
-                item.setModel(model)
-                item.setCsc(csc)
-                item.setDate(date)
+                val item = HistoryItem(model, csc, date)
                 historyList.add(item)
             }
         }
 
         // SINGLE SEARCH
-        helpLayout = findViewById(R.id.help)
-        helpModel = findViewById(R.id.my_model)
-        helpCsc = findViewById(R.id.my_csc)
-        initHelp()
         val searchButton = findViewById<AppCompatImageView>(R.id.search)
         searchButton.setOnClickListener {
             val modelString = model.text!!.trim().toString().toUpperCase(Locale.US)
@@ -270,9 +255,7 @@ class SearchActivity : AppCompatActivity() {
             if (modelString.isBlank() || cscString.isBlank()) {
                 Toast.makeText(this, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
             } else {
-                val item = SearchItem()
-                item.setModel(modelString)
-                item.setCsc(cscString)
+                val item = SearchItem(modelString, cscString)
                 searchList.add(item)
                 search()
             }
@@ -288,8 +271,6 @@ class SearchActivity : AppCompatActivity() {
             tab2.setTextAppearance(R.style.SearchButton_Unselected)
             sharedPrefs.edit().putString("search_mode", "single").apply()
 
-            helpLayout.visibility = View.VISIBLE
-            initHelp()
             searchButton.visibility = View.VISIBLE
             addButton.visibility = View.GONE
             multiLayout.visibility = View.GONE
@@ -300,7 +281,6 @@ class SearchActivity : AppCompatActivity() {
             tab2.setTextAppearance(R.style.SearchButton_Selected)
             sharedPrefs.edit().putString("search_mode", "multi").apply()
 
-            helpLayout.visibility = View.GONE
             searchButton.visibility = View.GONE
             addButton.visibility = View.VISIBLE
             if (searchList.isEmpty()) {
@@ -383,32 +363,19 @@ class SearchActivity : AppCompatActivity() {
         var modelString = ""
         var cscString = ""
         for (element in searchList) {
-            createHistory(element.getModel(), element.getCsc())
-            modelString += element.getModel() + "%"
-            cscString += element.getCsc() + "%"
+            createHistory(element.model, element.csc)
+            modelString += element.model + "%"
+            cscString += element.csc + "%"
         }
 
-        val save = sharedPrefs.getBoolean("saver", false)
-        if (save) {
-            if (Tools.isWifi(this)) {
-                intent.putExtra("model", modelString)
-                intent.putExtra("csc", cscString)
-                intent.putExtra("total", searchList.size)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
-            } else {
-                Toast.makeText(this, R.string.only_wifi, Toast.LENGTH_SHORT).show()
-            }
+        if (Tools.isOnline(this)) {
+            intent.putExtra("model", modelString)
+            intent.putExtra("csc", cscString)
+            intent.putExtra("total", searchList.size)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         } else {
-            if (Tools.isOnline(this)) {
-                intent.putExtra("model", modelString)
-                intent.putExtra("csc", cscString)
-                intent.putExtra("total", searchList.size)
-                setResult(Activity.RESULT_OK, intent)
-                finish()
-            } else {
-                Toast.makeText(this, R.string.check_network, Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(this, R.string.check_network, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -423,59 +390,37 @@ class SearchActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        toolbar.title = ""
         setSupportActionBar(toolbar)
-
-        val one = sharedPrefs.getBoolean("one", true)
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        val height = (resources.displayMetrics.heightPixels * 0.3976)
-        val lp = mAppBar.layoutParams
-        lp.height = height.toInt()
-        if (one) {
-            mAppBar.setExpanded(true)
-        } else {
-            mAppBar.setExpanded(false)
-        }
-
+        val toolbarText = getString(R.string.search)
         val title = findViewById<MaterialTextView>(R.id.title)
+        title.text = toolbarText
         val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        expandedTitle.text = toolbarText
+
+        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
-    }
 
-    private fun initHelp() {
-        if (sharedPrefs.getBoolean("help", true)) {
-            helpLayout.visibility = View.VISIBLE
-            val savedModel = sharedPrefs.getString("new_saved_model", "")!!
-            val savedCsc = sharedPrefs.getString("new_saved_csc", "")!!
-
-            helpModel.text = String.format(getString(R.string.my_model), savedModel)
-            helpCsc.text = String.format(getString(R.string.my_csc), savedCsc)
-
-            val myDeviceButton = findViewById<MaterialButton>(R.id.search_my_device)
-            myDeviceButton.setOnClickListener {
-                val item = SearchItem()
-                item.setModel(savedModel)
-                item.setCsc(savedCsc)
-                searchList.add(item)
-                search()
-            }
+        val one = sharedPrefs.getBoolean("one", true)
+        if (one) {
+            mAppBar.setExpanded(true)
         } else {
-            helpLayout.visibility = View.GONE
+            mAppBar.setExpanded(false)
         }
     }
 
     private fun addToSearchList(element: SearchItem) {
         var isDuplicated = false
-        val tempModel = element.getModel()
-        val tempCsc = element.getCsc()
+        val tempModel = element.model
+        val tempCsc = element.csc
 
         if (searchList.isNotEmpty()) {
             for (i in searchList.indices) {
-                if (tempModel == searchList[i].getModel() && tempCsc == searchList[i].getCsc()) {
+                if (tempModel == searchList[i].model && tempCsc == searchList[i].csc) {
                     isDuplicated = true
                 }
             }

@@ -12,7 +12,7 @@ import com.illusion.checkfirm.R
 
 class SingleAdapter(val context: Context, private val model: String, private val csc: String,
                     private val officialLatest: String, private val testLatest: String, private val isSmart: Boolean,
-                    private val date: String, private val downgrade: String, private val changelog: String,
+                    private val date: String, private val downgrade: String, private val type: String,
                     val onClickListener: MyAdapterListener) : RecyclerView.Adapter<SingleAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,11 +30,11 @@ class SingleAdapter(val context: Context, private val model: String, private val
         val detail: LinearLayout = view.findViewById(R.id.detail)
         var date: MaterialTextView = view.findViewById(R.id.smart_search_date)
         var downgrade: MaterialTextView = view.findViewById(R.id.smart_search_downgrade)
-        var changelog: MaterialTextView = view.findViewById(R.id.smart_search_changelog)
+        var type: MaterialTextView = view.findViewById(R.id.smart_search_type)
 
         init {
-            officialCard.setOnClickListener { v -> onClickListener.onOfficialCardClicked(v, adapterPosition) }
-            testCard.setOnClickListener { v -> onClickListener.onTestCardClicked(v, adapterPosition) }
+            officialCard.setOnClickListener { v -> onClickListener.onOfficialCardClicked(v, bindingAdapterPosition) }
+            testCard.setOnClickListener { v -> onClickListener.onTestCardClicked(v, bindingAdapterPosition) }
         }
     }
 
@@ -59,7 +59,7 @@ class SingleAdapter(val context: Context, private val model: String, private val
             holder.detail.visibility = View.VISIBLE
             holder.date.text = date
             holder.downgrade.text = downgrade
-            holder.changelog.text = changelog
+            holder.type.text = type
         } else {
             holder.detail.visibility = View.GONE
         }

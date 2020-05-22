@@ -10,8 +10,8 @@ import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.MaterialToolbar
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -21,16 +21,22 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textview.MaterialTextView
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.bookmark.BookmarkActivity
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import com.illusion.checkfirm.dialogs.SearchDialog
-import com.illusion.checkfirm.help.HelpFirmwareActivity
+import com.illusion.checkfirm.primitive.MainItem
+import com.illusion.checkfirm.primitive.PreviousItem
+import com.illusion.checkfirm.primitive.SmartSearchItem
 import com.illusion.checkfirm.search.TransparentActivity
 import com.illusion.checkfirm.search.SearchActivity
 import com.illusion.checkfirm.settings.SettingsActivity
+import com.illusion.checkfirm.settings.help.HelpActivity
+import com.illusion.checkfirm.settings.help.ManualActivity
+import com.illusion.checkfirm.settings.help.MyDeviceActivity
 import com.illusion.checkfirm.utils.Tools
-import java.util.ArrayList
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,7 +48,6 @@ class MainActivity : AppCompatActivity() {
     // Search Layouts
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     private lateinit var mResult: LinearLayout
-    private lateinit var mHelp: MaterialButton
 
     // Quick Search
     private lateinit var viewModel: BookmarkViewModel
@@ -75,21 +80,47 @@ class MainActivity : AppCompatActivity() {
 
         initToolbar()
         initQuick()
-        initHelpButton()
 
         if (Intent.ACTION_VIEW == intent.action) {
             val url = intent.data!!
-            val model = if (url.pathSegments[0].isBlank()) {
-                ""
-            } else {
-                url.pathSegments[0].toString()
+
+            when (url.pathSegments.size) {
+                0 -> {
+                    Toast.makeText(this, getString(R.string.link_share_error), Toast.LENGTH_SHORT).show()
+                }
+                1 -> {
+                    when (url.pathSegments[0].toString()) {
+                        "help" -> {
+                            val intent = Intent(this, HelpActivity::class.java)
+                            startActivity(intent)
+                        }
+                        "manual" -> {
+                            val intent = Intent(this, ManualActivity::class.java)
+                            startActivity(intent)
+                        }
+                        "mydevice" -> {
+                            val intent = Intent(this, MyDeviceActivity::class.java)
+                            startActivity(intent)
+                        }
+                        else -> {
+                            Toast.makeText(this, getString(R.string.link_share_error), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                else -> {
+                    val model = if (url.pathSegments[0].isBlank()) {
+                        ""
+                    } else {
+                        url.pathSegments[0].toString().toUpperCase(Locale.ENGLISH)
+                    }
+                    val csc = if (url.pathSegments[1].isBlank()) {
+                        ""
+                    } else {
+                        url.pathSegments[1].toString().toUpperCase(Locale.ENGLISH)
+                    }
+                    networkTask(model, csc, 0)
+                }
             }
-            val csc = if (url.pathSegments[1].isBlank()) {
-                ""
-            } else {
-                url.pathSegments[1].toString()
-            }
-            networkTask(model, csc, 0)
         } else {
             val welcome = sharedPrefs.getBoolean("welcome", false)
             if (welcome) {
@@ -106,35 +137,18 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            val save = sharedPrefs.getBoolean("saver", false)
-            val model = data!!.getStringExtra("model") as String
-            val csc = data.getStringExtra("csc") as String
-            val total = data.getIntExtra("total", 0)
-
-            if (save) {
-                if (Tools.isWifi(this)) {
-                    welcomeCardView.visibility = View.GONE
-                    networkTask(model, csc, total)
-                } else {
-                    Toast.makeText(this, R.string.only_wifi, Toast.LENGTH_SHORT).show()
-                }
+            if (Tools.isOnline(this)) {
+                val model = data!!.getStringExtra("model") as String
+                val csc = data.getStringExtra("csc") as String
+                val total = data.getIntExtra("total", 0)
+                
+                welcomeCardView.visibility = View.GONE
+                networkTask(model, csc, total)
             } else {
-                if (Tools.isOnline(this)) {
-                    welcomeCardView.visibility = View.GONE
-                    networkTask(model, csc, total)
-                } else {
-                    Toast.makeText(this, R.string.check_network, Toast.LENGTH_SHORT).show()
-                }
+                Toast.makeText(this, R.string.check_network, Toast.LENGTH_SHORT).show()
             }
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             mResult.visibility = View.VISIBLE
-
-            val help = sharedPrefs.getBoolean("help", true)
-            if (help) {
-                mHelp.visibility = View.VISIBLE
-            } else {
-                mHelp.visibility = View.GONE
-            }
 
             val tab = findViewById<LinearLayout>(R.id.tab_layout)
             var smart = sharedPrefs.getBoolean("smart", true)
@@ -150,7 +164,7 @@ class MainActivity : AppCompatActivity() {
             var previousTest: String
             var date: String
             var downgrade: String
-            var changelog: String
+            var type: String
 
             val total = data!!.getIntExtra("total", 0)
             val mRecyclerView = findViewById<RecyclerView>(R.id.search_result)
@@ -165,7 +179,7 @@ class MainActivity : AppCompatActivity() {
                 previousTest = searchResultPrefs.getString("previous_test_0", "")!!
                 date = searchResultPrefs.getString("first_discovery_date_0", "")!!
                 downgrade = searchResultPrefs.getString("downgrade_0", "")!!
-                changelog = searchResultPrefs.getString("changelog_0", "")!!
+                type = searchResultPrefs.getString("type_0", "")!!
 
                 latestOfficial = if (searchResultPrefs.getString("latest_official_0", "")!!.isBlank()) {
                     getString(R.string.search_error)
@@ -180,14 +194,16 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 val mAdapter = SingleAdapter(this, model, csc, latestOfficial, latestTest,
-                        smart, date, downgrade, changelog,object : SingleAdapter.MyAdapterListener {
+                        smart, date, downgrade, type, object : SingleAdapter.MyAdapterListener {
                     override fun onOfficialCardClicked(v: View, position: Int) {
-                        val bottomSheetFragment = SearchDialog.newInstance(true, model, csc, latestOfficial, previousOfficial)
+                        val bottomSheetFragment = SearchDialog.newInstance(true, model, csc, latestOfficial, previousOfficial,
+                                latestTest, previousTest)
                         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
 
                     override fun onTestCardClicked(v: View, position: Int) {
-                        val bottomSheetFragment = SearchDialog.newInstance(false, model, csc, latestTest, previousTest)
+                        val bottomSheetFragment = SearchDialog.newInstance(false, model, csc, latestOfficial, previousOfficial,
+                                latestTest, previousTest)
                         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
                 })
@@ -205,7 +221,7 @@ class MainActivity : AppCompatActivity() {
 
                 val resultList = ArrayList<MainItem>()
                 val previousList = ArrayList<PreviousItem>()
-                val smartList = ArrayList<SmartItem>()
+                val smartList = ArrayList<SmartSearchItem>()
                 resultList.clear()
                 previousList.clear()
                 smartList.clear()
@@ -217,33 +233,25 @@ class MainActivity : AppCompatActivity() {
                     previousOfficial = searchResultPrefs.getString("previous_official_$i", "")!!
                     previousTest = searchResultPrefs.getString("previous_test_$i", "")!!
 
-                    val item = MainItem()
-                    item.setModel(model)
-                    item.setCsc(csc)
-                    item.setOfficialLatest(latestOfficial)
-                    item.setTestLatest(latestTest)
+                    val item = MainItem(model, csc, latestOfficial, latestTest)
                     resultList.add(item)
 
-                    val previous = PreviousItem()
-                    previous.setOfficialPrevious(previousOfficial)
-                    previous.setTestPrevious(previousTest)
+                    val previous = PreviousItem(previousOfficial, previousTest)
                     previousList.add(previous)
 
                     date = searchResultPrefs.getString("first_discovery_date_$i", "")!!
                     downgrade = searchResultPrefs.getString("downgrade_$i", "")!!
-                    changelog = searchResultPrefs.getString("changelog_$i", "")!!
+                    type = searchResultPrefs.getString("type_$i", "")!!
 
-                    val element = SmartItem()
-                    element.setDate(date)
-                    element.setDowngrade(downgrade)
-                    element.setChangelog(changelog)
+                    val element = SmartSearchItem(date, downgrade, type)
                     smartList.add(element)
                 }
 
                 var mAdapter = MultiAdapter(this, isOfficial, smart, resultList, smartList, object : MultiAdapter.MyAdapterListener {
                     override fun onLayoutClicked(v: View, position: Int) {
-                        val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].getModel(),
-                                resultList[position].getCsc(), resultList[position].getOfficialLatest(), previousList[position].getOfficialPrevious())
+                        val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].model, resultList[position].csc,
+                                resultList[position].officialLatest, previousList[position].officialPrevious,
+                                resultList[position].testLatest, previousList[position].testPrevious)
                         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
                 })
@@ -256,8 +264,9 @@ class MainActivity : AppCompatActivity() {
                     smart = false
                     mAdapter = MultiAdapter(this, isOfficial, smart, resultList, smartList, object : MultiAdapter.MyAdapterListener {
                         override fun onLayoutClicked(v: View, position: Int) {
-                            val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].getModel(),
-                                    resultList[position].getCsc(), resultList[position].getOfficialLatest(), previousList[position].getOfficialPrevious())
+                            val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].model, resultList[position].csc,
+                                    resultList[position].officialLatest, previousList[position].officialPrevious,
+                                    resultList[position].testLatest, previousList[position].testPrevious)
                             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                         }
                     })
@@ -271,8 +280,9 @@ class MainActivity : AppCompatActivity() {
                     smart = !sharedPrefs.getBoolean("china", false)
                     mAdapter = MultiAdapter(this, isOfficial, smart, resultList, smartList, object : MultiAdapter.MyAdapterListener {
                         override fun onLayoutClicked(v: View, position: Int) {
-                            val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].getModel(),
-                                    resultList[position].getCsc(), resultList[position].getTestLatest(), previousList[position].getTestPrevious())
+                            val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].model, resultList[position].csc,
+                                    resultList[position].officialLatest, previousList[position].officialPrevious,
+                                    resultList[position].testLatest, previousList[position].testPrevious)
                             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                         }
                     })
@@ -282,6 +292,10 @@ class MainActivity : AppCompatActivity() {
 
             mSwipeRefreshLayout.isEnabled = false
             mSwipeRefreshLayout.isRefreshing = false
+        } else if (requestCode == 2 && resultCode == Activity.RESULT_CANCELED) {
+            mSwipeRefreshLayout.isEnabled = false
+            mSwipeRefreshLayout.isRefreshing = false
+            Toast.makeText(this, getString(R.string.search_timeout), Toast.LENGTH_SHORT).show()
         } else {
             mSwipeRefreshLayout.isEnabled = false
             mSwipeRefreshLayout.isRefreshing = false
@@ -316,45 +330,46 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        initHelpButton()
         initQuick()
     }
 
     private fun initToolbar() {
-        val one = sharedPrefs.getBoolean("one", true)
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        toolbar.title = ""
-        toolbar.overflowIcon = getDrawable(R.drawable.ic_more)
         setSupportActionBar(toolbar)
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        val height = (resources.displayMetrics.heightPixels * 0.3976)
-        val lp = mAppBar.layoutParams
-        lp.height = height.toInt()
-        if (one) {
-            mAppBar.setExpanded(true)
-        } else {
-            mAppBar.setExpanded(false)
-        }
+
+        val toolbarText = getString(R.string.app_name)
         val title = findViewById<MaterialTextView>(R.id.title)
+        title.text = toolbarText
         val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        expandedTitle.text = toolbarText
+
+        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
+
+        val one = sharedPrefs.getBoolean("one", true)
+        if (one) {
+            mAppBar.setExpanded(true)
+        } else {
+            mAppBar.setExpanded(false)
+        }
     }
 
     private fun initQuick() {
-        val chipScroll = findViewById<HorizontalScrollView>(R.id.chipScroll)
+        val chipScroll = findViewById<HorizontalScrollView>(R.id.chip_scroll)
         val quick = sharedPrefs.getBoolean("quick", false)
         if (quick) {
-            viewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
+            viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
             viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { bookmarks ->
                 bookmarks?.let {
                     if (it.isEmpty()) {
                         chipScroll.visibility = View.GONE
                     } else {
-                        val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chipGroup)
+                        val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chip_group)
                         bookmarkChipGroup.removeAllViews()
                         for (element in it) {
                             val bookmarkChip = Chip(this)
@@ -375,55 +390,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initHelpButton() {
-        mHelp = findViewById(R.id.help)
-        mHelp.setOnClickListener {
-            val intent = Intent(this, HelpFirmwareActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
     private fun welcomeSearch() {
-        val save = sharedPrefs.getBoolean("saver", false)
-        val total = searchDevicePrefs.getInt("welcome_search_total", 0)
-        var model = ""
-        var csc = ""
+        if (Tools.isOnline(this)) {
+            val total = searchDevicePrefs.getInt("welcome_search_total", 0)
+            var model = ""
+            var csc = ""
 
-        for (i in 0..total) {
-            val tempModel = searchDevicePrefs.getString("welcome_search_model_$i", "")
-            val tempCsc = searchDevicePrefs.getString("welcome_search_csc_$i", "")
+            for (i in 0..total) {
+                val tempModel = searchDevicePrefs.getString("welcome_search_model_$i", "")
+                val tempCsc = searchDevicePrefs.getString("welcome_search_csc_$i", "")
 
-            model += if (tempModel!!.isBlank()) {
-                sharedPrefs.getString("new_saved_model", "SM-A720S") + "%"
-            } else {
-                "$tempModel%"
+                model += if (tempModel!!.isBlank()) {
+                    sharedPrefs.getString("new_saved_model", "SM-A720S") + "%"
+                } else {
+                    "$tempModel%"
+                }
+
+                csc += if (tempCsc!!.isBlank()) {
+                    sharedPrefs.getString("new_saved_csc", "SKC") + "%"
+                } else {
+                    "$tempCsc%"
+                }
             }
-
-            csc += if (tempCsc!!.isBlank()) {
-                sharedPrefs.getString("new_saved_csc", "SKC") + "%"
-            } else {
-                "$tempCsc%"
-            }
-        }
-
-        if (save) {
-            if (Tools.isWifi(this)) {
-                welcomeCardView.visibility = View.GONE
-                networkTask(model, csc, total + 1)
-            } else {
-                welcomeTitle.text = getString(R.string.wifi)
-                welcomeText.text = getString(R.string.welcome_wifi)
-                welcomeCardView.visibility = View.VISIBLE
-            }
+            welcomeCardView.visibility = View.GONE
+            networkTask(model, csc, total + 1)
         } else {
-            if (Tools.isOnline(this)) {
-                welcomeCardView.visibility = View.GONE
-                networkTask(model, csc, total + 1)
-            } else {
-                welcomeTitle.text = getString(R.string.online)
-                welcomeText.text = getString(R.string.welcome_online)
-                welcomeCardView.visibility = View.VISIBLE
-            }
+            welcomeTitle.text = getString(R.string.check_network)
+            welcomeText.text = getString(R.string.welcome_online)
+            welcomeCardView.visibility = View.VISIBLE
         }
     }
 

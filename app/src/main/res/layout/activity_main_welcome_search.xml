@@ -1,4 +1,5 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/welcome"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,11 +12,11 @@
         android:layout_margin="14dp"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/cardview_point"
-            android:tint="@color/red" />
+            app:srcCompat="@drawable/cardview_point"
+            app:tint="@color/red" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/welcome_title"

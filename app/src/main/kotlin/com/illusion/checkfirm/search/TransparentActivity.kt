@@ -1,6 +1,5 @@
 package com.illusion.checkfirm.search
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
@@ -36,26 +35,54 @@ class TransparentActivity : AppCompatActivity() {
     private var model = ""
     private var csc = ""
     private var unknown = ""
+    private var error = ""
 
-    @SuppressLint("CommitPrefEdits")
+    // ArrayList that helps closing this activity safely
+    private lateinit var list: IntArray
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         db = FirebaseFirestore.getInstance()
-        unknown = getString(R.string.smart_search_unknown)
+        unknown = getString(R.string.unknown)
+        error = getString(R.string.search_error)
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         searchDevice = getSharedPreferences("search_device", Context.MODE_PRIVATE)
         searchResult = getSharedPreferences("search_result", Context.MODE_PRIVATE)
         resultEditor = searchResult.edit()
+        resultEditor.apply()
 
         val total = intent!!.getIntExtra("total", 1)
+        list = IntArray(total) { 0 }
         for (i in 0 until total) {
             model = searchDevice.getString("search_model_$i", "")!!
             csc = searchDevice.getString("search_csc_$i", "")!!
 
             SearchThread(total, i, model, csc).start()
         }
+
+        val tempList = IntArray(total) { 1 }
+        var isCloseable = false
+        Thread {
+            for (i in 0..9) {
+                Thread.sleep(1000)
+                if (tempList.contentEquals(list)) {
+                    isCloseable = true
+                    break
+                }
+            }
+
+            if (isCloseable) {
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+                overridePendingTransition(0, 0)
+            } else {
+                setResult(Activity.RESULT_CANCELED, intent)
+                finish()
+                overridePendingTransition(0, 0)
+            }
+        }.start()
     }
 
     inner class SearchThread(private val total: Int, private val current: Int, private val model: String, private val csc: String) : Thread() {
@@ -109,38 +136,51 @@ class TransparentActivity : AppCompatActivity() {
                     .replace(", ", "\n")
                     .replace("[", "")
                     .replace("]", "")
-            resultEditor.putString("latest_official_$current", latestOfficial)
-            resultEditor.putString("previous_official_$current", previousOfficial)
-            resultEditor.putString("latest_test_$current", latestTest)
-            resultEditor.putString("previous_test_$current", previousTest)
+            if (latestOfficial.isBlank()) {
+                resultEditor.putString("latest_official_$current", error)
+            } else {
+                resultEditor.putString("latest_official_$current", latestOfficial)
+            }
+
+            if (previousOfficial.isBlank()) {
+                resultEditor.putString("previous_official_$current", error)
+            } else {
+                resultEditor.putString("previous_official_$current", previousOfficial)
+            }
+
+            if (latestTest.isBlank()) {
+                resultEditor.putString("latest_test_$current", error)
+            } else {
+                resultEditor.putString("latest_test_$current", latestTest)
+            }
+
+            if (previousTest.isBlank()) {
+                resultEditor.putString("previous_test_$current", error)
+            } else {
+                resultEditor.putString("previous_test_$current", previousTest)
+            }
             intent.putExtra("total", total - 1)
             resultEditor.commit()
 
             if (sharedPrefs.getBoolean("china", false)) {
                 resultEditor.putString("first_discovery_date_$current", unknown)
-                resultEditor.putString("changelog_$current", unknown)
+                resultEditor.putString("type_$current", unknown)
                 resultEditor.putString("downgrade_$current", unknown)
                 resultEditor.apply()
-                setResult(Activity.RESULT_OK, intent)
-                finish()
-                overridePendingTransition(0, 0)
+                list[current] = 1
             } else {
                 if (latestOfficial.isBlank() && latestTest.isBlank()) {
                     resultEditor.putString("first_discovery_date_$current", unknown)
-                    resultEditor.putString("changelog_$current", unknown)
+                    resultEditor.putString("type_$current", unknown)
                     resultEditor.putString("downgrade_$current", unknown)
                     resultEditor.apply()
-                    setResult(Activity.RESULT_OK, intent)
-                    finish()
-                    overridePendingTransition(0, 0)
+                    list[current] = 1
                 } else if (latestOfficial.isNotBlank() && latestTest.isBlank()) {
                     resultEditor.putString("first_discovery_date_$current", unknown)
-                    resultEditor.putString("changelog_$current", unknown)
+                    resultEditor.putString("type_$current", unknown)
                     resultEditor.putString("downgrade_$current", unknown)
                     resultEditor.apply()
-                    setResult(Activity.RESULT_OK, intent)
-                    finish()
-                    overridePendingTransition(0, 0)
+                    list[current] = 1
                 } else if (latestOfficial.isBlank() && latestTest.isNotBlank()) {
                     smartSearch(1, current)
                 } else {
@@ -150,8 +190,6 @@ class TransparentActivity : AppCompatActivity() {
         }
     }
 
-    // @@@@@@ -> 검색 결과 없음
-    // ###### -> 암호화 펌웨어
     private fun smartSearch(check: Int, current: Int) {
         val latestOfficial = searchResult.getString("latest_official_$current", "")!!
         val latestTest = searchResult.getString("latest_test_$current", "")!!
@@ -169,55 +207,29 @@ class TransparentActivity : AppCompatActivity() {
                     add(check, current)
                 } else {
                     val currentOfficial = if (check == 1) {
-                        "@@@@@@@"
+                        "??????"
                     } else {
-                        when {
-                            latestOfficial.length < 6 -> {
-                                "@@@@@@@"
-                            }
-                            latestOfficial.contains(".") -> {
-                                val index = latestOfficial.indexOf(".")
-                                latestOfficial.substring(index - 6, index)
-                            }
-                            latestOfficial.contains("/") -> {
-                                val index = latestOfficial.indexOf("/")
-                                latestOfficial.substring(index - 6, index)
-                            }
-                            else -> "######"
-                        }
+                        Tools.getFirmwareInfo(latestOfficial)
                     }
 
-                    val currentTest = when {
-                        latestTest.length < 6 -> {
-                            "@@@@@@@"
-                        }
-                        latestTest.contains(".") -> {
-                            val index = latestTest.indexOf(".")
-                            latestTest.substring(index - 6, index)
-                        }
-                        latestTest.contains("/") -> {
-                            val index = latestTest.indexOf("/")
-                            latestTest.substring(index - 6, index)
-                        }
-                        else -> "######"
-                    }
+                    val currentTest = Tools.getFirmwareInfo(latestTest)
 
                     resultEditor.putString("first_discovery_date_$current", firestoreDate)
 
-                    if (currentTest[2] == '#' || currentTest[2] == '@') {
-                        resultEditor.putString("changelog_$current", unknown)
+                    if (currentTest[2] == '?') {
+                        resultEditor.putString("type_$current", unknown)
                         resultEditor.putString("downgrade_$current", unknown)
                     } else {
                         val compare = currentOfficial[2].compareTo(currentTest[2])
                         when {
                             compare < 0 -> {
-                                resultEditor.putString("changelog_$current", getString(R.string.smart_search_changelog_os))
+                                resultEditor.putString("type_$current", getString(R.string.smart_search_type_major))
                             }
                             compare > 0 -> {
-                                resultEditor.putString("changelog_$current", getString(R.string.smart_search_changelog_rollback))
+                                resultEditor.putString("type_$current", getString(R.string.smart_search_type_rollback))
                             }
                             else -> {
-                                resultEditor.putString("changelog_$current", getString(R.string.smart_search_changelog_bugfix))
+                                resultEditor.putString("type_$current", getString(R.string.smart_search_type_minor))
                             }
                         }
 
@@ -235,9 +247,7 @@ class TransparentActivity : AppCompatActivity() {
                     }
                 }
                 resultEditor.commit()
-                setResult(Activity.RESULT_OK, intent)
-                finish()
-                overridePendingTransition(0, 0)
+                list[current] = 1
             }
         }
     }
@@ -255,6 +265,7 @@ class TransparentActivity : AppCompatActivity() {
         items["model"] = model
         items["csc"] = csc
         db.collection("A_NOTIFICATION").document("UPDATE").set(items)
+        list[current] = 1
     }
 
     private fun add(check: Int, current: Int) {
@@ -270,66 +281,40 @@ class TransparentActivity : AppCompatActivity() {
         resultEditor.putString("first_discovery_date_$current", date)
 
         val currentOfficial = if (check == 1) {
-            "@@@@@@"
+            "??????"
         } else {
-            when {
-                latestOfficial.length < 6 -> {
-                    "######"
-                }
-                latestOfficial.contains(".") -> {
-                    val index = latestOfficial.indexOf(".")
-                    latestOfficial.substring(index - 6, index)
-                }
-                latestOfficial.contains("/") -> {
-                    val index = latestOfficial.indexOf("/")
-                    latestOfficial.substring(index - 6, index)
-                }
-                else -> "######"
-            }
+            Tools.getFirmwareInfo(latestOfficial)
         }
 
-        val currentTest = when {
-            latestTest.length < 6 -> {
-                "######"
-            }
-            latestTest.contains(".") -> {
-                val index = latestTest.indexOf(".")
-                latestTest.substring(index - 6, index)
-            }
-            latestTest.contains("/") -> {
-                val index = latestTest.indexOf("/")
-                latestTest.substring(index - 6, index)
-            }
-            else -> "######"
-        }
+        val currentTest = Tools.getFirmwareInfo(latestTest)
 
-        val condition = currentTest == "######"
+        val condition = (currentTest == "??????")
 
-        resultEditor.putString("changelog_$current", "")
+        resultEditor.putString("type_$current", "")
         resultEditor.putString("downgrade_$current", "")
 
         if (currentOfficial == currentTest) {
             if (condition) {
-                resultEditor.putString("changelog_$current", unknown)
+                resultEditor.putString("type_$current", unknown)
                 resultEditor.putString("downgrade_$current", unknown)
             } else {
-                resultEditor.putString("changelog_$current", getString(R.string.smart_search_changelog_bugfix))
+                resultEditor.putString("type_$current", getString(R.string.smart_search_type_minor))
                 resultEditor.putString("downgrade_$current", getString(R.string.smart_search_downgrade_possible))
             }
         } else {
             if (condition) {
-                resultEditor.putString("changelog_$current", unknown)
+                resultEditor.putString("type_$current", unknown)
             } else {
                 val compare = currentOfficial[2].compareTo(currentTest[2])
                 when {
                     compare < 0 -> {
-                        resultEditor.putString("changelog_$current", getString(R.string.smart_search_changelog_os))
+                        resultEditor.putString("type_$current", getString(R.string.smart_search_type_major))
                     }
                     compare > 0 -> {
-                        resultEditor.putString("changelog_$current", getString(R.string.smart_search_changelog_rollback))
+                        resultEditor.putString("type_$current", getString(R.string.smart_search_type_rollback))
                     }
                     else -> {
-                        resultEditor.putString("changelog_$current", getString(R.string.smart_search_changelog_bugfix))
+                        resultEditor.putString("type_$current", getString(R.string.smart_search_type_minor))
                     }
                 }
             }
@@ -348,9 +333,7 @@ class TransparentActivity : AppCompatActivity() {
         db.collection(model).document(csc).set(items)
         resultEditor.apply()
 
-        setResult(Activity.RESULT_OK, intent)
-        finish()
-        overridePendingTransition(0, 0)
+        list[current] = 1
     }
 
     override fun onBackPressed() {

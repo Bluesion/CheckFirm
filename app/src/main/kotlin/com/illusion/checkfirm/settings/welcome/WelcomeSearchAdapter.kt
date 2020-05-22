@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.settings
+package com.illusion.checkfirm.settings.welcome
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ class WelcomeSearchAdapter(private val context: Context, private val modelList: 
         var device: MaterialTextView = view.findViewById(R.id.device)
 
         init {
-            delete.setOnClickListener { onClickListener.onDeleteClicked(adapterPosition) }
+            delete.setOnClickListener { onClickListener.onDeleteClicked(bindingAdapterPosition) }
         }
     }
 

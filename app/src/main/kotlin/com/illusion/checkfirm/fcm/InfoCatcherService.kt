@@ -1,20 +1,24 @@
 package com.illusion.checkfirm.fcm
 
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.illusion.checkfirm.main.MainActivity
 import com.illusion.checkfirm.R
 
-@SuppressLint("MissingFirebaseInstanceTokenRefresh")
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class InfoCatcherService : FirebaseMessagingService() {
+
+    override fun onNewToken(p0: String) {
+        super.onNewToken(p0)
+        Log.d("CheckFirm New Token", p0)
+    }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         if (remoteMessage.data["model"] == "update" || remoteMessage.data["csc"] == "update") {

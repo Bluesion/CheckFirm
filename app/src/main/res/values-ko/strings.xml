@@ -27,10 +27,12 @@
     <string name="welcome_online">자동 검색 기능을 사용하시려면 네트워크에 연결해주세요.</string>
     <string name="clipboard">클립보드에 복사했습니다.</string>
     <string name="search_error">검색에 실패하였습니다. 해당 디바이스의 정보가 삼성 서버에 존재하지 않습니다.</string>
+    <string name="search_timeout">시간이 너무 오래 걸려 검색을 종료하였습니다.</string>
     <string name="searching">검색 중입니다. 잠시만 기다려주세요.</string>
     <string name="changelog">업데이트 내역</string>
     <string name="link_share">링크 공유</string>
     <string name="link_shared">링크가 복사되었습니다.</string>
+    <string name="link_share_error">링크 공유 오류: 링크가 잘못된 것 같습니다.</string>
     <string name="single_search">일반 검색</string>
     <string name="multi_search">다중 검색</string>
     <string name="multi_search_lists">아래 %d개의 디바이스를 검색합니다.</string>
@@ -42,7 +44,6 @@
     <string name="sherlock">셜록</string>
     <string name="sherlock_build">빌드 버전</string>
     <string name="sherlock_baseband">기저대역 버전</string>
-    <string name="sherlock_convert">변환</string>
     <string name="sherlock_samsung_encrypted_text">최신 테스트 펌웨어 암호화 텍스트</string>
     <string name="sherlock_user_encrypted_text">변환된 펌웨어 암호화 텍스트</string>
     <string name="sherlock_correct">일치합니다.</string>
@@ -61,7 +62,7 @@
     <string name="help_device_info">디바이스 정보</string>
     <string name="help_device_info_description">모델명, CSC</string>
     <string name="help_manual">사용설명서</string>
-    <string name="help_manual_description">펌웨어 정보 읽기</string>
+    <string name="help_manual_description">펌웨어 정보</string>
     <string name="firmware_0">기본 펌웨어 정보</string>
     <string name="firmware_1">펌웨어 정보는 빌드 버전, CSC 버전, 기저대역 버전 정보로 이루어져 있습니다.\n\n예를 들어, 펌웨어 정보 검색 결과가 아래와 같다면\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\n맨 앞의 정보(A720SKSU3BRK1)는 빌드 버전을 의미하며,\n가운데 정보(A720SSKC3BRK1)는 CSC 버전,\n마지막 정보(A720NKOU3BRK1)는 기저대역 버전을 뜻합니다.</string>
     <string name="firmware_2">펌웨어 정보 읽기</string>
@@ -69,7 +70,7 @@
     <string name="firmware_10">빨간색 글자</string>
     <string name="firmware_11">빨간색 글자(예시: U3)는 부트로더 버전을 의미합니다.\n\n삼성의 보안 정책상, 부트로더 버전이 높은 펌웨어에서 낮은 펌웨어로 다운그레이드가 불가능합니다.</string>
     <string name="firmware_12">노란색 글자</string>
-    <string name="firmware_13">노란색 글자(예시: B)는 메이저 버전을 의미합니다.\n이 부분이 바뀌면 안드로이드 OS 버전 혹은 One UI 버전이 업그레이드 됨을 암시합니다.\n\n대부분의 경우 A는 초기 출시 안드로이드 버전을 뜻하며,\nB는 안드로이드 업데이트를 1번 받았음을 의미하고,\nC는 안드로이드 업데이트를 2번 받았음을 의미합니다.\n.\n.\n.\nZ는 베타 펌웨어임을 의미합니다.</string>
+    <string name="firmware_13">노란색 글자(예시: B)는 메이저 버전을 의미합니다.\n이 부분이 바뀌면 안드로이드 OS 버전 혹은 One UI 버전이 업그레이드 됨을 암시합니다.\n\n대부분의 경우 A는 초기 출시 메이저 버전을 뜻하며,\nB는 메이저 업데이트를 1번 받았음을 의미하고,\nC는 메이저 업데이트를 2번 받았음을 의미합니다.\n.\n.\n.\nZ는 베타 펌웨어임을 의미합니다.</string>
     <string name="firmware_14">초록색 글자</string>
     <string name="firmware_15">초록색 글자(예시: R)는 연도를 의미합니다.\n\nR은 2018년,\nS는 2019년,\nT는 2020년을 의미합니다.</string>
     <string name="firmware_16">파란색 글자</string>
@@ -88,13 +89,13 @@
     <string name="update">업데이트</string>
     <string name="contributor">기여자</string>
     <string name="contributor_application">애플리케이션</string>
-    <string name="contributor_design">디자인</string>
+    <string name="contributor_designer">디자인</string>
     <string name="contributor_developer">제작</string>
     <string name="contributor_source">소스코드</string>
     <string name="contributor_localization">현지화</string>
     <string name="contributor_language">언어</string>
     <string name="contributor_russian">러시아어</string>
-    <string name="contributor_thanks">번역자</string>
+    <string name="contributor_translator">번역자</string>
     <string name="license">라이선스</string>
     <string name="legal">법적 고지</string>
     <string name="legal_text">정식 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.xml 에서 불러옵니다.\n\n테스트 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.test.xml 에서 불러옵니다.\n\n위 링크는 삼성전자가 소비자에게 정식으로 펌웨어 정보를 제공하는 경로가 아니며, 이 정보의 이용에 대한 책임은 모두 사용자에게 있습니다.</string>
@@ -128,14 +129,27 @@
     <string name="smart_search_downgrade">다운그레이드</string>
     <string name="smart_search_downgrade_possible">가능</string>
     <string name="smart_search_downgrade_impossible">불가능</string>
-    <string name="smart_search_category">분류</string>
-    <string name="smart_search_category_major">메이저 업데이트</string>
-    <string name="smart_search_category_minor">마이너 업데이트</string>
-    <string name="smart_search_category_rollback">롤백 상태</string>
+    <string name="smart_search_type">타입</string>
+    <string name="smart_search_type_major">메이저 업데이트</string>
+    <string name="smart_search_type_minor">마이너 업데이트</string>
+    <string name="smart_search_type_rollback">롤백 상태</string>
     <string name="smart_search_bootloader">부트로더 버전</string>
     <string name="smart_search_major_version">메이저 버전</string>
     <string name="smart_search_build_date">빌드 날짜</string>
     <string name="smart_search_minor_version">마이너 버전</string>
+    <string name="smart_search_date_format">%1$s (%2$s년 %3$s)</string>
+    <string name="january">1월</string>
+    <string name="february">2월</string>
+    <string name="march">3월</string>
+    <string name="april">4월</string>
+    <string name="may">5월</string>
+    <string name="june">6월</string>
+    <string name="july">7월</string>
+    <string name="august">8월</string>
+    <string name="september">9월</string>
+    <string name="october">10월</string>
+    <string name="november">11월</string>
+    <string name="december">12월</string>
 
     <!-- Info Catcher -->
     <string name="info_catcher">알리미</string>
@@ -154,6 +168,7 @@
     <string name="inquiry_bug">오류 제보</string>
     <string name="inquiry_question">질문</string>
     <string name="inquiry_send">전송</string>
+    <string name="contributor_chinese">중국어</string>
 
     <!-- Beta -->
 </resources>

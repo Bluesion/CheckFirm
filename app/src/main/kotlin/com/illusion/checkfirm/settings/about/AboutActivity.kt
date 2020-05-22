@@ -1,11 +1,8 @@
-package com.illusion.checkfirm.settings
+package com.illusion.checkfirm.settings.about
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.provider.Settings
 import android.view.Menu
 import android.view.View
@@ -18,35 +15,24 @@ import com.illusion.checkfirm.BuildConfig
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.dialogs.LegalDialog
 import com.illusion.checkfirm.utils.Tools
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
-import java.io.IOException
-import java.lang.ref.WeakReference
 
 class AboutActivity : AppCompatActivity() {
 
     private lateinit var latest: MaterialTextView
     private lateinit var update: MaterialButton
     private lateinit var progress: ProgressBar
-    private var latestVersion = 0
-
-    private val mHandler = MyHandler(this@AboutActivity)
-
-    private class MyHandler(activity: AboutActivity) : Handler() {
-        private val mActivity: WeakReference<AboutActivity> = WeakReference(activity)
-
-        override fun handleMessage(msg: Message) {
-            val activity = mActivity.get()
-            activity?.handleMessage()
-        }
-    }
-
-    private fun handleMessage() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        toolbar.title = ""
         setSupportActionBar(toolbar)
 
         val version = findViewById<MaterialTextView>(R.id.version)
@@ -55,31 +41,24 @@ class AboutActivity : AppCompatActivity() {
         progress = findViewById(R.id.progress)
         latest = findViewById(R.id.latest)
         update = findViewById(R.id.update)
-        val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val save = sharedPrefs.getBoolean("saver", false)
-        if (save) {
-            if (Tools.isWifi(applicationContext)) {
-                networkTask()
-            } else {
-                progress.visibility = View.GONE
-                latest.text = getString(R.string.wifi)
-                latest.visibility = View.VISIBLE
-                update.visibility = View.GONE
-            }
+        if (Tools.isOnline(applicationContext)) {
+            backgroundTask()
         } else {
-            if (Tools.isOnline(applicationContext)) {
-                networkTask()
-            } else {
-                progress.visibility = View.GONE
-                latest.text = getString(R.string.online)
-                latest.visibility = View.VISIBLE
-                update.visibility = View.GONE
-            }
+            progress.visibility = View.GONE
+            latest.text = getString(R.string.check_network)
+            latest.visibility = View.VISIBLE
+            update.visibility = View.GONE
         }
         update.setOnClickListener {
             val goPlayStore = Intent(Intent.ACTION_VIEW)
             goPlayStore.data = Uri.parse("market://details?id=" + applicationContext.packageName)
             startActivity(goPlayStore)
+        }
+
+        val contributor = findViewById<MaterialButton>(R.id.contributor)
+        contributor.setOnClickListener {
+            val intent = Intent(this, ContributorActivity::class.java)
+            startActivity(intent)
         }
 
         val legal = findViewById<MaterialButton>(R.id.legal)
@@ -116,33 +95,26 @@ class AboutActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun networkTask() {
-        object : Thread() {
-            override fun run() {
-                try {
-                    val doc = Jsoup.connect("https://github.com/gpillusion/CheckFirm/blob/master/VERSION").get()
-                    val version = doc.select("#LC4")
+    private fun backgroundTask() {
+        CoroutineScope(Dispatchers.Main).launch {
+            var data = 100
+            withContext(Dispatchers.IO) {
+                val doc = Jsoup.connect("https://github.com/gpillusion/CheckFirm/blob/master/VERSION").get()
+                val version = doc.select("#LC4")
 
-                    for (el in version) {
-                        latestVersion = Integer.parseInt(el.text())
-                    }
-
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-
-                mHandler.post {
-                    progress.visibility = View.GONE
-                    if (BuildConfig.VERSION_CODE >= latestVersion) {
-                        latest.visibility = View.VISIBLE
-                        update.visibility = View.GONE
-                    } else {
-                        latest.visibility = View.GONE
-                        update.visibility = View.VISIBLE
-                    }
-                    mHandler.sendEmptyMessage(0)
+                for (el in version) {
+                    data = Integer.parseInt(el.text())
                 }
             }
-        }.start()
+
+            progress.visibility = View.GONE
+            if (BuildConfig.VERSION_CODE >= data) {
+                latest.visibility = View.VISIBLE
+                update.visibility = View.GONE
+            } else {
+                latest.visibility = View.GONE
+                update.visibility = View.VISIBLE
+            }
+        }
     }
 }

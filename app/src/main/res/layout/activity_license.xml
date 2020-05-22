@@ -1,334 +1,249 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <include layout="@layout/toolbar_expandable" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:contentInsetStartWithNavigation="0dp"
-        app:navigationIcon="@drawable/ic_back" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:text="CheckFirm"
-            android:textAppearance="?textAppearanceCaption" />
-
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
+            android:layout_margin="10dp"
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/apache"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="13dp">
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Apache 2.0"
+                android:textAppearance="?textAppearanceCaption" />
 
-                <LinearLayout
-                    android:id="@+id/designer"
-                    android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="13dp">
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/library"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text="Designed by"
+                        android:text="Library"
                         android:textAppearance="?textAppearanceBody1"
-                        android:textColor="?colorAccent" />
+                        android:textColor="?colorAccent"
+                        app:layout_constraintBottom_toTopOf="@id/library_androidx"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/library_androidx"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Newfit"
-                        android:textAppearance="?textAppearanceBody1" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/developer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/github"
-                    app:layout_constraintStart_toEndOf="@id/designer"
-                    app:layout_constraintTop_toTopOf="parent">
+                        android:text="AndroidX"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toTopOf="@id/library_browser"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/library" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/library_browser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Android Browser Helper"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toTopOf="@id/library_firebase"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/library_androidx" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/library_firebase"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Firebase"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toTopOf="@id/library_material"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/library_browser" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/library_material"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Material Components"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/library_firebase" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text="Developed by"
+                        android:text="Copyright (C)"
                         android:textAppearance="?textAppearanceBody1"
-                        android:textColor="?colorAccent" />
+                        android:textColor="?colorAccent"
+                        app:layout_constraintBottom_toTopOf="@id/author_androidx"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author_androidx"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="gpillusion"
-                        android:textAppearance="?textAppearanceBody1" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/github"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                        android:text="Google"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toTopOf="@id/author_firebase"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/author" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author_firebase"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Google"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toTopOf="@id/author_material"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/author_androidx" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author_material"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Google"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toTopOf="@id/author_browser"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/author_firebase" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author_browser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Google"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/author_material" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="MIT"
+                android:textAppearance="?textAppearanceCaption" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="13dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/library_mit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text="Source on"
+                        android:text="Library"
                         android:textAppearance="?textAppearanceBody1"
-                        android:textColor="?colorAccent" />
+                        android:textColor="?colorAccent"
+                        app:layout_constraintBottom_toTopOf="@id/library_jsoup"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/library_jsoup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GitHub"
-                        android:textAppearance="?textAppearanceBody1" />
+                        android:text="Jsoup"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toTopOf="@id/library_castle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/library_mit" />
 
-                </LinearLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/library_castle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sponge Castle"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/library_jsoup" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author_mit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Copyright (C)"
+                        android:textAppearance="?textAppearanceBody1"
+                        android:textColor="?colorAccent"
+                        app:layout_constraintBottom_toTopOf="@id/author_jsoup"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author_jsoup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jonathan Hedley"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toTopOf="@id/author_castle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/author_mit" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/apache"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
-            android:background="?selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Apache 2.0"
-            android:textAppearance="?textAppearanceCaption" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author_castle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="rtyley"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/author_jsoup" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="13dp">
+            </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/library"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Library"
-                    android:textAppearance="?textAppearanceBody1"
-                    android:textColor="?colorAccent"
-                    app:layout_constraintBottom_toTopOf="@id/library_androidx"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/library_androidx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="AndroidX"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/library_browser"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/library" />
+        </LinearLayout>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/library_browser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Android Browser Helper"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/library_firebase"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/library_androidx" />
+    </androidx.core.widget.NestedScrollView>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/library_firebase"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Firebase"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/library_material"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/library_browser" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/library_material"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Material Components"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/library_firebase" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Copyright (C)"
-                    android:textAppearance="?textAppearanceBody1"
-                    android:textColor="?colorAccent"
-                    app:layout_constraintBottom_toTopOf="@id/author_androidx"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/author_androidx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Google"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/author_firebase"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/author" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/author_firebase"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Google"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/author_material"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/author_androidx" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/author_material"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Google"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/author_browser"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/author_firebase" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/author_browser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Google"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/author_material" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
-            android:background="?selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="MIT"
-            android:textAppearance="?textAppearanceCaption" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="13dp">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/library_mit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Library"
-                    android:textAppearance="?textAppearanceBody1"
-                    android:textColor="?colorAccent"
-                    app:layout_constraintBottom_toTopOf="@id/library_jsoup"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/library_jsoup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jsoup"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/library_mit" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/author_mit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Copyright (C)"
-                    android:textAppearance="?textAppearanceBody1"
-                    android:textColor="?colorAccent"
-                    app:layout_constraintBottom_toTopOf="@id/author_jsoup"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/author_jsoup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jonathan Hedley"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/author_mit" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

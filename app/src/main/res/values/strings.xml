@@ -7,23 +7,51 @@
     <string name="default_string" translatable="false">SM-</string>
     <string name="default_symbol" translatable="false">&#160;·&#160;</string>
     <string name="device_format" translatable="false">%1$s (%2$s)</string>
-    <string name="my_csc" translatable="false">CSC: %s</string>
     <string name="firmware_4" translatable="false">A720SKS</string>
     <string name="firmware_5" translatable="false">U3</string>
     <string name="firmware_6" translatable="false">B</string>
     <string name="firmware_7" translatable="false">R</string>
     <string name="firmware_8" translatable="false">K</string>
     <string name="firmware_9" translatable="false">1</string>
+    <string name="contributor_newfit" translatable="false">Newfit</string>
+    <string name="contributor_bluesion" translatable="false">Bluesion</string>
+    <string name="contributor_github" translatable="false">GitHub</string>
+    <string name="contributor_russian_translator" translatable="false">Adam Visitov</string>
+    <string name="contributor_chinese_translator" translatable="false">dididada9856</string>
+    <string name="smart_search_date_format">%1$s (%3$s, %2$s)</string>
+    <string name="year_a" translatable="false">2027</string>
+    <string name="year_b" translatable="false">2028</string>
+    <string name="year_c" translatable="false">2029</string>
+    <string name="year_d" translatable="false">2030</string>
+    <string name="year_e" translatable="false">2031</string>
+    <string name="year_f" translatable="false">2032</string>
+    <string name="year_g" translatable="false">2033</string>
+    <string name="year_h" translatable="false">2034</string>
+    <string name="year_i" translatable="false">2009</string>
+    <string name="year_j" translatable="false">2020</string>
+    <string name="year_k" translatable="false">2011</string>
+    <string name="year_l" translatable="false">2012</string>
+    <string name="year_m" translatable="false">2013</string>
+    <string name="year_n" translatable="false">2014</string>
+    <string name="year_o" translatable="false">2015</string>
+    <string name="year_p" translatable="false">2016</string>
+    <string name="year_q" translatable="false">2017</string>
+    <string name="year_r" translatable="false">2018</string>
+    <string name="year_s" translatable="false">2019</string>
+    <string name="year_t" translatable="false">2020</string>
+    <string name="year_u" translatable="false">2021</string>
+    <string name="year_v" translatable="false">2022</string>
+    <string name="year_w" translatable="false">2023</string>
+    <string name="year_x" translatable="false">2024</string>
+    <string name="year_y" translatable="false">2025</string>
+    <string name="year_z" translatable="false">2026</string>
 
     <!-- General -->
     <string name="check_network">Please check network</string>
-    <string name="only_wifi">Please check Wi-Fi</string>
-    <string name="help">Help</string>
-    <string name="online">Connect to network</string>
-    <string name="wifi">Connect to Wi-Fi</string>
     <string name="switch_on">On</string>
     <string name="switch_off">Off</string>
     <string name="close">Close</string>
+    <string name="unknown">Unknown</string>
 
     <!-- Notification -->
     <string name="notification_channel_new_firmware">New Firmware</string>
@@ -33,13 +61,6 @@
     <string name="info_catcher_notification_title">%1$s (%2$s) new firmware found!</string>
     <string name="info_catcher_notification_text">Check it now.</string>
 
-    <!-- Contact Us -->
-    <string name="contact_us">About Developers</string>
-    <string name="contact_dialog_title">Hello :)</string>
-    <string name="contact_dialog_text">Email us if you want to say something.</string>
-    <string name="contact_developer">Developer (gpillusion)</string>
-    <string name="contact_designer">Designer (Newfit)</string>
-
     <!-- Search -->
     <string name="latest_official">Latest Official Firmware</string>
     <string name="latest_test">Latest Test Firmware</string>
@@ -48,24 +69,30 @@
     <string name="previous_test">Previous Test Firmware</string>
     <string name="search">Search</string>
     <string name="welcome_disabled">How about turning on Welcome Search? Go to settings if you want to activate it.</string>
-    <string name="welcome_wifi">Data Saver is on. Please turn on Wi-Fi to use Welcome Search.</string>
     <string name="welcome_online">Please connect to network to use Welcome Search.</string>
     <string name="clipboard">Copied to clipboard.</string>
     <string name="search_error">Search failed. There is no data on Samsung server for this device.</string>
+    <string name="search_timeout">Too much time consumed. Searching automatically canceled.</string>
     <string name="searching">Still searching… Please wait for seconds</string>
     <string name="changelog">Changelog</string>
     <string name="link_share">Link Share</string>
     <string name="link_shared">Link copied.</string>
+    <string name="link_share_error">Link Share error: something is wrong with link.</string>
     <string name="single_search">Single Search</string>
     <string name="multi_search">Multiple Search</string>
-    <string name="my_device">TIP: My device</string>
-    <string name="my_model">Model: %s,</string>
-    <string name="unknown">Unknown</string>
-    <string name="my_device_search">Search my device</string>
     <string name="multi_search_lists">Search %d devices below.</string>
     <string name="multi_search_limit">You can search up to 4 devices</string>
     <string name="tab_main_1">Official</string>
     <string name="tab_main_2">Test</string>
+
+    <!-- Sherlock -->
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_build">Build version</string>
+    <string name="sherlock_baseband">Baseband version</string>
+    <string name="sherlock_samsung_encrypted_text">Latest test firmware encrypted text</string>
+    <string name="sherlock_user_encrypted_text">Converted encrypted text</string>
+    <string name="sherlock_correct">YOU GOT IT!</string>
+    <string name="sherlock_not_correct">Wrong… Try again</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Bookmark</string>
@@ -75,8 +102,12 @@
     <string name="save">Save</string>
     <string name="bookmark_search_error">Check if model and CSC code is correctly saved in bookmark.</string>
 
-    <!-- Help Firmware -->
-    <string name="firmware_help">TIP: How to read firmware info?</string>
+    <!-- Help -->
+    <string name="help">Help</string>
+    <string name="help_device_info">Device info</string>
+    <string name="help_device_info_description">Model, CSC</string>
+    <string name="help_manual">Manual</string>
+    <string name="help_manual_description">Firmware information</string>
     <string name="firmware_0">Basic Firmware Information</string>
     <string name="firmware_1">Firmware information consists of 3 information. Build version, CSC version, and baseband version.\n\nLet\'s suppose that firmware search result is\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nFirst one(A720SKSU3BRK1) refers build version,\nsecond one(A720SSKC3BRK1) refers CSC version,\nlast one(A720NKOU3BRK1) refers baseband version.</string>
     <string name="firmware_2">What do we know with firmware version?</string>
@@ -84,15 +115,17 @@
     <string name="firmware_10">Red text</string>
     <string name="firmware_11">Red text (ex. U3) means bootloader version.\n\nDue to Samsung\'s security policy, you cannot downgrade from higher bootloader version firmware to lower bootloader version firmware.</string>
     <string name="firmware_12">Yellow text</string>
-    <string name="firmware_13">Yellow text (ex. B) means Android OS version.\nIf yellow text is updated, it means Android OS is gonna be or has been updated.\n\nA means very first Android OS version.\nB means Android OS has been updated once.\nC means Android OS has been updated twice.\n.\n.\n.\nZ means beta firmware.</string>
+    <string name="firmware_13">Yellow text (ex. B) means major version.\nIf yellow text is updated, it means Android OS or One UI is going to be or has been updated.\n\nA means very first major version.\nB means major update has been released once.\nC means major update has been released twice.\n.\n.\n.\nZ means beta firmware.</string>
     <string name="firmware_14">Green text</string>
     <string name="firmware_15">Green text (ex. R) means year when firmware was built.\n\nR means 2018,\nS means 2019,\nT means 2020, and so on.</string>
     <string name="firmware_16">Blue text</string>
     <string name="firmware_17">Blue text (ex. K) means month when firmware was built.\n\nA means January,\nB means February,\n.\n.\n.\nL means December.</string>
     <string name="firmware_18">Purple text</string>
-    <string name="firmware_19">Purple text (ex. 1) means how many times firmware was built.\n\n1 means firmware was built once.\n.\n.\n.\n9 means firmware was built 9 times.\nA means firmware was built 10 times.\n.\n.\n.\nZ means firmware was built 35 times.</string>
-    <string name="firmware_20">When will test firmware be released?</string>
-    <string name="firmware_21">We cannot exactly assume it. But test firmware will be released soon if build version doesn\'t change more.</string>
+    <string name="firmware_19">Purple text (ex. 1) means how many times firmware was built (It means minor version).\n\n1 means firmware was built once.\n.\n.\n.\n9 means firmware was built 9 times.\nA means firmware was built 10 times.\n.\n.\n.\nF means firmware was built 16 times.</string>
+    <string name="firmware_20">What is .DM &amp; .BDM</string>
+    <string name="firmware_21">Sometimes there is .DM in test firmware info. DM means Developer Management and it means Samsung is testing that firmware.\n\nRarely there is .BDM in test firmware info. BDM means Broadband Developer Management and it means mobile carrier tests or checks up the firmware.</string>
+    <string name="firmware_22">When will test firmware be released?</string>
+    <string name="firmware_23">We cannot exactly assume it. But test firmware will be released soon if build version doesn\'t change more. It usually takes 3–5 weeks.</string>
 
     <!-- About -->
     <string name="app_information">App information</string>
@@ -101,10 +134,20 @@
     <string name="update">Update</string>
     <string name="license">License</string>
     <string name="legal">Legal Information</string>
-    <string name="legal_text">Official firmware information came from https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml.\n\nTest firmware information came from https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml.\n\nThey are not the official ways that Samsung Electronics provides firmware information to customers. Any use of this information is at your own risk.</string>
+    <string name="legal_text">Official firmware information came from https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml.\n\nTest firmware information came from https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml.\n\nThey are not the official ways that Samsung Electronics provides firmware information to customers. Any use of this information is at your own risk.</string>
+    <string name="contributor">Contributor</string>
+    <string name="contributor_application">Application</string>
+    <string name="contributor_designer">Designed by</string>
+    <string name="contributor_developer">Developed by</string>
+    <string name="contributor_source">Source on</string>
+    <string name="contributor_localization">Localization</string>
+    <string name="contributor_language">Language</string>
+    <string name="contributor_russian">Russian</string>
+    <string name="contributor_chinese">Chinese</string>
+    <string name="contributor_translator">Thanks to</string>
 
     <!-- Settings -->
-    <string name="feature">Features</string>
+    <string name="notification">Notification</string>
     <string name="design">Design</string>
     <string name="theme">Theme</string>
     <string name="theme_description">Set app theme.</string>
@@ -112,12 +155,8 @@
     <string name="theme_dark">Dark</string>
     <string name="theme_system">System default</string>
     <string name="about">About CheckFirm</string>
-    <string name="data_saver">Data Saver</string>
-    <string name="data_saver_description">Do all progresses that need Internet connection only when connected to Wi-Fi.</string>
     <string name="expandable_bar">Expandable Bar</string>
     <string name="expandable_bar_description">Use expandable bar.</string>
-    <string name="help_settings">TIP Button</string>
-    <string name="help_description">Show TIP buttons.</string>
     <string name="settings">Settings</string>
     <string name="information">Information</string>
     <string name="nation">Nation</string>
@@ -131,16 +170,31 @@
 
     <!-- Smart Search -->
     <string name="smart_search">Smart Search</string>
-    <string name="smart_search_description">Analyze the latest test firmware. It may be incorrect.</string>
+    <string name="smart_search_description">Analyze latest firmware. It may be incorrect.</string>
     <string name="smart_search_date">When discovered</string>
     <string name="smart_search_downgrade">Downgrade</string>
     <string name="smart_search_downgrade_possible">Possible</string>
     <string name="smart_search_downgrade_impossible">Impossible</string>
-    <string name="smart_search_changelog">What\'s new</string>
-    <string name="smart_search_changelog_os">OS Update</string>
-    <string name="smart_search_changelog_bugfix">Bug fixes</string>
-    <string name="smart_search_changelog_rollback">Roll back</string>
-    <string name="smart_search_unknown">Unknown</string>
+    <string name="smart_search_type">Type</string>
+    <string name="smart_search_type_major">Major update</string>
+    <string name="smart_search_type_minor">Minor update</string>
+    <string name="smart_search_type_rollback">Roll back</string>
+    <string name="smart_search_bootloader">Bootloader version</string>
+    <string name="smart_search_major_version">Major version</string>
+    <string name="smart_search_build_date">Build date</string>
+    <string name="smart_search_minor_version">Minor version</string>
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
 
     <!-- Info Catcher -->
     <string name="info_catcher">Info Catcher</string>
@@ -150,9 +204,15 @@
     <string name="info_catcher_insert">Add</string>
 
     <!-- Quick Search -->
-    <string name="quick_search">Quick Search</string>
-    <string name="quick_search_description">Show bookmarks on main screen.</string>
+    <string name="quick_search_bar">Quick search bar</string>
+    <string name="quick_search_bar_description">Show bookmarks on main screen.</string>
+
+    <!-- Inquiry -->
+    <string name="inquiry">Inquiry</string>
+    <string name="inquiry_new">New ideas</string>
+    <string name="inquiry_bug">Bug report</string>
+    <string name="inquiry_question">Questions</string>
+    <string name="inquiry_send">Send</string>
 
     <!-- Beta -->
-    <string name="beta">Beta</string>
 </resources>

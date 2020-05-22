@@ -34,14 +34,14 @@
                 android:orientation="vertical">
 
                 <HorizontalScrollView
-                    android:id="@+id/chipScroll"
+                    android:id="@+id/chip_scroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:overScrollMode="never"
                     android:scrollbars="none">
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup"
+                        android:id="@+id/chip_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:singleLine="true"
@@ -68,14 +68,6 @@
                             android:layout_height="wrap_content"
                             android:nestedScrollingEnabled="false"
                             android:overScrollMode="never" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/help"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/firmware_help"
-                            android:visibility="gone" />
 
                     </LinearLayout>
 

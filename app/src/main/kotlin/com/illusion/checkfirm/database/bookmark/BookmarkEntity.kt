@@ -10,4 +10,5 @@ class BookmarkEntity(@PrimaryKey(autoGenerate = true) var id: Long?,
                      @ColumnInfo(name = "name") var name: String,
                      @ColumnInfo(name = "model") var model: String,
                      @ColumnInfo(name = "csc") var csc: String,
-                     @ColumnInfo(name = "device") var device: String)
+                     @ColumnInfo(name = "device") var device: String,
+                     @ColumnInfo(name = "category") var category: String)

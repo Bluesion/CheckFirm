@@ -3,50 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:windowBackground"
-        app:elevation="0dp">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/expanded_title"
-                style="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/settings"
-                android:textSize="40sp" />
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="bottom"
-                app:contentInsetStartWithNavigation="0dp"
-                app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_back">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title"
-                    style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="@string/settings" />
-
-            </com.google.android.material.appbar.MaterialToolbar>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/toolbar_expandable" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -88,10 +45,8 @@
                             android:id="@+id/expandable_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="14dp"
-                            android:layout_marginBottom="13dp"
+                            android:layout_marginHorizontal="14dp"
+                            android:layout_marginVertical="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -125,8 +80,7 @@
                             android:id="@+id/expanded_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginEnd="14dp"
+                            android:layout_marginHorizontal="14dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/expandable_text"
@@ -142,27 +96,24 @@
                         android:background="#4D808080" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/help_layout"
+                        android:id="@+id/quick_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:minHeight="?android:attr/listPreferredItemHeight">
+                        android:gravity="center_vertical">
 
                         <LinearLayout
-                            android:id="@+id/help_text"
+                            android:id="@+id/quick_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="14dp"
-                            android:layout_marginBottom="13dp"
+                            android:layout_marginHorizontal="14dp"
+                            android:layout_marginVertical="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/help_switch"
+                            app:layout_constraintEnd_toStartOf="@id/quick_switch"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintHorizontal_chainStyle="packed"
                             app:layout_constraintHorizontal_weight="1"
@@ -176,26 +127,25 @@
                                 android:ellipsize="marquee"
                                 android:fadingEdge="horizontal"
                                 android:singleLine="true"
-                                android:text="@string/help_settings"
+                                android:text="@string/quick_search_bar"
                                 android:textSize="18sp" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 style="?android:attr/textAppearanceSmall"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/help_description" />
+                                android:text="@string/quick_search_bar_description" />
 
                         </LinearLayout>
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/help_switch"
+                            android:id="@+id/quick_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginEnd="14dp"
+                            android:layout_marginHorizontal="14dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/help_text"
+                            app:layout_constraintStart_toEndOf="@id/quick_text"
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -272,10 +222,8 @@
                             android:id="@+id/welcome_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="14dp"
-                            android:layout_marginBottom="13dp"
+                            android:layout_marginHorizontal="14dp"
+                            android:layout_marginVertical="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -320,8 +268,7 @@
                             android:id="@+id/welcome_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginEnd="14dp"
+                            android:layout_marginHorizontal="14dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/welcome_divider"
@@ -349,10 +296,8 @@
                             android:id="@+id/smart_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="14dp"
-                            android:layout_marginBottom="13dp"
+                            android:layout_marginHorizontal="14dp"
+                            android:layout_marginVertical="13dp"
                             android:orientation="vertical"
                             app:layout_constrainedWidth="true"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -385,76 +330,10 @@
                             android:id="@+id/smart_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginEnd="14dp"
+                            android:layout_marginHorizontal="14dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/smart_text"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:background="#4D808080" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/quick_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:id="@+id/quick_text"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="14dp"
-                            android:layout_marginBottom="13dp"
-                            android:orientation="vertical"
-                            app:layout_constrainedWidth="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/quick_switch"
-                            app:layout_constraintHorizontal_bias="0"
-                            app:layout_constraintHorizontal_chainStyle="packed"
-                            app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                style="?android:attr/textAppearanceLarge"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="marquee"
-                                android:fadingEdge="horizontal"
-                                android:singleLine="true"
-                                android:text="@string/quick_search"
-                                android:textSize="18sp" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                style="?android:attr/textAppearanceSmall"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/quick_search_description" />
-
-                        </LinearLayout>
-
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/quick_switch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginEnd="14dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/quick_text"
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -468,155 +347,79 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/feature" />
+                android:text="@string/notification" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/catcher_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/saver_layout"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/catcher_text"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="?selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_vertical">
+                        android:layout_marginHorizontal="14dp"
+                        android:layout_marginVertical="13dp"
+                        android:orientation="vertical"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/catcher_divider"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout
-                            android:id="@+id/saver_text"
-                            android:layout_width="0dp"
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?android:attr/textAppearanceLarge"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="14dp"
-                            android:layout_marginBottom="13dp"
-                            android:orientation="vertical"
-                            app:layout_constrainedWidth="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/saver_switch"
-                            app:layout_constraintHorizontal_bias="0"
-                            app:layout_constraintHorizontal_chainStyle="packed"
-                            app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            android:ellipsize="marquee"
+                            android:fadingEdge="horizontal"
+                            android:singleLine="true"
+                            android:text="@string/info_catcher"
+                            android:textSize="18sp" />
 
-                            <com.google.android.material.textview.MaterialTextView
-                                style="?android:attr/textAppearanceLarge"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="marquee"
-                                android:fadingEdge="horizontal"
-                                android:singleLine="true"
-                                android:text="@string/data_saver"
-                                android:textSize="18sp" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                style="?android:attr/textAppearanceSmall"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/data_saver_description" />
-
-                        </LinearLayout>
-
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/saver_switch"
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.textview.MaterialTextView
+                            style="?android:attr/textAppearanceSmall"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginEnd="14dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/saver_text"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:text="@string/info_catcher_description" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
                     <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:background="#4D808080" />
+                        android:id="@+id/catcher_divider"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="#4D808080"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/catcher_switch"
+                        app:layout_constraintStart_toEndOf="@id/catcher_text"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/catcher_layout"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/catcher_switch"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="?selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_vertical">
+                        android:layout_marginHorizontal="14dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/catcher_divider"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <LinearLayout
-                            android:id="@+id/catcher_text"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="14dp"
-                            android:layout_marginBottom="13dp"
-                            android:orientation="vertical"
-                            app:layout_constrainedWidth="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/catcher_divider"
-                            app:layout_constraintHorizontal_bias="0"
-                            app:layout_constraintHorizontal_chainStyle="packed"
-                            app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                style="?android:attr/textAppearanceLarge"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="marquee"
-                                android:fadingEdge="horizontal"
-                                android:singleLine="true"
-                                android:text="@string/info_catcher"
-                                android:textSize="18sp" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                style="?android:attr/textAppearanceSmall"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/info_catcher_description" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:id="@+id/catcher_divider"
-                            android:layout_width="1dp"
-                            android:layout_height="0dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:background="#4D808080"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/catcher_switch"
-                            app:layout_constraintStart_toEndOf="@id/catcher_text"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/catcher_switch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginEnd="14dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/catcher_divider"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -645,10 +448,8 @@
                         android:id="@+id/china_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginEnd="14dp"
-                        android:layout_marginBottom="13dp"
+                        android:layout_marginHorizontal="14dp"
+                        android:layout_marginVertical="13dp"
                         android:orientation="vertical"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -678,8 +479,7 @@
                         android:id="@+id/china_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginEnd="14dp"
+                        android:layout_marginHorizontal="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/china_text"
@@ -707,6 +507,27 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/help_layout"
+                        style="?textAppearanceBody1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="13dp"
+                        android:singleLine="true"
+                        android:text="@string/help"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="#4D808080" />
+
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/about_layout"
                         style="?textAppearanceBody1"
                         android:layout_width="match_parent"
@@ -714,10 +535,8 @@
                         android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:paddingStart="14dp"
-                        android:paddingTop="13dp"
-                        android:paddingEnd="14dp"
-                        android:paddingBottom="13dp"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="13dp"
                         android:singleLine="true"
                         android:text="@string/about"
                         android:textSize="18sp" />
@@ -730,19 +549,17 @@
                         android:background="#4D808080" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/contact_layout"
+                        android:id="@+id/inquiry_layout"
                         style="?textAppearanceBody1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?selectableItemBackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:paddingStart="14dp"
-                        android:paddingTop="13dp"
-                        android:paddingEnd="14dp"
-                        android:paddingBottom="13dp"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="13dp"
                         android:singleLine="true"
-                        android:text="@string/contact_us"
+                        android:text="@string/inquiry"
                         android:textSize="18sp" />
 
                 </LinearLayout>

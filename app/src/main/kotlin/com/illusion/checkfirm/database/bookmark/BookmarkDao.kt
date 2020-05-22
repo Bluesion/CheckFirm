@@ -15,6 +15,9 @@ interface BookmarkDao {
     @Query("SELECT COUNT(*) FROM bookmark_info")
     fun getCount(): LiveData<Int?>?
 
+    @Query("SELECT category FROM bookmark_info")
+    fun getCategory(): LiveData<List<String>>
+
     @Insert(onConflict = REPLACE)
     fun insert(catcher: BookmarkEntity)
 

@@ -4,14 +4,21 @@ import android.app.Application
 import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.messaging.FirebaseMessaging
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 class CheckFirm : Application() {
 
+    companion object {
+        lateinit var viewModelFactory: ViewModelProvider.AndroidViewModelFactory
+    }
+
     override fun onCreate() {
         super.onCreate()
+        viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this)
+
         FirebaseMessaging.getInstance().subscribeToTopic("update")
 
         val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)

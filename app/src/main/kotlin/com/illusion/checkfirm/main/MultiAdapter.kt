@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.primitive.MainItem
+import com.illusion.checkfirm.primitive.SmartSearchItem
 
 class MultiAdapter(val context: Context, private val isOfficial: Boolean, private val isSmart: Boolean,
-                   private var itemList: List<MainItem>, private var smartList: List<SmartItem>,
+                   private var itemList: List<MainItem>, private var smartSearchList: List<SmartSearchItem>,
                    val onClickListener: MyAdapterListener) : RecyclerView.Adapter<MultiAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -26,10 +28,10 @@ class MultiAdapter(val context: Context, private val isOfficial: Boolean, privat
         var text: MaterialTextView = view.findViewById(R.id.text)
         var date: MaterialTextView = view.findViewById(R.id.smart_search_date)
         var downgrade: MaterialTextView = view.findViewById(R.id.smart_search_downgrade)
-        var changelog: MaterialTextView = view.findViewById(R.id.smart_search_changelog)
+        var type: MaterialTextView = view.findViewById(R.id.smart_search_type)
 
         init {
-            card.setOnClickListener { v -> onClickListener.onLayoutClicked(v, adapterPosition) }
+            card.setOnClickListener { v -> onClickListener.onLayoutClicked(v, bindingAdapterPosition) }
         }
     }
 
@@ -43,22 +45,22 @@ class MultiAdapter(val context: Context, private val isOfficial: Boolean, privat
         val item = itemList[position]
         val colors = listOf("#8BC34A", "#FFC107", "#2196F3", "#673AB7")
 
-        holder.model.text = String.format(context.getString(R.string.device_format), item.getModel(), item.getCsc())
+        holder.model.text = String.format(context.getString(R.string.device_format), item.model, item.csc)
         holder.image.setColorFilter(Color.parseColor(colors[position]), PorterDuff.Mode.SRC_IN)
         if (isOfficial) {
             holder.title.text = context.getString(R.string.latest_official)
-            holder.text.text = item.getOfficialLatest()
+            holder.text.text = item.officialLatest
         } else {
             holder.title.text = context.getString(R.string.latest_test)
-            holder.text.text = item.getTestLatest()
+            holder.text.text = item.testLatest
         }
 
         if (isSmart) {
-            val smart = smartList[position]
+            val smart = smartSearchList[position]
             holder.detail.visibility = View.VISIBLE
-            holder.date.text = smart.getDate()
-            holder.downgrade.text = smart.getDowngrade()
-            holder.changelog.text = smart.getChangelog()
+            holder.date.text = smart.date
+            holder.downgrade.text = smart.downgrade
+            holder.type.text = smart.type
         } else {
             holder.detail.visibility = View.GONE
         }

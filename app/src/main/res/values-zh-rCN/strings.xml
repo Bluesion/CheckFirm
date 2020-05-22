@@ -3,47 +3,42 @@
 
     <!-- General -->
     <string name="check_network">请检查您的网络。</string>
-    <string name="only_wifi">请检查Wi-Fi</string>
     <string name="help">帮助</string>
-    <string name="online">请连接到网络</string>
-    <string name="wifi">请连接到Wi-Fi</string>
     <string name="switch_on">开启</string>
     <string name="switch_off">关闭</string>
     <string name="close">关</string>
 
     <!-- Notification -->
     <string name="notification_new_update_title">CheckFirm紧急更新</string>
-    <string name="notification_new_update_text">报告了严重的错误。请立即从Play商店对其进行更新。</string>
+    <string name="notification_new_update_text">发现了严重的错误。请立即前往Play商店进行更新。</string>
     <string name="info_catcher_notification_title">发现了新固件: %1$s (%2$s)</string>
     <string name="info_catcher_notification_text">请确认。</string>
-
-    <!-- Contact Us -->
-    <string name="contact_us">关于开发人员</string>
-    <string name="contact_dialog_text">如果您需要帮助，请发送电子邮件至。</string>
-    <string name="contact_developer">开发人员 (gpillusion)</string>
-    <string name="contact_designer">设计师 (Newfit)</string>
 
     <!-- Search -->
     <string name="latest_test">最新测试固件</string>
     <string name="model">机型</string>
     <string name="previous_test">先前的测试固件</string>
     <string name="welcome_disabled">如果要激活欢迎搜索，请转到设置。</string>
-    <string name="welcome_wifi">流量节省已打开。 자请打开Wi-Fi以使用“欢迎搜索”。</string>
     <string name="welcome_online">如果要使用欢迎搜索，请连接到网络。</string>
     <string name="clipboard">复制到剪贴板。</string>
     <string name="search_error">搜索失败。 请检查您是否正确编写了型号和CSC代码。</string>
+    <string name="search_timeout">消耗太多时间。 搜索自动取消。</string>
     <string name="searching">仍在搜寻中…请稍等片刻</string>
     <string name="changelog">变更日志</string>
     <string name="link_share">链接分享</string>
     <string name="link_shared">链接复制了</string>
+    <string name="link_share_error">链接共享错误：链接有问题。</string>
     <string name="single_search">单次搜寻</string>
     <string name="multi_search">多重搜寻</string>
-    <string name="my_device">提示：我的手机</string>
-    <string name="my_model">机型: %s,</string>
-    <string name="my_device_search">搜索我的手机</string>
     <string name="multi_search_lists">搜索%d个手机。</string>
     <string name="multi_search_limit">您最多可以搜索4个手机</string>
     <string name="tab_main_2">测试</string>
+
+    <!-- Sherlock -->
+    <string name="sherlock_baseband">基带版本</string>
+    <string name="sherlock_samsung_encrypted_text">最新测试固件加密文本</string>
+    <string name="sherlock_user_encrypted_text">转换后的加密文本</string>
+    <string name="sherlock_not_correct">不一样</string>
 
     <!-- Bookmark -->
     <string name="bookmark">书签</string>
@@ -52,26 +47,39 @@
     <string name="name">书签名称</string>
     <string name="bookmark_search_error">检查型号和CSC代码是否正确保存在书签中。</string>
 
-    <!-- Help Firmware -->
-    <string name="firmware_1">固件信息包含3个信息。 编译版本，CSC版本和基带版本。\n\n假设固件搜索结果为\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\n第一个（A720SKSU3BRK1）表示编译版本，\n第二个（A720SSKC3BRK1）表示CSC版本，\n最后一个（A720NKOU3BRK1）表示基带版本。</string>
+    <!-- Help -->
+    <string name="help_device_info">设备信息</string>
+    <string name="help_device_info_description">机型, CSC</string>
+    <string name="help_manual">手册</string>
+    <string name="firmware_1">固件信息包含3种信息。 编译版本，CSC版本和基带版本。\n\n假设固件搜索结果为\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\n第一个（A720SKSU3BRK1）表示编译版本，\n第二个（A720SSKC3BRK1）表示CSC版本，\n最后一个（A720NKOU3BRK1）表示基带版本。</string>
     <string name="firmware_3">您只需要关心编译版本。 您可以从版本获取固件信息。\n示例：</string>
     <string name="firmware_10">红色字</string>
     <string name="firmware_11">红色字（例如U3）表示引导程序版本。\n\n由于三星的安全策略，您无法从较高的引导程序版本固件降级为较低的引导程序版本固件。</string>
     <string name="firmware_12">黄色字</string>
-    <string name="firmware_13">黄色字（例如B）表示Android OS版本。\n如果黄色字已更新，则表示Android OS即将更新或已经更新。\n\nA表示第一个Android OS版本。\nB表示AndroidOS已更新一次。\nC表示Android OS已更新两次。\n.\n.\n.\nZ表示Beta固件。</string>
+    <string name="firmware_13">黄色字（例如B）表示主要版本。\n如果黄色文本已更新，则意味着将要或已经更新了Android OS或One UI。\n\nA表示第一个主要版本。\nB表示主要已更新一次。\nC表示主要已更新两次。\n.\n.\n.\nZ表示Beta固件。</string>
     <string name="firmware_14">绿色字</string>
-    <string name="firmware_15">绿色字（例如R）表示年份。\n\nR表示2018年，\nS表示2019年，\nT表示2020年，依此类推。</string>
+    <string name="firmware_15">绿色字（例如R）表示年份。\n\nR表示2018年，\nS表示2019年，\nT表示2020年，以此类推。</string>
     <string name="firmware_16">蓝色字</string>
     <string name="firmware_17">蓝色字（例如K）表示月份。\n\nA表示一月，\nB表示二月，\n.\n,\n,\nL表示十二月。</string>
-    <string name="firmware_19">紫色字（例如1）表示编译固件的次数。\n\n1表示固件编译了一次。\n.\n.\n.\n9表示固件编译了9次。\nA表示固件编译了10次。\n.\n.\n.\nZ表示固件编译了35次。</string>
-    <string name="firmware_20">测试固件什么时候发布？</string>
-    <string name="firmware_21">您无法确切知道。 但是如果编译版本没有更多变化，测试固件将很快发布。</string>
+    <string name="firmware_19">紫色字（例如1）表示编译固件的次数(表示次要版本)。\n\n1表示固件编译了一次。\n.\n.\n.\n9表示固件编译了9次。\nA表示固件编译了10次。\n.\n.\n.\nF表示固件编译了16次。</string>
+    <string name="firmware_20">什么是 .DM ＆ .BDM</string>
+    <string name="firmware_21">有时，测试固件信息中包含 .DM。 DM表示开发人员管理，这意味着Samsung正在测试该固件。\n\n测试固件信息中很少有 .BDM。 BDM表示宽带开发人员管理，它表示移动运营商测试或检查固件。</string>
+    <string name="firmware_22">测试中的固件什么时候发布？</string>
+    <string name="firmware_23">无法知道确切日期，但是如果编译版本没有更多变化，说明测试固件将很快发布。通常需要3–5个星期。</string>
 
     <!-- About -->
-    <string name="app_information">应用程式资讯</string>
+    <string name="app_information">应用程序信息</string>
     <string name="latest">已经安装了最新版本。</string>
-    <string name="license">执照</string>
-    <string name="legal_text">官方固件信息来自https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.xml。\n\n测试固件信息来自https://fota-cloud-dn.ospserver.net/firmware/(CSC)/(DEVICE)/version.test.xml。\n\n这不是三星电子向客户提供固件信息的正式方式。 使用此信息的风险自负。</string>
+    <string name="license">使用许可</string>
+    <string name="legal_text">官方固件信息来自https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.xml。\n\n测试固件信息来自https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.test.xml。\n\n这不是三星电子向客户提供固件信息的正式方式。 使用此信息的风险自负。</string>
+    <string name="contributor">贡献者</string>
+    <string name="contributor_application">应用</string>
+    <string name="contributor_designer">设计师</string>
+    <string name="contributor_developer">开发者</string>
+    <string name="contributor_source">源代码</string>
+    <string name="contributor_language">语言</string>
+    <string name="contributor_russian">俄语</string>
+    <string name="contributor_translator">译者</string>
 
     <!-- Settings -->
     <string name="design">设计</string>
@@ -79,40 +87,40 @@
     <string name="theme_description">设置主题背景。</string>
     <string name="theme_light">浅色</string>
     <string name="theme_system">系统默认</string>
-    <string name="data_saver">流量节省</string>
-    <string name="data_saver_description">仅在连接到Wi-Fi时进行互联网工作。</string>
     <string name="expandable_bar">折叠工具</string>
     <string name="expandable_bar_description">使用折叠工具。</string>
-    <string name="help_settings">帮助提示</string>
-    <string name="help_description">显示帮助提示按钮。</string>
     <string name="settings">设定</string>
     <string name="nation">国家</string>
-    <string name="china_title">防止在中国出现搜索错误</string>
-    <string name="china_text">防止在中国无限加载。如果您在中国，请打开此设置。</string>
+    <string name="china_title">解决中国地区搜索错误问题</string>
+    <string name="china_text">解决在中国无限加载。如果您在中国，请打开此选项。</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">欢迎搜寻</string>
     <string name="welcome_search_description">启动时搜索固件。</string>
-    <string name="welcome_search_text">请在启动时输入要搜索的设备。</string>
+    <string name="welcome_search_text">请输入要在启动时搜索的设备。</string>
 
     <!-- Smart Search -->
-    <string name="smart_search">聪明搜索</string>
-    <string name="smart_search_description">分析最新的测试固件。这可能是不正确。</string>
+    <string name="smart_search">智能搜索</string>
     <string name="smart_search_date">首次发现日期</string>
     <string name="smart_search_downgrade">操作系统降级</string>
-    <string name="smart_search_changelog">变更日志</string>
-    <string name="smart_search_changelog_os">操作系统更新</string>
-    <string name="smart_search_changelog_bugfix">错误修复</string>
-    <string name="smart_search_changelog_rollback">回滚</string>
+    <string name="smart_search_type">类型</string>
+    <string name="smart_search_type_rollback">回滚</string>
+    <string name="smart_search_bootloader">引导程序版本</string>
 
     <!-- Info Catcher -->
-    <string name="info_catcher_description">固件更新后，消息通知会向您发送通知。</string>
-    <string name="info_catcher_text">当有人发现新固件时，CheckFirm将自动向您发送通知。\n请输入要获取通知的设备。</string>
+    <string name="info_catcher_description">固件更新后，会向您发送消息通知。</string>
+    <string name="info_catcher_text">当发现新固件时，CheckFirm将自动向您发送通知。\n请输入要获取通知的设备。</string>
     <string name="info_catcher_error">请检查您是否正确编写了型号和CSC代码。</string>
 
     <!-- Quick Search -->
-    <string name="quick_search_description">在主屏幕上显示书签。</string>
+    <string name="quick_search_bar">快速搜索栏</string>
+    <string name="quick_search_bar_description">在主屏幕上显示书签。</string>
+
+    <!-- Inquiry -->
+    <string name="inquiry">查询</string>
+    <string name="inquiry_bug">错误报告</string>
+    <string name="inquiry_question">问题</string>
+    <string name="inquiry_send">发送</string>
 
     <!-- Beta -->
-    <string name="beta">贝塔</string>
 </resources>

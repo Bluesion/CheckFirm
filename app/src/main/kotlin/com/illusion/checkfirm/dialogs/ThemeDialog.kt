@@ -34,7 +34,7 @@ class ThemeDialog : BottomSheetDialogFragment() {
             systemLayout.visibility = View.GONE
         }
 
-        val sharedPrefs = activity!!.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val sharedPrefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
         val mEditor = sharedPrefs.edit()
         when (sharedPrefs.getString("theme", "light")) {
             "light" -> {

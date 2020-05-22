@@ -10,39 +10,42 @@ class BookmarkViewModel(application: Application) : AndroidViewModel(application
 
     private val repository: BookmarkRepository
     val allBookmarks: LiveData<List<BookmarkEntity>>
+    val allCategory: LiveData<List<String>>
 
     init {
-        val bookmarkDao = BookmarkDatabase.getDatabase(application, viewModelScope).bookmarkDao()
+        val bookmarkDao = BookmarkDatabase.getDatabase(application).bookmarkDao()
         repository = BookmarkRepository(bookmarkDao)
         allBookmarks = repository.allBookmarks
+        allCategory = repository.allCategory
     }
 
     fun getCount(): LiveData<Int?>? {
         return repository.getCount()
     }
 
-    fun insert(bookmarkName: String, model: String, csc: String) = viewModelScope.launch {
-        InsertThread(bookmarkName, model, csc).start()
+    fun insert(bookmarkName: String, model: String, csc: String, category: String) = viewModelScope.launch {
+        InsertThread(bookmarkName, model, csc, category).start()
     }
 
-    fun update(bookmarkName: String, id: Long, model: String, csc: String) = viewModelScope.launch {
-        UpdateThread(bookmarkName, id, model, csc).start()
+    fun update(bookmarkName: String, id: Long, model: String, csc: String, category: String) = viewModelScope.launch {
+        UpdateThread(bookmarkName, id, model, csc, category).start()
     }
 
     fun delete(device: String) = viewModelScope.launch {
         DeleteThread(device).start()
     }
 
-    inner class InsertThread(private val bookmarkName: String, val model: String, val csc: String) : Thread() {
+    inner class InsertThread(private val bookmarkName: String, val model: String, val csc: String, private val category: String) : Thread() {
         override fun run() {
-            val entity = BookmarkEntity(null, bookmarkName, model, csc, model + csc)
+            val entity = BookmarkEntity(null, bookmarkName, model, csc, model + csc, category)
             repository.insert(entity)
         }
     }
 
-    inner class UpdateThread(private val bookmarkName: String, val bookmarkId: Long, val model: String, val csc: String) : Thread() {
+    inner class UpdateThread(private val bookmarkName: String, private val bookmarkId: Long,
+                             val model: String, val csc: String, private val category: String) : Thread() {
         override fun run() {
-            val entity = BookmarkEntity(bookmarkId, bookmarkName, model, csc, model + csc)
+            val entity = BookmarkEntity(bookmarkId, bookmarkName, model, csc, model + csc, category)
             repository.update(entity)
         }
     }

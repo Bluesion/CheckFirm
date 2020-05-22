@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.settings
+package com.illusion.checkfirm.settings.welcome
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -10,7 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.ViewModelProviders
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
@@ -21,6 +22,7 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import java.util.*
@@ -42,29 +44,9 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         setContentView(R.layout.activity_welcome_search)
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val one = sharedPrefs.getBoolean("one", true)
         val welcome = sharedPrefs.getBoolean("welcome", false)
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        toolbar.title = ""
-        setSupportActionBar(toolbar)
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        val height = (resources.displayMetrics.heightPixels * 0.3976)
-        val lp = mAppBar.layoutParams
-        lp.height = height.toInt()
-        if (one) {
-            mAppBar.setExpanded(true)
-        } else {
-            mAppBar.setExpanded(false)
-        }
-
-        val title = findViewById<MaterialTextView>(R.id.title)
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
-        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
-            val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
-            expandedTitle.alpha = 1 - (percentage * 2 * -1)
-            title.alpha = percentage * -1
-        })
+        initToolbar()
 
         switchCard = findViewById(R.id.switch_card)
         switchText = findViewById(R.id.switch_text)
@@ -72,11 +54,11 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         if (welcome) {
             welcomeSwitch.isChecked = true
             switchText.text = getString(R.string.switch_on)
-            switchCard.background = getDrawable(R.color.switch_card_background_on)
+            switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_on)
         } else {
             welcomeSwitch.isChecked = false
             switchText.text = getString(R.string.switch_off)
-            switchCard.background = getDrawable(R.color.switch_card_background_off)
+            switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_off)
         }
         welcomeSwitch.setOnCheckedChangeListener(this)
 
@@ -88,7 +70,7 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         val savedDevicesLayout = findViewById<MaterialCardView>(R.id.saved_devices_layout)
         val savedDevicesText = findViewById<MaterialTextView>(R.id.saved_devices_text)
         val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-        viewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
+        viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
         viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { bookmarks ->
             bookmarks?.let {
                 if (it.isEmpty()) {
@@ -212,11 +194,11 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         when (p0.id) {
             R.id.welcome_switch -> {
                 if (isChecked) {
-                    switchCard.background = getDrawable(R.color.switch_card_background_on)
+                    switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_on)
                     mEditor.putBoolean("welcome", true)
                     switchText.text = getString(R.string.switch_on)
                 } else {
-                    switchCard.background = getDrawable(R.color.switch_card_background_off)
+                    switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_off)
                     mEditor.putBoolean("welcome", false)
                     switchText.text = getString(R.string.switch_off)
                 }
@@ -252,5 +234,30 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
             }
         }
         searchPrefsEditor.apply()
+    }
+
+    private fun initToolbar() {
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val toolbarText = getString(R.string.welcome_search)
+        val title = findViewById<MaterialTextView>(R.id.title)
+        title.text = toolbarText
+        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        expandedTitle.text = toolbarText
+
+        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
+        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+            val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
+            expandedTitle.alpha = 1 - (percentage * 2 * -1)
+            title.alpha = percentage * -1
+        })
+
+        val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
+        if (one) {
+            mAppBar.setExpanded(true)
+        } else {
+            mAppBar.setExpanded(false)
+        }
     }
 }

@@ -5,13 +5,14 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import com.illusion.checkfirm.dialogs.BookmarkDialog
@@ -28,29 +29,7 @@ class BookmarkActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bookmark)
 
-        val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        toolbar.title = ""
-        setSupportActionBar(toolbar)
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        val height = (resources.displayMetrics.heightPixels * 0.3976)
-        val lp = mAppBar.layoutParams
-        lp.height = height.toInt()
-        if (one) {
-            mAppBar.setExpanded(true)
-        } else {
-            mAppBar.setExpanded(false)
-        }
-
-        val title = findViewById<MaterialTextView>(R.id.title)
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
-        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
-            val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
-            expandedTitle.alpha = 1 - (percentage * 2 * -1)
-            expandedSubTitle.alpha = 1 - (percentage * 2 * -1)
-            title.alpha = percentage * -1
-        })
-        expandedSubTitle = findViewById(R.id.expanded_subtitle)
+        initToolbar()
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
@@ -84,7 +63,7 @@ class BookmarkActivity : AppCompatActivity() {
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = mAdapter
 
-        viewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
+        viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
         viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { devices ->
             devices?.let { mAdapter.setBookmarks(it) }
         })
@@ -103,5 +82,33 @@ class BookmarkActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initToolbar() {
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        val toolbarText = getString(R.string.bookmark)
+        val title = findViewById<MaterialTextView>(R.id.title)
+        title.text = toolbarText
+        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        expandedTitle.text = toolbarText
+        expandedSubTitle = findViewById(R.id.expanded_subtitle)
+
+        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
+        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+            val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
+            expandedTitle.alpha = 1 - (percentage * 2 * -1)
+            expandedSubTitle.alpha = 1 - (percentage * 2 * -1)
+            title.alpha = percentage * -1
+        })
+
+        val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
+        if (one) {
+            mAppBar.setExpanded(true)
+        } else {
+            mAppBar.setExpanded(false)
+        }
     }
 }
