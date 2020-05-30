@@ -12,7 +12,7 @@
         app:navigationIcon="@drawable/ic_back" />
 
     <WebView
-        android:id="@+id/webview"
+        android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

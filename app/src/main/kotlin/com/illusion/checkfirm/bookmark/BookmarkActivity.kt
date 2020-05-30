@@ -7,38 +7,32 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
+import com.illusion.checkfirm.databinding.ActivityBookmarkBinding
 import com.illusion.checkfirm.dialogs.BookmarkDialog
 import java.util.*
 
 class BookmarkActivity : AppCompatActivity() {
 
-    private lateinit var mAdapter: BookmarkAdapter
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var expandedSubTitle: MaterialTextView
+    private lateinit var binding: ActivityBookmarkBinding
     lateinit var viewModel: BookmarkViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bookmark)
+        binding = ActivityBookmarkBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initToolbar()
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener {
+        binding.fab.setOnClickListener {
             val bottomSheetFragment = BookmarkDialog.newInstance(false, 0, "", "", "")
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
 
-        mRecyclerView = findViewById(R.id.mRecyclerView)
-        mAdapter = BookmarkAdapter(ArrayList(), object : BookmarkAdapter.MyAdapterListener {
+        val mAdapter = BookmarkAdapter(ArrayList(), object : BookmarkAdapter.MyAdapterListener {
             override fun onLayoutClicked(model: String, csc: String) {
                 if (model.isBlank() || csc.isBlank()) {
                     Toast.makeText(this@BookmarkActivity, R.string.bookmark_search_error, Toast.LENGTH_SHORT).show()
@@ -59,9 +53,8 @@ class BookmarkActivity : AppCompatActivity() {
                 viewModel.delete(device)
             }
         })
-        val mLayoutManager = LinearLayoutManager(applicationContext)
-        mRecyclerView.layoutManager = mLayoutManager
-        mRecyclerView.adapter = mAdapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+        binding.recyclerView.adapter = mAdapter
 
         viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
         viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { devices ->
@@ -69,7 +62,7 @@ class BookmarkActivity : AppCompatActivity() {
         })
         viewModel.getCount()!!.observe(this, androidx.lifecycle.Observer { counts ->
             counts?.let {
-                expandedSubTitle.text = resources.getQuantityString(R.plurals.bookmark_subtitle, it, it)
+                binding.expandedSubtitle.text = resources.getQuantityString(R.plurals.bookmark_subtitle, it, it)
             }
         })
     }
@@ -85,30 +78,25 @@ class BookmarkActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
         val toolbarText = getString(R.string.bookmark)
-        val title = findViewById<MaterialTextView>(R.id.title)
-        title.text = toolbarText
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
-        expandedTitle.text = toolbarText
-        expandedSubTitle = findViewById(R.id.expanded_subtitle)
+        binding.title.text = toolbarText
+        binding.expandedTitle.text = toolbarText
 
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
-        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+        binding.appbar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
+        binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
-            expandedTitle.alpha = 1 - (percentage * 2 * -1)
-            expandedSubTitle.alpha = 1 - (percentage * 2 * -1)
-            title.alpha = percentage * -1
+            binding.expandedTitle.alpha = 1 - (percentage * 2 * -1)
+            binding.expandedSubtitle.alpha = 1 - (percentage * 2 * -1)
+            binding.title.alpha = percentage * -1
         })
 
         val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
         if (one) {
-            mAppBar.setExpanded(true)
+            binding.appbar.setExpanded(true)
         } else {
-            mAppBar.setExpanded(false)
+            binding.appbar.setExpanded(false)
         }
     }
 }

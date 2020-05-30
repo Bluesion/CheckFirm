@@ -6,25 +6,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.button.MaterialButton
-import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.DialogThemeBinding
 
 class ThemeDialog : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val rootView = inflater.inflate(R.layout.dialog_theme, container, false)
+        val binding = DialogThemeBinding.inflate(inflater)
 
-        val light = rootView.findViewById<RadioButton>(R.id.light)
-        val dark = rootView.findViewById<RadioButton>(R.id.dark)
-        val system = rootView.findViewById<RadioButton>(R.id.system)
+        val light = binding.light
+        val dark = binding.dark
+        val system = binding.system
 
-        val lightLayout = rootView.findViewById<LinearLayout>(R.id.light_layout)
-        val darkLayout = rootView.findViewById<LinearLayout>(R.id.dark_layout)
-        val systemLayout = rootView.findViewById<LinearLayout>(R.id.system_layout)
+        val lightLayout = binding.lightLayout
+        val darkLayout = binding.darkLayout
+        val systemLayout = binding.systemLayout
 
         if (Build.VERSION.SDK_INT == 28) {
             if (Build.MANUFACTURER != "samsung") {
@@ -110,11 +107,10 @@ class ThemeDialog : BottomSheetDialogFragment() {
             dismiss()
         }
 
-        val okButton = rootView.findViewById<MaterialButton>(R.id.ok)
-        okButton.setOnClickListener {
+        binding.ok.setOnClickListener {
             dismiss()
         }
 
-        return rootView
+        return binding.root
     }
 }
