@@ -4,25 +4,25 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.trusted.TrustedWebActivityIntentBuilder
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.androidbrowserhelper.trusted.TwaLauncher
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.ActivityContributorBinding
 import com.illusion.checkfirm.etc.WebViewActivity
 
 class ContributorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contributor)
+        val binding = ActivityContributorBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        val toolbar = binding.toolbar
         toolbar.title = getString(R.string.contributor)
         setSupportActionBar(toolbar)
 
-        val designer = findViewById<LinearLayout>(R.id.designer)
+        val designer = binding.designer
         designer.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "plain/text"
@@ -30,7 +30,7 @@ class ContributorActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val developer = findViewById<LinearLayout>(R.id.developer)
+        val developer = binding.developer
         developer.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "plain/text"
@@ -38,7 +38,7 @@ class ContributorActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val github = findViewById<LinearLayout>(R.id.github)
+        val github = binding.github
         github.setOnClickListener {
             val link = "https://github.com/gpillusion/CheckFirm"
             try {
