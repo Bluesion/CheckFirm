@@ -2,16 +2,17 @@ package com.illusion.checkfirm.settings.help
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.ActivityHelpManualBinding
 
 class ManualActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_help_firmware)
+        val binding = ActivityHelpManualBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        val toolbar = binding.toolbar
         toolbar.title = getString(R.string.help_manual)
         setSupportActionBar(toolbar)
     }

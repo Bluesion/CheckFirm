@@ -9,19 +9,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.browser.trusted.TrustedWebActivityIntentBuilder
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
-import com.google.android.material.textview.MaterialTextView
 import com.google.androidbrowserhelper.trusted.TwaLauncher
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.etc.WebViewActivity
+import com.illusion.checkfirm.databinding.DialogSearchBinding
 import com.illusion.checkfirm.etc.SherlockActivity
+import com.illusion.checkfirm.etc.WebViewActivity
 import com.illusion.checkfirm.utils.Tools
 
 class SearchDialog : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val rootView = inflater.inflate(R.layout.dialog_search, container, false)
+        val binding = DialogSearchBinding.inflate(inflater)
 
         val smart = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("smart", true)
 
@@ -31,20 +29,18 @@ class SearchDialog : BottomSheetDialogFragment() {
         val officialLatest = requireArguments().getString("official_latest").toString()
         val testLatest = requireArguments().getString("test_latest").toString()
 
-        val latestTitle = rootView.findViewById<MaterialTextView>(R.id.latest_title)
-        val latestText = rootView.findViewById<MaterialTextView>(R.id.latest_firmware)
-        val changelog = rootView.findViewById<MaterialButton>(R.id.changelog)
-        val copy = rootView.findViewById<MaterialButton>(R.id.copy)
-        val share = rootView.findViewById<MaterialButton>(R.id.share)
-        val previousTitle = rootView.findViewById<MaterialTextView>(R.id.previous_title)
-        val previousList = rootView.findViewById<MaterialTextView>(R.id.list)
+        val latestTitle = binding.latestTitle
+        val latestText = binding.latestFirmware
+        val changelog = binding.changelog
+        val previousTitle = binding.previousTitle
+        val previousList = binding.list
 
-        val smartSearch = rootView.findViewById<MaterialCardView>(R.id.smart_search)
-        val bootloader = rootView.findViewById<MaterialTextView>(R.id.bootloader)
-        val majorVersion = rootView.findViewById<MaterialTextView>(R.id.major_version)
-        val date = rootView.findViewById<MaterialTextView>(R.id.date)
-        val minorVersion = rootView.findViewById<MaterialTextView>(R.id.minor_version)
-        val sherlock = rootView.findViewById<MaterialCardView>(R.id.sherlock)
+        val smartSearch = binding.smartSearch
+        val bootloader = binding.bootloader
+        val majorVersion = binding.majorVersion
+        val date = binding.date
+        val minorVersion = binding.minorVersion
+        val sherlock = binding.sherlock
 
         if (isOfficial) {
             latestTitle.text = getString(R.string.latest_official)
@@ -119,25 +115,24 @@ class SearchDialog : BottomSheetDialogFragment() {
         }
 
         val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        copy.setOnClickListener {
+        binding.copy.setOnClickListener {
             val clip = ClipData.newPlainText("checkfirmLatest", latestText.text.toString())
             clipboard.setPrimaryClip(clip)
             Toast.makeText(requireActivity(), R.string.clipboard, Toast.LENGTH_SHORT).show()
         }
 
-        share.setOnClickListener {
+        binding.share.setOnClickListener {
             val link = "https://checkfirm.com/$model/$csc"
             val clip = ClipData.newPlainText("checkfirmLink", link)
             clipboard.setPrimaryClip(clip)
             Toast.makeText(requireActivity(), R.string.link_shared, Toast.LENGTH_SHORT).show()
         }
 
-        val okButton = rootView.findViewById<MaterialButton>(R.id.ok)
-        okButton.setOnClickListener {
+        binding.ok.setOnClickListener {
             dismiss()
         }
 
-        return rootView
+        return binding.root
     }
 
     private fun getFirmwareDate(date: String): String {

@@ -2,19 +2,19 @@ package com.illusion.checkfirm.settings.welcome
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.RowSearchItemsBinding
 
 class WelcomeSearchAdapter(private val context: Context, private val modelList: List<String>, private val cscList: List<String>,
                            val onClickListener: MyAdapterListener) : RecyclerView.Adapter<WelcomeSearchAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val delete: AppCompatImageButton = view.findViewById(R.id.delete)
-        var device: MaterialTextView = view.findViewById(R.id.device)
+    inner class MyViewHolder(binding: RowSearchItemsBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val delete: AppCompatImageButton = binding.delete
+        var device: MaterialTextView = binding.device
 
         init {
             delete.setOnClickListener { onClickListener.onDeleteClicked(bindingAdapterPosition) }
@@ -22,9 +22,9 @@ class WelcomeSearchAdapter(private val context: Context, private val modelList: 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_search_items, parent, false)
+        val binding = RowSearchItemsBinding.inflate(LayoutInflater.from(parent.context))
 
-        return MyViewHolder(itemView)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

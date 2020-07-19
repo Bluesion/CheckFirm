@@ -9,28 +9,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.RowSingleSearchItemsBinding
 
 class SingleAdapter(val context: Context, private val model: String, private val csc: String,
                     private val officialLatest: String, private val testLatest: String, private val isSmart: Boolean,
                     private val date: String, private val downgrade: String, private val type: String,
                     val onClickListener: MyAdapterListener) : RecyclerView.Adapter<SingleAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val officialCard: MaterialCardView = view.findViewById(R.id.official_card)
-        private val testCard: MaterialCardView = view.findViewById(R.id.test_card)
+    inner class MyViewHolder(binding: RowSingleSearchItemsBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val officialCard: MaterialCardView = binding.officialCard
+        private val testCard: MaterialCardView = binding.testCard
 
-        var officialModel: MaterialTextView = view.findViewById(R.id.model_official)
-        var officialTitle: MaterialTextView = view.findViewById(R.id.latest_official_firmware_title)
-        var officialText: MaterialTextView = view.findViewById(R.id.latest_official_firmware_text)
+        var officialModel: MaterialTextView = binding.modelOfficial
+        var officialTitle: MaterialTextView = binding.latestOfficialFirmwareTitle
+        var officialText: MaterialTextView = binding.latestOfficialFirmwareText
 
-        var testModel: MaterialTextView = view.findViewById(R.id.model_test)
-        var testTitle: MaterialTextView = view.findViewById(R.id.latest_test_firmware_title)
-        var testText: MaterialTextView = view.findViewById(R.id.latest_test_firmware_text)
+        var testModel: MaterialTextView = binding.modelTest
+        var testTitle: MaterialTextView = binding.latestTestFirmwareTitle
+        var testText: MaterialTextView = binding.latestTestFirmwareText
 
-        val detail: LinearLayout = view.findViewById(R.id.detail)
-        var date: MaterialTextView = view.findViewById(R.id.smart_search_date)
-        var downgrade: MaterialTextView = view.findViewById(R.id.smart_search_downgrade)
-        var type: MaterialTextView = view.findViewById(R.id.smart_search_type)
+        val detail: LinearLayout = binding.detail
+        var date: MaterialTextView = binding.smartSearchDate
+        var downgrade: MaterialTextView = binding.smartSearchDowngrade
+        var type: MaterialTextView = binding.smartSearchType
 
         init {
             officialCard.setOnClickListener { v -> onClickListener.onOfficialCardClicked(v, bindingAdapterPosition) }
@@ -39,9 +40,9 @@ class SingleAdapter(val context: Context, private val model: String, private val
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_single_search_items, parent, false)
+        val binding = RowSingleSearchItemsBinding.inflate(LayoutInflater.from(parent.context))
 
-        return MyViewHolder(itemView)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

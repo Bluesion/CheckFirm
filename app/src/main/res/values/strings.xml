@@ -18,7 +18,7 @@
     <string name="contributor_github" translatable="false">GitHub</string>
     <string name="contributor_russian_translator" translatable="false">Adam Visitov</string>
     <string name="contributor_chinese_translator" translatable="false">dididada9856</string>
-    <string name="smart_search_date_format">%1$s (%3$s, %2$s)</string>
+    <string name="contributor_czech_translator" translatable="false">Ondřej Brokl</string>
     <string name="year_a" translatable="false">2027</string>
     <string name="year_b" translatable="false">2028</string>
     <string name="year_c" translatable="false">2029</string>
@@ -144,6 +144,7 @@
     <string name="contributor_language">Language</string>
     <string name="contributor_russian">Russian</string>
     <string name="contributor_chinese">Chinese</string>
+    <string name="contributor_czech">Czech</string>
     <string name="contributor_translator">Thanks to</string>
 
     <!-- Settings -->
@@ -183,6 +184,7 @@
     <string name="smart_search_major_version">Major version</string>
     <string name="smart_search_build_date">Build date</string>
     <string name="smart_search_minor_version">Minor version</string>
+    <string name="smart_search_date_format">%1$s (%3$s, %2$s)</string>
     <string name="january">January</string>
     <string name="february">February</string>
     <string name="march">March</string>

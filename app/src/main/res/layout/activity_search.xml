@@ -17,7 +17,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include layout="@layout/toolbar_expandable" />
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/toolbar_expandable" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -132,7 +134,7 @@
                             app:singleSelection="true" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/history_recyclerview"
+                            android:id="@+id/history_recycler_view"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -163,7 +165,7 @@
                             android:layout_height="wrap_content" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/search_recyclerview"
+                            android:id="@+id/search_recycler_view"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp" />

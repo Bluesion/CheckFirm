@@ -29,19 +29,20 @@ class BookmarkDialog : BottomSheetDialogFragment() {
 
         if (shouldUpdate) {
             binding.title.text = getString(R.string.edit_bookmark)
-            if (bundleName != "") {
-                binding.name.setText(bundleName)
-            }
-
-            if (bundleModel != "") {
-                binding.model.setText(bundleModel)
-            }
-
-            if (bundleCSC != "") {
-                binding.csc.setText(bundleCSC)
-            }
         } else {
             binding.title.text = getString(R.string.new_bookmark)
+        }
+
+        if (bundleName != "") {
+            binding.name.setText(bundleName)
+        }
+
+        if (bundleModel != "") {
+            binding.model.setText(bundleModel)
+        }
+
+        if (bundleCSC != "") {
+            binding.csc.setText(bundleCSC)
         }
 
         binding.cancel.setOnClickListener {

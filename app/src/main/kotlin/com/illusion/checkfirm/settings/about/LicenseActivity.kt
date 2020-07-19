@@ -8,22 +8,23 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.trusted.TrustedWebActivityIntentBuilder
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.textview.MaterialTextView
 import com.google.androidbrowserhelper.trusted.TwaLauncher
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.ActivityLicenseBinding
 import com.illusion.checkfirm.etc.WebViewActivity
 
 class LicenseActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityLicenseBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_license)
+        binding = ActivityLicenseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initToolbar()
 
-        val apache = findViewById<MaterialTextView>(R.id.apache)
-        apache.setOnClickListener {
+        binding.apache.setOnClickListener {
             val link = "http://www.apache.org/licenses/LICENSE-2.0.html"
             try {
                 val builder = TrustedWebActivityIntentBuilder(Uri.parse(link))
@@ -36,8 +37,7 @@ class LicenseActivity : AppCompatActivity() {
             }
         }
 
-        val mit = findViewById<MaterialTextView>(R.id.mit)
-        mit.setOnClickListener {
+        binding.mit.setOnClickListener {
             val link = "https://opensource.org/licenses/MIT"
             try {
                 val builder = TrustedWebActivityIntentBuilder(Uri.parse(link))
@@ -62,15 +62,14 @@ class LicenseActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.includeToolbar.toolbar)
         val toolbarText = getString(R.string.license)
-        val title = findViewById<MaterialTextView>(R.id.title)
+        val title = binding.includeToolbar.title
         title.text = toolbarText
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        val mAppBar = binding.includeToolbar.appbar
         mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)

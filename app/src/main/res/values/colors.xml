@@ -22,4 +22,7 @@
     <color name="switch_card_background_on">#70affc</color>
     <color name="switch_card_background_off">#fafafa</color>
     <color name="button_ripple_color">#e1e1e1</color>
+    <color name="tip_card_background_color">#e3eaf0</color>
+    <color name="tip_title_color">#0074d4</color>
+    <color name="tip_text_color">#2e2e2e</color>
 </resources>

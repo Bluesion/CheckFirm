@@ -7,23 +7,18 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.appbar.MaterialToolbar
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
+import com.illusion.checkfirm.databinding.ActivitySearchBinding
 import com.illusion.checkfirm.primitive.HistoryItem
 import com.illusion.checkfirm.primitive.SearchItem
 import com.illusion.checkfirm.utils.Tools
@@ -32,6 +27,7 @@ import java.util.*
 
 class SearchActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySearchBinding
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var historyPrefs: SharedPreferences
     private lateinit var historyEditor: SharedPreferences.Editor
@@ -44,11 +40,11 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var model: EditText
     private lateinit var csc: EditText
     private lateinit var imm: InputMethodManager
-    private lateinit var viewModel: BookmarkViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         historyPrefs = getSharedPreferences("search_history", Context.MODE_PRIVATE)
@@ -58,10 +54,10 @@ class SearchActivity : AppCompatActivity() {
         initToolbar()
 
         // MULTI SEARCH
-        val multiLayout = findViewById<MaterialCardView>(R.id.multi_layout)
-        val searchLists = findViewById<MaterialTextView>(R.id.search_lists)
+        val multiLayout = binding.multiLayout
+        val searchLists = binding.searchLists
         searchLists.text = String.format(getString(R.string.multi_search_lists), 0)
-        searchRecyclerView = findViewById(R.id.search_recyclerview)
+        searchRecyclerView = binding.searchRecyclerView
         searchAdapter = SearchAdapter(this, searchList, object : SearchAdapter.MyAdapterListener {
             override fun onDeleteClicked(position: Int) {
                 searchList.removeAt(position)
@@ -74,12 +70,10 @@ class SearchActivity : AppCompatActivity() {
                 }
             }
         })
-        val searchLayout = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        searchRecyclerView.layoutManager = searchLayout
-        searchRecyclerView.itemAnimator = DefaultItemAnimator()
+        searchRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         searchRecyclerView.adapter = searchAdapter
 
-        val addButton = findViewById<AppCompatImageView>(R.id.add)
+        val addButton = binding.add
         addButton.setOnClickListener {
             if (searchList.size >= 10) {
                 Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
@@ -97,14 +91,14 @@ class SearchActivity : AppCompatActivity() {
                 }
             }
         }
-        val multiSearchButton = findViewById<MaterialButton>(R.id.search_button)
-        multiSearchButton.setOnClickListener {
+
+        binding.searchButton.setOnClickListener {
             search()
         }
 
         // COMMON
-        model = findViewById(R.id.model)
-        csc = findViewById(R.id.csc)
+        model = binding.model
+        csc = binding.csc
         model.setSelection(model.text!!.length)
         csc.setOnEditorActionListener { _, i, _ ->
             when (i) {
@@ -135,13 +129,12 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        val quick = findViewById<MaterialCardView>(R.id.quick)
-        val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chip_group)
-        viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
+        val bookmarkChipGroup = binding.chipGroup
+        val viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
         viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer {
             if (it.isEmpty()) {
                 if (historyList.isEmpty()) {
-                    quick.visibility = View.GONE
+                    binding.quick.visibility = View.GONE
                 } else {
                     bookmarkChipGroup.visibility = View.GONE
                 }
@@ -185,7 +178,7 @@ class SearchActivity : AppCompatActivity() {
             }
         })
 
-        historyRecyclerView = findViewById(R.id.history_recyclerview)
+        historyRecyclerView = binding.historyRecyclerView
         historyAdapter = HistoryAdapter(historyList, object : HistoryAdapter.MyAdapterListener {
             override fun onItemClicked(position: Int) {
                 model.setText(historyList[position].model)
@@ -232,8 +225,7 @@ class SearchActivity : AppCompatActivity() {
             }
         })
 
-        val historyLayout = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        historyRecyclerView.layoutManager = historyLayout
+        historyRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         historyRecyclerView.adapter = historyAdapter
 
         for (i in 0..9) {
@@ -248,7 +240,7 @@ class SearchActivity : AppCompatActivity() {
         }
 
         // SINGLE SEARCH
-        val searchButton = findViewById<AppCompatImageView>(R.id.search)
+        val searchButton = binding.search
         searchButton.setOnClickListener {
             val modelString = model.text!!.trim().toString().toUpperCase(Locale.US)
             val cscString = csc.text!!.trim().toString().toUpperCase(Locale.US)
@@ -261,8 +253,8 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        val tab1 = findViewById<MaterialButton>(R.id.single_search)
-        val tab2 = findViewById<MaterialButton>(R.id.multi_search)
+        val tab1 = binding.singleSearch
+        val tab2 = binding.multiSearch
         tab1.setTextAppearance(R.style.SearchButton_Selected)
         tab2.setTextAppearance(R.style.SearchButton_Unselected)
 
@@ -389,17 +381,17 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.includeToolbar.toolbar)
+
         val toolbarText = getString(R.string.search)
-        val title = findViewById<MaterialTextView>(R.id.title)
+        val title = binding.includeToolbar.title
         title.text = toolbarText
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
-        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+        val appBar = binding.includeToolbar.appbar
+        appBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
@@ -407,9 +399,9 @@ class SearchActivity : AppCompatActivity() {
 
         val one = sharedPrefs.getBoolean("one", true)
         if (one) {
-            mAppBar.setExpanded(true)
+            appBar.setExpanded(true)
         } else {
-            mAppBar.setExpanded(false)
+            appBar.setExpanded(false)
         }
     }
 

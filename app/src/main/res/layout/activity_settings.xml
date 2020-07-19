@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar_expandable" />
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/toolbar_expandable" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

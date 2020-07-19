@@ -1,36 +1,32 @@
 package com.illusion.checkfirm.main
 
 import android.app.Activity
-import android.content.*
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.HorizontalScrollView
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.appbar.MaterialToolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.bookmark.BookmarkActivity
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
+import com.illusion.checkfirm.databinding.ActivityMainBinding
 import com.illusion.checkfirm.dialogs.SearchDialog
 import com.illusion.checkfirm.primitive.MainItem
 import com.illusion.checkfirm.primitive.PreviousItem
 import com.illusion.checkfirm.primitive.SmartSearchItem
-import com.illusion.checkfirm.search.TransparentActivity
 import com.illusion.checkfirm.search.SearchActivity
+import com.illusion.checkfirm.search.TransparentActivity
 import com.illusion.checkfirm.settings.SettingsActivity
 import com.illusion.checkfirm.settings.help.HelpActivity
 import com.illusion.checkfirm.settings.help.ManualActivity
@@ -40,17 +36,13 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     // Welcome Search
     private lateinit var welcomeCardView: MaterialCardView
-    private lateinit var welcomeTitle: MaterialTextView
-    private lateinit var welcomeText: MaterialTextView
 
-    // Search Layouts
+    // Search Layout
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var mResult: LinearLayout
-
-    // Quick Search
-    private lateinit var viewModel: BookmarkViewModel
 
     // ETC
     private lateinit var sharedPrefs: SharedPreferences
@@ -59,24 +51,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         searchDevicePrefs = getSharedPreferences("search_device", Context.MODE_PRIVATE)
         searchResultPrefs = getSharedPreferences("search_result", Context.MODE_PRIVATE)
 
         // UI
-        mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
+        mSwipeRefreshLayout = binding.swipeRefreshLayout
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.green)
         mSwipeRefreshLayout.isEnabled = false
 
         // Welcome Search
-        welcomeCardView = findViewById(R.id.welcome)
-        welcomeTitle = findViewById(R.id.welcome_title)
-        welcomeText = findViewById(R.id.welcome_text)
-
-        // Search Result
-        mResult = findViewById(R.id.result)
+        welcomeCardView = binding.includeWelcomeSearch.welcome
 
         initToolbar()
         initQuick()
@@ -126,8 +114,8 @@ class MainActivity : AppCompatActivity() {
             if (welcome) {
                 welcomeSearch()
             } else {
-                welcomeTitle.text = getString(R.string.welcome_search)
-                welcomeText.text = getString(R.string.welcome_disabled)
+                binding.includeWelcomeSearch.welcomeTitle.text = getString(R.string.welcome_search)
+                binding.includeWelcomeSearch.welcomeText.text = getString(R.string.welcome_disabled)
                 welcomeCardView.visibility = View.VISIBLE
             }
         }
@@ -141,16 +129,16 @@ class MainActivity : AppCompatActivity() {
                 val model = data!!.getStringExtra("model") as String
                 val csc = data.getStringExtra("csc") as String
                 val total = data.getIntExtra("total", 0)
-                
+
                 welcomeCardView.visibility = View.GONE
                 networkTask(model, csc, total)
             } else {
                 Toast.makeText(this, R.string.check_network, Toast.LENGTH_SHORT).show()
             }
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
-            mResult.visibility = View.VISIBLE
+            binding.result.visibility = View.VISIBLE
 
-            val tab = findViewById<LinearLayout>(R.id.tab_layout)
+            val tab = binding.tabLayout
             var smart = sharedPrefs.getBoolean("smart", true)
             if (sharedPrefs.getBoolean("china", false)) {
                 smart = false
@@ -167,9 +155,8 @@ class MainActivity : AppCompatActivity() {
             var type: String
 
             val total = data!!.getIntExtra("total", 0)
-            val mRecyclerView = findViewById<RecyclerView>(R.id.search_result)
-            val mLayoutManager = LinearLayoutManager(this)
-            mRecyclerView.layoutManager = mLayoutManager
+            val recyclerView = binding.searchResult
+            recyclerView.layoutManager = LinearLayoutManager(this)
 
             if (total == 0) {
                 tab.visibility = View.GONE
@@ -207,12 +194,12 @@ class MainActivity : AppCompatActivity() {
                         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
                 })
-                mRecyclerView.adapter = mAdapter
+                recyclerView.adapter = mAdapter
             } else {
                 tab.visibility = View.VISIBLE
 
-                val tab1 = findViewById<MaterialButton>(R.id.button_official)
-                val tab2 = findViewById<MaterialButton>(R.id.button_test)
+                val tab1 = binding.buttonOfficial
+                val tab2 = binding.buttonTest
                 tab1.setTextAppearance(R.style.SearchButton_Selected)
                 tab2.setTextAppearance(R.style.SearchButton_Unselected)
 
@@ -255,7 +242,7 @@ class MainActivity : AppCompatActivity() {
                         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
                 })
-                mRecyclerView.adapter = mAdapter
+                recyclerView.adapter = mAdapter
 
                 tab1.setOnClickListener {
                     tab1.setTextAppearance(R.style.SearchButton_Selected)
@@ -270,7 +257,7 @@ class MainActivity : AppCompatActivity() {
                             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                         }
                     })
-                    mRecyclerView.adapter = mAdapter
+                    recyclerView.adapter = mAdapter
                 }
 
                 tab2.setOnClickListener {
@@ -286,7 +273,7 @@ class MainActivity : AppCompatActivity() {
                             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                         }
                     })
-                    mRecyclerView.adapter = mAdapter
+                    recyclerView.adapter = mAdapter
                 }
             }
 
@@ -334,18 +321,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.includeToolbar.toolbar)
 
         val toolbarText = getString(R.string.app_name)
-        val title = findViewById<MaterialTextView>(R.id.title)
+        val title = binding.includeToolbar.title
         title.text = toolbarText
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
-        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+        val appBar = binding.includeToolbar.appbar
+        appBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
@@ -353,23 +339,23 @@ class MainActivity : AppCompatActivity() {
 
         val one = sharedPrefs.getBoolean("one", true)
         if (one) {
-            mAppBar.setExpanded(true)
+            appBar.setExpanded(true)
         } else {
-            mAppBar.setExpanded(false)
+            appBar.setExpanded(false)
         }
     }
 
     private fun initQuick() {
-        val chipScroll = findViewById<HorizontalScrollView>(R.id.chip_scroll)
+        val chipScroll = binding.chipScroll
         val quick = sharedPrefs.getBoolean("quick", false)
         if (quick) {
-            viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
+            val viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
             viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { bookmarks ->
                 bookmarks?.let {
                     if (it.isEmpty()) {
                         chipScroll.visibility = View.GONE
                     } else {
-                        val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chip_group)
+                        val bookmarkChipGroup = binding.chipGroup
                         bookmarkChipGroup.removeAllViews()
                         for (element in it) {
                             val bookmarkChip = Chip(this)
@@ -415,8 +401,8 @@ class MainActivity : AppCompatActivity() {
             welcomeCardView.visibility = View.GONE
             networkTask(model, csc, total + 1)
         } else {
-            welcomeTitle.text = getString(R.string.check_network)
-            welcomeText.text = getString(R.string.welcome_online)
+            binding.includeWelcomeSearch.welcomeTitle.text = getString(R.string.check_network)
+            binding.includeWelcomeSearch.welcomeText.text = getString(R.string.welcome_online)
             welcomeCardView.visibility = View.VISIBLE
         }
     }

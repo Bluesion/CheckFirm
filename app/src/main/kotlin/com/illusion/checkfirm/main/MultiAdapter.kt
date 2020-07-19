@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.RowMultiSearchItemsBinding
 import com.illusion.checkfirm.primitive.MainItem
 import com.illusion.checkfirm.primitive.SmartSearchItem
 
@@ -19,16 +20,16 @@ class MultiAdapter(val context: Context, private val isOfficial: Boolean, privat
                    private var itemList: List<MainItem>, private var smartSearchList: List<SmartSearchItem>,
                    val onClickListener: MyAdapterListener) : RecyclerView.Adapter<MultiAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val card: MaterialCardView = view.findViewById(R.id.card)
-        var image: AppCompatImageView = view.findViewById(R.id.image)
-        var model: MaterialTextView = view.findViewById(R.id.model)
-        var title: MaterialTextView = view.findViewById(R.id.title)
-        val detail: LinearLayout = view.findViewById(R.id.detail)
-        var text: MaterialTextView = view.findViewById(R.id.text)
-        var date: MaterialTextView = view.findViewById(R.id.smart_search_date)
-        var downgrade: MaterialTextView = view.findViewById(R.id.smart_search_downgrade)
-        var type: MaterialTextView = view.findViewById(R.id.smart_search_type)
+    inner class MyViewHolder(binding: RowMultiSearchItemsBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val card: MaterialCardView = binding.card
+        var image: AppCompatImageView = binding.image
+        var model: MaterialTextView = binding.model
+        var title: MaterialTextView = binding.title
+        val detail: LinearLayout = binding.detail
+        var text: MaterialTextView = binding.text
+        var date: MaterialTextView = binding.smartSearchDate
+        var downgrade: MaterialTextView = binding.smartSearchDowngrade
+        var type: MaterialTextView = binding.smartSearchType
 
         init {
             card.setOnClickListener { v -> onClickListener.onLayoutClicked(v, bindingAdapterPosition) }
@@ -36,9 +37,9 @@ class MultiAdapter(val context: Context, private val isOfficial: Boolean, privat
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_multi_search_items, parent, false)
+        val binding = RowMultiSearchItemsBinding.inflate(LayoutInflater.from(parent.context))
 
-        return MyViewHolder(itemView)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

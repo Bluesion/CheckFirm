@@ -33,6 +33,7 @@
     <string name="update">更新</string>
     <string name="legal">法律信息</string>
     <string name="contributor_localization">本土化</string>
+    <string name="contributor_czech">捷克文</string>
 
     <!-- Settings -->
     <string name="notification">通知</string>

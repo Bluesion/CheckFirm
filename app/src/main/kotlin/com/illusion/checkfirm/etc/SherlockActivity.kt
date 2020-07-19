@@ -9,18 +9,17 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.ActivitySherlockBinding
 import org.spongycastle.crypto.digests.MD5Digest
 import org.spongycastle.util.encoders.Hex
 import java.nio.charset.StandardCharsets
 
 class SherlockActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySherlockBinding
     private var buildPrefix = ""
     private var cscPrefix = ""
     private var basebandPrefix = ""
@@ -29,14 +28,15 @@ class SherlockActivity : AppCompatActivity() {
     private lateinit var buildEditor: TextInputEditText
     private lateinit var cscEditor: TextInputEditText
     private lateinit var basebandEditor: TextInputEditText
-    private lateinit var userText: MaterialTextView
     private lateinit var samsungEncryptedText: MaterialTextView
     private lateinit var userEncryptedText: MaterialTextView
     private lateinit var status: MaterialTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sherlock)
+        binding = ActivitySherlockBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         initToolbar()
 
         val officialFirmware = intent.getStringExtra("official")!!
@@ -61,11 +61,8 @@ class SherlockActivity : AppCompatActivity() {
         val buildInfo = buildVersion.substring(length - 6)
         val cscInfo = cscVersion.substring(length - 5)
 
-        userText = findViewById(R.id.user_text)
-
-        val buildLayout = findViewById<TextInputLayout>(R.id.text_field_build)
-        buildLayout.prefixText = buildPrefix
-        buildEditor = findViewById(R.id.editor_build)
+        binding.textFieldBuild.prefixText = buildPrefix
+        buildEditor = binding.editorBuild
         buildEditor.setText(buildInfo)
         buildEditor.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
@@ -77,9 +74,8 @@ class SherlockActivity : AppCompatActivity() {
             }
         })
 
-        val cscLayout = findViewById<TextInputLayout>(R.id.text_field_csc)
-        cscLayout.prefixText = cscPrefix
-        cscEditor = findViewById(R.id.editor_csc)
+        binding.textFieldCsc.prefixText = cscPrefix
+        cscEditor = binding.editorCsc
         cscEditor.setText(cscInfo)
         cscEditor.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
@@ -91,9 +87,8 @@ class SherlockActivity : AppCompatActivity() {
             }
         })
 
-        val basebandLayout = findViewById<TextInputLayout>(R.id.text_field_baseband)
-        basebandLayout.prefixText = basebandPrefix
-        basebandEditor = findViewById(R.id.editor_baseband)
+        binding.textFieldBaseband.prefixText = basebandPrefix
+        basebandEditor = binding.editorBaseband
         basebandEditor.setText(basebandInfo)
         basebandEditor.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
@@ -105,17 +100,17 @@ class SherlockActivity : AppCompatActivity() {
             }
         })
 
-        samsungEncryptedText = findViewById(R.id.samsung_encrypted_text)
+        samsungEncryptedText = binding.samsungEncryptedText
         samsungEncryptedText.text = intent.getStringExtra("firmware")
 
         userFirmware = buildPrefix + buildEditor.text.toString() + "/" +
                 cscPrefix + cscEditor.text.toString() + "/" + basebandPrefix + basebandEditor.text.toString()
-        userText.text = userFirmware
+        binding.userText.text = userFirmware
 
-        userEncryptedText = findViewById(R.id.user_encrypted_text)
+        userEncryptedText = binding.userEncryptedText
         userEncryptedText.text = getMD5(userFirmware.toByteArray(StandardCharsets.UTF_8))
 
-        status = findViewById(R.id.status)
+        status = binding.status
         if (samsungEncryptedText.text == userEncryptedText.text) {
             status.text = getString(R.string.sherlock_correct)
             status.setTextColor(resources.getColor(R.color.green, theme))
@@ -125,8 +120,7 @@ class SherlockActivity : AppCompatActivity() {
         }
 
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val copyButton = findViewById<MaterialButton>(R.id.copy)
-        copyButton.setOnClickListener {
+        binding.copy.setOnClickListener {
             val clip = ClipData.newPlainText("checkfirmSherlock", userFirmware)
             clipboard.setPrimaryClip(clip)
             Toast.makeText(this, R.string.clipboard, Toast.LENGTH_SHORT).show()
@@ -155,7 +149,7 @@ class SherlockActivity : AppCompatActivity() {
     private fun compare() {
         userFirmware = buildPrefix + buildEditor.text.toString() + "/" +
                 cscPrefix + cscEditor.text.toString() + "/" + basebandPrefix + basebandEditor.text.toString()
-        userText.text = userFirmware
+        binding.userText.text = userFirmware
         userEncryptedText.text = getMD5(userFirmware.toByteArray(StandardCharsets.UTF_8))
 
         if (samsungEncryptedText.text == userEncryptedText.text) {
@@ -168,15 +162,15 @@ class SherlockActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.includeToolbar.toolbar)
         val toolbarText = getString(R.string.sherlock)
-        val title = findViewById<MaterialTextView>(R.id.title)
+
+        val title = binding.includeToolbar.title
+        val expandedTitle = binding.includeToolbar.expandedTitle
         title.text = toolbarText
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
         expandedTitle.text = toolbarText
 
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        val mAppBar = binding.includeToolbar.appbar
         mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)

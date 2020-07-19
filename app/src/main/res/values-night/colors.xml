@@ -4,4 +4,7 @@
     <color name="switch_card_background_on">#4197fe</color>
     <color name="switch_card_background_off">#252525</color>
     <color name="button_ripple_color">#515151</color>
+    <color name="tip_card_background_color">#053053</color>
+    <color name="tip_title_color">#fafafa</color>
+    <color name="tip_text_color">#038bfb</color>
 </resources>

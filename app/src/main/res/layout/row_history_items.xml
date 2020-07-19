@@ -5,7 +5,7 @@
     android:layout_marginBottom="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/touchArea"
+        android:id="@+id/touch_area"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
@@ -71,7 +71,7 @@
         android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/touchArea"
+        app:layout_constraintStart_toEndOf="@id/touch_area"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,14 +5,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.CompoundButton
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.switchmaterial.SwitchMaterial
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.ActivitySettingsBinding
 import com.illusion.checkfirm.dialogs.ThemeDialog
 import com.illusion.checkfirm.settings.about.AboutActivity
 import com.illusion.checkfirm.settings.catcher.InfoCatcherActivity
@@ -21,6 +18,7 @@ import com.illusion.checkfirm.settings.welcome.WelcomeSearchActivity
 
 class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
 
+    private lateinit var binding: ActivitySettingsBinding
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
     private lateinit var oneSwitch: SwitchMaterial
@@ -38,15 +36,16 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        oneSwitch = findViewById(R.id.expanded_switch)
-        welcomeSwitch = findViewById(R.id.welcome_switch)
-        smartSwitch = findViewById(R.id.smart_switch)
-        quickSwitch = findViewById(R.id.quick_switch)
-        catcherSwitch = findViewById(R.id.catcher_switch)
-        chinaSwitch = findViewById(R.id.china_switch)
+        oneSwitch = binding.expandedSwitch
+        welcomeSwitch = binding.welcomeSwitch
+        smartSwitch = binding.smartSwitch
+        quickSwitch = binding.quickSwitch
+        catcherSwitch = binding.catcherSwitch
+        chinaSwitch = binding.chinaSwitch
         initSwitch()
         initToolbar()
 
@@ -57,58 +56,48 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         catcherSwitch.setOnCheckedChangeListener(this)
         chinaSwitch.setOnCheckedChangeListener(this)
 
-        val oneLayout = findViewById<ConstraintLayout>(R.id.expanded_layout)
-        oneLayout.setOnClickListener {
+        binding.expandedLayout.setOnClickListener {
             oneSwitch.toggle()
         }
 
-        val themeLayout = findViewById<LinearLayout>(R.id.theme_layout)
-        themeLayout.setOnClickListener {
+        binding.themeLayout.setOnClickListener {
             val bottomSheetFragment = ThemeDialog()
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
 
-        val welcomeLayout = findViewById<ConstraintLayout>(R.id.welcome_layout)
-        welcomeLayout.setOnClickListener {
+        binding.welcomeLayout.setOnClickListener {
             val intent = Intent(this, WelcomeSearchActivity::class.java)
             startActivity(intent)
         }
 
-        val smartLayout = findViewById<ConstraintLayout>(R.id.smart_layout)
-        smartLayout.setOnClickListener {
+        binding.smartLayout.setOnClickListener {
             smartSwitch.toggle()
         }
 
-        val quickLayout = findViewById<ConstraintLayout>(R.id.quick_layout)
-        quickLayout.setOnClickListener {
+        binding.quickLayout.setOnClickListener {
             quickSwitch.toggle()
         }
 
-        val catcherLayout = findViewById<ConstraintLayout>(R.id.catcher_layout)
-        catcherLayout.setOnClickListener {
+        binding.catcherLayout.setOnClickListener {
             val intent = Intent(this, InfoCatcherActivity::class.java)
             startActivity(intent)
         }
 
-        val chinaLayout = findViewById<ConstraintLayout>(R.id.china_layout)
-        chinaLayout.setOnClickListener {
+        binding.chinaLayout.setOnClickListener {
             chinaSwitch.toggle()
         }
 
-        val helpLayout = findViewById<MaterialTextView>(R.id.help_layout)
-        helpLayout.setOnClickListener {
+        binding.helpLayout.setOnClickListener {
             val intent = Intent(this, HelpActivity::class.java)
             startActivity(intent)
         }
 
-        val aboutLayout = findViewById<MaterialTextView>(R.id.about_layout)
-        aboutLayout.setOnClickListener {
+        binding.aboutLayout.setOnClickListener {
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
         }
 
-        val inquiryLayout = findViewById<MaterialTextView>(R.id.inquiry_layout)
-        inquiryLayout.setOnClickListener {
+        binding.inquiryLayout.setOnClickListener {
             val intent = Intent(this, InquiryActivity::class.java)
             startActivity(intent)
         }
@@ -179,17 +168,17 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.includeToolbar.toolbar)
+
         val toolbarText = getString(R.string.settings)
-        val title = findViewById<MaterialTextView>(R.id.title)
+        val title = binding.includeToolbar.title
         title.text = toolbarText
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
-        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+        val appBar = binding.includeToolbar.appbar
+        appBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
@@ -197,9 +186,9 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
 
         val one = sharedPrefs.getBoolean("one", true)
         if (one) {
-            mAppBar.setExpanded(true)
+            appBar.setExpanded(true)
         } else {
-            mAppBar.setExpanded(false)
+            appBar.setExpanded(false)
         }
     }
 

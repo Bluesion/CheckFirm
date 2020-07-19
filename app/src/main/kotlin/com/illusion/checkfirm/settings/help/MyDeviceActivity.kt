@@ -3,25 +3,31 @@ package com.illusion.checkfirm.settings.help
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.ActivityHelpDeviceBinding
+import com.illusion.checkfirm.dialogs.BookmarkDialog
 
 class MyDeviceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_help_device)
+        val binding = ActivityHelpDeviceBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        val toolbar = binding.toolbar
         toolbar.title = getString(R.string.help_device_info)
         setSupportActionBar(toolbar)
 
         val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val myModel = findViewById<MaterialTextView>(R.id.model)
-        val myCsc = findViewById<MaterialTextView>(R.id.csc)
-        myModel.text = sharedPrefs.getString("new_saved_model", "")!!
-        myCsc.text = sharedPrefs.getString("new_saved_csc", "")!!
+        val model = sharedPrefs.getString("new_saved_model", "")!!
+        val csc = sharedPrefs.getString("new_saved_csc", "")!!
+        binding.model.text = model
+        binding.csc.text = csc
+
+        binding.tipText1.setOnClickListener {
+            val bottomSheetFragment = BookmarkDialog.newInstance(false, 0, "T내 디바이스", model, csc)
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+        }
     }
 
     override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {

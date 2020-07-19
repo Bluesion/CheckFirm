@@ -5,27 +5,26 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.card.MaterialCardView
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.ActivityHelpBinding
 
 class HelpActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityHelpBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_help)
+        binding = ActivityHelpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initToolbar()
 
-        val manual = findViewById<MaterialCardView>(R.id.help_manual)
-        manual.setOnClickListener {
+        binding.helpManual.setOnClickListener {
             val intent = Intent(this, ManualActivity::class.java)
             startActivity(intent)
         }
 
-        val myDevice = findViewById<MaterialCardView>(R.id.help_device)
-        myDevice.setOnClickListener {
+        binding.helpDevice.setOnClickListener {
             val intent = Intent(this, MyDeviceActivity::class.java)
             startActivity(intent)
         }
@@ -42,15 +41,15 @@ class HelpActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.includeToolbar.toolbar)
+
         val toolbarText = getString(R.string.help)
-        val title = findViewById<MaterialTextView>(R.id.title)
+        val title = binding.includeToolbar.title
         title.text = toolbarText
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
+        val mAppBar = binding.includeToolbar.appbar
         mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)

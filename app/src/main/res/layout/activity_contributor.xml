@@ -169,9 +169,19 @@
                     android:layout_height="wrap_content"
                     android:text="@string/contributor_chinese"
                     android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/czech"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/russian" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/czech"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contributor_czech"
+                    android:textAppearance="?textAppearanceBody1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/chinese" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/thanks"
@@ -201,9 +211,19 @@
                     android:layout_height="wrap_content"
                     android:text="@string/contributor_chinese_translator"
                     android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/czech_translator"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/russian_translator" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/czech_translator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contributor_czech_translator"
+                    android:textAppearance="?textAppearanceBody1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/chinese_translator" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

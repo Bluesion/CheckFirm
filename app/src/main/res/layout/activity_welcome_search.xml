@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar_expandable" />
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/toolbar_expandable" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -110,7 +112,7 @@
                         android:scrollbars="none">
 
                         <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/chipGroup"
+                            android:id="@+id/chip_group"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:singleLine="true"

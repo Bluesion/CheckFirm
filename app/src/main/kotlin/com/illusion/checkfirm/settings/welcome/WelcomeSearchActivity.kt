@@ -5,72 +5,59 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
-import com.google.android.material.switchmaterial.SwitchMaterial
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
+import com.illusion.checkfirm.databinding.ActivityWelcomeSearchBinding
 import java.util.*
 
 class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
 
+    private lateinit var binding: ActivityWelcomeSearchBinding
     private lateinit var sharedPrefs: SharedPreferences
-    private lateinit var mEditor: SharedPreferences.Editor
     private lateinit var searchPrefsEditor: SharedPreferences.Editor
-    private lateinit var switchText: MaterialTextView
-    private lateinit var switchCard: LinearLayout
     private lateinit var adapter: WelcomeSearchAdapter
     private lateinit var modelList: ArrayList<String>
     private lateinit var cscList: ArrayList<String>
-    private lateinit var viewModel: BookmarkViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome_search)
+        binding = ActivityWelcomeSearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val welcome = sharedPrefs.getBoolean("welcome", false)
 
         initToolbar()
 
-        switchCard = findViewById(R.id.switch_card)
-        switchText = findViewById(R.id.switch_text)
-        val welcomeSwitch = findViewById<SwitchMaterial>(R.id.welcome_switch)
+        val welcomeSwitch = binding.welcomeSwitch
         if (welcome) {
             welcomeSwitch.isChecked = true
-            switchText.text = getString(R.string.switch_on)
-            switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_on)
+            binding.switchText.text = getString(R.string.switch_on)
+            binding.switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_on)
         } else {
             welcomeSwitch.isChecked = false
-            switchText.text = getString(R.string.switch_off)
-            switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_off)
+            binding.switchText.text = getString(R.string.switch_off)
+            binding.switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_off)
         }
         welcomeSwitch.setOnCheckedChangeListener(this)
 
-        val welcomeLayout = findViewById<ConstraintLayout>(R.id.welcome)
-        welcomeLayout.setOnClickListener {
+        binding.welcome.setOnClickListener {
             welcomeSwitch.toggle()
         }
 
-        val savedDevicesLayout = findViewById<MaterialCardView>(R.id.saved_devices_layout)
-        val savedDevicesText = findViewById<MaterialTextView>(R.id.saved_devices_text)
-        val bookmarkChipGroup = findViewById<ChipGroup>(R.id.chipGroup)
-        viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
+        val savedDevicesLayout = binding.savedDevicesLayout
+        val savedDevicesText = binding.savedDevicesText
+        val bookmarkChipGroup = binding.chipGroup
+        val viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
         viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { bookmarks ->
             bookmarks?.let {
                 if (it.isEmpty()) {
@@ -134,9 +121,8 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
             savedDevicesText.text = resources.getQuantityText(R.plurals.saved_devices, modelList.size)
         }
 
-        val recyclerView = findViewById<RecyclerView>(R.id.welcome_list)
-        val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recyclerView.layoutManager = layoutManager
+        val recyclerView = binding.welcomeList
+        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         adapter = WelcomeSearchAdapter(this, modelList, cscList, object : WelcomeSearchAdapter.MyAdapterListener {
             override fun onDeleteClicked(position: Int) {
@@ -154,16 +140,13 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         })
         recyclerView.adapter = adapter
 
-        val editTextModel = findViewById<TextInputEditText>(R.id.model)
-        val editTextCsc = findViewById<TextInputEditText>(R.id.csc)
-        val addButton = findViewById<MaterialButton>(R.id.add)
-        addButton.setOnClickListener {
+        binding.add.setOnClickListener {
             if (modelList.size >= 4) {
                 Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
             } else {
                 savedDevicesLayout.visibility = View.VISIBLE
-                val modelText = editTextModel.text!!.trim().toString().toUpperCase(Locale.US)
-                val cscText = editTextCsc.text!!.trim().toString().toUpperCase(Locale.US)
+                val modelText = binding.model.text!!.trim().toString().toUpperCase(Locale.US)
+                val cscText = binding.csc.text!!.trim().toString().toUpperCase(Locale.US)
 
                 if (modelText.isNotEmpty() && cscText.isNotEmpty()) {
                     var isDuplicated = false
@@ -190,17 +173,17 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
     }
 
     override fun onCheckedChanged(p0: CompoundButton, isChecked: Boolean) {
-        mEditor = sharedPrefs.edit()
+        val mEditor = sharedPrefs.edit()
         when (p0.id) {
             R.id.welcome_switch -> {
                 if (isChecked) {
-                    switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_on)
+                    binding.switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_on)
                     mEditor.putBoolean("welcome", true)
-                    switchText.text = getString(R.string.switch_on)
+                    binding.switchText.text = getString(R.string.switch_on)
                 } else {
-                    switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_off)
+                    binding.switchCard.background = ContextCompat.getDrawable(this, R.color.switch_card_background_off)
                     mEditor.putBoolean("welcome", false)
-                    switchText.text = getString(R.string.switch_off)
+                    binding.switchText.text = getString(R.string.switch_off)
                 }
                 mEditor.apply()
             }
@@ -237,17 +220,17 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
     }
 
     private fun initToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.includeToolbar.toolbar)
+
         val toolbarText = getString(R.string.welcome_search)
-        val title = findViewById<MaterialTextView>(R.id.title)
+        val title = binding.includeToolbar.title
         title.text = toolbarText
-        val expandedTitle = findViewById<MaterialTextView>(R.id.expanded_title)
+        val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val mAppBar = findViewById<AppBarLayout>(R.id.appbar)
-        mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
-        mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+        val appBar = binding.includeToolbar.appbar
+        appBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
@@ -255,9 +238,9 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
 
         val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
         if (one) {
-            mAppBar.setExpanded(true)
+            appBar.setExpanded(true)
         } else {
-            mAppBar.setExpanded(false)
+            appBar.setExpanded(false)
         }
     }
 }

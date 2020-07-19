@@ -80,23 +80,27 @@ class BookmarkActivity : AppCompatActivity() {
     private fun initToolbar() {
         setSupportActionBar(binding.toolbar)
 
-        val toolbarText = getString(R.string.bookmark)
-        binding.title.text = toolbarText
-        binding.expandedTitle.text = toolbarText
+        val title = binding.title
+        val expandedTitle = binding.expandedTitle
 
-        binding.appbar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
-        binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
+        val toolbarText = getString(R.string.bookmark)
+        title.text = toolbarText
+        expandedTitle.text = toolbarText
+
+        val appbar = binding.appbar
+        appbar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
+        appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
-            binding.expandedTitle.alpha = 1 - (percentage * 2 * -1)
+            expandedTitle.alpha = 1 - (percentage * 2 * -1)
             binding.expandedSubtitle.alpha = 1 - (percentage * 2 * -1)
-            binding.title.alpha = percentage * -1
+            title.alpha = percentage * -1
         })
 
         val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
         if (one) {
-            binding.appbar.setExpanded(true)
+            appbar.setExpanded(true)
         } else {
-            binding.appbar.setExpanded(false)
+            appbar.setExpanded(false)
         }
     }
 }

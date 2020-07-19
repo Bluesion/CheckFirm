@@ -1,25 +1,24 @@
 package com.illusion.checkfirm.search
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
-import com.illusion.checkfirm.R
+import com.illusion.checkfirm.databinding.RowHistoryItemsBinding
 import com.illusion.checkfirm.primitive.HistoryItem
 import kotlin.math.min
 
 class HistoryAdapter(private val historyList: List<HistoryItem>,
-                     val onClickListener: MyAdapterListener): RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
+                     val onClickListener: MyAdapterListener) : RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val delete: AppCompatImageView = view.findViewById(R.id.delete)
-        private val touch: ConstraintLayout = view.findViewById(R.id.touchArea)
-        var model: MaterialTextView = view.findViewById(R.id.model)
-        var csc: MaterialTextView = view.findViewById(R.id.csc)
-        var date: MaterialTextView = view.findViewById(R.id.date)
+    inner class MyViewHolder(binding: RowHistoryItemsBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val delete: AppCompatImageView = binding.delete
+        private val touch: ConstraintLayout = binding.touchArea
+        var model: MaterialTextView = binding.model
+        var csc: MaterialTextView = binding.csc
+        var date: MaterialTextView = binding.date
 
         init {
             touch.setOnClickListener { onClickListener.onItemClicked(bindingAdapterPosition) }
@@ -28,9 +27,9 @@ class HistoryAdapter(private val historyList: List<HistoryItem>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_history_items, parent, false)
+        val binding = RowHistoryItemsBinding.inflate(LayoutInflater.from(parent.context))
 
-        return MyViewHolder(itemView)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
