@@ -10,12 +10,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.ActivitySherlockBinding
+import com.illusion.checkfirm.dialogs.SherlockDialog
 import org.spongycastle.crypto.digests.MD5Digest
 import org.spongycastle.util.encoders.Hex
 import java.nio.charset.StandardCharsets
+import java.util.*
 
 class SherlockActivity : AppCompatActivity() {
 
@@ -24,13 +25,11 @@ class SherlockActivity : AppCompatActivity() {
     private var cscPrefix = ""
     private var basebandPrefix = ""
     private var userFirmware = ""
+    private var testLatest = ""
 
     private lateinit var buildEditor: TextInputEditText
     private lateinit var cscEditor: TextInputEditText
     private lateinit var basebandEditor: TextInputEditText
-    private lateinit var samsungEncryptedText: MaterialTextView
-    private lateinit var userEncryptedText: MaterialTextView
-    private lateinit var status: MaterialTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,31 +38,7 @@ class SherlockActivity : AppCompatActivity() {
 
         initToolbar()
 
-        val officialFirmware = intent.getStringExtra("official")!!
-
-        val firstIndex = officialFirmware.indexOf("/")
-        val secondIndex = officialFirmware.lastIndexOf("/")
-
-        val buildVersion = officialFirmware.substring(0, firstIndex)
-        val cscVersion = officialFirmware.substring(firstIndex + 1, secondIndex)
-        var basebandVersion = ""
-        var basebandInfo = ""
-
-        val length = buildVersion.length
-        buildPrefix = buildVersion.substring(0, length - 6)
-        cscPrefix = cscVersion.substring(0, length - 5)
-        if (officialFirmware.length - 1 > secondIndex) {
-            basebandVersion = officialFirmware.substring(secondIndex + 1)
-            basebandPrefix = basebandVersion.substring(0, length - 6)
-            basebandInfo = basebandVersion.substring(length - 6)
-        }
-
-        val buildInfo = buildVersion.substring(length - 6)
-        val cscInfo = cscVersion.substring(length - 5)
-
-        binding.textFieldBuild.prefixText = buildPrefix
         buildEditor = binding.editorBuild
-        buildEditor.setText(buildInfo)
         buildEditor.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
 
@@ -74,9 +49,7 @@ class SherlockActivity : AppCompatActivity() {
             }
         })
 
-        binding.textFieldCsc.prefixText = cscPrefix
         cscEditor = binding.editorCsc
-        cscEditor.setText(cscInfo)
         cscEditor.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
 
@@ -87,9 +60,7 @@ class SherlockActivity : AppCompatActivity() {
             }
         })
 
-        binding.textFieldBaseband.prefixText = basebandPrefix
         basebandEditor = binding.editorBaseband
-        basebandEditor.setText(basebandInfo)
         basebandEditor.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
 
@@ -100,23 +71,47 @@ class SherlockActivity : AppCompatActivity() {
             }
         })
 
-        samsungEncryptedText = binding.samsungEncryptedText
-        samsungEncryptedText.text = intent.getStringExtra("firmware")
+        testLatest = intent.getStringExtra("test")!!
 
-        userFirmware = buildPrefix + buildEditor.text.toString() + "/" +
-                cscPrefix + cscEditor.text.toString() + "/" + basebandPrefix + basebandEditor.text.toString()
-        binding.userText.text = userFirmware
+        if (!intent.getBooleanExtra("pro_mode", false)) {
+            val officialFirmware = intent.getStringExtra("official")!!
 
-        userEncryptedText = binding.userEncryptedText
-        userEncryptedText.text = getMD5(userFirmware.toByteArray(StandardCharsets.UTF_8))
+            val firstIndex = officialFirmware.indexOf("/")
+            val secondIndex = officialFirmware.lastIndexOf("/")
 
-        status = binding.status
-        if (samsungEncryptedText.text == userEncryptedText.text) {
-            status.text = getString(R.string.sherlock_correct)
-            status.setTextColor(resources.getColor(R.color.green, theme))
+            val buildVersion = officialFirmware.substring(0, firstIndex)
+            val cscVersion = officialFirmware.substring(firstIndex + 1, secondIndex)
+            var basebandInfo = ""
+
+            val length = buildVersion.length
+            buildPrefix = buildVersion.substring(0, length - 6)
+            cscPrefix = cscVersion.substring(0, length - 5)
+            if (officialFirmware.length - 1 > secondIndex) {
+                val basebandVersion = officialFirmware.substring(secondIndex + 1)
+                basebandPrefix = basebandVersion.substring(0, length - 6)
+                basebandInfo = basebandVersion.substring(length - 6)
+            }
+
+            binding.textFieldBuild.prefixText = buildPrefix
+            buildEditor.setText(buildVersion.substring(length - 6))
+
+            binding.textFieldCsc.prefixText = cscPrefix
+            cscEditor.setText(cscVersion.substring(length - 5))
+
+            binding.textFieldBaseband.prefixText = basebandPrefix
+            basebandEditor.setText(basebandInfo)
         } else {
-            status.text = getString(R.string.sherlock_not_correct)
-            status.setTextColor(resources.getColor(R.color.red, theme))
+            val dummy = getDate()
+            buildEditor.setText(dummy)
+            cscEditor.setText(dummy)
+            basebandEditor.setText(dummy)
+        }
+
+        compare()
+
+        binding.help.setOnClickListener {
+            val bottomSheetFragment = SherlockDialog.newInstance(testLatest, getMD5(userFirmware.toByteArray(StandardCharsets.UTF_8))!!)
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
 
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -148,17 +143,46 @@ class SherlockActivity : AppCompatActivity() {
 
     private fun compare() {
         userFirmware = buildPrefix + buildEditor.text.toString() + "/" +
-                cscPrefix + cscEditor.text.toString() + "/" + basebandPrefix + basebandEditor.text.toString()
-        binding.userText.text = userFirmware
-        userEncryptedText.text = getMD5(userFirmware.toByteArray(StandardCharsets.UTF_8))
+            cscPrefix + cscEditor.text.toString() + "/" + basebandPrefix + basebandEditor.text.toString()
 
-        if (samsungEncryptedText.text == userEncryptedText.text) {
-            status.text = getString(R.string.sherlock_correct)
-            status.setTextColor(resources.getColor(R.color.green, theme))
-        } else {
-            status.text = getString(R.string.sherlock_not_correct)
-            status.setTextColor(resources.getColor(R.color.red, theme))
+        val userFirmwareWithDM = buildPrefix + buildEditor.text.toString() + ".DM/" +
+            cscPrefix + cscEditor.text.toString() + "/" + basebandPrefix + basebandEditor.text.toString()
+
+        val encryptedFirmware = getMD5(userFirmware.toByteArray(StandardCharsets.UTF_8))
+        val encryptedFirmwareWithDM = getMD5(userFirmwareWithDM.toByteArray(StandardCharsets.UTF_8))
+
+        when (testLatest) {
+            encryptedFirmware -> {
+                binding.status.text = getString(R.string.sherlock_correct)
+                binding.status.setTextColor(resources.getColor(R.color.green, theme))
+                binding.userText.text = userFirmware
+            }
+            encryptedFirmwareWithDM -> {
+                binding.editorBuild.setText("${buildEditor.text}.DM")
+                binding.status.text = getString(R.string.sherlock_correct)
+                binding.status.setTextColor(resources.getColor(R.color.green, theme))
+                binding.userText.text = userFirmwareWithDM
+            }
+            else -> {
+                binding.status.text = getString(R.string.sherlock_not_correct)
+                binding.status.setTextColor(resources.getColor(R.color.red, theme))
+                binding.userText.text = userFirmware
+            }
         }
+    }
+
+    private fun getDate(): String {
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"))
+        val todayYear = calendar.get(Calendar.YEAR)
+        val todayMonth = calendar.get(Calendar.MONTH).plus(1)
+
+        val yearSub = todayYear - 2011
+        val monthSub = todayMonth - 1
+
+        val year = (75 + yearSub).toChar()
+        val month = (65 + monthSub).toChar()
+
+        return "$year$month" + "1"
     }
 
     private fun initToolbar() {
@@ -170,7 +194,7 @@ class SherlockActivity : AppCompatActivity() {
         title.text = toolbarText
         expandedTitle.text = toolbarText
 
-        val mAppBar = binding.includeToolbar.appbar
+        val mAppBar = binding.includeToolbar.appBar
         mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)

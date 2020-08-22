@@ -41,7 +41,7 @@
             android:name=".bookmark.BookmarkActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout" />
         <activity
-            android:name=".settings.help.ManualActivity"
+            android:name=".settings.help.FirmwareManualActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

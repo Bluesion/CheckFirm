@@ -37,7 +37,7 @@ class MultiAdapter(val context: Context, private val isOfficial: Boolean, privat
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = RowMultiSearchItemsBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = RowMultiSearchItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MyViewHolder(binding)
     }

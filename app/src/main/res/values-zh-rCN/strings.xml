@@ -7,6 +7,7 @@
     <string name="switch_on">开启</string>
     <string name="switch_off">关闭</string>
     <string name="close">关</string>
+    <string name="my_device">我的设备</string>
 
     <!-- Notification -->
     <string name="notification_new_update_title">CheckFirm紧急更新</string>
@@ -14,15 +15,19 @@
     <string name="info_catcher_notification_title">发现了新固件: %1$s (%2$s)</string>
     <string name="info_catcher_notification_text">请确认。</string>
 
+    <!-- Main -->
+    <string name="main_welcome_search_text">欢迎搜寻已禁用。建议打开欢迎搜寻。</string>
+    <string name="main_network_error_title">网络错误</string>
+    <string name="main_network_error_text">网络未连接或速度太慢。</string>
+    <string name="main_search_error_title">搜索错误</string>
+    <string name="main_search_error_text">型号或CSC错误。</string>
+
     <!-- Search -->
     <string name="latest_test">最新测试固件</string>
     <string name="model">机型</string>
     <string name="previous_test">先前的测试固件</string>
-    <string name="welcome_disabled">如果要激活欢迎搜索，请转到设置。</string>
-    <string name="welcome_online">如果要使用欢迎搜索，请连接到网络。</string>
     <string name="clipboard">复制到剪贴板。</string>
     <string name="search_error">搜索失败。 请检查您是否正确编写了型号和CSC代码。</string>
-    <string name="search_timeout">消耗太多时间。 搜索自动取消。</string>
     <string name="searching">仍在搜寻中…请稍等片刻</string>
     <string name="changelog">变更日志</string>
     <string name="link_share">链接分享</string>
@@ -46,6 +51,10 @@
     <string name="edit_bookmark">编辑书签</string>
     <string name="name">书签名称</string>
     <string name="bookmark_search_error">检查型号和CSC代码是否正确保存在书签中。</string>
+    <string name="bookmark_order">书签顺序</string>
+    <string name="bookmark_order_by_created_time">按创建时间排序</string>
+    <string name="bookmark_order_by_device">设备顺序</string>
+    <string name="bookmark_order_by_name">按名称顺序</string>
 
     <!-- Help -->
     <string name="help_device_info">设备信息</string>
@@ -91,13 +100,16 @@
     <string name="expandable_bar_description">使用折叠工具。</string>
     <string name="settings">设定</string>
     <string name="nation">国家</string>
-    <string name="china_title">解决中国地区搜索错误问题</string>
-    <string name="china_text">解决在中国无限加载。如果您在中国，请打开此选项。</string>
+    <string name="firebase">修正搜寻错误</string>
+    <string name="firebase_description">由于某些国家（例如中国或伊朗）禁止使用Firebase，因此存在搜索错误。如果您在这些国家/地区，请启用此设置。</string>
+    <string name="quick_search_bar">快速搜索栏</string>
+    <string name="quick_search_bar_description">在主屏幕上显示书签。</string>
+    <string name="welcome_search_description">启动时搜索固件。</string>
+    <string name="info_catcher_description">固件更新后，会向您发送消息通知。</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">欢迎搜寻</string>
-    <string name="welcome_search_description">启动时搜索固件。</string>
-    <string name="welcome_search_text">请输入要在启动时搜索的设备。</string>
+    <string name="welcome_search_text">启动时搜索固件。\n请输入要在启动时搜索的设备。</string>
 
     <!-- Smart Search -->
     <string name="smart_search">智能搜索</string>
@@ -108,19 +120,23 @@
     <string name="smart_search_bootloader">引导程序版本</string>
 
     <!-- Info Catcher -->
-    <string name="info_catcher_description">固件更新后，会向您发送消息通知。</string>
-    <string name="info_catcher_text">当发现新固件时，CheckFirm将自动向您发送通知。\n请输入要获取通知的设备。</string>
+    <string name="info_catcher_text">固件更新后，会向您发送消息通知。\n请输入要获取通知的设备。</string>
     <string name="info_catcher_error">请检查您是否正确编写了型号和CSC代码。</string>
-
-    <!-- Quick Search -->
-    <string name="quick_search_bar">快速搜索栏</string>
-    <string name="quick_search_bar_description">在主屏幕上显示书签。</string>
 
     <!-- Inquiry -->
     <string name="inquiry">查询</string>
     <string name="inquiry_bug">错误报告</string>
     <string name="inquiry_question">问题</string>
     <string name="inquiry_send">发送</string>
+
+    <!-- Suggestion -->
+    <string name="suggestion">建议</string>
+    <string name="suggestion_title">在查找其他功能吗?</string>
+    <string name="suggestion_bookmark_my_device">把我的手机加到书签上</string>
+    <string name="suggestion_enable_welcome_search">启用欢迎搜寻</string>
+    <string name="suggestion_check_my_device_info">查看我的设备信息</string>
+    <string name="suggestion_wifi">开启Wi-Fi</string>
+    <string name="suggestion_data">开启行动数据</string>
 
     <!-- Beta -->
 </resources>

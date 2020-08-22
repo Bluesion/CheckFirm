@@ -19,57 +19,39 @@
             android:layout_margin="10dp"
             android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:contentPadding="14dp">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/status"
+                    style="?textAppearanceBody1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        style="?textAppearanceBody1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/sherlock_samsung_encrypted_text" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_help" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/samsung_encrypted_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        style="?textAppearanceBody1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/sherlock_user_encrypted_text" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/user_encrypted_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/text_field_build"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editor_build"
@@ -140,7 +122,7 @@
                     app:layout_constraintEnd_toStartOf="@id/copy">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/user_text"
+                        android:id="@+id/userText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="8dp" />

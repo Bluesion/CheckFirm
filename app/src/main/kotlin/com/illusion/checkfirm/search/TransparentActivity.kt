@@ -74,11 +74,13 @@ class TransparentActivity : AppCompatActivity() {
             }
 
             if (isCloseable) {
+                intent.putExtra("search_code", 2)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
                 overridePendingTransition(0, 0)
             } else {
-                setResult(Activity.RESULT_CANCELED, intent)
+                intent.putExtra("search_code", 3)
+                setResult(Activity.RESULT_OK, intent)
                 finish()
                 overridePendingTransition(0, 0)
             }

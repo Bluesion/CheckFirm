@@ -101,11 +101,11 @@
                 style="?textAppearanceBody1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="T이 기능은 어떠세요?"
+                android:text="@string/suggestion_title"
                 android:textColor="@color/tip_title_color" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tip_text_1"
+                android:id="@+id/add_bookmark"
                 style="?textAppearanceBody2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="T내 기기 북마크에 추가"
+                android:text="@string/suggestion_bookmark_my_device"
                 android:textColor="@color/tip_text_color" />
 
         </LinearLayout>

@@ -130,8 +130,12 @@ class SearchActivity : AppCompatActivity() {
         }
 
         val bookmarkChipGroup = binding.chipGroup
+
+        val bookmarkOrderBy = sharedPrefs.getString("bookmark_order_by", "time")!!
+        val isDescending = sharedPrefs.getBoolean("bookmark_order_by_desc", false)
+
         val viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
-        viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer {
+        viewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, androidx.lifecycle.Observer {
             if (it.isEmpty()) {
                 if (historyList.isEmpty()) {
                     binding.quick.visibility = View.GONE
@@ -389,7 +393,7 @@ class SearchActivity : AppCompatActivity() {
         val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val appBar = binding.includeToolbar.appbar
+        val appBar = binding.includeToolbar.appBar
         appBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)

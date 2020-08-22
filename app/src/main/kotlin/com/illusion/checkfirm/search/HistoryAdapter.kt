@@ -27,7 +27,7 @@ class HistoryAdapter(private val historyList: List<HistoryItem>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = RowHistoryItemsBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = RowHistoryItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MyViewHolder(binding)
     }

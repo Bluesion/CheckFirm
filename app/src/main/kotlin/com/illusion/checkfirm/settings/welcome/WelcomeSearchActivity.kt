@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.chip.Chip
 import com.illusion.checkfirm.CheckFirm
@@ -25,8 +24,8 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var searchPrefsEditor: SharedPreferences.Editor
     private lateinit var adapter: WelcomeSearchAdapter
-    private lateinit var modelList: ArrayList<String>
-    private lateinit var cscList: ArrayList<String>
+    private var modelList = ArrayList<String>()
+    private var cscList = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,9 +55,53 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
 
         val savedDevicesLayout = binding.savedDevicesLayout
         val savedDevicesText = binding.savedDevicesText
+
+        val searchPrefs = getSharedPreferences("search_device", Context.MODE_PRIVATE)
+        searchPrefsEditor = searchPrefs.edit()
+        val total = searchPrefs.getInt("welcome_search_total", 0)
+
+        for (i in 0..total) {
+            val model = searchPrefs.getString("welcome_search_model_$i", "")!!
+            val csc = searchPrefs.getString("welcome_search_csc_$i", "")!!
+
+            if (model.isNotEmpty() && csc.isNotEmpty()) {
+                modelList.add(model)
+                cscList.add(csc)
+            }
+        }
+
+        if (modelList.isEmpty()) {
+            savedDevicesLayout.visibility = View.GONE
+        } else {
+            savedDevicesLayout.visibility = View.VISIBLE
+            savedDevicesText.text = resources.getQuantityText(R.plurals.saved_devices, modelList.size)
+        }
+
+        val recyclerView = binding.welcomeList
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = WelcomeSearchAdapter(this, modelList, cscList, object : WelcomeSearchAdapter.MyAdapterListener {
+            override fun onDeleteClicked(position: Int) {
+                modelList.removeAt(position)
+                cscList.removeAt(position)
+                savedDevicesText.text = resources.getQuantityText(R.plurals.saved_devices, modelList.size)
+                searchPrefsEditor.putString("welcome_search_model_$position", "")
+                searchPrefsEditor.putString("welcome_search_csc_$position", "")
+                searchPrefsEditor.apply()
+                if (modelList.isEmpty()) {
+                    savedDevicesLayout.visibility = View.GONE
+                }
+                adapter.notifyDataSetChanged()
+            }
+        })
+        recyclerView.adapter = adapter
+
         val bookmarkChipGroup = binding.chipGroup
+
+        val bookmarkOrderBy = sharedPrefs.getString("bookmark_order_by", "time")!!
+        val isDescending = sharedPrefs.getBoolean("bookmark_order_by_desc", false)
+
         val viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
-        viewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { bookmarks ->
+        viewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, androidx.lifecycle.Observer { bookmarks ->
             bookmarks?.let {
                 if (it.isEmpty()) {
                     bookmarkChipGroup.visibility = View.GONE
@@ -87,7 +130,10 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
                                     modelList.add(tempModel)
                                     cscList.add(tempCsc)
                                     adapter.notifyDataSetChanged()
+                                    savedDevicesLayout.visibility = View.VISIBLE
+                                    bookmarkChipGroup.visibility = View.VISIBLE
                                 }
+                                savedDevicesText.text = resources.getQuantityText(R.plurals.saved_devices, modelList.size)
                             }
                         }
                         bookmarkChipGroup.addView(bookmarkChip)
@@ -97,54 +143,10 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
             }
         })
 
-        modelList = ArrayList()
-        cscList = ArrayList()
-
-        val searchPrefs = getSharedPreferences("search_device", Context.MODE_PRIVATE)
-        searchPrefsEditor = searchPrefs.edit()
-        val total = searchPrefs.getInt("welcome_search_total", 0)
-
-        for (i in 0..total) {
-            val model = searchPrefs.getString("welcome_search_model_$i", "")!!
-            val csc = searchPrefs.getString("welcome_search_csc_$i", "")!!
-
-            if (model.isNotEmpty() && csc.isNotEmpty()) {
-                modelList.add(searchPrefs.getString("welcome_search_model_$i", "")!!)
-                cscList.add(searchPrefs.getString("welcome_search_csc_$i", "")!!)
-            }
-        }
-
-        if (modelList.isEmpty()) {
-            savedDevicesLayout.visibility = View.GONE
-        } else {
-            savedDevicesLayout.visibility = View.VISIBLE
-            savedDevicesText.text = resources.getQuantityText(R.plurals.saved_devices, modelList.size)
-        }
-
-        val recyclerView = binding.welcomeList
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-
-        adapter = WelcomeSearchAdapter(this, modelList, cscList, object : WelcomeSearchAdapter.MyAdapterListener {
-            override fun onDeleteClicked(position: Int) {
-                modelList.removeAt(position)
-                cscList.removeAt(position)
-                savedDevicesText.text = resources.getQuantityText(R.plurals.saved_devices, modelList.size)
-                searchPrefsEditor.putString("welcome_search_model_$position", "")
-                searchPrefsEditor.putString("welcome_search_csc_$position", "")
-                searchPrefsEditor.apply()
-                if (modelList.isEmpty()) {
-                    savedDevicesLayout.visibility = View.GONE
-                }
-                adapter.notifyDataSetChanged()
-            }
-        })
-        recyclerView.adapter = adapter
-
         binding.add.setOnClickListener {
             if (modelList.size >= 4) {
                 Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
             } else {
-                savedDevicesLayout.visibility = View.VISIBLE
                 val modelText = binding.model.text!!.trim().toString().toUpperCase(Locale.US)
                 val cscText = binding.csc.text!!.trim().toString().toUpperCase(Locale.US)
 
@@ -163,10 +165,12 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
                         modelList.add(modelText)
                         cscList.add(cscText)
                         adapter.notifyDataSetChanged()
+                        savedDevicesLayout.visibility = View.VISIBLE
+                        bookmarkChipGroup.visibility = View.VISIBLE
                     }
                     savedDevicesText.text = resources.getQuantityText(R.plurals.saved_devices, modelList.size)
                 } else {
-                    Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.main_search_error_text), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -211,7 +215,7 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
             }
         } else {
             searchPrefsEditor.putInt("welcome_search_total", 0)
-            for (i in 0 until modelList.size) {
+            for (i in 0..4) {
                 searchPrefsEditor.putString("welcome_search_model_$i", "")
                 searchPrefsEditor.putString("welcome_search_csc_$i", "")
             }
@@ -228,7 +232,7 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val appBar = binding.includeToolbar.appbar
+        val appBar = binding.includeToolbar.appBar
         appBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)

@@ -28,10 +28,8 @@ class WebViewActivity : AppCompatActivity() {
         }
 
         val webView = binding.webView
-        webView.settings.setAppCacheEnabled(true)
         webView.settings.cacheMode = WebSettings.LOAD_DEFAULT
-        webView.settings.setAppCachePath(cacheDir.path)
         webView.webViewClient = WebViewClient()
-        webView.loadUrl(url)
+        webView.loadUrl(url!!)
     }
 }

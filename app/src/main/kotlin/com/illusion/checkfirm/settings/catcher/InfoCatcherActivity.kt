@@ -52,8 +52,11 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
 
         val bookmarkChipGroup = binding.chipGroup
 
+        val bookmarkOrderBy = sharedPrefs.getString("bookmark_order_by", "time")!!
+        val isDescending = sharedPrefs.getBoolean("bookmark_order_by_desc", false)
+
         val bmViewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
-        bmViewModel.allBookmarks.observe(this, androidx.lifecycle.Observer { bookmarks ->
+        bmViewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, androidx.lifecycle.Observer { bookmarks ->
             bookmarks?.let {
                 if (it.isEmpty()) {
                     bookmarkChipGroup.visibility = View.GONE
@@ -78,7 +81,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
         model.setText(getString(R.string.default_string))
         model.setSelection(model.text!!.length)
 
-        binding.save.setOnClickListener {
+        binding.add.setOnClickListener {
             val modelText = model.text!!.trim().toString().toUpperCase(Locale.US)
             val cscText = binding.csc.text!!.trim().toString().toUpperCase(Locale.US)
 
@@ -150,7 +153,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
         val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val appBar = binding.includeToolbar.appbar
+        val appBar = binding.includeToolbar.appBar
         appBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)

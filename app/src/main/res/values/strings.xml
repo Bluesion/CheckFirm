@@ -45,6 +45,8 @@
     <string name="year_x" translatable="false">2024</string>
     <string name="year_y" translatable="false">2025</string>
     <string name="year_z" translatable="false">2026</string>
+    <string name="license_apache" translatable="false">Apache 2.0</string>
+    <string name="license_mit" translatable="false">MIT</string>
 
     <!-- General -->
     <string name="check_network">Please check network</string>
@@ -52,6 +54,7 @@
     <string name="switch_off">Off</string>
     <string name="close">Close</string>
     <string name="unknown">Unknown</string>
+    <string name="my_device">My device</string>
 
     <!-- Notification -->
     <string name="notification_channel_new_firmware">New Firmware</string>
@@ -61,6 +64,13 @@
     <string name="info_catcher_notification_title">%1$s (%2$s) new firmware found!</string>
     <string name="info_catcher_notification_text">Check it now.</string>
 
+    <!-- Main -->
+    <string name="main_welcome_search_text">Welcome Search is disabled. It is recommend to turn on Welcome Search.</string>
+    <string name="main_network_error_title">Network error</string>
+    <string name="main_network_error_text">Network is not connected or too slow.</string>
+    <string name="main_search_error_title">Search error</string>
+    <string name="main_search_error_text">Model or CSC is incorrect.</string>
+
     <!-- Search -->
     <string name="latest_official">Latest Official Firmware</string>
     <string name="latest_test">Latest Test Firmware</string>
@@ -68,11 +78,8 @@
     <string name="previous_official">Previous Official Firmware</string>
     <string name="previous_test">Previous Test Firmware</string>
     <string name="search">Search</string>
-    <string name="welcome_disabled">How about turning on Welcome Search? Go to settings if you want to activate it.</string>
-    <string name="welcome_online">Please connect to network to use Welcome Search.</string>
     <string name="clipboard">Copied to clipboard.</string>
     <string name="search_error">Search failed. There is no data on Samsung server for this device.</string>
-    <string name="search_timeout">Too much time consumed. Searching automatically canceled.</string>
     <string name="searching">Still searching… Please wait for seconds</string>
     <string name="changelog">Changelog</string>
     <string name="link_share">Link Share</string>
@@ -101,6 +108,11 @@
     <string name="name">Bookmark Name</string>
     <string name="save">Save</string>
     <string name="bookmark_search_error">Check if model and CSC code is correctly saved in bookmark.</string>
+    <string name="bookmark_order">Bookmark order</string>
+    <string name="bookmark_order_by_created_time">Order by created time</string>
+    <string name="bookmark_order_by_device">Order by device</string>
+    <string name="bookmark_order_by_name">Order by name</string>
+    <string name="bookmark_order_by_desc">Order by descending</string>
 
     <!-- Help -->
     <string name="help">Help</string>
@@ -160,18 +172,21 @@
     <string name="expandable_bar_description">Use expandable bar.</string>
     <string name="settings">Settings</string>
     <string name="information">Information</string>
+    <string name="welcome_search_description">Search firmware on start.</string>
+    <string name="smart_search_description">Analyze latest firmware. It may be incorrect.</string>
+    <string name="info_catcher_description">Info Catcher will send you a notification when firmware has been updated.</string>
     <string name="nation">Nation</string>
-    <string name="china_title">Prevent search error in China</string>
-    <string name="china_text">Prevents infinite loading in China. Turn on this setting if you are in China.</string>
+    <string name="firebase">Fix search error</string>
+    <string name="firebase_description">Because some countries like China or Iran banned Firebase, there is a search error. Turn on this setting if you are in those countries.</string>
+    <string name="quick_search_bar">Quick search bar</string>
+    <string name="quick_search_bar_description">Show bookmarks on main screen.</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">Welcome Search</string>
-    <string name="welcome_search_description">Search firmware on start.</string>
-    <string name="welcome_search_text">Please input device that you want to search on start.</string>
+    <string name="welcome_search_text">Search firmware on start.\nPlease input device that you want to search on start.</string>
 
     <!-- Smart Search -->
     <string name="smart_search">Smart Search</string>
-    <string name="smart_search_description">Analyze latest firmware. It may be incorrect.</string>
     <string name="smart_search_date">When discovered</string>
     <string name="smart_search_downgrade">Downgrade</string>
     <string name="smart_search_downgrade_possible">Possible</string>
@@ -200,14 +215,9 @@
 
     <!-- Info Catcher -->
     <string name="info_catcher">Info Catcher</string>
-    <string name="info_catcher_description">Info Catcher will send you a notification when firmware has been updated.</string>
-    <string name="info_catcher_text">When someone discovers new firmware, CheckFirm will send a notification to you automatically.\nPlease input device that you want to catch.</string>
+    <string name="info_catcher_text">Info Catcher will send you a notification when firmware has been updated.\nPlease input device that you want to catch.</string>
     <string name="info_catcher_error">Please check if you wrote model and CSC code correctly.</string>
     <string name="info_catcher_insert">Add</string>
-
-    <!-- Quick Search -->
-    <string name="quick_search_bar">Quick search bar</string>
-    <string name="quick_search_bar_description">Show bookmarks on main screen.</string>
 
     <!-- Inquiry -->
     <string name="inquiry">Inquiry</string>
@@ -215,6 +225,15 @@
     <string name="inquiry_bug">Bug report</string>
     <string name="inquiry_question">Questions</string>
     <string name="inquiry_send">Send</string>
+
+    <!-- Suggestion -->
+    <string name="suggestion">Suggestion</string>
+    <string name="suggestion_title">Looking for something else?</string>
+    <string name="suggestion_bookmark_my_device">Add my device to bookmark</string>
+    <string name="suggestion_enable_welcome_search">Enable Welcome Search</string>
+    <string name="suggestion_check_my_device_info">Check my device information</string>
+    <string name="suggestion_wifi">Turn on Wi-Fi</string>
+    <string name="suggestion_data">Turn on mobile data</string>
 
     <!-- Beta -->
 </resources>

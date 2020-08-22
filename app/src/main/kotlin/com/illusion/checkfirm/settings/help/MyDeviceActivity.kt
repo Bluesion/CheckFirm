@@ -24,8 +24,8 @@ class MyDeviceActivity : AppCompatActivity() {
         binding.model.text = model
         binding.csc.text = csc
 
-        binding.tipText1.setOnClickListener {
-            val bottomSheetFragment = BookmarkDialog.newInstance(false, 0, "T내 디바이스", model, csc)
+        binding.addBookmark.setOnClickListener {
+            val bottomSheetFragment = BookmarkDialog.newInstance(false, 0, getString(R.string.my_device), model, csc)
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
     }

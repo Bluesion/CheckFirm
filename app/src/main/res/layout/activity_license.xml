@@ -26,7 +26,7 @@
                 android:background="?selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Apache 2.0"
+                android:text="@string/license_apache"
                 android:textAppearance="?textAppearanceCaption" />
 
             <com.google.android.material.card.MaterialCardView
@@ -159,7 +159,7 @@
                 android:background="?selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="MIT"
+                android:text="@string/license_mit"
                 android:textAppearance="?textAppearanceCaption" />
 
             <com.google.android.material.card.MaterialCardView

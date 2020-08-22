@@ -40,7 +40,7 @@ class SingleAdapter(val context: Context, private val model: String, private val
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = RowSingleSearchItemsBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = RowSingleSearchItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MyViewHolder(binding)
     }

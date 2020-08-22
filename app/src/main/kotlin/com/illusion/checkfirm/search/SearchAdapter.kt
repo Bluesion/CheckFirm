@@ -23,7 +23,7 @@ class SearchAdapter(val context: Context, private var searchList: List<SearchIte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = RowSearchItemsBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = RowSearchItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MyViewHolder(binding)
     }

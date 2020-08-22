@@ -21,6 +21,7 @@
 
     <!-- Bookmark -->
     <string name="save">保存</string>
+    <string name="bookmark_order_by_desc">降序</string>
 
     <!-- Help -->
     <string name="help_manual_description">固件信息</string>
@@ -40,11 +41,11 @@
     <string name="theme_dark">深色</string>
     <string name="about">CheckFirm 信息</string>
     <string name="information">信息</string>
+    <string name="smart_search_description">分析最新固件。 可能不正确。</string>
 
     <!-- Welcome Search -->
 
     <!-- Smart Search -->
-    <string name="smart_search_description">分析最新固件。 可能不正确。</string>
     <string name="smart_search_downgrade_possible">可能</string>
     <string name="smart_search_downgrade_impossible">不可能</string>
     <string name="smart_search_type_minor">小更新</string>

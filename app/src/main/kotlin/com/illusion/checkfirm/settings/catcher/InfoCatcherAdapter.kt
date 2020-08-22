@@ -23,13 +23,14 @@ class InfoCatcherAdapter(private val context: Context, private var deviceList: L
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = RowSearchItemsBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = RowSearchItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.device.text = String.format(context.getString(R.string.device_format), deviceList[position].model, deviceList[position].csc)
+        val data = deviceList[position]
+        holder.device.text = String.format(context.getString(R.string.device_format), data.model, data.csc)
     }
 
     override fun getItemCount(): Int {

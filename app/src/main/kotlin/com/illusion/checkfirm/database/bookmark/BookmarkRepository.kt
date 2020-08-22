@@ -4,11 +4,14 @@ import androidx.lifecycle.LiveData
 
 class BookmarkRepository(private val bookmarkDao: BookmarkDao) {
 
-    val allBookmarks: LiveData<List<BookmarkEntity>> = bookmarkDao.getAll()
     val allCategory: LiveData<List<String>> = bookmarkDao.getCategory()
 
     fun getCount(): LiveData<Int?>? {
         return bookmarkDao.getCount()
+    }
+
+    fun getBookmarks(order: String, isDesc: Boolean): LiveData<List<BookmarkEntity>> {
+        return bookmarkDao.getBookmarks(order, isDesc)
     }
 
     fun insert(entity: BookmarkEntity) {

@@ -83,9 +83,10 @@ class SearchDialog : BottomSheetDialogFragment() {
             previousList.text = requireArguments().getString("test_previous")
             changelog.visibility = View.GONE
 
-            if (officialLatest.isNotBlank() && officialLatest != getString(R.string.search_error)
-                    && testLatest.isNotBlank() && testLatest != getString(R.string.search_error)) {
+            if (officialLatest != getString(R.string.search_error)
+                && testLatest != getString(R.string.search_error)) {
                 if (testLatest.contains("/")) {
+                    sherlock.visibility = View.GONE
                     if (smart) {
                         smartSearch.visibility = View.VISIBLE
 
@@ -104,9 +105,20 @@ class SearchDialog : BottomSheetDialogFragment() {
                     sherlock.setOnClickListener {
                         val intent = Intent(requireActivity(), SherlockActivity::class.java)
                         intent.putExtra("official", officialLatest)
-                        intent.putExtra("firmware", testLatest)
+                        intent.putExtra("test", testLatest)
                         startActivity(intent)
                     }
+                }
+            } else if (officialLatest == getString(R.string.search_error)
+                && testLatest != getString(R.string.search_error)) {
+                smartSearch.visibility = View.GONE
+                sherlock.visibility = View.VISIBLE
+                sherlock.setOnClickListener {
+                    val intent = Intent(requireActivity(), SherlockActivity::class.java)
+                    intent.putExtra("official", officialLatest)
+                    intent.putExtra("test", testLatest)
+                    intent.putExtra("pro_mode", true)
+                    startActivity(intent)
                 }
             } else {
                 smartSearch.visibility = View.GONE

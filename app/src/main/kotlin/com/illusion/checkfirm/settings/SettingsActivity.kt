@@ -26,13 +26,13 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
     private lateinit var smartSwitch: SwitchMaterial
     private lateinit var quickSwitch: SwitchMaterial
     private lateinit var catcherSwitch: SwitchMaterial
-    private lateinit var chinaSwitch: SwitchMaterial
+    private lateinit var firebaseSwitch: SwitchMaterial
     private var one: Boolean = true
     private var welcome: Boolean = false
     private var smart: Boolean = false
     private var quick: Boolean = false
     private var catcher: Boolean = false
-    private var china: Boolean = false
+    private var firebase: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +45,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         smartSwitch = binding.smartSwitch
         quickSwitch = binding.quickSwitch
         catcherSwitch = binding.catcherSwitch
-        chinaSwitch = binding.chinaSwitch
+        firebaseSwitch = binding.firebaseSwitch
         initSwitch()
         initToolbar()
 
@@ -54,7 +54,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         smartSwitch.setOnCheckedChangeListener(this)
         quickSwitch.setOnCheckedChangeListener(this)
         catcherSwitch.setOnCheckedChangeListener(this)
-        chinaSwitch.setOnCheckedChangeListener(this)
+        firebaseSwitch.setOnCheckedChangeListener(this)
 
         binding.expandedLayout.setOnClickListener {
             oneSwitch.toggle()
@@ -83,8 +83,8 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             startActivity(intent)
         }
 
-        binding.chinaLayout.setOnClickListener {
-            chinaSwitch.toggle()
+        binding.firebaseLayout.setOnClickListener {
+            firebaseSwitch.toggle()
         }
 
         binding.helpLayout.setOnClickListener {
@@ -143,9 +143,9 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             }
             else -> {
                 if (isChecked) {
-                    mEditor.putBoolean("china", true)
+                    mEditor.putBoolean("firebase", true)
                 } else {
-                    mEditor.putBoolean("china", false)
+                    mEditor.putBoolean("firebase", false)
                 }
             }
         }
@@ -176,7 +176,7 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val appBar = binding.includeToolbar.appbar
+        val appBar = binding.includeToolbar.appBar
         appBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
@@ -198,13 +198,13 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         smart = sharedPrefs.getBoolean("smart", true)
         quick = sharedPrefs.getBoolean("quick", false)
         catcher = sharedPrefs.getBoolean("catcher", false)
-        china = sharedPrefs.getBoolean("china", false)
+        firebase = sharedPrefs.getBoolean("firebase", false)
 
         oneSwitch.isChecked = one
         welcomeSwitch.isChecked = welcome
         smartSwitch.isChecked = smart
         quickSwitch.isChecked = quick
         catcherSwitch.isChecked = catcher
-        chinaSwitch.isChecked = china
+        firebaseSwitch.isChecked = firebase
     }
 }

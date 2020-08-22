@@ -438,7 +438,7 @@
                 android:layout_marginTop="4dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/china_layout"
+                    android:id="@+id/firebase_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
@@ -447,7 +447,7 @@
                     android:gravity="center_vertical">
 
                     <LinearLayout
-                        android:id="@+id/china_text"
+                        android:id="@+id/firebase_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="14dp"
@@ -455,7 +455,7 @@
                         android:orientation="vertical"
                         app:layout_constrainedWidth="true"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/china_switch"
+                        app:layout_constraintEnd_toStartOf="@id/firebase_switch"
                         app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintHorizontal_weight="1"
@@ -467,24 +467,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:text="@string/china_title"
+                            android:text="@string/firebase"
                             android:textSize="18sp" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/china_text" />
+                            android:text="@string/firebase_description" />
 
                     </LinearLayout>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/china_switch"
+                        android:id="@+id/firebase_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/china_text"
+                        app:layout_constraintStart_toEndOf="@id/firebase_text"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

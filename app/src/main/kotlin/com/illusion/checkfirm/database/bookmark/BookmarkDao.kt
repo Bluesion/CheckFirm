@@ -9,11 +9,14 @@ import androidx.room.Update
 
 @Dao
 interface BookmarkDao {
-    @Query("SELECT * FROM bookmark_info ORDER BY device ASC")
-    fun getAll(): LiveData<List<BookmarkEntity>>
+    @Query("SELECT * FROM bookmark_info ORDER BY CASE WHEN :isDesc = 0 THEN (CASE :order WHEN 'time' THEN id WHEN 'device' THEN device WHEN 'name' THEN name ELSE id END) END ASC, CASE WHEN :isDesc = 1 THEN (CASE :order WHEN 'time' THEN id WHEN 'device' THEN device WHEN 'name' THEN name ELSE id END) END DESC")
+    fun getBookmarks(order: String, isDesc: Boolean): LiveData<List<BookmarkEntity>>
 
     @Query("SELECT COUNT(*) FROM bookmark_info")
     fun getCount(): LiveData<Int?>?
+
+    @Query("SELECT * FROM bookmark_info WHERE category=:category")
+    fun getByCategory(category: String): LiveData<List<BookmarkEntity>>
 
     @Query("SELECT category FROM bookmark_info")
     fun getCategory(): LiveData<List<String>>
@@ -27,6 +30,6 @@ interface BookmarkDao {
     @Query("DELETE FROM bookmark_info")
     fun deleteAll()
 
-    @Query("DELETE FROM bookmark_info WHERE device = :device")
+    @Query("DELETE FROM bookmark_info WHERE device=:device")
     fun delete(device: String): Int
 }

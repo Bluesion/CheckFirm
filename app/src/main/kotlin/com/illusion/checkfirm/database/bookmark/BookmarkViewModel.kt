@@ -9,18 +9,20 @@ import kotlinx.coroutines.launch
 class BookmarkViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: BookmarkRepository
-    val allBookmarks: LiveData<List<BookmarkEntity>>
     val allCategory: LiveData<List<String>>
 
     init {
         val bookmarkDao = BookmarkDatabase.getDatabase(application).bookmarkDao()
         repository = BookmarkRepository(bookmarkDao)
-        allBookmarks = repository.allBookmarks
         allCategory = repository.allCategory
     }
 
     fun getCount(): LiveData<Int?>? {
         return repository.getCount()
+    }
+
+    fun getBookmarks(order: String, isDesc: Boolean): LiveData<List<BookmarkEntity>> {
+        return repository.getBookmarks(order, isDesc)
     }
 
     fun insert(bookmarkName: String, model: String, csc: String, category: String) = viewModelScope.launch {

@@ -10,26 +10,42 @@
     android:paddingBottom="16dp">
 
     <com.google.android.material.textview.MaterialTextView
-        style="?textAppearanceHeadline6"
+        style="?textAppearanceBody1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/legal"
-        android:textColor="?actionMenuTextColor"
-        android:textStyle="bold" />
+        android:text="@string/sherlock_samsung_encrypted_text" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
+        android:id="@+id/samsung_encrypted_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        style="?textAppearanceBody1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:autoLink="web"
-        android:text="@string/legal_text" />
+        android:text="@string/sherlock_user_encrypted_text" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/user_encrypted_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ok"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@android:string/ok"
         android:textStyle="bold"
         app:rippleColor="@color/button_ripple_color" />

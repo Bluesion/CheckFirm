@@ -34,7 +34,7 @@ class BookmarkAdapter(private var bookmarkList: List<BookmarkEntity>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = RowBookmarkItemsBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = RowBookmarkItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MyViewHolder(binding)
     }

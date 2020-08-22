@@ -3,13 +3,13 @@ package com.illusion.checkfirm.settings.help
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.databinding.ActivityHelpManualBinding
+import com.illusion.checkfirm.databinding.ActivityHelpFirmwareManualBinding
 
-class ManualActivity : AppCompatActivity() {
+class FirmwareManualActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityHelpManualBinding.inflate(layoutInflater)
+        val binding = ActivityHelpFirmwareManualBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val toolbar = binding.toolbar

@@ -13,12 +13,12 @@
         style="?textAppearanceHeadline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/theme"
+        android:text="@string/bookmark_order"
         android:textColor="?actionMenuTextColor"
         android:textStyle="bold" />
 
     <LinearLayout
-        android:id="@+id/light_layout"
+        android:id="@+id/time_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -26,7 +26,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/light"
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true" />
@@ -35,19 +35,39 @@
             style="?textAppearanceBody2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/theme_light" />
+            android:text="@string/bookmark_order_by_created_time" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/dark_layout"
+        android:id="@+id/device_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/dark"
+            android:id="@+id/device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="?textAppearanceBody2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bookmark_order_by_device" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false" />
@@ -56,38 +76,47 @@
             style="?textAppearanceBody2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/theme_dark" />
+            android:text="@string/bookmark_order_by_name" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/system_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/desc_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="?selectableItemBackground"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/system"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false" />
+        android:layout_marginTop="4dp"
+        android:background="?selectableItemBackground">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/desc_text"
             style="?textAppearanceBody2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/bookmark_order_by_desc"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/desc_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/desc_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/theme_system" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/desc_text"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ok"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/close"
+        android:layout_marginTop="16dp"
+        android:text="@android:string/ok"
         android:textStyle="bold"
         app:rippleColor="@color/button_ripple_color" />
 

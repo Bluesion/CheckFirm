@@ -69,7 +69,7 @@ class LicenseActivity : AppCompatActivity() {
         val expandedTitle = binding.includeToolbar.expandedTitle
         expandedTitle.text = toolbarText
 
-        val mAppBar = binding.includeToolbar.appbar
+        val mAppBar = binding.includeToolbar.appBar
         mAppBar.layoutParams.height = (resources.displayMetrics.heightPixels * 0.3976).toInt()
         mAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, _ ->
             val percentage = (appBarLayout.y / appBarLayout.totalScrollRange)
