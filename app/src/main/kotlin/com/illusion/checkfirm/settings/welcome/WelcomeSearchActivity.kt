@@ -21,7 +21,7 @@ import java.util.*
 class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
 
     private lateinit var binding: ActivityWelcomeSearchBinding
-    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var settingPrefs: SharedPreferences
     private lateinit var searchPrefsEditor: SharedPreferences.Editor
     private lateinit var adapter: WelcomeSearchAdapter
     private var modelList = ArrayList<String>()
@@ -32,8 +32,8 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         binding = ActivityWelcomeSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val welcome = sharedPrefs.getBoolean("welcome", false)
+        settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val welcome = settingPrefs.getBoolean("welcome", false)
 
         initToolbar()
 
@@ -56,7 +56,7 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
         val savedDevicesLayout = binding.savedDevicesLayout
         val savedDevicesText = binding.savedDevicesText
 
-        val searchPrefs = getSharedPreferences("search_device", Context.MODE_PRIVATE)
+        val searchPrefs = getSharedPreferences("search", Context.MODE_PRIVATE)
         searchPrefsEditor = searchPrefs.edit()
         val total = searchPrefs.getInt("welcome_search_total", 0)
 
@@ -97,8 +97,8 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
 
         val bookmarkChipGroup = binding.chipGroup
 
-        val bookmarkOrderBy = sharedPrefs.getString("bookmark_order_by", "time")!!
-        val isDescending = sharedPrefs.getBoolean("bookmark_order_by_desc", false)
+        val bookmarkOrderBy = settingPrefs.getString("bookmark_order_by", "time")!!
+        val isDescending = settingPrefs.getBoolean("bookmark_order_by_desc", false)
 
         val viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
         viewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, androidx.lifecycle.Observer { bookmarks ->
@@ -177,7 +177,7 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
     }
 
     override fun onCheckedChanged(p0: CompoundButton, isChecked: Boolean) {
-        val mEditor = sharedPrefs.edit()
+        val mEditor = settingPrefs.edit()
         when (p0.id) {
             R.id.welcome_switch -> {
                 if (isChecked) {
@@ -239,12 +239,5 @@ class WelcomeSearchActivity : AppCompatActivity(), CompoundButton.OnCheckedChang
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
-
-        val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
-        if (one) {
-            appBar.setExpanded(true)
-        } else {
-            appBar.setExpanded(false)
-        }
     }
 }

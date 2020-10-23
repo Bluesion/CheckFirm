@@ -23,16 +23,13 @@
     <string name="main_search_error_text">型号或CSC错误。</string>
 
     <!-- Search -->
-    <string name="latest_test">最新测试固件</string>
+    <string name="test_latest">最新测试固件</string>
     <string name="model">机型</string>
-    <string name="previous_test">先前的测试固件</string>
+    <string name="test_previous">先前的测试固件</string>
     <string name="clipboard">复制到剪贴板。</string>
     <string name="search_error">搜索失败。 请检查您是否正确编写了型号和CSC代码。</string>
     <string name="searching">仍在搜寻中…请稍等片刻</string>
     <string name="changelog">变更日志</string>
-    <string name="link_share">链接分享</string>
-    <string name="link_shared">链接复制了</string>
-    <string name="link_share_error">链接共享错误：链接有问题。</string>
     <string name="single_search">单次搜寻</string>
     <string name="multi_search">多重搜寻</string>
     <string name="multi_search_lists">搜索%d个手机。</string>
@@ -47,9 +44,9 @@
 
     <!-- Bookmark -->
     <string name="bookmark">书签</string>
-    <string name="new_bookmark">添加书签</string>
-    <string name="edit_bookmark">编辑书签</string>
-    <string name="name">书签名称</string>
+    <string name="bookmark_new">添加书签</string>
+    <string name="bookmark_edit">编辑书签</string>
+    <string name="bookmark_name">书签名称</string>
     <string name="bookmark_search_error">检查型号和CSC代码是否正确保存在书签中。</string>
     <string name="bookmark_order">书签顺序</string>
     <string name="bookmark_order_by_created_time">按创建时间排序</string>
@@ -58,7 +55,7 @@
 
     <!-- Help -->
     <string name="help_device_info">设备信息</string>
-    <string name="help_device_info_description">机型, CSC</string>
+    <string name="help_device_info_description">机型 · CSC</string>
     <string name="help_manual">手册</string>
     <string name="firmware_1">固件信息包含3种信息。 编译版本，CSC版本和基带版本。\n\n假设固件搜索结果为\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\n第一个（A720SKSU3BRK1）表示编译版本，\n第二个（A720SSKC3BRK1）表示CSC版本，\n最后一个（A720NKOU3BRK1）表示基带版本。</string>
     <string name="firmware_3">您只需要关心编译版本。 您可以从版本获取固件信息。\n示例：</string>
@@ -77,8 +74,8 @@
     <string name="firmware_23">无法知道确切日期，但是如果编译版本没有更多变化，说明测试固件将很快发布。通常需要3–5个星期。</string>
 
     <!-- About -->
-    <string name="app_information">应用程序信息</string>
-    <string name="latest">已经安装了最新版本。</string>
+    <string name="about_app_information">应用程序信息</string>
+    <string name="about_latest">已经安装了最新版本。</string>
     <string name="license">使用许可</string>
     <string name="legal_text">官方固件信息来自https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.xml。\n\n测试固件信息来自https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.test.xml。\n\n这不是三星电子向客户提供固件信息的正式方式。 使用此信息的风险自负。</string>
     <string name="contributor">贡献者</string>
@@ -91,19 +88,15 @@
     <string name="contributor_translator">译者</string>
 
     <!-- Settings -->
-    <string name="design">设计</string>
-    <string name="theme">主题背景</string>
-    <string name="theme_description">设置主题背景。</string>
-    <string name="theme_light">浅色</string>
-    <string name="theme_system">系统默认</string>
-    <string name="expandable_bar">折叠工具</string>
-    <string name="expandable_bar_description">使用折叠工具。</string>
+    <string name="settings_theme">主题背景</string>
+    <string name="settings_theme_description">设置主题背景。</string>
+    <string name="settings_theme_light">浅色</string>
+    <string name="settings_theme_system">系统默认</string>
     <string name="settings">设定</string>
-    <string name="nation">国家</string>
-    <string name="firebase">修正搜寻错误</string>
-    <string name="firebase_description">由于某些国家（例如中国或伊朗）禁止使用Firebase，因此存在搜索错误。如果您在这些国家/地区，请启用此设置。</string>
-    <string name="quick_search_bar">快速搜索栏</string>
-    <string name="quick_search_bar_description">在主屏幕上显示书签。</string>
+    <string name="settings_firebase">修正搜寻错误</string>
+    <string name="settings_firebase_description">由于某些国家（例如中国或伊朗）禁止使用Firebase，因此存在搜索错误。如果您在这些国家/地区，请启用此设置。</string>
+    <string name="settings_quick_search_bar">快速搜索栏</string>
+    <string name="settings_quick_search_bar_description">在主屏幕上显示书签。</string>
     <string name="welcome_search_description">启动时搜索固件。</string>
     <string name="info_catcher_description">固件更新后，会向您发送消息通知。</string>
 
@@ -114,10 +107,12 @@
     <!-- Smart Search -->
     <string name="smart_search">智能搜索</string>
     <string name="smart_search_date">首次发现日期</string>
-    <string name="smart_search_downgrade">操作系统降级</string>
-    <string name="smart_search_type">类型</string>
+    <string name="smart_search_type_minor">小更新</string>
+    <string name="smart_search_type_major">重大更新</string>
     <string name="smart_search_type_rollback">回滚</string>
     <string name="smart_search_bootloader">引导程序版本</string>
+    <string name="smart_search_downgrade_possible">可能降级</string>
+    <string name="smart_search_downgrade_impossible">不可能降级</string>
 
     <!-- Info Catcher -->
     <string name="info_catcher_text">固件更新后，会向您发送消息通知。\n请输入要获取通知的设备。</string>

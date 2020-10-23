@@ -10,6 +10,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.ActivitySettingsBinding
+import com.illusion.checkfirm.dialogs.ProfileDialog
 import com.illusion.checkfirm.dialogs.ThemeDialog
 import com.illusion.checkfirm.settings.about.AboutActivity
 import com.illusion.checkfirm.settings.catcher.InfoCatcherActivity
@@ -19,45 +20,33 @@ import com.illusion.checkfirm.settings.welcome.WelcomeSearchActivity
 class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
 
     private lateinit var binding: ActivitySettingsBinding
-    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var settingsPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
-    private lateinit var oneSwitch: SwitchMaterial
     private lateinit var welcomeSwitch: SwitchMaterial
-    private lateinit var smartSwitch: SwitchMaterial
+    private lateinit var orderSwitch: SwitchMaterial
     private lateinit var quickSwitch: SwitchMaterial
     private lateinit var catcherSwitch: SwitchMaterial
     private lateinit var firebaseSwitch: SwitchMaterial
-    private var one: Boolean = true
-    private var welcome: Boolean = false
-    private var smart: Boolean = false
-    private var quick: Boolean = false
-    private var catcher: Boolean = false
-    private var firebase: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        oneSwitch = binding.expandedSwitch
+        settingsPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         welcomeSwitch = binding.welcomeSwitch
-        smartSwitch = binding.smartSwitch
+        orderSwitch = binding.orderSwitch
         quickSwitch = binding.quickSwitch
         catcherSwitch = binding.catcherSwitch
         firebaseSwitch = binding.firebaseSwitch
         initSwitch()
         initToolbar()
 
-        oneSwitch.setOnCheckedChangeListener(this)
-        welcomeSwitch.setOnCheckedChangeListener(this)
-        smartSwitch.setOnCheckedChangeListener(this)
-        quickSwitch.setOnCheckedChangeListener(this)
-        catcherSwitch.setOnCheckedChangeListener(this)
-        firebaseSwitch.setOnCheckedChangeListener(this)
+        binding.userName.text = settingsPrefs.getString("profile_user_name", "Unknown")
 
-        binding.expandedLayout.setOnClickListener {
-            oneSwitch.toggle()
+        binding.profileLayout.setOnClickListener {
+            val bottomSheetFragment = ProfileDialog()
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
 
         binding.themeLayout.setOnClickListener {
@@ -70,8 +59,8 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             startActivity(intent)
         }
 
-        binding.smartLayout.setOnClickListener {
-            smartSwitch.toggle()
+        binding.orderLayout.setOnClickListener {
+            orderSwitch.toggle()
         }
 
         binding.quickLayout.setOnClickListener {
@@ -104,15 +93,8 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
     }
 
     override fun onCheckedChanged(p0: CompoundButton, isChecked: Boolean) {
-        mEditor = sharedPrefs.edit()
+        mEditor = settingsPrefs.edit()
         when (p0.id) {
-            R.id.expanded_switch -> {
-                if (isChecked) {
-                    mEditor.putBoolean("one", true)
-                } else {
-                    mEditor.putBoolean("one", false)
-                }
-            }
             R.id.welcome_switch -> {
                 if (isChecked) {
                     mEditor.putBoolean("welcome", true)
@@ -120,11 +102,11 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                     mEditor.putBoolean("welcome", false)
                 }
             }
-            R.id.smart_switch -> {
+            R.id.order_switch -> {
                 if (isChecked) {
-                    mEditor.putBoolean("smart", true)
+                    mEditor.putBoolean("alphabetical", true)
                 } else {
-                    mEditor.putBoolean("smart", false)
+                    mEditor.putBoolean("alphabetical", false)
                 }
             }
             R.id.quick_switch -> {
@@ -183,28 +165,25 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
-
-        val one = sharedPrefs.getBoolean("one", true)
-        if (one) {
-            appBar.setExpanded(true)
-        } else {
-            appBar.setExpanded(false)
-        }
     }
 
     private fun initSwitch() {
-        one = sharedPrefs.getBoolean("one", true)
-        welcome = sharedPrefs.getBoolean("welcome", false)
-        smart = sharedPrefs.getBoolean("smart", true)
-        quick = sharedPrefs.getBoolean("quick", false)
-        catcher = sharedPrefs.getBoolean("catcher", false)
-        firebase = sharedPrefs.getBoolean("firebase", false)
+        val welcome = settingsPrefs.getBoolean("welcome", false)
+        val order = settingsPrefs.getBoolean("alphabetical", true)
+        val quick = settingsPrefs.getBoolean("quick", false)
+        val catcher = settingsPrefs.getBoolean("catcher", false)
+        val firebase = settingsPrefs.getBoolean("firebase", false)
 
-        oneSwitch.isChecked = one
         welcomeSwitch.isChecked = welcome
-        smartSwitch.isChecked = smart
+        orderSwitch.isChecked = order
         quickSwitch.isChecked = quick
         catcherSwitch.isChecked = catcher
         firebaseSwitch.isChecked = firebase
+
+        welcomeSwitch.setOnCheckedChangeListener(this)
+        orderSwitch.setOnCheckedChangeListener(this)
+        quickSwitch.setOnCheckedChangeListener(this)
+        catcherSwitch.setOnCheckedChangeListener(this)
+        firebaseSwitch.setOnCheckedChangeListener(this)
     }
 }

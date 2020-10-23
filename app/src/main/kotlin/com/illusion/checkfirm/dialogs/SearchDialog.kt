@@ -1,109 +1,112 @@
 package com.illusion.checkfirm.dialogs
 
-import android.content.*
-import android.net.Uri
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.browser.trusted.TrustedWebActivityIntentBuilder
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.androidbrowserhelper.trusted.TwaLauncher
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.DialogSearchBinding
 import com.illusion.checkfirm.etc.SherlockActivity
 import com.illusion.checkfirm.etc.WebViewActivity
 import com.illusion.checkfirm.utils.Tools
 
-class SearchDialog : BottomSheetDialogFragment() {
+class SearchDialog(private val isOfficial: Boolean, private val i: Int) : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = DialogSearchBinding.inflate(inflater)
 
-        val smart = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("smart", true)
+        val searchPrefs = requireActivity().getSharedPreferences("search", Context.MODE_PRIVATE)
+        val officialLatest = searchPrefs.getString("official_latest_$i", "null")!!
 
-        val isOfficial = requireArguments().getBoolean("isOfficial")
-        val model = requireArguments().getString("model")
-        val csc = requireArguments().getString("csc")
-        val officialLatest = requireArguments().getString("official_latest").toString()
-        val testLatest = requireArguments().getString("test_latest").toString()
-
-        val latestTitle = binding.latestTitle
-        val latestText = binding.latestFirmware
-        val changelog = binding.changelog
-        val previousTitle = binding.previousTitle
-        val previousList = binding.list
-
-        val smartSearch = binding.smartSearch
-        val bootloader = binding.bootloader
-        val majorVersion = binding.majorVersion
-        val date = binding.date
-        val minorVersion = binding.minorVersion
-        val sherlock = binding.sherlock
+        var copy: String
 
         if (isOfficial) {
-            latestTitle.text = getString(R.string.latest_official)
-            latestText.text = officialLatest
-            previousTitle.text = getString(R.string.previous_official)
-            previousList.text = requireArguments().getString("official_previous")
+            copy = officialLatest
+            binding.latestTitle.text = getString(R.string.official_latest)
+            binding.latestFirmware.text = officialLatest
+            binding.previousTitle.text = getString(R.string.official_previous)
+            binding.list.text = searchPrefs.getString("official_previous_$i", "null")!!
+
+            val changelog = binding.dynamicButton
+            changelog.text = getString(R.string.changelog)
             changelog.setOnClickListener {
-                val link = "http://doc.samsungmobile.com/$model/$csc/doc.html"
-                try {
-                    val builder = TrustedWebActivityIntentBuilder(Uri.parse(link))
-                    TwaLauncher(requireActivity()).launch(builder, null, null)
-                } catch (e: ActivityNotFoundException) {
-                    val intent = Intent(requireActivity(), WebViewActivity::class.java)
-                    intent.putExtra("url", link)
-                    intent.putExtra("number", 1)
-                    startActivity(intent)
-                }
+                val model = searchPrefs.getString("search_model_$i", "null")!!
+                val csc = searchPrefs.getString("search_csc_$i", "null")!!
+
+                val link = "https://doc.samsungmobile.com/$model/$csc/doc.html"
+                val intent = Intent(requireActivity(), WebViewActivity::class.java)
+                intent.putExtra("url", link)
+                intent.putExtra("number", 1)
+                startActivity(intent)
             }
+            changelog.visibility = View.VISIBLE
 
-            if (officialLatest.isNotBlank() && officialLatest != getString(R.string.search_error)) {
-                if (smart) {
-                    smartSearch.visibility = View.VISIBLE
+            if (officialLatest != getString(R.string.search_error)) {
+                binding.smartSearch.visibility = View.VISIBLE
 
-                    val firmwareInfo = Tools.getFirmwareInfo(officialLatest)
-                    bootloader.text = firmwareInfo.substring(0, 2)
-                    majorVersion.text = firmwareInfo.substring(2, 3)
-                    date.text = getFirmwareDate(firmwareInfo.substring(3, 5))
-                    minorVersion.text = firmwareInfo.substring(5, 6)
+                val firmwareInfo = Tools.getFirmwareInfo(officialLatest)
+
+                binding.bootloader.text = firmwareInfo.substring(0, 2)
+
+                binding.majorVersion.text = firmwareInfo.substring(2, 3)
+                val androidVersion = searchPrefs.getString("official_latest_android_version_$i", "")!!
+                if (androidVersion == getString(R.string.unknown)) {
+                    binding.majorVersionDescription.text = ""
                 } else {
-                    smartSearch.visibility = View.GONE
+                    binding.majorVersionDescription.text =
+                        String.format(getString(R.string.smart_search_android_version_format), searchPrefs.getString("official_latest_android_version_$i", "null"))
                 }
-            } else {
-                smartSearch.visibility = View.GONE
+
+                val dateString = firmwareInfo.substring(3, 5)
+                binding.date.text = dateString
+                binding.dateDescription.text = getFirmwareDate(dateString)
+
+                binding.minorVersion.text = firmwareInfo.substring(5, 6)
             }
-            sherlock.visibility = View.GONE
         } else {
-            latestTitle.text = getString(R.string.latest_test)
-            latestText.text = testLatest
-            previousTitle.text = getString(R.string.previous_test)
-            previousList.text = requireArguments().getString("test_previous")
-            changelog.visibility = View.GONE
+            val testLatest = searchPrefs.getString("test_latest_$i", "null")!!
+            val testDecrypted = searchPrefs.getString("test_decrypted_$i", "null")!!
+
+            copy = testLatest
+
+            binding.latestTitle.text = getString(R.string.test_latest)
+            binding.latestFirmware.text = testLatest
+            binding.previousTitle.text = getString(R.string.test_previous)
+            binding.list.text = searchPrefs.getString("test_previous_$i", "null")!!
+
+            val sherlock = binding.dynamicButton
+            sherlock.text = getString(R.string.sherlock)
 
             if (officialLatest != getString(R.string.search_error)
                 && testLatest != getString(R.string.search_error)) {
                 if (testLatest.contains("/")) {
-                    sherlock.visibility = View.GONE
-                    if (smart) {
-                        smartSearch.visibility = View.VISIBLE
+                    binding.smartSearch.visibility = View.VISIBLE
 
-                        val firmwareInfo = Tools.getFirmwareInfo(testLatest)
-                        bootloader.text = firmwareInfo.substring(0, 2)
-                        majorVersion.text = firmwareInfo.substring(2, 3)
-                        date.text = getFirmwareDate(firmwareInfo.substring(3, 5))
-                        minorVersion.text = firmwareInfo.substring(5, 6)
-                    } else {
-                        smartSearch.visibility = View.GONE
-                    }
-                    sherlock.visibility = View.GONE
+                    val firmwareInfo = Tools.getFirmwareInfo(testLatest)
+
+                    binding.bootloader.text = firmwareInfo.substring(0, 2)
+                    binding.bootloaderDescription.text = searchPrefs.getString("test_downgrade_$i", "null")!!
+
+                    binding.majorVersion.text = firmwareInfo.substring(2, 3)
+                    binding.majorVersionDescription.text = searchPrefs.getString("test_type_$i", "null")!!
+
+                    val dateString = firmwareInfo.substring(3, 5)
+                    binding.date.text = dateString
+                    binding.dateDescription.text = getFirmwareDate(dateString)
+
+                    binding.minorVersion.text = firmwareInfo.substring(5, 6)
                 } else {
-                    smartSearch.visibility = View.GONE
                     sherlock.visibility = View.VISIBLE
                     sherlock.setOnClickListener {
                         val intent = Intent(requireActivity(), SherlockActivity::class.java)
+                        intent.putExtra("model", searchPrefs.getString("search_model_$i", "null"))
+                        intent.putExtra("csc", searchPrefs.getString("search_csc_$i", "null"))
                         intent.putExtra("official", officialLatest)
                         intent.putExtra("test", testLatest)
                         startActivity(intent)
@@ -111,33 +114,68 @@ class SearchDialog : BottomSheetDialogFragment() {
                 }
             } else if (officialLatest == getString(R.string.search_error)
                 && testLatest != getString(R.string.search_error)) {
-                smartSearch.visibility = View.GONE
-                sherlock.visibility = View.VISIBLE
-                sherlock.setOnClickListener {
-                    val intent = Intent(requireActivity(), SherlockActivity::class.java)
-                    intent.putExtra("official", officialLatest)
-                    intent.putExtra("test", testLatest)
-                    intent.putExtra("pro_mode", true)
-                    startActivity(intent)
+                if (!testLatest.contains("/")) {
+                    sherlock.visibility = View.VISIBLE
+                    sherlock.setOnClickListener {
+                        val intent = Intent(requireActivity(), SherlockActivity::class.java)
+                        intent.putExtra("model", searchPrefs.getString("search_model_$i", "null"))
+                        intent.putExtra("csc", searchPrefs.getString("search_csc_$i", "null"))
+                        intent.putExtra("official", officialLatest)
+                        intent.putExtra("test", testLatest)
+                        intent.putExtra("pro_mode", true)
+                        startActivity(intent)
+                    }
                 }
-            } else {
-                smartSearch.visibility = View.GONE
+            }
+
+            if (testDecrypted != "null") {
+                copy = testDecrypted
+
                 sherlock.visibility = View.GONE
+                binding.decryptedFirmware.text = testDecrypted
+                binding.watson.text = String.format(getString(R.string.sherlock_watson_format), searchPrefs.getString("test_watson_$i", "null")!!)
+                binding.original.visibility = View.VISIBLE
+                binding.decryptedLayout.visibility = View.VISIBLE
+
+                binding.smartSearch.visibility = View.VISIBLE
+
+                val firmwareInfo = Tools.getFirmwareInfo(testDecrypted)
+
+                binding.bootloader.text = firmwareInfo.substring(0, 2)
+                binding.bootloaderDescription.text = searchPrefs.getString("test_downgrade_$i", "null")!!
+                if (officialLatest.substring(0, 2) == testDecrypted.substring(0, 2)) {
+                    binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_possible)
+                } else {
+                    binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_impossible)
+                }
+
+                binding.majorVersion.text = firmwareInfo.substring(2, 3)
+                val compareMajorVersion = officialLatest[2].compareTo(testDecrypted[2])
+                when {
+                    compareMajorVersion < 0 -> {
+                        binding.majorVersionDescription.text = getString(R.string.smart_search_type_major)
+                    }
+                    compareMajorVersion > 0 -> {
+                        binding.majorVersionDescription.text = getString(R.string.smart_search_type_rollback)
+                    }
+                    else -> {
+                        binding.majorVersionDescription.text = getString(R.string.smart_search_type_minor)
+                    }
+                }
+
+                val dateString = firmwareInfo.substring(3, 5)
+                binding.date.text = dateString
+                binding.dateDescription.text = getFirmwareDate(dateString)
+
+                binding.minorVersion.text = firmwareInfo.substring(5, 6)
             }
         }
 
         val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         binding.copy.setOnClickListener {
-            val clip = ClipData.newPlainText("checkfirmLatest", latestText.text.toString())
+            val clip = ClipData.newPlainText("checkfirmLatest", copy)
             clipboard.setPrimaryClip(clip)
             Toast.makeText(requireActivity(), R.string.clipboard, Toast.LENGTH_SHORT).show()
-        }
-
-        binding.share.setOnClickListener {
-            val link = "https://checkfirm.com/$model/$csc"
-            val clip = ClipData.newPlainText("checkfirmLink", link)
-            clipboard.setPrimaryClip(clip)
-            Toast.makeText(requireActivity(), R.string.link_shared, Toast.LENGTH_SHORT).show()
         }
 
         binding.ok.setOnClickListener {
@@ -193,25 +231,6 @@ class SearchDialog : BottomSheetDialogFragment() {
             else -> getString(R.string.unknown)
         }
 
-        return String.format(getString(R.string.smart_search_date_format), date, year, month)
-    }
-
-    companion object {
-        fun newInstance(isOfficial: Boolean, model: String, csc: String,
-                        officialLatest: String, officialPrevious: String, testLatest: String, testPrevious: String): SearchDialog {
-            val f = SearchDialog()
-
-            val args = Bundle()
-            args.putBoolean("isOfficial", isOfficial)
-            args.putString("model", model)
-            args.putString("csc", csc)
-            args.putString("official_latest", officialLatest)
-            args.putString("official_previous", officialPrevious)
-            args.putString("test_latest", testLatest)
-            args.putString("test_previous", testPrevious)
-            f.arguments = args
-
-            return f
-        }
+        return String.format(getString(R.string.smart_search_date_format), year, month)
     }
 }

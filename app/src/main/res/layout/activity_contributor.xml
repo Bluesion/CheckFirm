@@ -133,99 +133,96 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:background="@drawable/contributor_card">
+            android:background="@drawable/contributor_card"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_weight="1"
                 android:layout_marginVertical="13dp"
-                android:layout_marginHorizontal="14dp">
+                android:gravity="start"
+                android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/language"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="@string/contributor_language"
                     android:textAppearance="?textAppearanceBody1"
-                    android:textColor="?colorAccent"
-                    app:layout_constraintBottom_toTopOf="@id/russian"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textColor="?colorAccent" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/russian"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contributor_russian"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/chinese"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/language" />
+                    android:textAppearance="?textAppearanceBody1" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/chinese"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contributor_chinese"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/czech"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/russian" />
+                    android:textAppearance="?textAppearanceBody1" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/czech"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contributor_czech"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/chinese" />
+                    android:textAppearance="?textAppearanceBody1" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/thanks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contributor_portuguese"
+                    android:textAppearance="?textAppearanceBody1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="13dp"
+                android:layout_marginEnd="14dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="@string/contributor_translator"
                     android:textAppearance="?textAppearanceBody1"
-                    android:textColor="?colorAccent"
-                    app:layout_constraintBottom_toTopOf="@id/russian_translator"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textColor="?colorAccent" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/russian_translator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contributor_russian_translator"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/chinese_translator"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/thanks" />
+                    android:textAppearance="?textAppearanceBody1" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/chinese_translator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contributor_chinese_translator"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toTopOf="@id/czech_translator"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/russian_translator" />
+                    android:textAppearance="?textAppearanceBody1" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/czech_translator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contributor_czech_translator"
-                    android:textAppearance="?textAppearanceBody1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/chinese_translator" />
+                    android:textAppearance="?textAppearanceBody1" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contributor_portuguese_translator"
+                    android:textAppearance="?textAppearanceBody1" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

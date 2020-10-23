@@ -25,19 +25,16 @@
     <string name="main_search_error_text">Модель или CSC неверны.</string>
 
     <!-- Search -->
-    <string name="latest_official">Последняя официальная прошивка</string>
-    <string name="latest_test">Последняя тестовая прошивка</string>
+    <string name="official_latest">Последняя официальная прошивка</string>
+    <string name="test_latest">Последняя тестовая прошивка</string>
     <string name="model">Модель</string>
-    <string name="previous_official">Предыдущие официальные прошивки</string>
-    <string name="previous_test">Предыдущие тестовые прошивки</string>
+    <string name="official_previous">Предыдущие официальные прошивки</string>
+    <string name="test_previous">Предыдущие тестовые прошивки</string>
     <string name="search">Поиск</string>
     <string name="clipboard">Скопировано в буфер обмена.</string>
     <string name="search_error">На сервере Samsung нет данных для этого устройства.</string>
     <string name="searching">Ищем прошивки, подождите несколько секунд…</string>
     <string name="changelog">Список изменений</string>
-    <string name="link_share">Поделиться ссылкой</string>
-    <string name="link_shared">Ссылка скопирована.</string>
-    <string name="link_share_error">Ошибка отправки: некорректная ссылка.</string>
     <string name="single_search">Одиночный поиск</string>
     <string name="multi_search">Мультипоиск</string>
     <string name="multi_search_limit">Вы можете искать прошивки для 4 устройств одновременно.</string>
@@ -56,10 +53,10 @@
 
     <!-- Bookmark -->
     <string name="bookmark">Закладки</string>
-    <string name="new_bookmark">Новая закладка</string>
-    <string name="edit_bookmark">Редактировать закладку</string>
-    <string name="name">Имя закладки</string>
-    <string name="save">Сохранить</string>
+    <string name="bookmark_new">Новая закладка</string>
+    <string name="bookmark_edit">Редактировать закладку</string>
+    <string name="bookmark_name">Имя закладки</string>
+    <string name="bookmark_save">Сохранить</string>
     <string name="bookmark_search_error">Проверьте, правильно ли указаны модель устройства и код CSC в закладках.</string>
     <string name="bookmark_order">Закладка Упорядочить</string>
     <string name="bookmark_order_by_created_time">Упорядочить по времени создания</string>
@@ -93,10 +90,10 @@
     <string name="firmware_23">"Тестовая прошивка будет выпущена в ближайшее время, если версия сборки не меняется в течение нескольких недель. Ожидайте обновление в течение 3–5 недель."</string>
 
     <!-- About -->
-    <string name="app_information">О приложении</string>
-    <string name="version">Версия</string>
-    <string name="latest">Установлена последняя версия.</string>
-    <string name="update">Обновить</string>
+    <string name="about_app_information">О приложении</string>
+    <string name="about_version">Версия</string>
+    <string name="about_latest">Установлена последняя версия.</string>
+    <string name="about_update">Обновить</string>
     <string name="contributor">Авторы</string>
     <string name="contributor_application">Приложение</string>
     <string name="contributor_designer">Дизайн</string>
@@ -113,25 +110,18 @@
     <string name="legal_text">Информация об официальных прошивках: https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.xml.\n\nИнформация о тестовых прошивках: https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.test.xml.\n\nЭто неофициальный способ получения информации об официальных и тестовых прошивках для устройств компании Samsung. Любое использование этой информации на ваш страх и риск."</string>
 
     <!-- Settings -->
-    <string name="notification">Уведомления</string>
-    <string name="design">Оформление</string>
-    <string name="theme">Тема оформления</string>
-    <string name="theme_dark">Темная тема</string>
-    <string name="theme_description">Выбрать тему оформления.</string>
-    <string name="theme_light">Светлая тема</string>
-    <string name="theme_system">На основе системы</string>
-    <string name="about">О приложении</string>
-    <string name="expandable_bar">Расширяемый бар</string>
-    <string name="expandable_bar_description">Использовать расширяемый бар.</string>
+    <string name="settings_theme">Тема оформления</string>
+    <string name="settings_theme_dark">Темная тема</string>
+    <string name="settings_theme_description">Выбрать тему оформления.</string>
+    <string name="settings_theme_light">Светлая тема</string>
+    <string name="settings_theme_system">На основе системы</string>
+    <string name="settings_about">О приложении</string>
     <string name="settings">Настройки</string>
-    <string name="information">Информация</string>
-    <string name="nation">Бесконечный поиск</string>
-    <string name="firebase">Исправить ошибку поиска</string>
-    <string name="firebase_description">Поскольку некоторые страны, такие как Китай или Иран, запретили Firebase, возникает ошибка поиска. Включите этот параметр, если вы находитесь в этих странах.</string>
-    <string name="quick_search_bar">Панель быстрого поиска</string>
-    <string name="quick_search_bar_description">Отображать закладки на главном экране.</string>
+    <string name="settings_firebase">Исправить ошибку поиска</string>
+    <string name="settings_firebase_description">Поскольку некоторые страны, такие как Китай или Иран, запретили Firebase, возникает ошибка поиска. Включите этот параметр, если вы находитесь в этих странах.</string>
+    <string name="settings_quick_search_bar">Панель быстрого поиска</string>
+    <string name="settings_quick_search_bar_description">Отображать закладки на главном экране.</string>
     <string name="welcome_search_description">Поиск прошивок сразу при запуске приложения.</string>
-    <string name="smart_search_description">Анализ последних прошивок. Функция может работать некорректно.</string>
     <string name="info_catcher_description">Приложение сообщит вам о наличии нового обновления.</string>
 
     <!-- Welcome Search -->
@@ -141,10 +131,8 @@
     <!-- Smart Search -->
     <string name="smart_search">Умный поиск</string>
     <string name="smart_search_date">Найдена</string>
-    <string name="smart_search_downgrade">Понижение</string>
-    <string name="smart_search_downgrade_impossible">Невозможо</string>
-    <string name="smart_search_downgrade_possible">Возможно</string>
-    <string name="smart_search_type">Тип</string>
+    <string name="smart_search_downgrade_impossible">Понизить невозможно</string>
+    <string name="smart_search_downgrade_possible">Понизить возможное</string>
     <string name="smart_search_type_major">Крупное обновление</string>
     <string name="smart_search_type_minor">Минорное обновление</string>
     <string name="smart_search_type_rollback">Откат</string>
@@ -152,7 +140,7 @@
     <string name="smart_search_major_version">Крупная версия</string>
     <string name="smart_search_build_date">Дата сборки</string>
     <string name="smart_search_minor_version">Минорная версия</string>
-    <string name="smart_search_date_format">%1$s (%3$s %2$s)</string>
+    <string name="smart_search_date_format">%2$s %1$s</string>
     <string name="january">январь</string>
     <string name="february">февраль</string>
     <string name="march">март</string>

@@ -1,5 +1,6 @@
 <resources>
     <!-- Test -->
+    <string name="settings_profile_user_name">유저 이름</string>
 
     <!-- General -->
     <string name="check_network">네트워크를 확인해주세요.</string>
@@ -25,19 +26,16 @@
     <string name="main_search_error_text">모델명이나 CSC를 잘못 입력하셨습니다.</string>
 
     <!-- Search -->
-    <string name="latest_official">최신 공식 펌웨어</string>
-    <string name="latest_test">최신 테스트 펌웨어</string>
+    <string name="official_latest">최신 공식 펌웨어</string>
+    <string name="test_latest">최신 테스트 펌웨어</string>
     <string name="model">모델명</string>
-    <string name="previous_official">이전 공식 펌웨어</string>
-    <string name="previous_test">이전 테스트 펌웨어</string>
+    <string name="official_previous">이전 공식 펌웨어</string>
+    <string name="test_previous">이전 테스트 펌웨어</string>
     <string name="search">검색</string>
     <string name="clipboard">클립보드에 복사했습니다.</string>
     <string name="search_error">검색에 실패하였습니다. 해당 디바이스의 정보가 삼성 서버에 존재하지 않습니다.</string>
     <string name="searching">검색 중입니다. 잠시만 기다려주세요.</string>
     <string name="changelog">업데이트 내역</string>
-    <string name="link_share">링크 공유</string>
-    <string name="link_shared">링크가 복사되었습니다.</string>
-    <string name="link_share_error">링크 공유 오류: 링크가 잘못된 것 같습니다.</string>
     <string name="single_search">일반 검색</string>
     <string name="multi_search">다중 검색</string>
     <string name="multi_search_lists">아래 %d개의 디바이스를 검색합니다.</string>
@@ -53,13 +51,15 @@
     <string name="sherlock_user_encrypted_text">변환된 펌웨어 암호화 텍스트</string>
     <string name="sherlock_correct">일치합니다.</string>
     <string name="sherlock_not_correct">일치하지 않습니다.</string>
+    <string name="sherlock_original">원본</string>
+    <string name="sherlock_watson_format">복호화 by %s</string>
 
     <!-- Bookmark -->
     <string name="bookmark">북마크</string>
-    <string name="new_bookmark">북마크 추가</string>
-    <string name="edit_bookmark">북마크 수정</string>
-    <string name="name">북마크 이름</string>
-    <string name="save">저장</string>
+    <string name="bookmark_new">북마크 추가</string>
+    <string name="bookmark_edit">북마크 수정</string>
+    <string name="bookmark_name">북마크 이름</string>
+    <string name="bookmark_save">저장</string>
     <string name="bookmark_search_error">북마크의 모델명과 CSC 코드를 정확히 입력하세요.</string>
     <string name="bookmark_order">북마크 순서</string>
     <string name="bookmark_order_by_created_time">생성된 순서대로</string>
@@ -70,9 +70,11 @@
     <!-- Help -->
     <string name="help">도움말</string>
     <string name="help_device_info">디바이스 정보</string>
-    <string name="help_device_info_description">모델명, CSC</string>
+    <string name="help_device_info_description">모델명 · CSC</string>
     <string name="help_manual">사용설명서</string>
     <string name="help_manual_description">펌웨어 정보</string>
+    <string name="help_youtube">유튜브 영상</string>
+    <string name="help_youtube_description">Saqlin mirza님 제공</string>
     <string name="firmware_0">기본 펌웨어 정보</string>
     <string name="firmware_1">펌웨어 정보는 빌드 버전, CSC 버전, 기저대역 버전 정보로 이루어져 있습니다.\n\n예를 들어, 펌웨어 정보 검색 결과가 아래와 같다면\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\n맨 앞의 정보(A720SKSU3BRK1)는 빌드 버전을 의미하며,\n가운데 정보(A720SSKC3BRK1)는 CSC 버전,\n마지막 정보(A720NKOU3BRK1)는 기저대역 버전을 뜻합니다.</string>
     <string name="firmware_2">펌웨어 정보 읽기</string>
@@ -93,10 +95,10 @@
     <string name="firmware_23">테스트 펌웨어의 정확한 출시 일정은 알 수 없습니다.\n대략 3주-5주 이내로 테스트 펌웨어가 정식 펌웨어로 출시되며, 긴급한 패치가 포함된 펌웨어는 며칠 내로 출시될 수도 있습니다.</string>
 
     <!-- About -->
-    <string name="app_information">앱 정보</string>
-    <string name="version">버전</string>
-    <string name="latest">최신 버전입니다.</string>
-    <string name="update">업데이트</string>
+    <string name="about_app_information">앱 정보</string>
+    <string name="about_version">버전</string>
+    <string name="about_latest">최신 버전입니다.</string>
+    <string name="about_update">업데이트</string>
     <string name="contributor">기여자</string>
     <string name="contributor_application">애플리케이션</string>
     <string name="contributor_designer">디자인</string>
@@ -107,32 +109,28 @@
     <string name="contributor_russian">러시아어</string>
     <string name="contributor_chinese">중국어</string>
     <string name="contributor_czech">체코어</string>
+    <string name="contributor_portuguese">포르투갈어</string>
     <string name="contributor_translator">번역자</string>
     <string name="license">라이선스</string>
     <string name="legal">법적 고지</string>
     <string name="legal_text">정식 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.xml 에서 불러옵니다.\n\n테스트 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.test.xml 에서 불러옵니다.\n\n위 링크는 삼성전자가 소비자에게 정식으로 펌웨어 정보를 제공하는 경로가 아니며, 이 정보의 이용에 대한 책임은 모두 사용자에게 있습니다.</string>
 
     <!-- Settings -->
-    <string name="notification">알림</string>
-    <string name="design">디자인</string>
-    <string name="theme">테마</string>
-    <string name="theme_description">앱 테마를 설정합니다.</string>
-    <string name="theme_light">밝은 테마</string>
-    <string name="theme_dark">어두운 테마</string>
-    <string name="theme_system">시스템 테마</string>
-    <string name="about">CheckFirm 정보</string>
-    <string name="expandable_bar">확장바</string>
-    <string name="expandable_bar_description">확장바를 사용합니다.</string>
+    <string name="settings_theme">테마</string>
+    <string name="settings_theme_description">앱 테마를 설정합니다.</string>
+    <string name="settings_theme_light">밝은 테마</string>
+    <string name="settings_theme_dark">어두운 테마</string>
+    <string name="settings_theme_system">시스템 테마</string>
+    <string name="settings_about">CheckFirm 정보</string>
     <string name="settings">설정</string>
-    <string name="information">정보</string>
-    <string name="nation">국가</string>
-    <string name="firebase">검색 오류 수정</string>
-    <string name="firebase_description">일부 국가(중국, 이란 등)에서는 Firebase 사용이 금지되었기 때문에 검색 오류가 발생합니다. 해당 국가에 계신다면 이 설정을 켜주세요.</string>
-    <string name="quick_search_bar">빠른 검색창</string>
-    <string name="quick_search_bar_description">메인 화면에 북마크를 표시합니다.</string>
+    <string name="settings_firebase">검색 오류 수정</string>
+    <string name="settings_firebase_description">일부 국가(중국, 이란 등)에서는 Firebase 사용이 금지되었기 때문에 검색 오류가 발생합니다. 해당 국가에 계신다면 이 설정을 켜주세요.</string>
+    <string name="settings_quick_search_bar">빠른 검색창</string>
+    <string name="settings_quick_search_bar_description">메인 화면에 북마크를 표시합니다.</string>
     <string name="welcome_search_description">앱 실행 시 지정된 디바이스의 펌웨어 정보를 검색합니다.</string>
-    <string name="smart_search_description">최신 펌웨어를 분석합니다. 분석 결과는 실제와 다를 수 있습니다.</string>
     <string name="info_catcher_description">사용자가 지정한 디바이스의 펌웨어가 업데이트 되었을 때 알림을 표시합니다.</string>
+    <string name="order">이전 펌웨어 정렬</string>
+    <string name="order_description">이전 펌웨어 리스트가 알파벳 순서로 정렬됩니다.</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">자동 검색</string>
@@ -141,10 +139,8 @@
     <!-- Smart Search -->
     <string name="smart_search">스마트 서치</string>
     <string name="smart_search_date">최초 발견일</string>
-    <string name="smart_search_downgrade">다운그레이드</string>
-    <string name="smart_search_downgrade_possible">가능</string>
-    <string name="smart_search_downgrade_impossible">불가능</string>
-    <string name="smart_search_type">타입</string>
+    <string name="smart_search_downgrade_possible">다운그레이드 가능</string>
+    <string name="smart_search_downgrade_impossible">다운그레이드 불가능</string>
     <string name="smart_search_type_major">메이저 업데이트</string>
     <string name="smart_search_type_minor">마이너 업데이트</string>
     <string name="smart_search_type_rollback">롤백 상태</string>
@@ -152,7 +148,9 @@
     <string name="smart_search_major_version">메이저 버전</string>
     <string name="smart_search_build_date">빌드 날짜</string>
     <string name="smart_search_minor_version">마이너 버전</string>
-    <string name="smart_search_date_format">%1$s (%2$s년 %3$s)</string>
+    <string name="smart_search_date_format">%1$s년 %2$s</string>
+    <string name="smart_search_discoverer">최초 발견자</string>
+    <string name="smart_search_android_version">안드로이드 버전</string>
     <string name="january">1월</string>
     <string name="february">2월</string>
     <string name="march">3월</string>
@@ -174,9 +172,13 @@
 
     <!-- Inquiry -->
     <string name="inquiry">문의하기</string>
+    <string name="inquiry_note_title">알림</string>
+    <string name="inquiry_note_text">답변에 최대 일주일이 걸릴 수 있습니다.\n앱과 관련한 내용이 아니면 답변을 드리지 않습니다.\n가급적이면 이메일 제목과 내용의 기기 정보는 변경하지 말아주세요.</string>
+    <string name="inquiry_type">유형</string>
     <string name="inquiry_new">새로운 아이디어</string>
     <string name="inquiry_bug">오류 제보</string>
     <string name="inquiry_question">질문</string>
+    <string name="inquiry_detail">내용</string>
     <string name="inquiry_send">전송</string>
 
     <!-- Suggestion -->

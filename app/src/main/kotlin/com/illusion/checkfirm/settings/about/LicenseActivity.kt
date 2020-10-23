@@ -1,14 +1,9 @@
 package com.illusion.checkfirm.settings.about
 
-import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.trusted.TrustedWebActivityIntentBuilder
 import com.google.android.material.appbar.AppBarLayout
-import com.google.androidbrowserhelper.trusted.TwaLauncher
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.ActivityLicenseBinding
 import com.illusion.checkfirm.etc.WebViewActivity
@@ -26,28 +21,18 @@ class LicenseActivity : AppCompatActivity() {
 
         binding.apache.setOnClickListener {
             val link = "http://www.apache.org/licenses/LICENSE-2.0.html"
-            try {
-                val builder = TrustedWebActivityIntentBuilder(Uri.parse(link))
-                TwaLauncher(this).launch(builder, null, null)
-            } catch (e: ActivityNotFoundException) {
-                val intent = Intent(this, WebViewActivity::class.java)
-                intent.putExtra("url", link)
-                intent.putExtra("number", 2)
-                startActivity(intent)
-            }
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra("url", link)
+            intent.putExtra("number", 2)
+            startActivity(intent)
         }
 
         binding.mit.setOnClickListener {
             val link = "https://opensource.org/licenses/MIT"
-            try {
-                val builder = TrustedWebActivityIntentBuilder(Uri.parse(link))
-                TwaLauncher(this).launch(builder, null, null)
-            } catch (e: ActivityNotFoundException) {
-                val intent = Intent(this, WebViewActivity::class.java)
-                intent.putExtra("url", link)
-                intent.putExtra("number", 2)
-                startActivity(intent)
-            }
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra("url", link)
+            intent.putExtra("number", 2)
+            startActivity(intent)
         }
     }
 
@@ -76,12 +61,5 @@ class LicenseActivity : AppCompatActivity() {
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
-
-        val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
-        if (one) {
-            mAppBar.setExpanded(true)
-        } else {
-            mAppBar.setExpanded(false)
-        }
     }
 }

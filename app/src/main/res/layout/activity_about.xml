@@ -42,7 +42,7 @@
                 style="?textAppearanceBody2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/version" />
+                android:text="@string/about_version" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/version"
@@ -71,7 +71,7 @@
                 style="?textAppearanceBody2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/latest"
+                android:text="@string/about_latest"
                 android:textColor="#909090"
                 android:visibility="gone" />
 
@@ -81,7 +81,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/update"
+                android:text="@string/about_update"
                 android:textColor="@android:color/white"
                 android:visibility="gone" />
 

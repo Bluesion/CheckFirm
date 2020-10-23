@@ -3,19 +3,16 @@ package com.illusion.checkfirm.search
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.RowSearchItemsBinding
-import com.illusion.checkfirm.primitive.SearchItem
 
 class SearchAdapter(val context: Context, private var searchList: List<SearchItem>,
                     val onClickListener: MyAdapterListener) : RecyclerView.Adapter<SearchAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(binding: RowSearchItemsBinding) : RecyclerView.ViewHolder(binding.root) {
-        var device: MaterialTextView = binding.device
-        private val delete: AppCompatImageButton = binding.delete
+        var device = binding.device
+        private val delete = binding.delete
 
         init {
             delete.setOnClickListener { onClickListener.onDeleteClicked(bindingAdapterPosition) }

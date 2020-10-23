@@ -10,7 +10,6 @@
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:label="@string/app_name"
@@ -23,19 +22,9 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="www.checkfirm.com" />
-                <data android:scheme="https" android:host="www.checkfirm.com" />
-                <data android:scheme="http" android:host="checkfirm.com" />
-                <data android:scheme="https" android:host="checkfirm.com" />
-                <data android:scheme="checkfirm" android:host="search" />
-            </intent-filter>
             <meta-data
                 android:name="android.app.shortcuts"
-                android:resource="@xml/shortcut"/>
+                android:resource="@xml/shortcut" />
         </activity>
         <activity
             android:name=".bookmark.BookmarkActivity"
@@ -43,44 +32,14 @@
         <activity
             android:name=".settings.help.FirmwareManualActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="www.checkfirm.com/manual" />
-                <data android:scheme="https" android:host="www.checkfirm.com/manual" />
-                <data android:scheme="http" android:host="checkfirm.com/manual" />
-                <data android:scheme="https" android:host="checkfirm.com/manual" />
-                <data android:scheme="checkfirm" android:host="manual" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".settings.help.MyDeviceActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="www.checkfirm.com/mydevice" />
-                <data android:scheme="https" android:host="www.checkfirm.com/mydevice" />
-                <data android:scheme="http" android:host="checkfirm.com/mydevice" />
-                <data android:scheme="https" android:host="checkfirm.com/mydevice" />
-                <data android:scheme="checkfirm" android:host="mydevice" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".settings.help.HelpActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="www.checkfirm.com/help" />
-                <data android:scheme="https" android:host="www.checkfirm.com/help" />
-                <data android:scheme="http" android:host="checkfirm.com/help" />
-                <data android:scheme="https" android:host="checkfirm.com/help" />
-                <data android:scheme="checkfirm" android:host="help" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".search.SearchActivity"

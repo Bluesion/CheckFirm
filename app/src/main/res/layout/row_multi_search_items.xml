@@ -37,20 +37,22 @@
             android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:id="@+id/detail"
+            android:id="@+id/detail_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:baselineAligned="false"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:weightSum="3">
 
             <LinearLayout
+                android:id="@+id/date_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
@@ -68,20 +70,21 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/discoverer_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/smart_search_downgrade" />
+                    android:text="@string/smart_search_discoverer" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/smart_search_downgrade"
+                    android:id="@+id/smart_search_discoverer"
                     style="?textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,17 +96,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/smart_search_type" />
+                    android:text="@string/smart_search_android_version" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/smart_search_type"
+                    android:id="@+id/smart_search_android_version"
                     style="?textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

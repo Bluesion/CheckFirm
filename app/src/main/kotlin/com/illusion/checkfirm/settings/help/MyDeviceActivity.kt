@@ -18,15 +18,15 @@ class MyDeviceActivity : AppCompatActivity() {
         toolbar.title = getString(R.string.help_device_info)
         setSupportActionBar(toolbar)
 
-        val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val model = sharedPrefs.getString("new_saved_model", "")!!
-        val csc = sharedPrefs.getString("new_saved_csc", "")!!
+        val settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val model = settingPrefs.getString("new_saved_model", "")!!
+        val csc = settingPrefs.getString("new_saved_csc", "")!!
         binding.model.text = model
         binding.csc.text = csc
 
         binding.addBookmark.setOnClickListener {
-            val bottomSheetFragment = BookmarkDialog.newInstance(false, 0, getString(R.string.my_device), model, csc)
-            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            val bottomSheetDialog = BookmarkDialog(false, 0, getString(R.string.my_device), model, csc)
+            bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
         }
     }
 

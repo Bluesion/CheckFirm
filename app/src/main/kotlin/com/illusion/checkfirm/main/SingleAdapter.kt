@@ -4,34 +4,34 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.RowSingleSearchItemsBinding
 
-class SingleAdapter(val context: Context, private val model: String, private val csc: String,
-                    private val officialLatest: String, private val testLatest: String, private val isSmart: Boolean,
-                    private val date: String, private val downgrade: String, private val type: String,
+class SingleAdapter(val context: Context, private val firebase: Boolean,
                     val onClickListener: MyAdapterListener) : RecyclerView.Adapter<SingleAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(binding: RowSingleSearchItemsBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val officialCard: MaterialCardView = binding.officialCard
-        private val testCard: MaterialCardView = binding.testCard
+        private val officialCard = binding.officialCard
+        private val testCard = binding.testCard
 
-        var officialModel: MaterialTextView = binding.modelOfficial
-        var officialTitle: MaterialTextView = binding.latestOfficialFirmwareTitle
-        var officialText: MaterialTextView = binding.latestOfficialFirmwareText
+        var officialModel = binding.modelOfficial
+        var officialTitle = binding.latestOfficialFirmwareTitle
+        var officialText = binding.latestOfficialFirmwareText
 
-        var testModel: MaterialTextView = binding.modelTest
-        var testTitle: MaterialTextView = binding.latestTestFirmwareTitle
-        var testText: MaterialTextView = binding.latestTestFirmwareText
+        var testModel = binding.modelTest
+        var testTitle = binding.latestTestFirmwareTitle
+        var testText = binding.latestTestFirmwareText
 
-        val detail: LinearLayout = binding.detail
-        var date: MaterialTextView = binding.smartSearchDate
-        var downgrade: MaterialTextView = binding.smartSearchDowngrade
-        var type: MaterialTextView = binding.smartSearchType
+        var detailLayout = binding.detailLayout
+
+        var dateLayout = binding.dateLayout
+        var date = binding.smartSearchDate
+
+        var discovererLayout = binding.discovererLayout
+        var discoverer = binding.smartSearchDiscoverer
+
+        var androidVersion = binding.smartSearchAndroidVersion
 
         init {
             officialCard.setOnClickListener { v -> onClickListener.onOfficialCardClicked(v, bindingAdapterPosition) }
@@ -46,23 +46,37 @@ class SingleAdapter(val context: Context, private val model: String, private val
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val searchPrefs = context.getSharedPreferences("search", Context.MODE_PRIVATE)
+
+        val model = searchPrefs.getString("search_model_0", "null")!!
+        val csc = searchPrefs.getString("search_csc_0", "null")!!
         val device = String.format(context.getString(R.string.device_format), model, csc)
         holder.officialModel.text = device
         holder.testModel.text = device
 
-        holder.officialTitle.text = context.getString(R.string.latest_official)
-        holder.officialText.text = officialLatest
+        holder.officialTitle.text = context.getString(R.string.official_latest)
+        holder.officialText.text = searchPrefs.getString("official_latest_0", "null")!!
 
-        holder.testTitle.text = context.getString(R.string.latest_test)
-        holder.testText.text = testLatest
+        val testLatest = searchPrefs.getString("test_latest_0", "null")!!
+        val testDecrypted = searchPrefs.getString("test_decrypted_0", "null")!!
+        holder.testTitle.text = context.getString(R.string.test_latest)
 
-        if (isSmart) {
-            holder.detail.visibility = View.VISIBLE
-            holder.date.text = date
-            holder.downgrade.text = downgrade
-            holder.type.text = type
+        if (testDecrypted == "null") {
+            holder.testText.text = testLatest
         } else {
-            holder.detail.visibility = View.GONE
+            holder.testText.text = testDecrypted
+        }
+
+        if (testLatest != context.getString(R.string.search_error)) {
+            holder.detailLayout.visibility = View.VISIBLE
+            holder.androidVersion.text = searchPrefs.getString("test_latest_android_version_0", "")!!
+
+            if (!firebase) {
+                holder.dateLayout.visibility = View.VISIBLE
+                holder.date.text = searchPrefs.getString("test_discovery_date_0", "")!!
+                holder.discovererLayout.visibility = View.VISIBLE
+                holder.discoverer.text = searchPrefs.getString("test_discoverer_0", "Unknown")!!
+            }
         }
     }
 

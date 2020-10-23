@@ -1,12 +1,8 @@
 package com.illusion.checkfirm.settings.about
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.trusted.TrustedWebActivityIntentBuilder
-import com.google.androidbrowserhelper.trusted.TwaLauncher
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.ActivityContributorBinding
 import com.illusion.checkfirm.etc.WebViewActivity
@@ -41,15 +37,10 @@ class ContributorActivity : AppCompatActivity() {
         val github = binding.github
         github.setOnClickListener {
             val link = "https://github.com/gpillusion/CheckFirm"
-            try {
-                val builder = TrustedWebActivityIntentBuilder(Uri.parse(link))
-                TwaLauncher(this).launch(builder, null, null)
-            } catch (e: ActivityNotFoundException) {
-                val intent = Intent(this, WebViewActivity::class.java)
-                intent.putExtra("url", link)
-                intent.putExtra("number", 2)
-                startActivity(intent)
-            }
+            val intent = Intent(this, WebViewActivity::class.java)
+            intent.putExtra("url", link)
+            intent.putExtra("number", 1)
+            startActivity(intent)
         }
     }
 

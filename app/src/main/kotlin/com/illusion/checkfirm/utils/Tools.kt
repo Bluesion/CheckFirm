@@ -3,6 +3,9 @@ package com.illusion.checkfirm.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import org.spongycastle.crypto.digests.MD5Digest
+import org.spongycastle.util.encoders.Hex
+import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,5 +55,14 @@ object Tools {
                 "??????"
             }
         }
+    }
+
+    fun getMD5Hash(text: String): String? {
+        var newText = text.toByteArray(StandardCharsets.UTF_8)
+        val localMD5Digest = MD5Digest()
+        localMD5Digest.update(newText, 0, newText.size)
+        newText = ByteArray(localMD5Digest.digestSize)
+        localMD5Digest.doFinal(newText, 0)
+        return Hex.toHexString(newText)
     }
 }

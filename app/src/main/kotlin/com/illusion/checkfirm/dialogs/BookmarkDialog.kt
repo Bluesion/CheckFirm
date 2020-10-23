@@ -12,7 +12,8 @@ import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import com.illusion.checkfirm.databinding.DialogBookmarkBinding
 import java.util.*
 
-class BookmarkDialog : BottomSheetDialogFragment() {
+class BookmarkDialog(private val shouldUpdate: Boolean, private val id: Long,
+                     private val name: String, private val model: String, private val csc: String) : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = DialogBookmarkBinding.inflate(inflater)
@@ -21,28 +22,22 @@ class BookmarkDialog : BottomSheetDialogFragment() {
 
         val viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
 
-        val shouldUpdate = requireArguments().getBoolean("shouldUpdate")
-        val bundleId = requireArguments().getLong("id")
-        val bundleName = requireArguments().getString("name")
-        val bundleModel = requireArguments().getString("model")
-        val bundleCSC = requireArguments().getString("csc")
-
         if (shouldUpdate) {
-            binding.title.text = getString(R.string.edit_bookmark)
+            binding.title.text = getString(R.string.bookmark_edit)
         } else {
-            binding.title.text = getString(R.string.new_bookmark)
+            binding.title.text = getString(R.string.bookmark_new)
         }
 
-        if (bundleName != "") {
-            binding.name.setText(bundleName)
+        if (name.isNotBlank()) {
+            binding.name.setText(name)
         }
 
-        if (bundleModel != "") {
-            binding.model.setText(bundleModel)
+        if (model.isNotBlank()) {
+            binding.model.setText(model)
         }
 
-        if (bundleCSC != "") {
-            binding.csc.setText(bundleCSC)
+        if (csc.isNotBlank()) {
+            binding.csc.setText(csc)
         }
 
         binding.cancel.setOnClickListener {
@@ -55,7 +50,7 @@ class BookmarkDialog : BottomSheetDialogFragment() {
             val csc = binding.csc.text!!.trim().toString().toUpperCase(Locale.US)
 
             if (shouldUpdate) {
-                viewModel.update(name, bundleId, model, csc, "")
+                viewModel.update(name, id, model, csc, "")
             } else {
                 viewModel.insert(name, model, csc, "")
             }
@@ -63,21 +58,5 @@ class BookmarkDialog : BottomSheetDialogFragment() {
         }
 
         return binding.root
-    }
-
-    companion object {
-        fun newInstance(shouldUpdate: Boolean, id: Long, name: String, model: String, csc: String): BookmarkDialog {
-            val f = BookmarkDialog()
-
-            val args = Bundle()
-            args.putBoolean("shouldUpdate", shouldUpdate)
-            args.putLong("id", id)
-            args.putString("name", name)
-            args.putString("model", model)
-            args.putString("csc", csc)
-            f.arguments = args
-
-            return f
-        }
     }
 }

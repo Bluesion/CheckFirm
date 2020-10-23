@@ -3,9 +3,7 @@ package com.illusion.checkfirm.settings.welcome
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textview.MaterialTextView
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.RowSearchItemsBinding
 
@@ -13,8 +11,8 @@ class WelcomeSearchAdapter(private val context: Context, private var modelList: 
                            val onClickListener: MyAdapterListener) : RecyclerView.Adapter<WelcomeSearchAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(binding: RowSearchItemsBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val delete: AppCompatImageButton = binding.delete
-        var device: MaterialTextView = binding.device
+        private val delete = binding.delete
+        var device = binding.device
 
         init {
             delete.setOnClickListener { onClickListener.onDeleteClicked(bindingAdapterPosition) }

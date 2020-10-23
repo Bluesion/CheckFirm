@@ -23,7 +23,7 @@ import java.util.*
 class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
 
     private lateinit var binding: ActivityInfoCatcherBinding
-    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var settingPrefs: SharedPreferences
     private lateinit var icViewModel: InfoCatcherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +31,11 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
         binding = ActivityInfoCatcherBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
 
         initToolbar()
 
-        val catcher = sharedPrefs.getBoolean("catcher", false)
+        val catcher = settingPrefs.getBoolean("catcher", false)
         val catcherSwitch = binding.catcherSwitch
         if (catcher) {
             catcherSwitch.isChecked = true
@@ -52,11 +52,11 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
 
         val bookmarkChipGroup = binding.chipGroup
 
-        val bookmarkOrderBy = sharedPrefs.getString("bookmark_order_by", "time")!!
-        val isDescending = sharedPrefs.getBoolean("bookmark_order_by_desc", false)
+        val bookmarkOrderBy = settingPrefs.getString("bookmark_order_by", "time")!!
+        val isDescending = settingPrefs.getBoolean("bookmark_order_by_desc", false)
 
         val bmViewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
-        bmViewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, androidx.lifecycle.Observer { bookmarks ->
+        bmViewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, { bookmarks ->
             bookmarks?.let {
                 if (it.isEmpty()) {
                     bookmarkChipGroup.visibility = View.GONE
@@ -103,7 +103,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         icViewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(InfoCatcherViewModel::class.java)
-        icViewModel.allDevices.observe(this, androidx.lifecycle.Observer { devices ->
+        icViewModel.allDevices.observe(this, { devices ->
             devices?.let {
                 adapter.setDevices(it)
                 if (it.isEmpty()) {
@@ -117,7 +117,7 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
     }
 
     override fun onCheckedChanged(p0: CompoundButton, isChecked: Boolean) {
-        val editor = sharedPrefs.edit()
+        val editor = settingPrefs.edit()
         when (p0.id) {
             R.id.catcher_switch -> {
                 if (isChecked) {
@@ -160,12 +160,5 @@ class InfoCatcherActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeL
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
-
-        val one = sharedPrefs.getBoolean("one", true)
-        if (one) {
-            appBar.setExpanded(true)
-        } else {
-            appBar.setExpanded(false)
-        }
     }
 }

@@ -1,7 +1,7 @@
 package com.illusion.checkfirm.settings.help
 
-import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
@@ -19,14 +19,16 @@ class HelpActivity : AppCompatActivity() {
 
         initToolbar()
 
+        binding.helpYoutube.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=aNXR1M8Dq_I")))
+        }
+
         binding.helpManual.setOnClickListener {
-            val intent = Intent(this, FirmwareManualActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, FirmwareManualActivity::class.java))
         }
 
         binding.helpDevice.setOnClickListener {
-            val intent = Intent(this, MyDeviceActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MyDeviceActivity::class.java))
         }
     }
 
@@ -56,12 +58,5 @@ class HelpActivity : AppCompatActivity() {
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
-
-        val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
-        if (one) {
-            mAppBar.setExpanded(true)
-        } else {
-            mAppBar.setExpanded(false)
-        }
     }
 }

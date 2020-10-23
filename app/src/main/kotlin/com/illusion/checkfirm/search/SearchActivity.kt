@@ -19,8 +19,6 @@ import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import com.illusion.checkfirm.databinding.ActivitySearchBinding
-import com.illusion.checkfirm.primitive.HistoryItem
-import com.illusion.checkfirm.primitive.SearchItem
 import com.illusion.checkfirm.utils.Tools
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,7 +26,7 @@ import java.util.*
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var settingPrefs: SharedPreferences
     private lateinit var historyPrefs: SharedPreferences
     private lateinit var historyEditor: SharedPreferences.Editor
     private lateinit var searchRecyclerView: RecyclerView
@@ -46,10 +44,10 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         historyPrefs = getSharedPreferences("search_history", Context.MODE_PRIVATE)
         historyEditor = historyPrefs.edit()
-        sharedPrefs.edit().putString("search_mode", "single").apply()
+        settingPrefs.edit().putString("search_mode", "single").apply()
         imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         initToolbar()
 
@@ -75,7 +73,7 @@ class SearchActivity : AppCompatActivity() {
 
         val addButton = binding.add
         addButton.setOnClickListener {
-            if (searchList.size >= 10) {
+            if (searchList.size >= 4) {
                 Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
             } else {
                 val modelString = model.text!!.trim().toString().toUpperCase(Locale.US)
@@ -109,11 +107,11 @@ class SearchActivity : AppCompatActivity() {
                         Toast.makeText(this, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
                     } else {
                         val item = SearchItem(modelString, cscString)
-                        if (sharedPrefs.getString("search_mode", "single") == "single") {
+                        if (settingPrefs.getString("search_mode", "single") == "single") {
                             searchList.add(item)
                             search()
                         } else {
-                            if (searchList.size >= 10) {
+                            if (searchList.size >= 4) {
                                 Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
                             } else {
                                 addToSearchList(item)
@@ -131,11 +129,11 @@ class SearchActivity : AppCompatActivity() {
 
         val bookmarkChipGroup = binding.chipGroup
 
-        val bookmarkOrderBy = sharedPrefs.getString("bookmark_order_by", "time")!!
-        val isDescending = sharedPrefs.getBoolean("bookmark_order_by_desc", false)
+        val bookmarkOrderBy = settingPrefs.getString("bookmark_order_by", "time")!!
+        val isDescending = settingPrefs.getBoolean("bookmark_order_by_desc", false)
 
         val viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
-        viewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, androidx.lifecycle.Observer {
+        viewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, {
             if (it.isEmpty()) {
                 if (historyList.isEmpty()) {
                     binding.quick.visibility = View.GONE
@@ -157,16 +155,16 @@ class SearchActivity : AppCompatActivity() {
                         val modelString = model.text!!.trim().toString().toUpperCase(Locale.US)
                         val cscString = csc.text!!.trim().toString().toUpperCase(Locale.US)
                         if (modelString.isBlank() || cscString.isBlank()) {
-                            if (sharedPrefs.getString("search_mode", "single") == "single") {
+                            if (settingPrefs.getString("search_mode", "single") == "single") {
                                 Toast.makeText(this, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
                             }
                         } else {
                             val item = SearchItem(modelString, cscString)
-                            if (sharedPrefs.getString("search_mode", "single") == "single") {
+                            if (settingPrefs.getString("search_mode", "single") == "single") {
                                 searchList.add(item)
                                 search()
                             } else {
-                                if (searchList.size >= 10) {
+                                if (searchList.size >= 4) {
                                     Toast.makeText(this, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
                                 } else {
                                     addToSearchList(item)
@@ -193,11 +191,11 @@ class SearchActivity : AppCompatActivity() {
                     Toast.makeText(this@SearchActivity, R.string.info_catcher_error, Toast.LENGTH_SHORT).show()
                 } else {
                     val item = SearchItem(modelString, cscString)
-                    if (sharedPrefs.getString("search_mode", "single") == "single") {
+                    if (settingPrefs.getString("search_mode", "single") == "single") {
                         searchList.add(item)
                         search()
                     } else {
-                        if (searchList.size >= 10) {
+                        if (searchList.size >= 4) {
                             Toast.makeText(this@SearchActivity, getString(R.string.multi_search_limit), Toast.LENGTH_SHORT).show()
                         } else {
                             addToSearchList(item)
@@ -265,7 +263,7 @@ class SearchActivity : AppCompatActivity() {
         tab1.setOnClickListener {
             tab1.setTextAppearance(R.style.SearchButton_Selected)
             tab2.setTextAppearance(R.style.SearchButton_Unselected)
-            sharedPrefs.edit().putString("search_mode", "single").apply()
+            settingPrefs.edit().putString("search_mode", "single").apply()
 
             searchButton.visibility = View.VISIBLE
             addButton.visibility = View.GONE
@@ -275,7 +273,7 @@ class SearchActivity : AppCompatActivity() {
         tab2.setOnClickListener {
             tab1.setTextAppearance(R.style.SearchButton_Unselected)
             tab2.setTextAppearance(R.style.SearchButton_Selected)
-            sharedPrefs.edit().putString("search_mode", "multi").apply()
+            settingPrefs.edit().putString("search_mode", "multi").apply()
 
             searchButton.visibility = View.GONE
             addButton.visibility = View.VISIBLE
@@ -400,13 +398,6 @@ class SearchActivity : AppCompatActivity() {
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
-
-        val one = sharedPrefs.getBoolean("one", true)
-        if (one) {
-            appBar.setExpanded(true)
-        } else {
-            appBar.setExpanded(false)
-        }
     }
 
     private fun addToSearchList(element: SearchItem) {

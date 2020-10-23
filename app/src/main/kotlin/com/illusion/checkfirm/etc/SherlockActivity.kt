@@ -3,6 +3,7 @@ package com.illusion.checkfirm.etc
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,12 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.FirebaseFirestore
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.ActivitySherlockBinding
 import com.illusion.checkfirm.dialogs.SherlockDialog
-import org.spongycastle.crypto.digests.MD5Digest
-import org.spongycastle.util.encoders.Hex
-import java.nio.charset.StandardCharsets
+import com.illusion.checkfirm.utils.Tools
 import java.util.*
 
 class SherlockActivity : AppCompatActivity() {
@@ -26,6 +26,8 @@ class SherlockActivity : AppCompatActivity() {
     private var basebandPrefix = ""
     private var userFirmware = ""
     private var testLatest = ""
+    private var watson = ""
+    private lateinit var settingPrefs: SharedPreferences
 
     private lateinit var buildEditor: TextInputEditText
     private lateinit var cscEditor: TextInputEditText
@@ -37,6 +39,9 @@ class SherlockActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initToolbar()
+
+        settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        watson = settingPrefs.getString("profile_user_name", "Unknown")!!
 
         buildEditor = binding.editorBuild
         buildEditor.addTextChangedListener(object : TextWatcher {
@@ -110,7 +115,7 @@ class SherlockActivity : AppCompatActivity() {
         compare()
 
         binding.help.setOnClickListener {
-            val bottomSheetFragment = SherlockDialog.newInstance(testLatest, getMD5(userFirmware.toByteArray(StandardCharsets.UTF_8))!!)
+            val bottomSheetFragment = SherlockDialog(testLatest, Tools.getMD5Hash(userFirmware)!!)
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
 
@@ -132,15 +137,6 @@ class SherlockActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun getMD5(paramArrayOfByte: ByteArray): String? {
-        var newText = paramArrayOfByte
-        val localMD5Digest = MD5Digest()
-        localMD5Digest.update(newText, 0, newText.size)
-        newText = ByteArray(localMD5Digest.digestSize)
-        localMD5Digest.doFinal(newText, 0)
-        return Hex.toHexString(newText)
-    }
-
     private fun compare() {
         userFirmware = buildPrefix + buildEditor.text.toString() + "/" +
             cscPrefix + cscEditor.text.toString() + "/" + basebandPrefix + basebandEditor.text.toString()
@@ -148,20 +144,22 @@ class SherlockActivity : AppCompatActivity() {
         val userFirmwareWithDM = buildPrefix + buildEditor.text.toString() + ".DM/" +
             cscPrefix + cscEditor.text.toString() + "/" + basebandPrefix + basebandEditor.text.toString()
 
-        val encryptedFirmware = getMD5(userFirmware.toByteArray(StandardCharsets.UTF_8))
-        val encryptedFirmwareWithDM = getMD5(userFirmwareWithDM.toByteArray(StandardCharsets.UTF_8))
+        val encryptedFirmware = Tools.getMD5Hash(userFirmware)
+        val encryptedFirmwareWithDM = Tools.getMD5Hash(userFirmwareWithDM)
 
         when (testLatest) {
             encryptedFirmware -> {
                 binding.status.text = getString(R.string.sherlock_correct)
                 binding.status.setTextColor(resources.getColor(R.color.green, theme))
                 binding.userText.text = userFirmware
+                add(userFirmware)
             }
             encryptedFirmwareWithDM -> {
-                binding.editorBuild.setText("${buildEditor.text}.DM")
+                binding.editorBuild.setText(String.format(getString(R.string.sherlock_dm_format), buildEditor.text))
                 binding.status.text = getString(R.string.sherlock_correct)
                 binding.status.setTextColor(resources.getColor(R.color.green, theme))
                 binding.userText.text = userFirmwareWithDM
+                add(userFirmwareWithDM)
             }
             else -> {
                 binding.status.text = getString(R.string.sherlock_not_correct)
@@ -201,12 +199,17 @@ class SherlockActivity : AppCompatActivity() {
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
+    }
 
-        val one = getSharedPreferences("settings", Context.MODE_PRIVATE).getBoolean("one", true)
-        if (one) {
-            mAppBar.setExpanded(true)
-        } else {
-            mAppBar.setExpanded(false)
+    private fun add(decryptedFirmware: String) {
+        if (!settingPrefs.getBoolean("firebase", false)) {
+            val model = intent.getStringExtra("model")!!
+            val csc = intent.getStringExtra("csc")!!
+            val db = FirebaseFirestore.getInstance()
+
+            val docRef = db.collection(model).document(csc)
+            docRef.update("firmware_decrypted", decryptedFirmware)
+            docRef.update("watson", watson)
         }
     }
 }

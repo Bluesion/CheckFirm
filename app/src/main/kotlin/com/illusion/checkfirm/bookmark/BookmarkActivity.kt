@@ -22,7 +22,7 @@ class BookmarkActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBookmarkBinding
     lateinit var viewModel: BookmarkViewModel
-    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var settingPrefs: SharedPreferences
     private lateinit var mAdapter: BookmarkAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,13 +33,13 @@ class BookmarkActivity : AppCompatActivity() {
         initToolbar()
 
         binding.fab.setOnClickListener {
-            val bottomSheetFragment = BookmarkDialog.newInstance(false, 0, "", "", "")
-            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            val bottomSheetDialog = BookmarkDialog(false, 0, "", "", "")
+            bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
         }
 
-        sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
-        viewModel.getCount()!!.observe(this, androidx.lifecycle.Observer { counts ->
+        viewModel.getCount()!!.observe(this, { counts ->
             counts?.let {
                 binding.expandedSubtitle.text = resources.getQuantityString(R.plurals.bookmark_subtitle, it, it)
             }
@@ -58,8 +58,8 @@ class BookmarkActivity : AppCompatActivity() {
             }
 
             override fun onEditClicked(id: Long, name: String, model: String, csc: String) {
-                val bottomSheetFragment = BookmarkDialog.newInstance(true, id, name, model, csc)
-                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                val bottomSheetDialog = BookmarkDialog(true, id, name, model, csc)
+                bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
             }
 
             override fun onDeleteClicked(device: String) {
@@ -84,13 +84,13 @@ class BookmarkActivity : AppCompatActivity() {
                 return true
             }
             R.id.order -> {
-                val bottomSheetFragment = OrderDialog()
-                bottomSheetFragment.setOnBottomSheetCloseListener(object : OrderDialog.OnBottomSheetCloseListener {
+                val bottomSheetDialog = OrderDialog()
+                bottomSheetDialog.setOnBottomSheetCloseListener(object : OrderDialog.OnBottomSheetCloseListener {
                     override fun onBottomSheetClose() {
                         initList()
                     }
                 })
-                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
                 return true
             }
         }
@@ -115,21 +115,13 @@ class BookmarkActivity : AppCompatActivity() {
             binding.expandedSubtitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
-
-        sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val one = sharedPrefs.getBoolean("one", true)
-        if (one) {
-            appbar.setExpanded(true)
-        } else {
-            appbar.setExpanded(false)
-        }
     }
 
     private fun initList() {
-        val bookmarkOrderBy = sharedPrefs.getString("bookmark_order_by", "time")!!
-        val isDescending = sharedPrefs.getBoolean("bookmark_order_by_desc", false)
+        val bookmarkOrderBy = settingPrefs.getString("bookmark_order_by", "time")!!
+        val isDescending = settingPrefs.getBoolean("bookmark_order_by_desc", false)
 
-        viewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, androidx.lifecycle.Observer { bookmarks ->
+        viewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, { bookmarks ->
             bookmarks?.let { mAdapter.setBookmarks(it) }
         })
     }

@@ -10,7 +10,6 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -24,28 +23,19 @@ import com.illusion.checkfirm.bookmark.BookmarkActivity
 import com.illusion.checkfirm.database.bookmark.BookmarkViewModel
 import com.illusion.checkfirm.databinding.ActivityMainBinding
 import com.illusion.checkfirm.dialogs.SearchDialog
-import com.illusion.checkfirm.primitive.MainItem
-import com.illusion.checkfirm.primitive.PreviousItem
-import com.illusion.checkfirm.primitive.SmartSearchItem
 import com.illusion.checkfirm.search.SearchActivity
 import com.illusion.checkfirm.search.TransparentActivity
 import com.illusion.checkfirm.settings.SettingsActivity
-import com.illusion.checkfirm.settings.help.FirmwareManualActivity
-import com.illusion.checkfirm.settings.help.HelpActivity
 import com.illusion.checkfirm.settings.help.MyDeviceActivity
 import com.illusion.checkfirm.settings.welcome.WelcomeSearchActivity
 import com.illusion.checkfirm.utils.Tools
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
-
-    private lateinit var sharedPrefs: SharedPreferences
-    private lateinit var searchDevicePrefs: SharedPreferences
-    private lateinit var searchResultPrefs: SharedPreferences
+    private lateinit var settingPrefs: SharedPreferences
+    private lateinit var searchPrefs: SharedPreferences
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         val data = result.data
@@ -62,20 +52,7 @@ class MainActivity : AppCompatActivity() {
                     binding.searchResult.visibility = View.VISIBLE
 
                     val tab = binding.tabLayout
-                    var smart = sharedPrefs.getBoolean("smart", true)
-                    if (sharedPrefs.getBoolean("china", false)) {
-                        smart = false
-                    }
-
-                    var model: String
-                    var csc: String
-                    var latestOfficial: String
-                    var latestTest: String
-                    var previousOfficial: String
-                    var previousTest: String
-                    var date: String
-                    var downgrade: String
-                    var type: String
+                    var firebase = settingPrefs.getBoolean("firebase", false)
 
                     val total = data.getIntExtra("total", 0)
                     val recyclerView = binding.searchResult
@@ -83,38 +60,16 @@ class MainActivity : AppCompatActivity() {
 
                     if (total == 0) {
                         tab.visibility = View.GONE
-                        model = searchDevicePrefs.getString("search_model_0", "")!!
-                        csc = searchDevicePrefs.getString("search_csc_0", "")!!
-                        previousOfficial = searchResultPrefs.getString("previous_official_0", "")!!
-                        previousTest = searchResultPrefs.getString("previous_test_0", "")!!
-                        date = searchResultPrefs.getString("first_discovery_date_0", "")!!
-                        downgrade = searchResultPrefs.getString("downgrade_0", "")!!
-                        type = searchResultPrefs.getString("type_0", "")!!
 
-                        latestOfficial = if (searchResultPrefs.getString("latest_official_0", "")!!.isBlank()) {
-                            getString(R.string.search_error)
-                        } else {
-                            searchResultPrefs.getString("latest_official_0", "")!!
-                        }
-
-                        latestTest = if (searchResultPrefs.getString("latest_test_0", "")!!.isBlank()) {
-                            getString(R.string.search_error)
-                        } else {
-                            searchResultPrefs.getString("latest_test_0", "")!!
-                        }
-
-                        val mAdapter = SingleAdapter(this, model, csc, latestOfficial, latestTest,
-                            smart, date, downgrade, type, object : SingleAdapter.MyAdapterListener {
+                        val mAdapter = SingleAdapter(this, firebase, object : SingleAdapter.MyAdapterListener {
                             override fun onOfficialCardClicked(v: View, position: Int) {
-                                val bottomSheetFragment = SearchDialog.newInstance(true, model, csc, latestOfficial, previousOfficial,
-                                    latestTest, previousTest)
-                                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                                val bottomSheetDialog = SearchDialog(true, position)
+                                bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
                             }
 
                             override fun onTestCardClicked(v: View, position: Int) {
-                                val bottomSheetFragment = SearchDialog.newInstance(false, model, csc, latestOfficial, previousOfficial,
-                                    latestTest, previousTest)
-                                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                                val bottomSheetDialog = SearchDialog(false, position)
+                                bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
                             }
                         })
                         recyclerView.adapter = mAdapter
@@ -127,42 +82,12 @@ class MainActivity : AppCompatActivity() {
                         tab2.setTextAppearance(R.style.SearchButton_Unselected)
 
                         var isOfficial = true
-                        smart = false
+                        firebase = false
 
-                        val resultList = ArrayList<MainItem>()
-                        val previousList = ArrayList<PreviousItem>()
-                        val smartList = ArrayList<SmartSearchItem>()
-                        resultList.clear()
-                        previousList.clear()
-                        smartList.clear()
-                        for (i in 0..total) {
-                            model = searchDevicePrefs.getString("search_model_$i", "")!!
-                            csc = searchDevicePrefs.getString("search_csc_$i", "")!!
-                            latestOfficial = searchResultPrefs.getString("latest_official_$i", "")!!
-                            latestTest = searchResultPrefs.getString("latest_test_$i", "")!!
-                            previousOfficial = searchResultPrefs.getString("previous_official_$i", "")!!
-                            previousTest = searchResultPrefs.getString("previous_test_$i", "")!!
-
-                            val item = MainItem(model, csc, latestOfficial, latestTest)
-                            resultList.add(item)
-
-                            val previous = PreviousItem(previousOfficial, previousTest)
-                            previousList.add(previous)
-
-                            date = searchResultPrefs.getString("first_discovery_date_$i", "")!!
-                            downgrade = searchResultPrefs.getString("downgrade_$i", "")!!
-                            type = searchResultPrefs.getString("type_$i", "")!!
-
-                            val element = SmartSearchItem(date, downgrade, type)
-                            smartList.add(element)
-                        }
-
-                        var mAdapter = MultiAdapter(this, isOfficial, smart, resultList, smartList, object : MultiAdapter.MyAdapterListener {
+                        var mAdapter = MultiAdapter(this, isOfficial, firebase, total, object : MultiAdapter.MyAdapterListener {
                             override fun onLayoutClicked(v: View, position: Int) {
-                                val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].model, resultList[position].csc,
-                                    resultList[position].officialLatest, previousList[position].officialPrevious,
-                                    resultList[position].testLatest, previousList[position].testPrevious)
-                                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                                val bottomSheetDialog = SearchDialog(isOfficial, position)
+                                bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
                             }
                         })
                         recyclerView.adapter = mAdapter
@@ -171,13 +96,11 @@ class MainActivity : AppCompatActivity() {
                             tab1.setTextAppearance(R.style.SearchButton_Selected)
                             tab2.setTextAppearance(R.style.SearchButton_Unselected)
                             isOfficial = true
-                            smart = false
-                            mAdapter = MultiAdapter(this, isOfficial, smart, resultList, smartList, object : MultiAdapter.MyAdapterListener {
+                            firebase = false
+                            mAdapter = MultiAdapter(this, isOfficial, firebase, total, object : MultiAdapter.MyAdapterListener {
                                 override fun onLayoutClicked(v: View, position: Int) {
-                                    val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].model, resultList[position].csc,
-                                        resultList[position].officialLatest, previousList[position].officialPrevious,
-                                        resultList[position].testLatest, previousList[position].testPrevious)
-                                    bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                                    val bottomSheetDialog = SearchDialog(isOfficial, position)
+                                    bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
                                 }
                             })
                             recyclerView.adapter = mAdapter
@@ -187,13 +110,11 @@ class MainActivity : AppCompatActivity() {
                             tab1.setTextAppearance(R.style.SearchButton_Unselected)
                             tab2.setTextAppearance(R.style.SearchButton_Selected)
                             isOfficial = false
-                            smart = !sharedPrefs.getBoolean("china", false)
-                            mAdapter = MultiAdapter(this, isOfficial, smart, resultList, smartList, object : MultiAdapter.MyAdapterListener {
+                            firebase = settingPrefs.getBoolean("firebase", false)
+                            mAdapter = MultiAdapter(this, isOfficial, firebase, total, object : MultiAdapter.MyAdapterListener {
                                 override fun onLayoutClicked(v: View, position: Int) {
-                                    val bottomSheetFragment = SearchDialog.newInstance(isOfficial, resultList[position].model, resultList[position].csc,
-                                        resultList[position].officialLatest, previousList[position].officialPrevious,
-                                        resultList[position].testLatest, previousList[position].testPrevious)
-                                    bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                                    val bottomSheetDialog = SearchDialog(isOfficial, position)
+                                    bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
                                 }
                             })
                             recyclerView.adapter = mAdapter
@@ -220,9 +141,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        searchDevicePrefs = getSharedPreferences("search_device", Context.MODE_PRIVATE)
-        searchResultPrefs = getSharedPreferences("search_result", Context.MODE_PRIVATE)
+        settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        searchPrefs = getSharedPreferences("search", Context.MODE_PRIVATE)
 
         // UI
         mSwipeRefreshLayout = binding.swipeRefreshLayout
@@ -232,56 +152,14 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initQuick()
 
-        if (Intent.ACTION_VIEW == intent.action) {
-            val url = intent.data!!
-
-            when (url.pathSegments.size) {
-                0 -> {
-                    Toast.makeText(this, getString(R.string.link_share_error), Toast.LENGTH_SHORT).show()
-                }
-                1 -> {
-                    when (url.pathSegments[0].toString()) {
-                        "help" -> {
-                            val intent = Intent(this, HelpActivity::class.java)
-                            startActivity(intent)
-                        }
-                        "manual" -> {
-                            val intent = Intent(this, FirmwareManualActivity::class.java)
-                            startActivity(intent)
-                        }
-                        "mydevice" -> {
-                            val intent = Intent(this, MyDeviceActivity::class.java)
-                            startActivity(intent)
-                        }
-                        else -> {
-                            Toast.makeText(this, getString(R.string.link_share_error), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-                else -> {
-                    val model = if (url.pathSegments[0].isBlank()) {
-                        ""
-                    } else {
-                        url.pathSegments[0].toString().toUpperCase(Locale.ENGLISH)
-                    }
-                    val csc = if (url.pathSegments[1].isBlank()) {
-                        ""
-                    } else {
-                        url.pathSegments[1].toString().toUpperCase(Locale.ENGLISH)
-                    }
-                    networkTask(model, csc, 0)
-                }
-            }
+        val welcome = settingPrefs.getBoolean("welcome", false)
+        if (welcome) {
+            welcomeSearch()
         } else {
-            val welcome = sharedPrefs.getBoolean("welcome", false)
-            if (welcome) {
-                welcomeSearch()
-            } else {
-                binding.includeView.mainView.visibility = View.VISIBLE
-                binding.includeView.noWelcome.visibility = View.VISIBLE
-                binding.includeView.networkError.visibility = View.GONE
-                binding.includeView.searchError.visibility = View.GONE
-            }
+            binding.includeView.mainView.visibility = View.VISIBLE
+            binding.includeView.noWelcome.visibility = View.VISIBLE
+            binding.includeView.networkError.visibility = View.GONE
+            binding.includeView.searchError.visibility = View.GONE
         }
 
         binding.includeView.welcomeSearchSetting.setOnClickListener {
@@ -360,24 +238,17 @@ class MainActivity : AppCompatActivity() {
             expandedTitle.alpha = 1 - (percentage * 2 * -1)
             title.alpha = percentage * -1
         })
-
-        val one = sharedPrefs.getBoolean("one", true)
-        if (one) {
-            appBar.setExpanded(true)
-        } else {
-            appBar.setExpanded(false)
-        }
     }
 
     private fun initQuick() {
         val chipScroll = binding.chipScroll
-        val quick = sharedPrefs.getBoolean("quick", false)
+        val quick = settingPrefs.getBoolean("quick", false)
         if (quick) {
-            val bookmarkOrderBy = sharedPrefs.getString("bookmark_order_by", "time")!!
-            val isDescending = sharedPrefs.getBoolean("bookmark_order_by_desc", false)
+            val bookmarkOrderBy = settingPrefs.getString("bookmark_order_by", "time")!!
+            val isDescending = settingPrefs.getBoolean("bookmark_order_by_desc", false)
 
             val viewModel = ViewModelProvider(this, CheckFirm.viewModelFactory).get(BookmarkViewModel::class.java)
-            viewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, androidx.lifecycle.Observer { bookmarks ->
+            viewModel.getBookmarks(bookmarkOrderBy, isDescending).observe(this, { bookmarks ->
                 bookmarks?.let {
                     if (it.isEmpty()) {
                         chipScroll.visibility = View.GONE
@@ -403,22 +274,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun welcomeSearch() {
-        val total = searchDevicePrefs.getInt("welcome_search_total", 0)
+        val total = searchPrefs.getInt("welcome_search_total", 0)
         var model = ""
         var csc = ""
 
         for (i in 0..total) {
-            val tempModel = searchDevicePrefs.getString("welcome_search_model_$i", "")
-            val tempCsc = searchDevicePrefs.getString("welcome_search_csc_$i", "")
+            val tempModel = searchPrefs.getString("welcome_search_model_$i", "")
+            val tempCsc = searchPrefs.getString("welcome_search_csc_$i", "")
 
             model += if (tempModel!!.isBlank()) {
-                sharedPrefs.getString("new_saved_model", "SM-A720S") + "%"
+                settingPrefs.getString("new_saved_model", "SM-A720S") + "%"
             } else {
                 "$tempModel%"
             }
 
             csc += if (tempCsc!!.isBlank()) {
-                sharedPrefs.getString("new_saved_csc", "SKC") + "%"
+                settingPrefs.getString("new_saved_csc", "SKC") + "%"
             } else {
                 "$tempCsc%"
             }
@@ -438,7 +309,7 @@ class MainActivity : AppCompatActivity() {
                 mSwipeRefreshLayout.isEnabled = true
                 mSwipeRefreshLayout.isRefreshing = true
 
-                val editor = searchDevicePrefs.edit()
+                val editor = searchPrefs.edit()
                 val intent = Intent(this, TransparentActivity::class.java)
                 when {
                     total == 0 -> {
