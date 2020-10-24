@@ -102,72 +102,107 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
 
                     binding.minorVersion.text = firmwareInfo.substring(5, 6)
                 } else {
-                    sherlock.visibility = View.VISIBLE
-                    sherlock.setOnClickListener {
-                        val intent = Intent(requireActivity(), SherlockActivity::class.java)
-                        intent.putExtra("model", searchPrefs.getString("search_model_$i", "null"))
-                        intent.putExtra("csc", searchPrefs.getString("search_csc_$i", "null"))
-                        intent.putExtra("official", officialLatest)
-                        intent.putExtra("test", testLatest)
-                        startActivity(intent)
+                    if (testDecrypted == "null") {
+                        sherlock.visibility = View.VISIBLE
+                        sherlock.setOnClickListener {
+                            val intent = Intent(requireActivity(), SherlockActivity::class.java)
+                            intent.putExtra("model", searchPrefs.getString("search_model_$i", "null"))
+                            intent.putExtra("csc", searchPrefs.getString("search_csc_$i", "null"))
+                            intent.putExtra("official", officialLatest)
+                            intent.putExtra("test", testLatest)
+                            startActivity(intent)
+                        }
+                    } else {
+                        copy = testDecrypted
+
+                        sherlock.visibility = View.GONE
+                        binding.decryptedFirmware.text = testDecrypted
+                        binding.watson.text = String.format(getString(R.string.sherlock_watson_format), searchPrefs.getString("test_watson_$i", "null")!!)
+                        binding.original.visibility = View.VISIBLE
+                        binding.decryptedLayout.visibility = View.VISIBLE
+
+                        binding.smartSearch.visibility = View.VISIBLE
+
+                        val firmwareInfo = Tools.getFirmwareInfo(testDecrypted)
+
+                        binding.bootloader.text = firmwareInfo.substring(0, 2)
+                        if (officialLatest.substring(0, 2) == testDecrypted.substring(0, 2)) {
+                            binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_possible)
+                        } else {
+                            binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_impossible)
+                        }
+
+                        binding.majorVersion.text = firmwareInfo.substring(2, 3)
+                        val compareMajorVersion = officialLatest[2].compareTo(testDecrypted[2])
+                        when {
+                            compareMajorVersion < 0 -> {
+                                binding.majorVersionDescription.text = getString(R.string.smart_search_type_major)
+                            }
+                            compareMajorVersion > 0 -> {
+                                binding.majorVersionDescription.text = getString(R.string.smart_search_type_rollback)
+                            }
+                            else -> {
+                                binding.majorVersionDescription.text = getString(R.string.smart_search_type_minor)
+                            }
+                        }
+
+                        val dateString = firmwareInfo.substring(3, 5)
+                        binding.date.text = dateString
+                        binding.dateDescription.text = getFirmwareDate(dateString)
+
+                        binding.minorVersion.text = firmwareInfo.substring(5, 6)
                     }
                 }
             } else if (officialLatest == getString(R.string.search_error)
                 && testLatest != getString(R.string.search_error)) {
-                if (!testLatest.contains("/")) {
-                    sherlock.visibility = View.VISIBLE
-                    sherlock.setOnClickListener {
-                        val intent = Intent(requireActivity(), SherlockActivity::class.java)
-                        intent.putExtra("model", searchPrefs.getString("search_model_$i", "null"))
-                        intent.putExtra("csc", searchPrefs.getString("search_csc_$i", "null"))
-                        intent.putExtra("official", officialLatest)
-                        intent.putExtra("test", testLatest)
-                        intent.putExtra("pro_mode", true)
-                        startActivity(intent)
-                    }
-                }
-            }
+                if (testLatest.contains("/")) {
+                    binding.smartSearch.visibility = View.VISIBLE
 
-            if (testDecrypted != "null") {
-                copy = testDecrypted
+                    val firmwareInfo = Tools.getFirmwareInfo(testLatest)
 
-                sherlock.visibility = View.GONE
-                binding.decryptedFirmware.text = testDecrypted
-                binding.watson.text = String.format(getString(R.string.sherlock_watson_format), searchPrefs.getString("test_watson_$i", "null")!!)
-                binding.original.visibility = View.VISIBLE
-                binding.decryptedLayout.visibility = View.VISIBLE
+                    binding.bootloader.text = firmwareInfo.substring(0, 2)
+                    binding.majorVersion.text = firmwareInfo.substring(2, 3)
 
-                binding.smartSearch.visibility = View.VISIBLE
+                    val dateString = firmwareInfo.substring(3, 5)
+                    binding.date.text = dateString
+                    binding.dateDescription.text = getFirmwareDate(dateString)
 
-                val firmwareInfo = Tools.getFirmwareInfo(testDecrypted)
-
-                binding.bootloader.text = firmwareInfo.substring(0, 2)
-                binding.bootloaderDescription.text = searchPrefs.getString("test_downgrade_$i", "null")!!
-                if (officialLatest.substring(0, 2) == testDecrypted.substring(0, 2)) {
-                    binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_possible)
+                    binding.minorVersion.text = firmwareInfo.substring(5, 6)
                 } else {
-                    binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_impossible)
+                    if (testDecrypted == "null") {
+                        sherlock.visibility = View.VISIBLE
+                        sherlock.setOnClickListener {
+                            val intent = Intent(requireActivity(), SherlockActivity::class.java)
+                            intent.putExtra("model", searchPrefs.getString("search_model_$i", "null"))
+                            intent.putExtra("csc", searchPrefs.getString("search_csc_$i", "null"))
+                            intent.putExtra("official", officialLatest)
+                            intent.putExtra("test", testLatest)
+                            intent.putExtra("pro_mode", true)
+                            startActivity(intent)
+                        }
+                    } else {
+                        copy = testDecrypted
+
+                        sherlock.visibility = View.GONE
+                        binding.decryptedFirmware.text = testDecrypted
+                        binding.watson.text = String.format(getString(R.string.sherlock_watson_format), searchPrefs.getString("test_watson_$i", "null")!!)
+                        binding.original.visibility = View.VISIBLE
+                        binding.decryptedLayout.visibility = View.VISIBLE
+
+                        binding.smartSearch.visibility = View.VISIBLE
+
+                        val firmwareInfo = Tools.getFirmwareInfo(testDecrypted)
+
+                        binding.bootloader.text = firmwareInfo.substring(0, 2)
+                        binding.majorVersion.text = firmwareInfo.substring(2, 3)
+
+                        val dateString = firmwareInfo.substring(3, 5)
+                        binding.date.text = dateString
+                        binding.dateDescription.text = getFirmwareDate(dateString)
+
+                        binding.minorVersion.text = firmwareInfo.substring(5, 6)
+                    }
                 }
-
-                binding.majorVersion.text = firmwareInfo.substring(2, 3)
-                val compareMajorVersion = officialLatest[2].compareTo(testDecrypted[2])
-                when {
-                    compareMajorVersion < 0 -> {
-                        binding.majorVersionDescription.text = getString(R.string.smart_search_type_major)
-                    }
-                    compareMajorVersion > 0 -> {
-                        binding.majorVersionDescription.text = getString(R.string.smart_search_type_rollback)
-                    }
-                    else -> {
-                        binding.majorVersionDescription.text = getString(R.string.smart_search_type_minor)
-                    }
-                }
-
-                val dateString = firmwareInfo.substring(3, 5)
-                binding.date.text = dateString
-                binding.dateDescription.text = getFirmwareDate(dateString)
-
-                binding.minorVersion.text = firmwareInfo.substring(5, 6)
             }
         }
 
