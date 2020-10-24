@@ -10,6 +10,16 @@ import com.illusion.checkfirm.databinding.DialogProfileBinding
 
 class ProfileDialog : BottomSheetDialogFragment() {
 
+    private lateinit var onDialogCloseListener: OnDialogCloseListener
+
+    interface OnDialogCloseListener {
+        fun onDialogClose()
+    }
+
+    fun setOnDialogCloseListener(listener: OnDialogCloseListener) {
+        onDialogCloseListener = listener
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = DialogProfileBinding.inflate(inflater)
         val sharedPrefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
@@ -26,6 +36,7 @@ class ProfileDialog : BottomSheetDialogFragment() {
                 mEditor.putString("profile_user_name", binding.name.text.toString())
             }
             mEditor.apply()
+            onDialogCloseListener.onDialogClose()
             dismiss()
         }
 

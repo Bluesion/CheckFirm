@@ -45,8 +45,13 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         binding.userName.text = settingsPrefs.getString("profile_user_name", "Unknown")
 
         binding.profileLayout.setOnClickListener {
-            val bottomSheetFragment = ProfileDialog()
-            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            val bottomSheetDialog = ProfileDialog()
+            bottomSheetDialog.setOnDialogCloseListener(object : ProfileDialog.OnDialogCloseListener {
+                override fun onDialogClose() {
+                    binding.userName.text = settingsPrefs.getString("profile_user_name", "Unknown")
+                }
+            })
+            bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
         }
 
         binding.themeLayout.setOnClickListener {
