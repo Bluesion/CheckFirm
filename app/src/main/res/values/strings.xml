@@ -1,5 +1,5 @@
 <resources>
-    <!-- Test -->
+    <!-- In case of Czech, Russian, Portuguese, Russian and Chinese, you can translate only these 16 strings. -->
     <string name="order">Order previous firmwares</string>
     <string name="order_description">Previous firmwares will be ordered alphabetically.</string>
     <string name="help_sherlock">Sherlock manual</string>
@@ -10,9 +10,6 @@
     <string name="settings_profile_user_name">User name</string>
     <string name="smart_search_discoverer">First discoverer</string>
     <string name="smart_search_android_version">Android version</string>
-    <string name="smart_search_date">Discovered date</string>
-    <string name="smart_search_downgrade_possible">Downgrade possible</string>
-    <string name="smart_search_downgrade_impossible">Downgrade impossible</string>
     <string name="sherlock_original">Original</string>
     <string name="sherlock_watson_format">Decrypted by %s</string>
     <string name="inquiry_note_title">Note</string>
@@ -158,7 +155,10 @@
     <string name="smart_search_major_version">Major version</string>
     <string name="smart_search_build_date">Build date</string>
     <string name="smart_search_minor_version">Minor version</string>
+    <string name="smart_search_date">Discovered date</string>
     <string name="smart_search_date_format">%2$s, %1$s</string>
+    <string name="smart_search_downgrade_possible">Downgrade possible</string>
+    <string name="smart_search_downgrade_impossible">Downgrade impossible</string>
     <string name="january">January</string>
     <string name="february">February</string>
     <string name="march">March</string>
