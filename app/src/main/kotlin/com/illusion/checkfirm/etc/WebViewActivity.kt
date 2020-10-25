@@ -32,7 +32,7 @@ class WebViewActivity : AppCompatActivity() {
         binding.webView.settings.defaultTextEncodingName = "utf-8"
         binding.webView.settings.useWideViewPort = true
         binding.webView.settings.setSupportZoom(true)
-        binding.webView.settings.builtInZoomControls = true
+        binding.webView.settings.builtInZoomControls = false
         binding.webView.webChromeClient = WebChromeClient()
         binding.webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
