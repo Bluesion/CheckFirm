@@ -1,8 +1,6 @@
 package com.illusion.checkfirm.etc
 
-import android.net.http.SslError
 import android.os.Bundle
-import android.webkit.SslErrorHandler
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -35,18 +33,11 @@ class WebViewActivity : AppCompatActivity() {
         binding.webView.settings.useWideViewPort = true
         binding.webView.settings.setSupportZoom(true)
         binding.webView.settings.builtInZoomControls = true
-        binding.webView.settings.displayZoomControls = false
-        binding.webView.settings.blockNetworkLoads = false
-        binding.webView.settings.allowFileAccess = false
         binding.webView.webChromeClient = WebChromeClient()
         binding.webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
                 view.loadUrl(url!!)
                 return true
-            }
-
-            override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
-                handler!!.proceed()
             }
         }
         binding.webView.loadUrl(url!!)
