@@ -27,7 +27,9 @@ class SherlockActivity : AppCompatActivity() {
     private var userFirmware = ""
     private var testLatest = ""
     private var watson = ""
+    private var i = 0
     private lateinit var settingPrefs: SharedPreferences
+    private lateinit var searchPrefs: SharedPreferences
 
     private lateinit var buildEditor: TextInputEditText
     private lateinit var cscEditor: TextInputEditText
@@ -42,6 +44,7 @@ class SherlockActivity : AppCompatActivity() {
 
         settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         watson = settingPrefs.getString("profile_user_name", "Unknown")!!
+        searchPrefs = getSharedPreferences("search", Context.MODE_PRIVATE)
 
         buildEditor = binding.editorBuild
         buildEditor.addTextChangedListener(object : TextWatcher {
@@ -76,10 +79,11 @@ class SherlockActivity : AppCompatActivity() {
             }
         })
 
-        testLatest = intent.getStringExtra("test")!!
+        i = intent.getIntExtra("index", 0)
+        testLatest = searchPrefs.getString("test_latest_$i", "null")!!
 
         if (!intent.getBooleanExtra("pro_mode", false)) {
-            val officialFirmware = intent.getStringExtra("official")!!
+            val officialFirmware = searchPrefs.getString("official_latest_$i", "null")!!
 
             val firstIndex = officialFirmware.indexOf("/")
             val secondIndex = officialFirmware.lastIndexOf("/")
@@ -203,8 +207,14 @@ class SherlockActivity : AppCompatActivity() {
 
     private fun add(decryptedFirmware: String) {
         if (!settingPrefs.getBoolean("firebase", false)) {
-            val model = intent.getStringExtra("model")!!
-            val csc = intent.getStringExtra("csc")!!
+            val editor = searchPrefs.edit()
+            editor.putString("test_watson_$i", watson)
+            editor.putString("test_decrypted_$i", decryptedFirmware)
+            editor.apply()
+
+            val model = searchPrefs.getString("search_model_$i", "null")!!
+            val csc = searchPrefs.getString("search_csc_$i", "null")!!
+
             val db = FirebaseFirestore.getInstance()
 
             val docRef = db.collection(model).document(csc)

@@ -106,11 +106,9 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                         sherlock.visibility = View.VISIBLE
                         sherlock.setOnClickListener {
                             val intent = Intent(requireActivity(), SherlockActivity::class.java)
-                            intent.putExtra("model", searchPrefs.getString("search_model_$i", "null"))
-                            intent.putExtra("csc", searchPrefs.getString("search_csc_$i", "null"))
-                            intent.putExtra("official", officialLatest)
-                            intent.putExtra("test", testLatest)
+                            intent.putExtra("index", i)
                             startActivity(intent)
+                            dismiss()
                         }
                     } else {
                         copy = testDecrypted
@@ -123,17 +121,20 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
 
                         binding.smartSearch.visibility = View.VISIBLE
 
-                        val firmwareInfo = Tools.getFirmwareInfo(testDecrypted)
+                        val officialFirmwareInfo = Tools.getFirmwareInfo(officialLatest)
+                        val testFirmwareInfo = Tools.getFirmwareInfo(testDecrypted)
 
-                        binding.bootloader.text = firmwareInfo.substring(0, 2)
-                        if (officialLatest.substring(0, 2) == firmwareInfo.substring(0, 2)) {
+                        val bootloader = testFirmwareInfo.substring(0, 2)
+                        binding.bootloader.text = bootloader
+                        if (officialFirmwareInfo.substring(0, 2) == bootloader) {
                             binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_possible)
                         } else {
                             binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_impossible)
                         }
 
-                        binding.majorVersion.text = firmwareInfo.substring(2, 3)
-                        val compareMajorVersion = officialLatest[2].compareTo(firmwareInfo.substring(2, 3)[0])
+                        val majorVersion = testFirmwareInfo.substring(2, 3)
+                        binding.majorVersion.text = majorVersion
+                        val compareMajorVersion = officialFirmwareInfo[2].compareTo(majorVersion[0])
                         when {
                             compareMajorVersion < 0 -> {
                                 binding.majorVersionDescription.text = getString(R.string.smart_search_type_major)
@@ -146,11 +147,11 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                             }
                         }
 
-                        val dateString = firmwareInfo.substring(3, 5)
+                        val dateString = testFirmwareInfo.substring(3, 5)
                         binding.date.text = dateString
                         binding.dateDescription.text = getFirmwareDate(dateString)
 
-                        binding.minorVersion.text = firmwareInfo.substring(5, 6)
+                        binding.minorVersion.text = testFirmwareInfo.substring(5, 6)
                     }
                 }
             } else if (officialLatest == getString(R.string.search_error)
@@ -173,12 +174,10 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                         sherlock.visibility = View.VISIBLE
                         sherlock.setOnClickListener {
                             val intent = Intent(requireActivity(), SherlockActivity::class.java)
-                            intent.putExtra("model", searchPrefs.getString("search_model_$i", "null"))
-                            intent.putExtra("csc", searchPrefs.getString("search_csc_$i", "null"))
-                            intent.putExtra("official", officialLatest)
-                            intent.putExtra("test", testLatest)
+                            intent.putExtra("index", i)
                             intent.putExtra("pro_mode", true)
                             startActivity(intent)
+                            dismiss()
                         }
                     } else {
                         copy = testDecrypted
