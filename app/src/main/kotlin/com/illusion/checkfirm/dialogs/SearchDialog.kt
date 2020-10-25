@@ -126,14 +126,14 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                         val firmwareInfo = Tools.getFirmwareInfo(testDecrypted)
 
                         binding.bootloader.text = firmwareInfo.substring(0, 2)
-                        if (officialLatest.substring(0, 2) == testDecrypted.substring(0, 2)) {
+                        if (officialLatest.substring(0, 2) == firmwareInfo.substring(0, 2)) {
                             binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_possible)
                         } else {
                             binding.bootloaderDescription.text = getString(R.string.smart_search_downgrade_impossible)
                         }
 
                         binding.majorVersion.text = firmwareInfo.substring(2, 3)
-                        val compareMajorVersion = officialLatest[2].compareTo(testDecrypted[2])
+                        val compareMajorVersion = officialLatest[2].compareTo(firmwareInfo.substring(2, 3)[0])
                         when {
                             compareMajorVersion < 0 -> {
                                 binding.majorVersionDescription.text = getString(R.string.smart_search_type_major)
