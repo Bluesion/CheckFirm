@@ -36,7 +36,7 @@ class ContributorActivity : AppCompatActivity() {
 
         val github = binding.github
         github.setOnClickListener {
-            val link = "https://github.com/gpillusion/CheckFirm"
+            val link = "https://github.com/Bluesion/CheckFirm"
             val intent = Intent(this, WebViewActivity::class.java)
             intent.putExtra("url", link)
             intent.putExtra("number", 1)
