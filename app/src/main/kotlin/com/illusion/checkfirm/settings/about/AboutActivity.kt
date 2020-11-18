@@ -12,10 +12,6 @@ import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.ActivityAboutBinding
 import com.illusion.checkfirm.dialogs.LegalDialog
 import com.illusion.checkfirm.utils.Tools
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 
 class AboutActivity : AppCompatActivity() {
@@ -34,32 +30,33 @@ class AboutActivity : AppCompatActivity() {
         val latest = binding.latest
         val update = binding.update
         if (Tools.isOnline(applicationContext)) {
-            CoroutineScope(Dispatchers.Main).launch {
+            Thread {
                 var data = 100
-                withContext(Dispatchers.IO) {
-                    val doc = Jsoup.connect("https://github.com/gpillusion/CheckFirm/blob/master/VERSION").get()
-                    val version = doc.select("#LC4")
+                val doc = Jsoup.connect("https://github.com/Bluesion/CheckFirm/blob/master/VERSION").get()
+                val version = doc.select("#LC4")
 
-                    for (el in version) {
-                        data = Integer.parseInt(el.text())
+                for (el in version) {
+                    data = Integer.parseInt(el.text())
+                }
+
+                runOnUiThread {
+                    progress.visibility = View.GONE
+                    if (BuildConfig.VERSION_CODE >= data) {
+                        latest.visibility = View.VISIBLE
+                        update.visibility = View.GONE
+                    } else {
+                        latest.visibility = View.GONE
+                        update.visibility = View.VISIBLE
                     }
                 }
-
-                progress.visibility = View.GONE
-                if (BuildConfig.VERSION_CODE >= data) {
-                    latest.visibility = View.VISIBLE
-                    update.visibility = View.GONE
-                } else {
-                    latest.visibility = View.GONE
-                    update.visibility = View.VISIBLE
-                }
-            }
+            }.start()
         } else {
             progress.visibility = View.GONE
             latest.text = getString(R.string.check_network)
             latest.visibility = View.VISIBLE
             update.visibility = View.GONE
         }
+
         update.setOnClickListener {
             val goPlayStore = Intent(Intent.ACTION_VIEW)
             goPlayStore.data = Uri.parse("market://details?id=" + applicationContext.packageName)
