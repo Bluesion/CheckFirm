@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.DialogSearchBinding
 import com.illusion.checkfirm.etc.SherlockActivity
@@ -21,8 +22,7 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = DialogSearchBinding.inflate(inflater)
 
-        val searchPrefs = requireActivity().getSharedPreferences("search", Context.MODE_PRIVATE)
-        val officialLatest = searchPrefs.getString("official_latest_$i", "null")!!
+        val officialLatest = CheckFirm.searchResult[i].officialLatestFirmware
 
         var copy: String
 
@@ -31,13 +31,16 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
             binding.latestTitle.text = getString(R.string.official_latest)
             binding.latestFirmware.text = officialLatest
             binding.previousTitle.text = getString(R.string.official_previous)
-            binding.list.text = searchPrefs.getString("official_previous_$i", "null")!!
+            binding.list.text = CheckFirm.searchResult[i].officialPreviousFirmware.toString()
+                .replace(", ", "\n")
+                .replace("[", "")
+                .replace("]", "")
 
             val changelog = binding.dynamicButton
             changelog.text = getString(R.string.changelog)
             changelog.setOnClickListener {
-                val model = searchPrefs.getString("search_model_$i", "null")!!
-                val csc = searchPrefs.getString("search_csc_$i", "null")!!
+                val model = CheckFirm.searchModel[i]
+                val csc = CheckFirm.searchCSC[i]
 
                 val link = "https://doc.samsungmobile.com/$model/$csc/doc.html"
                 val intent = Intent(requireActivity(), WebViewActivity::class.java)
@@ -55,12 +58,12 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                 binding.bootloader.text = firmwareInfo.substring(0, 2)
 
                 binding.majorVersion.text = firmwareInfo.substring(2, 3)
-                val androidVersion = searchPrefs.getString("official_latest_android_version_$i", "")!!
+                val androidVersion = CheckFirm.searchResult[i].officialAndroidVersion
                 if (androidVersion == getString(R.string.unknown)) {
                     binding.majorVersionDescription.text = ""
                 } else {
                     binding.majorVersionDescription.text =
-                        String.format(getString(R.string.smart_search_android_version_format), searchPrefs.getString("official_latest_android_version_$i", "null"))
+                        String.format(getString(R.string.smart_search_android_version_format), CheckFirm.searchResult[i].officialAndroidVersion)
                 }
 
                 val dateString = firmwareInfo.substring(3, 5)
@@ -70,15 +73,19 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                 binding.minorVersion.text = firmwareInfo.substring(5, 6)
             }
         } else {
-            val testLatest = searchPrefs.getString("test_latest_$i", "null")!!
-            val testDecrypted = searchPrefs.getString("test_decrypted_$i", "null")!!
+            val testLatest = CheckFirm.searchResult[i].testLatestFirmware
+            val testDecrypted = CheckFirm.searchResult[i].testDecrypted
 
             copy = testLatest
 
             binding.latestTitle.text = getString(R.string.test_latest)
             binding.latestFirmware.text = testLatest
             binding.previousTitle.text = getString(R.string.test_previous)
-            binding.list.text = searchPrefs.getString("test_previous_$i", "null")!!
+
+            binding.list.text = CheckFirm.searchResult[i].testPreviousFirmware.toString()
+                .replace(", ", "\n")
+                .replace("[", "")
+                .replace("]", "")
 
             val sherlock = binding.dynamicButton
             sherlock.text = getString(R.string.sherlock)
@@ -91,10 +98,10 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                     val firmwareInfo = Tools.getFirmwareInfo(testLatest)
 
                     binding.bootloader.text = firmwareInfo.substring(0, 2)
-                    binding.bootloaderDescription.text = searchPrefs.getString("test_downgrade_$i", "null")!!
+                    binding.bootloaderDescription.text = CheckFirm.searchResult[i].testDowngrade
 
                     binding.majorVersion.text = firmwareInfo.substring(2, 3)
-                    binding.majorVersionDescription.text = searchPrefs.getString("test_type_$i", "null")!!
+                    binding.majorVersionDescription.text = CheckFirm.searchResult[i].testType
 
                     val dateString = firmwareInfo.substring(3, 5)
                     binding.date.text = dateString
@@ -115,7 +122,7 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
 
                         sherlock.visibility = View.GONE
                         binding.decryptedFirmware.text = testDecrypted
-                        binding.watson.text = String.format(getString(R.string.sherlock_watson_format), searchPrefs.getString("test_watson_$i", "null")!!)
+                        binding.watson.text = String.format(getString(R.string.sherlock_watson_format), CheckFirm.searchResult[i].testWatson)
                         binding.original.visibility = View.VISIBLE
                         binding.decryptedLayout.visibility = View.VISIBLE
 
@@ -184,7 +191,7 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
 
                         sherlock.visibility = View.GONE
                         binding.decryptedFirmware.text = testDecrypted
-                        binding.watson.text = String.format(getString(R.string.sherlock_watson_format), searchPrefs.getString("test_watson_$i", "null")!!)
+                        binding.watson.text = String.format(getString(R.string.sherlock_watson_format), CheckFirm.searchResult[i].testWatson)
                         binding.original.visibility = View.VISIBLE
                         binding.decryptedLayout.visibility = View.VISIBLE
 

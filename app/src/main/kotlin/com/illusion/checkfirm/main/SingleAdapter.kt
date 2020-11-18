@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.RowSingleSearchItemsBinding
 
@@ -46,19 +47,17 @@ class SingleAdapter(val context: Context, private val firebase: Boolean,
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val searchPrefs = context.getSharedPreferences("search", Context.MODE_PRIVATE)
-
-        val model = searchPrefs.getString("search_model_0", "null")!!
-        val csc = searchPrefs.getString("search_csc_0", "null")!!
+        val model = CheckFirm.searchModel[0]
+        val csc = CheckFirm.searchCSC[0]
         val device = String.format(context.getString(R.string.device_format), model, csc)
         holder.officialModel.text = device
         holder.testModel.text = device
 
         holder.officialTitle.text = context.getString(R.string.official_latest)
-        holder.officialText.text = searchPrefs.getString("official_latest_0", "null")!!
+        holder.officialText.text = CheckFirm.searchResult[0].officialLatestFirmware
 
-        val testLatest = searchPrefs.getString("test_latest_0", "null")!!
-        val testDecrypted = searchPrefs.getString("test_decrypted_0", "null")!!
+        val testLatest = CheckFirm.searchResult[0].testLatestFirmware
+        val testDecrypted = CheckFirm.searchResult[0].testDecrypted
         holder.testTitle.text = context.getString(R.string.test_latest)
 
         if (testDecrypted == "null") {
@@ -69,13 +68,13 @@ class SingleAdapter(val context: Context, private val firebase: Boolean,
 
         if (testLatest != context.getString(R.string.search_error)) {
             holder.detailLayout.visibility = View.VISIBLE
-            holder.androidVersion.text = searchPrefs.getString("test_latest_android_version_0", "")!!
+            holder.androidVersion.text = CheckFirm.searchResult[0].testAndroidVersion
 
             if (!firebase) {
                 holder.dateLayout.visibility = View.VISIBLE
-                holder.date.text = searchPrefs.getString("test_discovery_date_0", "")!!
+                holder.date.text = CheckFirm.searchResult[0].testDiscoveryDate
                 holder.discovererLayout.visibility = View.VISIBLE
-                holder.discoverer.text = searchPrefs.getString("test_discoverer_0", "Unknown")!!
+                holder.discoverer.text = CheckFirm.searchResult[0].testDiscoverer
             }
         }
     }

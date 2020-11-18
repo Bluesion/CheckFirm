@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.utils.Tools
 import org.jsoup.Jsoup
@@ -24,8 +25,6 @@ class TransparentActivity : AppCompatActivity() {
     private val testURL = "/version.test.xml"
 
     private lateinit var settingPrefs: SharedPreferences
-    private lateinit var searchPrefs: SharedPreferences
-    private lateinit var resultEditor: SharedPreferences.Editor
 
     // Firebase
     private lateinit var db: FirebaseFirestore
@@ -45,15 +44,12 @@ class TransparentActivity : AppCompatActivity() {
         error = getString(R.string.search_error)
 
         settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        searchPrefs = getSharedPreferences("search", Context.MODE_PRIVATE)
-        resultEditor = searchPrefs.edit()
-        resultEditor.apply()
 
         val total = intent!!.getIntExtra("total", 1)
         list = IntArray(total) { 0 }
         for (i in 0 until total) {
-            model = searchPrefs.getString("search_model_$i", "null")!!
-            csc = searchPrefs.getString("search_csc_$i", "null")!!
+            model = CheckFirm.searchModel[i]
+            csc = CheckFirm.searchCSC[i]
 
             SearchThread(total, i, model, csc).start()
         }
@@ -131,103 +127,89 @@ class TransparentActivity : AppCompatActivity() {
                     testFirmware.reverse()
                 }
 
-                val previousOfficial = officialFirmware.toString()
-                    .replace(", ", "\n")
-                    .replace("[", "")
-                    .replace("]", "")
-
-                val previousTest = testFirmware.toString()
-                    .replace(", ", "\n")
-                    .replace("[", "")
-                    .replace("]", "")
-
                 if (latestOfficial.isBlank()) {
-                    resultEditor.putString("official_latest_$current", error)
+                    CheckFirm.searchResult[current].officialLatestFirmware = error
                 } else {
-                    resultEditor.putString("official_latest_$current", latestOfficial)
+                    CheckFirm.searchResult[current].officialLatestFirmware = latestOfficial
                     if (officialAndroidVersion.isBlank()) {
-                        resultEditor.putString("official_latest_android_version_$current", getString(R.string.unknown))
+                        CheckFirm.searchResult[current].officialAndroidVersion = getString(R.string.unknown)
                     } else {
-                        resultEditor.putString("official_latest_android_version_$current", officialAndroidVersion)
+                        CheckFirm.searchResult[current].officialAndroidVersion = officialAndroidVersion
                     }
                 }
 
-                if (previousOfficial.isBlank()) {
-                    resultEditor.putString("official_previous_$current", error)
+                if (officialFirmware.isEmpty()) {
+                    CheckFirm.searchResult[current].officialPreviousFirmware = arrayListOf(error)
                 } else {
-                    resultEditor.putString("official_previous_$current", previousOfficial)
+                    CheckFirm.searchResult[current].officialPreviousFirmware = officialFirmware
                 }
 
                 if (latestTest.isBlank()) {
-                    resultEditor.putString("test_latest_$current", error)
+                    CheckFirm.searchResult[current].testLatestFirmware = error
                 } else {
-                    resultEditor.putString("test_latest_$current", latestTest)
+                    CheckFirm.searchResult[current].testLatestFirmware = latestTest
                     if (testAndroidVersion.isBlank()) {
-                        resultEditor.putString("test_latest_android_version_$current", getString(R.string.unknown))
+                        CheckFirm.searchResult[current].testAndroidVersion = getString(R.string.unknown)
                     } else {
-                        resultEditor.putString("test_latest_android_version_$current", testAndroidVersion)
+                        CheckFirm.searchResult[current].testAndroidVersion = testAndroidVersion
                     }
                 }
 
-                if (previousTest.isBlank()) {
-                    resultEditor.putString("test_previous_$current", error)
+                if (testFirmware.isEmpty()) {
+                    CheckFirm.searchResult[current].testPreviousFirmware = arrayListOf(error)
                 } else {
-                    resultEditor.putString("test_previous_$current", previousTest)
+                    CheckFirm.searchResult[current].testPreviousFirmware = testFirmware
                 }
                 intent.putExtra("total", total - 1)
-                resultEditor.commit()
 
                 if (settingPrefs.getBoolean("firebase", false)) {
                     val currentOfficial = Tools.getFirmwareInfo(latestOfficial)
                     val currentTest = Tools.getFirmwareInfo(latestTest)
 
                     if (currentTest[2] == '?') {
-                        resultEditor.putString("test_type_$current", "null")
-                        resultEditor.putString("test_downgrade_$current", "null")
+                        CheckFirm.searchResult[current].testType = "null"
+                        CheckFirm.searchResult[current].testDowngrade = "null"
                     } else {
                         val compare = currentOfficial[2].compareTo(currentTest[2])
                         when {
                             compare < 0 -> {
-                                resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_major))
+                                CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_major)
                             }
                             compare > 0 -> {
-                                resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_rollback))
+                                CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_rollback)
                             }
                             else -> {
-                                resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_minor))
+                                CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_minor)
                             }
                         }
 
                         if (currentOfficial.substring(0, 2) == currentTest.substring(0, 2)) {
-                            resultEditor.putString("test_downgrade_$current", getString(R.string.smart_search_downgrade_possible))
+                            CheckFirm.searchResult[current].testDowngrade = getString(R.string.smart_search_downgrade_possible)
                         } else {
-                            resultEditor.putString("test_downgrade_$current", getString(R.string.smart_search_downgrade_impossible))
+                            CheckFirm.searchResult[current].testDowngrade = getString(R.string.smart_search_downgrade_impossible)
                         }
                     }
-                    resultEditor.putString("test_discovery_date_$current", getString(R.string.unknown))
-                    resultEditor.putString("test_decrypted_$current", "null")
-                    resultEditor.putString("test_discoverer_$current", "null")
-                    resultEditor.putString("test_watson_$current", "null")
-                    resultEditor.apply()
+                    CheckFirm.searchResult[current].testDiscoveryDate = getString(R.string.unknown)
+                    CheckFirm.searchResult[current].testDecrypted = "null"
+                    CheckFirm.searchResult[current].testDiscoverer = "null"
+                    CheckFirm.searchResult[current].testWatson = "null"
                     list[current] = 1
                 } else {
                     if (latestOfficial.isBlank() && latestTest.isBlank()) {
-                        resultEditor.putString("test_discovery_date_$current", getString(R.string.unknown))
-                        resultEditor.putString("test_decrypted_$current", "null")
-                        resultEditor.putString("test_type_$current", "null")
-                        resultEditor.putString("test_downgrade_$current", "null")
-                        resultEditor.putString("test_discoverer_$current", "null")
-                        resultEditor.putString("test_watson_$current", "null")
-                        resultEditor.apply()
+                        CheckFirm.searchResult[current].testDiscoveryDate = getString(R.string.unknown)
+                        CheckFirm.searchResult[current].testDecrypted = "null"
+                        CheckFirm.searchResult[current].testType = "null"
+                        CheckFirm.searchResult[current].testDowngrade = "null"
+                        CheckFirm.searchResult[current].testDiscoverer = "null"
+                        CheckFirm.searchResult[current].testWatson = "null"
                         list[current] = 1
                     } else if (latestOfficial.isNotBlank() && latestTest.isBlank()) {
-                        resultEditor.putString("test_discovery_date_$current", getString(R.string.unknown))
-                        resultEditor.putString("test_decrypted_$current", "null")
-                        resultEditor.putString("test_type_$current", "null")
-                        resultEditor.putString("test_downgrade_$current", "null")
-                        resultEditor.putString("test_discoverer_$current", "null")
-                        resultEditor.putString("test_watson_$current", "null")
-                        resultEditor.apply()
+                        CheckFirm.searchResult[current].testDiscoveryDate = getString(R.string.unknown)
+                        CheckFirm.searchResult[current].testDecrypted = "null"
+                        CheckFirm.searchResult[current].testType = "null"
+                        CheckFirm.searchResult[current].testDowngrade = "null"
+                        CheckFirm.searchResult[current].testDiscoverer = "null"
+                        CheckFirm.searchResult[current].testWatson = "null"
                         list[current] = 1
                     } else if (latestOfficial.isBlank() && latestTest.isNotBlank()) {
                         smartSearch(1, current)
@@ -240,10 +222,10 @@ class TransparentActivity : AppCompatActivity() {
     }
 
     private fun smartSearch(check: Int, current: Int) {
-        val latestOfficial = searchPrefs.getString("official_latest_$current", "null")!!
-        val latestTest = searchPrefs.getString("test_latest_$current", "null")!!
-        val model = searchPrefs.getString("search_model_$current", "null")!!
-        val csc = searchPrefs.getString("search_csc_$current", "null")!!
+        val latestOfficial = CheckFirm.searchResult[current].officialLatestFirmware
+        val latestTest = CheckFirm.searchResult[current].testLatestFirmware
+        val model = CheckFirm.searchModel[current]
+        val csc = CheckFirm.searchCSC[current]
 
         val docRef = db.collection(model).document(csc)
         docRef.get().addOnCompleteListener { task ->
@@ -267,64 +249,63 @@ class TransparentActivity : AppCompatActivity() {
                     val currentTest = Tools.getFirmwareInfo(latestTest)
 
                     if (firestoreDiscoverer == "null") {
-                        resultEditor.putString("test_discoverer_$current", "Unknown")
+                        CheckFirm.searchResult[current].testDiscoverer = "Unknown"
                     } else {
-                        resultEditor.putString("test_discoverer_$current", firestoreDiscoverer)
+                        CheckFirm.searchResult[current].testDiscoverer = firestoreDiscoverer
                     }
-                    resultEditor.putString("test_discovery_date_$current", firestoreDate)
+                    CheckFirm.searchResult[current].testDiscoveryDate = firestoreDate
 
                     if (Tools.getMD5Hash(firestoreDecrypted) == firestoreLatest) {
-                        resultEditor.putString("test_decrypted_$current", firestoreDecrypted)
-                        resultEditor.putString("test_watson_$current", firestoreWatson)
+                        CheckFirm.searchResult[current].testDecrypted = firestoreDecrypted
+                        CheckFirm.searchResult[current].testWatson = firestoreWatson
                     } else {
-                        resultEditor.putString("test_decrypted_$current", "null")
-                        resultEditor.putString("test_watson_$current", "null")
+                        CheckFirm.searchResult[current].testDecrypted = "null"
+                        CheckFirm.searchResult[current].testWatson = "null"
                     }
 
                     if (currentTest[2] == '?') {
-                        resultEditor.putString("test_type_$current", "null")
-                        resultEditor.putString("test_downgrade_$current", "null")
+                        CheckFirm.searchResult[current].testType = "null"
+                        CheckFirm.searchResult[current].testDowngrade = "null"
                     } else {
                         val compare = currentOfficial[2].compareTo(currentTest[2])
                         when {
                             compare < 0 -> {
-                                resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_major))
+                                CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_major)
                             }
                             compare > 0 -> {
-                                resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_rollback))
+                                CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_rollback)
                             }
                             else -> {
-                                resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_minor))
+                                CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_minor)
                             }
                         }
 
                         if (currentOfficial.substring(0, 2) == currentTest.substring(0, 2)) {
-                            resultEditor.putString("test_downgrade_$current", getString(R.string.smart_search_downgrade_possible))
+                            CheckFirm.searchResult[current].testDowngrade = getString(R.string.smart_search_downgrade_possible)
                         } else {
-                            resultEditor.putString("test_downgrade_$current", getString(R.string.smart_search_downgrade_impossible))
+                            CheckFirm.searchResult[current].testDowngrade = getString(R.string.smart_search_downgrade_impossible)
                         }
                     }
 
                     if (firestoreLatest != latestTest) {
                         val newDate = Tools.dateToString(Tools.getCurrentDateTime())
                         val discoverer = settingPrefs.getString("profile_user_name", "Unknown")!!
-                        resultEditor.putString("test_discovery_date_$current", newDate)
-                        resultEditor.putString("test_discoverer_$current", discoverer)
-                        resultEditor.putString("test_watson_$current", "null")
-                        resultEditor.putString("test_decrypted_$current", "null")
+                        CheckFirm.searchResult[current].testDiscoveryDate = newDate
+                        CheckFirm.searchResult[current].testDiscoverer = discoverer
+                        CheckFirm.searchResult[current].testWatson = "null"
+                        CheckFirm.searchResult[current].testDecrypted = "null"
                         update(current)
                     }
                 }
-                resultEditor.commit()
                 list[current] = 1
             }
         }
     }
 
     private fun update(current: Int) {
-        val model = searchPrefs.getString("search_model_$current", "null")!!
-        val csc = searchPrefs.getString("search_csc_$current", "null")!!
-        val latestTest = searchPrefs.getString("test_latest_$current", "null")!!
+        val model = CheckFirm.searchModel[current]
+        val csc = CheckFirm.searchCSC[current]
+        val latestTest = CheckFirm.searchResult[current].testLatestFirmware
         val date = Tools.dateToString(Tools.getCurrentDateTime())
         val discoverer = settingPrefs.getString("profile_user_name", "Unknown")!!
         val docRef = db.collection(model).document(csc)
@@ -342,10 +323,10 @@ class TransparentActivity : AppCompatActivity() {
     }
 
     private fun add(check: Int, current: Int) {
-        val model = searchPrefs.getString("search_model_$current", "null")!!
-        val csc = searchPrefs.getString("search_csc_$current", "null")!!
-        val latestOfficial = searchPrefs.getString("official_latest_$current", "null")!!
-        val latestTest = searchPrefs.getString("test_latest_$current", "null")!!
+        val model = CheckFirm.searchModel[current]
+        val csc = CheckFirm.searchCSC[current]
+        val latestOfficial = CheckFirm.searchResult[current].officialLatestFirmware
+        val latestTest = CheckFirm.searchResult[current].testLatestFirmware
         val date = Tools.dateToString(Tools.getCurrentDateTime())
         val discoverer = settingPrefs.getString("profile_user_name", "Unknown")!!
         val items = HashMap<String, Any>()
@@ -355,7 +336,7 @@ class TransparentActivity : AppCompatActivity() {
         items["firmware_decrypted"] = "null"
         items["watson"] = "null"
 
-        resultEditor.putString("test_discovery_date_$current", date)
+        CheckFirm.searchResult[current].testDiscoveryDate = date
 
         val currentOfficial = if (check == 1) {
             "??????"
@@ -367,49 +348,48 @@ class TransparentActivity : AppCompatActivity() {
 
         val condition = (currentTest == "??????")
 
-        resultEditor.putString("test_decrypted_$current", "null")
-        resultEditor.putString("test_watson_$current", "null")
-        resultEditor.putString("test_discoverer_$current", discoverer)
+        CheckFirm.searchResult[current].testDecrypted = "null"
+        CheckFirm.searchResult[current].testWatson = "null"
+        CheckFirm.searchResult[current].testDiscoverer = discoverer
 
         if (currentOfficial == currentTest) {
             if (condition) {
-                resultEditor.putString("test_type_$current", "null")
-                resultEditor.putString("test_downgrade_$current", "null")
+                CheckFirm.searchResult[current].testType = "null"
+                CheckFirm.searchResult[current].testDowngrade = "null"
             } else {
-                resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_minor))
-                resultEditor.putString("test_downgrade_$current", getString(R.string.smart_search_downgrade_possible))
+                CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_minor)
+                CheckFirm.searchResult[current].testDowngrade = getString(R.string.smart_search_downgrade_possible)
             }
         } else {
             if (condition) {
-                resultEditor.putString("test_type_$current", "null")
+                CheckFirm.searchResult[current].testType = "null"
             } else {
                 val compare = currentOfficial[2].compareTo(currentTest[2])
                 when {
                     compare < 0 -> {
-                        resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_major))
+                        CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_major)
                     }
                     compare > 0 -> {
-                        resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_rollback))
+                        CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_rollback)
                     }
                     else -> {
-                        resultEditor.putString("test_type_$current", getString(R.string.smart_search_type_minor))
+                        CheckFirm.searchResult[current].testType = getString(R.string.smart_search_type_minor)
                     }
                 }
             }
 
             if (currentOfficial.substring(0, 2) == currentTest.substring(0, 2)) {
                 if (condition) {
-                    resultEditor.putString("test_downgrade_$current", "null")
+                    CheckFirm.searchResult[current].testDowngrade = "null"
                 } else {
-                    resultEditor.putString("test_downgrade_$current", getString(R.string.smart_search_downgrade_possible))
+                    CheckFirm.searchResult[current].testDowngrade = getString(R.string.smart_search_downgrade_possible)
                 }
             } else {
-                resultEditor.putString("test_downgrade_$current", getString(R.string.smart_search_downgrade_impossible))
+                CheckFirm.searchResult[current].testDowngrade = getString(R.string.smart_search_downgrade_impossible)
             }
         }
 
         db.collection(model).document(csc).set(items)
-        resultEditor.apply()
 
         list[current] = 1
     }

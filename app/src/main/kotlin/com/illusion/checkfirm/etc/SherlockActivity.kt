@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.ActivitySherlockBinding
 import com.illusion.checkfirm.dialogs.SherlockDialog
@@ -29,7 +30,6 @@ class SherlockActivity : AppCompatActivity() {
     private var watson = ""
     private var i = 0
     private lateinit var settingPrefs: SharedPreferences
-    private lateinit var searchPrefs: SharedPreferences
 
     private lateinit var buildEditor: TextInputEditText
     private lateinit var cscEditor: TextInputEditText
@@ -44,7 +44,6 @@ class SherlockActivity : AppCompatActivity() {
 
         settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         watson = settingPrefs.getString("profile_user_name", "Unknown")!!
-        searchPrefs = getSharedPreferences("search", Context.MODE_PRIVATE)
 
         buildEditor = binding.editorBuild
         buildEditor.addTextChangedListener(object : TextWatcher {
@@ -80,10 +79,10 @@ class SherlockActivity : AppCompatActivity() {
         })
 
         i = intent.getIntExtra("index", 0)
-        testLatest = searchPrefs.getString("test_latest_$i", "null")!!
+        testLatest = CheckFirm.searchResult[i].testLatestFirmware
 
         if (!intent.getBooleanExtra("pro_mode", false)) {
-            val officialFirmware = searchPrefs.getString("official_latest_$i", "null")!!
+            val officialFirmware = CheckFirm.searchResult[i].officialLatestFirmware
 
             val firstIndex = officialFirmware.indexOf("/")
             val secondIndex = officialFirmware.lastIndexOf("/")
@@ -207,13 +206,11 @@ class SherlockActivity : AppCompatActivity() {
 
     private fun add(decryptedFirmware: String) {
         if (!settingPrefs.getBoolean("firebase", false)) {
-            val editor = searchPrefs.edit()
-            editor.putString("test_watson_$i", watson)
-            editor.putString("test_decrypted_$i", decryptedFirmware)
-            editor.apply()
+            CheckFirm.searchResult[i].testWatson = watson
+            CheckFirm.searchResult[i].testDecrypted = decryptedFirmware
 
-            val model = searchPrefs.getString("search_model_$i", "null")!!
-            val csc = searchPrefs.getString("search_csc_$i", "null")!!
+            val model = CheckFirm.searchModel[i]
+            val csc = CheckFirm.searchCSC[i]
 
             val db = FirebaseFirestore.getInstance()
 

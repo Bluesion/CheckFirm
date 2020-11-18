@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     private lateinit var settingPrefs: SharedPreferences
-    private lateinit var searchPrefs: SharedPreferences
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         val data = result.data
@@ -142,7 +141,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         settingPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        searchPrefs = getSharedPreferences("search", Context.MODE_PRIVATE)
 
         // UI
         mSwipeRefreshLayout = binding.swipeRefreshLayout
@@ -274,6 +272,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun welcomeSearch() {
+        val searchPrefs = getSharedPreferences("search", Context.MODE_PRIVATE)
         val total = searchPrefs.getInt("welcome_search_total", 0)
         var model = ""
         var csc = ""
@@ -297,8 +296,8 @@ class MainActivity : AppCompatActivity() {
         networkTask(model, csc, total + 1)
     }
 
-    private fun networkTask(tempModel: String, tempCsc: String, total: Int) {
-        if (tempModel.isBlank() || tempCsc.isBlank()) {
+    private fun networkTask(tempModel: String, tempCSC: String, total: Int) {
+        if (tempModel.isBlank() || tempCSC.isBlank()) {
             binding.includeView.mainView.visibility = View.VISIBLE
             binding.includeView.noWelcome.visibility = View.GONE
             binding.includeView.networkError.visibility = View.GONE
@@ -309,33 +308,31 @@ class MainActivity : AppCompatActivity() {
                 mSwipeRefreshLayout.isEnabled = true
                 mSwipeRefreshLayout.isRefreshing = true
 
-                val editor = searchPrefs.edit()
                 val intent = Intent(this, TransparentActivity::class.java)
                 when {
                     total == 0 -> {
-                        editor.putString("search_model_0", tempModel)
-                        editor.putString("search_csc_0", tempCsc)
+                        CheckFirm.searchModel[0] = tempModel
+                        CheckFirm.searchCSC[0] = tempCSC
                         intent.putExtra("total", 1)
                     }
                     total == 1 -> {
                         val model = tempModel.substring(0, tempModel.length - 1)
-                        val csc = tempCsc.substring(0, tempCsc.length - 1)
-                        editor.putString("search_model_0", model)
-                        editor.putString("search_csc_0", csc)
+                        val csc = tempCSC.substring(0, tempCSC.length - 1)
+                        CheckFirm.searchModel[0] = model
+                        CheckFirm.searchCSC[0] = csc
                         intent.putExtra("total", 1)
                     }
                     total > 1 -> {
                         val modelList = tempModel.split("%")
-                        val cscList = tempCsc.split("%")
+                        val cscList = tempCSC.split("%")
 
                         for (i in modelList.indices) {
-                            editor.putString("search_model_$i", modelList[i])
-                            editor.putString("search_csc_$i", cscList[i])
+                            CheckFirm.searchModel[i] = modelList[i]
+                            CheckFirm.searchCSC[i] = cscList[i]
                         }
                         intent.putExtra("total", total)
                     }
                 }
-                editor.apply()
                 intent.putExtra("search_code", 2)
                 startForResult.launch(intent)
                 overridePendingTransition(0, 0)

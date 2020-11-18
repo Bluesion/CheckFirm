@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.messaging.FirebaseMessaging
+import com.illusion.checkfirm.search.SearchResultItem
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -13,6 +14,9 @@ class CheckFirm : Application() {
 
     companion object {
         lateinit var viewModelFactory: ViewModelProvider.AndroidViewModelFactory
+        lateinit var searchModel: Array<String>
+        lateinit var searchCSC: Array<String>
+        lateinit var searchResult: Array<SearchResultItem>
     }
 
     override fun onCreate() {
@@ -20,6 +24,12 @@ class CheckFirm : Application() {
         viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this)
 
         FirebaseMessaging.getInstance().subscribeToTopic("update")
+
+        searchModel = arrayOf("", "", "", "")
+        searchCSC = arrayOf("", "", "", "")
+
+        val empty = SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", "")
+        searchResult = arrayOf(empty, empty, empty, empty)
 
         val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val savedModel = sharedPrefs.getString("new_saved_model", "")!!

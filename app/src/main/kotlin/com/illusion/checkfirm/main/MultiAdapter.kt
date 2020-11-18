@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.RowMultiSearchItemsBinding
 
@@ -45,18 +46,16 @@ class MultiAdapter(val context: Context, private val isOfficial: Boolean, privat
         val colors = listOf("#8BC34A", "#FFC107", "#2196F3", "#673AB7")
         holder.image.setColorFilter(Color.parseColor(colors[position]), PorterDuff.Mode.SRC_IN)
 
-        val searchPrefs = context.getSharedPreferences("search", Context.MODE_PRIVATE)
-
-        val model = searchPrefs.getString("search_model_$position", "null")
-        val csc = searchPrefs.getString("search_csc_$position", "null")
+        val model = CheckFirm.searchModel[position]
+        val csc = CheckFirm.searchCSC[position]
         holder.model.text = String.format(context.getString(R.string.device_format), model, csc)
 
         if (isOfficial) {
             holder.title.text = context.getString(R.string.official_latest)
-            holder.text.text = searchPrefs.getString("official_latest_$position", "null")
+            holder.text.text = CheckFirm.searchResult[position].officialLatestFirmware
         } else {
-            val testLatest = searchPrefs.getString("test_latest_$position", "null")!!
-            val testDecrypted = searchPrefs.getString("test_decrypted_$position", "null")!!
+            val testLatest = CheckFirm.searchResult[position].testLatestFirmware
+            val testDecrypted = CheckFirm.searchResult[position].testDecrypted
 
             holder.title.text = context.getString(R.string.test_latest)
             if (testDecrypted == "null") {
@@ -67,13 +66,13 @@ class MultiAdapter(val context: Context, private val isOfficial: Boolean, privat
 
             if (testLatest != context.getString(R.string.search_error)) {
                 holder.detailLayout.visibility = View.VISIBLE
-                holder.androidVersion.text = searchPrefs.getString("test_latest_android_version_$position", "")!!
+                holder.androidVersion.text = CheckFirm.searchResult[position].testAndroidVersion
 
                 if (!firebase) {
                     holder.dateLayout.visibility = View.VISIBLE
-                    holder.date.text = searchPrefs.getString("test_discovery_date_$position", "")!!
+                    holder.date.text = CheckFirm.searchResult[position].testDiscoveryDate
                     holder.discovererLayout.visibility = View.VISIBLE
-                    holder.discoverer.text = searchPrefs.getString("test_discoverer_$position", "Unknown")!!
+                    holder.discoverer.text = CheckFirm.searchResult[position].testDiscoverer
                 }
             }
         }
