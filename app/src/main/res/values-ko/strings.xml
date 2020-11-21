@@ -129,8 +129,6 @@
     <string name="settings_quick_search_bar_description">메인 화면에 북마크를 표시합니다.</string>
     <string name="welcome_search_description">앱 실행 시 지정된 디바이스의 펌웨어 정보를 검색합니다.</string>
     <string name="info_catcher_description">사용자가 지정한 디바이스의 펌웨어가 업데이트 되었을 때 알림을 표시합니다.</string>
-    <string name="order">이전 펌웨어 정렬</string>
-    <string name="order_description">이전 펌웨어 리스트가 알파벳 순서로 정렬됩니다.</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">자동 검색</string>

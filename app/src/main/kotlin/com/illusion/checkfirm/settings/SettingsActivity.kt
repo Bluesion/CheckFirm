@@ -23,7 +23,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
     private lateinit var settingsPrefs: SharedPreferences
     private lateinit var mEditor: SharedPreferences.Editor
     private lateinit var welcomeSwitch: SwitchMaterial
-    private lateinit var orderSwitch: SwitchMaterial
     private lateinit var quickSwitch: SwitchMaterial
     private lateinit var catcherSwitch: SwitchMaterial
     private lateinit var firebaseSwitch: SwitchMaterial
@@ -35,7 +34,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
 
         settingsPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         welcomeSwitch = binding.welcomeSwitch
-        orderSwitch = binding.orderSwitch
         quickSwitch = binding.quickSwitch
         catcherSwitch = binding.catcherSwitch
         firebaseSwitch = binding.firebaseSwitch
@@ -62,10 +60,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
         binding.welcomeLayout.setOnClickListener {
             val intent = Intent(this, WelcomeSearchActivity::class.java)
             startActivity(intent)
-        }
-
-        binding.orderLayout.setOnClickListener {
-            orderSwitch.toggle()
         }
 
         binding.quickLayout.setOnClickListener {
@@ -105,13 +99,6 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
                     mEditor.putBoolean("welcome", true)
                 } else {
                     mEditor.putBoolean("welcome", false)
-                }
-            }
-            R.id.order_switch -> {
-                if (isChecked) {
-                    mEditor.putBoolean("alphabetical", true)
-                } else {
-                    mEditor.putBoolean("alphabetical", false)
                 }
             }
             R.id.quick_switch -> {
@@ -174,19 +161,16 @@ class SettingsActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeList
 
     private fun initSwitch() {
         val welcome = settingsPrefs.getBoolean("welcome", false)
-        val order = settingsPrefs.getBoolean("alphabetical", true)
         val quick = settingsPrefs.getBoolean("quick", false)
         val catcher = settingsPrefs.getBoolean("catcher", false)
         val firebase = settingsPrefs.getBoolean("firebase", false)
 
         welcomeSwitch.isChecked = welcome
-        orderSwitch.isChecked = order
         quickSwitch.isChecked = quick
         catcherSwitch.isChecked = catcher
         firebaseSwitch.isChecked = firebase
 
         welcomeSwitch.setOnCheckedChangeListener(this)
-        orderSwitch.setOnCheckedChangeListener(this)
         quickSwitch.setOnCheckedChangeListener(this)
         catcherSwitch.setOnCheckedChangeListener(this)
         firebaseSwitch.setOnCheckedChangeListener(this)

@@ -1,8 +1,6 @@
 <resources>
     <!-- In case of Czech, Russian, Portuguese, Russian and Chinese, you can translate only these 16 strings (line 4 ~ 19) -->
     <!-- In case of other languages, you should translate the whole file (line 4 ~ 196) -->
-    <string name="order">Order previous firmwares</string>
-    <string name="order_description">Previous firmwares will be ordered alphabetically.</string>
     <string name="help_sherlock">Sherlock manual</string>
     <string name="help_sherlock_description">How to use Sherlock?</string>
     <string name="help_youtube">How to video on Youtube</string>
