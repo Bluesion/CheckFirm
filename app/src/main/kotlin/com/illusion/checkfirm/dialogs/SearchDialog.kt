@@ -71,6 +71,8 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                 binding.dateDescription.text = getFirmwareDate(dateString)
 
                 binding.minorVersion.text = firmwareInfo.substring(5, 6)
+            } else {
+                binding.copy.visibility = View.GONE
             }
         } else {
             val testLatest = CheckFirm.searchResult[i].testLatestFirmware
@@ -209,6 +211,8 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                         binding.minorVersion.text = firmwareInfo.substring(5, 6)
                     }
                 }
+            } else {
+                binding.copy.visibility = View.GONE
             }
         }
 
