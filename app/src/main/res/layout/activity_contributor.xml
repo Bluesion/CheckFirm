@@ -179,6 +179,12 @@
                     android:text="@string/contributor_portuguese"
                     android:textAppearance="?textAppearanceBody1" />
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contributor_romanian"
+                    android:textAppearance="?textAppearanceBody1" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -220,6 +226,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contributor_portuguese_translator"
+                    android:textAppearance="?textAppearanceBody1" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contributor_romanian_translator"
                     android:textAppearance="?textAppearanceBody1" />
 
             </LinearLayout>

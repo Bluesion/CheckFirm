@@ -1,0 +1,196 @@
+<resources>
+    <!-- Test -->
+
+    <!-- General -->
+    <string name="check_network">Verifică rețeaua</string>
+    <string name="switch_on">On</string>
+    <string name="switch_off">Off</string>
+    <string name="close">Închide</string>
+    <string name="unknown">Necunoscut(ă)</string>
+    <string name="my_device">Dispozitivul meu</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_new_firmware">A apărut un firmware nou</string>
+    <string name="notification_channel_new_update">A aparut un update la app</string>
+    <string name="notification_new_update_title">Update urgent pentru CheckFirm</string>
+    <string name="notification_new_update_text">S-au descoperit buguri critice, vă rog updatați aplicația din Magazin Play.</string>
+    <string name="info_catcher_notification_title">%1$s (%2$s) firmware-uri noi au fost gasite!</string>
+    <string name="info_catcher_notification_text">Vezi despre ce e vorba.</string>
+
+    <!-- Main -->
+    <string name="main_welcome_search_text">Welcome Search e dezactivat.E recomandat să pornești Welcome Search.</string>
+    <string name="main_network_error_title">Eroare de Rețea</string>
+    <string name="main_network_error_text">Probleme de conexiune sau conexiune prea lentă.</string>
+    <string name="main_search_error_title">Eroare de căutare</string>
+    <string name="main_search_error_text">Model sau CSC incorect.</string>
+
+    <!-- Search -->
+    <string name="search">Caută</string>
+    <string name="official_latest">Ultimul Firmware Oficial</string>
+    <string name="test_latest">Ultimul Firmware Test</string>
+    <string name="model">Model</string>
+    <string name="official_previous"> Firmware Oficial Anterior</string>
+    <string name="test_previous">Firmware în teste Anterior</string>
+    <string name="clipboard">Copiat în clipboard.</string>
+    <string name="search_error">Căutarea a eșuat. Nu am găsit date in serverele samsung despre acest dispozitiv.</string>
+    <string name="searching">Încă caut… mai așteaptă</string>
+    <string name="changelog">Changelog</string>
+    <string name="single_search">Căutare simplă</string>
+    <string name="multi_search">Căutare multiplă</string>
+    <string name="multi_search_lists">Caută prin %d dispozitive mai jos.</string>
+    <string name="multi_search_limit">Poți căuta până la 4 dispozitive</string>
+    <string name="tab_main_1">Oficial</string>
+    <string name="tab_main_2">În teste</string>
+
+    <!-- Sherlock -->
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_build">Versiune Build</string>
+    <string name="sherlock_baseband">Versiune Baseband</string>
+    <string name="sherlock_samsung_encrypted_text">Textul criptat al ultimei versiuni.</string>
+    <string name="sherlock_user_encrypted_text">Textul criptat convertit</string>
+    <string name="sherlock_correct">L-AI DEPISTAT!</string>
+    <string name="sherlock_not_correct">Of… Nu e ăsta.</string>
+    <string name="sherlock_original">Original</string>
+    <string name="sherlock_watson_format">Decriptat de %s</string>
+
+    <!-- Bookmark -->
+    <string name="bookmark">Semn de carte</string>
+    <string name="bookmark_new">Semn de carte nou</string>
+    <string name="bookmark_edit">Editeaza semnul de carte</string>
+    <string name="bookmark_name">Nume al semnului de carte</string>
+    <string name="bookmark_save">Salvează</string>
+    <string name="bookmark_search_error">Verifică dacă CSC-ul e scris corect in semnul de carte.</string>
+    <string name="bookmark_order">Ordonează semnele de carte</string>
+    <string name="bookmark_order_by_created_time">Ordonează în funcție de timpul creeării</string>
+    <string name="bookmark_order_by_device">Ordonează după dispozitiv</string>
+    <string name="bookmark_order_by_name">Ordonează după nume</string>
+    <string name="bookmark_order_by_desc">Ordonează descendent</string>
+
+    <!-- Help -->
+    <string name="help">Ajutor</string>
+    <string name="help_device_info">Info Dispozitiv.</string>
+    <string name="help_device_info_description">Model si CSC</string>
+    <string name="help_manual">Firmware manual</string>
+    <string name="help_manual_description">Firmware information</string>
+    <string name="help_sherlock">Manual pentru Sherlock</string>
+    <string name="help_sherlock_description">Cum se folosește Sherlock?</string>
+    <string name="help_youtube">Video Explicativ pe Youtube</string>
+    <string name="help_youtube_description">Video de Saqlin mirza</string>
+    <string name="firmware_0">Informatii de bază despre firmware</string>
+    <string name="firmware_1">Informațiile despre firmware sunt categorizate în 3 valori. Build version, CSC version, și baseband version.\n\nPresupunem că rezultatul căutării e \nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nPrima  (A720SKSU3BRK1) e build version,\n A doua(A720SSKC3BRK1) e CSC version,\nși ultima (A720NKOU3BRK1) e baseband version.</string>
+    <string name="firmware_2">Ce trebuie să știm din aceste informații.</string>
+    <string name="firmware_3">All we need to care is build version. We can analyze firmware with build version.\nHere is example build version:</string>
+    <string name="firmware_10">Red text</string>
+    <string name="firmware_11">Red text (ex. U3) means bootloader version.\n\nDue to Samsung\'s security policy, you cannot downgrade from higher bootloader version firmware to lower bootloader version firmware.</string>
+    <string name="firmware_12">Yellow text</string>
+    <string name="firmware_13">Yellow text (ex. B) means major version.\nIf yellow text is updated, it means Android OS or One UI is going to be or has been updated.\n\nA means very first major version.\nB means major update has been released once.\nC means major update has been released twice.\n.\n.\n.\nZ means beta firmware.</string>
+    <string name="firmware_14">Green text</string>
+    <string name="firmware_15">Green text (ex. R) means year when firmware was built.\n\nR means 2018,\nS means 2019,\nT means 2020, and so on.</string>
+    <string name="firmware_16">Blue text</string>
+    <string name="firmware_17">Blue text (ex. K) means month when firmware was built.\n\nA means January,\nB means February,\n.\n.\n.\nL means December.</string>
+    <string name="firmware_18">Purple text</string>
+    <string name="firmware_19">Purple text (ex. 1) means how many times firmware was built (It means minor version).\n\n1 means firmware was built once.\n.\n.\n.\n9 means firmware was built 9 times.\nA means firmware was built 10 times.\n.\n.\n.\nF means firmware was built 16 times.</string>
+    <string name="firmware_20">What is .DM &amp; .BDM</string>
+    <string name="firmware_21">Sometimes there is .DM in test firmware info. DM means Developer Management and it means Samsung is testing that firmware.\n\nRarely there is .BDM in test firmware info. BDM means Broadband Developer Management and it means mobile carrier tests or checks up the firmware.</string>
+    <string name="firmware_22">When will test firmware be released?</string>
+    <string name="firmware_23">We cannot exactly assume it. But test firmware will be released soon if build version doesn\'t change more. It usually takes 3–5 weeks.</string>
+
+    <!-- About -->
+    <string name="about_app_information">Informatii despre aplicație</string>
+    <string name="about_version">Versiune</string>
+    <string name="about_latest">Ultima versiune e deja instalată</string>
+    <string name="about_update">Actualizează</string>
+    <string name="license">Licență</string>
+    <string name="legal">Informații Legale</string>
+    <string name="legal_text">Informațiile oficiale vin de pe serverul https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml.\n\nTest firmware information came from https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml.\n\nThey are not the official ways that Samsung Electronics provides firmware information to customers. Any use of this information is at your own risk.</string>
+
+    <!-- Contributor -->
+    <string name="contributor">Contribuitor</string>
+    <string name="contributor_application">Aplicație</string>
+    <string name="contributor_designer">Design de</string>
+    <string name="contributor_developer">Dezvoltat de</string>
+    <string name="contributor_source">Sursa pe</string>
+    <string name="contributor_localization">Traducere</string>
+    <string name="contributor_language">Limbă</string>
+    <string name="contributor_russian">Rusă</string>
+    <string name="contributor_chinese">Chineză</string>
+    <string name="contributor_czech">Cehă</string>
+    <string name="contributor_portuguese">Portugheză</string>
+    <string name="contributor_translator">Mulțumeste lui</string>
+
+    <!-- Settings -->
+    <string name="settings">Setări</string>
+    <string name="settings_theme">Temă</string>
+    <string name="settings_theme_description">Setează tema aplicației</string>
+    <string name="settings_theme_light">Deschis</string>
+    <string name="settings_theme_dark">Întunecat</string>
+    <string name="settings_theme_system">Implicitul de sistem</string>
+    <string name="settings_about">Despre CheckFirm</string>
+    <string name="welcome_search_description">Cauta firmware la start.</string>
+    <string name="info_catcher_description">Info Catcher îti va trimite notificare când se updatează firmware-ul.</string>
+    <string name="settings_firebase">Repară eroarea de căutare</string>
+    <string name="settings_firebase_description">În țări precum Iran si China FireBase e blocat, selectează această opțiune pentru a bypass-ui eroarea </string>
+    <string name="settings_quick_search_bar">Bară căutare rapidă</string>
+    <string name="settings_quick_search_bar_description">Arată pe ecranul principal semnele de carte.</string>
+    <string name="settings_profile_user_name">Nume Utilizator</string>
+
+    <!-- Welcome Search -->
+    <string name="welcome_search">Căutare de la intrare</string>
+    <string name="welcome_search_text">Caută firmware-ul la intrarea in app.\nIntrodu device-ul pe care să il căutăm la start.</string>
+
+    <!-- Smart Search -->
+    <string name="smart_search">Căutare Inteligentă</string>
+    <string name="smart_search_type_major">Update Major</string>
+    <string name="smart_search_type_minor">Update Minor</string>
+    <string name="smart_search_type_rollback">Rollback la versiune anterioara</string>
+    <string name="smart_search_bootloader">Versiune Bootloader</string>
+    <string name="smart_search_major_version"> Versiune Majoră</string>
+    <string name="smart_search_build_date">Data de construire</string>
+    <string name="smart_search_minor_version">Versiune Minoră</string>
+    <string name="smart_search_date">Data descoperirii</string>
+    <string name="smart_search_date_format">%2$s, %1$s</string>
+    <string name="smart_search_downgrade_possible">Downgrade possibil</string>
+    <string name="smart_search_downgrade_impossible">Downgrade imposibil</string>
+    <string name="smart_search_discoverer">Primul Descoperitor</string>
+    <string name="smart_search_android_version">Versiune Android</string>
+    <string name="january">Ianuarie</string>
+    <string name="february">Februarie</string>
+    <string name="march">Martie</string>
+    <string name="april">Aprilie</string>
+    <string name="may">Mai</string>
+    <string name="june">Iunie</string>
+    <string name="july">Iulie</string>
+    <string name="august">August</string>
+    <string name="september">Septembrie</string>
+    <string name="october">Octombrie</string>
+    <string name="november">Noiembrie</string>
+    <string name="december">Decembrie</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher">Colectorul de Informații</string>
+    <string name="info_catcher_text">Colectorul de Informații îți va trimite o notificare atunci când actualizezi firmware-ul.\nIntrodu modelul de dispozitiv pe care vrei să il captezi.</string>
+    <string name="info_catcher_error">Verifică dacă ai scris modelul și CSC-ul corect.</string>
+    <string name="info_catcher_insert">Add</string>
+
+    <!-- Inquiry -->
+    <string name="inquiry">Întrebări</string>
+    <string name="inquiry_new">Idei noi</string>
+    <string name="inquiry_bug">Rapoarte bug-uri</string>
+    <string name="inquiry_question">Întrebări</string>
+    <string name="inquiry_send">Trimite</string>
+    <string name="inquiry_note_title">Notă</string>
+    <string name="inquiry_note_text">O să incerc să răspund intr-o saptămână.\nI Nu voi răspunde la întrebări dacă nu sunt despre aplicație.Nu lucrez pentru Samsung.\n Nu modfica detaliile despre dispozitiv in email.\n Vă rog folosiți Engleză sau Coreeană.</string>
+    <string name="inquiry_detail">Detalii</string>
+    <string name="inquiry_type">Tip Cerere</string>
+
+    <!-- Suggestion -->
+    <string name="suggestion">Sugestii</string>
+    <string name="suggestion_title">Cauți altceva?</string>
+    <string name="suggestion_bookmark_my_device">Adauga-mi dispozitivul la semne de carte.</string>
+    <string name="suggestion_enable_welcome_search">Pornește căutarea la pornire.</string>
+    <string name="suggestion_check_my_device_info">Verifică informații despre dispozitivul propriu</string>
+    <string name="suggestion_wifi">Pornește Wi-Fi.</string>
+    <string name="suggestion_data">Pornește date mobile.</string>
+
+    <!-- Beta -->
+</resources>
