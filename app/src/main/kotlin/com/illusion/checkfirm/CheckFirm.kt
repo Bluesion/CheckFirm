@@ -14,9 +14,14 @@ class CheckFirm : Application() {
 
     companion object {
         lateinit var viewModelFactory: ViewModelProvider.AndroidViewModelFactory
-        lateinit var searchModel: Array<String>
-        lateinit var searchCSC: Array<String>
-        lateinit var searchResult: Array<SearchResultItem>
+        var searchModel = arrayOf("", "", "", "")
+        var searchCSC = arrayOf("", "", "", "")
+        var searchResult = arrayOf(
+            SearchResultItem("", "", hashMapOf(), "", "", hashMapOf(), "", "", "", "", "", ""),
+            SearchResultItem("", "", hashMapOf(), "", "", hashMapOf(), "", "", "", "", "", ""),
+            SearchResultItem("", "", hashMapOf(), "", "", hashMapOf(), "", "", "", "", "", ""),
+            SearchResultItem("", "", hashMapOf(), "", "", hashMapOf(), "", "", "", "", "", "")
+        )
     }
 
     override fun onCreate() {
@@ -24,16 +29,6 @@ class CheckFirm : Application() {
         viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this)
 
         FirebaseMessaging.getInstance().subscribeToTopic("update")
-
-        searchModel = arrayOf("", "", "", "")
-        searchCSC = arrayOf("", "", "", "")
-
-        searchResult = arrayOf(
-            SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", ""),
-            SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", ""),
-            SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", ""),
-            SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", "")
-        )
 
         val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val savedModel = sharedPrefs.getString("new_saved_model", "")!!

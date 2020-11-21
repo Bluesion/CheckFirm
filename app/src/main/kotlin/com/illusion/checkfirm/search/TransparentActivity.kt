@@ -16,8 +16,6 @@ import org.jsoup.parser.Parser
 import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
-import java.util.*
-import kotlin.collections.HashMap
 
 class TransparentActivity : AppCompatActivity() {
     private val baseURL = "https://fota-cloud-dn.ospserver.net/firmware/"
@@ -82,17 +80,15 @@ class TransparentActivity : AppCompatActivity() {
     inner class SearchThread(private val total: Int, private val current: Int, private val model: String, private val csc: String) : Thread() {
         private var latestOfficial = ""
         private var officialAndroidVersion = ""
-        private lateinit var officialFirmware: ArrayList<String>
+        private var officialFirmware = HashMap<String, String>()
 
         private var latestTest = ""
         private var testAndroidVersion = ""
-        private lateinit var testFirmware: ArrayList<String>
+        private var testFirmware = HashMap<String, String>()
 
         override fun run() {
             val urlOfficial = "$baseURL$csc/$model$officialURL"
             val urlTest = "$baseURL$csc/$model$testURL"
-            officialFirmware = ArrayList()
-            testFirmware = ArrayList()
 
             try {
                 val official = Jsoup.parse(URL(urlOfficial).openStream(), "UTF-8", "", Parser.xmlParser())
@@ -102,7 +98,7 @@ class TransparentActivity : AppCompatActivity() {
                 }
                 for (el in official.select("value")) {
                     val firmwares = el.text()
-                    officialFirmware.add(firmwares)
+                    officialFirmware[firmwares] = firmwares
                 }
 
                 val test = Jsoup.parse(URL(urlTest).openStream(), "UTF-8", "", Parser.xmlParser())
@@ -112,7 +108,7 @@ class TransparentActivity : AppCompatActivity() {
                 }
                 for (el in test.select("value")) {
                     val firmwares = el.text()
-                    testFirmware.add(firmwares)
+                    testFirmware[firmwares] = firmwares
                 }
 
             } catch (e: MalformedURLException) {
@@ -120,13 +116,6 @@ class TransparentActivity : AppCompatActivity() {
             } catch (e: IOException) {
                 e.printStackTrace()
             } finally {
-                if (settingPrefs.getBoolean("alphabetical", true)) {
-                    officialFirmware.sort()
-                    officialFirmware.reverse()
-                    testFirmware.sort()
-                    testFirmware.reverse()
-                }
-
                 if (latestOfficial.isBlank()) {
                     CheckFirm.searchResult[current].officialLatestFirmware = error
                 } else {
@@ -139,7 +128,7 @@ class TransparentActivity : AppCompatActivity() {
                 }
 
                 if (officialFirmware.isEmpty()) {
-                    CheckFirm.searchResult[current].officialPreviousFirmware = arrayListOf(error)
+                    CheckFirm.searchResult[current].officialPreviousFirmware = hashMapOf(error to error)
                 } else {
                     CheckFirm.searchResult[current].officialPreviousFirmware = officialFirmware
                 }
@@ -156,7 +145,7 @@ class TransparentActivity : AppCompatActivity() {
                 }
 
                 if (testFirmware.isEmpty()) {
-                    CheckFirm.searchResult[current].testPreviousFirmware = arrayListOf(error)
+                    CheckFirm.searchResult[current].testPreviousFirmware = hashMapOf(error to error)
                 } else {
                     CheckFirm.searchResult[current].testPreviousFirmware = testFirmware
                 }

@@ -31,10 +31,13 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
             binding.latestTitle.text = getString(R.string.official_latest)
             binding.latestFirmware.text = officialLatest
             binding.previousTitle.text = getString(R.string.official_previous)
-            binding.list.text = CheckFirm.searchResult[i].officialPreviousFirmware.toString()
-                .replace(", ", "\n")
-                .replace("[", "")
-                .replace("]", "")
+
+            val builder = StringBuilder()
+            CheckFirm.searchResult[i].officialPreviousFirmware.toSortedMap(reverseOrder()).values.forEach { firmware ->
+                builder.append(firmware).append("\n")
+            }
+            builder.deleteAt(builder.lastIndex)
+            binding.list.text = builder.toString()
 
             val changelog = binding.dynamicButton
             changelog.text = getString(R.string.changelog)
@@ -84,10 +87,12 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
             binding.latestFirmware.text = testLatest
             binding.previousTitle.text = getString(R.string.test_previous)
 
-            binding.list.text = CheckFirm.searchResult[i].testPreviousFirmware.toString()
-                .replace(", ", "\n")
-                .replace("[", "")
-                .replace("]", "")
+            val builder = StringBuilder()
+            CheckFirm.searchResult[i].testPreviousFirmware.toSortedMap(reverseOrder()).values.forEach { firmware ->
+                builder.append(firmware).append("\n")
+            }
+            builder.deleteAt(builder.lastIndex)
+            binding.list.text = builder.toString()
 
             val sherlock = binding.dynamicButton
             sherlock.text = getString(R.string.sherlock)
