@@ -28,8 +28,12 @@ class CheckFirm : Application() {
         searchModel = arrayOf("", "", "", "")
         searchCSC = arrayOf("", "", "", "")
 
-        val empty = SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", "")
-        searchResult = arrayOf(empty, empty, empty, empty)
+        searchResult = arrayOf(
+            SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", ""),
+            SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", ""),
+            SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", ""),
+            SearchResultItem("", "", arrayListOf(""), "", "", arrayListOf(""), "", "", "", "", "", "")
+        )
 
         val sharedPrefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val savedModel = sharedPrefs.getString("new_saved_model", "")!!
