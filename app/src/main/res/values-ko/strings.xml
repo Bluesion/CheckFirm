@@ -53,6 +53,8 @@
     <string name="sherlock_not_correct">일치하지 않습니다.</string>
     <string name="sherlock_original">원본</string>
     <string name="sherlock_watson_format">복호화 by %s</string>
+    <string name="sherlock_in">이전 테스트 펌웨어 목록에 존재합니다.</string>
+    <string name="sherlock_not_in">이전 테스트 펌웨어 목록에 존재하지 않습니다.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">북마크</string>

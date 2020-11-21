@@ -70,11 +70,15 @@
             android:name=".etc.SherlockActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout" />
         <activity
+            android:name=".etc.Sherlock2Activity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
+        <activity
             android:name=".settings.about.ContributorActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout" />
         <activity
             android:name=".settings.InquiryActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout" />
+
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />

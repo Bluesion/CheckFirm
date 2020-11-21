@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.databinding.DialogSearchBinding
+import com.illusion.checkfirm.etc.Sherlock2Activity
 import com.illusion.checkfirm.etc.SherlockActivity
 import com.illusion.checkfirm.etc.WebViewActivity
 import com.illusion.checkfirm.utils.Tools
@@ -216,8 +217,31 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                         binding.minorVersion.text = firmwareInfo.substring(5, 6)
                     }
                 }
-            } else {
+            } else if (officialLatest != getString(R.string.search_error)
+                && testLatest == getString(R.string.search_error)) {
                 binding.copy.visibility = View.GONE
+                if (CheckFirm.searchResult[i].testPreviousFirmware.isNotEmpty()) {
+                    sherlock.visibility = View.VISIBLE
+                    sherlock.setOnClickListener {
+                        val intent = Intent(requireActivity(), Sherlock2Activity::class.java)
+                        intent.putExtra("index", i)
+                        startActivity(intent)
+                        dismiss()
+                    }
+                }
+            } else if (officialLatest == getString(R.string.search_error)
+                && testLatest == getString(R.string.search_error)) {
+                binding.copy.visibility = View.GONE
+                if (CheckFirm.searchResult[i].testPreviousFirmware.isNotEmpty()) {
+                    sherlock.visibility = View.VISIBLE
+                    sherlock.setOnClickListener {
+                        val intent = Intent(requireActivity(), Sherlock2Activity::class.java)
+                        intent.putExtra("index", i)
+                        intent.putExtra("pro_mode", true)
+                        startActivity(intent)
+                        dismiss()
+                    }
+                }
             }
         }
 
