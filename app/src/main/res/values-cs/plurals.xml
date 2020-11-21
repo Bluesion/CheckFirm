@@ -1,0 +1,11 @@
+<resources>
+    <plurals name="bookmark_subtitle">
+        <item quantity="one">%d záložka</item>
+        <item quantity="other">%d záložky/ek</item>
+    </plurals>
+
+    <plurals name="saved_devices">
+        <item quantity="one">Uložené zařízení</item>
+        <item quantity="other">Uložená zařízení</item>
+    </plurals>
+</resources>

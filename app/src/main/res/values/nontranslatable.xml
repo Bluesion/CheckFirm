@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name" translatable="false">CheckFirm</string>
+    <string name="csc" translatable="false">CSC</string>
+    <string name="default_string" translatable="false">SM-</string>
+    <string name="default_symbol" translatable="false">&#160;·&#160;</string>
+    <string name="device_format" translatable="false">%1$s (%2$s)</string>
+    <string name="firmware_4" translatable="false">A720SKS</string>
+    <string name="firmware_5" translatable="false">U3</string>
+    <string name="firmware_6" translatable="false">B</string>
+    <string name="firmware_7" translatable="false">R</string>
+    <string name="firmware_8" translatable="false">K</string>
+    <string name="firmware_9" translatable="false">1</string>
+    <string name="contributor_newfit" translatable="false">Newfit</string>
+    <string name="contributor_bluesion" translatable="false">Bluesion</string>
+    <string name="contributor_github" translatable="false">GitHub</string>
+    <string name="contributor_russian_translator" translatable="false">Adam Visitov</string>
+    <string name="contributor_chinese_translator" translatable="false">dididada9856</string>
+    <string name="contributor_czech_translator" translatable="false">Ondřej Brokl</string>
+    <string name="contributor_portuguese_translator" translatable="false">Yan Varão</string>
+    <string name="license_library" translatable="false">Library</string>
+    <string name="license_copyright" translatable="false">Copyright (C)</string>
+    <string name="license_apache" translatable="false">Apache 2.0</string>
+    <string name="license_mit" translatable="false">MIT</string>
+    <string name="license_androidx" translatable="false">Android X</string>
+    <string name="license_firebase" translatable="false">Firebase</string>
+    <string name="license_material_components" translatable="false">Material Components</string>
+    <string name="license_google" translatable="false">Google</string>
+    <string name="license_jsoup" translatable="false">Jsoup</string>
+    <string name="license_jonathan_hedley" translatable="false">Jonathan Hedley</string>
+    <string name="license_sponge_castle" translatable="false">Sponge Castle</string>
+    <string name="license_rtyley" translatable="false">rtyley</string>
+    <string name="sherlock_dm_format" translatable="false">%s.DM</string>
+    <string name="smart_search_android_version_format" translatable="false">Android %s</string>
+    <string name="year_a" translatable="false">2027</string>
+    <string name="year_b" translatable="false">2028</string>
+    <string name="year_c" translatable="false">2029</string>
+    <string name="year_d" translatable="false">2030</string>
+    <string name="year_e" translatable="false">2031</string>
+    <string name="year_f" translatable="false">2032</string>
+    <string name="year_g" translatable="false">2033</string>
+    <string name="year_h" translatable="false">2034</string>
+    <string name="year_i" translatable="false">2009</string>
+    <string name="year_j" translatable="false">2020</string>
+    <string name="year_k" translatable="false">2011</string>
+    <string name="year_l" translatable="false">2012</string>
+    <string name="year_m" translatable="false">2013</string>
+    <string name="year_n" translatable="false">2014</string>
+    <string name="year_o" translatable="false">2015</string>
+    <string name="year_p" translatable="false">2016</string>
+    <string name="year_q" translatable="false">2017</string>
+    <string name="year_r" translatable="false">2018</string>
+    <string name="year_s" translatable="false">2019</string>
+    <string name="year_t" translatable="false">2020</string>
+    <string name="year_u" translatable="false">2021</string>
+    <string name="year_v" translatable="false">2022</string>
+    <string name="year_w" translatable="false">2023</string>
+    <string name="year_x" translatable="false">2024</string>
+    <string name="year_y" translatable="false">2025</string>
+    <string name="year_z" translatable="false">2026</string>
+</resources>

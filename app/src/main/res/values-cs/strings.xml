@@ -1,0 +1,180 @@
+<resources>
+    <!-- Test -->
+
+    <!-- General -->
+    <string name="check_network">Prosíme zkontrolujte síť</string>
+    <string name="switch_on">Zapnuto</string>
+    <string name="switch_off">Vypnuto</string>
+    <string name="close">Zavřít</string>
+    <string name="unknown">Neznámý</string>
+    <string name="my_device">Moje zařízení</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_new_firmware">Nový firmware</string>
+    <string name="notification_channel_new_update">Aktualizace aplikace</string>
+    <string name="notification_new_update_title">Důležitá aktualizace aplikace CheckFirm</string>
+    <string name="notification_new_update_text">Kritické chyby byly nahlášeny. Prosíme aktualizujte ihned aplikaci v Obchodu Play.</string>
+    <string name="info_catcher_notification_title">%1$s (%2$s) nový firmware nalezen!</string>
+    <string name="info_catcher_notification_text">Zkontrolujte ho nyní.</string>
+
+    <!-- Main -->
+    <string name="main_welcome_search_text">Hledání při spuštění je zakázáno. Doporučuje se zapnout Hledání při spuštění.</string>
+    <string name="main_network_error_title">Chyba sítě</string>
+    <string name="main_network_error_text">Síť není připojena nebo je příliš pomalá.</string>
+    <string name="main_search_error_title">Chyba vyhledávání</string>
+    <string name="main_search_error_text">Vypadá to, že model nebo CSC je nesprávný.</string>
+
+    <!-- Search -->
+    <string name="official_latest">Nejnovější oficiální firmware</string>
+    <string name="test_latest">Nejnovější testovací firmware</string>
+    <string name="model">Model</string>
+    <string name="official_previous">Předchozí oficiální firmware</string>
+    <string name="test_previous">Předchozí testovací firmware</string>
+    <string name="search">Hledat</string>
+    <string name="clipboard">Zkopírováno do schránky.</string>
+    <string name="search_error">Hledání selhalo. Na Samsung serverech nejsou žádná data pro toto zařízení.</string>
+    <string name="searching">Stále probíhá hledání… Prosíme počkejte několik sekund.</string>
+    <string name="changelog">Seznam změn</string>
+    <string name="single_search">Hledání</string>
+    <string name="multi_search">Vícenásobné hledání</string>
+    <string name="multi_search_lists">Hledat %d zařízení níže.</string>
+    <string name="multi_search_limit">Můžete hledat až 4 zařízení</string>
+    <string name="tab_main_1">Oficiální</string>
+    <string name="tab_main_2">Testovací</string>
+
+    <!-- Sherlock -->
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_build">Verze sestavení</string>
+    <string name="sherlock_baseband">Verze zákl. pásma</string>
+    <string name="sherlock_samsung_encrypted_text">Zašifrovaný text nejnovějšího testovacího firmwaru</string>
+    <string name="sherlock_user_encrypted_text">Konvertován zašifrovaný text</string>
+    <string name="sherlock_correct">ZVLÁDL JSI TO!</string>
+    <string name="sherlock_not_correct">Špatně… Zkuste to znovu</string>
+
+    <!-- Bookmark -->
+    <string name="bookmark">Záložka</string>
+    <string name="bookmark_new">Nová záložka</string>
+    <string name="bookmark_edit">Upravit záložku</string>
+    <string name="bookmark_name">Jméno záložky</string>
+    <string name="bookmark_save">Uložit</string>
+    <string name="bookmark_search_error">Zkontrolujte, zda jsou model i CSC kód správně napsány v záložce.</string>
+    <string name="bookmark_order">Pořadí záložek</string>
+    <string name="bookmark_order_by_created_time">Řadit podle vytvořeného času</string>
+    <string name="bookmark_order_by_device">Řadit podle zařízení</string>
+    <string name="bookmark_order_by_name">Řadit podle jména</string>
+    <string name="bookmark_order_by_desc">Seřadit sestupně</string>
+
+    <!-- Help -->
+    <string name="help">Nápověda</string>
+    <string name="help_device_info">Informace o zařízení</string>
+    <string name="help_device_info_description">Model · CSC</string>
+    <string name="help_manual">Příručka</string>
+    <string name="help_manual_description">Informace o firmwaru</string>
+    <string name="firmware_0">Základní informace o firmwaru</string>
+    <string name="firmware_1">Informace o firmwaru se skládají ze 3 informací. Verze sestavení, Verze CSC a verze základního pásma.\n\nPředpokládejme, že výsledek hledání je \nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nPrvní z nich (A720SKSU3BRK1) je verze sestavení,\ndruhá (A720SSKC3BRK1) je verze CSC,\na třetí (A720NKOU3BRK1) je verze základního pásma.</string>
+    <string name="firmware_2">Co zjistíme z verze firmwaru?</string>
+    <string name="firmware_3">Vše, co nás zajíma je verze sestavení. Můžeme analyzovat firmware právě pomocí verze sestavení.\nZde je příklad verze sestavení:</string>
+    <string name="firmware_10">Červený text</string>
+    <string name="firmware_11">Červený text (např. U3) znamená verzi bootloaderu.\n\nKvůli bezpečnostní politice společnosti Samsung se nemůžete vrátit z vyšší verze bootloaderu firmwaru na nižší verzi.</string>
+    <string name="firmware_12">Žlutý text</string>
+    <string name="firmware_13">Žlutý text (např. B) znamená hlavní verzi firmwaru.\nPokud je žlutý text aktualizován, znamená to, že verze OS Android nebo One UI bude aktualizována.\n\nA znamená první hlavní verzi.\nB znamená, že byl vydán jeden velký update.\nC znamená, že byly vydány dva velké updaty.\n.\n.\n.\nZ je beta firmware.</string>
+    <string name="firmware_14">Zelený text</string>
+    <string name="firmware_15">Zelený text (např. R) znamená rok, kdy byl firmware vytvořen.\n\nR je 2018,\nS je 2019,\nT je 2020, atd.</string>
+    <string name="firmware_16">Modrý text</string>
+    <string name="firmware_17">Modrý text (např. K) znamená měsíc, kdy byl firmware vytvořen.\n\nA je Leden,\nB je Únor,\n.\n.\n.\nL je Prosinec.</string>
+    <string name="firmware_18">Fialový text</string>
+    <string name="firmware_19">Fialový text (např. 1) znamená, kolikrát byl firmware vytvořen (Znamená to malou verzi).\n\n1 znamená, že byl firmware vytvořen jednou.\n.\n.\n.\n9 znamená, že byl firmware vytvořen 9krát.\nA znamená, že byl firmware vytvořen 10krát.\n.\n.\n.\nF znamená, že byl firmware vytvořen 16krát.</string>
+    <string name="firmware_20">Co znamenají .DM &amp; .BDM?</string>
+    <string name="firmware_21">Někdy se objeví .DM v informacích o testovacím firmwaru. DM (Developer Management) znamená, že Samsung testuje tento firmware.\n\nVzáčně se také objeví .BDM v informacích o testovacím firmwaru. BDM (Broadband Developer Management) znamená, že mobilní operátor testuje nebo kontroluje firmware.</string>
+    <string name="firmware_22">Kdy bude testovací firmware vydán?</string>
+    <string name="firmware_23">To nemůžeme přesně určit, ale testovací firmware bude vydán brzy, pokud se verze sestavení dále nemění. Většinou to trvá 3–5 týdnů.</string>
+
+    <!-- About -->
+    <string name="about_app_information">Informace o aplikaci</string>
+    <string name="about_version">Verze</string>
+    <string name="about_latest">Nejnovější verze je již nainstalována.</string>
+    <string name="about_update">Aktualizace</string>
+    <string name="license">Licence</string>
+    <string name="legal">Právní informace</string>
+    <string name="legal_text">Informace o oficiálním firmwaru pocházejí z https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml.\n\nInformace o testovacím firmwaru pocházejí z https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml.\n\nToto nejsou oficiální cesty, kterými společnost Samsung Electronics předává informace o firmwaru zákazníkům. Jakékoliv použití těchto informací je na vlastní nebezpečí.</string>
+    <string name="contributor">Přispěvatelé</string>
+    <string name="contributor_application">Aplikace</string>
+    <string name="contributor_designer">Navrhlo</string>
+    <string name="contributor_developer">Vytvořilo</string>
+    <string name="contributor_source">Zdroj</string>
+    <string name="contributor_localization">Lokalizace</string>
+    <string name="contributor_language">Jazyk</string>
+    <string name="contributor_russian">Ruština</string>
+    <string name="contributor_chinese">Čínština</string>
+    <string name="contributor_czech">Čeština</string>
+    <string name="contributor_translator">Díky</string>
+
+    <!-- Settings -->
+    <string name="settings_theme">Motiv</string>
+    <string name="settings_theme_description">Nastavit motiv aplikace.</string>
+    <string name="settings_theme_light">Světlý</string>
+    <string name="settings_theme_dark">Tmavý</string>
+    <string name="settings_theme_system">Motiv zařízení</string>
+    <string name="settings_about">O aplikaci CheckFirm</string>
+    <string name="settings">Nastavení</string>
+    <string name="settings_firebase">Opravte chybu vyhledávání</string>
+    <string name="settings_firebase_description">Zabraňuje nekonečnému načítání v Číně. Aktivujte toto nastavení pokud jste v Číně.</string>
+    <string name="settings_quick_search_bar">Rychlá lišta vyhledávání</string>
+    <string name="settings_quick_search_bar_description">Zobrazit záložky na hlavní obrazovce.</string>
+    <string name="welcome_search_description">Vyhledá firmware při spuštění aplikace.</string>
+    <string name="info_catcher_description">Chytač informací vám pošle oznámení, když je firmware aktualizován.</string>
+
+    <!-- Welcome Search -->
+    <string name="welcome_search">Hledání při spuštění</string>
+    <string name="welcome_search_text">Vyhledá firmware při spuštění aplikace.\nProsíme vyplňte zařízení, které chcete vyhledat při spuštění.</string>
+
+    <!-- Smart Search -->
+    <string name="smart_search">Inteligentní hledání</string>
+    <string name="smart_search_date">Datum objevení</string>
+    <string name="smart_search_downgrade_possible">Downgrade možný</string>
+    <string name="smart_search_downgrade_impossible">Downgrade nemožný</string>
+    <string name="smart_search_type_major">Velký update</string>
+    <string name="smart_search_type_minor">Malý update</string>
+    <string name="smart_search_type_rollback">Návrat zpět</string>
+    <string name="smart_search_bootloader">Verze Bootloaderu</string>
+    <string name="smart_search_major_version">Hlavní verze</string>
+    <string name="smart_search_build_date">Datum sestavení</string>
+    <string name="smart_search_minor_version">Malá verze</string>
+    <string name="smart_search_date_format">%2$s, %1$s</string>
+    <string name="january">Leden</string>
+    <string name="february">Únor</string>
+    <string name="march">Březen</string>
+    <string name="april">Duben</string>
+    <string name="may">Květen</string>
+    <string name="june">Červen</string>
+    <string name="july">Červenec</string>
+    <string name="august">Srpen</string>
+    <string name="september">Září</string>
+    <string name="october">Říjen</string>
+    <string name="november">Listopad</string>
+    <string name="december">Prosinec</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher">Chytač informací</string>
+    <string name="info_catcher_text">Chytač informací vám pošle oznámení, když je firmware aktualizován.\nProsíme vyplňte zařízení, pro které chcete informace zachytit.</string>
+    <string name="info_catcher_error">Prosíme zkontrolujte, zda jste vyplnili model a CSC kód správně.</string>
+    <string name="info_catcher_insert">Přidat</string>
+
+    <!-- Inquiry -->
+    <string name="inquiry">Zpětná vazba</string>
+    <string name="inquiry_new">Nové nápady</string>
+    <string name="inquiry_bug">Nahlášení chyb</string>
+    <string name="inquiry_question">Otázky</string>
+    <string name="inquiry_send">Odeslat</string>
+
+    <!-- Suggestion -->
+    <string name="suggestion">Návrh</string>
+    <string name="suggestion_title">Hledáte další funkce?</string>
+    <string name="suggestion_bookmark_my_device">Přidat zařízení k záložce</string>
+    <string name="suggestion_enable_welcome_search">Povolit Hledání při spuštění</string>
+    <string name="suggestion_check_my_device_info">Zkontrolujte informace o mém zařízení</string>
+    <string name="suggestion_wifi">Zapněte Wi-Fi</string>
+    <string name="suggestion_data">Zapněte mobilní data</string>
+
+    <!-- Beta -->
+</resources>
