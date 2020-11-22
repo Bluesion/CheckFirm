@@ -128,9 +128,9 @@ class TransparentActivity : AppCompatActivity() {
                 }
 
                 if (officialFirmware.isEmpty()) {
-                    CheckFirm.searchResult[current].officialPreviousFirmware = hashMapOf(error to error)
+                    CheckFirm.searchResult[current].officialPreviousFirmware = sortedMapOf(error to error)
                 } else {
-                    CheckFirm.searchResult[current].officialPreviousFirmware = officialFirmware
+                    CheckFirm.searchResult[current].officialPreviousFirmware = officialFirmware.toSortedMap(reverseOrder())
                 }
 
                 if (latestTest.isBlank()) {
@@ -145,9 +145,9 @@ class TransparentActivity : AppCompatActivity() {
                 }
 
                 if (testFirmware.isEmpty()) {
-                    CheckFirm.searchResult[current].testPreviousFirmware = hashMapOf(error to error)
+                    CheckFirm.searchResult[current].testPreviousFirmware = sortedMapOf(error to error)
                 } else {
-                    CheckFirm.searchResult[current].testPreviousFirmware = testFirmware
+                    CheckFirm.searchResult[current].testPreviousFirmware = testFirmware.toSortedMap(reverseOrder())
                 }
                 intent.putExtra("total", total - 1)
 

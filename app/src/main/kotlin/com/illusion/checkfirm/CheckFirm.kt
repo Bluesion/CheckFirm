@@ -17,10 +17,10 @@ class CheckFirm : Application() {
         var searchModel = arrayOf("", "", "", "")
         var searchCSC = arrayOf("", "", "", "")
         var searchResult = arrayOf(
-            SearchResultItem("", "", hashMapOf(), "", "", hashMapOf(), "", "", "", "", "", ""),
-            SearchResultItem("", "", hashMapOf(), "", "", hashMapOf(), "", "", "", "", "", ""),
-            SearchResultItem("", "", hashMapOf(), "", "", hashMapOf(), "", "", "", "", "", ""),
-            SearchResultItem("", "", hashMapOf(), "", "", hashMapOf(), "", "", "", "", "", "")
+            SearchResultItem("", "", sortedMapOf(), "", "", sortedMapOf(), "", "", "", "", "", ""),
+            SearchResultItem("", "", sortedMapOf(), "", "", sortedMapOf(), "", "", "", "", "", ""),
+            SearchResultItem("", "", sortedMapOf(), "", "", sortedMapOf(), "", "", "", "", "", ""),
+            SearchResultItem("", "", sortedMapOf(), "", "", sortedMapOf(), "", "", "", "", "", "")
         )
     }
 

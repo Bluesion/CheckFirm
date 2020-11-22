@@ -34,7 +34,7 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
             binding.previousTitle.text = getString(R.string.official_previous)
 
             val builder = StringBuilder()
-            CheckFirm.searchResult[i].officialPreviousFirmware.toSortedMap(reverseOrder()).values.forEach { firmware ->
+            CheckFirm.searchResult[i].officialPreviousFirmware.values.forEach { firmware ->
                 builder.append(firmware).append("\n")
             }
             builder.deleteAt(builder.lastIndex)
@@ -89,7 +89,7 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
             binding.previousTitle.text = getString(R.string.test_previous)
 
             val builder = StringBuilder()
-            CheckFirm.searchResult[i].testPreviousFirmware.toSortedMap(reverseOrder()).values.forEach { firmware ->
+            CheckFirm.searchResult[i].testPreviousFirmware.values.forEach { firmware ->
                 builder.append(firmware).append("\n")
             }
             builder.deleteAt(builder.lastIndex)
