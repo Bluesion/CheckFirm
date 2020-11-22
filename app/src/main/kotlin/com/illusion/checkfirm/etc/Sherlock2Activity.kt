@@ -13,13 +13,14 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.textfield.TextInputEditText
 import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.databinding.ActivitySherlock2Binding
+import com.illusion.checkfirm.databinding.ActivitySherlockBinding
+import com.illusion.checkfirm.dialogs.Sherlock2Dialog
 import com.illusion.checkfirm.utils.Tools
 import java.util.*
 
 class Sherlock2Activity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySherlock2Binding
+    private lateinit var binding: ActivitySherlockBinding
     private var buildPrefix = ""
     private var cscPrefix = ""
     private var basebandPrefix = ""
@@ -33,7 +34,7 @@ class Sherlock2Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySherlock2Binding.inflate(layoutInflater)
+        binding = ActivitySherlockBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initToolbar()
@@ -111,6 +112,11 @@ class Sherlock2Activity : AppCompatActivity() {
 
         compare()
 
+        binding.help.setOnClickListener {
+            val bottomSheetFragment = Sherlock2Dialog(i, Tools.getMD5Hash(userFirmware)!!)
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+        }
+
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         binding.copy.setOnClickListener {
             val clip = ClipData.newPlainText("checkfirmSherlock", userFirmware)
@@ -150,6 +156,7 @@ class Sherlock2Activity : AppCompatActivity() {
                 binding.status.text = getString(R.string.sherlock_in)
                 binding.status.setTextColor(resources.getColor(R.color.green, theme))
                 binding.userText.text = userFirmwareWithDM
+                userFirmware = userFirmwareWithDM
             }
             else -> {
                 binding.status.text = getString(R.string.sherlock_not_in)
