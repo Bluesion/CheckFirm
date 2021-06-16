@@ -1,5 +1,0 @@
-<resources>
-    <plurals name="bookmark_subtitle">
-        <item quantity="other">%d個書籤</item>
-    </plurals>
-</resources>

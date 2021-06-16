@@ -1,13 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
-        <item name="colorAccent">@color/blue</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_primary</item>
+        <item name="colorControlActivated">@color/color_control_activated</item>
         <item name="materialCardViewStyle">@style/CardTheme</item>
         <item name="switchStyle">@style/SwitchTheme</item>
+        <item name="radioButtonStyle">@style/RadioButtonTheme</item>
         <item name="bottomSheetDialogTheme">@style/BottomDialog</item>
-        <item name="textAppearanceHeadline6">@style/CardViewTitle</item>
         <item name="toolbarStyle">@style/Toolbar</item>
         <item name="android:windowBackground">@color/background_color</item>
         <item name="android:statusBarColor">@color/background_color</item>

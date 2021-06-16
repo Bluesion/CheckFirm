@@ -1,21 +1,17 @@
 <resources>
     <plurals name="bookmark_subtitle">
-        <item quantity="one">%d favorito</item>
-        <item quantity="other">%d favoritos</item>
+        <item quantity="other">%d個書籤</item>
     </plurals>
 
     <plurals name="category_subtitle">
-        <item quantity="one">%d category</item>
         <item quantity="other">%d categories</item>
     </plurals>
 
     <plurals name="category_format">
-        <item quantity="one">%d other device</item>
         <item quantity="other">%d other devices</item>
     </plurals>
 
     <plurals name="category_devices">
-        <item quantity="one">%d device</item>
         <item quantity="other">%d devices</item>
     </plurals>
 </resources>

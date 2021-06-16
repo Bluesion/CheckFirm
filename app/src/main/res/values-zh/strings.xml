@@ -16,6 +16,13 @@
     <string name="notification_new_update_text">發現了嚴重的錯誤。請立即前往Play商店進行更新。</string>
     <string name="info_catcher_notification_title">發現了新固件: %1$s (%2$s)</string>
     <string name="info_catcher_notification_text">請確認。</string>
+    <string name="sherlock_script_notification_name">Sherlock script</string>
+    <string name="sherlock_script_notification_description">Show notification for Sherlock script.</string>
+    <string name="sherlock_script_notification_title">Sherlock script</string>
+    <string name="sherlock_script_notification_text_ongoing">Sherlock script running…</string>
+    <string name="sherlock_script_notification_text_finished">Sherlock script finished.</string>
+    <string name="notification_channel_name_sherlock_script">Sherlock script</string>
+    <string name="notification_channel_description_sherlock_script">Sherlock script helps you find latest test firmware even it is encrypted.</string>
 
     <!-- Main -->
     <string name="main_welcome_search_text">歡迎搜尋已禁用。建議打開歡迎搜尋。</string>
@@ -27,6 +34,8 @@
     <!-- Search -->
     <string name="official_latest">最新的官方固件</string>
     <string name="test_latest">最新測試固件</string>
+    <string name="test_newfound">Newfound test firmware</string>
+    <string name="beta_firmware">Beta firmware</string>
     <string name="model">機型</string>
     <string name="official_previous">以前的官方固件</string>
     <string name="test_previous">先前的測試固件</string>
@@ -35,12 +44,12 @@
     <string name="search_error">搜索失敗。 請檢查您是否正確編寫了型号和CSC代碼。</string>
     <string name="searching">仍在搜尋中…請稍等片刻</string>
     <string name="changelog">變更日誌</string>
-    <string name="single_search">單次搜尋</string>
-    <string name="multi_search">多重搜尋</string>
     <string name="multi_search_lists">搜索%d個手機。</string>
     <string name="multi_search_limit">您最多可以搜索4個手機</string>
     <string name="tab_main_1">官方</string>
     <string name="tab_main_2">測試</string>
+    <string name="search_history">Search history</string>
+    <string name="search_list_empty">Search list is empty.</string>
 
     <!-- Sherlock -->
     <string name="sherlock">夏洛克</string>
@@ -50,6 +59,23 @@
     <string name="sherlock_user_encrypted_text">轉換後的加密文本</string>
     <string name="sherlock_correct">相同</string>
     <string name="sherlock_not_correct">不一樣</string>
+    <string name="sherlock_in">It is in previous test firmware.</string>
+    <string name="sherlock_not_in">It is not in previous test firmware.</string>
+    <string name="sherlock_original">Original</string>
+    <string name="sherlock_watson_format">Decrypted by %s</string>
+    <string name="sherlock_script">Sherlock script</string>
+    <string name="sherlock_script_start_value">Start</string>
+    <string name="sherlock_script_end_value">End</string>
+    <string name="sherlock_script_start">Start script</string>
+    <string name="sherlock_script_no_error">Script is running…</string>
+    <string name="sherlock_script_error_1">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_2">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_3">Major version: start value is larger than end value.</string>
+    <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
+    <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
+    <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
+    <string name="sherlock_script_end">Script ended. Found: %s</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">書籤</string>
@@ -66,6 +92,8 @@
 
     <!-- Help -->
     <string name="help">幫助</string>
+    <string name="help_youtube">How to video on Youtube</string>
+    <string name="help_youtube_description">Video by Saqlin mirza</string>
     <string name="help_device_info">設備信息</string>
     <string name="help_device_info_description">機型 · CSC</string>
     <string name="help_manual">手冊</string>
@@ -107,9 +135,13 @@
     <string name="contributor_russian">俄語</string>
     <string name="contributor_chinese">中文</string>
     <string name="contributor_czech">捷克文</string>
+    <string name="contributor_portuguese">Portuguese</string>
+    <string name="contributor_romanian">Romanian</string>
+    <string name="contributor_sinhala">Sinhala</string>
     <string name="contributor_translator">譯者</string>
 
     <!-- Settings -->
+    <string name="settings_profile_user_name">User name</string>
     <string name="settings_theme">主題背景</string>
     <string name="settings_theme_description">設置主題背景。</string>
     <string name="settings_theme_light">淺色</string>
@@ -127,11 +159,12 @@
     <!-- Welcome Search -->
     <string name="welcome_search">歡迎搜尋</string>
     <string name="welcome_search_text">啟動時搜索固件。\n請輸入要在啟動時搜索的設備。</string>
+    <string name="welcome_search_list_empty">Click + button to add a device.</string>
 
     <!-- Smart Search -->
     <string name="smart_search">智能搜索</string>
     <string name="smart_search_type_minor">小更新</string>
-    <string name="smart_search_type_major">重大更新</string>
+    <string name="smart_search_type_major">One UI 更新</string>
     <string name="smart_search_type_rollback">回滾</string>
     <string name="smart_search_date">首次發現日期</string>
     <string name="smart_search_bootloader">引導程序版本</string>
@@ -141,6 +174,9 @@
     <string name="smart_search_build_date">建立日期</string>
     <string name="smart_search_minor_version">次要版本</string>
     <string name="smart_search_date_format">%1$s年 %2$s</string>
+    <string name="smart_search_discoverer">First discoverer</string>
+    <string name="smart_search_android_version">Android version</string>
+    <string name="smart_search_update_type">Update type</string>
     <string name="january">1月</string>
     <string name="february">2月</string>
     <string name="march">3月</string>
@@ -162,6 +198,7 @@
 
     <!-- Inquiry -->
     <string name="inquiry">查詢</string>
+    <string name="inquiry_type">Type</string>
     <string name="inquiry_new">新的主意</string>
     <string name="inquiry_bug">錯誤報告</string>
     <string name="inquiry_question">問題</string>
@@ -176,6 +213,15 @@
     <string name="suggestion_wifi">開啟Wi-Fi</string>
     <string name="suggestion_data">開啟行動數據</string>
 
+    <!-- Category -->
+    <string name="category">Category</string>
+    <string name="category_and">&#160;and&#160;</string>
+    <string name="category_all">All</string>
+    <string name="category_edit_name">Category name</string>
+    <string name="category_edit_devices_title">Devices</string>
+    <string name="category_edit_name_error_all">Category name cannot be All.</string>
+    <string name="category_edit_name_error_empty">Category name should not be empty.</string>
+    <string name="category_edit_device_list_error_empty">Device list should not be empty.</string>
 
     <!-- Beta -->
 </resources>

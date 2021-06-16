@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="color_primary">@color/blue</color>
+    <color name="color_primary_dark">#0072de</color>
+    <color name="color_control_activated">#3e91ff</color>
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="background_color">#f2f2f2</color>
     <color name="red">#f64141</color>
     <color name="yellow">#FEC006</color>
     <color name="green">#15b76d</color>
-    <color name="blue">#2979FF</color>
+    <color name="blue">#0381fe</color>
     <color name="purple">#6E6ED1</color>
+    <color name="switch_card_background_off">#fafafa</color>
+    <color name="switch_card_background_on">#ffaad2fa</color>
+    <color name="switch_text_color_on">#ff0072de</color>
+    <color name="switch_track_off_stroke_color">#ffa4a4a4</color>
+    <color name="switch_track_on_color">#ff0381fe</color>
     <color name="switch_thumb_off_color">#fffafafa</color>
-    <color name="switch_thumb_off_disabled_color">#fffafafa</color>
-    <color name="switch_thumb_off_disabled_stroke_color">#ffcbcbcb</color>
     <color name="switch_thumb_off_stroke_color">#ffa1a1a1</color>
     <color name="switch_thumb_on_color">#fffafafa</color>
-    <color name="switch_thumb_on_disabled_color">#fffafafa</color>
-    <color name="switch_track_off_color">#00ffffff</color>
-    <color name="switch_track_off_disabled_color">#00ffffff</color>
-    <color name="switch_track_off_disabled_stroke_color">#668f8f8f</color>
-    <color name="switch_track_off_stroke_color">#cc8f8f8f</color>
-    <color name="switch_track_on_disabled_color">#668f8f8f</color>
-    <color name="switch_track_on_disabled_stroke_color">#66ffffff</color>
-    <color name="switch_card_background_on">#70affc</color>
-    <color name="switch_card_background_off">#fafafa</color>
+    <color name="switch_thumb_on_stroke_color">#0381fe</color>
     <color name="button_ripple_color">#e1e1e1</color>
     <color name="tip_card_background_color">#e3eaf0</color>
-    <color name="tip_title_color">#0074d4</color>
-    <color name="tip_text_color">#2e2e2e</color>
+    <color name="tip_title_color">#2e2e2e</color>
+    <color name="tip_text_color">#0074d4</color>
 </resources>

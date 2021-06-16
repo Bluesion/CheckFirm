@@ -1,6 +1,6 @@
 <resources>
     <!-- Test -->
-    <string name="settings_profile_user_name">유저 이름</string>
+
 
     <!-- General -->
     <string name="check_network">네트워크를 확인해주세요.</string>
@@ -17,6 +17,13 @@
     <string name="notification_new_update_text">현재 치명적인 버그가 보고되었습니다. 지금 Play 스토어에서 업데이트 해주세요.</string>
     <string name="info_catcher_notification_title">%1$s (%2$s)의 새로운 펌웨어가 발견되었어요!</string>
     <string name="info_catcher_notification_text">지금 바로 확인해보세요.</string>
+    <string name="notification_channel_name_sherlock_script">셜록 스크립트</string>
+    <string name="notification_channel_description_sherlock_script">셜록 스크립트는 암호화된 펌웨어를 읽어 최신 테스트 펌웨어를 찾도록 도와줍니다.</string>
+    <string name="sherlock_script_notification_name">셜록 스크립트</string>
+    <string name="sherlock_script_notification_description">셜록 스크립트의 알림을 표시합니다.</string>
+    <string name="sherlock_script_notification_title">셜록 스크립트</string>
+    <string name="sherlock_script_notification_text_ongoing">스크립트 실행 중…</string>
+    <string name="sherlock_script_notification_text_finished">스크립트가 종료되었습니다.</string>
 
     <!-- Main -->
     <string name="main_welcome_search_text">자동 검색 기능이 비활성화 되어 있습니다. 편리한 자동 검색 기능을 사용해보세요.</string>
@@ -28,20 +35,22 @@
     <!-- Search -->
     <string name="official_latest">최신 공식 펌웨어</string>
     <string name="test_latest">최신 테스트 펌웨어</string>
+    <string name="test_newfound">새로 발견된 테스트 펌웨어</string>
     <string name="model">모델명</string>
     <string name="official_previous">이전 공식 펌웨어</string>
     <string name="test_previous">이전 테스트 펌웨어</string>
+    <string name="beta_firmware">베타 펌웨어</string>
     <string name="search">검색</string>
     <string name="clipboard">클립보드에 복사했습니다.</string>
     <string name="search_error">검색에 실패하였습니다. 해당 디바이스의 정보가 삼성 서버에 존재하지 않습니다.</string>
     <string name="searching">검색 중입니다. 잠시만 기다려주세요.</string>
     <string name="changelog">업데이트 내역</string>
-    <string name="single_search">일반 검색</string>
-    <string name="multi_search">다중 검색</string>
     <string name="multi_search_lists">아래 %d개의 디바이스를 검색합니다.</string>
     <string name="multi_search_limit">최대 4개까지 검색이 가능합니다.</string>
     <string name="tab_main_1">공식 펌웨어</string>
     <string name="tab_main_2">테스트 펌웨어</string>
+    <string name="search_history">검색 기록</string>
+    <string name="search_list_empty">검색할 디바이스를 입력해주세요.</string>
 
     <!-- Sherlock -->
     <string name="sherlock">셜록</string>
@@ -55,6 +64,19 @@
     <string name="sherlock_watson_format">복호화 by %s</string>
     <string name="sherlock_in">이전 테스트 펌웨어 목록에 존재합니다.</string>
     <string name="sherlock_not_in">이전 테스트 펌웨어 목록에 존재하지 않습니다.</string>
+    <string name="sherlock_script">셜록 스크립트</string>
+    <string name="sherlock_script_start_value">시작값</string>
+    <string name="sherlock_script_end_value">종료값</string>
+    <string name="sherlock_script_start">스크립트 실행</string>
+    <string name="sherlock_script_no_error">스크립트 실행 중…</string>
+    <string name="sherlock_script_error_1">부트로더 버전의 시작 값이 종료 값보다 큽니다.</string>
+    <string name="sherlock_script_error_2">부트로더 버전의 시작 값이 종료 값보다 큽니다.</string>
+    <string name="sherlock_script_error_3">메이저 버전의 시작 값이 종료 값보다 큽니다.</string>
+    <string name="sherlock_script_error_4">펌웨어 날짜(년)의 시작 값이 종료 값보다 큽니다.</string>
+    <string name="sherlock_script_error_5">펌웨어 날짜(월)의 시작 값이 종료 값보다 큽니다.</string>
+    <string name="sherlock_script_error_6">마이너 버전의 시작 값이 종료 값보다 큽니다.</string>
+    <string name="sherlock_script_end">스크립트 종료됨. 찾은 값: %s</string>
+    <string name="sherlock_upload_server">발견한 정보가 서버에 등록되었습니다.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">북마크</string>
@@ -68,6 +90,16 @@
     <string name="bookmark_order_by_device">디바이스 순서대로</string>
     <string name="bookmark_order_by_name">이름 순서대로</string>
     <string name="bookmark_order_by_desc">역순으로 정렬</string>
+
+    <!-- Category -->
+    <string name="category">카테고리</string>
+    <string name="category_and">&#160;외&#160;</string>
+    <string name="category_all">전체</string>
+    <string name="category_edit_name">카테고리 이름</string>
+    <string name="category_edit_devices_title">디바이스</string>
+    <string name="category_edit_name_error_all">카테고리 이름은 All이 될 수 없어요.</string>
+    <string name="category_edit_name_error_empty">카테고리 이름을 입력해주세요.</string>
+    <string name="category_edit_device_list_error_empty">카테고리에 추가할 디바이스를 선택해주세요.</string>
 
     <!-- Help -->
     <string name="help">도움말</string>
@@ -113,6 +145,7 @@
     <string name="contributor_czech">체코어</string>
     <string name="contributor_portuguese">포르투갈어</string>
     <string name="contributor_romanian">로마어</string>
+    <string name="contributor_sinhala">싱할라어</string>
     <string name="contributor_translator">번역자</string>
     <string name="license">라이선스</string>
     <string name="legal">법적 고지</string>
@@ -121,8 +154,8 @@
     <!-- Settings -->
     <string name="settings_theme">테마</string>
     <string name="settings_theme_description">앱 테마를 설정합니다.</string>
-    <string name="settings_theme_light">밝은 테마</string>
-    <string name="settings_theme_dark">어두운 테마</string>
+    <string name="settings_theme_light">라이트</string>
+    <string name="settings_theme_dark">다크</string>
     <string name="settings_theme_system">시스템 테마</string>
     <string name="settings_about">CheckFirm 정보</string>
     <string name="settings">설정</string>
@@ -132,17 +165,19 @@
     <string name="settings_quick_search_bar_description">메인 화면에 북마크를 표시합니다.</string>
     <string name="welcome_search_description">앱 실행 시 지정된 디바이스의 펌웨어 정보를 검색합니다.</string>
     <string name="info_catcher_description">사용자가 지정한 디바이스의 펌웨어가 업데이트 되었을 때 알림을 표시합니다.</string>
+    <string name="settings_profile_user_name">사용자 이름</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">자동 검색</string>
     <string name="welcome_search_text">앱 실행 시 지정된 디바이스의 펌웨어 정보를 검색합니다.\n자동 검색을 원하는 디바이스 정보를 아래에 입력해주세요.</string>
+    <string name="welcome_search_list_empty">+ 버튼을 눌러 디바이스를 추가하세요.</string>
 
     <!-- Smart Search -->
     <string name="smart_search">스마트 서치</string>
     <string name="smart_search_date">최초 발견일</string>
     <string name="smart_search_downgrade_possible">다운그레이드 가능</string>
     <string name="smart_search_downgrade_impossible">다운그레이드 불가능</string>
-    <string name="smart_search_type_major">메이저 업데이트</string>
+    <string name="smart_search_type_major">One UI 업데이트</string>
     <string name="smart_search_type_minor">마이너 업데이트</string>
     <string name="smart_search_type_rollback">롤백 상태</string>
     <string name="smart_search_bootloader">부트로더 버전</string>
@@ -152,6 +187,7 @@
     <string name="smart_search_date_format">%1$s년 %2$s</string>
     <string name="smart_search_discoverer">최초 발견자</string>
     <string name="smart_search_android_version">안드로이드 버전</string>
+    <string name="smart_search_update_type">업데이트 종류</string>
     <string name="january">1월</string>
     <string name="february">2월</string>
     <string name="march">3월</string>
@@ -173,13 +209,10 @@
 
     <!-- Inquiry -->
     <string name="inquiry">문의하기</string>
-    <string name="inquiry_note_title">알림</string>
-    <string name="inquiry_note_text">답변에 최대 일주일이 걸릴 수 있습니다.\n앱과 관련한 내용이 아니면 답변을 드리지 않습니다.\n가급적이면 이메일 제목과 내용의 기기 정보는 변경하지 말아주세요.</string>
     <string name="inquiry_type">유형</string>
     <string name="inquiry_new">새로운 아이디어</string>
     <string name="inquiry_bug">오류 제보</string>
     <string name="inquiry_question">질문</string>
-    <string name="inquiry_detail">내용</string>
     <string name="inquiry_send">전송</string>
 
     <!-- Suggestion -->

@@ -3,7 +3,9 @@
     <string name="csc" translatable="false">CSC</string>
     <string name="default_string" translatable="false">SM-</string>
     <string name="default_symbol" translatable="false">&#160;·&#160;</string>
-    <string name="device_format" translatable="false">%1$s (%2$s)</string>
+    <string name="device_format_1" translatable="false">%1$s (%2$s)</string>
+    <string name="device_format_2" translatable="false">%1$s · %2$s</string>
+    <string name="category_device_format" translatable="false">%1$s (%2$s / %3$s)</string>
     <string name="firmware_4" translatable="false">A720SKS</string>
     <string name="firmware_5" translatable="false">U3</string>
     <string name="firmware_6" translatable="false">B</string>
@@ -18,6 +20,7 @@
     <string name="contributor_czech_translator" translatable="false">Ondřej Brokl</string>
     <string name="contributor_portuguese_translator" translatable="false">Yan Varão</string>
     <string name="contributor_romanian_translator" translatable="false">George Christian Cotea</string>
+    <string name="contributor_sinhala_translator" translatable="false">Thusiru Kodithuwakku</string>
     <string name="license_library" translatable="false">Library</string>
     <string name="license_copyright" translatable="false">Copyright (C)</string>
     <string name="license_apache" translatable="false">Apache 2.0</string>
@@ -28,10 +31,10 @@
     <string name="license_google" translatable="false">Google</string>
     <string name="license_jsoup" translatable="false">Jsoup</string>
     <string name="license_jonathan_hedley" translatable="false">Jonathan Hedley</string>
-    <string name="license_sponge_castle" translatable="false">Sponge Castle</string>
-    <string name="license_rtyley" translatable="false">rtyley</string>
     <string name="sherlock_dm_format" translatable="false">%s.DM</string>
     <string name="smart_search_android_version_format" translatable="false">Android %s</string>
+    <string name="category_summary" translatable="false">%1$s</string>
+    <string name="sherlock_script_format" translatable="false">%1$s%2$s%3$s%4$s</string>
     <string name="year_a" translatable="false">2027</string>
     <string name="year_b" translatable="false">2028</string>
     <string name="year_c" translatable="false">2029</string>

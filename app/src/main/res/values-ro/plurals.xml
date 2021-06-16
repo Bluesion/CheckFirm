@@ -1,11 +1,25 @@
 <resources>
     <plurals name="bookmark_subtitle">
         <item quantity="one">%d bookmark</item>
+        <item quantity="few">%d bookmarkuri</item>
         <item quantity="other">%d bookmarkuri</item>
     </plurals>
 
-    <plurals name="saved_devices">
-        <item quantity="one">Dispozitiv salvat</item>
-        <item quantity="other">Dispozitiv salvate</item>
+    <plurals name="category_subtitle">
+        <item quantity="one">%d category</item>
+        <item quantity="few">%d categories</item>
+        <item quantity="other">%d categories</item>
+    </plurals>
+
+    <plurals name="category_format">
+        <item quantity="one">%d other device</item>
+        <item quantity="few">%d other devices</item>
+        <item quantity="other">%d other devices</item>
+    </plurals>
+
+    <plurals name="category_devices">
+        <item quantity="one">%d device</item>
+        <item quantity="few">%d devices</item>
+        <item quantity="other">%d devices</item>
     </plurals>
 </resources>

@@ -16,6 +16,13 @@
     <string name="notification_new_update_text">S-au descoperit buguri critice, vă rog updatați aplicația din Magazin Play.</string>
     <string name="info_catcher_notification_title">%1$s (%2$s) firmware-uri noi au fost gasite!</string>
     <string name="info_catcher_notification_text">Vezi despre ce e vorba.</string>
+    <string name="sherlock_script_notification_name">Sherlock script</string>
+    <string name="sherlock_script_notification_description">Show notification for Sherlock script.</string>
+    <string name="sherlock_script_notification_title">Sherlock script</string>
+    <string name="sherlock_script_notification_text_ongoing">Sherlock script running…</string>
+    <string name="sherlock_script_notification_text_finished">Sherlock script finished.</string>
+    <string name="notification_channel_name_sherlock_script">Sherlock script</string>
+    <string name="notification_channel_description_sherlock_script">Sherlock script helps you find latest test firmware even it is encrypted.</string>
 
     <!-- Main -->
     <string name="main_welcome_search_text">Welcome Search e dezactivat.E recomandat să pornești Welcome Search.</string>
@@ -28,6 +35,8 @@
     <string name="search">Caută</string>
     <string name="official_latest">Ultimul Firmware Oficial</string>
     <string name="test_latest">Ultimul Firmware Test</string>
+    <string name="test_newfound">Newfound test firmware</string>
+    <string name="beta_firmware">Beta firmware</string>
     <string name="model">Model</string>
     <string name="official_previous"> Firmware Oficial Anterior</string>
     <string name="test_previous">Firmware în teste Anterior</string>
@@ -35,12 +44,12 @@
     <string name="search_error">Căutarea a eșuat. Nu am găsit date in serverele samsung despre acest dispozitiv.</string>
     <string name="searching">Încă caut… mai așteaptă</string>
     <string name="changelog">Changelog</string>
-    <string name="single_search">Căutare simplă</string>
-    <string name="multi_search">Căutare multiplă</string>
     <string name="multi_search_lists">Caută prin %d dispozitive mai jos.</string>
     <string name="multi_search_limit">Poți căuta până la 4 dispozitive</string>
     <string name="tab_main_1">Oficial</string>
     <string name="tab_main_2">În teste</string>
+    <string name="search_history">Search history</string>
+    <string name="search_list_empty">Search list is empty.</string>
 
     <!-- Sherlock -->
     <string name="sherlock">Sherlock</string>
@@ -52,6 +61,21 @@
     <string name="sherlock_not_correct">Of… Nu e ăsta.</string>
     <string name="sherlock_original">Original</string>
     <string name="sherlock_watson_format">Decriptat de %s</string>
+    <string name="sherlock_in">It is in previous test firmware.</string>
+    <string name="sherlock_not_in">It is not in previous test firmware.</string>
+    <string name="sherlock_script">Sherlock script</string>
+    <string name="sherlock_script_start_value">Start</string>
+    <string name="sherlock_script_end_value">End</string>
+    <string name="sherlock_script_start">Start script</string>
+    <string name="sherlock_script_no_error">Script is running…</string>
+    <string name="sherlock_script_error_1">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_2">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_3">Major version: start value is larger than end value.</string>
+    <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
+    <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
+    <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
+    <string name="sherlock_script_end">Script ended. Found: %s</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Semn de carte</string>
@@ -72,8 +96,6 @@
     <string name="help_device_info_description">Model si CSC</string>
     <string name="help_manual">Firmware manual</string>
     <string name="help_manual_description">Firmware information</string>
-    <string name="help_sherlock">Manual pentru Sherlock</string>
-    <string name="help_sherlock_description">Cum se folosește Sherlock?</string>
     <string name="help_youtube">Video Explicativ pe Youtube</string>
     <string name="help_youtube_description">Video de Saqlin mirza</string>
     <string name="firmware_0">Informatii de bază despre firmware</string>
@@ -116,10 +138,13 @@
     <string name="contributor_chinese">Chineză</string>
     <string name="contributor_czech">Cehă</string>
     <string name="contributor_portuguese">Portugheză</string>
+    <string name="contributor_romanian">Romanian</string>
+    <string name="contributor_sinhala">Sinhala</string>
     <string name="contributor_translator">Mulțumeste lui</string>
 
     <!-- Settings -->
     <string name="settings">Setări</string>
+    <string name="settings_profile_user_name">Nume Utilizator</string>
     <string name="settings_theme">Temă</string>
     <string name="settings_theme_description">Setează tema aplicației</string>
     <string name="settings_theme_light">Deschis</string>
@@ -132,15 +157,15 @@
     <string name="settings_firebase_description">În țări precum Iran si China FireBase e blocat, selectează această opțiune pentru a bypass-ui eroarea </string>
     <string name="settings_quick_search_bar">Bară căutare rapidă</string>
     <string name="settings_quick_search_bar_description">Arată pe ecranul principal semnele de carte.</string>
-    <string name="settings_profile_user_name">Nume Utilizator</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">Căutare de la intrare</string>
     <string name="welcome_search_text">Caută firmware-ul la intrarea in app.\nIntrodu device-ul pe care să il căutăm la start.</string>
+    <string name="welcome_search_list_empty">Click + button to add a device.</string>
 
     <!-- Smart Search -->
     <string name="smart_search">Căutare Inteligentă</string>
-    <string name="smart_search_type_major">Update Major</string>
+    <string name="smart_search_type_major">Update One UI</string>
     <string name="smart_search_type_minor">Update Minor</string>
     <string name="smart_search_type_rollback">Rollback la versiune anterioara</string>
     <string name="smart_search_bootloader">Versiune Bootloader</string>
@@ -153,6 +178,7 @@
     <string name="smart_search_downgrade_impossible">Downgrade imposibil</string>
     <string name="smart_search_discoverer">Primul Descoperitor</string>
     <string name="smart_search_android_version">Versiune Android</string>
+    <string name="smart_search_update_type">Update type</string>
     <string name="january">Ianuarie</string>
     <string name="february">Februarie</string>
     <string name="march">Martie</string>
@@ -178,9 +204,6 @@
     <string name="inquiry_bug">Rapoarte bug-uri</string>
     <string name="inquiry_question">Întrebări</string>
     <string name="inquiry_send">Trimite</string>
-    <string name="inquiry_note_title">Notă</string>
-    <string name="inquiry_note_text">O să incerc să răspund intr-o saptămână.\nI Nu voi răspunde la întrebări dacă nu sunt despre aplicație.Nu lucrez pentru Samsung.\n Nu modfica detaliile despre dispozitiv in email.\n Vă rog folosiți Engleză sau Coreeană.</string>
-    <string name="inquiry_detail">Detalii</string>
     <string name="inquiry_type">Tip Cerere</string>
 
     <!-- Suggestion -->
@@ -191,6 +214,16 @@
     <string name="suggestion_check_my_device_info">Verifică informații despre dispozitivul propriu</string>
     <string name="suggestion_wifi">Pornește Wi-Fi.</string>
     <string name="suggestion_data">Pornește date mobile.</string>
+
+    <!-- Category -->
+    <string name="category">Category</string>
+    <string name="category_and">&#160;and&#160;</string>
+    <string name="category_all">All</string>
+    <string name="category_edit_name">Category name</string>
+    <string name="category_edit_devices_title">Devices</string>
+    <string name="category_edit_name_error_all">Category name cannot be All.</string>
+    <string name="category_edit_name_error_empty">Category name should not be empty.</string>
+    <string name="category_edit_device_list_error_empty">Device list should not be empty.</string>
 
     <!-- Beta -->
 </resources>

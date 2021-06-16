@@ -1,23 +1,6 @@
 <resources>
-    <!-- In case of Czech, Russian, Portuguese, Russian and Chinese, you can translate only these 16 strings (line 4 ~ 19) -->
-    <!-- In case of other languages, you should translate the whole file (line 4 ~ 196) -->
-    <string name="sherlock_in">It is in previous test firmware.</string>
-    <string name="sherlock_not_in">It is not in previous test firmware.</string>
-    <string name="help_sherlock">Sherlock manual</string>
-    <string name="help_sherlock_description">How to use Sherlock?</string>
-    <string name="help_youtube">How to video on Youtube</string>
-    <string name="help_youtube_description">Video by Saqlin mirza</string>
-    <string name="contributor_portuguese">Portuguese</string>
-    <string name="contributor_romanian">Romanian</string>
-    <string name="settings_profile_user_name">User name</string>
-    <string name="smart_search_discoverer">First discoverer</string>
-    <string name="smart_search_android_version">Android version</string>
-    <string name="sherlock_original">Original</string>
-    <string name="sherlock_watson_format">Decrypted by %s</string>
-    <string name="inquiry_note_title">Note</string>
-    <string name="inquiry_note_text">I will try to reply in a week.\nI will not reply if it is not about app. Please do not ask me about firmware. I am not a Samsung developer.\nI want you not to edit email title or erase device info in email contents.\nPlease use English or Korean.</string>
-    <string name="inquiry_detail">Detail</string>
-    <string name="inquiry_type">Inquiry type</string>
+    <!-- Test -->
+
 
     <!-- General -->
     <string name="check_network">Please check network</string>
@@ -34,6 +17,13 @@
     <string name="notification_new_update_text">Critical bugs are reported. Please update it from Play Store right now.</string>
     <string name="info_catcher_notification_title">%1$s (%2$s) new firmware found!</string>
     <string name="info_catcher_notification_text">Check it now.</string>
+    <string name="sherlock_script_notification_name">Sherlock script</string>
+    <string name="sherlock_script_notification_description">Show notification for Sherlock script.</string>
+    <string name="sherlock_script_notification_title">Sherlock script</string>
+    <string name="sherlock_script_notification_text_ongoing">Sherlock script running…</string>
+    <string name="sherlock_script_notification_text_finished">Sherlock script finished.</string>
+    <string name="notification_channel_name_sherlock_script">Sherlock script</string>
+    <string name="notification_channel_description_sherlock_script">Sherlock script helps you find latest test firmware even it is encrypted.</string>
 
     <!-- Main -->
     <string name="main_welcome_search_text">Welcome Search is disabled. It is recommend to turn on Welcome Search.</string>
@@ -44,21 +34,23 @@
 
     <!-- Search -->
     <string name="search">Search</string>
-    <string name="official_latest">Latest Official Firmware</string>
-    <string name="test_latest">Latest Test Firmware</string>
+    <string name="official_latest">Latest official firmware</string>
+    <string name="test_latest">Latest test firmware</string>
+    <string name="test_newfound">Newfound test firmware</string>
+    <string name="beta_firmware">Beta firmware</string>
     <string name="model">Model</string>
-    <string name="official_previous">Previous Official Firmware</string>
-    <string name="test_previous">Previous Test Firmware</string>
+    <string name="official_previous">Previous official firmware</string>
+    <string name="test_previous">Previous test firmware</string>
     <string name="clipboard">Copied to clipboard.</string>
     <string name="search_error">Search failed. There is no data on Samsung server for this device.</string>
     <string name="searching">Still searching… Please wait for seconds</string>
     <string name="changelog">Changelog</string>
-    <string name="single_search">Single Search</string>
-    <string name="multi_search">Multiple Search</string>
     <string name="multi_search_lists">Search %d devices below.</string>
     <string name="multi_search_limit">You can search up to 4 devices</string>
     <string name="tab_main_1">Official</string>
     <string name="tab_main_2">Test</string>
+    <string name="search_history">Search history</string>
+    <string name="search_list_empty">Search list is empty.</string>
 
     <!-- Sherlock -->
     <string name="sherlock">Sherlock</string>
@@ -68,12 +60,29 @@
     <string name="sherlock_user_encrypted_text">Converted encrypted text</string>
     <string name="sherlock_correct">YOU GOT IT!</string>
     <string name="sherlock_not_correct">Wrong… Try again</string>
+    <string name="sherlock_in">It is in previous test firmware.</string>
+    <string name="sherlock_not_in">It is not in previous test firmware.</string>
+    <string name="sherlock_original">Original</string>
+    <string name="sherlock_watson_format">Decrypted by %s</string>
+    <string name="sherlock_script">Sherlock script</string>
+    <string name="sherlock_script_start_value">Start</string>
+    <string name="sherlock_script_end_value">End</string>
+    <string name="sherlock_script_start">Start script</string>
+    <string name="sherlock_script_no_error">Script is running…</string>
+    <string name="sherlock_script_error_1">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_2">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_3">Major version: start value is larger than end value.</string>
+    <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
+    <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
+    <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
+    <string name="sherlock_script_end">Script ended. Found: %s</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Bookmark</string>
     <string name="bookmark_new">New bookmark</string>
     <string name="bookmark_edit">Edit bookmark</string>
-    <string name="bookmark_name">Bookmark Name</string>
+    <string name="bookmark_name">Bookmark name</string>
     <string name="bookmark_save">Save</string>
     <string name="bookmark_search_error">Check if model and CSC code is correctly saved in bookmark.</string>
     <string name="bookmark_order">Bookmark order</string>
@@ -84,11 +93,13 @@
 
     <!-- Help -->
     <string name="help">Help</string>
+    <string name="help_youtube">How to video on Youtube</string>
+    <string name="help_youtube_description">Video by Saqlin mirza</string>
     <string name="help_device_info">Device info</string>
     <string name="help_device_info_description">Model · CSC</string>
     <string name="help_manual">Firmware manual</string>
     <string name="help_manual_description">Firmware information</string>
-    <string name="firmware_0">Basic Firmware Information</string>
+    <string name="firmware_0">Basic firmware information</string>
     <string name="firmware_1">Firmware information consists of 3 information. Build version, CSC version, and baseband version.\n\nLet\'s suppose that firmware search result is\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nFirst one(A720SKSU3BRK1) refers build version,\nsecond one(A720SSKC3BRK1) refers CSC version,\nlast one(A720NKOU3BRK1) refers baseband version.</string>
     <string name="firmware_2">What do we know with firmware version?</string>
     <string name="firmware_3">All we need to care is build version. We can analyze firmware with build version.\nHere is example build version:</string>
@@ -127,10 +138,14 @@
     <string name="contributor_russian">Russian</string>
     <string name="contributor_chinese">Chinese</string>
     <string name="contributor_czech">Czech</string>
+    <string name="contributor_portuguese">Portuguese</string>
+    <string name="contributor_romanian">Romanian</string>
+    <string name="contributor_sinhala">Sinhala</string>
     <string name="contributor_translator">Thanks to</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>
+    <string name="settings_profile_user_name">User name</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_theme_description">Set app theme.</string>
     <string name="settings_theme_light">Light</string>
@@ -146,11 +161,12 @@
 
     <!-- Welcome Search -->
     <string name="welcome_search">Welcome Search</string>
-    <string name="welcome_search_text">Search firmware on start.\nPlease input device that you want to search on start.</string>
+    <string name="welcome_search_text">Search firmware on app start.\nPlease input device that you want to search on start.</string>
+    <string name="welcome_search_list_empty">Click + button to add a device.</string>
 
     <!-- Smart Search -->
     <string name="smart_search">Smart Search</string>
-    <string name="smart_search_type_major">Major update</string>
+    <string name="smart_search_type_major">One UI update</string>
     <string name="smart_search_type_minor">Minor update</string>
     <string name="smart_search_type_rollback">Roll back</string>
     <string name="smart_search_bootloader">Bootloader version</string>
@@ -161,6 +177,9 @@
     <string name="smart_search_date_format">%2$s, %1$s</string>
     <string name="smart_search_downgrade_possible">Downgrade possible</string>
     <string name="smart_search_downgrade_impossible">Downgrade impossible</string>
+    <string name="smart_search_discoverer">First discoverer</string>
+    <string name="smart_search_android_version">Android version</string>
+    <string name="smart_search_update_type">Update type</string>
     <string name="january">January</string>
     <string name="february">February</string>
     <string name="march">March</string>
@@ -182,6 +201,7 @@
 
     <!-- Inquiry -->
     <string name="inquiry">Inquiry</string>
+    <string name="inquiry_type">Type</string>
     <string name="inquiry_new">New ideas</string>
     <string name="inquiry_bug">Bug report</string>
     <string name="inquiry_question">Questions</string>
@@ -195,6 +215,16 @@
     <string name="suggestion_check_my_device_info">Check my device information</string>
     <string name="suggestion_wifi">Turn on Wi-Fi</string>
     <string name="suggestion_data">Turn on mobile data</string>
+
+    <!-- Category -->
+    <string name="category">Category</string>
+    <string name="category_and">&#160;and&#160;</string>
+    <string name="category_all">All</string>
+    <string name="category_edit_name">Category name</string>
+    <string name="category_edit_devices_title">Devices</string>
+    <string name="category_edit_name_error_all">Category name cannot be All.</string>
+    <string name="category_edit_name_error_empty">Category name should not be empty.</string>
+    <string name="category_edit_device_list_error_empty">Device list should not be empty.</string>
 
     <!-- Beta -->
 </resources>

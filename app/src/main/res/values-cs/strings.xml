@@ -16,6 +16,13 @@
     <string name="notification_new_update_text">Kritické chyby byly nahlášeny. Prosíme aktualizujte ihned aplikaci v Obchodu Play.</string>
     <string name="info_catcher_notification_title">%1$s (%2$s) nový firmware nalezen!</string>
     <string name="info_catcher_notification_text">Zkontrolujte ho nyní.</string>
+    <string name="sherlock_script_notification_name">Sherlock script</string>
+    <string name="sherlock_script_notification_description">Show notification for Sherlock script.</string>
+    <string name="sherlock_script_notification_title">Sherlock script</string>
+    <string name="sherlock_script_notification_text_ongoing">Sherlock script running…</string>
+    <string name="sherlock_script_notification_text_finished">Sherlock script finished.</string>
+    <string name="notification_channel_name_sherlock_script">Sherlock script</string>
+    <string name="notification_channel_description_sherlock_script">Sherlock script helps you find latest test firmware even it is encrypted.</string>
 
     <!-- Main -->
     <string name="main_welcome_search_text">Hledání při spuštění je zakázáno. Doporučuje se zapnout Hledání při spuštění.</string>
@@ -27,6 +34,8 @@
     <!-- Search -->
     <string name="official_latest">Nejnovější oficiální firmware</string>
     <string name="test_latest">Nejnovější testovací firmware</string>
+    <string name="test_newfound">Newfound test firmware</string>
+    <string name="beta_firmware">Beta firmware</string>
     <string name="model">Model</string>
     <string name="official_previous">Předchozí oficiální firmware</string>
     <string name="test_previous">Předchozí testovací firmware</string>
@@ -35,12 +44,12 @@
     <string name="search_error">Hledání selhalo. Na Samsung serverech nejsou žádná data pro toto zařízení.</string>
     <string name="searching">Stále probíhá hledání… Prosíme počkejte několik sekund.</string>
     <string name="changelog">Seznam změn</string>
-    <string name="single_search">Hledání</string>
-    <string name="multi_search">Vícenásobné hledání</string>
     <string name="multi_search_lists">Hledat %d zařízení níže.</string>
     <string name="multi_search_limit">Můžete hledat až 4 zařízení</string>
     <string name="tab_main_1">Oficiální</string>
     <string name="tab_main_2">Testovací</string>
+    <string name="search_history">Search history</string>
+    <string name="search_list_empty">Search list is empty.</string>
 
     <!-- Sherlock -->
     <string name="sherlock">Sherlock</string>
@@ -50,6 +59,23 @@
     <string name="sherlock_user_encrypted_text">Konvertován zašifrovaný text</string>
     <string name="sherlock_correct">ZVLÁDL JSI TO!</string>
     <string name="sherlock_not_correct">Špatně… Zkuste to znovu</string>
+    <string name="sherlock_in">It is in previous test firmware.</string>
+    <string name="sherlock_not_in">It is not in previous test firmware.</string>
+    <string name="sherlock_original">Original</string>
+    <string name="sherlock_watson_format">Decrypted by %s</string>
+    <string name="sherlock_script">Sherlock script</string>
+    <string name="sherlock_script_start_value">Start</string>
+    <string name="sherlock_script_end_value">End</string>
+    <string name="sherlock_script_start">Start script</string>
+    <string name="sherlock_script_no_error">Script is running…</string>
+    <string name="sherlock_script_error_1">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_2">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_3">Major version: start value is larger than end value.</string>
+    <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
+    <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
+    <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
+    <string name="sherlock_script_end">Script ended. Found: %s</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Záložka</string>
@@ -66,6 +92,8 @@
 
     <!-- Help -->
     <string name="help">Nápověda</string>
+    <string name="help_youtube">How to video on Youtube</string>
+    <string name="help_youtube_description">Video by Saqlin mirza</string>
     <string name="help_device_info">Informace o zařízení</string>
     <string name="help_device_info_description">Model · CSC</string>
     <string name="help_manual">Příručka</string>
@@ -107,10 +135,14 @@
     <string name="contributor_russian">Ruština</string>
     <string name="contributor_chinese">Čínština</string>
     <string name="contributor_czech">Čeština</string>
+    <string name="contributor_portuguese">Portuguese</string>
+    <string name="contributor_romanian">Romanian</string>
+    <string name="contributor_sinhala">Sinhala</string>
     <string name="contributor_translator">Díky</string>
 
     <!-- Settings -->
     <string name="settings_theme">Motiv</string>
+    <string name="settings_profile_user_name">User name</string>
     <string name="settings_theme_description">Nastavit motiv aplikace.</string>
     <string name="settings_theme_light">Světlý</string>
     <string name="settings_theme_dark">Tmavý</string>
@@ -127,13 +159,14 @@
     <!-- Welcome Search -->
     <string name="welcome_search">Hledání při spuštění</string>
     <string name="welcome_search_text">Vyhledá firmware při spuštění aplikace.\nProsíme vyplňte zařízení, které chcete vyhledat při spuštění.</string>
+    <string name="welcome_search_list_empty">Click + button to add a device.</string>
 
     <!-- Smart Search -->
     <string name="smart_search">Inteligentní hledání</string>
     <string name="smart_search_date">Datum objevení</string>
     <string name="smart_search_downgrade_possible">Downgrade možný</string>
     <string name="smart_search_downgrade_impossible">Downgrade nemožný</string>
-    <string name="smart_search_type_major">Velký update</string>
+    <string name="smart_search_type_major">One UI update</string>
     <string name="smart_search_type_minor">Malý update</string>
     <string name="smart_search_type_rollback">Návrat zpět</string>
     <string name="smart_search_bootloader">Verze Bootloaderu</string>
@@ -141,6 +174,9 @@
     <string name="smart_search_build_date">Datum sestavení</string>
     <string name="smart_search_minor_version">Malá verze</string>
     <string name="smart_search_date_format">%2$s, %1$s</string>
+    <string name="smart_search_discoverer">First discoverer</string>
+    <string name="smart_search_android_version">Android version</string>
+    <string name="smart_search_update_type">Update type</string>
     <string name="january">Leden</string>
     <string name="february">Únor</string>
     <string name="march">Březen</string>
@@ -162,6 +198,7 @@
 
     <!-- Inquiry -->
     <string name="inquiry">Zpětná vazba</string>
+    <string name="inquiry_type">Type</string>
     <string name="inquiry_new">Nové nápady</string>
     <string name="inquiry_bug">Nahlášení chyb</string>
     <string name="inquiry_question">Otázky</string>
@@ -175,6 +212,16 @@
     <string name="suggestion_check_my_device_info">Zkontrolujte informace o mém zařízení</string>
     <string name="suggestion_wifi">Zapněte Wi-Fi</string>
     <string name="suggestion_data">Zapněte mobilní data</string>
+
+    <!-- Category -->
+    <string name="category">Category</string>
+    <string name="category_and">&#160;and&#160;</string>
+    <string name="category_all">All</string>
+    <string name="category_edit_name">Category name</string>
+    <string name="category_edit_devices_title">Devices</string>
+    <string name="category_edit_name_error_all">Category name cannot be All.</string>
+    <string name="category_edit_name_error_empty">Category name should not be empty.</string>
+    <string name="category_edit_device_list_error_empty">Device list should not be empty.</string>
 
     <!-- Beta -->
 </resources>

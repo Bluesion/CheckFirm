@@ -1,0 +1,227 @@
+<resources>
+    <!-- General -->
+    <string name="check_network">Lütfen ağı kontrol edin</string>
+    <string name="switch_on">Açık</string>
+    <string name="switch_off">Kapalı</string>
+    <string name="close">Kapat</string>
+    <string name="unknown">Bilinmiyor</string>
+    <string name="my_device">Cihazım</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_new_firmware">Yeni Üretici Yazılımı</string>
+    <string name="notification_channel_new_update">Uygulama Güncelleme</string>
+    <string name="notification_new_update_title">Acil güncellemeyi kontrol et</string>
+    <string name="notification_new_update_text">Kritik hatalar rapor edildi. Lütfen hemen Play Store\'dan güncelleyin.</string>
+    <string name="info_catcher_notification_title">%1$s (%2$s) yeni üretici yazılımı bulundu!</string>
+    <string name="info_catcher_notification_text">Şimdi kontrol edin.</string>
+    <string name="sherlock_script_notification_name">Sherlock script</string>
+    <string name="sherlock_script_notification_description">Show notification for Sherlock script.</string>
+    <string name="sherlock_script_notification_title">Sherlock script</string>
+    <string name="sherlock_script_notification_text_ongoing">Sherlock script running…</string>
+    <string name="sherlock_script_notification_text_finished">Sherlock script finished.</string>
+    <string name="notification_channel_name_sherlock_script">Sherlock script</string>
+    <string name="notification_channel_description_sherlock_script">Sherlock script helps you find latest test firmware even it is encrypted.</string>
+
+    <!-- Main -->
+    <string name="main_welcome_search_text">Hoş Geldiniz Araması devre dışı bırakıldı. Hoş Geldiniz Aramasını etkinleştirmeniz önerilir.</string>
+    <string name="main_network_error_title">Ağ hatası</string>
+    <string name="main_network_error_text">Ağ bağlı değil veya çok yavaş.</string>
+    <string name="main_search_error_title">Arama hatası</string>
+    <string name="main_search_error_text">Model veya CSC yanlış.</string>
+
+    <!-- Search -->
+    <string name="search">Ara</string>
+    <string name="official_latest">En son resmi donanım yazılımı</string>
+    <string name="test_latest">En son test donanım yazılımı</string>
+    <string name="test_newfound">Yeni bulunan test donanım yazılımı</string>
+    <string name="beta_firmware">Beta üretici yazılımı</string>
+    <string name="model">Model</string>
+    <string name="official_previous">Önceki resmi üretici yazılımı</string>
+    <string name="test_previous">Önceki test donanım yazılımı</string>
+    <string name="clipboard">Panoya kopyalandı.</string>
+    <string name="search_error">Arama başarısız oldu. Bu cihaz için Samsung sunucusunda veri yok.</string>
+    <string name="searching">Hala aranıyor… Lütfen birkaç saniye bekleyin</string>
+    <string name="changelog">Değişiklik günlüğü</string>
+    <string name="multi_search_lists">Aşağıda %d cihaz ara.</string>
+    <string name="multi_search_limit">4 cihaza kadar arama yapabilirsiniz</string>
+    <string name="tab_main_1">Resmi</string>
+    <string name="tab_main_2">Test</string>
+    <string name="search_history">Arama geçmişi</string>
+    <string name="search_list_empty">Arama listesi boş.</string>
+
+    <!-- Sherlock -->
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_build">Derleme sürümü</string>
+    <string name="sherlock_baseband">Temel bant sürümü</string>
+    <string name="sherlock_samsung_encrypted_text">En son test donanım yazılımı şifreli metin</string>
+    <string name="sherlock_user_encrypted_text">Dönüştürülmüş şifreli metin</string>
+    <string name="sherlock_correct">ANLADINIZ!</string>
+    <string name="sherlock_not_correct">Yanlış… Tekrar deneyin</string>
+    <string name="sherlock_original">Orijinal</string>
+    <string name="sherlock_watson_format">%s tarafından şifresi çözüldü</string>
+    <string name="sherlock_in">Önceki test bellenimindedir.</string>
+    <string name="sherlock_not_in">Önceki test ürün yazılımında değildir.</string>
+    <string name="sherlock_script">İpucu bulucu</string>
+    <string name="sherlock_script_start_value">Başlat</string>
+    <string name="sherlock_script_end_value">Son</string>
+    <string name="sherlock_script_start">Komut dosyasını başlat</string>
+    <string name="sherlock_script_no_error">Komut dosyası çalışıyor…</string>
+    <string name="sherlock_script_error_1">Bootloader: başlangıç değeri, bitiş değerinden daha büyük.</string>
+    <string name="sherlock_script_error_2">Bootloader: başlangıç değeri, bitiş değerinden daha büyük.</string>
+    <string name="sherlock_script_error_3">Ana sürüm: başlangıç değeri, bitiş değerinden daha büyük.</string>
+    <string name="sherlock_script_error_4">Firmware yılı: başlangıç değeri, bitiş değerinden daha büyük.</string>
+    <string name="sherlock_script_error_5">Firmware ayı: başlangıç değeri, bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_6">Küçük sürüm: başlangıç değeri, bitiş değerinden daha büyük.</string>
+    <string name="sherlock_script_end">Script ended. Found: %s</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
+
+    <!-- Bookmark -->
+    <string name="bookmark">Yer İşareti</string>
+    <string name="bookmark_new">Yeni yer işareti</string>
+    <string name="bookmark_edit">Yer işaretini düzenle</string>
+    <string name="bookmark_name">Yer imi adı</string>
+    <string name="bookmark_save">Kaydet</string>
+    <string name="bookmark_search_error">Modelin ve CSC kodunun yer imine doğru şekilde kaydedilip kaydedilmediğini kontrol edin.</string>
+    <string name="bookmark_order">Yer işareti sırası</string>
+    <string name="bookmark_order_by_created_time">Oluşturma zamanına göre sırala</string>
+    <string name="bookmark_order_by_device">Cihaza göre sırala</string>
+    <string name="bookmark_order_by_name">Ada göre sırala</string>
+    <string name="bookmark_order_by_desc">Azalan sırala</string>
+
+    <!-- Help -->
+    <string name="help">Yardım</string>
+    <string name="help_youtube">Youtube\'da nasıl video yapılır</string>
+    <string name="help_youtube_description">Saqlin mirza tarafından video</string>
+    <string name="help_device_info">Cihaz bilgileri</string>
+    <string name="help_device_info_description">Modeli · CSC</string>
+    <string name="help_manual">Donanım yazılımı kılavuzu</string>
+    <string name="help_manual_description">Donanım yazılımı bilgileri</string>
+    <string name="firmware_0">Temel donanım yazılımı bilgileri</string>
+    <string name="firmware_1">Firmware bilgileri 3 bilgiden oluşur. Derleme sürümü, CSC sürümü ve ana bant sürümü.\n\nDonanım yazılımı arama sonucunun A720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1 olduğunu varsayalım.\n\nİlki (A720SKSU3BRK1) derleme sürümünü ifade eder,\nikincisi (A720SSKC3BRK1) CSC versiyonunu ifade eder,\nsonuncusu (A720NKOU3BRK1) temel bant versiyonunu ifade eder.</string>
+    <string name="firmware_2">Firmware sürümü hakkında ne biliyoruz?</string>
+    <string name="firmware_3">Tek ihtiyacımız olan şey derleme versiyonu. Donanım yazılımını derleme sürümü ile analiz edebiliriz.\nİşte örnek derleme sürümü:</string>
+    <string name="firmware_10">Kırmızı metin</string>
+    <string name="firmware_11">Kırmızı metin (U3), bootloader sürümü anlamına gelir.\n\nSamsung\'un güvenlik politikası nedeniyle, daha yüksek önyükleyici sürümü belleniminden daha düşük önyükleyici sürümü bellenimine geçiş yapamazsınız.</string>
+    <string name="firmware_12">Sarı metin</string>
+    <string name="firmware_13">Sarı metin (B) ana sürüm anlamına gelir.\nSarı metin güncellenirse, bu, Android OS veya One UI\'nin güncelleneceği veya güncelleneceği anlamına gelir.\n\nA, ilk büyük versiyon demektir.\nB, büyük güncellemenin bir kez yayınlandığı anlamına gelir.\nC, büyük güncellemenin iki kez yayınlandığı anlamına gelir.\n.\n.\n.\nZ, beta ürün yazılımı anlamına gelir.</string>
+    <string name="firmware_14">Yeşil metin</string>
+    <string name="firmware_15">Yeşil metin (R), aygıt yazılımının oluşturulduğu yıl anlamına gelir.\n\nR, 2018 anlamına gelir,\nS, 2019 anlamına gelir,\nT, 2020 anlamına gelir ve böyle devam eder.</string>
+    <string name="firmware_16">Mavi metin</string>
+    <string name="firmware_17">Mavi metin (K), aygıt yazılımının oluşturulduğu ay anlamına gelir.\n\nA demektir Ocak,\nB, Şubat anlamına gelir,\n.\n.\n.\nL Aralık anlamına gelir.</string>
+    <string name="firmware_18">Mor metin</string>
+    <string name="firmware_19">Mor metin (1), aygıt yazılımının kaç kez oluşturulduğu anlamına gelir (Bu, küçük sürüm anlamına gelir).\n\n1, aygıt yazılımının bir kez oluşturulduğu anlamına gelir.\n.\n.\n.\n9, aygıt yazılımının 9 kez oluşturulduğu anlamına gelir.\nA, aygıt yazılımının 10 kez oluşturulduğu anlamına gelir.\n.\n.\n.\nF, aygıt yazılımının 16 kez oluşturulduğu anlamına gelir.</string>
+    <string name="firmware_20">.DM &amp; .BDM nedir</string>
+    <string name="firmware_21">Bazen test aygıt yazılımı bilgisinde .DM bulunur. DM, Geliştirici Yönetimi anlamına gelir ve bu, Samsung\'un bu aygıt yazılımını test ettiği anlamına gelir.\n\nNadiren test aygıt yazılımı bilgisinde .BDM var. BDM, Geniş Bant Geliştirici Yönetimi anlamına gelir ve mobil operatörün aygıt yazılımını test ettiği veya kontrol ettiği anlamına gelir.</string>
+    <string name="firmware_22">Test aygıt yazılımı ne zaman piyasaya sürülecek?</string>
+    <string name="firmware_23">Tam olarak varsayamayız. Ancak, derleme sürümü daha fazla değişmezse test ürün yazılımı yakında yayınlanacaktır. Genellikle 3–5 hafta sürer.</string>
+
+    <!-- About -->
+    <string name="about_app_information">Uygulama bilgileri</string>
+    <string name="about_version">Sürüm</string>
+    <string name="about_latest">En son sürüm zaten yüklü.</string>
+    <string name="about_update">Güncelle</string>
+    <string name="license">Lisans</string>
+    <string name="legal">Yasal Bilgiler</string>
+    <string name="legal_text">Resmi ürün yazılımı bilgileri https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml adresinden geldi\n\nTest üretici yazılımı bilgileri https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml adresinden geldi.\n\nSamsung Electronics\'in müşterilere ürün yazılımı bilgileri sağladığı resmi yollar değildir. Bu bilgilerin herhangi bir şekilde kullanılması riski size aittir.</string>
+
+    <!-- Contributor -->
+    <string name="contributor">Katkıda Bulunan</string>
+    <string name="contributor_application">Uygulama</string>
+    <string name="contributor_designer">Tasarım</string>
+    <string name="contributor_developer">Geliştiren</string>
+    <string name="contributor_source">Kaynak açık</string>
+    <string name="contributor_localization">Yerelleştirme</string>
+    <string name="contributor_language">Dil</string>
+    <string name="contributor_russian">Rusça</string>
+    <string name="contributor_chinese">Çince</string>
+    <string name="contributor_czech">Çekçe</string>
+    <string name="contributor_portuguese">Portekizce</string>
+    <string name="contributor_romanian">Romence</string>
+    <string name="contributor_sinhala">Sinhala</string>
+    <string name="contributor_translator">Teşekkürler</string>
+
+    <!-- Settings -->
+    <string name="settings">Ayarlar</string>
+    <string name="settings_profile_user_name">Kullanıcı adı</string>
+    <string name="settings_theme">Tema</string>
+    <string name="settings_theme_description">Uygulama temasını ayarlayın.</string>
+    <string name="settings_theme_light">Işık</string>
+    <string name="settings_theme_dark">Koyu</string>
+    <string name="settings_theme_system">Sistem varsayılanı</string>
+    <string name="settings_about">CheckFirm Hakkında</string>
+    <string name="welcome_search_description">Başlangıçta donanım yazılımını arayın.</string>
+    <string name="info_catcher_description">Info Catcher, donanım yazılımı güncellendiğinde size bir bildirim gönderecektir.</string>
+    <string name="settings_firebase">Arama hatasını düzeltin</string>
+    <string name="settings_firebase_description">Çin veya İran gibi bazı ülkeler Firebase\'i yasakladığından, bir arama hatası vardır. Bu ülkelerdeyseniz bu ayarı açın.</string>
+    <string name="settings_quick_search_bar">Hızlı arama çubuğu</string>
+    <string name="settings_quick_search_bar_description">Yer işaretlerini ana ekranda göster.</string>
+
+    <!-- Welcome Search -->
+    <string name="welcome_search">Hoş Geldiniz Araması</string>
+    <string name="welcome_search_text">Başlangıçta donanım yazılımını arayın.\nLütfen başlangıçta aramak istediğiniz cihazı girin.</string>
+    <string name="welcome_search_list_empty">Click + button to add a device.</string>
+
+    <!-- Smart Search -->
+    <string name="smart_search">Akıllı Arama</string>
+    <string name="smart_search_type_major">Bir kullanıcı arayüzü güncellemesi</string>
+    <string name="smart_search_type_minor">Küçük güncelleme</string>
+    <string name="smart_search_type_rollback">Geri alın</string>
+    <string name="smart_search_bootloader">Önyükleyici sürümü</string>
+    <string name="smart_search_major_version">Ana sürüm</string>
+    <string name="smart_search_build_date">Oluşturma tarihi</string>
+    <string name="smart_search_minor_version">Alt sürüm</string>
+    <string name="smart_search_date">Keşfedildiği tarih</string>
+    <string name="smart_search_date_format">%2$s, %1$s</string>
+    <string name="smart_search_downgrade_possible">Düşürme mümkün</string>
+    <string name="smart_search_downgrade_impossible">Düşürmek imkansız</string>
+    <string name="smart_search_update_type">Türü güncelle</string>
+    <string name="smart_search_discoverer">İlk keşfeden</string>
+    <string name="smart_search_android_version">Android sürümü</string>
+    <string name="january">Ocak</string>
+    <string name="february">Şubat</string>
+    <string name="march">Mart</string>
+    <string name="april">Nisan</string>
+    <string name="may">Mayıs</string>
+    <string name="june">Haziran</string>
+    <string name="july">Temmuz</string>
+    <string name="august">Ağustos</string>
+    <string name="september">Eylül</string>
+    <string name="october">Ekim</string>
+    <string name="november">Kasım</string>
+    <string name="december">Aralık</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher">Bilgi Yakalayıcı</string>
+    <string name="info_catcher_text">Info Catcher, donanım yazılımı güncellendiğinde size bir bildirim gönderecektir.\nLütfen yakalamak istediğiniz cihazı girin.</string>
+    <string name="info_catcher_error">Lütfen modeli ve CSC kodunu doğru yazıp yazmadığınızı kontrol edin.</string>
+    <string name="info_catcher_insert">Ekle</string>
+
+    <!-- Inquiry -->
+    <string name="inquiry">Sorgu</string>
+    <string name="inquiry_type">Sorgu türü</string>
+    <string name="inquiry_new">Yeni fikirler</string>
+    <string name="inquiry_bug">Hata raporu</string>
+    <string name="inquiry_question">Sorular</string>
+    <string name="inquiry_send">Gönder</string>
+
+    <!-- Suggestion -->
+    <string name="suggestion">Öneri</string>
+    <string name="suggestion_title">Başka bir şey mi arıyorsunuz?</string>
+    <string name="suggestion_bookmark_my_device">Cihazımı favorilere ekle</string>
+    <string name="suggestion_enable_welcome_search">Hoş Geldiniz Aramasını Etkinleştir</string>
+    <string name="suggestion_check_my_device_info">Cihaz bilgilerimi kontrol et</string>
+    <string name="suggestion_wifi">Wi-Fi\'yi açın</string>
+    <string name="suggestion_data">Mobil veriyi açın</string>
+
+    <!-- Category -->
+    <string name="category">Kategori</string>
+    <string name="category_and">&#160;ve&#160;</string>
+    <string name="category_all">Tümü</string>
+    <string name="category_edit_name">Kategori adı</string>
+    <string name="category_edit_devices_title">Cihazlar</string>
+    <string name="category_edit_name_error_all">Kategori adı All olamaz.</string>
+    <string name="category_edit_name_error_empty">Kategori adı boş olmamalıdır.</string>
+    <string name="category_edit_device_list_error_empty">Cihaz listesi boş olmamalıdır.</string>
+
+    <!-- Beta -->
+</resources>

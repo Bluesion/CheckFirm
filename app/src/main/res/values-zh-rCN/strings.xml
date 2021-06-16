@@ -14,6 +14,13 @@
     <string name="notification_new_update_text">发现了严重的错误。请立即前往Play商店进行更新。</string>
     <string name="info_catcher_notification_title">发现了新固件: %1$s (%2$s)</string>
     <string name="info_catcher_notification_text">请确认。</string>
+    <string name="sherlock_script_notification_name">Sherlock script</string>
+    <string name="sherlock_script_notification_description">Show notification for Sherlock script.</string>
+    <string name="sherlock_script_notification_title">Sherlock script</string>
+    <string name="sherlock_script_notification_text_ongoing">Sherlock script running…</string>
+    <string name="sherlock_script_notification_text_finished">Sherlock script finished.</string>
+    <string name="notification_channel_name_sherlock_script">Sherlock script</string>
+    <string name="notification_channel_description_sherlock_script">Sherlock script helps you find latest test firmware even it is encrypted.</string>
 
     <!-- Main -->
     <string name="main_welcome_search_text">欢迎搜寻已禁用。建议打开欢迎搜寻。</string>
@@ -26,21 +33,40 @@
     <string name="test_latest">最新测试固件</string>
     <string name="model">机型</string>
     <string name="test_previous">先前的测试固件</string>
+    <string name="test_newfound">Newfound test firmware</string>
+    <string name="beta_firmware">Beta firmware</string>
     <string name="clipboard">复制到剪贴板。</string>
     <string name="search_error">搜索失败。 请检查您是否正确编写了型号和CSC代码。</string>
     <string name="searching">仍在搜寻中…请稍等片刻</string>
     <string name="changelog">变更日志</string>
-    <string name="single_search">单次搜寻</string>
-    <string name="multi_search">多重搜寻</string>
     <string name="multi_search_lists">搜索%d个手机。</string>
     <string name="multi_search_limit">您最多可以搜索4个手机</string>
     <string name="tab_main_2">测试</string>
+    <string name="search_history">Search history</string>
+    <string name="search_list_empty">Search list is empty.</string>
 
     <!-- Sherlock -->
     <string name="sherlock_baseband">基带版本</string>
     <string name="sherlock_samsung_encrypted_text">最新测试固件加密文本</string>
     <string name="sherlock_user_encrypted_text">转换后的加密文本</string>
     <string name="sherlock_not_correct">不一样</string>
+    <string name="sherlock_in">It is in previous test firmware.</string>
+    <string name="sherlock_not_in">It is not in previous test firmware.</string>
+    <string name="sherlock_original">Original</string>
+    <string name="sherlock_watson_format">Decrypted by %s</string>
+    <string name="sherlock_script">Sherlock script</string>
+    <string name="sherlock_script_start_value">Start</string>
+    <string name="sherlock_script_end_value">End</string>
+    <string name="sherlock_script_start">Start script</string>
+    <string name="sherlock_script_no_error">Script is running…</string>
+    <string name="sherlock_script_error_1">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_2">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_3">Major version: start value is larger than end value.</string>
+    <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
+    <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
+    <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
+    <string name="sherlock_script_end">Script ended. Found: %s</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">书签</string>
@@ -54,6 +80,8 @@
     <string name="bookmark_order_by_name">按名称顺序</string>
 
     <!-- Help -->
+    <string name="help_youtube">How to video on Youtube</string>
+    <string name="help_youtube_description">Video by Saqlin mirza</string>
     <string name="help_device_info">设备信息</string>
     <string name="help_device_info_description">机型 · CSC</string>
     <string name="help_manual">手册</string>
@@ -85,9 +113,13 @@
     <string name="contributor_source">源代码</string>
     <string name="contributor_language">语言</string>
     <string name="contributor_russian">俄语</string>
+    <string name="contributor_portuguese">Portuguese</string>
+    <string name="contributor_romanian">Romanian</string>
+    <string name="contributor_sinhala">Sinhala</string>
     <string name="contributor_translator">译者</string>
 
     <!-- Settings -->
+    <string name="settings_profile_user_name">User name</string>
     <string name="settings_theme">主题背景</string>
     <string name="settings_theme_description">设置主题背景。</string>
     <string name="settings_theme_light">浅色</string>
@@ -103,16 +135,20 @@
     <!-- Welcome Search -->
     <string name="welcome_search">欢迎搜寻</string>
     <string name="welcome_search_text">启动时搜索固件。\n请输入要在启动时搜索的设备。</string>
+    <string name="welcome_search_list_empty">Click + button to add a device.</string>
 
     <!-- Smart Search -->
     <string name="smart_search">智能搜索</string>
     <string name="smart_search_date">首次发现日期</string>
     <string name="smart_search_type_minor">小更新</string>
-    <string name="smart_search_type_major">重大更新</string>
+    <string name="smart_search_type_major">One UI 更新</string>
     <string name="smart_search_type_rollback">回滚</string>
     <string name="smart_search_bootloader">引导程序版本</string>
     <string name="smart_search_downgrade_possible">可能降级</string>
     <string name="smart_search_downgrade_impossible">不可能降级</string>
+    <string name="smart_search_discoverer">First discoverer</string>
+    <string name="smart_search_android_version">Android version</string>
+    <string name="smart_search_update_type">Update type</string>
 
     <!-- Info Catcher -->
     <string name="info_catcher_text">固件更新后，会向您发送消息通知。\n请输入要获取通知的设备。</string>
@@ -120,6 +156,7 @@
 
     <!-- Inquiry -->
     <string name="inquiry">查询</string>
+    <string name="inquiry_type">Type</string>
     <string name="inquiry_bug">错误报告</string>
     <string name="inquiry_question">问题</string>
     <string name="inquiry_send">发送</string>
@@ -132,6 +169,16 @@
     <string name="suggestion_check_my_device_info">查看我的设备信息</string>
     <string name="suggestion_wifi">开启Wi-Fi</string>
     <string name="suggestion_data">开启行动数据</string>
+
+    <!-- Category -->
+    <string name="category">Category</string>
+    <string name="category_and">&#160;and&#160;</string>
+    <string name="category_all">All</string>
+    <string name="category_edit_name">Category name</string>
+    <string name="category_edit_devices_title">Devices</string>
+    <string name="category_edit_name_error_all">Category name cannot be All.</string>
+    <string name="category_edit_name_error_empty">Category name should not be empty.</string>
+    <string name="category_edit_device_list_error_empty">Device list should not be empty.</string>
 
     <!-- Beta -->
 </resources>

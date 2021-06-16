@@ -3,7 +3,15 @@
         <item quantity="other">%d个书签</item>
     </plurals>
 
-    <plurals name="saved_devices">
-        <item quantity="other">保存的手机</item>
+    <plurals name="category_subtitle">
+        <item quantity="other">%d categories</item>
+    </plurals>
+
+    <plurals name="category_format">
+        <item quantity="other">%d other devices</item>
+    </plurals>
+
+    <plurals name="category_devices">
+        <item quantity="other">%d devices</item>
     </plurals>
 </resources>

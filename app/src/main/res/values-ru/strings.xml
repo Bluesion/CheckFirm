@@ -16,6 +16,13 @@
     <string name="notification_new_update_title">Важное обновление CheckFirm</string>
     <string name="info_catcher_notification_title">%1$s (%2$s) новая прошивка найдена!</string>
     <string name="info_catcher_notification_text">Ознакомьтесь с ней сейчас.</string>
+    <string name="sherlock_script_notification_name">Sherlock script</string>
+    <string name="sherlock_script_notification_description">Show notification for Sherlock script.</string>
+    <string name="sherlock_script_notification_title">Sherlock script</string>
+    <string name="sherlock_script_notification_text_ongoing">Sherlock script running…</string>
+    <string name="sherlock_script_notification_text_finished">Sherlock script finished.</string>
+    <string name="notification_channel_name_sherlock_script">Sherlock script</string>
+    <string name="notification_channel_description_sherlock_script">Sherlock script helps you find latest test firmware even it is encrypted.</string>
 
     <!-- Main -->
     <string name="main_welcome_search_text">Поиск при запуске отключен. Рекомендуется включить Поиск при запуске.</string>
@@ -27,6 +34,8 @@
     <!-- Search -->
     <string name="official_latest">Последняя официальная прошивка</string>
     <string name="test_latest">Последняя тестовая прошивка</string>
+    <string name="test_newfound">Newfound test firmware</string>
+    <string name="beta_firmware">Beta firmware</string>
     <string name="model">Модель</string>
     <string name="official_previous">Предыдущие официальные прошивки</string>
     <string name="test_previous">Предыдущие тестовые прошивки</string>
@@ -35,12 +44,12 @@
     <string name="search_error">На сервере Samsung нет данных для этого устройства.</string>
     <string name="searching">Ищем прошивки, подождите несколько секунд…</string>
     <string name="changelog">Список изменений</string>
-    <string name="single_search">Одиночный поиск</string>
-    <string name="multi_search">Мультипоиск</string>
     <string name="multi_search_limit">Вы можете искать прошивки для 4 устройств одновременно.</string>
     <string name="multi_search_lists">Поиск прошивок для %d следующих устройств:</string>
     <string name="tab_main_1">Официальные</string>
     <string name="tab_main_2">Тестовые</string>
+    <string name="search_history">Search history</string>
+    <string name="search_list_empty">Search list is empty.</string>
 
     <!-- Sherlock -->
     <string name="sherlock">Шерлок</string>
@@ -50,6 +59,23 @@
     <string name="sherlock_not_correct">Неверно, повторите попытку.</string>
     <string name="sherlock_samsung_encrypted_text">Последняя текстовая прошивка имеет зашифрованное описание.</string>
     <string name="sherlock_user_encrypted_text">Преобразованный зашифрованный текст описания</string>
+    <string name="sherlock_in">It is in previous test firmware.</string>
+    <string name="sherlock_not_in">It is not in previous test firmware.</string>
+    <string name="sherlock_original">Original</string>
+    <string name="sherlock_watson_format">Decrypted by %s</string>
+    <string name="sherlock_script">Sherlock script</string>
+    <string name="sherlock_script_start_value">Start</string>
+    <string name="sherlock_script_end_value">End</string>
+    <string name="sherlock_script_start">Start script</string>
+    <string name="sherlock_script_no_error">Script is running…</string>
+    <string name="sherlock_script_error_1">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_2">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_3">Major version: start value is larger than end value.</string>
+    <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
+    <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
+    <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
+    <string name="sherlock_script_end">Script ended. Found: %s</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Закладки</string>
@@ -66,6 +92,8 @@
 
     <!-- Help -->
     <string name="help">Помощь</string>
+    <string name="help_youtube">How to video on Youtube</string>
+    <string name="help_youtube_description">Video by Saqlin mirza</string>
     <string name="help_device_info">Об устройстве</string>
     <string name="help_device_info_description">Модель и код CSC</string>
     <string name="help_manual">Справка</string>
@@ -104,6 +132,9 @@
     <string name="contributor_russian">Русский</string>
     <string name="contributor_chinese">Китайский</string>
     <string name="contributor_czech">Чешский</string>
+    <string name="contributor_portuguese">Portuguese</string>
+    <string name="contributor_romanian">Romanian</string>
+    <string name="contributor_sinhala">Sinhala</string>
     <string name="contributor_translator">Переводчик</string>
     <string name="license">Лицензии</string>
     <string name="legal">Юридическая информация</string>
@@ -111,6 +142,7 @@
 
     <!-- Settings -->
     <string name="settings_theme">Тема оформления</string>
+    <string name="settings_profile_user_name">User name</string>
     <string name="settings_theme_dark">Темная тема</string>
     <string name="settings_theme_description">Выбрать тему оформления.</string>
     <string name="settings_theme_light">Светлая тема</string>
@@ -127,13 +159,14 @@
     <!-- Welcome Search -->
     <string name="welcome_search">Поиск при запуске</string>
     <string name="welcome_search_text">Поиск прошивок сразу при запуске приложения.\nУкажите модель устройства, обновления которого вы хотите искать при запуске приложения.</string>
+    <string name="welcome_search_list_empty">Click + button to add a device.</string>
 
     <!-- Smart Search -->
     <string name="smart_search">Умный поиск</string>
     <string name="smart_search_date">Найдена</string>
     <string name="smart_search_downgrade_impossible">Понизить невозможно</string>
     <string name="smart_search_downgrade_possible">Понизить возможное</string>
-    <string name="smart_search_type_major">Крупное обновление</string>
+    <string name="smart_search_type_major">One UI обновление</string>
     <string name="smart_search_type_minor">Минорное обновление</string>
     <string name="smart_search_type_rollback">Откат</string>
     <string name="smart_search_bootloader">Версия загрузчика</string>
@@ -141,6 +174,9 @@
     <string name="smart_search_build_date">Дата сборки</string>
     <string name="smart_search_minor_version">Минорная версия</string>
     <string name="smart_search_date_format">%2$s %1$s</string>
+    <string name="smart_search_discoverer">First discoverer</string>
+    <string name="smart_search_android_version">Android version</string>
+    <string name="smart_search_update_type">Update type</string>
     <string name="january">январь</string>
     <string name="february">февраль</string>
     <string name="march">март</string>
@@ -162,6 +198,7 @@
 
     <!-- Inquiry -->
     <string name="inquiry">Обратная связь</string>
+    <string name="inquiry_type">Type</string>
     <string name="inquiry_new">Идея</string>
     <string name="inquiry_bug">Сообщение об ошибке</string>
     <string name="inquiry_question">Вопрос</string>
@@ -175,6 +212,16 @@
     <string name="suggestion_check_my_device_info">Проверить информацию о моем устройстве</string>
     <string name="suggestion_wifi">Включите Wi-Fi</string>
     <string name="suggestion_data">Включите мобильные данные</string>
+
+    <!-- Category -->
+    <string name="category">Category</string>
+    <string name="category_and">&#160;and&#160;</string>
+    <string name="category_all">All</string>
+    <string name="category_edit_name">Category name</string>
+    <string name="category_edit_devices_title">Devices</string>
+    <string name="category_edit_name_error_all">Category name cannot be All.</string>
+    <string name="category_edit_name_error_empty">Category name should not be empty.</string>
+    <string name="category_edit_device_list_error_empty">Device list should not be empty.</string>
 
     <!-- Beta -->
 </resources>
