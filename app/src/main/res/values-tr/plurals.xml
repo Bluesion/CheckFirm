@@ -8,14 +8,4 @@
         <item quantity="one">%d kategori</item>
         <item quantity="other">%d kategori</item>
     </plurals>
-
-    <plurals name="category_format">
-        <item quantity="one">%d diğer cihaz</item>
-        <item quantity="other">%d diğer cihaz</item>
-    </plurals>
-
-    <plurals name="category_devices">
-        <item quantity="one">%d cihaz</item>
-        <item quantity="other">%d cihaz</item>
-    </plurals>
 </resources>

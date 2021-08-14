@@ -62,8 +62,12 @@
     <string name="sherlock_in">It is in previous test firmware.</string>
     <string name="sherlock_not_in">It is not in previous test firmware.</string>
     <string name="sherlock_original">Original</string>
-    <string name="sherlock_watson_format">Decrypted by %s</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
+
+    <!-- Sherlock script -->
     <string name="sherlock_script">Sherlock script</string>
+    <string name="sherlock_script_log">Log</string>
+    <string name="sherlock_script_message">Set script start and end value first. and then start script.</string>
     <string name="sherlock_script_start_value">Start</string>
     <string name="sherlock_script_end_value">End</string>
     <string name="sherlock_script_start">Start script</string>
@@ -74,8 +78,8 @@
     <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
     <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
     <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
-    <string name="sherlock_script_end">Script ended. Found: %s</string>
-    <string name="sherlock_upload_server">Information uploaded to server.</string>
+    <string name="sherlock_script_end">Script ended. Found:\n%s</string>
+    <string name="sherlock_script_end_failed">Script ended. Found nothing. You can try again by resetting script start and end value.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">書籤</string>
@@ -85,10 +89,19 @@
     <string name="bookmark_save">保存</string>
     <string name="bookmark_search_error">檢查型號和CSC代碼是否正確保存在書籤中。</string>
     <string name="bookmark_order">書籤順序</string>
+    <string name="bookmark_order_description">Order bookmarks</string>
     <string name="bookmark_order_by_created_time">按創建時間排序</string>
     <string name="bookmark_order_by_device">設備順序</string>
     <string name="bookmark_order_by_name">按名稱順序</string>
     <string name="bookmark_order_by_desc">降序</string>
+
+    <!-- Bookmark backup and restore -->
+    <string name="backup">Backup</string>
+    <string name="backup_description">Save CheckFirm bookmark and category as JSON file.</string>
+    <string name="restore">Restore</string>
+    <string name="restore_description">Load backup JSON file to restore.</string>
+    <string name="backup_toast">Backup complete.</string>
+    <string name="restore_toast">Restore completed.</string>
 
     <!-- Help -->
     <string name="help">幫助</string>
@@ -96,6 +109,9 @@
     <string name="help_youtube_description">Video by Saqlin mirza</string>
     <string name="help_device_info">設備信息</string>
     <string name="help_device_info_description">機型 · CSC</string>
+    <string name="help_device_info_edit">Edit</string>
+    <string name="help_device_name">Device name</string>
+    <string name="help_device_info_bookmark">Bookmark saved.</string>
     <string name="help_manual">手冊</string>
     <string name="help_manual_description">固件信息</string>
     <string name="firmware_0">基本固件信息</string>
@@ -155,6 +171,8 @@
     <string name="settings_quick_search_bar_description">在主屏幕上顯示書籤。</string>
     <string name="welcome_search_description">啟動時搜索固件。</string>
     <string name="info_catcher_description">固件更新後，會向您發送消息通知。</string>
+    <string name="settings_bookmark_backup_restore">Backup&amp;restore</string>
+    <string name="settings_bookmark_backup_restore_description">Backup and restore CheckFirm bookmark and category.</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">歡迎搜尋</string>
@@ -198,7 +216,7 @@
 
     <!-- Inquiry -->
     <string name="inquiry">查詢</string>
-    <string name="inquiry_type">Type</string>
+    <string name="inquiry_hint">Tell me details.</string>
     <string name="inquiry_new">新的主意</string>
     <string name="inquiry_bug">錯誤報告</string>
     <string name="inquiry_question">問題</string>
@@ -222,6 +240,7 @@
     <string name="category_edit_name_error_all">Category name cannot be All.</string>
     <string name="category_edit_name_error_empty">Category name should not be empty.</string>
     <string name="category_edit_device_list_error_empty">Device list should not be empty.</string>
+    <string name="smart_search_watson">Decrypted by</string>
 
     <!-- Beta -->
 </resources>

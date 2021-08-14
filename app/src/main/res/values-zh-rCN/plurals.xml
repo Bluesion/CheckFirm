@@ -6,12 +6,4 @@
     <plurals name="category_subtitle">
         <item quantity="other">%d categories</item>
     </plurals>
-
-    <plurals name="category_format">
-        <item quantity="other">%d other devices</item>
-    </plurals>
-
-    <plurals name="category_devices">
-        <item quantity="other">%d devices</item>
-    </plurals>
 </resources>

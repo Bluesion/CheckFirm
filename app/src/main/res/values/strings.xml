@@ -63,8 +63,12 @@
     <string name="sherlock_in">It is in previous test firmware.</string>
     <string name="sherlock_not_in">It is not in previous test firmware.</string>
     <string name="sherlock_original">Original</string>
-    <string name="sherlock_watson_format">Decrypted by %s</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
+
+    <!-- Sherlock script -->
     <string name="sherlock_script">Sherlock script</string>
+    <string name="sherlock_script_log">Log</string>
+    <string name="sherlock_script_message">Set script start and end value first. and then start script.</string>
     <string name="sherlock_script_start_value">Start</string>
     <string name="sherlock_script_end_value">End</string>
     <string name="sherlock_script_start">Start script</string>
@@ -75,8 +79,8 @@
     <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
     <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
     <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
-    <string name="sherlock_script_end">Script ended. Found: %s</string>
-    <string name="sherlock_upload_server">Information uploaded to server.</string>
+    <string name="sherlock_script_end">Script ended. Found:\n%s</string>
+    <string name="sherlock_script_end_failed">Script ended. Found nothing. You can try again by resetting script start and end value.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Bookmark</string>
@@ -86,10 +90,19 @@
     <string name="bookmark_save">Save</string>
     <string name="bookmark_search_error">Check if model and CSC code is correctly saved in bookmark.</string>
     <string name="bookmark_order">Bookmark order</string>
+    <string name="bookmark_order_description">Order bookmarks</string>
     <string name="bookmark_order_by_created_time">Order by created time</string>
     <string name="bookmark_order_by_device">Order by device</string>
     <string name="bookmark_order_by_name">Order by name</string>
     <string name="bookmark_order_by_desc">Order by descending</string>
+
+    <!-- Bookmark backup and restore -->
+    <string name="backup">Backup</string>
+    <string name="backup_description">Save CheckFirm bookmark and category as JSON file.</string>
+    <string name="restore">Restore</string>
+    <string name="restore_description">Load backup JSON file to restore.</string>
+    <string name="backup_toast">Backup complete.</string>
+    <string name="restore_toast">Restore completed.</string>
 
     <!-- Help -->
     <string name="help">Help</string>
@@ -97,6 +110,9 @@
     <string name="help_youtube_description">Video by Saqlin mirza</string>
     <string name="help_device_info">Device info</string>
     <string name="help_device_info_description">Model · CSC</string>
+    <string name="help_device_info_edit">Edit</string>
+    <string name="help_device_name">Device name</string>
+    <string name="help_device_info_bookmark">Bookmark saved.</string>
     <string name="help_manual">Firmware manual</string>
     <string name="help_manual_description">Firmware information</string>
     <string name="firmware_0">Basic firmware information</string>
@@ -158,6 +174,8 @@
     <string name="settings_firebase_description">Because some countries like China or Iran banned Firebase, there is a search error. Turn on this setting if you are in those countries.</string>
     <string name="settings_quick_search_bar">Quick search bar</string>
     <string name="settings_quick_search_bar_description">Show bookmarks on main screen.</string>
+    <string name="settings_bookmark_backup_restore">Backup&amp;restore</string>
+    <string name="settings_bookmark_backup_restore_description">Backup and restore CheckFirm bookmark and category.</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">Welcome Search</string>
@@ -178,6 +196,7 @@
     <string name="smart_search_downgrade_possible">Downgrade possible</string>
     <string name="smart_search_downgrade_impossible">Downgrade impossible</string>
     <string name="smart_search_discoverer">First discoverer</string>
+    <string name="smart_search_watson">Decrypted by</string>
     <string name="smart_search_android_version">Android version</string>
     <string name="smart_search_update_type">Update type</string>
     <string name="january">January</string>
@@ -201,7 +220,7 @@
 
     <!-- Inquiry -->
     <string name="inquiry">Inquiry</string>
-    <string name="inquiry_type">Type</string>
+    <string name="inquiry_hint">Tell me details.</string>
     <string name="inquiry_new">New ideas</string>
     <string name="inquiry_bug">Bug report</string>
     <string name="inquiry_question">Questions</string>

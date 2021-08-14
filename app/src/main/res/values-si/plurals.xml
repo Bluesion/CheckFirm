@@ -8,14 +8,4 @@
         <item quantity="one">%d වර්ගීකරණය</item>
         <item quantity="other">%d වර්ගීකරණ</item>
     </plurals>
-
-    <plurals name="category_format">
-        <item quantity="one">%d අනෙක් උපාංගය</item>
-        <item quantity="other">%d අනෙක් උපාංග</item>
-    </plurals>
-
-    <plurals name="category_devices">
-        <item quantity="one">%d උපාංගය</item>
-        <item quantity="other">%d උපාංග</item>
-    </plurals>
 </resources>

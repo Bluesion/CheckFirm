@@ -2,24 +2,14 @@
     <plurals name="bookmark_subtitle">
         <item quantity="one">%d záložka</item>
         <item quantity="few">%d záložky</item>
+        <item quantity="many">%d záložek</item>
         <item quantity="other">%d záložek</item>
     </plurals>
 
     <plurals name="category_subtitle">
         <item quantity="one">%d category</item>
         <item quantity="few">%d categories</item>
+        <item quantity="many">%d categories</item>
         <item quantity="other">%d categories</item>
-    </plurals>
-
-    <plurals name="category_format">
-        <item quantity="one">%d other device</item>
-        <item quantity="few">%d other devices</item>
-        <item quantity="other">%d other devices</item>
-    </plurals>
-
-    <plurals name="category_devices">
-        <item quantity="one">%d device</item>
-        <item quantity="few">%d devices</item>
-        <item quantity="other">%d devices</item>
     </plurals>
 </resources>

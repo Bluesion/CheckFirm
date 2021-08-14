@@ -10,6 +10,8 @@
         <item name="radioButtonStyle">@style/RadioButtonTheme</item>
         <item name="bottomSheetDialogTheme">@style/BottomDialog</item>
         <item name="toolbarStyle">@style/Toolbar</item>
+        <item name="spinnerStyle">@style/SpinnerStyle</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
         <item name="android:windowBackground">@color/background_color</item>
         <item name="android:statusBarColor">@color/background_color</item>
         <item name="android:windowLightStatusBar">true</item>

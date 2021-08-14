@@ -23,4 +23,17 @@
     <color name="tip_card_background_color">#e3eaf0</color>
     <color name="tip_title_color">#2e2e2e</color>
     <color name="tip_text_color">#0074d4</color>
+
+    <color name="sesl_menu_popup_background_color">#FCFCFC</color>
+    <color name="sesl_menu_popup_background_stroke_color">#FCFCFC</color>
+    <color name="sesl_spinner_dropdown_item_text_color_disabled">#66000000</color>
+    <color name="sesl_spinner_dropdown_item_text_color_normal">#000000</color>
+    <color name="sesl_spinner_icon_color_default">#3B3B3B</color>
+    <color name="sesl_spinner_icon_color_disabled">#663B3B3B</color>
+    <color name="sesl_spinner_item_text_color_disabled">#66252525</color>
+    <color name="sesl_spinner_item_text_color_normal">#252525</color>
+
+    <color name="sesl_scrollbar_handle_tint">#DEDEDE</color>
+
+    <color name="item_divider_color">#979797</color>
 </resources>

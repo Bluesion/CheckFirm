@@ -82,4 +82,49 @@
         <item name="android:textColor">@color/tip_text_color</item>
     </style>
 
+    <style name="ProgressBarStyle.Circle" parent="@android:style/Widget.ProgressBar">
+        <item name="android:maxWidth">60dp</item>
+        <item name="android:maxHeight">60dp</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@drawable/sesl_progress</item>
+        <item name="android:progressDrawable">@drawable/sesl_progress_circle</item>
+    </style>
+
+    <style name="SpinnerStyle" parent="@style/Platform.Widget.AppCompat.Spinner">
+        <item name="android:gravity">start|center</item>
+        <item name="android:background">@drawable/sesl_spinner_background_dark</item>
+        <item name="android:clickable">true</item>
+        <item name="android:dropDownSelector">?android:listChoiceBackgroundIndicator</item>
+        <item name="android:popupBackground">@drawable/sesl_menu_popup_background_dark</item>
+        <item name="android:dropDownHorizontalOffset">0.0dip</item>
+        <item name="android:dropDownVerticalOffset">0.0dip</item>
+        <item name="android:popupAnimationStyle">@style/Base.Animation.AppCompat.ListPopup</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:popupElevation">@dimen/sesl_menu_popup_elevation</item>
+        <item name="overlapAnchor">true</item>
+    </style>
+
+    <style name="Base.Animation.AppCompat.ListPopup" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/sesl_list_popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/sesl_list_popup_exit</item>
+    </style>
+
+    <style name="SpinnerDropDownItem" parent="@android:style/Widget.Material.DropDownItem.Spinner">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Widget.DropDownItem</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/sesl_popup_menu_item_top_padding</item>
+        <item name="android:paddingBottom">@dimen/sesl_popup_menu_item_bottom_padding</item>
+        <item name="android:checkMark">@drawable/sesl_spinner_checked_ic_selector</item>
+        <item name="android:minWidth">@dimen/sesl_popup_menu_item_min_width</item>
+        <item name="android:minHeight">@dimen/sesl_popup_menu_item_min_height</item>
+        <item name="android:paddingStart">@dimen/sesl_popup_menu_item_start_padding</item>
+        <item name="android:paddingEnd">@dimen/sesl_popup_menu_item_end_padding</item>
+    </style>
+
+    <style name="Base.TextAppearance.AppCompat.Widget.DropDownItem" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">@dimen/sesl_popup_menu_item_text_size</item>
+        <item name="android:textColor">@color/sesl_spinner_dropdown_text_color_dark</item>
+    </style>
+
 </resources>

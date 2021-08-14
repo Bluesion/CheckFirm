@@ -60,10 +60,14 @@
     <string name="sherlock_correct">L-AI DEPISTAT!</string>
     <string name="sherlock_not_correct">Of… Nu e ăsta.</string>
     <string name="sherlock_original">Original</string>
-    <string name="sherlock_watson_format">Decriptat de %s</string>
     <string name="sherlock_in">It is in previous test firmware.</string>
     <string name="sherlock_not_in">It is not in previous test firmware.</string>
+    <string name="sherlock_upload_server">Information uploaded to server.</string>
+
+    <!-- Sherlock script -->
     <string name="sherlock_script">Sherlock script</string>
+    <string name="sherlock_script_log">Log</string>
+    <string name="sherlock_script_message">Set script start and end value first. and then start script.</string>
     <string name="sherlock_script_start_value">Start</string>
     <string name="sherlock_script_end_value">End</string>
     <string name="sherlock_script_start">Start script</string>
@@ -74,8 +78,8 @@
     <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
     <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
     <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
-    <string name="sherlock_script_end">Script ended. Found: %s</string>
-    <string name="sherlock_upload_server">Information uploaded to server.</string>
+    <string name="sherlock_script_end">Script ended. Found:\n%s</string>
+    <string name="sherlock_script_end_failed">Script ended. Found nothing. You can try again by resetting script start and end value.</string>
 
     <!-- Bookmark -->
     <string name="bookmark">Semn de carte</string>
@@ -85,15 +89,27 @@
     <string name="bookmark_save">Salvează</string>
     <string name="bookmark_search_error">Verifică dacă CSC-ul e scris corect in semnul de carte.</string>
     <string name="bookmark_order">Ordonează semnele de carte</string>
+    <string name="bookmark_order_description">Order bookmarks</string>
     <string name="bookmark_order_by_created_time">Ordonează în funcție de timpul creeării</string>
     <string name="bookmark_order_by_device">Ordonează după dispozitiv</string>
     <string name="bookmark_order_by_name">Ordonează după nume</string>
     <string name="bookmark_order_by_desc">Ordonează descendent</string>
 
+    <!-- Bookmark backup and restore -->
+    <string name="backup">Backup</string>
+    <string name="backup_description">Save CheckFirm bookmark and category as JSON file.</string>
+    <string name="restore">Restore</string>
+    <string name="restore_description">Load backup JSON file to restore.</string>
+    <string name="backup_toast">Backup complete.</string>
+    <string name="restore_toast">Restore completed.</string>
+
     <!-- Help -->
     <string name="help">Ajutor</string>
     <string name="help_device_info">Info Dispozitiv.</string>
     <string name="help_device_info_description">Model si CSC</string>
+    <string name="help_device_info_edit">Edit</string>
+    <string name="help_device_name">Device name</string>
+    <string name="help_device_info_bookmark">Bookmark saved.</string>
     <string name="help_manual">Firmware manual</string>
     <string name="help_manual_description">Firmware information</string>
     <string name="help_youtube">Video Explicativ pe Youtube</string>
@@ -157,6 +173,8 @@
     <string name="settings_firebase_description">În țări precum Iran si China FireBase e blocat, selectează această opțiune pentru a bypass-ui eroarea </string>
     <string name="settings_quick_search_bar">Bară căutare rapidă</string>
     <string name="settings_quick_search_bar_description">Arată pe ecranul principal semnele de carte.</string>
+    <string name="settings_bookmark_backup_restore">Backup&amp;restore</string>
+    <string name="settings_bookmark_backup_restore_description">Backup and restore CheckFirm bookmark and category.</string>
 
     <!-- Welcome Search -->
     <string name="welcome_search">Căutare de la intrare</string>
@@ -204,7 +222,7 @@
     <string name="inquiry_bug">Rapoarte bug-uri</string>
     <string name="inquiry_question">Întrebări</string>
     <string name="inquiry_send">Trimite</string>
-    <string name="inquiry_type">Tip Cerere</string>
+    <string name="inquiry_hint">Tell me details.</string>
 
     <!-- Suggestion -->
     <string name="suggestion">Sugestii</string>
@@ -224,6 +242,7 @@
     <string name="category_edit_name_error_all">Category name cannot be All.</string>
     <string name="category_edit_name_error_empty">Category name should not be empty.</string>
     <string name="category_edit_device_list_error_empty">Device list should not be empty.</string>
+    <string name="smart_search_watson">Decriptat de</string>
 
     <!-- Beta -->
 </resources>
