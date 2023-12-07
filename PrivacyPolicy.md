@@ -8,8 +8,10 @@ If you decrypt the lastest firwmare information using CheckFirm Sherlock, your n
 
 CheckFirm always cares your privacy.
 
+</br>
+</br>
 
-# Volt 개인정보처리방침
+# CheckFirm 개인정보처리방침
 CheckFirm은 유저의 닉네임을 셜록 기능에 활용합니다.
 
 1. 셜록은 앱의 필수 기능이 아닙니다. 셜록 없이도 충분히 CheckFirm을 사용하실 수 있습니다.
