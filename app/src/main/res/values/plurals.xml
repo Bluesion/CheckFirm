@@ -8,4 +8,9 @@
         <item quantity="one">%d category</item>
         <item quantity="other">%d categories</item>
     </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="one">%d device</item>
+        <item quantity="other">%d devices</item>
+    </plurals>
 </resources>

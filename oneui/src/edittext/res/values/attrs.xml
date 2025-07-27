@@ -1,0 +1,199 @@
+<resources>
+    <declare-styleable name="OneUIEditText">
+        <attr name="hint" format="string" />
+        <attr name="hintTextColor" format="color" />
+        <attr name="text" format="string" />
+        <attr name="textAppearance" format="reference" />
+        <attr name="inputType" format="enum">
+            <!-- There is no content type.  The text is not editable. -->
+            <enum name="none" value="0" />
+            <!-- Just plain old text.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_NORMAL}. -->
+            <enum name="text" value="1" />
+            <!-- Can be combined with <var>text</var> and its variations to
+                 request capitalization of all characters.  Corresponds to
+                 {@link android.text.InputType#TYPE_TEXT_FLAG_CAP_CHARACTERS}. -->
+            <enum name="textCapCharacters" value="4097" />
+            <!-- Can be combined with <var>text</var> and its variations to
+                 request capitalization of the first character of every word.  Corresponds to
+                 {@link android.text.InputType#TYPE_TEXT_FLAG_CAP_WORDS}. -->
+            <enum name="textCapWords" value="8193" />
+            <!-- Can be combined with <var>text</var> and its variations to
+                 request capitalization of the first character of every sentence.  Corresponds to
+                 {@link android.text.InputType#TYPE_TEXT_FLAG_CAP_SENTENCES}. -->
+            <enum name="textCapSentences" value="16385" />
+            <!-- Can be combined with <var>text</var> and its variations to
+                 request auto-correction of text being input.  Corresponds to
+                 {@link android.text.InputType#TYPE_TEXT_FLAG_AUTO_CORRECT}. -->
+            <enum name="textAutoCorrect" value="32769" />
+            <!-- Can be combined with <var>text</var> and its variations to
+                 specify that this field will be doing its own auto-completion and
+                 talking with the input method appropriately.  Corresponds to
+                 {@link android.text.InputType#TYPE_TEXT_FLAG_AUTO_COMPLETE}. -->
+            <enum name="textAutoComplete" value="65537" />
+            <!-- Can be combined with <var>text</var> and its variations to
+                 allow multiple lines of text in the field.  If this flag is not set,
+                 the text field will be constrained to a single line.  Corresponds to
+                 {@link android.text.InputType#TYPE_TEXT_FLAG_MULTI_LINE}.
+
+                 Note: If this flag is not set and the text field doesn't have max length limit, the
+                 framework automatically set maximum length of the characters to 5000 for the
+                 performance reasons.
+                 -->
+            <enum name="textMultiLine" value="131073" />
+            <!-- Can be combined with <var>text</var> and its variations to
+                 indicate that though the regular text view should not be multiple
+                 lines, the IME should provide multiple lines if it can.  Corresponds to
+                 {@link android.text.InputType#TYPE_TEXT_FLAG_IME_MULTI_LINE}. -->
+            <enum name="textImeMultiLine" value="262145" />
+            <!-- Can be combined with <var>text</var> and its variations to
+                 indicate that the IME should not show any
+                 dictionary-based word suggestions.  Corresponds to
+                 {@link android.text.InputType#TYPE_TEXT_FLAG_NO_SUGGESTIONS}. -->
+            <enum name="textNoSuggestions" value="524289" />
+            <!-- Can be combined with <var>text</var> and its variations to
+                 indicate that if there is extra information, the IME should provide
+                 {@link android.view.inputmethod.TextAttribute}.  Corresponds to
+                 {@link android.text.InputType#TYPE_TEXT_FLAG_ENABLE_TEXT_CONVERSION_SUGGESTIONS}. -->
+            <enum name="textEnableTextConversionSuggestions" value="1048577" />
+            <!-- Text that will be used as a URI.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_URI}. -->
+            <enum name="textUri" value="17" />
+            <!-- Text that will be used as an e-mail address.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_EMAIL_ADDRESS}. -->
+            <enum name="textEmailAddress" value="33" />
+            <!-- Text that is being supplied as the subject of an e-mail.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_EMAIL_SUBJECT}. -->
+            <enum name="textEmailSubject" value="49" />
+            <!-- Text that is the content of a short message.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_SHORT_MESSAGE}. -->
+            <enum name="textShortMessage" value="65" />
+            <!-- Text that is the content of a long message.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_LONG_MESSAGE}. -->
+            <enum name="textLongMessage" value="81" />
+            <!-- Text that is the name of a person.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_PERSON_NAME}. -->
+            <enum name="textPersonName" value="97" />
+            <!-- Text that is being supplied as a postal mailing address.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_POSTAL_ADDRESS}. -->
+            <enum name="textPostalAddress" value="113" />
+            <!-- Text that is a password.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_PASSWORD}. -->
+            <enum name="textPassword" value="129" />
+            <!-- Text that is a password that should be visible.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_VISIBLE_PASSWORD}. -->
+            <enum name="textVisiblePassword" value="145" />
+            <!-- Text that is being supplied as text in a web form.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_WEB_EDIT_TEXT}. -->
+            <enum name="textWebEditText" value="161" />
+            <!-- Text that is filtering some other data.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_FILTER}. -->
+            <enum name="textFilter" value="177" />
+            <!-- Text that is for phonetic pronunciation, such as a phonetic name
+                 field in a contact entry.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_PHONETIC}. -->
+            <enum name="textPhonetic" value="193" />
+            <!-- Text that will be used as an e-mail address on a web form.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS}. -->
+            <enum name="textWebEmailAddress" value="209" />
+            <!-- Text that will be used as a password on a web form.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_TEXT} |
+                 {@link android.text.InputType#TYPE_TEXT_VARIATION_WEB_PASSWORD}. -->
+            <enum name="textWebPassword" value="225" />
+            <!-- A numeric only field.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_NUMBER} |
+                 {@link android.text.InputType#TYPE_NUMBER_VARIATION_NORMAL}. -->
+            <enum name="number" value="2" />
+            <!-- Can be combined with <var>number</var> and its other options to
+                 allow a signed number.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_NUMBER} |
+                 {@link android.text.InputType#TYPE_NUMBER_FLAG_SIGNED}. -->
+            <enum name="numberSigned" value="4098" />
+            <!-- Can be combined with <var>number</var> and its other options to
+                 allow a decimal (fractional) number.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_NUMBER} |
+                 {@link android.text.InputType#TYPE_NUMBER_FLAG_DECIMAL}. -->
+            <enum name="numberDecimal" value="8194" />
+            <!-- A numeric password field.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_NUMBER} |
+                 {@link android.text.InputType#TYPE_NUMBER_VARIATION_PASSWORD}. -->
+            <enum name="numberPassword" value="18" />
+            <!-- For entering a phone number.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_PHONE}. -->
+            <enum name="phone" value="3" />
+            <!-- For entering a date and time.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_DATETIME} |
+                 {@link android.text.InputType#TYPE_DATETIME_VARIATION_NORMAL}. -->
+            <enum name="datetime" value="4" />
+            <!-- For entering a date.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_DATETIME} |
+                 {@link android.text.InputType#TYPE_DATETIME_VARIATION_DATE}. -->
+            <enum name="date" value="20" />
+            <!-- For entering a time.  Corresponds to
+                 {@link android.text.InputType#TYPE_CLASS_DATETIME} |
+                 {@link android.text.InputType#TYPE_DATETIME_VARIATION_TIME}. -->
+            <enum name="time" value="36" />
+        </attr>
+        <attr name="maxLines" format="integer" />
+        <attr name="privateImeOptions" format="string" />
+        <attr name="imeOptions" format="enum">
+            <!-- This editor has no action associated with it.
+                 Corresponds to
+                 {@link android.view.inputmethod.EditorInfo#IME_ACTION_NONE}. -->
+            <enum name="actionNone" value="1" />
+            <!-- The action key performs a "go"
+                 operation to take the user to the target of the text they typed.
+                 Typically used, for example, when entering a URL.
+                 Corresponds to
+                 {@link android.view.inputmethod.EditorInfo#IME_ACTION_GO}. -->
+            <enum name="actionGo" value="2" />
+            <!-- The action key performs a "search"
+                 operation, taking the user to the results of searching for the text
+                 the have typed (in whatever context is appropriate).
+                 Corresponds to
+                 {@link android.view.inputmethod.EditorInfo#IME_ACTION_SEARCH}. -->
+            <enum name="actionSearch" value="3" />
+            <!-- The action key performs a "send"
+                 operation, delivering the text to its target.  This is typically used
+                 when composing a message.
+                 Corresponds to
+                 {@link android.view.inputmethod.EditorInfo#IME_ACTION_SEND}. -->
+            <enum name="actionSend" value="4" />
+            <!-- The action key performs a "next"
+                 operation, taking the user to the next field that will accept text.
+                 Corresponds to
+                 {@link android.view.inputmethod.EditorInfo#IME_ACTION_NEXT}. -->
+            <enum name="actionNext" value="5" />
+            <!-- The action key performs a "done"
+                 operation, closing the soft input method.
+                 Corresponds to
+                 {@link android.view.inputmethod.EditorInfo#IME_ACTION_DONE}. -->
+            <enum name="actionDone" value="6" />
+        </attr>
+        <attr name="importantForAutofill" format="enum">
+            <enum name="auto" value="1" />
+            <enum name="no" value="2" />
+            <enum name="noExcludeDescendants" value="4" />
+            <enum name="yes" value="0" />
+            <enum name="yesExcludeDescendants" value="3" />
+        </attr>
+        <attr name="clearIcon" format="reference" />
+        <attr name="enableClearIcon" format="boolean" />
+        <attr name="lineColor" format="color" />
+        <attr name="lineHeight" format="dimension" />
+    </declare-styleable>
+</resources>

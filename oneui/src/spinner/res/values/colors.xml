@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="oneui_spinner_dropdown_item_text_color_disabled">#66000000</color>
+    <color name="oneui_spinner_dropdown_item_text_color_normal">#000000</color>
+    <color name="oneui_spinner_icon_color_default">#3B3B3B</color>
+    <color name="oneui_spinner_icon_color_disabled">#663B3B3B</color>
+    <color name="oneui_spinner_item_text_color_disabled">#66252525</color>
+    <color name="oneui_spinner_item_text_color_normal">#252525</color>
+</resources>

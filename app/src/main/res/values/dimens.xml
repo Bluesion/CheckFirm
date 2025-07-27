@@ -1,26 +1,6 @@
 <resources>
-    <dimen name="fast_scroll_thickness">8dp</dimen>
-    <dimen name="fast_scroll_margin">0dp</dimen>
-    <dimen name="fast_scroll_min_range">50dp</dimen>
-    <dimen name="fast_scroll_min_thumbSize">50dp</dimen>
-    <dimen name="bottom_list_padding">128dp</dimen>
-
-    <!--Spinner-->
-    <dimen name="sesl_menu_popup_bottom_margin">6dp</dimen>
-    <dimen name="sesl_menu_popup_bottom_padding">6dp</dimen>
-    <dimen name="sesl_menu_popup_corner_radius">24dp</dimen>
-    <dimen name="sesl_menu_popup_elevation">8dp</dimen>
-    <dimen name="sesl_menu_popup_scale_anim_pivot_x">100.0%</dimen>
-    <dimen name="sesl_menu_popup_stroke_width">1dp</dimen>
-    <dimen name="sesl_menu_popup_top_margin">6dp</dimen>
-    <dimen name="sesl_menu_popup_top_padding">6dp</dimen>
-
-    <dimen name="sesl_popup_menu_item_bottom_padding">13dp</dimen>
-    <dimen name="sesl_popup_menu_item_end_padding">24dp</dimen>
-    <dimen name="sesl_popup_menu_item_min_height">43dp</dimen>
-    <dimen name="sesl_popup_menu_item_min_width">168dp</dimen>
-    <dimen name="sesl_popup_menu_item_start_padding">24dp</dimen>
-    <dimen name="sesl_popup_menu_item_top_padding">13dp</dimen>
-    <dimen name="sesl_popup_menu_item_text_size">17sp</dimen>
-    <dimen name="sesl_disabled_color_alpha">0.4</dimen>
+    <dimen name="chip_ripple_default_alpha">0.12</dimen>
+    <dimen name="chip_ripple_focused_alpha">0.20</dimen>
+    <dimen name="chip_ripple_hovered_alpha">0.20</dimen>
+    <dimen name="chip_ripple_pressed_alpha">0.12</dimen>
 </resources>

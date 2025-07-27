@@ -1,0 +1,67 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <group
+        android:name="rotating_border_group"
+        android:pivotX="12"
+        android:pivotY="12">
+        <!-- First quarter of the circular border (top-right) with gaps -->
+        <path
+            android:name="border_segment_1"
+            android:strokeColor="@color/sesl_loading_progress_color2"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:trimPathStart="0.12"
+            android:trimPathEnd="0.88"
+            android:pathData="M12,2 A10,10 0 0,1 22,12" />
+
+        <!-- Second quarter of the circular border (bottom-right) with gaps -->
+        <path
+            android:name="border_segment_2"
+            android:strokeColor="@color/sesl_loading_progress_color2"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:trimPathStart="0.12"
+            android:trimPathEnd="0.88"
+            android:pathData="M22,12 A10,10 0 0,1 12,22" />
+
+        <!-- Third quarter of the circular border (bottom-left) with gaps -->
+        <path
+            android:name="border_segment_3"
+            android:strokeColor="@color/sesl_loading_progress_color2"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:trimPathStart="0.12"
+            android:trimPathEnd="0.88"
+            android:pathData="M12,22 A10,10 0 0,1 2,12" />
+
+        <!-- Fourth quarter of the circular border (top-left) with gaps -->
+        <path
+            android:name="border_segment_4"
+            android:strokeColor="@color/sesl_loading_progress_color1"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:trimPathStart="0.12"
+            android:trimPathEnd="0.88"
+            android:pathData="M2,12 A10,10 0 0,1 12,2" />
+    </group>
+    <path
+        android:name="face"
+        android:fillColor="@color/sherlock_loading_color"
+        android:fillType="evenOdd"
+        android:pathData="M12,19.583C16.188,19.583 19.583,16.188 19.583,12C19.583,7.812 16.188,4.417 12,4.417C7.812,4.417 4.417,7.812 4.417,12C4.417,16.188 7.812,19.583 12,19.583Z" />
+    <path
+        android:name="left_eye"
+        android:fillColor="@android:color/white"
+        android:pathData="M9.512,11.645C9.97,11.645 10.341,11.088 10.341,10.401C10.341,9.713 9.97,9.156 9.512,9.156C9.054,9.156 8.682,9.713 8.682,10.401C8.682,11.088 9.054,11.645 9.512,11.645Z" />
+    <path
+        android:name="right_eye"
+        android:fillColor="@android:color/white"
+        android:pathData="M15.317,10.401C15.317,11.088 14.946,11.645 14.488,11.645C14.03,11.645 13.659,11.088 13.659,10.401C13.659,9.713 14.03,9.156 14.488,9.156C14.946,9.156 15.317,9.713 15.317,10.401Z" />
+    <path
+        android:name="mouth"
+        android:fillColor="@android:color/white"
+        android:pathData="M8.941,14.539C9.175,14.223 9.62,14.157 9.935,14.391C10.525,14.828 11.236,15.08 12,15.08C12.764,15.08 13.475,14.828 14.065,14.391C14.38,14.157 14.825,14.223 15.059,14.539C15.293,14.854 15.227,15.299 14.911,15.533C14.09,16.142 13.086,16.502 12,16.502C10.914,16.502 9.909,16.142 9.089,15.533C8.773,15.299 8.707,14.854 8.941,14.539Z" />
+</vector>

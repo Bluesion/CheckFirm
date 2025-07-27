@@ -1,0 +1,19 @@
+<resources>
+
+    <style name="OneUI.Switch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumb">@drawable/sesl_switch_thumb_selector</item>
+        <item name="track">@drawable/sesl_switch_track_selector</item>
+        <item name="showText">false</item>
+        <item name="switchPadding">0dp</item>
+        <item name="android:background">@drawable/sesl_switch_background</item>
+    </style>
+	
+	<style name="OneUI.SwitchText" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/oneui_switch_card_text_off</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="singleLine">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="switch_on">Включено</string>
+    <string name="switch_off">Выключено</string>
+</resources>

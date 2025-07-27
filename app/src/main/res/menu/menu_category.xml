@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/arrange"
+        android:icon="@drawable/ic_arrange"
+        android:title="@string/settings_bookmark_order"
+        app:showAsAction="ifRoom" />
+
+</menu>

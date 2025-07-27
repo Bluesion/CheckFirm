@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="oneui_primary">#0381FE</color>
+    <color name="oneui_onPrimary">#1A1B1F</color>
+    <color name="oneui_primaryContainer">#0381FE</color>
+    <color name="oneui_onPrimaryContainer">#1A1B1F</color>
+    <color name="oneui_secondary">#0381FE</color>
+    <color name="oneui_onSecondary">#1A1B1F</color>
+    <color name="oneui_secondaryContainer">#0381FE</color>
+    <color name="oneui_onSecondaryContainer">#E3E2E6</color>
+    <color name="oneui_tertiary">#0381FE</color>
+    <color name="oneui_onTertiary">#1A1B1F</color>
+    <color name="oneui_tertiaryContainer">#0381FE</color>
+    <color name="oneui_onTertiaryContainer">#1A1B1F</color>
+    <color name="oneui_error">#FFB4A9</color>
+    <color name="oneui_errorContainer">#930006</color>
+    <color name="oneui_onError">#680003</color>
+    <color name="oneui_onErrorContainer">#FFDAD4</color>
+    <color name="oneui_background">#010101</color>
+    <color name="oneui_onBackground">#E3E2E6</color>
+    <color name="oneui_surface">#171719</color>
+    <color name="oneui_onSurface">#FFFFFF</color>
+    <color name="oneui_surfaceVariant">#44474F</color>
+    <color name="oneui_onSurfaceVariant">#E3E2E6</color>
+    <color name="oneui_outline">#8D9099</color>
+    <color name="oneui_inverseOnSurface">#1A1B1F</color>
+    <color name="oneui_inverseSurface">#E3E2E6</color>
+    <color name="oneui_primaryInverse">#0381FE</color>
+	<color name="oneui_toolbar_icon_tint">#FAFAFA</color>
+	<color name="oneui_menu_popup_background_color">#252525</color>
+    <color name="oneui_menu_popup_background_stroke_color">#252525</color>
+</resources>

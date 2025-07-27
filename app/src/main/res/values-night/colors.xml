@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="button_ripple_color">#515151</color>
+
+    <color name="oneui_settings_description_color">#959597</color>
+
+    <color name="oneui_toolbar_text_color">#E5E5E5</color>
+
+    <color name="oneui4_tip_card_background_color">#053053</color>
+    <color name="oneui4_tip_text_color">#038BFB</color>
+
+    <color name="oneui4_about_page_button_text">#FAFAFA</color>
+    <color name="oneui4_about_page_button_ripple_color">#404040</color>
+
+    <color name="search_add_button_background_color">#2D2D30</color>
+
+    <color name="sherlock_warning_color">#FF9B17</color>
+    <color name="sherlock_fail_color">@color/oneui_error</color>
+    <color name="sherlock_normal_color">@color/oneui_primary</color>
+    <color name="sherlock_success_color">#8DD483</color>
+    <color name="sherlock_loading_color">#C1C1C1</color>
+</resources>

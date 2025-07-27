@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/app_information"
-        android:icon="@drawable/app_info_icon"
+        android:icon="@drawable/oneui_app_info_icon"
         android:title="@string/about_app_information"
         app:showAsAction="ifRoom" />
 

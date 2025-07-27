@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/sesl_radiobutton">
+    <target
+        android:name="s2"
+        android:animation="@animator/sesl_radio_outcircle_scaley_0_reverse" />
+    <target
+        android:name="s2pg1p10"
+        android:animation="@animator/sesl_radio_outcircle_ellipsepath1custom1_stroke1_s2pg1p2_reverse" />
+    <target
+        android:name="s1"
+        android:animation="@animator/sesl_radio_incircle_scaley_4_reverse" />
+</animated-vector>

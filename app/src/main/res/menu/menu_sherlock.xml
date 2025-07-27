@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/information"
+        android:icon="@drawable/oneui_app_info_icon"
+        android:title="@string/sherlock"
+        app:showAsAction="ifRoom" />
+
+</menu>

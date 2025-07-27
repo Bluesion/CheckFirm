@@ -1,0 +1,183 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/build_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:contentPadding="12dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/oneui_switch_thumb_off_stroke_color"
+        app:layout_constraintBottom_toTopOf="@id/csc_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/build_card_title"
+                style="@style/TextAppearance.Material3.LabelLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sherlock_build"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_build_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/oneui_switch_track_off_stroke_color"
+                android:background="@null"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
+                android:privateImeOptions="defaultInputmode=english"
+                app:layout_constraintTop_toBottomOf="@id/build_card_title"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="A720SKS" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_build"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:background="@null"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
+                android:privateImeOptions="defaultInputmode=english"
+                app:layout_constraintTop_toBottomOf="@id/build_card_title"
+                app:layout_constraintStart_toEndOf="@id/edit_text_build_prefix"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="U3BRK1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/csc_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:contentPadding="12dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/oneui_switch_thumb_off_stroke_color"
+        app:layout_constraintBottom_toTopOf="@id/baseband_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/csc_card_title"
+                style="@style/TextAppearance.Material3.LabelLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/csc"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_csc_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/oneui_switch_track_off_stroke_color"
+                android:background="@null"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
+                android:privateImeOptions="defaultInputmode=english"
+                app:layout_constraintTop_toBottomOf="@id/csc_card_title"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="A720SSK" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_csc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:background="@null"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
+                android:privateImeOptions="defaultInputmode=english"
+                app:layout_constraintTop_toBottomOf="@id/csc_card_title"
+                app:layout_constraintStart_toEndOf="@id/edit_text_csc_prefix"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="C3BRK1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/baseband_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="12dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/oneui_switch_thumb_off_stroke_color"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/baseband_card_title"
+                style="@style/TextAppearance.Material3.LabelLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sherlock_baseband"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_baseband_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/oneui_switch_track_off_stroke_color"
+                android:background="@null"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
+                android:privateImeOptions="defaultInputmode=english"
+                app:layout_constraintTop_toBottomOf="@id/baseband_card_title"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="A720NKO" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_baseband"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:background="@null"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
+                android:privateImeOptions="defaultInputmode=english"
+                app:layout_constraintTop_toBottomOf="@id/baseband_card_title"
+                app:layout_constraintStart_toEndOf="@id/edit_text_baseband_prefix"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="U3BRK1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

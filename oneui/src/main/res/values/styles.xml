@@ -1,0 +1,8 @@
+<resources>
+    <style name="OneUI" />
+
+	<style name="OneUI.Animation.ListPopup" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/oneui_list_popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/oneui_list_popup_exit</item>
+    </style>
+</resources>

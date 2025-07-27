@@ -1,39 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">@color/blue</color>
-    <color name="color_primary_dark">#0072de</color>
-    <color name="color_control_activated">#3e91ff</color>
     <color name="ic_launcher_background">#FFFFFF</color>
-    <color name="background_color">#f2f2f2</color>
-    <color name="red">#f64141</color>
-    <color name="yellow">#FEC006</color>
-    <color name="green">#15b76d</color>
-    <color name="blue">#0381fe</color>
-    <color name="purple">#6E6ED1</color>
-    <color name="switch_card_background_off">#fafafa</color>
-    <color name="switch_card_background_on">#ffaad2fa</color>
-    <color name="switch_text_color_on">#ff0072de</color>
-    <color name="switch_track_off_stroke_color">#ffa4a4a4</color>
-    <color name="switch_track_on_color">#ff0381fe</color>
-    <color name="switch_thumb_off_color">#fffafafa</color>
-    <color name="switch_thumb_off_stroke_color">#ffa1a1a1</color>
-    <color name="switch_thumb_on_color">#fffafafa</color>
-    <color name="switch_thumb_on_stroke_color">#0381fe</color>
-    <color name="button_ripple_color">#e1e1e1</color>
-    <color name="tip_card_background_color">#e3eaf0</color>
-    <color name="tip_title_color">#2e2e2e</color>
-    <color name="tip_text_color">#0074d4</color>
+    <color name="button_ripple_color">#E1E1E1</color>
 
-    <color name="sesl_menu_popup_background_color">#FCFCFC</color>
-    <color name="sesl_menu_popup_background_stroke_color">#FCFCFC</color>
-    <color name="sesl_spinner_dropdown_item_text_color_disabled">#66000000</color>
-    <color name="sesl_spinner_dropdown_item_text_color_normal">#000000</color>
-    <color name="sesl_spinner_icon_color_default">#3B3B3B</color>
-    <color name="sesl_spinner_icon_color_disabled">#663B3B3B</color>
-    <color name="sesl_spinner_item_text_color_disabled">#66252525</color>
-    <color name="sesl_spinner_item_text_color_normal">#252525</color>
+    <color name="oneui_settings_description_color">#848386</color>
 
-    <color name="sesl_scrollbar_handle_tint">#DEDEDE</color>
+    <color name="oneui_toolbar_text_color">#262628</color>
 
-    <color name="item_divider_color">#979797</color>
+    <color name="oneui4_tip_card_background_color">#E3EAF0</color>
+    <color name="oneui4_tip_text_color">#0074D4</color>
+
+    <color name="oneui4_about_page_button_text">#252525</color>
+    <color name="oneui4_about_page_button_ripple_color">#DFDFDF</color>
+
+    <color name="search_add_button_background_color">#E9E9EC</color>
+
+    <color name="sherlock_warning_color">#FF9B17</color>
+    <color name="sherlock_fail_color">@color/oneui_error</color>
+    <color name="sherlock_normal_color">@color/oneui_primary</color>
+    <color name="sherlock_success_color">#8DD483</color>
+    <color name="sherlock_loading_color">#C1C1C1</color>
 </resources>

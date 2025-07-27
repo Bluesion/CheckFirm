@@ -1,0 +1,10 @@
+<resources>
+    <style name="OneUI.ProgressBarStyle.Circle" parent="@android:style/Widget.ProgressBar">
+        <item name="android:maxWidth">60dp</item>
+        <item name="android:maxHeight">60dp</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@drawable/oneui_progress</item>
+        <item name="android:progressDrawable">@drawable/oneui_progress_circle</item>
+    </style>
+</resources>

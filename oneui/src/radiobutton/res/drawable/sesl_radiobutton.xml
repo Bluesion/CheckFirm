@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32"
+    aapt:fps="60">
+    <group
+        android:name="s2"
+        android:scaleX="0.25"
+        android:scaleY="0.25"
+        android:translateX="16"
+        android:translateY="16"
+        aapt:layer_name="Radio_outCircle">
+        <group
+            android:name="s2pg1"
+            aapt:layer_name="Ellipse 1">
+            <path
+                android:name="s2pg1p10"
+                android:pathData="M 0 -36 C 19.882 -36 36 -19.882 36 0 C 36 19.882 19.882 36 0 36 C -19.882 36 -36 19.882 -36 0 C -36 -19.882 -19.882 -36 0 -36 Z"
+                android:strokeWidth="6"
+                android:strokeAlpha="0.8"
+                android:strokeColor="@color/oneui_radiobutton_color"
+                android:strokeLineCap="butt"
+                android:strokeLineJoin="miter"
+                android:strokeMiterLimit="4"
+                aapt:layer_name="Ellipse Path 1"
+                aapt:style_name="Stroke 1" />
+        </group>
+    </group>
+    <group
+        android:name="s1"
+        android:pivotX="20.25"
+        android:pivotY="20.25"
+        android:scaleX="0"
+        android:scaleY="0"
+        android:translateX="-4.25"
+        android:translateY="-4.25"
+        aapt:layer_name="Radio_inCircle">
+        <group
+            android:name="s1pg1"
+            android:translateX="20.25"
+            android:translateY="20.25"
+            aapt:layer_name="Group 1">
+            <path
+                android:name="s1pg1p10"
+                android:fillAlpha="1"
+                android:fillColor="@color/oneui_radiobutton_color"
+                android:pathData="M 0 -20 C 11.046 -20 20 -11.046 20 0 C 20 11.046 11.046 20 0 20 C -11.046 20 -20 11.046 -20 0 C -20 -11.046 -11.046 -20 0 -20 Z"
+                aapt:layer_name="Path 1"
+                aapt:style_name="Fill 1" />
+        </group>
+    </group>
+</vector>

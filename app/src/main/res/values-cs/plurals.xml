@@ -7,9 +7,16 @@
     </plurals>
 
     <plurals name="category_subtitle">
-        <item quantity="one">%d category</item>
-        <item quantity="few">%d categories</item>
-        <item quantity="many">%d categories</item>
-        <item quantity="other">%d categories</item>
+        <item quantity="one">%d kategorie</item>
+        <item quantity="few">%d kategorie</item>
+        <item quantity="many">%d kategorií</item>
+        <item quantity="other">%d kategorií</item>
+    </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="one">%d zařízení</item>
+        <item quantity="few">%d zařízení</item>
+        <item quantity="many">%d zařízení</item>
+        <item quantity="other">%d zařízení</item>
     </plurals>
 </resources>

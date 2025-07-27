@@ -2,245 +2,245 @@
     <!-- Test -->
 
     <!-- General -->
-    <string name="check_network">Проверьте подключение к интернету.</string>
-    <string name="switch_on">Включено</string>
-    <string name="switch_off">Выключено</string>
+    <string name="add_item">Добавить</string>
+    <string name="check_network">Проверьте сеть</string>
+    <string name="check_device">Убедитесь, что вы правильно ввели код модели и CSC.</string>
     <string name="close">Закрыть</string>
     <string name="unknown">Неизвестно</string>
-    <string name="my_device">Мое устройство</string>
 
     <!-- Notification -->
     <string name="notification_channel_new_firmware">Новая прошивка</string>
     <string name="notification_channel_new_update">Обновление приложения</string>
-    <string name="notification_new_update_text">Исправлены критические ошибки приложения. Обновите приложение через Play Маркет прямо сейчас.</string>
-    <string name="notification_new_update_title">Важное обновление CheckFirm</string>
-    <string name="info_catcher_notification_title">%1$s (%2$s) новая прошивка найдена!</string>
-    <string name="info_catcher_notification_text">Ознакомьтесь с ней сейчас.</string>
-    <string name="sherlock_script_notification_name">Sherlock script</string>
-    <string name="sherlock_script_notification_description">Show notification for Sherlock script.</string>
-    <string name="sherlock_script_notification_title">Sherlock script</string>
-    <string name="sherlock_script_notification_text_ongoing">Sherlock script running…</string>
-    <string name="sherlock_script_notification_text_finished">Sherlock script finished.</string>
-    <string name="notification_channel_name_sherlock_script">Sherlock script</string>
-    <string name="notification_channel_description_sherlock_script">Sherlock script helps you find latest test firmware even it is encrypted.</string>
+    <string name="notification_new_update_title">Срочное обновление CheckFirm</string>
+    <string name="notification_new_update_text">Сообщается о критических ошибках. Пожалуйста, обновитесь из Play Store немедленно.</string>
+    <string name="notification_info_catcher_title">Найдена новая прошивка для %1$s (%2$s)!</string>
+    <string name="notification_info_catcher_text">Проверьте сейчас.</string>
+    <string name="notification_permission_required_title">Требуется разрешение</string>
+    <string name="notification_permission_required_message">CheckFirm предоставляет Info Catcher, который уведомляет вас о найденной новой прошивке. Чтобы использовать эту функцию, вы должны предоставить разрешение на уведомления.</string>
+    <string name="notification_permission_required_button_deny">Отклонить</string>
+    <string name="notification_permission_required_button_grant">Предоставить</string>
 
     <!-- Main -->
-    <string name="main_welcome_search_text">Поиск при запуске отключен. Рекомендуется включить Поиск при запуске.</string>
+    <string name="main_welcome_search_text">Приветствие Поиск отключено. Рекомендуется включить Приветствие Поиск.</string>
     <string name="main_network_error_title">Сетевая ошибка</string>
     <string name="main_network_error_text">Сеть не подключена или слишком медленная.</string>
     <string name="main_search_error_title">Ошибка поиска</string>
-    <string name="main_search_error_text">Модель или CSC неверны.</string>
+    <string name="main_search_error_text">Модель или CSC указаны неверно.</string>
+    <string name="main_category_dialog_description">Выберите категорию, которую хотите отобразить на панели быстрого поиска.</string>
+    <string name="main_hello_title">Добро пожаловать в CheckFirm!</string>
+    <string name="main_hello_description">Вы можете искать информацию о прошивке для устройств Samsung. Ознакомьтесь с функциями ниже.</string>
+    <string name="main_hello_search_description">Поиск информации о прошивке.</string>
+    <string name="main_hello_bookmark_description">Добавляйте закладки и категории.</string>
+    <string name="main_hello_info_catcher_description">Не пропустите найденную прошивку.</string>
+    <string name="main_hello_settings_description">Вас ждут дополнительные функции.</string>
 
     <!-- Search -->
+    <string name="search">Поиск</string>
     <string name="official_latest">Последняя официальная прошивка</string>
     <string name="test_latest">Последняя тестовая прошивка</string>
-    <string name="test_newfound">Newfound test firmware</string>
-    <string name="beta_firmware">Beta firmware</string>
     <string name="model">Модель</string>
-    <string name="official_previous">Предыдущие официальные прошивки</string>
-    <string name="test_previous">Предыдущие тестовые прошивки</string>
-    <string name="search">Поиск</string>
+    <string name="official_previous">Предыдущая официальная прошивка</string>
+    <string name="test_previous">Предыдущая тестовая прошивка</string>
     <string name="clipboard">Скопировано в буфер обмена.</string>
-    <string name="search_error">На сервере Samsung нет данных для этого устройства.</string>
-    <string name="searching">Ищем прошивки, подождите несколько секунд…</string>
-    <string name="changelog">Список изменений</string>
-    <string name="multi_search_limit">Вы можете искать прошивки для 4 устройств одновременно.</string>
-    <string name="multi_search_lists">Поиск прошивок для %d следующих устройств:</string>
-    <string name="tab_main_1">Официальные</string>
-    <string name="tab_main_2">Тестовые</string>
-    <string name="search_history">Search history</string>
-    <string name="search_list_empty">Search list is empty.</string>
+    <string name="search_error">Поиск не удался. На сервере Samsung нет данных для этого устройства.</string>
+    <string name="multi_search_limit">Вы можете искать до 5 устройств</string>
+    <string name="search_history">История поиска</string>
+    <string name="search_history_delete_all">Удалить все</string>
+    <string name="search_list_empty">Список поиска пуст.</string>
+    <string name="search_no_bookmark">Нет закладки</string>
+    <string name="search_no_history">Нет истории</string>
+    <string name="search_add_bookmark">Добавить закладку</string>
+    <string name="search_result_tab_previous">Предыдущий</string>
+    <string name="search_result_tab_beta">Бета</string>
 
     <!-- Sherlock -->
     <string name="sherlock">Шерлок</string>
-    <string name="sherlock_baseband">Версия модуля связи</string>
     <string name="sherlock_build">Версия сборки</string>
-    <string name="sherlock_correct">ПРАВИЛЬНО!</string>
-    <string name="sherlock_not_correct">Неверно, повторите попытку.</string>
-    <string name="sherlock_samsung_encrypted_text">Последняя текстовая прошивка имеет зашифрованное описание.</string>
-    <string name="sherlock_user_encrypted_text">Преобразованный зашифрованный текст описания</string>
-    <string name="sherlock_in">It is in previous test firmware.</string>
-    <string name="sherlock_not_in">It is not in previous test firmware.</string>
-    <string name="sherlock_original">Original</string>
-    <string name="sherlock_upload_server">Information uploaded to server.</string>
+    <string name="sherlock_baseband">Версия базовой полосы</string>
+    <string name="sherlock_tab_manual">Руководство</string>
+    <string name="sherlock_tab_script">Скрипт</string>
+    <string name="sherlock_result_success">Поздравляем! Вы расшифровали зашифрованную информацию о прошивке.</string>
+    <string name="sherlock_result_fail">Расшифровка не удалась. Вы можете попробовать снова, изменив значение.</string>
+    <string name="sherlock_manual_description">Теперь вы детектив, который расшифровывает зашифрованную информацию о прошивке! Попробуйте расшифровать, вводя значения в каждое поле.</string>
 
     <!-- Sherlock script -->
-    <string name="sherlock_script">Sherlock script</string>
-    <string name="sherlock_script_log">Log</string>
-    <string name="sherlock_script_message">Set script start and end value first. and then start script.</string>
-    <string name="sherlock_script_start_value">Start</string>
-    <string name="sherlock_script_end_value">End</string>
-    <string name="sherlock_script_start">Start script</string>
-    <string name="sherlock_script_no_error">Script is running…</string>
-    <string name="sherlock_script_error_1">Bootloader: start value is larger than end value.</string>
-    <string name="sherlock_script_error_2">Bootloader: start value is larger than end value.</string>
-    <string name="sherlock_script_error_3">Major version: start value is larger than end value.</string>
-    <string name="sherlock_script_error_4">Firmware year: start value is larger than end value.</string>
-    <string name="sherlock_script_error_5">Firmware month: start value is larger than end value.</string>
-    <string name="sherlock_script_error_6">Minor version: start value is larger than end value.</string>
-    <string name="sherlock_script_end">Script ended. Found:\n%s</string>
-    <string name="sherlock_script_end_failed">Script ended. Found nothing. You can try again by resetting script start and end value.</string>
+    <string name="sherlock_script">Скрипт Шерлока</string>
+    <string name="sherlock_script_description">Все, что вам нужно сделать, это ввести начальное и конечное значение. Скрипт Шерлока попытается найти расшифрованную информацию о прошивке со всеми данными между начальным и конечным значением. Обратите внимание, что если разница между начальным и конечным значением слишком велика, приложение может быть принудительно закрыто из-за перегрузки.</string>
+    <string name="sherlock_script_start_value">Начало</string>
+    <string name="sherlock_script_end_value">Конец</string>
+    <string name="sherlock_script_start">Запустить скрипт</string>
+    <string name="sherlock_script_error_1">Загрузчик: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_2">Загрузчик: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_3">Версия One UI: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_4">Год: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_5">Месяц: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_6">Ревизия: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_7">Что-то не так с начальным значением.</string>
+    <string name="sherlock_script_error_8">Что-то не так с конечным значением.</string>
+    <string name="sherlock_script_no_error">Похоже, ошибок нет.\nГотовы к работе!</string>
+    <string name="sherlock_script_running">Скрипт выполняется…\nНе покидайте этот экран.</string>
 
     <!-- Bookmark -->
-    <string name="bookmark">Закладки</string>
+    <string name="bookmark">Закладка</string>
     <string name="bookmark_new">Новая закладка</string>
     <string name="bookmark_edit">Редактировать закладку</string>
-    <string name="bookmark_name">Имя закладки</string>
+    <string name="bookmark_name">Название закладки</string>
     <string name="bookmark_save">Сохранить</string>
-    <string name="bookmark_search_error">Проверьте, правильно ли указаны модель устройства и код CSC в закладках.</string>
-    <string name="bookmark_order">Закладка Упорядочить</string>
-    <string name="bookmark_order_description">Order bookmarks</string>
-    <string name="bookmark_order_by_created_time">Упорядочить по времени создания</string>
-    <string name="bookmark_order_by_device">Упорядочить по устройству</string>
-    <string name="bookmark_order_by_name">Упорядочить по имени</string>
-    <string name="bookmark_order_by_desc">Сортировать по убыванию</string>
+    <string name="bookmark_search_error">Проверьте, правильно ли сохранены коды модели и CSC в закладке.</string>
+    <string name="bookmark_name_error">Пожалуйста, назовите эту закладку!</string>
 
     <!-- Bookmark backup and restore -->
-    <string name="backup">Backup</string>
-    <string name="backup_description">Save CheckFirm bookmark and category as JSON file.</string>
-    <string name="restore">Restore</string>
-    <string name="restore_description">Load backup JSON file to restore.</string>
-    <string name="backup_toast">Backup complete.</string>
-    <string name="restore_toast">Restore completed.</string>
+    <string name="backup">Резервное копирование</string>
+    <string name="backup_description">Сохраните закладку и категорию CheckFirm в виде файла JSON.</string>
+    <string name="restore">Восстановить</string>
+    <string name="restore_description">Загрузите файл резервной копии JSON для восстановления.</string>
+    <string name="backup_toast">Резервное копирование завершено.</string>
+    <string name="restore_toast">Восстановление завершено.</string>
 
     <!-- Help -->
     <string name="help">Помощь</string>
-    <string name="help_youtube">How to video on Youtube</string>
-    <string name="help_youtube_description">Video by Saqlin mirza</string>
-    <string name="help_device_info">Об устройстве</string>
-    <string name="help_device_info_description">Модель и код CSC</string>
-    <string name="help_device_info_edit">Edit</string>
-    <string name="help_device_name">Device name</string>
-    <string name="help_device_info_bookmark">Bookmark saved.</string>
-    <string name="help_manual">Справка</string>
-    <string name="help_manual_description">Информация о прошивках</string>
-    <string name="firmware_0">Основная информация о прошивках</string>
-    <string name="firmware_1">"Информация о прошивке состоит из 3 пунктов: версия сборки, версия CSC и версия модуля связи.\n\nПредположим, что результат поиска прошивки следующий:\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\n\nA720SKSU3BRK1 – обозначает версию сборки.\nA720SSKC3BRK1 – обозначается версию CSC.\nA720NKOU3BRK1 – обозначает версию модуля связи."</string>
-    <string name="firmware_2">Что мы можем узнать по версии сборки?</string>
-    <string name="firmware_3">"Мы можем узнать некоторые сведения о прошивке, благодаря версии сборки.\nПример версии сборки:"</string>
-    <string name="firmware_10">Красный текст</string>
-    <string name="firmware_11">"Красный текст (к примеру, U3) обозначает версию загрузчика.\n\nИз-за политики безопасности Samsung вы не можете перейти с прошивки с загрузчиком более новой версии на прошивку с загрузчиком более старой версии."</string>
-    <string name="firmware_12">Желтый текст</string>
-    <string name="firmware_13">"Желтый текст (к примеру, буква B) означает крупную версию.\nЕсли желтый текст обновлен, это означает, что ОС Android или One UI будут или были обновлены.\n\nА обозначает самую первую крупную версию.\nB означает, что крупное обновление было выпущено один раз.\nC означает, что крупное обновление было выпущено дважды.\n.\n.\n.\nZ обозначает бета-прошивку."</string>
-    <string name="firmware_14">Зеленый текст</string>
-    <string name="firmware_15">"Зеленый текст (к примеру, буква R) обозначает год, когда была собрана прошивка.\n\nR обозначает 2018 год, S – 2019, Т – 2020, и так далее."</string>
-    <string name="firmware_16">Синий текст</string>
-    <string name="firmware_17">"Синий текст (к примеру, буква K) обозначает месяц, когда была собрана прошивка.\n\nA обозначает январь.\nB обозначает февраль.\n.\n.\n.\nL обозначает декабрь."</string>
-    <string name="firmware_18">Фиолетовый текст</string>
-    <string name="firmware_19">"Фиолетовый текст (к примеру, цифра 1) указывает, сколько раз была собрана прошивка (обозначает минорную версию).\n\n1 означает, что прошивка была собрана один раз.\n.\n.\n.\n9 означает, что прошивка была собрана 9 раз.\nА означает, что прошивка была собрана 10 раз.\n.\n.\n.\nF означает, что прошивка была собрана 16 раз."</string>
-    <string name="firmware_20">Что такое DM и BDM?</string>
-    <string name="firmware_21">"Иногда в сведениях о тестовой прошивке присутствуют сокращения DM и BDM. Сокращение DM расшифровывается как Developer Management, оно означает, что прошивка находится в стадии тестирования.\n\nСокращение BDM в сведениях о тестовой прошивке встречается реже. BDM расшифровывается как Broadband Developer Management, оно означает, что оператор мобильной связи тестирует эту прошивку."</string>
-    <string name="firmware_22">Когда выйдет тестовая прошивка?</string>
-    <string name="firmware_23">"Тестовая прошивка будет выпущена в ближайшее время, если версия сборки не меняется в течение нескольких недель. Ожидайте обновление в течение 3–5 недель."</string>
+    <string name="help_device_info">Информация об устройстве</string>
+    <string name="help_device_info_description">Модель · CSC</string>
+    <string name="help_device_info_edit">Редактировать</string>
+    <string name="help_device_name">Название устройства</string>
+    <string name="help_device_info_bookmark">Закладка сохранена.</string>
+    <string name="help_manual">Руководство по прошивке</string>
+    <string name="help_manual_description">Информация о прошивке</string>
+    <string name="help_firmware_manual_description">Информация о прошивке состоит из 3 частей. Это версия сборки, версия CSC и версия базовой полосы.\n\nПредположим, что результат поиска прошивки:\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1.\n\nПервая (A720SKSU3BRK1) относится к версии сборки,\nвторая (A720SSKC3BRK1) относится к версии CSC,\nпоследняя (A720NKOU3BRK1) относится к версии базовой полосы.</string>
+    <string name="help_firmware_manual_build_description">A720SKSU3BRK1 относится к версии сборки. Из версии сборки вы можете получить версию загрузчика, версию One UI, год сборки прошивки, месяц и номер ревизии (минорную версию).</string>
+    <string name="help_firmware_manual_build_device_description">Это номер модели. В данном случае A720 — это Samsung Galaxy A7 (2017).</string>
+    <string name="help_firmware_manual_build_region_description">Это код региона. В данном случае SKS означает Южная Корея. Это может быть 4-буквенный код.</string>
+    <string name="help_firmware_manual_build_bootloader_description">Это версия загрузчика. Из-за политики безопасности Samsung вы не можете понизить версию прошивки с более высокой версией загрузчика до более низкой версии загрузчика.</string>
+    <string name="help_firmware_manual_build_one_ui_description">Это версия One UI.\nЕсли желтый текст обновлен, это означает, что One UI собирается обновиться или уже обновился.\n\nA означает самую первую основную версию.\nB означает, что основное обновление было выпущено один раз.\nC означает, что основное обновление было выпущено дважды.\n.\n.\n.\nZ означает бета-прошивку.</string>
+    <string name="help_firmware_manual_build_year_description">Это год, когда была собрана прошивка.\n\nT означает 2020,\nU означает 2021,\nV означает 2022 и так далее.</string>
+    <string name="help_firmware_manual_build_month_description">Это месяц, когда была собрана прошивка.\n\nA означает Январь,\nB означает Февраль,\n.\n.\n.\nL означает Декабрь.</string>
+    <string name="help_firmware_manual_build_revision_description">Это номер ревизии (минорная версия).\n\n1 означает, что прошивка была собрана один раз.\n.\n.\n.\n9 означает, что прошивка была собрана 9 раз.\nA означает, что прошивка была собрана 10 раз.\n.\n.\n.\nF означает, что прошивка была собрана 16 раз.</string>
+    <string name="help_firmware_manual_csc_description">A720SSKC3BRK1 относится к версии CSC. CSC — это аббревиатура от Consumer Software Customization и относится к конкретной региональной или операторской прошивке, установленной на устройстве Samsung.</string>
+    <string name="help_firmware_manual_baseband_description">A720NKOU3BRK1 относится к версии базовой полосы. Базовая полоса — это прошивка, которая управляет радиомодулем вашего устройства. Она отвечает за беспроводную связь между вашим устройством и сетью.</string>
 
     <!-- About -->
-    <string name="about_app_information">О приложении</string>
+    <string name="about_app_information">Информация о приложении</string>
     <string name="about_version">Версия</string>
-    <string name="about_latest">Установлена последняя версия.</string>
+    <string name="about_latest">Последняя версия уже установлена.</string>
     <string name="about_update">Обновить</string>
-    <string name="contributor">Авторы</string>
+    <string name="license">Лицензия</string>
+    <string name="legal">Юридическая информация</string>
+    <string name="legal_text">Информация об официальной прошивке взята с https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml.\n\nИнформация о тестовой прошивке взята с https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml.\n\nЭто не официальные способы предоставления информации о прошивке компанией Samsung Electronics клиентам. Любое использование этой информации осуществляется на ваш страх и риск.</string>
+
+    <!-- Contributor -->
+    <string name="contributor">Участник</string>
     <string name="contributor_application">Приложение</string>
-    <string name="contributor_designer">Дизайн</string>
-    <string name="contributor_developer">Разработка</string>
-    <string name="contributor_source">Исходный код</string>
-    <string name="contributor_localization">Локализация</string>
-    <string name="contributor_language">Язык</string>
+    <string name="contributor_designer">Дизайнер</string>
+    <string name="contributor_developer">Разработчик</string>
     <string name="contributor_russian">Русский</string>
     <string name="contributor_chinese">Китайский</string>
     <string name="contributor_czech">Чешский</string>
-    <string name="contributor_portuguese">Portuguese</string>
-    <string name="contributor_romanian">Romanian</string>
-    <string name="contributor_sinhala">Sinhala</string>
+    <string name="contributor_portuguese">Португальский</string>
+    <string name="contributor_romanian">Румынский</string>
+    <string name="contributor_sinhala">Сингальский</string>
     <string name="contributor_translator">Переводчик</string>
-    <string name="license">Лицензии</string>
-    <string name="legal">Юридическая информация</string>
-    <string name="legal_text">Информация об официальных прошивках: https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.xml.\n\nИнформация о тестовых прошивках: https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.test.xml.\n\nЭто неофициальный способ получения информации об официальных и тестовых прошивках для устройств компании Samsung. Любое использование этой информации на ваш страх и риск."</string>
 
     <!-- Settings -->
-    <string name="settings_theme">Тема оформления</string>
-    <string name="settings_profile_user_name">User name</string>
-    <string name="settings_theme_dark">Темная тема</string>
-    <string name="settings_theme_description">Выбрать тему оформления.</string>
-    <string name="settings_theme_light">Светлая тема</string>
-    <string name="settings_theme_system">На основе системы</string>
-    <string name="settings_about">О приложении</string>
     <string name="settings">Настройки</string>
-    <string name="settings_firebase">Исправить ошибку поиска</string>
-    <string name="settings_firebase_description">Поскольку некоторые страны, такие как Китай или Иран, запретили Firebase, возникает ошибка поиска. Включите этот параметр, если вы находитесь в этих странах.</string>
+    <string name="settings_profile_user_name">Имя пользователя</string>
+    <string name="settings_theme">Тема</string>
+    <string name="settings_theme_description">Установить тему приложения.</string>
+    <string name="settings_theme_light">Светлая</string>
+    <string name="settings_theme_dark">Темная</string>
+    <string name="settings_theme_system">Системная по умолчанию</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_language_description">Установить язык приложения</string>
+    <string name="settings_language_default">Системная по умолчанию</string>
     <string name="settings_quick_search_bar">Панель быстрого поиска</string>
-    <string name="settings_quick_search_bar_description">Отображать закладки на главном экране.</string>
-    <string name="welcome_search_description">Поиск прошивок сразу при запуске приложения.</string>
-    <string name="info_catcher_description">Приложение сообщит вам о наличии нового обновления.</string>
-    <string name="settings_bookmark_backup_restore">Backup&amp;restore</string>
-    <string name="settings_bookmark_backup_restore_description">Backup and restore CheckFirm bookmark and category.</string>
+    <string name="settings_quick_search_bar_description">Показывать закладки на главном экране.</string>
+    <string name="settings_bookmark_order">Порядок закладок</string>
+    <string name="settings_bookmark_order_description">Сортировать закладки</string>
+    <string name="settings_bookmark_order_by_created_time">Сортировать по времени создания</string>
+    <string name="settings_bookmark_order_by_device">Сортировать по устройству</string>
+    <string name="settings_bookmark_order_by_name">Сортировать по имени</string>
+    <string name="settings_bookmark_order_by_desc">Сортировать по убыванию</string>
+    <string name="settings_bookmark_reset">Сбросить закладки</string>
+    <string name="settings_bookmark_reset_description">Сбросить все закладки и категории. Используйте эту функцию только при наличии ошибок.</string>
+    <string name="settings_bookmark_reset_dialog_title">Вы уверены?</string>
+    <string name="settings_bookmark_reset_dialog_message">Все закладки и категории будут удалены.</string>
+    <string name="settings_bookmark_reset_toast">Сброс выполнен успешно.</string>
+    <string name="settings_bookmark_backup_restore">Резервное копирование и восстановление</string>
+    <string name="settings_bookmark_backup_restore_description">Резервное копирование и восстановление закладок и категорий CheckFirm.</string>
+    <string name="settings_welcome_search_description">Искать прошивку при запуске.</string>
+    <string name="settings_info_catcher_description">Info Catcher отправит вам уведомление при обновлении прошивки.</string>
+    <string name="settings_firebase">Исправить ошибку поиска</string>
+    <string name="settings_firebase_description">Поскольку некоторые страны, такие как Китай или Иран, запретили Firebase, возникает ошибка поиска. Включите эту настройку, если вы находитесь в этих странах.</string>
+    <string name="settings_inquiry">Запрос</string>
+    <string name="settings_inquiry_not_found_exception">Пожалуйста, установите приложение почтового клиента из Google Play Store.</string>
+    <string name="settings_about">О CheckFirm</string>
 
     <!-- Welcome Search -->
-    <string name="welcome_search">Поиск при запуске</string>
-    <string name="welcome_search_text">Поиск прошивок сразу при запуске приложения.\nУкажите модель устройства, обновления которого вы хотите искать при запуске приложения.</string>
-    <string name="welcome_search_list_empty">Click + button to add a device.</string>
+    <string name="welcome_search">Приветствие Поиск</string>
+    <string name="welcome_search_description">Искать прошивку при запуске приложения.\nПожалуйста, введите устройство, которое вы хотите искать при запуске.</string>
+    <string name="welcome_search_add_device">Добавить устройство</string>
+    <string name="welcome_search_empty_device_list">Вы можете добавить до 5 устройств.</string>
 
     <!-- Smart Search -->
     <string name="smart_search">Умный поиск</string>
-    <string name="smart_search_date">Найдена</string>
-    <string name="smart_search_downgrade_impossible">Понизить невозможно</string>
-    <string name="smart_search_downgrade_possible">Понизить возможное</string>
-    <string name="smart_search_type_major">One UI обновление</string>
+    <string name="smart_search_type_major">Обновление One UI</string>
     <string name="smart_search_type_minor">Минорное обновление</string>
     <string name="smart_search_type_rollback">Откат</string>
     <string name="smart_search_bootloader">Версия загрузчика</string>
-    <string name="smart_search_major_version">Крупная версия</string>
+    <string name="smart_search_major_version">Основная версия</string>
     <string name="smart_search_build_date">Дата сборки</string>
     <string name="smart_search_minor_version">Минорная версия</string>
-    <string name="smart_search_date_format">%2$s %1$s</string>
-    <string name="smart_search_discoverer">First discoverer</string>
-    <string name="smart_search_android_version">Android version</string>
-    <string name="smart_search_update_type">Update type</string>
-    <string name="january">январь</string>
-    <string name="february">февраль</string>
-    <string name="march">март</string>
-    <string name="april">апрель</string>
-	<string name="may">май</string>
-    <string name="june">июнь</string>
-    <string name="july">июль</string>
-    <string name="august">август</string>
-    <string name="september">сентябрь</string>
-    <string name="october">октябрь</string>
-    <string name="november">ноябрь</string>
+    <string name="smart_search_date_format">%2$s, %1$s</string>
+    <string name="smart_search_downgrade_possible">Возможен откат</string>
+    <string name="smart_search_downgrade_impossible">Откат невозможен</string>
+    <string name="january">Январь</string>
+    <string name="february">Февраль</string>
+    <string name="march">Март</string>
+    <string name="april">Апрель</string>
+    <string name="may">Май</string>
+    <string name="june">Июнь</string>
+    <string name="july">Июль</string>
+    <string name="august">Август</string>
+    <string name="september">Сентябрь</string>
+    <string name="october">Октябрь</string>
+    <string name="november">Ноябрь</string>
     <string name="december">Декабрь</string>
 
     <!-- Info Catcher -->
-    <string name="info_catcher">Наличие обновлений</string>
-    <string name="info_catcher_text">Приложение сообщит вам о наличии нового обновления.\nВведите модель устройства, обновления которого вы хотите отслеживать.</string>
-    <string name="info_catcher_error">Проверьте, правильно ли вы указали модель устройства и код CSC.</string>
-    <string name="info_catcher_insert">Добавить</string>
-
-    <!-- Inquiry -->
-    <string name="inquiry">Обратная связь</string>
-    <string name="inquiry_hint">Tell me details.</string>
-    <string name="inquiry_new">Идея</string>
-    <string name="inquiry_bug">Сообщение об ошибке</string>
-    <string name="inquiry_question">Вопрос</string>
-    <string name="inquiry_send">Отправить</string>
+    <string name="info_catcher">Info Catcher</string>
+    <string name="info_catcher_description">Info Catcher отправит вам уведомление при обновлении прошивки.\nПожалуйста, введите устройство, которое вы хотите отслеживать.</string>
 
     <!-- Suggestion -->
     <string name="suggestion">Предложение</string>
-    <string name="suggestion_title">Ищете что-то другое?</string>
+    <string name="suggestion_title">Ищете что-то еще?</string>
     <string name="suggestion_bookmark_my_device">Добавить мое устройство в закладки</string>
-    <string name="suggestion_enable_welcome_search">Включите Поиск при запуске</string>
+    <string name="suggestion_enable_welcome_search">Включить Приветствие Поиск</string>
     <string name="suggestion_check_my_device_info">Проверить информацию о моем устройстве</string>
-    <string name="suggestion_wifi">Включите Wi-Fi</string>
-    <string name="suggestion_data">Включите мобильные данные</string>
+    <string name="suggestion_wifi">Включить Wi-Fi</string>
+    <string name="suggestion_data">Включить мобильные данные</string>
+    <string name="suggestion_search_my_device">Искать это устройство</string>
 
     <!-- Category -->
-    <string name="category">Category</string>
-    <string name="category_and">&#160;and&#160;</string>
-    <string name="category_all">All</string>
-    <string name="category_edit_name">Category name</string>
-    <string name="category_edit_devices_title">Devices</string>
-    <string name="category_edit_name_error_all">Category name cannot be All.</string>
-    <string name="category_edit_name_error_empty">Category name should not be empty.</string>
-    <string name="category_edit_device_list_error_empty">Device list should not be empty.</string>
-    <string name="smart_search_watson">Decrypted by</string>
+    <string name="category">Категория</string>
+    <string name="category_all">Все</string>
+    <string name="category_edit_name">Название категории</string>
+    <string name="category_edit_devices_title">Устройства</string>
+    <string name="category_edit_name_error_all">Название категории не может быть «Все».</string>
+    <string name="category_edit_name_error_empty">Название категории не должно быть пустым!</string>
+    <string name="category_edit_device_list_error_empty">Список устройств не должен быть пустым.</string>
 
-    <!-- Beta -->
+    <!-- Report -->
+    <string name="report">Сообщить</string>
+    <string name="report_description">Спасибо за ваш отчет. Я позабочусь о том, чтобы ваш отчет был учтен в течение недели, и вы не будете уведомлены. Если ваш отчет неуместен, он может быть проигнорирован. Пожалуйста, выберите причину для сообщения ниже.</string>
+    <string name="report_type_1">Ошибка информации о прошивке</string>
+    <string name="report_type_2">Недопустимое имя пользователя</string>
+    <string name="report_type_3">Ошибка информации Умного поиска</string>
+    <string name="report_type_4">Другие ошибки</string>
+    <string name="report_detail">(Необязательно) Любые детали будут полезны.</string>
+    <string name="report_submit">Отправить</string>
+    <string name="report_success">Отправка прошла успешно.</string>
+    <string name="report_fail">Отправка не удалась.</string>
+
+    <!-- Outdated -->
+    <string name="outdated_title">Требуется обновление</string>
+    <string name="outdated_description">Текущая версия больше не поддерживается. Пожалуйста, обновитесь до последней версии. Приносим извинения за неудобства.</string>
 </resources>

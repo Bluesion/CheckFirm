@@ -5,16 +5,8 @@
     <string name="default_symbol" translatable="false">&#160;·&#160;</string>
     <string name="device_format_1" translatable="false">%1$s (%2$s)</string>
     <string name="device_format_2" translatable="false">%1$s · %2$s</string>
-    <string name="category_device_format" translatable="false">%1$s (%2$s / %3$s)</string>
-    <string name="firmware_4" translatable="false">A720SKS</string>
-    <string name="firmware_5" translatable="false">U3</string>
-    <string name="firmware_6" translatable="false">B</string>
-    <string name="firmware_7" translatable="false">R</string>
-    <string name="firmware_8" translatable="false">K</string>
-    <string name="firmware_9" translatable="false">1</string>
     <string name="contributor_newfit" translatable="false">Newfit</string>
     <string name="contributor_bluesion" translatable="false">Bluesion</string>
-    <string name="contributor_github" translatable="false">GitHub</string>
     <string name="contributor_russian_translator" translatable="false">Adam Visitov</string>
     <string name="contributor_chinese_translator" translatable="false">dididada9856</string>
     <string name="contributor_czech_translator" translatable="false">Ondřej Brokl</string>
@@ -27,14 +19,11 @@
     <string name="license_mit" translatable="false">MIT</string>
     <string name="license_androidx" translatable="false">Android X</string>
     <string name="license_firebase" translatable="false">Firebase</string>
-    <string name="license_material_components" translatable="false">Material Components</string>
+    <string name="license_material_components" translatable="false">MDC-Android</string>
     <string name="license_google" translatable="false">Google</string>
     <string name="license_jsoup" translatable="false">Jsoup</string>
     <string name="license_jonathan_hedley" translatable="false">Jonathan Hedley</string>
-    <string name="sherlock_dm_format" translatable="false">%s.DM</string>
     <string name="smart_search_android_version_format" translatable="false">Android %s</string>
-    <string name="category_summary" translatable="false">%1$s</string>
-    <string name="sherlock_script_format" translatable="false">%1$s%2$s%3$s%4$s</string>
     <string name="year_a" translatable="false">2027</string>
     <string name="year_b" translatable="false">2028</string>
     <string name="year_c" translatable="false">2029</string>
@@ -61,4 +50,30 @@
     <string name="year_x" translatable="false">2024</string>
     <string name="year_y" translatable="false">2025</string>
     <string name="year_z" translatable="false">2026</string>
+    <string name="search_result_error" translatable="false">NULL</string>
+    <string name="settings_language_cs" translatable="false">Čeština</string>
+    <string name="settings_language_en" translatable="false">English</string>
+    <string name="settings_language_ja" translatable="false">日本語</string>
+    <string name="settings_language_ko" translatable="false">한국어</string>
+    <string name="settings_language_pt_rBR" translatable="false">Português (Brasil)</string>
+    <string name="settings_language_pt_rPT" translatable="false">Português (Portugal)</string>
+    <string name="settings_language_ro" translatable="false">Română</string>
+    <string name="settings_language_ru" translatable="false">Русский</string>
+    <string name="settings_language_si" translatable="false">Sinhala-සිංහල-රන්දික</string>
+    <string name="settings_language_tr" translatable="false">Türkçe</string>
+    <string name="settings_language_zh_rTW" translatable="false">中文 (繁體)</string>
+    <string name="settings_language_zh_rCN" translatable="false">中文 (简体)</string>
+    <string name="help_firmware_manual_build_device" translatable="false">A720</string>
+    <string name="help_firmware_manual_build_region" translatable="false">SKS</string>
+    <string name="help_firmware_manual_build_bootloader" translatable="false">U3</string>
+    <string name="help_firmware_manual_build_one_ui" translatable="false">B</string>
+    <string name="help_firmware_manual_build_year" translatable="false">R</string>
+    <string name="help_firmware_manual_build_month" translatable="false">K</string>
+    <string name="help_firmware_manual_build_revision" translatable="false">1</string>
+    <string name="help_firmware_manual_build" translatable="false">BUILD\nA720SKSU3BRK1</string>
+    <string name="help_firmware_manual_csc" translatable="false">CSC\nA720SSKC3BRK1</string>
+    <string name="help_firmware_manual_baseband" translatable="false">BASEBAND\nA720NKOU3BRK1</string>
+    <string name="outdated_emoji" translatable="false">😢</string>
+    <string name="sherlock_result_success_emoji" translatable="false">🎉</string>
+    <string name="sherlock_result_fail_emoji" translatable="false">😅</string>
 </resources>

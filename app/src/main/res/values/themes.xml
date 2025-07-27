@@ -1,30 +1,80 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/color_primary</item>
-        <item name="colorControlActivated">@color/color_control_activated</item>
-        <item name="materialCardViewStyle">@style/CardTheme</item>
-        <item name="switchStyle">@style/SwitchTheme</item>
-        <item name="radioButtonStyle">@style/RadioButtonTheme</item>
-        <item name="bottomSheetDialogTheme">@style/BottomDialog</item>
-        <item name="toolbarStyle">@style/Toolbar</item>
-        <item name="spinnerStyle">@style/SpinnerStyle</item>
-        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
-        <item name="android:windowBackground">@color/background_color</item>
-        <item name="android:statusBarColor">@color/background_color</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
-        <item name="android:navigationBarColor" tools:targetApi="27">@color/background_color</item>
-        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+<resources>
+    
+    <style name="Theme.App.Start" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/oneui_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/checkfirm_splash_screen</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 
-    <style name="TransparentTheme" parent="AppTheme">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:windowDisablePreview">true</item>
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/oneui_primary</item>
+        <item name="colorOnPrimary">@color/oneui_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/oneui_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/oneui_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/oneui_secondary</item>
+        <item name="colorOnSecondary">@color/oneui_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/oneui_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/oneui_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/oneui_tertiary</item>
+        <item name="colorOnTertiary">@color/oneui_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/oneui_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/oneui_onTertiaryContainer</item>
+        <item name="colorError">@color/oneui_error</item>
+        <item name="colorErrorContainer">@color/oneui_errorContainer</item>
+        <item name="colorOnError">@color/oneui_onError</item>
+        <item name="colorOnErrorContainer">@color/oneui_onErrorContainer</item>
+        <item name="android:colorBackground">@color/oneui_background</item>
+        <item name="colorOnBackground">@color/oneui_onBackground</item>
+        <item name="colorSurface">@color/oneui_surface</item>
+        <item name="colorOnSurface">@color/oneui_onSurface</item>
+        <item name="colorSurfaceVariant">@color/oneui_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/oneui_onSurfaceVariant</item>
+        <item name="colorOutline">@color/oneui_outline</item>
+        <item name="colorOnSurfaceInverse">@color/oneui_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/oneui_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/oneui_primaryInverse</item>
+        <item name="materialCardViewStyle">@style/CardTheme</item>
+        <item name="materialSwitchStyle">@style/OneUI.Switch</item>
+        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
+        <item name="radioButtonStyle">@style/OneUI.RadioButton</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.CheckFirm.BottomSheetDialog</item>
+        <item name="android:spinnerStyle">@style/OneUI.Spinner</item>
+        <item name="spinnerStyle">@style/OneUI.Spinner</item>
+        <item name="appBarLayoutStyle">@style/OneUI.AppBarLayout</item>
+        <item name="collapsingToolbarLayoutStyle">@style/OneUI.CollapsingToolbarLayout</item>
+        <item name="chipStyle">@style/BookmarkChip</item>
+        <item name="materialDividerStyle">@style/OneUI.Divider</item>
+        <item name="checkboxStyle">@style/OneUI.CheckBox</item>
+        <item name="floatingActionButtonStyle">@style/OneUI.FAB</item>
+        <item name="fontFamily">@font/font_wanted_sans</item>
+        <item name="android:spinnerDropDownItemStyle">@style/CheckFirm.Spinner.DropDownItem</item>
+        <item name="android:dropDownListViewStyle">@style/OneUI.Spinner.DropDownListView</item>
+        <item name="android:windowBackground">@color/oneui_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="elevationOverlayEnabled">false</item>
+    </style>
+    
+    <style name="ThemeOverlay.CheckFirm.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.8</item>
+        <item name="bottomSheetStyle">@style/Widget.CheckFirm.BottomSheet.Modal</item>
+        <item name="materialButtonStyle">@style/OneUI.DialogButton</item>
+        <item name="materialSwitchStyle">@style/OneUI.Switch</item>
+        <item name="radioButtonStyle">@style/OneUI.RadioButton</item>
+        <item name="checkboxStyle">@style/OneUI.CheckBox</item>
+        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
+        <item name="materialCardViewStyle">@style/CardTheme</item>
+        <item name="fontFamily">@font/font_wanted_sans</item>
+    </style>
+
+    <style name="Widget.CheckFirm.BottomSheet.Modal" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/oneui_surface</item>
+        <item name="android:elevation">0dp</item>
+        <item name="fontFamily">@font/font_wanted_sans</item>
     </style>
 
 </resources>

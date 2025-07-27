@@ -1,0 +1,13 @@
+<resources>
+    <plurals name="bookmark_subtitle">
+        <item quantity="other">%d 個のブックマーク</item>
+    </plurals>
+
+    <plurals name="category_subtitle">
+        <item quantity="other">%d つのカテゴリ</item>
+    </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="other">%d 台のデバイス</item>
+    </plurals>
+</resources>

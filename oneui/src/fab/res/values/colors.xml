@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="oneui_fab_background">#FCFCFC</color>
+    <color name="oneui_fab_ripple_color">#EFEFEF</color>
+	<color name="oneui_fab_tint">#0381FE</color>
+</resources>

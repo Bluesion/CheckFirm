@@ -1,9 +1,0 @@
-<resources>
-    <plurals name="bookmark_subtitle">
-        <item quantity="other">%d个书签</item>
-    </plurals>
-
-    <plurals name="category_subtitle">
-        <item quantity="other">%d categories</item>
-    </plurals>
-</resources>

@@ -6,4 +6,8 @@
     <plurals name="category_subtitle">
         <item quantity="other">카테고리 %d개</item>
     </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="other">디바이스 %d개</item>
+    </plurals>
 </resources>

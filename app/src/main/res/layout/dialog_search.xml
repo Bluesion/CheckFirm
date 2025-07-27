@@ -1,312 +1,231 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/report_button"
+        style="@style/CardTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:layout_marginBottom="16dp"
+        app:contentPadding="8dp"
+        app:cardBackgroundColor="#FFDBC9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/latest_firmware_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/report_image"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_report"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.Material3.LabelSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/report"
+                android:textAllCaps="true"
+                android:textColor="#341000"
+                android:layout_marginStart="4dp"
+                app:layout_constraintStart_toEndOf="@id/report_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/latest_firmware_card"
         style="@style/CardTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp">
+        android:layout_marginBottom="16dp"
+        app:contentPadding="14dp"
+        app:layout_constraintBottom_toTopOf="@id/smart_search_card">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="14dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/latest_title"
-                style="?textAppearanceBody1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/original"
-                style="?textAppearanceCaption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sherlock_original"
-                android:visibility="gone" />
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/latest_firmware"
-                style="?textAppearanceBody2"
-                android:layout_width="match_parent"
+                style="@style/TextAppearance.Material3.BodyMedium"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="14dp" />
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/latest_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/copy_button" />
 
-            <LinearLayout
-                android:id="@+id/decrypted_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="vertical"
-                android:visibility="gone">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/copy_button"
+                style="@style/ClickableLayout"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+                app:srcCompat="@drawable/ic_copy"
+                app:layout_constraintTop_toTopOf="@id/latest_firmware"
+                app:layout_constraintEnd_toStartOf="@id/dynamic_button"
+                app:layout_constraintBottom_toBottomOf="@id/latest_firmware" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/watson"
-                    style="?textAppearanceCaption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp" />
+            <!-- This could be Sherlock button -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/dynamic_button"
+                style="@style/ClickableLayout"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+                app:srcCompat="@drawable/ic_web"
+                app:layout_constraintTop_toTopOf="@id/latest_firmware"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/latest_firmware" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/decrypted_firmware"
-                    style="?textAppearanceBody2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-14dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/copy"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@android:string/copy" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/dynamic_button"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/smart_search_card"
         style="@style/CardTheme"
-        android:id="@+id/smart_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"
-        app:contentPadding="14dp">
+        android:layout_marginBottom="16dp"
+        app:contentPadding="14dp"
+        app:layout_constraintBottom_toTopOf="@id/previous_card">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textview.MaterialTextView
-                style="?textAppearanceBody1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/smart_search"
-                android:textStyle="bold" />
-
-            <HorizontalScrollView
+                android:id="@+id/smart_search_title"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:scrollbars="none">
+                android:text="@string/smart_search"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/smart_search_help"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="4dp"
+                app:srcCompat="@drawable/ic_smart_search_help"
+                app:layout_constraintTop_toTopOf="@id/smart_search_title"
+                app:layout_constraintStart_toEndOf="@id/smart_search_title"
+                app:layout_constraintBottom_toBottomOf="@id/smart_search_title" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/smart_search_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none"
+                app:layout_constraintTop_toBottomOf="@id/smart_search_title" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            style="?textAppearanceBody2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/smart_search_bootloader" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/bootloader"
-                            style="?textAppearanceBody2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/bootloader_description"
-                            style="?textAppearanceCaption"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_marginStart="32dp">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            style="?textAppearanceBody2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/smart_search_major_version" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/major_version"
-                            style="?textAppearanceBody2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/major_version_description"
-                            style="?textAppearanceCaption"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_marginStart="32dp">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            style="?textAppearanceBody2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/smart_search_build_date" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/date"
-                            style="?textAppearanceBody2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/date_description"
-                            style="?textAppearanceCaption"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_marginStart="32dp">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            style="?textAppearanceBody2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/smart_search_minor_version" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/minor_version"
-                            style="?textAppearanceBody2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            style="?textAppearanceCaption"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/previous_card"
         style="@style/CardTheme"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="12dp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:contentPadding="14dp"
+        app:layout_constraintBottom_toTopOf="@id/ok">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="14dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/previous_title"
-                style="?textAppearanceBody1"
+            <FrameLayout
+                android:id="@+id/previous_dynamic_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.bluesion.oneui.tab.OneUITab
+                        android:id="@+id/tab_previous_firmware"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:tabTitle="@string/search_result_tab_previous"
+                        app:isSubTab="true"
+                        app:isTabSelected="true"
+                        app:customFontFamily="@font/font_wanted_sans"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tab_beta_firmware" />
+
+                    <com.bluesion.oneui.tab.OneUITab
+                        android:id="@+id/tab_beta_firmware"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:tabTitle="@string/search_result_tab_beta"
+                        app:isSubTab="true"
+                        app:customFontFamily="@font/font_wanted_sans"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tab_previous_firmware"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/list"
-                    style="?textAppearanceBody1"
-                    android:layout_width="match_parent"
+                    android:id="@+id/previous_title"
+                    style="@style/TextAppearance.Material3.BodyLarge"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lineSpacingExtra="4dp"
-                    android:textSize="13sp" />
+                    android:textStyle="bold" />
 
-            </androidx.core.widget.NestedScrollView>
+            </FrameLayout>
 
-        </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dynamic_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/previous_dynamic_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ok"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/OneUI.DialogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="14dp"
         android:text="@android:string/ok"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:rippleColor="@color/button_ripple_color" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

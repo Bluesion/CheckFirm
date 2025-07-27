@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="OneUI.CheckBox" parent="@style/Widget.Material3.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/oneui_checkbox</item>
+    </style>
+
+</resources>

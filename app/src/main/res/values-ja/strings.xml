@@ -1,0 +1,246 @@
+<resources>
+    <!-- Test -->
+
+    <!-- General -->
+    <string name="add_item">追加</string>
+    <string name="check_network">ネットワークを確認してください</string>
+    <string name="check_device">モデルとCSCコードを正しく入力したか確認してください。</string>
+    <string name="close">閉じる</string>
+    <string name="unknown">不明</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_new_firmware">新しいファームウェア</string>
+    <string name="notification_channel_new_update">アプリのアップデート</string>
+    <string name="notification_new_update_title">CheckFirm 緊急アップデート</string>
+    <string name="notification_new_update_text">重大なバグが報告されています。すぐにPlayストアからアップデートしてください。</string>
+    <string name="notification_info_catcher_title">%1$s (%2$s) の新しいファームウェアが見つかりました！</string>
+    <string name="notification_info_catcher_text">今すぐ確認してください。</string>
+    <string name="notification_permission_required_title">権限が必要です</string>
+    <string name="notification_permission_required_message">CheckFirmは、新しいファームウェアが見つかったときに通知するInfo Catcherを提供します。この機能を使用するには、通知の許可を付与する必要があります。</string>
+    <string name="notification_permission_required_button_deny">拒否</string>
+    <string name="notification_permission_required_button_grant">許可</string>
+
+    <!-- Main -->
+    <string name="main_welcome_search_text">ウェルカム検索は無効です。ウェルカム検索をオンにすることをお勧めします。</string>
+    <string name="main_network_error_title">ネットワークエラー</string>
+    <string name="main_network_error_text">ネットワークに接続されていないか、遅すぎます。</string>
+    <string name="main_search_error_title">検索エラー</string>
+    <string name="main_search_error_text">モデルまたはCSCが正しくありません。</string>
+    <string name="main_category_dialog_description">クイック検索バーに表示したいカテゴリを選択してください。</string>
+    <string name="main_hello_title">CheckFirmへようこそ！</string>
+    <string name="main_hello_description">Samsungデバイスのファームウェア情報を検索できます。以下の機能をご覧ください。</string>
+    <string name="main_hello_search_description">ファームウェア情報を検索します。</string>
+    <string name="main_hello_bookmark_description">ブックマークとカテゴリを追加します。</string>
+    <string name="main_hello_info_catcher_description">新しいファームウェアを見逃さないでください。</string>
+    <string name="main_hello_settings_description">さらに多くの機能が待っています。</string>
+
+    <!-- Search -->
+    <string name="search">検索</string>
+    <string name="official_latest">最新の公式ファームウェア</string>
+    <string name="test_latest">最新のテストファームウェア</string>
+    <string name="model">モデル</string>
+    <string name="official_previous">以前の公式ファームウェア</string>
+    <string name="test_previous">以前のテストファームウェア</string>
+    <string name="clipboard">クリップボードにコピーしました。</string>
+    <string name="search_error">検索に失敗しました。このデバイスのSamsungサーバーにデータがありません。</string>
+    <string name="multi_search_limit">最大5台のデバイスを検索できます</string>
+    <string name="search_history">検索履歴</string>
+    <string name="search_history_delete_all">すべて削除</string>
+    <string name="search_list_empty">検索リストは空です。</string>
+    <string name="search_no_bookmark">ブックマークなし</string>
+    <string name="search_no_history">履歴なし</string>
+    <string name="search_add_bookmark">ブックマークを追加</string>
+    <string name="search_result_tab_previous">以前</string>
+    <string name="search_result_tab_beta">ベータ</string>
+
+    <!-- Sherlock -->
+    <string name="sherlock">シャーロック</string>
+    <string name="sherlock_build">ビルドバージョン</string>
+    <string name="sherlock_baseband">ベースバンドバージョン</string>
+    <string name="sherlock_tab_manual">マニュアル</string>
+    <string name="sherlock_tab_script">スクリプト</string>
+    <string name="sherlock_result_success">おめでとうございます！暗号化されたファームウェア情報を解読しました。</string>
+    <string name="sherlock_result_fail">復号化に失敗しました。値を変更して再試行できます。</string>
+    <string name="sherlock_manual_description">あなたは今、暗号化されたファームウェア情報を解読する探偵です！各フィールドに値を入力して解読してみてください。</string>
+
+    <!-- Sherlock script -->
+    <string name="sherlock_script">シャーロック スクリプト</string>
+    <string name="sherlock_script_description">開始値と終了値の入力だけで済みます。シャーロック スクリプトは、開始値と終了値の間のすべてのデータを使用して解読されたファームウェア情報を検索しようとします。開始値と終了値の差が大きすぎると、過負荷によりアプリが強制終了する可能性があることに注意してください。</string>
+    <string name="sherlock_script_start_value">開始</string>
+    <string name="sherlock_script_end_value">終了</string>
+    <string name="sherlock_script_start">スクリプトを開始</string>
+    <string name="sherlock_script_error_1">ブートローダー: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_2">ブートローダー: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_3">One UIバージョン: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_4">年: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_5">月: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_6">リビジョン: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_7">開始値に問題があります。</string>
+    <string name="sherlock_script_error_8">終了値に問題があります。</string>
+    <string name="sherlock_script_no_error">エラーはないようです。\n準備完了！</string>
+    <string name="sherlock_script_running">スクリプトを実行中…\nこの画面を終了しないでください。</string>
+
+    <!-- Bookmark -->
+    <string name="bookmark">ブックマーク</string>
+    <string name="bookmark_new">新しいブックマーク</string>
+    <string name="bookmark_edit">ブックマークを編集</string>
+    <string name="bookmark_name">ブックマーク名</string>
+    <string name="bookmark_save">保存</string>
+    <string name="bookmark_search_error">モデルとCSCコードがブックマークに正しく保存されているか確認してください。</string>
+    <string name="bookmark_name_error">ブックマークに名前を付けてください！</string>
+
+    <!-- Bookmark backup and restore -->
+    <string name="backup">バックアップ</string>
+    <string name="backup_description">CheckFirmのブックマークとカテゴリをJSONファイルとして保存します。</string>
+    <string name="restore">復元</string>
+    <string name="restore_description">バックアップJSONファイルをロードして復元します。</string>
+    <string name="backup_toast">バックアップが完了しました。</string>
+    <string name="restore_toast">復元が完了しました。</string>
+
+    <!-- Help -->
+    <string name="help">ヘルプ</string>
+    <string name="help_device_info">デバイス情報</string>
+    <string name="help_device_info_description">モデル · CSC</string>
+    <string name="help_device_info_edit">編集</string>
+    <string name="help_device_name">デバイス名</string>
+    <string name="help_device_info_bookmark">ブックマークが保存されました。</string>
+    <string name="help_manual">ファームウェアマニュアル</string>
+    <string name="help_manual_description">ファームウェア情報</string>
+    <string name="help_firmware_manual_description">ファームウェア情報は3つの情報で構成されています。ビルドバージョン、CSCバージョン、ベースバンドバージョンです。\n\nファームウェア検索結果が\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1であると仮定します。\n\n最初のもの（A720SKSU3BRK1）はビルドバージョンを指し、\n2番目のもの（A720SSKC3BRK1）はCSCバージョンを指し、\n最後のもの（A720NKOU3BRK1）はベースバンドバージョンを指します。</string>
+    <string name="help_firmware_manual_build_description">A720SKSU3BRK1はビルドバージョンを指します。ビルドバージョンから、ブートローダーバージョン、One UIバージョン、ファームウェアビルド年、月、およびリビジョン番号（マイナーバージョン）を取得できます。</string>
+    <string name="help_firmware_manual_build_device_description">これはモデル番号です。この場合、A720はSamsung Galaxy A7 (2017)です。</string>
+    <string name="help_firmware_manual_build_region_description">これは地域コードです。この場合、SKSは韓国を意味します。4文字のコードである可能性があります。</string>
+    <string name="help_firmware_manual_build_bootloader_description">これはブートローダーバージョンです。Samsungのセキュリティポリシーにより、より高いブートローダーバージョンのファームウェアからより低いブートローダーバージョンのファームウェアへのダウングレードはできません。</string>
+    <string name="help_firmware_manual_build_one_ui_description">これはOne UIのバージョンです。\n黄色いテキストが更新された場合、One UIが更新される予定または更新されたことを意味します。\n\nAは最初のメジャーバージョンを意味します。\nBはメジャーアップデートが一度リリースされたことを意味します。\nCはメジャーアップデートが2回リリースされたことを意味します。\n.\n.\n.\nZはベータファームウェアを意味します。</string>
+    <string name="help_firmware_manual_build_year_description">これはファームウェアがビルドされた年です。\n\nTは2020年、\nUは2021年、\nVは2022年などを意味します。</string>
+    <string name="help_firmware_manual_build_month_description">これはファームウェアがビルドされた月です。\n\nAは1月、\nBは2月、\n.\n.\n.\nLは12月を意味します。</string>
+    <string name="help_firmware_manual_build_revision_description">これはリビジョン番号（マイナーバージョン）です。\n\n1はファームウェアが一度ビルドされたことを意味します。\n.\n.\n.\n9はファームウェアが9回ビルドされたことを意味します。\nAはファームウェアが10回ビルドされたことを意味します。\n.\n.\n.\nFはファームウェアが16回ビルドされたことを意味します。</string>
+    <string name="help_firmware_manual_csc_description">A720SSKC3BRK1はCSCバージョンを指します。CSCはConsumer Software Customizationの略で、Samsungデバイスにインストールされている特定の地域またはキャリアのファームウェアを指します。</string>
+    <string name="help_firmware_manual_baseband_description">A720NKOU3BRK1はベースバンドバージョンを指します。ベースバンドはデバイスの無線を制御するファームウェアです。デバイスとネットワーク間の無線通信を担当します。</string>
+
+    <!-- About -->
+    <string name="about_app_information">アプリ情報</string>
+    <string name="about_version">バージョン</string>
+    <string name="about_latest">最新バージョンはすでにインストールされています。</string>
+    <string name="about_update">アップデート</string>
+    <string name="license">ライセンス</string>
+    <string name="legal">法的情報</string>
+    <string name="legal_text">公式ファームウェア情報はhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xmlから取得しています。\n\nテストファームウェア情報はhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xmlから取得しています。\n\nこれらはSamsung Electronicsが顧客にファームウェア情報を提供する公式な方法ではありません。これらの情報の使用は自己責任でお願いします。</string>
+
+    <!-- Contributor -->
+    <string name="contributor">貢献者</string>
+    <string name="contributor_application">アプリケーション</string>
+    <string name="contributor_designer">デザイナー</string>
+    <string name="contributor_developer">開発者</string>
+    <string name="contributor_russian">ロシア語</string>
+    <string name="contributor_chinese">中国語</string>
+    <string name="contributor_czech">チェコ語</string>
+    <string name="contributor_portuguese">ポルトガル語</string>
+    <string name="contributor_romanian">ルーマニア語</string>
+    <string name="contributor_sinhala">シンハラ語</string>
+    <string name="contributor_translator">翻訳者</string>
+
+    <!-- Settings -->
+    <string name="settings">設定</string>
+    <string name="settings_profile_user_name">ユーザー名</string>
+    <string name="settings_theme">テーマ</string>
+    <string name="settings_theme_description">アプリのテーマを設定します。</string>
+    <string name="settings_theme_light">ライト</string>
+    <string name="settings_theme_dark">ダーク</string>
+    <string name="settings_theme_system">システムデフォルト</string>
+    <string name="settings_language">言語</string>
+    <string name="settings_language_description">アプリの言語を設定します</string>
+    <string name="settings_language_default">システムデフォルト</string>
+    <string name="settings_quick_search_bar">クイック検索バー</string>
+    <string name="settings_quick_search_bar_description">ホームページにブックマークを表示します。</string>
+    <string name="settings_bookmark_order">ブックマークの順序</string>
+    <string name="settings_bookmark_order_description">ブックマークを並べ替えます</string>
+    <string name="settings_bookmark_order_by_created_time">作成日時順</string>
+    <string name="settings_bookmark_order_by_device">デバイス順</string>
+    <string name="settings_bookmark_order_by_name">名前順</string>
+    <string name="settings_bookmark_order_by_desc">降順</string>
+    <string name="settings_bookmark_reset">ブックマークをリセット</string>
+    <string name="settings_bookmark_reset_description">すべてのブックマークとカテゴリをリセットします。エラーが発生した場合にのみこの機能を使用してください。</string>
+    <string name="settings_bookmark_reset_dialog_title">よろしいですか？</string>
+    <string name="settings_bookmark_reset_dialog_message">すべてのブックマークとカテゴリが削除されます。</string>
+    <string name="settings_bookmark_reset_toast">リセットに成功しました。</string>
+    <string name="settings_bookmark_backup_restore">バックアップと復元</string>
+    <string name="settings_bookmark_backup_restore_description">CheckFirmのブックマークとカテゴリをバックアップおよび復元します。</string>
+    <string name="settings_welcome_search_description">起動時にファームウェアを検索します。</string>
+    <string name="settings_info_catcher_description">Info Catcherは、ファームウェアが更新されたときに通知を送信します。</string>
+    <string name="settings_firebase">検索エラーを修正</string>
+    <string name="settings_firebase_description">中国やイランなどの一部の国ではFirebaseが禁止されているため、検索エラーが発生します。これらの国にいる場合は、この設定をオンにしてください。</string>
+    <string name="settings_inquiry">お問い合わせ</string>
+    <string name="settings_inquiry_not_found_exception">Playストアからメールクライアントアプリをインストールしてください。</string>
+    <string name="settings_about">CheckFirmについて</string>
+
+    <!-- Welcome Search -->
+    <string name="welcome_search">ウェルカム検索</string>
+    <string name="welcome_search_description">アプリ起動時にファームウェアを検索します。\n起動時に検索したいデバイスを入力してください。</string>
+    <string name="welcome_search_add_device">デバイスを追加</string>
+    <string name="welcome_search_empty_device_list">最大5台のデバイスを追加できます。</string>
+
+    <!-- Smart Search -->
+    <string name="smart_search">スマート検索</string>
+    <string name="smart_search_type_major">One UIアップデート</string>
+    <string name="smart_search_type_minor">マイナーアップデート</string>
+    <string name="smart_search_type_rollback">ロールバック</string>
+    <string name="smart_search_bootloader">ブートローダーバージョン</string>
+    <string name="smart_search_major_version">メジャーバージョン</string>
+    <string name="smart_search_build_date">ビルド日</string>
+    <string name="smart_search_minor_version">マイナーバージョン</string>
+    <string name="smart_search_date_format">%2$s, %1$s</string>
+    <string name="smart_search_downgrade_possible">ダウングレード可能</string>
+    <string name="smart_search_downgrade_impossible">ダウングレード不可能</string>
+    <string name="january">1月</string>
+    <string name="february">2月</string>
+    <string name="march">3月</string>
+    <string name="april">4月</string>
+    <string name="may">5月</string>
+    <string name="june">6月</string>
+    <string name="july">7月</string>
+    <string name="august">8月</string>
+    <string name="september">9月</string>
+    <string name="october">10月</string>
+    <string name="november">11月</string>
+    <string name="december">12月</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher">インフォキャッチャー</string>
+    <string name="info_catcher_description">Info Catcherは、ファームウェアが更新されたときに通知を送信します。\nキャッチしたいデバイスを入力してください。</string>
+
+    <!-- Suggestion -->
+    <string name="suggestion">提案</string>
+    <string name="suggestion_title">他に探しているものはありますか？</string>
+    <string name="suggestion_bookmark_my_device">マイデバイスをブックマークに追加</string>
+    <string name="suggestion_enable_welcome_search">ウェルカム検索を有効にする</string>
+    <string name="suggestion_check_my_device_info">マイデバイス情報を確認する</string>
+    <string name="suggestion_wifi">Wi-Fiをオンにする</string>
+    <string name="suggestion_data">モバイルデータをオンにする</string>
+    <string name="suggestion_search_my_device">このデバイスを検索</string>
+
+    <!-- Category -->
+    <string name="category">カテゴリ</string>
+    <string name="category_all">すべて</string>
+    <string name="category_edit_name">カテゴリ名</string>
+    <string name="category_edit_devices_title">デバイス</string>
+    <string name="category_edit_name_error_all">カテゴリ名は「すべて」にできません。</string>
+    <string name="category_edit_name_error_empty">カテゴリ名は空にできません。</string>
+    <string name="category_edit_device_list_error_empty">デバイスリストは空にできません。</string>
+
+    <!-- Report -->
+    <string name="report">報告</string>
+    <string name="report_description">ご報告ありがとうございます。1週間以内に反映させますが、通知はされません。ご報告が不適切であった場合、無視される可能性があります。報告理由を以下から選択してください。</string>
+    <string name="report_type_1">ファームウェア情報エラー</string>
+    <string name="report_type_2">不適切なユーザー名</string>
+    <string name="report_type_3">スマート検索情報エラー</string>
+    <string name="report_type_4">その他のエラー</string>
+    <string name="report_detail">(任意) 詳細があれば役立ちます。</string>
+    <string name="report_submit">送信</string>
+    <string name="report_success">送信に成功しました。</string>
+    <string name="report_fail">送信に失敗しました。</string>
+
+    <!-- Outdated -->
+    <string name="outdated_title">更新が必要です</string>
+    <string name="outdated_description">現在のバージョンはサポートされていません。最新バージョンにアップデートしてください。ご不便をおかけして申し訳ありません。</string>
+</resources>

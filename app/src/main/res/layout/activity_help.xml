@@ -8,67 +8,22 @@
         layout="@layout/toolbar_expandable" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="12dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:orientation="vertical">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/help_youtube"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:contentPadding="14dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/ic_youtube"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_youtube" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/ic_youtube"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            style="?textAppearanceHeadline6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/help_youtube" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/help_youtube_description" />
-
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/help_manual"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:contentPadding="14dp">
+                app:contentPadding="12dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -83,27 +38,28 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
-                    <LinearLayout
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/help_manual_title"
+                        style="@style/SettingsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="14dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/help_manual"
+                        android:layout_marginStart="12dp"
+                        app:layout_constraintVertical_chainStyle="packed"
                         app:layout_constraintStart_toEndOf="@id/ic_help_manual"
-                        app:layout_constraintBottom_toBottomOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/help_manual_description" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            style="?textAppearanceHeadline6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/help_manual" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/help_manual_description" />
-
-                    </LinearLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/help_manual_description"
+                        style="@style/SettingsDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="@string/help_manual_description"
+                        app:layout_constraintStart_toEndOf="@id/ic_help_manual"
+                        app:layout_constraintTop_toBottomOf="@id/help_manual_title"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -114,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:contentPadding="14dp">
+                app:contentPadding="12dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -129,27 +85,28 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
-                    <LinearLayout
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/help_device_title"
+                        style="@style/SettingsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="14dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/help_device_info"
+                        android:layout_marginStart="12dp"
+                        app:layout_constraintVertical_chainStyle="packed"
                         app:layout_constraintStart_toEndOf="@id/ic_help_device"
-                        app:layout_constraintBottom_toBottomOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/help_device_description" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            style="?textAppearanceHeadline6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/help_device_info" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/help_device_info_description" />
-
-                    </LinearLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/help_device_description"
+                        style="@style/SettingsDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="@string/help_device_info_description"
+                        app:layout_constraintStart_toEndOf="@id/ic_help_device"
+                        app:layout_constraintTop_toBottomOf="@id/help_device_title"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

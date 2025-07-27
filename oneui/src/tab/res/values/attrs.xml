@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="OneUITab">
+        <attr name="tabTitle" format="string" />
+        <attr name="isSubTab" format="boolean" />
+        <attr name="isTabSelected" format="boolean" />
+        <attr name="customFontFamily" format="reference" />
+    </declare-styleable>
+</resources>

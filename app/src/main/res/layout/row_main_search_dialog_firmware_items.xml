@@ -1,0 +1,7 @@
+<com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/data"
+    style="@style/TextAppearance.Material3.BodySmall"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxLines="1"
+    android:ellipsize="end" />

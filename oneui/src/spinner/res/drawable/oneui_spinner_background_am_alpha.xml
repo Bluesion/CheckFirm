@@ -1,0 +1,8 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:autoMirrored="true">
+    <item android:state_enabled="false">
+        <nine-patch android:autoMirrored="true" android:src="@drawable/oneui_spinner_mtrl_am_alpha" android:tint="@color/oneui_spinner_icon_color_disabled" />
+    </item>
+    <item>
+        <nine-patch android:autoMirrored="true" android:src="@drawable/oneui_spinner_mtrl_am_alpha" android:tint="@color/oneui_spinner_icon_color_default" />
+    </item>
+</selector>

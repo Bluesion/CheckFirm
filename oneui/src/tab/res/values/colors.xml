@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="oneui_tab_indicator">#000000</color>
+	<color name="oneui_sub_tab_background_selected">#E9E9EC</color>
+	<color name="oneui_sub_tab_background">@android:color/transparent</color>
+	<color name="oneui_tab_text_selected">#000000</color>
+	<color name="oneui_tab_text">#636363</color>
+</resources>

@@ -1,0 +1,246 @@
+<resources>
+    <!-- Test -->
+
+    <!-- General -->
+    <string name="add_item">新增</string>
+    <string name="check_network">請檢查網路</string>
+    <string name="check_device">請確保您正確輸入了型號和CSC代碼。</string>
+    <string name="close">關閉</string>
+    <string name="unknown">未知</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_new_firmware">新韌體</string>
+    <string name="notification_channel_new_update">應用程式更新</string>
+    <string name="notification_new_update_title">CheckFirm 緊急更新</string>
+    <string name="notification_new_update_text">已報告關鍵錯誤。請立即從 Play 商店更新。</string>
+    <string name="notification_info_catcher_title">找到 %1$s (%2$s) 的新韌體了！</string>
+    <string name="notification_info_catcher_text">立即檢查。</string>
+    <string name="notification_permission_required_title">需要權限</string>
+    <string name="notification_permission_required_message">CheckFirm 提供 Info Catcher，當找到新韌體時會通知您。若要使用此功能，您必須授予通知權限。</string>
+    <string name="notification_permission_required_button_deny">拒絕</string>
+    <string name="notification_permission_required_button_grant">授予</string>
+
+    <!-- Main -->
+    <string name="main_welcome_search_text">歡迎搜尋已停用。建議啟用歡迎搜尋。</string>
+    <string name="main_network_error_title">網路錯誤</string>
+    <string name="main_network_error_text">網路未連線或太慢。</string>
+    <string name="main_search_error_title">搜尋錯誤</string>
+    <string name="main_search_error_text">型號或CSC不正確。</string>
+    <string name="main_category_dialog_description">選擇要在快速搜尋列中顯示的類別。</string>
+    <string name="main_hello_title">歡迎來到 CheckFirm！</string>
+    <string name="main_hello_description">您可以搜尋三星裝置的韌體資訊。請查看以下功能。</string>
+    <string name="main_hello_search_description">搜尋韌體資訊。</string>
+    <string name="main_hello_bookmark_description">新增書籤和類別。</string>
+    <string name="main_hello_info_catcher_description">不要錯過新找到的韌體。</string>
+    <string name="main_hello_settings_description">更多功能等著您。</string>
+
+    <!-- Search -->
+    <string name="search">搜尋</string>
+    <string name="official_latest">最新官方韌體</string>
+    <string name="test_latest">最新測試韌體</string>
+    <string name="model">型號</string>
+    <string name="official_previous">先前官方韌體</string>
+    <string name="test_previous">先前測試韌體</string>
+    <string name="clipboard">已複製到剪貼簿。</string>
+    <string name="search_error">搜尋失敗。此裝置在三星伺服器上沒有資料。</string>
+    <string name="multi_search_limit">您最多可搜尋 5 台裝置</string>
+    <string name="search_history">搜尋記錄</string>
+    <string name="search_history_delete_all">全部刪除</string>
+    <string name="search_list_empty">搜尋列表為空。</string>
+    <string name="search_no_bookmark">沒有書籤</string>
+    <string name="search_no_history">沒有記錄</string>
+    <string name="search_add_bookmark">新增書籤</string>
+    <string name="search_result_tab_previous">先前</string>
+    <string name="search_result_tab_beta">Beta</string>
+
+    <!-- Sherlock -->
+    <string name="sherlock">夏洛克</string>
+    <string name="sherlock_build">建置版本</string>
+    <string name="sherlock_baseband">基頻版本</string>
+    <string name="sherlock_tab_manual">手冊</string>
+    <string name="sherlock_tab_script">腳本</string>
+    <string name="sherlock_result_success">恭喜您！您已成功破解韌體加密資訊。</string>
+    <string name="sherlock_result_fail">解密失敗。您可以嘗試更改值再次嘗試。</string>
+    <string name="sherlock_manual_description">您現在是一位破解韌體加密資訊的偵探！嘗試透過在每個欄位中輸入值來解密。</string>
+
+    <!-- Sherlock script -->
+    <string name="sherlock_script">夏洛克腳本</string>
+    <string name="sherlock_script_description">您需要做的就是輸入起始值和結束值。夏洛克腳本將嘗試尋找起始值和結束值之間所有資料的解密韌體資訊。請注意，如果起始值和結束值之間的差異過大，應用程式可能會因過載而強制關閉。</string>
+    <string name="sherlock_script_start_value">開始</string>
+    <string name="sherlock_script_end_value">結束</string>
+    <string name="sherlock_script_start">啟動腳本</string>
+    <string name="sherlock_script_error_1">開機載入程式：起始值大於結束值。</string>
+    <string name="sherlock_script_error_2">開機載入程式：起始值大於結束值。</string>
+    <string name="sherlock_script_error_3">One UI 版本：起始值大於結束值。</string>
+    <string name="sherlock_script_error_4">年份：起始值大於結束值。</string>
+    <string name="sherlock_script_error_5">月份：起始值大於結束值。</string>
+    <string name="sherlock_script_error_6">修訂：起始值大於結束值。</string>
+    <string name="sherlock_script_error_7">起始值有問題。</string>
+    <string name="sherlock_script_error_8">結束值有問題。</string>
+    <string name="sherlock_script_no_error">似乎沒有錯誤。\n準備就緒！</string>
+    <string name="sherlock_script_running">腳本正在執行中…\n請勿退出此畫面。</string>
+
+    <!-- Bookmark -->
+    <string name="bookmark">書籤</string>
+    <string name="bookmark_new">新書籤</string>
+    <string name="bookmark_edit">編輯書籤</string>
+    <string name="bookmark_name">書籤名稱</string>
+    <string name="bookmark_save">儲存</string>
+    <string name="bookmark_search_error">請檢查型號和CSC代碼是否已正確儲存於書籤中。</string>
+    <string name="bookmark_name_error">請為此書籤命名！</string>
+
+    <!-- Bookmark backup and restore -->
+    <string name="backup">備份</string>
+    <string name="backup_description">將CheckFirm書籤和類別儲存為JSON檔案。</string>
+    <string name="restore">還原</string>
+    <string name="restore_description">載入備份JSON檔案以進行還原。</string>
+    <string name="backup_toast">備份完成。</string>
+    <string name="restore_toast">還原完成。</string>
+
+    <!-- Help -->
+    <string name="help">說明</string>
+    <string name="help_device_info">裝置資訊</string>
+    <string name="help_device_info_description">型號 · CSC</string>
+    <string name="help_device_info_edit">編輯</string>
+    <string name="help_device_name">裝置名稱</string>
+    <string name="help_device_info_bookmark">書籤已儲存。</string>
+    <string name="help_manual">韌體手冊</string>
+    <string name="help_manual_description">韌體資訊</string>
+    <string name="help_firmware_manual_description">韌體資訊包含 3 個部分。它們是建置版本、CSC 版本和基頻版本。\n\n假設韌體搜尋結果為\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1。\n\n第一個 (A720SKSU3BRK1) 指建置版本，第二個 (A720SSKC3BRK1) 指CSC版本，最後一個 (A720NKOU3BRK1) 指基頻版本。</string>
+    <string name="help_firmware_manual_build_description">A720SKSU3BRK1 指的是建置版本。您可以從建置版本中取得開機載入程式版本、One UI 版本、韌體建置年份、月份和修訂號（次要版本）。</string>
+    <string name="help_firmware_manual_build_device_description">這是型號。在此情況下，A720 是 Samsung Galaxy A7 (2017)。</string>
+    <string name="help_firmware_manual_build_region_description">這是區域代碼。在此情況下，SKS 表示韓國。它可能是一個 4 個字母的代碼。</string>
+    <string name="help_firmware_manual_build_bootloader_description">這是開機載入程式版本。由於三星的安全政策，您無法從較高開機載入程式版本的韌體降級到較低開機載入程式版本的韌體。</string>
+    <string name="help_firmware_manual_build_one_ui_description">這是 One UI 的版本。\n如果黃色文字已更新，則表示 One UI 即將或已經更新。\n\nA 表示第一個主要版本。\nB 表示主要更新已發佈一次。\nC 表示主要更新已發佈兩次。\n.\n.\n.\nZ 表示 Beta 韌體。</string>
+    <string name="help_firmware_manual_build_year_description">這是韌體建置的年份。\n\nT 表示 2020 年，\nU 表示 2021 年，\nV 表示 2022 年，依此類推。</string>
+    <string name="help_firmware_manual_build_month_description">這是韌體建置的月份。\n\nA 表示一月，\nB 表示二月，\n.\n.\n.\nL 表示十二月。</string>
+    <string name="help_firmware_manual_build_revision_description">這是修訂號（次要版本）。\n\n1 表示韌體已建置一次。\n.\n.\n.\n9 表示韌體已建置 9 次。\nA 表示韌體已建置 10 次。\n.\n.\n.\nF 表示韌體已建置 16 次。</string>
+    <string name="help_firmware_manual_csc_description">A720SSKC3BRK1 指的是 CSC 版本。CSC 是 Consumer Software Customization 的縮寫，指的是安裝在三星裝置上的特定區域或營運商的韌體。</string>
+    <string name="help_firmware_manual_baseband_description">A720NKOU3BRK1 指的是基頻版本。基頻是控制您裝置無線電的韌體。它負責您裝置與網路之間的無線通訊。</string>
+
+    <!-- About -->
+    <string name="about_app_information">應用程式資訊</string>
+    <string name="about_version">版本</string>
+    <string name="about_latest">最新版本已安裝。</string>
+    <string name="about_update">更新</string>
+    <string name="license">授權</string>
+    <string name="legal">法律資訊</string>
+    <string name="legal_text">官方韌體資訊來自 https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml。\n\n測試韌體資訊來自 https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml。\n\n這些並非三星電子向客戶提供韌體資訊的官方途徑。任何使用這些資訊的風險由您自行承擔。</string>
+
+    <!-- Contributor -->
+    <string name="contributor">貢獻者</string>
+    <string name="contributor_application">應用程式</string>
+    <string name="contributor_designer">設計師</string>
+    <string name="contributor_developer">開發者</string>
+    <string name="contributor_russian">俄語</string>
+    <string name="contributor_chinese">中文</string>
+    <string name="contributor_czech">捷克語</string>
+    <string name="contributor_portuguese">葡萄牙語</string>
+    <string name="contributor_romanian">羅馬尼亞語</string>
+    <string name="contributor_sinhala">僧伽羅語</string>
+    <string name="contributor_translator">翻譯者</string>
+
+    <!-- Settings -->
+    <string name="settings">設定</string>
+    <string name="settings_profile_user_name">使用者名稱</string>
+    <string name="settings_theme">主題</string>
+    <string name="settings_theme_description">設定應用程式主題。</string>
+    <string name="settings_theme_light">淺色</string>
+    <string name="settings_theme_dark">深色</string>
+    <string name="settings_theme_system">系統預設</string>
+    <string name="settings_language">語言</string>
+    <string name="settings_language_description">設定應用程式語言</string>
+    <string name="settings_language_default">系統預設</string>
+    <string name="settings_quick_search_bar">快速搜尋列</string>
+    <string name="settings_quick_search_bar_description">在主畫面上顯示書籤。</string>
+    <string name="settings_bookmark_order">書籤順序</string>
+    <string name="settings_bookmark_order_description">排序書籤</string>
+    <string name="settings_bookmark_order_by_created_time">按建立時間排序</string>
+    <string name="settings_bookmark_order_by_device">按裝置排序</string>
+    <string name="settings_bookmark_order_by_name">按名稱排序</string>
+    <string name="settings_bookmark_order_by_desc">按遞減順序排序</string>
+    <string name="settings_bookmark_reset">重設書籤</string>
+    <string name="settings_bookmark_reset_description">重設所有書籤和類別。僅在出現錯誤時使用此功能。</string>
+    <string name="settings_bookmark_reset_dialog_title">您確定嗎？</string>
+    <string name="settings_bookmark_reset_dialog_message">所有書籤和類別都將被刪除。</string>
+    <string name="settings_bookmark_reset_toast">重設成功。</string>
+    <string name="settings_bookmark_backup_restore">備份與還原</string>
+    <string name="settings_bookmark_backup_restore_description">備份和還原CheckFirm書籤和類別。</string>
+    <string name="settings_welcome_search_description">啟動時搜尋韌體。</string>
+    <string name="settings_info_catcher_description">Info Catcher 將在韌體更新時向您發送通知。</string>
+    <string name="settings_firebase">修正搜尋錯誤</string>
+    <string name="settings_firebase_description">由於中國或伊朗等一些國家禁止使用 Firebase，因此存在搜尋錯誤。如果您在這些國家，請啟用此設定。</string>
+    <string name="settings_inquiry">查詢</string>
+    <string name="settings_inquiry_not_found_exception">請從 Google Play 商店安裝電子郵件用戶端應用程式。</string>
+    <string name="settings_about">關於 CheckFirm</string>
+
+    <!-- Welcome Search -->
+    <string name="welcome_search">歡迎搜尋</string>
+    <string name="welcome_search_description">應用程式啟動時搜尋韌體。\n請輸入您希望在啟動時搜尋的裝置。</string>
+    <string name="welcome_search_add_device">新增裝置</string>
+    <string name="welcome_search_empty_device_list">您最多可以新增 5 台裝置。</string>
+
+    <!-- Smart Search -->
+    <string name="smart_search">智慧搜尋</string>
+    <string name="smart_search_type_major">One UI 更新</string>
+    <string name="smart_search_type_minor">次要更新</string>
+    <string name="smart_search_type_rollback">回滾</string>
+    <string name="smart_search_bootloader">開機載入程式版本</string>
+    <string name="smart_search_major_version">主要版本</string>
+    <string name="smart_search_build_date">建置日期</string>
+    <string name="smart_search_minor_version">次要版本</string>
+    <string name="smart_search_date_format">%2$s, %1$s</string>
+    <string name="smart_search_downgrade_possible">可降級</string>
+    <string name="smart_search_downgrade_impossible">不可降級</string>
+    <string name="january">一月</string>
+    <string name="february">二月</string>
+    <string name="march">三月</string>
+    <string name="april">四月</string>
+    <string name="may">五月</string>
+    <string name="june">六月</string>
+    <string name="july">七月</string>
+    <string name="august">八月</string>
+    <string name="september">九月</string>
+    <string name="october">十月</string>
+    <string name="november">十一月</string>
+    <string name="december">十二月</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher">資訊擷取器</string>
+    <string name="info_catcher_description">Info Catcher 將在韌體更新時向您發送通知。\n請輸入您要擷取的裝置。</string>
+
+    <!-- Suggestion -->
+    <string name="suggestion">建議</string>
+    <string name="suggestion_title">還在尋找其他東西嗎？</string>
+    <string name="suggestion_bookmark_my_device">將我的裝置加入書籤</string>
+    <string name="suggestion_enable_welcome_search">啟用歡迎搜尋</string>
+    <string name="suggestion_check_my_device_info">檢查我的裝置資訊</string>
+    <string name="suggestion_wifi">開啟 Wi-Fi</string>
+    <string name="suggestion_data">開啟行動數據</string>
+    <string name="suggestion_search_my_device">搜尋此裝置</string>
+
+    <!-- Category -->
+    <string name="category">類別</string>
+    <string name="category_all">全部</string>
+    <string name="category_edit_name">類別名稱</string>
+    <string name="category_edit_devices_title">裝置</string>
+    <string name="category_edit_name_error_all">類別名稱不能是「全部」。</string>
+    <string name="category_edit_name_error_empty">類別名稱不得為空！</string>
+    <string name="category_edit_device_list_error_empty">裝置列表不得為空。</string>
+
+    <!-- Report -->
+    <string name="report">回報</string>
+    <string name="report_description">感謝您的回報。我將在一周內納入您的回報，且不會通知您。如果您的回報不當，可能會被忽略。請選擇以下回報原因。</string>
+    <string name="report_type_1">韌體資訊錯誤</string>
+    <string name="report_type_2">不當的使用者名稱</string>
+    <string name="report_type_3">智慧搜尋資訊錯誤</string>
+    <string name="report_type_4">其他錯誤</string>
+    <string name="report_detail">(可選) 任何詳細資訊都會有幫助。</string>
+    <string name="report_submit">提交</string>
+    <string name="report_success">提交成功。</string>
+    <string name="report_fail">提交失敗。</string>
+
+    <!-- Outdated -->
+    <string name="outdated_title">需要更新</string>
+    <string name="outdated_description">目前版本不再支援。請更新至最新版本。對於造成您的不便，我們深感抱歉。</string>
+</resources>

@@ -1,15 +1,22 @@
 <resources>
     <plurals name="bookmark_subtitle">
         <item quantity="one">%d закладка</item>
-        <item quantity="few">%d закладок</item>
+        <item quantity="few">%d закладки</item>
         <item quantity="many">%d закладок</item>
         <item quantity="other">%d закладок</item>
     </plurals>
 
     <plurals name="category_subtitle">
-        <item quantity="one">%d category</item>
-        <item quantity="few">%d categories</item>
-        <item quantity="many">%d categories</item>
-        <item quantity="other">%d categories</item>
+        <item quantity="one">%d категория</item>
+        <item quantity="few">%d категории</item>
+        <item quantity="many">%d категорий</item>
+        <item quantity="other">%d категорий</item>
+    </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="one">%d устройство</item>
+        <item quantity="few">%d устройства</item>
+        <item quantity="many">%d устройств</item>
+        <item quantity="other">%d устройств</item>
     </plurals>
 </resources>

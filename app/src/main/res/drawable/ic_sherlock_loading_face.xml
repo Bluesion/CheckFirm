@@ -1,0 +1,6 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_sherlock_loading_face_icon">
+    <target
+        android:name="rotating_border_group"
+        android:animation="@animator/sherlock_loading_animator" />
+</animated-vector>

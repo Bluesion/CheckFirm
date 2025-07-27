@@ -1,0 +1,15 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="together">
+    <set android:ordering="sequentially">
+        <objectAnimator
+            android:duration="183"
+            android:propertyName="fillAlpha"
+            android:valueFrom="1"
+            android:valueTo="1" />
+        <objectAnimator
+            android:duration="116"
+            android:propertyName="fillAlpha"
+            android:valueFrom="0"
+            android:valueTo="0" />
+    </set>
+</set>

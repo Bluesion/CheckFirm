@@ -1,0 +1,17 @@
+<resources>
+
+	<style name="ShapeAppearanceOverlay" />
+
+	<style name="ShapeAppearanceOverlay.Circle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="OneUI.FAB" parent="@style/Widget.Material3.FloatingActionButton.Surface">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Circle</item>
+        <item name="backgroundTint">@color/oneui_fab_background</item>
+        <item name="tint">@color/oneui_fab_tint</item>
+        <item name="rippleColor">@color/oneui_fab_ripple_color</item>
+    </style>
+
+</resources>

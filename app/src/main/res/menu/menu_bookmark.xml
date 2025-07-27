@@ -2,9 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/order"
-        android:icon="@drawable/ic_order"
-        android:title="@string/bookmark_order"
+        android:id="@+id/category"
+        android:icon="@drawable/ic_category"
+        android:title="@string/category"
         app:showAsAction="ifRoom" />
 
 </menu>

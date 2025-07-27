@@ -1,0 +1,6 @@
+<resources>
+    <style name="OneUI.RadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/oneui_control_background</item>
+        <item name="android:button">@drawable/oneui_radiobutton</item>
+    </style>
+</resources>

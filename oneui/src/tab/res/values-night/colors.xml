@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="oneui_tab_indicator">#FFFFFF</color>
+	<color name="oneui_sub_tab_background_selected">#2D2D2D</color>
+	<color name="oneui_tab_text_selected">#FFFFFF</color>
+	<color name="oneui_tab_text">#A9A9A9</color>
+</resources>

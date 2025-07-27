@@ -1,210 +1,197 @@
 <resources>
+    <!-- Test -->
+
     <!-- General -->
-    <string name="check_network">කරුණාකර ජාල සම්බන්ධතාවය පරීක්ෂා කරන්න</string>
-    <string name="switch_on">සක්‍රීය කරන්න</string>
-    <string name="switch_off">අක්‍රීය කරන්න</string>
-    <string name="close">වසන්න</string>
-    <string name="unknown">නොදනී</string>
-    <string name="my_device">මගේ උපාංගය</string>
+    <string name="add_item">එකතු කරන්න</string>
+    <string name="check_network">ජාලය පරීක්ෂා කරන්න</string>
+    <string name="check_device">ඔබ විසින් ආකෘතිය සහ CSC කේතය නිවැරදිව ලියා තිබේදැයි පරීක්ෂා කරන්න.</string>
+    <string name="close">වසා දමන්න</string>
+    <string name="unknown">නොදන්නා</string>
 
     <!-- Notification -->
-    <string name="notification_channel_new_firmware">නව ස්ථීරාංග</string>
-    <string name="notification_channel_new_update">යෙදුම් යාවත්කාලීන කිරීම</string>
-    <string name="notification_new_update_title">CheckFirm හදිසි යාවත්කාලීන කිරීම</string>
-    <string name="notification_new_update_text">බරපතල දෝෂ වාර්තා විය. කරුණාකර එය දැන්ම Play Store මගින් යාවත්කාලීන කරන්න.</string>
-    <string name="info_catcher_notification_title">%1$s (%2$s) නව ස්ථීරාංග හමු විය!</string>
-    <string name="info_catcher_notification_text">දැන්ම එය පරීක්ෂා කරන්න.</string>
-    <string name="sherlock_script_notification_name">Sherlock script</string>
-    <string name="sherlock_script_notification_description">Show notification for Sherlock script.</string>
-    <string name="sherlock_script_notification_title">Sherlock script</string>
-    <string name="sherlock_script_notification_text_ongoing">Sherlock script running…</string>
-    <string name="sherlock_script_notification_text_finished">Sherlock script finished.</string>
-    <string name="notification_channel_name_sherlock_script">Sherlock script</string>
-    <string name="notification_channel_description_sherlock_script">Sherlock script helps you find latest test firmware even it is encrypted.</string>
+    <string name="notification_channel_new_firmware">නව ස්ථිරාංගය</string>
+    <string name="notification_channel_new_update">යෙදුම් යාවත්කාලීනය</string>
+    <string name="notification_new_update_title">CheckFirm හදිසි යාවත්කාලීනය</string>
+    <string name="notification_new_update_text">විවේචනාත්මක දෝෂ වාර්තා වී ඇත. කරුණාකර Play Store වෙතින් වහාම යාවත්කාලීන කරන්න.</string>
+    <string name="notification_info_catcher_title">%1$s (%2$s) සඳහා නව ස්ථිරාංගයක් සොයාගෙන ඇත!</string>
+    <string name="notification_info_catcher_text">දැන්ම පරීක්ෂා කරන්න.</string>
+    <string name="notification_permission_required_title">අවසරය අවශ්‍යයි</string>
+    <string name="notification_permission_required_message">CheckFirm විසින් Info Catcher සපයයි, එය නව ස්ථිරාංගයක් සොයාගත් විට ඔබට දැනුම් දෙයි. මෙම අංගය භාවිතා කිරීමට, ඔබ දැනුම්දීම් අවසරය ලබා දිය යුතුය.</string>
+    <string name="notification_permission_required_button_deny">ප්‍රතික්ෂේප කරන්න</string>
+    <string name="notification_permission_required_button_grant">ප්‍රදානය කරන්න</string>
 
     <!-- Main -->
-    <string name="main_welcome_search_text">ආරම්භක සෙවීම අක්‍රීය කර ඇත. ආරම්භක සෙවීම සක්‍රීය කරන මෙන් නිර්දේශ කෙරේ.</string>
-    <string name="main_network_error_title">ජාල සබඳතා දෝෂයක්</string>
-    <string name="main_network_error_text">ජාල සබඳතාව නැත හෝ ඉතාමත් මන්දගාමී වේ.</string>
-    <string name="main_search_error_title">සෙවුම් දෝෂයක්</string>
-    <string name="main_search_error_text">මාදිලිය හෝ CSC කේතය වැරදියි.</string>
+    <string name="main_welcome_search_text">ආරම්භක සෙවීම අක්‍රිය කර ඇත. ආරම්භක සෙවීම සක්‍රිය කිරීම නිර්දේශ කෙරේ.</string>
+    <string name="main_network_error_title">ජාල දෝෂය</string>
+    <string name="main_network_error_text">ජාලය සම්බන්ධ වී නැත හෝ ඉතා මන්දගාමී වේ.</string>
+    <string name="main_search_error_title">සෙවුම් දෝෂය</string>
+    <string name="main_search_error_text">ආකෘතිය හෝ CSC වැරදිය.</string>
+    <string name="main_category_dialog_description">ඉක්මන් සෙවුම් තීරුවේ පෙන්වීමට අවශ්‍ය ප්‍රවර්ගය තෝරන්න.</string>
+    <string name="main_hello_title">CheckFirm වෙත සාදරයෙන් පිළිගනිමු!</string>
+    <string name="main_hello_description">ඔබට Samsung උපාංග සඳහා ස්ථිරාංග තොරතුරු සෙවිය හැක. පහත විශේෂාංග බලන්න.</string>
+    <string name="main_hello_search_description">ස්ථිරාංග තොරතුරු සොයන්න.</string>
+    <string name="main_hello_bookmark_description">Bookmaks සහ ප්‍රවර්ග එක් කරන්න.</string>
+    <string name="main_hello_info_catcher_description">නව ස්ථිරාංගය අතපසු නොකරන්න.</string>
+    <string name="main_hello_settings_description">තවත් විශේෂාංග බලා සිටී.</string>
 
     <!-- Search -->
     <string name="search">සොයන්න</string>
-    <string name="official_latest">නවතම නිල ස්ථීරාංගය</string>
-    <string name="test_latest">නවතම පරීක්ෂණ ස්ථීරාංගය</string>
-	<string name="test_newfound">අලුත හමුවූ පරීක්ෂණ ස්ථීරාංගය</string>
-    <string name="model">මාදිලිය</string>
-    <string name="official_previous">පෙර නිල ස්ථීරාංගය</string>
-    <string name="test_previous">පෙර පරීක්ෂණ ස්ථීරාංගය</string>
-    <string name="clipboard">ක්ලිප් පුවරුවට පිටපත් කරන ලදී.</string>
-    <string name="search_error">සෙවීම අසාර්ථකයි. මෙම උපාංගය සඳහා Samsung සේවාදායකයේ දත්ත නොමැත.</string>
-    <string name="searching">තවමත් සොයමින් පවතී… කරුණාකර තත්පර කිහිපයක් රැඳී සිටින්න</string>
-    <string name="changelog">වෙනස්වීම් සටහන</string>
-    <string name="multi_search_lists">පහත උපාංග %d සොයන්න.</string>
-    <string name="multi_search_limit">ඔබට උපාංග 4ක් දක්වා සෙවිය හැක.</string>
-    <string name="tab_main_1">නිල</string>
-    <string name="tab_main_2">පරීක්ෂණ</string>
-	<string name="search_list_empty">සෙවුම් ලැයිස්තුව හිස්.</string>
-	<string name="search_history">සෙවුම් ඉතිහාසය</string>
-	<string name="beta_firmware">ස්ථාවර නොවූ ස්ථීරාංග</string>
+    <string name="official_latest">අවසන් නිල ස්ථිරාංගය</string>
+    <string name="test_latest">අවසන් පරීක්ෂණ ස්ථිරාංගය</string>
+    <string name="model">ආකෘතිය</string>
+    <string name="official_previous">පෙර නිල ස්ථිරාංගය</string>
+    <string name="test_previous">පෙර පරීක්ෂණ ස්ථිරාංගය</string>
+    <string name="clipboard">පුවරුවට පිටපත් කරන ලදී.</string>
+    <string name="search_error">සෙවීම අසාර්ථක විය. මෙම උපාංගය සඳහා Samsung සේවාදායකයේ දත්ත නොමැත.</string>
+    <string name="multi_search_limit">ඔබට උපාංග 5ක් දක්වා සෙවිය හැක</string>
+    <string name="search_history">සෙවුම් ඉතිහාසය</string>
+    <string name="search_history_delete_all">සියල්ල මකන්න</string>
+    <string name="search_list_empty">සෙවුම් ලැයිස්තුව හිස්ය.</string>
+    <string name="search_no_bookmark">Bookmaks නැත</string>
+    <string name="search_no_history">ඉතිහාසයක් නැත</string>
+    <string name="search_add_bookmark">Bookmak එකතු කරන්න</string>
+    <string name="search_result_tab_previous">පෙර</string>
+    <string name="search_result_tab_beta">බීටා</string>
 
     <!-- Sherlock -->
-    <string name="sherlock">ෂර්ලොක් කිරීම</string>
-	<string name="sherlock_original">අව්‍යාජයි</string>
-    <string name="sherlock_build">ගොඩනැගුම් සංස්කරණය</string>
-    <string name="sherlock_baseband">බේස්බෑන්ඩ් සංස්කරණය</string>
-    <string name="sherlock_samsung_encrypted_text">නවතම පරීක්ෂණ ස්ථීරාංග සංකේතන යතුර</string>
-    <string name="sherlock_user_encrypted_text">පරිවර්තනය කළ සංකේතාත්මක පෙළ</string>
-    <string name="sherlock_correct">ඔබට එය වැටහුනා!</string>
-    <string name="sherlock_not_correct">වැරදියි… නැවත උත්සාහ කරන්න</string>
-	<string name="sherlock_in">එය පෙර පරීක්ෂණ ස්ථිරාංග වල ඇත.</string>
-    <string name="sherlock_not_in">එය පෙර පරීක්ෂණ ස්ථිරාංග වල නැත.</string>
-    <string name="sherlock_upload_server">Information uploaded to server.</string>
+    <string name="sherlock">ෂර්ලොක්</string>
+    <string name="sherlock_build">නිර්මාණ අනුවාදය</string>
+    <string name="sherlock_baseband">මූලික කලාප අනුවාදය</string>
+    <string name="sherlock_tab_manual">අත්පොත</string>
+    <string name="sherlock_tab_script">ස්ක්‍රිප්ට්</string>
+    <string name="sherlock_result_success">සුභ පැතුම්! ඔබ ස්ථිරාංගයේ ගුප්ත තොරතුරු විකේතනය කර ඇත.</string>
+    <string name="sherlock_result_fail">විකේතනය අසාර්ථක විය. ඔබ අගය වෙනස් කිරීමෙන් නැවත උත්සාහ කළ හැකිය.</string>
+    <string name="sherlock_manual_description">දැන් ඔබ ස්ථිරාංගයේ ගුප්ත තොරතුරු විකේතනය කරන අනාවරක කෙනෙකි! සෑම ක්ෂේත්‍රයකම අගයන් ඇතුළත් කිරීමෙන් විකේතනය කිරීමට උත්සාහ කරන්න.</string>
 
     <!-- Sherlock script -->
-    <string name="sherlock_script">හෝඩුවා සොයන්නා (ස්ථාවර නොවූ)</string>
-    <string name="sherlock_script_log">Log</string>
-    <string name="sherlock_script_message">Set script start and end value first. and then start script.</string>
-    <string name="sherlock_script_start_value">පටන් ගන්න</string>
-    <string name="sherlock_script_end_value">අවසන් කරන්න</string>
+    <string name="sherlock_script">ෂර්ලොක් ස්ක්‍රිප්ට්</string>
+    <string name="sherlock_script_description">ඔබ කළ යුත්තේ ආරම්භක සහ අවසන් අගය ඇතුළත් කිරීම පමණි. ෂර්ලොක් ස්ක්‍රිප්ට් ආරම්භක සහ අවසන් අගය අතර ඇති සියලුම දත්ත සමඟ විකේතනය කරන ලද ස්ථිරාංග තොරතුරු සොයා ගැනීමට උත්සාහ කරනු ඇත. කරුණාකර සටහන් කරන්න, ආරම්භක අගය සහ අවසන් අගය අතර වෙනස ඉතා විශාල නම්, අධික බර නිසා යෙදුම බලහත්කාරයෙන් වසා දැමිය හැකිය.</string>
+    <string name="sherlock_script_start_value">ආරම්භය</string>
+    <string name="sherlock_script_end_value">අවසන්</string>
     <string name="sherlock_script_start">ස්ක්‍රිප්ට් ආරම්භ කරන්න</string>
-    <string name="sherlock_script_no_error">ස්ක්‍රිප්ට් ක්‍රියාත්මක වේ…</string>
-    <string name="sherlock_script_error_1">ඇරඹුම් කාරකය: ආරම්භක අගය අවසාන අගයට වඩා විශාලය.</string>
-    <string name="sherlock_script_error_2">ඇරඹුම් කාරකය: ආරම්භක අගය අවසාන අගයට වඩා විශාලය.</string>
-    <string name="sherlock_script_error_3">ප්‍රධාන සංස්කරණය: ආරම්භක අගය අවසාන අගයට වඩා විශාලය.</string>
-    <string name="sherlock_script_error_4">ස්ථීරාංග වර්ෂය: ආරම්භක අගය අවසාන අගයට වඩා විශාලය.</string>
-    <string name="sherlock_script_error_5">ස්ථීරාංග මාසය: ආරම්භක අගය අවසාන අගයට වඩා විශාලය.</string>
-    <string name="sherlock_script_error_6">සුළු සංස්කරණය: ආරම්භක අගය අවසාන අගයට වඩා විශාලය.</string>
-    <string name="sherlock_script_end">Script ended. Found:\n%s</string>
-    <string name="sherlock_script_end_failed">Script ended. Found nothing. You can try again by resetting script start and end value.</string>
+    <string name="sherlock_script_error_1">බූට්ලෝඩරය: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_2">බූට්ලෝඩරය: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_3">One UI අනුවාදය: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_4">වසර: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_5">මාසය: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_6">සංශෝධනය: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_7">ආරම්භක අගයෙහි යමක් වැරදිය.</string>
+    <string name="sherlock_script_error_8">අවසන් අගයෙහි යමක් වැරදිය.</string>
+    <string name="sherlock_script_no_error">කිසිදු දෝෂයක් නොමැති බව පෙනේ.\nයාමට සූදානම්!</string>
+    <string name="sherlock_script_running">ස්ක්‍රිප්ට් ධාවනය වෙමින් පවතී…\nමෙම තිරයෙන් පිට නොවන්න.</string>
 
     <!-- Bookmark -->
-    <string name="bookmark">පිටු සලකුණ</string>
-    <string name="bookmark_new">නව පිටු සලකුණ</string>
-    <string name="bookmark_edit">පිටු සලකුණු සංස්කරණය</string>
-    <string name="bookmark_name">පිටු සලකුණු නම</string>
+    <string name="bookmark">Bookmak</string>
+    <string name="bookmark_new">නව Bookmak</string>
+    <string name="bookmark_edit">Bookmak සංස්කරණය කරන්න</string>
+    <string name="bookmark_name">Bookmak නම</string>
     <string name="bookmark_save">සුරකින්න</string>
-    <string name="bookmark_search_error">මාදිලිය සහ CSC කේතය නිවැරදිව පිටු සලකුණෙහි සුරකින ලදි දැයි පරීක්ෂා කරන්න..</string>
-    <string name="bookmark_order">පිටු සලකුණු පිළිවෙල</string>
-    <string name="bookmark_order_description">Order bookmarks</string>
-    <string name="bookmark_order_by_created_time">නිර්මාණය කළ වේලාව අනුව ලැයිස්තුගත කරන්න</string>
-    <string name="bookmark_order_by_device">උපාංගය අනුව ලැයිස්තුගත කරන්න</string>
-    <string name="bookmark_order_by_name">නම අනුව ලැයිස්තුගත කරන්න</string>
-    <string name="bookmark_order_by_desc">අවරෝහණ පිළිවෙලට ලැයිස්තුගත කරන්න</string>
+    <string name="bookmark_search_error">ආකෘතිය සහ CSC කේතය Bookmak හි නිවැරදිව සුරැකී ඇත්දැයි පරීක්ෂා කරන්න.</string>
+    <string name="bookmark_name_error">කරුණාකර මෙම Bookmak නම් කරන්න!</string>
 
     <!-- Bookmark backup and restore -->
-    <string name="backup">Backup</string>
-    <string name="backup_description">Save CheckFirm bookmark and category as JSON file.</string>
-    <string name="restore">Restore</string>
-    <string name="restore_description">Load backup JSON file to restore.</string>
-    <string name="backup_toast">Backup complete.</string>
-    <string name="restore_toast">Restore completed.</string>
-	
-	<!-- Category -->
-	<string name="category">වර්ගීකරණය</string>
-    <string name="category_and">&#160;සහ&#160;</string>
-    <string name="category_all">සියල්ල</string>
-    <string name="category_edit_name">ප්‍රවර්ග නාමය</string>
-    <string name="category_edit_devices_title">උපාංග</string>
-    <string name="category_edit_name_error_all">ප්‍රවර්ග නාමය සියල්ලම විය නොහැක.</string>
-    <string name="category_edit_name_error_empty">ප්‍රවර්ග නාමය හිස් නොවිය යුතුය.</string>
-    <string name="category_edit_device_list_error_empty">උපාංග ලැයිස්තුව හිස් නොවීය යුතුය.</string>
+    <string name="backup">සම්පුර්ණ පිටපත</string>
+    <string name="backup_description">CheckFirm Bookmak සහ ප්‍රවර්ගය JSON ගොනුවක් ලෙස සුරකින්න.</string>
+    <string name="restore">ප්‍රතිස්ථාපනය කරන්න</string>
+    <string name="restore_description">ප්‍රතිස්ථාපනය කිරීමට උපස්ථ JSON ගොනුව පූරණය කරන්න.</string>
+    <string name="backup_toast">සම්පුර්ණ පිටපත සම්පූර්ණයි.</string>
+    <string name="restore_toast">ප්‍රතිස්ථාපනය සම්පූර්ණයි.</string>
 
     <!-- Help -->
-    <string name="help">උපකාර</string>
-    <string name="help_youtube">ක්‍රියාකරන ආකාරය පෙන්වන youtube වීඩියෝව</string>
-    <string name="help_youtube_description">වීඩියෝ කළේ Saqlin mirza</string>
+    <string name="help">උදව්</string>
     <string name="help_device_info">උපාංග තොරතුරු</string>
-    <string name="help_device_info_description">මාදිලිය · CSC</string>
-    <string name="help_device_info_edit">Edit</string>
-    <string name="help_device_name">Device name</string>
-    <string name="help_device_info_bookmark">Bookmark saved.</string>
-    <string name="help_manual">ස්ථීරාංග අත්පොත</string>
-    <string name="help_manual_description">ස්ථීරාංග විස්තරය</string>
-    <string name="firmware_0">මූලික ස්ථීරාංග විස්තරය</string>
-    <string name="firmware_1">ස්ථිරාංග තොරතුරු, තොරතුරු 3 කින් සමන්විත වේ. ගොඩනැගුම් සංස්කරණය, CSC සංස්කරණය, සහ බේස්බෑන්ඩ් සංස්කරණය.\n\n ස්ථීරාංග සෙවුම් ප්‍රත්ඵලය\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1\nයැයි සිතමු\n\nපළමු එකෙන්(A720SKSU3BRK1) ගොඩනැගුම් සංස්කරණය,\nදෙවනි එකෙන්(A720SSKC3BRK1) CSC සංස්කරණය,\n අන්තිම එකෙන්(A720NKOU3BRK1) බේස්බෑන්ඩ් සංස්කරණය අදහස් කෙරේ.</string>
-    <string name="firmware_2">ස්ථිරාංග සංස්කරණය සමඟ අප දන්නේ කුමක්ද?</string>
-    <string name="firmware_3">අප සැලකිලිමත් විය යුත්තේ ගොඩනැගුම් සංස්කරණය ගැන පමණි. අපට ගොඩනැගුම් සංස්කරණය මගින් ස්ථිරංගය විශ්ලේෂණය කළ හැකිය.\nමෙම උදාහරණ ගොඩනැගුම් සංස්කරණය සලකන්න:</string>
-    <string name="firmware_10">රතුපාට පෙළ</string>
-    <string name="firmware_11">රතුපාට පෙළෙන් (ex. U3) අදහස් වන්නේ ඇරඹුම් කරකයේ සංස්කරණයයි.\n\n Samsung සමාගමේ ආරක්ෂක ප්‍රතිපත්ති අනුව, ඔබට ඉහළ ඇරඹුම් කාරක ස්ථිරාංග සංස්කරණයේ සිට පහළ ඇරඹුම් කාරක ස්ථිරාංග සංකරණය දක්වා ස්ථීරාංග පහත හෙලීමට නොහැකිය.</string>
-    <string name="firmware_12">කහපාට පෙළ</string>
-    <string name="firmware_13">කහපාට පෙළෙන් (ex. B) අදහස් වන්නේ ප්‍රධාන සංස්කරණයයි.\nකහපාට පෙළ යාවත්කාලීන වුවොත්, ඉන් අදහස් කරන්නේ Android මෙහෙයුම් පද්ධතිය හෝ One UI පද්ධතිය යාවත්කාලීන වීමට හෝ වී ඇති බවයි.\n\nA යන්නෙන් අදහස් වන්නේ පළවෙනිම ප්‍රධාන සංස්කරණයයි.\nB යන්නෙන් අදහස් වන්නේ ප්‍රධාන සංස්කරණය එක් වරක් නිකුත්කර ඇති බවයි.\nC යන්නෙන් අදහස් වන්නේ ප්‍රධාන සංස්කරණය දෙවරක් නිකුත්කර ඇති බවයි..\n.\n.\n.\nZ යන්නෙන් අදහස් වන්නේ ස්ථාවර නොවූ ස්ථිරංගයක් බවයි.</string>
-    <string name="firmware_14">කොළපාට පෙළ</string>
-    <string name="firmware_15">කොළපාට පෙලෙන් (ex. R) අදහස් වන්නේ ස්ථිරංගය ගොඩනැගූ වර්ෂයයි.\n\nR යනු 2018,\nS යනු 2019,\nT යනු 2020, යනාදී ආකාරයට වේ.</string>
-    <string name="firmware_16">නිල්පට පෙළ</string>
-    <string name="firmware_17">නිල්පට පෙළෙන් (ex. K) අදහස් වන්නේ ස්ථිරංගය ගොඩනැගූ මාසයයි.\n\nA යනු ජනවාරි,\nB යනු පෙබරවාරි,\n.\n.\n.\nL යනු දෙසැම්බර් යනාදී ආකාරයට වේ.</string>
-    <string name="firmware_18">දම්පාට පෙළ</string>
-    <string name="firmware_19">දම්පාට පෙළෙන් (ex. 1) අදහස් වන්නේ ස්ථිරංගය කී වරක් ගොඩනගා ඇති ද යන්නයි (ඉන් අදහස් වන්නේ ප්‍රධාන සංස්කරණ පිළිබඳවයි).\n\n1 යන්නෙන් අදහස් වන්නේ ස්ථිරංගය එක් වරක් ගොඩනගා ඇති බවයි.\n.\n.\n.\n9 යන්නෙන් අදහස් වන්නේ 9 වරක් ගොඩනගා ඇති බවයි.\nA යන්නෙන් අදහස් වන්නේ 10 වරක් ගොඩනගා ඇති බවයි.\n.\n.\n.\nF යන්නෙන් අදහස් වන්නේ 16 වරක් ගොඩනගා ඇති බවයි.</string>
-    <string name="firmware_20">.DM &amp; .BDM කියන්නේ කුමක්ද?</string>
-    <string name="firmware_21">සමහර වෙලාවට පරීක්ෂණ ස්ථීරාංග තොරතුරු වල .DM යැයි සඳහන් වේ. DM යන්නෙන් අදහස් වන්නේ Developer Management (සංවර්ධක කළමනාකරණය) සහ ඉන් අදහස් වන්නේ Samsung සමාගම මෙම ස්ථිරංගය පරීක්ෂා කරන බවයි.\n\nකලාතුරකින් පරීක්ෂණ ස්ථීරාංග තොරතුරු වල .BDM යනුවෙන් සඳහන් වේ. BDM යන්නෙන් අදහස් වන්නේ Broadband Developer Management (බ්‍රෝඩ්බෑන්ඩ් සංවර්ධක කළමනාකරණය) සහ ඉන් අදහස් වන්නේ ජංගම දුරකථන සේවා සපයන්නා මෙම ස්ථිරංගය පරීක්ෂා කරන බවයි.</string>
-    <string name="firmware_22">පරීක්ෂණ ස්ථිරාංග මුදා හරිනු ලබන්නේ කවදා ද?</string>
-    <string name="firmware_23">අපට එය හරියටම උපකල්පනය කළ නොහැක. නමුත් ගොඩනැගුම් සංස්කරණය තවදුරටත් වෙනස් නොවේ නම් පරීක්ෂණ ස්ථිරාංගය ඉක්මනින් නිකුත් වේ. එයට සාමාන්‍යයෙන් සති 3ත් - 5ත් අතර කාලයක් ගතවේ..</string>
+    <string name="help_device_info_description">ආකෘතිය · CSC</string>
+    <string name="help_device_info_edit">සංස්කරණය කරන්න</string>
+    <string name="help_device_name">උපාංග නම</string>
+    <string name="help_device_info_bookmark">Bookmak සුරැකිනි.</string>
+    <string name="help_manual">ස්ථිරාංග අත්පොත</string>
+    <string name="help_manual_description">ස්ථිරාංග තොරතුරු</string>
+    <string name="help_firmware_manual_description">ස්ථිරාංග තොරතුරු 3 තොරතුරු වලින් සමන්විත වේ.ඒවා නම් ගොඩනැගුම් අනුවාදය, CSC අනුවාදය සහ මූලික කලාප අනුවාදයයි.\n\nස්ථිරාංග සෙවුම් ප්‍රතිඵලය A720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1 බව උපකල්පනය කරන්න.\n\nපළමු එක (A720SKSU3BRK1) ගොඩනැගුම් අනුවාදය, දෙවන එක (A720SSKC3BRK1) CSC අනුවාදය, අවසාන එක (A720NKOU3BRK1) මූලික කලාප අනුවාදයයි.</string>
+    <string name="help_firmware_manual_build_description">A720SKSU3BRK1 ගොඩනැගුම් අනුවාදය වෙත යොමු කරයි. ඔබට ගොඩනැගුම් අනුවාදය, One UI අනුවාදය, ස්ථිරාංග ගොඩනැගුම් වසර, මාසය සහ සංශෝධන අංකය (සුළු අනුවාදය) ගොඩනැගුම් අනුවාදය වෙතින් ලබා ගත හැකිය.</string>
+    <string name="help_firmware_manual_build_device_description">එය ආකෘති අංකයයි. මෙම අවස්ථාවෙහිදී, A720 යනු Samsung Galaxy A7 (2017) ය.</string>
+    <string name="help_firmware_manual_build_region_description">එය කලාප කේතයයි. මෙම අවස්ථාවෙහිදී, SKS යනු දකුණු කොරියාවයි. එය අක්ෂර 4 කින් යුත් කේතයක් විය හැකිය.</string>
+    <string name="help_firmware_manual_build_bootloader_description">එය බූට්ලෝඩර් අනුවාදයයි. Samsung හි ආරක්ෂක ප්‍රතිපත්තිය හේතුවෙන්, ඉහළ බූට්ලෝඩර් අනුවාද ස්ථිරාංගයක සිට පහළ බූට්ලෝඩර් අනුවාද ස්ථිරාංගයකට ඩවුන්ග්‍රේඩ් කිරීමට ඔබට නොහැකිය.</string>
+    <string name="help_firmware_manual_build_one_ui_description">එය One UI අනුවාදයයි.\nකහ පාට පෙළ යාවත්කාලීන කර ඇත්නම්, One UI යාවත්කාලීන වීමට හෝ යාවත්කාලීන වී ඇති බව අදහස් වේ.\n\nA යනු පළමු ප්‍රධාන අනුවාදයයි.\nB යනු ප්‍රධාන යාවත්කාලීනයක් වරක් නිකුත් කර ඇති බවයි.\nC යනු ප්‍රධාන යාවත්කාලීනයක් දෙවරක් නිකුත් කර ඇති බවයි.\n.\n.\n.\nZ යනු බීටා ස්ථිරාංගයයි.</string>
+    <string name="help_firmware_manual_build_year_description">ස්ථිරාංගය ගොඩනඟන ලද වසර එයයි.\n\nT යනු 2020,\nU යනු 2021,\nV යනු 2022 යනාදිය.</string>
+    <string name="help_firmware_manual_build_month_description">ස්ථිරාංගය ගොඩනඟන ලද මාසය එයයි.\n\nA යනු ජනවාරි,\nB යනු පෙබරවාරි,\n.\n.\n.\nL යනු දෙසැම්බර් ය.</string>
+    <string name="help_firmware_manual_build_revision_description">එය සංශෝධන අංකය (සුළු අනුවාදය) ය.\n\n1 යනු ස්ථිරාංගය වරක් ගොඩනඟා ඇති බවයි.\n.\n.\n.\n9 යනු ස්ථිරාංගය 9 වතාවක් ගොඩනඟා ඇති බවයි.\nA යනු ස්ථිරාංගය 10 වතාවක් ගොඩනඟා ඇති බවයි.\n.\n.\n.\nF යනු ස්ථිරාංගය 16 වතාවක් ගොඩනඟා ඇති බවයි.</string>
+    <string name="help_firmware_manual_csc_description">A720SSKC3BRK1 CSC අනුවාදය වෙත යොමු කරයි. CSC යනු Consumer Software Customization හි සංක්ෂිප්තය වන අතර එය Samsung උපාංගයක ස්ථාපනය කර ඇති නිශ්චිත කලාපීය හෝ වාහක ස්ථිරාංගය වෙත යොමු කරයි.</string>
+    <string name="help_firmware_manual_baseband_description">A720NKOU3BRK1 මූලික කලාප අනුවාදය වෙත යොමු කරයි. මූලික කලාපය යනු ඔබගේ උපාංගයේ ගුවන්විදුලිය පාලනය කරන ස්ථිරාංගයකි. එය ඔබගේ උපාංගය සහ ජාලය අතර රැහැන් රහිත සන්නිවේදනය සඳහා වගකිව යුතුය.</string>
 
     <!-- About -->
-    <string name="about_app_information">යෙදුමේ තොරතුරු</string>
-    <string name="about_version">සංස්කරණය</string>
-    <string name="about_latest">නවතම සංස්කරණය දැනටමත් ස්ථාපනය කර ඇත.</string>
+    <string name="about_app_information">යෙදුම් තොරතුරු</string>
+    <string name="about_version">අනුවාදය</string>
+    <string name="about_latest">අවසන් අනුවාදය දැනටමත් ස්ථාපනය කර ඇත.</string>
     <string name="about_update">යාවත්කාලීන කරන්න</string>
-    <string name="license">බලපත්‍ර</string>
+    <string name="license">බලපත්‍රය</string>
     <string name="legal">නීතිමය තොරතුරු</string>
-    <string name="legal_text">නිල ස්ථිරාංග තොරතුරු පැමිණියේ https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml මගිනි.\n\nපරීක්ෂණ ස්ථීරාංග තොරතුරු පැමිණියේ https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml මගිනි.\n\nSamsung Electronics සමාගම විසින් පාරිභෝගිකයින්ට ස්ථිරාංග තොරතුරු සපයන නිල ක්‍රමය මෙය නොවේ.  මෙම තොරතුරු භාවිතා කිරීම ඔබේම අවදානමක පවතී.</string>
+    <string name="legal_text">නිල ස්ථිරාංග තොරතුරු https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml වෙතින් ලබාගෙන ඇත.\n\nපරීක්ෂණ ස්ථිරාංග තොරතුරු https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml වෙතින් ලබාගෙන ඇත.\n\nමේවා Samsung Electronics විසින් පාරිභෝගිකයින්ට ස්ථිරාංග තොරතුරු සපයන නිල ක්‍රම නොවේ. මෙම තොරතුරු භාවිතා කිරීම ඔබේම අවදානමකිනි.</string>
 
     <!-- Contributor -->
-    <string name="contributor">දායකයින්</string>
+    <string name="contributor">දායකයා</string>
     <string name="contributor_application">යෙදුම</string>
-    <string name="contributor_designer">නිර්මාණය කළේ</string>
-    <string name="contributor_developer">සංවර්ධනය කළේ</string>
-    <string name="contributor_source">මුලාශ්‍රය</string>
-    <string name="contributor_localization">ප්‍රාදේශීයකරණය</string>
-    <string name="contributor_language">භාෂාව</string>
+    <string name="contributor_designer">නිර්මාණ ශිල්පියා</string>
+    <string name="contributor_developer">සංවර්ධක</string>
     <string name="contributor_russian">රුසියානු</string>
     <string name="contributor_chinese">චීන</string>
-    <string name="contributor_czech">චෙච්</string>
-	<string name="contributor_portuguese">පෘතුගීසි</string>
-    <string name="contributor_romanian">රුමේනියානු</string>
-    <string name="contributor_sinhala">Sinhala</string>
-    <string name="contributor_translator">ස්තුතිය</string>
+    <string name="contributor_czech">චෙක්</string>
+    <string name="contributor_portuguese">පෘතුගීසි</string>
+    <string name="contributor_romanian">රැුමේනියානු</string>
+    <string name="contributor_sinhala">සිංහල</string>
+    <string name="contributor_translator">පරිවර්තක</string>
 
     <!-- Settings -->
     <string name="settings">සැකසුම්</string>
-	<string name="settings_profile_user_name">පරිශීලක නාමය</string>
+    <string name="settings_profile_user_name">පරිශීලක නාමය</string>
     <string name="settings_theme">තේමාව</string>
     <string name="settings_theme_description">යෙදුම් තේමාව සකසන්න.</string>
-    <string name="settings_theme_light">ආලෝකමත්</string>
+    <string name="settings_theme_light">ආලෝකය</string>
     <string name="settings_theme_dark">අඳුරු</string>
     <string name="settings_theme_system">පද්ධති පෙරනිමිය</string>
-    <string name="settings_about">CheckFirm ගැන</string>
-    <string name="welcome_search_description">ආරම්භයේ දී ස්ථිරංගය ගැන සොයන්න.</string>
-    <string name="info_catcher_description">ස්ථිරාංග යාවත්කාලීන කිරීමක් කළ විට තොරතුරු කැචර් ඔබට දැනුම් දීමක් කරනු ඇත.</string>
-    <string name="settings_firebase">සෙවුම් දෝෂය නිවැරදි කරන්න</string>
-    <string name="settings_firebase_description">චීනය හා ඉරානය වැනි සමහර රටවල් Firebase තහනම් කර ඇති නිසා සෙවුම් දෝෂයක් තිබේ.  ඔබ එම රටවල සිටී නම් මෙම සැකසුම සක්‍රිය කරන්න.</string>
+    <string name="settings_language">භාෂාව</string>
+    <string name="settings_language_description">යෙදුම් භාෂාව සකසන්න</string>
+    <string name="settings_language_default">පද්ධති පෙරනිමිය</string>
     <string name="settings_quick_search_bar">ඉක්මන් සෙවුම් තීරුව</string>
-    <string name="settings_quick_search_bar_description">ප්‍රධාන තිරයේ පිටු සලකුණු පෙන්වන්න.</string>
-    <string name="settings_bookmark_backup_restore">Backup&amp;restore</string>
-    <string name="settings_bookmark_backup_restore_description">Backup and restore CheckFirm bookmark and category.</string>
+    <string name="settings_quick_search_bar_description">මුල් තිරයේ Bookmaks පෙන්වන්න.</string>
+    <string name="settings_bookmark_order">Bookmak අනුපිළිවෙල</string>
+    <string name="settings_bookmark_order_description">Bookmaks වර්ග කරන්න</string>
+    <string name="settings_bookmark_order_by_created_time">නිර්මාණය කළ වේලාව අනුව වර්ග කරන්න</string>
+    <string name="settings_bookmark_order_by_device">උපාංගය අනුව වර්ග කරන්න</string>
+    <string name="settings_bookmark_order_by_name">නම අනුව වර්ග කරන්න</string>
+    <string name="settings_bookmark_order_by_desc">අවරෝහණ අනුපිළිවෙලට වර්ග කරන්න</string>
+    <string name="settings_bookmark_reset">Bookmaks නැවත සකසන්න</string>
+    <string name="settings_bookmark_reset_description">සියලු Bookmaks සහ ප්‍රවර්ග නැවත සකසන්න. දෝෂ තිබේ නම් පමණක් මෙම කාර්යය භාවිතා කරන්න.</string>
+    <string name="settings_bookmark_reset_dialog_title">ඔබට විශ්වාසද?</string>
+    <string name="settings_bookmark_reset_dialog_message">සියලු Bookmaks සහ ප්‍රවර්ග මකා දමනු ලැබේ.</string>
+    <string name="settings_bookmark_reset_toast">නැවත සැකසීම සාර්ථක විය.</string>
+    <string name="settings_bookmark_backup_restore">සම්පුර්ණ පිටපත සහ ප්‍රතිස්ථාපනය</string>
+    <string name="settings_bookmark_backup_restore_description">CheckFirm Bookmaks සහ ප්‍රවර්ගය උපස්ථ කර ප්‍රතිස්ථාපනය කරන්න.</string>
+    <string name="settings_welcome_search_description">ආරම්භයේදී ස්ථිරාංගය සොයන්න.</string>
+    <string name="settings_info_catcher_description">ස්ථිරාංගය යාවත්කාලීන කළ විට Info Catcher ඔබට දැනුම්දීමක් යවනු ඇත.</string>
+    <string name="settings_firebase">සෙවුම් දෝෂය නිවැරදි කරන්න</string>
+    <string name="settings_firebase_description">චීනය හෝ ඉරානය වැනි සමහර රටවල් Firebase තහනම් කර ඇති බැවින්, සෙවුම් දෝෂයක් ඇත. ඔබ එම රටවල සිටී නම් මෙම සැකසුම සක්‍රිය කරන්න.</string>
+    <string name="settings_inquiry">විමසීම</string>
+    <string name="settings_inquiry_not_found_exception">කරුණාකර Google Play Store වෙතින් විද්‍යුත් තැපැල් සේවාදායක යෙදුමක් ස්ථාපනය කරන්න.</string>
+    <string name="settings_about">CheckFirm ගැන</string>
 
     <!-- Welcome Search -->
-    <string name="welcome_search">ආරම්භක සෙවුම</string>
-    <string name="welcome_search_text">ආරම්භයේ දී ස්ථිරංගය සොයන්න\nආරම්භයේදීම ඔබට සෙවීමට අවශ්‍ය උපාංගය ආදානය කරන්න.</string>
-    <string name="welcome_search_list_empty">Click + button to add a device.</string>
+    <string name="welcome_search">ආරම්භක සෙවීම</string>
+    <string name="welcome_search_description">යෙදුම ආරම්භයේදී ස්ථිරාංගය සොයන්න.\nකරුණාකර යෙදුම ආරම්භයේදී සෙවීමට අවශ්‍ය උපාංගය ඇතුළත් කරන්න.</string>
+    <string name="welcome_search_add_device">උපාංගය එක් කරන්න</string>
+    <string name="welcome_search_empty_device_list">ඔබට උපාංග 5ක් දක්වා එක් කළ හැක.</string>
 
     <!-- Smart Search -->
-    <string name="smart_search">ස්මාර්ට් සෙවීම</string>
+    <string name="smart_search">ස්මාර්ට් සෙවුම</string>
     <string name="smart_search_type_major">One UI යාවත්කාලීනය</string>
     <string name="smart_search_type_minor">සුළු යාවත්කාලීනය</string>
-    <string name="smart_search_type_rollback">ආපසු පෙරළීම</string>
-    <string name="smart_search_bootloader">ඇරඹුම් කාරක සංස්කරණය</string>
-    <string name="smart_search_major_version">ප්‍රධාන සංස්කරණය</string>
+    <string name="smart_search_type_rollback">පසුබැසීම</string>
+    <string name="smart_search_bootloader">බූට්ලෝඩර් අනුවාදය</string>
+    <string name="smart_search_major_version">ප්‍රධාන අනුවාදය</string>
     <string name="smart_search_build_date">ගොඩනැගුම් දිනය</string>
-    <string name="smart_search_minor_version">සුළු සංස්කරණය</string>
-    <string name="smart_search_date">සොයාගත් දිනය</string>
+    <string name="smart_search_minor_version">සුළු අනුවාදය</string>
     <string name="smart_search_date_format">%2$s, %1$s</string>
-    <string name="smart_search_downgrade_possible">පහත හෙලිය හැක</string>
-    <string name="smart_search_downgrade_impossible">පහත හෙලිය නොහැක</string>
-	<string name="smart_search_discoverer">පළමුව සොයාගත් තැනැත්තා</string>
-    <string name="smart_search_android_version">Android සංස්කරණය</string>
-	<string name="smart_search_update_type">යාවත්කාලීන වර්ගය</string>
+    <string name="smart_search_downgrade_possible">ඩවුන්ග්‍රේඩ් කළ හැක</string>
+    <string name="smart_search_downgrade_impossible">ඩවුන්ග්‍රේඩ් කළ නොහැක</string>
     <string name="january">ජනවාරි</string>
     <string name="february">පෙබරවාරි</string>
     <string name="march">මාර්තු</string>
@@ -219,28 +206,41 @@
     <string name="december">දෙසැම්බර්</string>
 
     <!-- Info Catcher -->
-    <string name="info_catcher">තොරතුරු කැචර්</string>
-    <string name="info_catcher_text">ස්ථිරාංග යාවත්කාලීන කිරීමක් කළ විට තොරතුරු කැචර් ඔබට දැනුම් දීමක් කරනු ඇත.\nආරම්භයේදීම ඔබට සෙවීමට අවශ්‍ය උපාංගය ආදානය කරන්න.</string>
-    <string name="info_catcher_error">කරුණාකර ඔබ නිවැරදිව මාදිලිය සහ CSC කේතය සටහන් කළේ දැයි පරීක්ෂා කරන්න.</string>
-    <string name="info_catcher_insert">එකතු කරන්න</string>
-
-    <!-- Inquiry -->
-    <string name="inquiry">විමර්ශන</string>
-    <string name="inquiry_new">නව අදහස්</string>
-    <string name="inquiry_bug">දෝෂ වාර්තාව</string>
-    <string name="inquiry_question">ප්‍රශ්න</string>
-    <string name="inquiry_send">යවන්න</string>
-    <string name="inquiry_hint">Tell me details.</string>
+    <string name="info_catcher">තොරතුරු අල්ලාගන්නා</string>
+    <string name="info_catcher_description">ස්ථිරාංගය යාවත්කාලීන කළ විට Info Catcher ඔබට දැනුම්දීමක් යවනු ඇත.\nකරුණාකර ඔබ අල්ලා ගැනීමට කැමති උපාංගය ඇතුළත් කරන්න.</string>
 
     <!-- Suggestion -->
     <string name="suggestion">යෝජනාව</string>
-    <string name="suggestion_title">වෙන දෙයක් හොයනවද?</string>
-    <string name="suggestion_bookmark_my_device">පිටු සලකුණු කිරීමට මගේ උපාංගය එක් කරන්න</string>
-    <string name="suggestion_enable_welcome_search">ආරම්භක සෙවුම සක්‍රීය කරන්න</string>
-    <string name="suggestion_check_my_device_info">මගේ උපාංගයේ තොරතුරු පරීක්ෂා කරන්න</string>
-    <string name="suggestion_wifi">වයි-ෆයි ක්‍රියාත්මක කරන්න</string>
-    <string name="suggestion_data">ජංගම දත්ත ක්‍රියාත්මක කරන්න</string>
-    <string name="smart_search_watson">විකේතනය කළේ</string>
+    <string name="suggestion_title">වෙනත් දෙයක් සොයනවාද?</string>
+    <string name="suggestion_bookmark_my_device">මගේ උපාංගය Bookmak එකට එක් කරන්න</string>
+    <string name="suggestion_enable_welcome_search">ආරම්භක සෙවීම සක්‍රිය කරන්න</string>
+    <string name="suggestion_check_my_device_info">මගේ උපාංග තොරතුරු පරීක්ෂා කරන්න</string>
+    <string name="suggestion_wifi">Wi-Fi සක්‍රිය කරන්න</string>
+    <string name="suggestion_data">ජංගම දත්ත සක්‍රිය කරන්න</string>
+    <string name="suggestion_search_my_device">මෙම උපාංගය සොයන්න</string>
 
-    <!-- Beta -->
+    <!-- Category -->
+    <string name="category">ප්‍රවර්ගය</string>
+    <string name="category_all">සියල්ල</string>
+    <string name="category_edit_name">ප්‍රවර්ග නාමය</string>
+    <string name="category_edit_devices_title">උපාංග</string>
+    <string name="category_edit_name_error_all">ප්‍රවර්ග නාමය සියල්ල විය නොහැක.</string>
+    <string name="category_edit_name_error_empty">ප්‍රවර්ග නාමය හිස් විය නොහැක!</string>
+    <string name="category_edit_device_list_error_empty">උපාංග ලැයිස්තුව හිස් විය නොහැක.</string>
+
+    <!-- Report -->
+    <string name="report">වාර්තාව</string>
+    <string name="report_description">ඔබගේ වාර්තාවට ස්තූතියි. මම සතියක් ඇතුළත ඔබේ වාර්තාව ඇතුළත් කරන බවට වග බලා ගන්නෙමි, එය දැනුම් දෙනු නොලැබේ. ඔබේ වාර්තාව අනුචිත නම්, එය නොසලකා හැරිය හැක. කරුණාකර පහත වාර්තා කිරීම සඳහා හේතුවක් තෝරන්න.</string>
+    <string name="report_type_1">ස්ථිරාංග තොරතුරු දෝෂය</string>
+    <string name="report_type_2">අනුචිත පරිශීලක නාමය</string>
+    <string name="report_type_3">ස්මාර්ට් සෙවුම් තොරතුරු දෝෂය</string>
+    <string name="report_type_4">වෙනත් දෝෂ</string>
+    <string name="report_detail">(විකල්ප) ඕනෑම විස්තරයක් ප්‍රයෝජනවත් වනු ඇත.</string>
+    <string name="report_submit">ඉදිරිපත් කරන්න</string>
+    <string name="report_success">ඉදිරිපත් කිරීම සාර්ථක විය.</string>
+    <string name="report_fail">ඉදිරිපත් කිරීම අසාර්ථක විය.</string>
+
+    <!-- Outdated -->
+    <string name="outdated_title">යාවත්කාලීන කිරීම අවශ්‍යයි</string>
+    <string name="outdated_description">වත්මන් අනුවාදය තවදුරටත් සහාය නොදක්වයි. කරුණාකර නවතම අනුවාදයට යාවත්කාලීන කරන්න. ඔබගේ අපහසුතාවය ගැන කණගාටුයි.</string>
 </resources>

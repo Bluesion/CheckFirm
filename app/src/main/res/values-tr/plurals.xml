@@ -1,11 +1,16 @@
 <resources>
     <plurals name="bookmark_subtitle">
-        <item quantity="one">%d yer imi</item>
-        <item quantity="other">%d yer imi</item>
+        <item quantity="one">%d yer işareti</item>
+        <item quantity="other">%d yer işareti</item>
     </plurals>
 
     <plurals name="category_subtitle">
         <item quantity="one">%d kategori</item>
         <item quantity="other">%d kategori</item>
+    </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="one">%d cihaz</item>
+        <item quantity="other">%d cihaz</item>
     </plurals>
 </resources>

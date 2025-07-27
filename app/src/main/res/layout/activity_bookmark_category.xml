@@ -1,0 +1,52 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/toolbar_expandable"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="48dp"
+        android:paddingHorizontal="12dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:background="@color/oneui_background"
+        app:layout_anchor="@id/fragment_container_view"
+        app:layout_anchorGravity="bottom">
+
+        <com.bluesion.oneui.tab.OneUITab
+            android:id="@+id/tab_bookmark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:isTabSelected="true"
+            app:customFontFamily="@font/font_wanted_sans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tab_category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tabTitle="@string/bookmark" />
+
+        <com.bluesion.oneui.tab.OneUITab
+            android:id="@+id/tab_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:customFontFamily="@font/font_wanted_sans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tab_bookmark"
+            app:tabTitle="@string/category" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

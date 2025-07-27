@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:autoMirrored="false">
+    <item android:drawable="@drawable/oneui_spinner_icon_check" android:state_activated="true" />
+    <item android:drawable="@drawable/oneui_spinner_icon_check" android:state_checked="true" />
+</selector>

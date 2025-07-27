@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:name="face"
+        android:fillColor="@color/sherlock_normal_color"
+        android:fillType="evenOdd"
+        android:pathData="M12,22C17.523,22 22,17.523 22,12C22,6.477 17.523,2 12,2C6.477,2 2,6.477 2,12C2,17.523 6.477,22 12,22Z" />
+    <path
+        android:name="left_eye"
+        android:fillColor="@android:color/white"
+        android:pathData="M9,12C9.552,12 10,11.328 10,10.5C10,9.672 9.552,9 9,9C8.448,9 8,9.672 8,10.5C8,11.328 8.448,12 9,12Z" />
+    <path
+        android:name="right_eye"
+        android:fillColor="@android:color/white"
+        android:pathData="M16,10.5C16,11.328 15.552,12 15,12C14.448,12 14,11.328 14,10.5C14,9.672 14.448,9 15,9C15.552,9 16,9.672 16,10.5Z" />
+    <path
+        android:name="mouth"
+        android:strokeColor="@android:color/white"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M8.5,16.5 Q12,18.5 15.5,16.5" />
+</vector>

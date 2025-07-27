@@ -1,130 +1,139 @@
 <resources>
 
-    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="titleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Title</item>
+    <style name="CheckFirm" />
+
+    <style name="ClickableLayout">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
     </style>
 
-    <style name="CardViewTitle" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="BottomSheetDialogTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="CardTheme" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">@color/switch_card_background_off</item>
+    <style name="OneUI.TipText" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/oneui4_tip_text_color</item>
+    </style>
+
+    <style name="OneUI.AppBarLayout" parent="@style/Widget.Material3.AppBarLayout">
+        <item name="android:background">@color/oneui_background</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="OneUI.CollapsingToolbarLayout" parent="@style/Widget.Material3.CollapsingToolbar">
+        <item name="android:background">@color/oneui_background</item>
+        <item name="contentScrim">@color/oneui_background</item>
+        <item name="titleEnabled">false</item>
+    </style>
+
+    <style name="OneUI.Toolbar" parent="@style/Widget.Material3.Toolbar">
+        <item name="android:minHeight">56dp</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="titleTextAppearance">@style/OneUI.Toolbar.Title</item>
+    </style>
+
+    <style name="OneUI.Toolbar.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/oneui_toolbar_text_color</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="OneUI.AboutPageButton" parent="@style/Widget.Material3.Button.UnelevatedButton">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/oneui4_about_page_button_text</item>
+        <item name="backgroundTint">@color/button_ripple_color</item>
+        <item name="rippleColor">@color/oneui4_about_page_button_ripple_color</item>
+        <item name="cornerRadius">22dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:minWidth">216dp</item>
+        <item name="android:lines">1</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="OneUI.DialogButton" parent="@style/Widget.Material3.Button.TextButton">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?actionMenuTextColor</item>
+        <item name="rippleColor">@color/button_ripple_color</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Chip">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="BookmarkChip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipIconVisible">false</item>
+    </style>
+
+    <style name="CardTheme" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/oneui_surface</item>
         <item name="cardElevation">0dp</item>
         <item name="cardCornerRadius">14dp</item>
         <item name="android:minHeight">48dp</item>
     </style>
 
-    <style name="BottomDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
-        <item name="colorAccent">@color/blue</item>
-        <item name="bottomSheetStyle">@style/DialogBackground</item>
-        <item name="android:backgroundDimAmount">0.8</item>
+    <style name="SettingsTitle" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">17sp</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:requiresFadingEdge">horizontal</item>
+        <item name="singleLine">true</item>
     </style>
 
-    <style name="DialogBackground" parent="Widget.MaterialComponents.BottomSheet.Modal">
-        <item name="enforceMaterialTheme">false</item>
+    <style name="SettingsDescription" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/oneui_settings_description_color</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="SettingsDivider" parent="OneUI.Divider">
+        <item name="android:layout_marginHorizontal">14dp</item>
+    </style>
+
+    <style name="SearchDialogTheme" parent="ThemeOverlay.CheckFirm.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/SearchDialogTheme.Modal</item>
+    </style>
+
+    <style name="SearchDialogTheme.Modal" parent="Widget.CheckFirm.BottomSheet.Modal">
         <item name="backgroundTint">@android:color/transparent</item>
         <item name="android:elevation">0dp</item>
     </style>
 
-    <style name="SwitchTheme" parent="Widget.MaterialComponents.CompoundButton.Switch">
-        <item name="android:thumbOffset">0dp</item>
-        <item name="android:thumb">@drawable/switch_thumb_selector</item>
-        <item name="android:switchMinWidth">20dp</item>
-        <item name="showText">false</item>
-        <item name="switchPadding">0dp</item>
-        <item name="track">@drawable/switch_track_selector</item>
-        <item name="useMaterialThemeColors">false</item>
-        <item name="enforceMaterialTheme">false</item>
+    <style name="SearchDeviceListCardView" parent="CardTheme">
+        <item name="contentPaddingLeft">20dp</item>
+        <item name="contentPaddingRight">20dp</item>
+        <item name="contentPaddingTop">12dp</item>
+        <item name="contentPaddingBottom">12dp</item>
+        <item name="cardBackgroundColor">@color/oneui_surface</item>
+        <item name="cardElevation">16dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Corner.Top</item>
     </style>
 
-    <style name="SwitchText" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:fadingEdge">horizontal</item>
-        <item name="singleLine">true</item>
+    <style name="ShapeAppearanceOverlay.Corner" />
+
+    <style name="ShapeAppearanceOverlay.Corner.Top">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">14dp</item>
+        <item name="cornerSizeTopLeft">14dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+    
+    <style name="CheckFirm.Spinner.DropDownItem" parent="OneUI.Spinner.DropDownItem">
+        <item name="android:textAppearance">@style/CheckFirm.TextAppearance.Widget.DropDownItem</item>
     </style>
 
-    <style name="SettingsTitle" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textSize">18sp</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:fadingEdge">horizontal</item>
-        <item name="singleLine">true</item>
-    </style>
-
-    <style name="SettingsSubtitle" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textColor">#8A000000</item>
-    </style>
-
-    <style name="SearchButton.Selected" parent="TextAppearance.MaterialComponents.Button">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/blue</item>
-    </style>
-
-    <style name="SearchButton.Unselected" parent="TextAppearance.MaterialComponents.Button">
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">#7A7A7A</item>
-    </style>
-
-    <style name="RadioButtonTheme" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:background">@drawable/sesl_control_background</item>
-        <item name="android:button">@drawable/sesl_btn_radio</item>
-    </style>
-
-    <style name="TipText" parent="@style/TextAppearance.MaterialComponents.Body2">
-        <item name="android:layout_marginTop">16dp</item>
-        <item name="background">?selectableItemBackground</item>
-        <item name="android:clickable">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/tip_text_color</item>
-    </style>
-
-    <style name="ProgressBarStyle.Circle" parent="@android:style/Widget.ProgressBar">
-        <item name="android:maxWidth">60dp</item>
-        <item name="android:maxHeight">60dp</item>
-        <item name="android:indeterminate">true</item>
-        <item name="android:indeterminateOnly">false</item>
-        <item name="android:indeterminateDrawable">@drawable/sesl_progress</item>
-        <item name="android:progressDrawable">@drawable/sesl_progress_circle</item>
-    </style>
-
-    <style name="SpinnerStyle" parent="@style/Platform.Widget.AppCompat.Spinner">
-        <item name="android:gravity">start|center</item>
-        <item name="android:background">@drawable/sesl_spinner_background_dark</item>
-        <item name="android:clickable">true</item>
-        <item name="android:dropDownSelector">?android:listChoiceBackgroundIndicator</item>
-        <item name="android:popupBackground">@drawable/sesl_menu_popup_background_dark</item>
-        <item name="android:dropDownHorizontalOffset">0.0dip</item>
-        <item name="android:dropDownVerticalOffset">0.0dip</item>
-        <item name="android:popupAnimationStyle">@style/Base.Animation.AppCompat.ListPopup</item>
-        <item name="android:stateListAnimator">@null</item>
-        <item name="android:popupElevation">@dimen/sesl_menu_popup_elevation</item>
-        <item name="overlapAnchor">true</item>
-    </style>
-
-    <style name="Base.Animation.AppCompat.ListPopup" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/sesl_list_popup_enter</item>
-        <item name="android:windowExitAnimation">@anim/sesl_list_popup_exit</item>
-    </style>
-
-    <style name="SpinnerDropDownItem" parent="@android:style/Widget.Material.DropDownItem.Spinner">
-        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Widget.DropDownItem</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingTop">@dimen/sesl_popup_menu_item_top_padding</item>
-        <item name="android:paddingBottom">@dimen/sesl_popup_menu_item_bottom_padding</item>
-        <item name="android:checkMark">@drawable/sesl_spinner_checked_ic_selector</item>
-        <item name="android:minWidth">@dimen/sesl_popup_menu_item_min_width</item>
-        <item name="android:minHeight">@dimen/sesl_popup_menu_item_min_height</item>
-        <item name="android:paddingStart">@dimen/sesl_popup_menu_item_start_padding</item>
-        <item name="android:paddingEnd">@dimen/sesl_popup_menu_item_end_padding</item>
-    </style>
-
-    <style name="Base.TextAppearance.AppCompat.Widget.DropDownItem" parent="@android:style/TextAppearance.Small">
-        <item name="android:textSize">@dimen/sesl_popup_menu_item_text_size</item>
-        <item name="android:textColor">@color/sesl_spinner_dropdown_text_color_dark</item>
+    <style name="CheckFirm.TextAppearance.Widget.DropDownItem" parent="OneUI.TextAppearance.Widget.DropDownItem">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/oneui_spinner_dropdown_text_color</item>
+        <item name="fontFamily">@font/font_wanted_sans</item>
     </style>
 
 </resources>

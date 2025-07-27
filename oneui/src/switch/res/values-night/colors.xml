@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sesl_switch_thumb_off_disabled">#858585</color>
+    <color name="sesl_switch_thumb_off_stroke">#8F8F8F</color>
+    <color name="sesl_switch_thumb_off_stroke_disabled">#668F8F8F</color>
+    <color name="sesl_switch_thumb_on_disabled">#858585</color>
+    <color name="sesl_switch_track_off">#636368</color>
+    <color name="sesl_switch_track_off_disabled">#66636368</color>
+	<color name="oneui_switch_card_text_off">#FAFAFA</color>
+	<color name="oneui_switch_card_background_off">#171717</color>
+    <color name="oneui_switch_card_background_on">#272727</color>
+    <color name="oneui_switch_track_off_stroke_color">#7A7A7A</color>
+</resources>

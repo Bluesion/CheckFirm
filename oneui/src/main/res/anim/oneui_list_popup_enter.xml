@@ -1,0 +1,15 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="false">
+    <scale
+        android:duration="350"
+        android:fromXScale="80%"
+        android:fromYScale="80%"
+        android:interpolator="@interpolator/oneui_elastic_50_menu_popup"
+        android:pivotX="100%"
+        android:toXScale="100%"
+        android:toYScale="100%" />
+    <alpha
+        android:duration="200"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0" />
+</set>

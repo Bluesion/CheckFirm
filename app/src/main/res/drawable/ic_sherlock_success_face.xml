@@ -1,0 +1,6 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_sherlock_success_face_icon">
+    <target
+        android:name="face"
+        android:animation="@animator/sherlock_success_animator" />
+</animated-vector>

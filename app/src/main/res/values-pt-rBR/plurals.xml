@@ -1,0 +1,19 @@
+<resources>
+    <plurals name="bookmark_subtitle">
+        <item quantity="one">%d favorito</item>
+        <item quantity="many">%d favoritos</item>
+        <item quantity="other">%d favoritos</item>
+    </plurals>
+
+    <plurals name="category_subtitle">
+        <item quantity="one">%d categoria</item>
+        <item quantity="many">%d categorias</item>
+        <item quantity="other">%d categorias</item>
+    </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="one">%d dispositivo</item>
+        <item quantity="many">%d dispositivos</item>
+        <item quantity="other">%d dispositivos</item>
+    </plurals>
+</resources>

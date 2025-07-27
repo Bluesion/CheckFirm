@@ -1,0 +1,33 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="4dp"
+    android:layout_gravity="center">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tab_title"
+        style="@style/TextAppearance.Material3.BodyMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tab_indicator"
+        tools:text="TABTABTAB" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/tab_indicator"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="2dp"
+        app:cardCornerRadius="26dp"
+        app:cardBackgroundColor="@color/oneui_tab_indicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tab_title"
+        app:layout_constraintStart_toStartOf="@id/tab_title"
+        app:layout_constraintEnd_toEndOf="@id/tab_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

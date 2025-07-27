@@ -1,0 +1,16 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingEnd="29dp"
+    android:paddingMode="stack">
+    <item>
+        <ripple android:color="?colorControlHighlight">
+            <item
+                android:id="@android:id/mask"
+                android:drawable="@drawable/oneui_spinner_background_mask" />
+        </ripple>
+    </item>
+    <item
+        android:width="24dp"
+        android:height="28dp"
+        android:drawable="@drawable/oneui_spinner_background_am_alpha"
+        android:gravity="end|center" />
+</layer-list>

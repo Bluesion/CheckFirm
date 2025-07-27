@@ -1,0 +1,13 @@
+<resources>
+    <plurals name="bookmark_subtitle">
+        <item quantity="other">%d 個書籤</item>
+    </plurals>
+
+    <plurals name="category_subtitle">
+        <item quantity="other">%d 個類別</item>
+    </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="other">%d 個裝置</item>
+    </plurals>
+</resources>

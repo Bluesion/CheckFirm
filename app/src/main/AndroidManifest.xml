@@ -1,84 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.illusion.checkfirm">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="false"
-        android:label="@string/app_name"
+        android:supportsRtl="true"
         android:name=".CheckFirm"
-        android:theme="@style/AppTheme">
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:enableOnBackInvokedCallback="true"
+        android:dataExtractionRules="@xml/data_extraction_rules">
         <activity
-            android:name=".main.MainActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation">
+            android:name=".features.main.ui.MainActivity"
+            android:theme="@style/Theme.App.Start"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcut" />
         </activity>
+        <activity android:name=".features.main.ui.ReportActivity"
+            android:label="" />
+        <activity android:name=".features.bookmark.ui.BookmarkCategoryActivity"
+            android:label="" />
         <activity
-            android:name=".bookmark.BookmarkActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
+            android:name=".features.settings.backuprestore.BackupRestoreActivity"
+            android:label="@string/settings_bookmark_backup_restore" />
         <activity
-            android:name=".settings.help.FirmwareManualActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout">
-        </activity>
+            android:name=".features.bookmark.ui.CategoryEditActivity"
+            android:label="" />
         <activity
-            android:name=".settings.help.MyDeviceActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout">
-        </activity>
+            android:name=".features.settings.help.FirmwareManualActivity"
+            android:label="" />
         <activity
-            android:name=".settings.help.HelpActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout">
-        </activity>
+            android:name=".features.settings.help.MyDeviceActivity"
+            android:label="" />
         <activity
-            android:name=".search.SearchActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
+            android:name=".features.settings.help.HelpActivity"
+            android:label="" />
         <activity
-            android:name=".search.TransparentActivity"
-            android:theme="@style/TransparentTheme"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
+            android:name=".features.search.ui.SearchActivity"
+            android:label="" />
         <activity
-            android:name=".etc.WebViewActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
+            android:name=".features.settings.about.AboutActivity"
+            android:label="" />
         <activity
-            android:name=".settings.about.AboutActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
+            android:name=".features.catcher.ui.InfoCatcherActivity"
+            android:label="" />
         <activity
-            android:name=".settings.catcher.InfoCatcherActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
+            android:name=".features.settings.SettingsActivity"
+            android:label="" />
         <activity
-            android:name=".settings.about.LicenseActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
+            android:name=".features.welcome.ui.WelcomeSearchActivity"
+            android:label="" />
         <activity
-            android:name=".settings.SettingsActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
-        <activity
-            android:name=".settings.welcome.WelcomeSearchActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
-        <activity
-            android:name=".etc.SherlockActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
-        <activity
-            android:name=".etc.Sherlock2Activity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
-        <activity
-            android:name=".settings.about.ContributorActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
-        <activity
-            android:name=".settings.InquiryActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout" />
-
+            android:name=".features.sherlock.ui.SherlockActivity"
+            android:label="" />
+        <activity android:name=".features.main.ui.OutdatedActivity" />
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />
@@ -90,16 +74,24 @@
             android:resource="@mipmap/ic_launcher" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/blue" />
+            android:resource="@color/oneui_primary" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/app_name" />
 		<service
-			android:name=".fcm.InfoCatcherService"
+			android:name=".features.catcher.service.InfoCatcherFCMService"
             android:exported="false">
 			<intent-filter>
 				<action android:name="com.google.firebase.MESSAGING_EVENT" />
 			</intent-filter>
 		</service>
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
     </application>
 </manifest>

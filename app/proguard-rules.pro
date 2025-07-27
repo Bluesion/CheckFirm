@@ -1,8 +1,5 @@
 -optimizationpasses 5
 -dontusemixedcaseclassnames
--dontskipnonpubliclibraryclasses
--dontskipnonpubliclibraryclassmembers
--dontpreverify
 -verbose
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 
@@ -22,15 +19,15 @@
     java.lang.Object readResolve();
 }
 
--keepclasseswithmembernames class * {
+-keepclasseswithmembers class * {
     native <methods>;
 }
 
--keepclasseswithmembernames class * {
+-keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);
 }
 
--keepclasseswithmembernames class * {
+-keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
 
@@ -43,22 +40,35 @@
   public static final android.os.Parcelable$Creator *;
 }
 
--keepattributes Signature
--keepattributes *Annotation*
--keep class sun.misc.Unsafe { *; }
--keep class com.google.gson.examples.android.model.** { *; }
--dontwarn org.apache.commons.**
--keep class org.apache.http.** { *; }
--dontwarn org.apache.http.**
--keep class net.htmlparser.** { *; }
--dontwarn net.htmlparser.**
-
 -dontshrink
 -keep class javax.** {*;}
 -keep class com.sun.** {*;}
 -keep class org.ietf.** {*;}
 -keep class myjava.** {*;}
--keep public class Mail {*;}
 -dontwarn java.awt.**
 -dontwarn java.beans.Beans
 -dontwarn javax.security.**
+
+# ServiceLoader support
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+
+# Most of volatile fields are updated with AFU and should not be mangled
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
+}
+
+-dontwarn com.squareup.**
+-keep class com.squareup.** { *; }
+-keep class io.grpc.okhttp.** { *; }
+
+# Angus Mail
+-dontwarn java.lang.reflect.AnnotatedType
+-dontwarn org.graalvm.nativeimage.hosted.Feature$BeforeAnalysisAccess
+-dontwarn org.graalvm.nativeimage.hosted.Feature$IsInConfigurationAccess
+-dontwarn org.graalvm.nativeimage.hosted.Feature
+-dontwarn org.graalvm.nativeimage.hosted.RuntimeReflection
+-dontwarn org.jspecify.annotations.NullMarked
+
+# OneUI SwitchCard
+-keep class com.bluesion.oneui.switchcard.** { *; }

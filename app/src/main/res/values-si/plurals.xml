@@ -1,11 +1,16 @@
 <resources>
     <plurals name="bookmark_subtitle">
-        <item quantity="one">%d පිටු සලකුණ</item>
-        <item quantity="other">%d පිටු සලකුණු</item>
+        <item quantity="one">පිටු සලකුණ %d</item>
+        <item quantity="other">පිටු සලකුණු %d</item>
     </plurals>
 
     <plurals name="category_subtitle">
-        <item quantity="one">%d වර්ගීකරණය</item>
-        <item quantity="other">%d වර්ගීකරණ</item>
+        <item quantity="one">කාණ්ඩය %d</item>
+        <item quantity="other">කාණ්ඩ %d</item>
+    </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="one">උපාංගය %d</item>
+        <item quantity="other">උපාංග %d</item>
     </plurals>
 </resources>

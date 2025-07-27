@@ -1,13 +1,19 @@
 <resources>
     <plurals name="bookmark_subtitle">
-        <item quantity="one">%d bookmark</item>
-        <item quantity="few">%d bookmarkuri</item>
-        <item quantity="other">%d bookmarkuri</item>
+        <item quantity="one">%d marcaj</item>
+        <item quantity="few">%d marcaje</item>
+        <item quantity="other">%d de marcaje</item>
     </plurals>
 
     <plurals name="category_subtitle">
-        <item quantity="one">%d category</item>
-        <item quantity="few">%d categories</item>
-        <item quantity="other">%d categories</item>
+        <item quantity="one">%d categorie</item>
+        <item quantity="few">%d categorii</item>
+        <item quantity="other">%d de categorii</item>
+    </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="one">%d dispozitiv</item>
+        <item quantity="few">%d dispozitive</item>
+        <item quantity="other">%d de dispozitive</item>
     </plurals>
 </resources>

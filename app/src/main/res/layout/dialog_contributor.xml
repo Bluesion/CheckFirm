@@ -1,0 +1,239 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        style="@style/BottomSheetDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contributor"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sub_title_1"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="@string/contributor_application"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/designer_title"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_designer"
+        android:textColor="@color/oneui_primary"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintTop_toBottomOf="@id/sub_title_1"
+        app:layout_constraintEnd_toStartOf="@id/designer_name"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/designer_name"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_newfit"
+        android:gravity="end"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintTop_toBottomOf="@id/sub_title_1"
+        app:layout_constraintStart_toEndOf="@id/designer_title"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/developer_title"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_developer"
+        android:textColor="@color/oneui_primary"
+        app:layout_constraintTop_toBottomOf="@id/designer_title"
+        app:layout_constraintStart_toStartOf="@id/designer_title"
+        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/developer_name"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_bluesion"
+        android:gravity="end"
+        app:layout_constraintTop_toBottomOf="@id/designer_name"
+        app:layout_constraintStart_toStartOf="@id/designer_name"
+        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sub_title_2"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="@string/contributor_translator"
+        app:layout_constraintTop_toBottomOf="@id/developer_title"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_russian"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_russian"
+        android:textColor="@color/oneui_primary"
+        app:layout_constraintTop_toBottomOf="@id/sub_title_2"
+        app:layout_constraintStart_toStartOf="@id/designer_title"
+        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_russian_translator"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_russian_translator"
+        android:gravity="end"
+        app:layout_constraintTop_toBottomOf="@id/sub_title_2"
+        app:layout_constraintStart_toStartOf="@id/designer_name"
+        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_chinese"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_chinese"
+        android:textColor="@color/oneui_primary"
+        app:layout_constraintTop_toBottomOf="@id/contributor_russian"
+        app:layout_constraintStart_toStartOf="@id/designer_title"
+        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_chinese_translator"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_chinese_translator"
+        android:gravity="end"
+        app:layout_constraintTop_toBottomOf="@id/contributor_russian_translator"
+        app:layout_constraintStart_toStartOf="@id/designer_name"
+        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_czech"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_czech"
+        android:textColor="@color/oneui_primary"
+        app:layout_constraintTop_toBottomOf="@id/contributor_chinese"
+        app:layout_constraintStart_toStartOf="@id/designer_title"
+        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_czech_translator"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_czech_translator"
+        android:gravity="end"
+        app:layout_constraintTop_toBottomOf="@id/contributor_chinese_translator"
+        app:layout_constraintStart_toStartOf="@id/designer_name"
+        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_portuguese"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_portuguese"
+        android:textColor="@color/oneui_primary"
+        app:layout_constraintTop_toBottomOf="@id/contributor_czech"
+        app:layout_constraintStart_toStartOf="@id/designer_title"
+        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_portuguese_translator"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_portuguese_translator"
+        android:gravity="end"
+        app:layout_constraintTop_toBottomOf="@id/contributor_czech_translator"
+        app:layout_constraintStart_toStartOf="@id/designer_name"
+        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_romanian"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_romanian"
+        android:textColor="@color/oneui_primary"
+        app:layout_constraintTop_toBottomOf="@id/contributor_portuguese"
+        app:layout_constraintStart_toStartOf="@id/designer_title"
+        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_romanian_translator"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_romanian_translator"
+        android:gravity="end"
+        app:layout_constraintTop_toBottomOf="@id/contributor_portuguese_translator"
+        app:layout_constraintStart_toStartOf="@id/designer_name"
+        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_sinhala"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_sinhala"
+        android:textColor="@color/oneui_primary"
+        app:layout_constraintTop_toBottomOf="@id/contributor_romanian"
+        app:layout_constraintStart_toStartOf="@id/designer_title"
+        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contributor_sinhala_translator"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/contributor_sinhala_translator"
+        android:gravity="end"
+        app:layout_constraintTop_toBottomOf="@id/contributor_romanian_translator"
+        app:layout_constraintStart_toStartOf="@id/designer_name"
+        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@android:string/ok"
+        app:layout_constraintTop_toBottomOf="@id/contributor_sinhala_translator" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

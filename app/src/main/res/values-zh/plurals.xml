@@ -1,9 +1,13 @@
 <resources>
     <plurals name="bookmark_subtitle">
-        <item quantity="other">%d個書籤</item>
+        <item quantity="other">%d 个书签</item>
     </plurals>
 
     <plurals name="category_subtitle">
-        <item quantity="other">%d categories</item>
+        <item quantity="other">%d 个类别</item>
+    </plurals>
+
+    <plurals name="search_device_summary">
+        <item quantity="other">%d 个设备</item>
     </plurals>
 </resources>

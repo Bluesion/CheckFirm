@@ -1,0 +1,21 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="together">
+    <set android:ordering="sequentially">
+        <objectAnimator
+            android:duration="66"
+            android:propertyName="fillAlpha"
+            android:valueFrom="0"
+            android:valueTo="0" />
+        <objectAnimator
+            android:duration="66"
+            android:interpolator="@android:anim/linear_interpolator"
+            android:propertyName="fillAlpha"
+            android:valueFrom="0"
+            android:valueTo="1" />
+        <objectAnimator
+            android:duration="166"
+            android:propertyName="fillAlpha"
+            android:valueFrom="0"
+            android:valueTo="0" />
+    </set>
+</set>
