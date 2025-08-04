@@ -156,7 +156,7 @@ class TabBookmarkFragment : CheckFirmFragment<FragmentSearchTabBookmarkBinding>(
         }
 
         binding!!.suggestionSearchMyDevice.setOnClickListener {
-            when (searchViewModel.addToSearchList(DeviceItem(Build.MODEL, Tools.getCSC(requireContext())))) {
+            when (searchViewModel.addToSearchList(DeviceItem(Build.MODEL, Tools.getCSC()))) {
                 SearchValidationResult.INVALID_DEVICE -> {
                     Toast.makeText(
                         requireContext(),

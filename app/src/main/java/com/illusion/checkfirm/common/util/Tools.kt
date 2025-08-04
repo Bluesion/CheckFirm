@@ -205,15 +205,18 @@ object Tools {
         return Character.isLowerCase(character) || Character.isDigit(character)
     }
 
-    fun getCSC(context: Context): String {
+    fun getCSC(): String {
         val process = Runtime.getRuntime().exec(
             arrayOf("/system/bin/getprop", "ro.csc.sales_code")
         )
         val reader = BufferedReader(InputStreamReader(process.inputStream))
         val csc = reader.readLine()
         reader.close()
-        return csc.ifBlank {
-            context.getString(R.string.unknown)
+
+        return if (csc.isNullOrBlank()) {
+            ""
+        } else {
+            csc.uppercase(Locale.US)
         }
     }
 

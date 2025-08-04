@@ -223,7 +223,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
 
     private fun startSearch() {
         val model = Build.MODEL
-        val csc = Tools.getCSC(this)
+        val csc = Tools.getCSC()
 
         if (Tools.isValidDevice(model, csc)) {
             searchFirmware(model, csc, 1)

@@ -152,7 +152,7 @@ class SettingsActivity : CheckFirmActivity<ActivitySettingsBinding>(),
                 "*****\n" +
                 "App version: ${BuildConfig.VERSION_NAME}\n" +
                 "Android version: ${Build.VERSION.RELEASE}\n" +
-                "Device: ${Build.MODEL} (${Tools.getCSC(this)})\n" +
+                "Device: ${Build.MODEL} (${Tools.getCSC()})\n" +
                 "*****\n" +
                 "\n"
     }

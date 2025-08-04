@@ -34,10 +34,17 @@ class MyDeviceActivity : CheckFirmActivity<ActivityHelpDeviceBinding>() {
         binding.userName.text = userName
 
         val model = Build.MODEL
-        val csc = Tools.getCSC(this)
+        val csc = Tools.getCSC()
 
         binding.model.text = model
-        binding.csc.text = csc
+
+        csc.let {
+            if (it.isBlank()) {
+                binding.csc.text = getString(R.string.unknown)
+            } else {
+                binding.csc.text = it
+            }
+        }
 
         val modelName = Settings.Global.getString(contentResolver, "default_device_name")
         if (modelName.isNullOrBlank()) {
