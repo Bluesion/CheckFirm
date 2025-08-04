@@ -69,7 +69,8 @@ object Tools {
     }
 
     private fun isValidModel(model: String): Boolean {
-        if (!model.contains("-")) {
+        // Hyphen이 하나만 있는지 확인
+        if (model.count { it == '-' } != 1) {
             return false
         }
 
@@ -82,15 +83,22 @@ object Tools {
             return false
         }
 
-        // GT로 시작하는 모델 미지원
+        // prefix가 영어 대문자만으로 구성되어 있는지 확인
+        prefix.forEach {
+            if (it.code !in 65..90) {
+                return false
+            }
+        }
+
+        // prefix가 S로 시작하는지 확인 (GT로 시작하는 구형 모델 미지원)
         if (prefix[0] != 'S') {
             return false
         }
 
-        // 짧은 건 SM-R860 같은 케이스 (버즈, 워치 등)
+        // 가장 짧은 건 code가 3자리 (SC-03L 등 라우터)
         // SM-A025VZKAVZW 같은 특수 케이스 존재
         // 위 보다 긴 건 못 봤는데, 혹시 몰라서 12자까지 제한
-        if (code.length !in 4..12) {
+        if (code.length !in 3..12) {
             return false
         }
 
