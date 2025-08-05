@@ -39,27 +39,67 @@ object Tools {
     }
 
     /**
-     * 펌웨어 정보를 6자리로 만들어주는 함수
-     * A720SKSU5CUJ2/A720SSKC5CUJ2/A720NKOU5CUJ1 -> U5CUJ2
-     * 만약 잘못된 정보가 들어오면 ??????로 리턴한다.
+     * 펌웨어 정보 중 빌드 정보만 추출하는 함수
+     * A720SKSU5CUJ2/A720SSKC5CUJ2/A720NKOU5CUJ1 -> A720SKSU5CUJ2
      *
-     * 아주 드문 케이스로 _나 .이 포함되는 경우가 있는데, 여기선 따로 체크하지 않는다.
+     * 비정상적인 펌웨어 정보가 들어오면 빈 문자열을 반환한다.
      */
-    fun getFirmwareInfo(firmware: String): String {
-        if (firmware.length < 6) {
-            return "??????"
+    fun getFullBuildInfo(firmware: String): String {
+        if (firmware.isBlank()) {
+            return ""
         }
 
         val slashIndex = firmware.indexOf("/")
         if (slashIndex == -1) {
-            return "??????"
+            return ""
         }
 
-        return firmware.substring(slashIndex - 6, slashIndex)
+        return firmware.split("/")[0]
     }
 
-    fun getShortFirmwareInfo(firmware: String): String {
-        return getFirmwareInfo(firmware).substring(3)
+    /**
+     * 펌웨어 정보를 6자리로 만들어주는 함수
+     * A720SKSU5CUJ2/A720SSKC5CUJ2/A720NKOU5CUJ1 -> U5CUJ2
+     *
+     * 비정상적인 펌웨어 정보가 들어오면 빈 문자열을 반환한다.
+     */
+    fun getBuildInfo(firmware: String): String {
+        val temp = getFullBuildInfo(firmware)
+
+        if (temp.isEmpty()) {
+            return ""
+        }
+
+        val underScoreIndex = temp.indexOf("_")
+        val dotIndex = temp.indexOf(".")
+
+        return if (underScoreIndex > dotIndex) {
+            temp.substring(dotIndex - 6, dotIndex)
+        } else if (underScoreIndex == dotIndex) {
+            temp.substring(temp.length - 6)
+        } else {
+            temp.substring(underScoreIndex - 6, underScoreIndex)
+        }
+    }
+
+    /**
+     * 펌웨어 정보를 4자리로 만들어주는 함수
+     * A720SKSU5CUJ2/A720SSKC5CUJ2/A720NKOU5CUJ1 -> CUJ2
+     *
+     * 비정상적인 펌웨어 정보가 들어오면 빈 문자열을 반환한다.
+     */
+    fun getShortBuildInfo(firmware: String): String {
+        val temp = getBuildInfo(firmware)
+
+        if (temp.isEmpty()) {
+            return ""
+        }
+
+        return temp.substring(2)
+    }
+
+    fun isBetaFirmware(firmware: String): Boolean {
+        return getShortBuildInfo(firmware)[0] == 'Z'
     }
 
     fun getMD5Hash(text: String): String {
@@ -203,8 +243,8 @@ object Tools {
     }
 
     fun compareFirmware(original: String, new: String): Int {
-        val originalBuildNumber = getFirmwareInfo(original)
-        val newBuildNumber = getFirmwareInfo(new)
+        val originalBuildNumber = getBuildInfo(original)
+        val newBuildNumber = getBuildInfo(new)
 
         return compareBuildNumber(originalBuildNumber, newBuildNumber)
     }

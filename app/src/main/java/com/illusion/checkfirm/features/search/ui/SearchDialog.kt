@@ -228,7 +228,7 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
         val smartSearchValue: Array<String>
         val smartSearchDescription: Array<String>
 
-        val officialFirmwareInfo = Tools.getFirmwareInfo(CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware)
+        val officialFirmwareInfo = Tools.getBuildInfo(CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware)
 
         if (isOfficial) {
             if (CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware.isBlank()) {
@@ -256,11 +256,11 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
             var testFirmwareInfo = CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware
 
             if (CheckFirm.firmwareItems[i].testFirmwareItem.decryptedFirmware.isNotBlank()) {
-                testFirmwareInfo = Tools.getFirmwareInfo(CheckFirm.firmwareItems[i].testFirmwareItem.decryptedFirmware)
+                testFirmwareInfo = Tools.getBuildInfo(CheckFirm.firmwareItems[i].testFirmwareItem.decryptedFirmware)
             }
 
             if (CheckFirm.firmwareItems[i].testFirmwareItem.clue.isNotBlank()) {
-                testFirmwareInfo = Tools.getFirmwareInfo(CheckFirm.firmwareItems[i].testFirmwareItem.clue)
+                testFirmwareInfo = Tools.getBuildInfo(CheckFirm.firmwareItems[i].testFirmwareItem.clue)
             }
 
             if (testFirmwareInfo.isBlank()) {

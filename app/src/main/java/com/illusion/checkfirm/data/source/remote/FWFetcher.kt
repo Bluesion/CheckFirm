@@ -67,12 +67,14 @@ class FWFetcher(private val context: Context) {
         fetchOfficialFirmwareNotifyDoc(current)
         fetchTestFirmwareInfo(current)
 
-        if (!isFirebaseEnabled) {
+        if (isFirebaseEnabled) {
+            smartSearch(current)
+        } else {
             val officialLatest = CheckFirm.firmwareItems[current].officialFirmwareItem.latestFirmware
             val testLatest = CheckFirm.firmwareItems[current].testFirmwareItem.latestFirmware
             val testPrevious = CheckFirm.firmwareItems[current].testFirmwareItem.previousFirmware
 
-            val currentOfficial = Tools.getFirmwareInfo(officialLatest)
+            val currentOfficial = Tools.getBuildInfo(officialLatest)
             val currentTest: String
 
             if (testLatest.isEmpty() && testPrevious.isNotEmpty()) {
@@ -82,13 +84,13 @@ class FWFetcher(private val context: Context) {
                     currentTest = testPrevious.firstKey()
                 } else {
                     CheckFirm.firmwareItems[current].testFirmwareItem.clue = officialLatest
-                    currentTest = Tools.getFirmwareInfo(officialLatest)
+                    currentTest = Tools.getBuildInfo(officialLatest)
                 }
             } else {
-                currentTest = Tools.getFirmwareInfo(testLatest)
+                currentTest = Tools.getBuildInfo(testLatest)
             }
 
-            if (currentTest[2] != '?') {
+            if (currentTest.isNotBlank()) {
                 val compare = currentOfficial[2].compareTo(currentTest[2])
                 when {
                     compare < 0 -> {
@@ -114,8 +116,6 @@ class FWFetcher(private val context: Context) {
                     currentOfficial.substring(0, 2) == currentTest.substring(0, 2)
             }
             CheckFirm.firmwareItems[current].testFirmwareItem.discoveryDate = unknown
-        } else {
-            smartSearch(current)
         }
     }
 
@@ -240,7 +240,7 @@ class FWFetcher(private val context: Context) {
 
                 if (firmwares.isNotBlank()) {
                     if (Character.isUpperCase(firmwares[0])) {
-                        if (Tools.getFirmwareInfo(firmwares)[2] == 'Z') {
+                        if (Tools.isBetaFirmware(firmwares)) {
                             testBeta[firmwares] = firmwares
                         } else {
                             testPrevious[firmwares] = firmwares
@@ -454,8 +454,8 @@ class FWFetcher(private val context: Context) {
 
     private fun getFirmwareType(current: Int, testFirmware: String) {
         val compare =
-            Tools.getFirmwareInfo(CheckFirm.firmwareItems[current].officialFirmwareItem.latestFirmware)[2].compareTo(
-                Tools.getFirmwareInfo(testFirmware)[2]
+            Tools.getBuildInfo(CheckFirm.firmwareItems[current].officialFirmwareItem.latestFirmware)[2].compareTo(
+                Tools.getBuildInfo(testFirmware)[2]
             )
         when {
             compare < 0 -> {
@@ -480,8 +480,8 @@ class FWFetcher(private val context: Context) {
     }
 
     private fun getDowngradeInfo(current: Int, testFirmware: String) {
-        CheckFirm.firmwareItems[current].testFirmwareItem.isDowngradable = Tools.getFirmwareInfo(CheckFirm.firmwareItems[current].officialFirmwareItem.latestFirmware)
-            .substring(0, 2) == Tools.getFirmwareInfo(testFirmware).substring(0, 2)
+        CheckFirm.firmwareItems[current].testFirmwareItem.isDowngradable = Tools.getBuildInfo(CheckFirm.firmwareItems[current].officialFirmwareItem.latestFirmware)
+            .substring(0, 2) == Tools.getBuildInfo(testFirmware).substring(0, 2)
     }
 
     private fun getOfficialAndroidVersion(rawString: String): String {

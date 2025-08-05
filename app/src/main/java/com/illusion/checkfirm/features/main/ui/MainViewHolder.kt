@@ -61,8 +61,7 @@ class MainViewHolder(
                 )
             )
             binding.officialFirmwareText.text =
-                Tools.getFirmwareInfo(CheckFirm.firmwareItems[absoluteAdapterPosition].officialFirmwareItem.latestFirmware)
-                    .substring(2)
+                Tools.getShortBuildInfo(CheckFirm.firmwareItems[absoluteAdapterPosition].officialFirmwareItem.latestFirmware)
 
             binding.smartSearchOfficialDeviceText.text =
                 CheckFirm.firmwareItems[absoluteAdapterPosition].officialFirmwareItem.deviceName
@@ -85,24 +84,21 @@ class MainViewHolder(
         } else {
             binding.testFirmwareText.setTextColor(binding.testFirmwareText.context.getColor(com.bluesion.oneui.R.color.oneui_onSurface))
             binding.testFirmwareText.text =
-                Tools.getFirmwareInfo(CheckFirm.firmwareItems[absoluteAdapterPosition].testFirmwareItem.latestFirmware)
-                    .substring(2)
+                Tools.getShortBuildInfo(CheckFirm.firmwareItems[absoluteAdapterPosition].testFirmwareItem.latestFirmware)
             showDetail()
         }
 
         if (CheckFirm.firmwareItems[absoluteAdapterPosition].testFirmwareItem.decryptedFirmware.isNotBlank()) {
             binding.testFirmwareText.setTextColor(binding.testFirmwareText.context.getColor(com.bluesion.oneui.R.color.oneui_onSurface))
             binding.testFirmwareText.text =
-                Tools.getFirmwareInfo(CheckFirm.firmwareItems[absoluteAdapterPosition].testFirmwareItem.decryptedFirmware)
-                    .substring(2)
+                Tools.getShortBuildInfo(CheckFirm.firmwareItems[absoluteAdapterPosition].testFirmwareItem.decryptedFirmware)
             showDetail()
         }
 
         if (CheckFirm.firmwareItems[absoluteAdapterPosition].testFirmwareItem.clue.isNotBlank()) {
             binding.testFirmwareText.setTextColor(binding.testFirmwareText.context.getColor(com.bluesion.oneui.R.color.oneui_onSurface))
             binding.testFirmwareText.text =
-                Tools.getFirmwareInfo(CheckFirm.firmwareItems[absoluteAdapterPosition].testFirmwareItem.clue)
-                    .substring(2)
+                Tools.getShortBuildInfo(CheckFirm.firmwareItems[absoluteAdapterPosition].testFirmwareItem.clue)
             showDetail()
         }
     }

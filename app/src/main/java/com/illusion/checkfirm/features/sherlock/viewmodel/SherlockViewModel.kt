@@ -399,10 +399,7 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                         CheckFirm.firmwareItems[i].testFirmwareItem.clue = _userInput.value
                         CheckFirm.firmwareItems[i].testFirmwareItem.discoveryDate = Tools.dateToString(Tools.getCurrentDateTime())
                     } else {
-                        if ((CheckFirm.firmwareItems[i].testFirmwareItem.clue != _userInput.value) && (Tools.getFirmwareInfo(
-                                _userInput.value
-                            )[2] != 'Z')
-                        ) {
+                        if ((CheckFirm.firmwareItems[i].testFirmwareItem.clue != _userInput.value) && !Tools.isBetaFirmware(_userInput.value)) {
                             if (Tools.compareFirmware(
                                     CheckFirm.firmwareItems[i].testFirmwareItem.clue,
                                     _userInput.value
