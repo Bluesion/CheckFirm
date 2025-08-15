@@ -49,7 +49,9 @@ fcm = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.
 firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firestore" }
 fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 jakarta-activation = { group = "jakarta.activation", name = "jakarta.activation-api", version.ref = "jakarta-activation" }
 jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
@@ -73,9 +75,9 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 [bundles]
 angus = ["angus", "angus-activation", "jakarta-activation"]
 bases = ["activity", "core", "fragment"]
-composes = ["activity-compose", "compose-ui", "compose-ui-graphics", "compose-ui-tooling-preview", "compose-material3"]
+composes = ["activity-compose", "compose-ui", "compose-ui-graphics", "compose-ui-tooling-preview"]
 coroutines = ["coroutine-android", "coroutine-core", "coroutine-jvm"]
 datas = ["datastore", "kotlin-serialization-json", "room", "room-ktx"]
-designs = ["constraintlayout", "coordinatorlayout", "material"]
+designs = ["compose-material3", "constraintlayout", "coordinatorlayout", "material"]
 firebases = ["fcm", "firestore"]
-lifecycles = ["lifecycle", "lifecycle-viewmodel"]
+lifecycles = ["lifecycle", "lifecycle-compose", "lifecycle-viewmodel", "lifecycle-viewmodel-compose"]
