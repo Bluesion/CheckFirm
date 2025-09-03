@@ -61,6 +61,7 @@
 -dontshrink
 -dontwarn java.lang.reflect.AnnotatedType
 -dontwarn org.jspecify.annotations.NullMarked
+-dontwarn org.graalvm.nativeimage.hosted.**
 -keep class javax.** {*;}
 -keep class jakarta.mail.** { *; }
 -keep class jakarta.activation.** { *; }
