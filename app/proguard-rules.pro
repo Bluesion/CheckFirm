@@ -40,11 +40,6 @@
   public static final android.os.Parcelable$Creator *;
 }
 
--dontshrink
--keep class javax.** {*;}
--keep class com.sun.** {*;}
--keep class org.ietf.** {*;}
--keep class myjava.** {*;}
 -dontwarn java.awt.**
 -dontwarn java.beans.Beans
 -dontwarn javax.security.**
@@ -63,12 +58,13 @@
 -keep class io.grpc.okhttp.** { *; }
 
 # Angus Mail
+-dontshrink
 -dontwarn java.lang.reflect.AnnotatedType
--dontwarn org.graalvm.nativeimage.hosted.Feature$BeforeAnalysisAccess
--dontwarn org.graalvm.nativeimage.hosted.Feature$IsInConfigurationAccess
--dontwarn org.graalvm.nativeimage.hosted.Feature
--dontwarn org.graalvm.nativeimage.hosted.RuntimeReflection
 -dontwarn org.jspecify.annotations.NullMarked
+-keep class javax.** {*;}
+-keep class jakarta.mail.** { *; }
+-keep class jakarta.activation.** { *; }
+-keep class org.eclipse.angus.** { *; }
 
 # OneUI SwitchCard
 -keep class com.bluesion.oneui.switchcard.** { *; }
