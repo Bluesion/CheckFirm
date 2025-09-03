@@ -157,8 +157,9 @@ object Tools {
             return false
         }
 
-        for (i in 0..2) {
-            if (csc[i].code.toByte().toInt() !in 65..90) {
+        // 코드가 영어 대문자나 숫자가 아닌 경우 걸러내기
+        for (ch in csc) {
+            if (ch.code !in 65..90 && ch.code !in 48..57) {
                 return false
             }
         }
