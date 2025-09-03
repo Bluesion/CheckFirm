@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -15,14 +16,6 @@ android {
 
     sourceSets {
         getByName("main") {
-            java {
-                srcDir("src/divider/java")
-                srcDir("src/edittext/java")
-                srcDir("src/spinner/java")
-                srcDir("src/switch/java")
-                srcDir("src/tab/java")
-            }
-
             res {
                 srcDir("src/checkbox/res")
 				srcDir("src/divider/res")
@@ -67,10 +60,22 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 }
 
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
+
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.test.manifest)
+
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+
+    implementation(libs.bundles.lifecycles)
 }
