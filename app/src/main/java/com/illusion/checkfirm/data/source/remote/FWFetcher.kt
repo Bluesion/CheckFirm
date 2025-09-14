@@ -453,6 +453,13 @@ class FWFetcher(private val context: Context) {
     }
 
     private fun getFirmwareType(current: Int, testFirmware: String) {
+        val currentFirmware = Tools.getBuildInfo(CheckFirm.firmwareItems[current].officialFirmwareItem.latestFirmware)
+        val nextFirmware = Tools.getBuildInfo(testFirmware)
+
+        if (currentFirmware.isEmpty() || nextFirmware.isEmpty()) {
+            return
+        }
+
         val compare =
             Tools.getBuildInfo(CheckFirm.firmwareItems[current].officialFirmwareItem.latestFirmware)[2].compareTo(
                 Tools.getBuildInfo(testFirmware)[2]
@@ -480,8 +487,15 @@ class FWFetcher(private val context: Context) {
     }
 
     private fun getDowngradeInfo(current: Int, testFirmware: String) {
-        CheckFirm.firmwareItems[current].testFirmwareItem.isDowngradable = Tools.getBuildInfo(CheckFirm.firmwareItems[current].officialFirmwareItem.latestFirmware)
-            .substring(0, 2) == Tools.getBuildInfo(testFirmware).substring(0, 2)
+        val officialFirmwareBootloader = Tools.getBuildInfo(CheckFirm.firmwareItems[current].officialFirmwareItem.latestFirmware)
+        val testFirmwareBootloader = Tools.getBuildInfo(testFirmware)
+
+        if (officialFirmwareBootloader.isEmpty() || testFirmwareBootloader.isEmpty()) {
+            return
+        }
+
+        CheckFirm.firmwareItems[current].testFirmwareItem.isDowngradable =
+            officialFirmwareBootloader.substring(0, 2) == testFirmwareBootloader.substring(0, 2)
     }
 
     private fun getOfficialAndroidVersion(rawString: String): String {
