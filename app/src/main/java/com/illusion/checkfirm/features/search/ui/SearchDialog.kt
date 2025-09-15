@@ -263,7 +263,7 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                 testFirmwareInfo = Tools.getBuildInfo(CheckFirm.firmwareItems[i].testFirmwareItem.clue)
             }
 
-            if (testFirmwareInfo.isBlank()) {
+            if (officialFirmwareInfo.isBlank() || testFirmwareInfo.isBlank()) {
                 binding!!.smartSearchCard.visibility = View.GONE
                 return
             }
