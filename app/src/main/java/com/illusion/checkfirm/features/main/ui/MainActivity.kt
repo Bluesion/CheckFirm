@@ -124,35 +124,19 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
 
-        val content: View = findViewById(android.R.id.content)
-        content.viewTreeObserver.addOnPreDrawListener(
-            object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    return if (mainViewModel.isOldVersion.value != null) {
-                        val isConnectedToInternet = Tools.isOnline(this@MainActivity)
-                        if (isConnectedToInternet) {
-                            if (mainViewModel.isOldVersion.value!!) {
-                                startActivity(Intent(this@MainActivity, OutdatedActivity::class.java))
-                                finish()
-                            } else {
-                                initQuickSearchBar()
-                                if (settingsViewModel.settingsState.value.isWelcomeSearchEnabled) {
-                                    welcomeSearch()
-                                } else {
-                                    startSearch()
-                                }
-                            }
-                        } else {
-                            showMainLayout(2)
-                        }
-                        content.viewTreeObserver.removeOnPreDrawListener(this)
-                        true
-                    } else {
-                        false
-                    }
+        lifecycleScope.launch {
+            val isConnectedToInternet = Tools.isOnline(this@MainActivity)
+            if (isConnectedToInternet) {
+                initQuickSearchBar()
+                if (settingsViewModel.getAllSettings().isWelcomeSearchEnabled) {
+                    welcomeSearch()
+                } else {
+                    startSearch()
                 }
+            } else {
+                showMainLayout(2)
             }
-        )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
