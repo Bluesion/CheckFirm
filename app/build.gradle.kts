@@ -23,8 +23,8 @@ android {
         applicationId = "com.illusion.checkfirm"
         minSdk = 28
         targetSdk = 36
-        versionCode = 53
-        versionName = "11.1.5"
+        versionCode = 54
+        versionName = "11.1.6"
     }
 
     signingConfigs {
