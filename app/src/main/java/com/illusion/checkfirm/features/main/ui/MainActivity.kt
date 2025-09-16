@@ -99,32 +99,32 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
 
         fwFetcher = FWFetcher(this@MainActivity)
 
-        binding.searchResult.apply {
-            addItemDecoration(
-                RecyclerViewVerticalMarginDecorator(
-                    Tools.dpToPx(this@MainActivity, 12f)
-                )
-            )
-            adapter = MainAdapter(
-                total = 0,
-                isFirebaseEnabled = settingsViewModel.settingsState.value.isFirebaseEnabled,
-                onCardClicked = { isOfficial, position ->
-                    SearchDialog(isOfficial, position).show(supportFragmentManager, null)
-                },
-                onCardLongClicked = { firmware ->
-                    (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(
-                        ClipData.newPlainText(
-                            "CheckFirm",
-                            firmware
-                        )
-                    )
-                    Toast.makeText(this@MainActivity, R.string.clipboard, Toast.LENGTH_SHORT).show()
-                }
-            )
-            layoutManager = LinearLayoutManager(this@MainActivity)
-        }
-
         lifecycleScope.launch {
+            binding.searchResult.apply {
+                addItemDecoration(
+                    RecyclerViewVerticalMarginDecorator(
+                        Tools.dpToPx(this@MainActivity, 12f)
+                    )
+                )
+                adapter = MainAdapter(
+                    total = 0,
+                    isFirebaseEnabled = settingsViewModel.getAllSettings().isFirebaseEnabled,
+                    onCardClicked = { isOfficial, position ->
+                        SearchDialog(isOfficial, position).show(supportFragmentManager, null)
+                    },
+                    onCardLongClicked = { firmware ->
+                        (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(
+                            ClipData.newPlainText(
+                                "CheckFirm",
+                                firmware
+                            )
+                        )
+                        Toast.makeText(this@MainActivity, R.string.clipboard, Toast.LENGTH_SHORT).show()
+                    }
+                )
+                layoutManager = LinearLayoutManager(this@MainActivity)
+            }
+
             val isConnectedToInternet = Tools.isOnline(this@MainActivity)
             if (isConnectedToInternet) {
                 initQuickSearchBar()
@@ -168,8 +168,8 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun initQuickSearchBar() {
-        if (settingsViewModel.settingsState.value.isQuickSearchBarEnabled) {
+    private suspend fun initQuickSearchBar() {
+        if (settingsViewModel.getAllSettings().isQuickSearchBarEnabled) {
             binding.categoryIcon.setOnClickListener {
                 CategoryDialog(
                     category = currentCategory,
