@@ -4,25 +4,25 @@
     android:viewportWidth="256"
     android:viewportHeight="256">
     <group
-        android:scaleX="0.5"
-        android:scaleY="0.5"
         android:pivotX="128"
-        android:pivotY="128">
+        android:pivotY="128"
+        android:scaleX="0.5"
+        android:scaleY="0.5">
         <path
             android:name="yellow"
-            android:pathData="M104,184l-56,-55.99"
-            android:strokeLineJoin="round"
-            android:strokeWidth="24"
             android:fillColor="#FAB200"
+            android:pathData="M104,184l-56,-55.99"
+            android:strokeWidth="24"
             android:strokeColor="#FAB200"
-            android:strokeLineCap="round" />
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
         <path
             android:name="blue"
-            android:pathData="M216,72l-112,112"
-            android:strokeLineJoin="round"
-            android:strokeWidth="24"
             android:fillColor="#005AFF"
+            android:pathData="M216,72l-112,112"
+            android:strokeWidth="24"
             android:strokeColor="#005AFF"
-            android:strokeLineCap="round" />
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
     </group>
 </vector>

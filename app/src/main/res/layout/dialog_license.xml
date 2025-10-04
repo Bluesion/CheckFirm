@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/license"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/apache"
@@ -21,11 +21,11 @@
         android:background="?selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:textStyle="bold"
         android:text="@string/license_apache"
+        android:textStyle="bold"
         app:drawableEndCompat="@drawable/ic_chevron_right_small"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/androidx"
@@ -35,10 +35,10 @@
         android:layout_marginTop="8dp"
         android:text="@string/license_androidx"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintWidth_percent="0.45"
         app:layout_constraintEnd_toStartOf="@id/androidx_author"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/apache"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintWidth_percent="0.45" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/androidx_author"
@@ -46,12 +46,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/license_google"
         android:gravity="end"
-        app:layout_constraintWidth_percent="0.55"
-        app:layout_constraintTop_toBottomOf="@id/apache"
+        android:text="@string/license_google"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/androidx"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/apache"
+        app:layout_constraintWidth_percent="0.55" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/firebase"
@@ -61,21 +61,21 @@
         android:layout_marginTop="8dp"
         android:text="@string/license_firebase"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/androidx"
+        app:layout_constraintEnd_toEndOf="@id/androidx"
         app:layout_constraintStart_toStartOf="@id/androidx"
-        app:layout_constraintEnd_toEndOf="@id/androidx" />
+        app:layout_constraintTop_toBottomOf="@id/androidx" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/firebase_author"
         style="@style/TextAppearance.Material3.BodyLarge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/license_google"
         android:layout_marginTop="8dp"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/androidx_author"
+        android:text="@string/license_google"
+        app:layout_constraintEnd_toEndOf="@id/androidx_author"
         app:layout_constraintStart_toStartOf="@id/androidx_author"
-        app:layout_constraintEnd_toEndOf="@id/androidx_author" />
+        app:layout_constraintTop_toBottomOf="@id/androidx_author" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/material_components"
@@ -85,9 +85,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/license_material_components"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/firebase"
+        app:layout_constraintEnd_toEndOf="@id/androidx"
         app:layout_constraintStart_toStartOf="@id/androidx"
-        app:layout_constraintEnd_toEndOf="@id/androidx" />
+        app:layout_constraintTop_toBottomOf="@id/firebase" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/material_components_author"
@@ -95,11 +95,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/license_google"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/firebase_author"
+        android:text="@string/license_google"
+        app:layout_constraintEnd_toEndOf="@id/androidx_author"
         app:layout_constraintStart_toStartOf="@id/androidx_author"
-        app:layout_constraintEnd_toEndOf="@id/androidx_author" />
+        app:layout_constraintTop_toBottomOf="@id/firebase_author" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/mit"
@@ -110,11 +110,11 @@
         android:background="?selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:textStyle="bold"
         android:text="@string/license_mit"
+        android:textStyle="bold"
         app:drawableEndCompat="@drawable/ic_chevron_right_small"
-        app:layout_constraintTop_toBottomOf="@id/material_components"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/material_components" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/jsoup"
@@ -124,20 +124,20 @@
         android:layout_marginTop="8dp"
         android:text="@string/license_jsoup"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/mit"
+        app:layout_constraintEnd_toEndOf="@id/androidx"
         app:layout_constraintStart_toStartOf="@id/androidx"
-        app:layout_constraintEnd_toEndOf="@id/androidx" />
+        app:layout_constraintTop_toBottomOf="@id/mit" />
 
     <com.google.android.material.textview.MaterialTextView
         style="@style/TextAppearance.Material3.BodyLarge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/license_jonathan_hedley"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/mit"
+        android:text="@string/license_jonathan_hedley"
+        app:layout_constraintEnd_toEndOf="@id/androidx_author"
         app:layout_constraintStart_toStartOf="@id/androidx_author"
-        app:layout_constraintEnd_toEndOf="@id/androidx_author" />
+        app:layout_constraintTop_toBottomOf="@id/mit" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ok"

@@ -7,27 +7,29 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
+        android:name=".CheckFirm"
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
-        android:supportsRtl="true"
-        android:name=".CheckFirm"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:enableOnBackInvokedCallback="true"
-        android:dataExtractionRules="@xml/data_extraction_rules">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
             android:name=".features.main.ui.MainActivity"
-            android:theme="@style/Theme.App.Start"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.Start">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".features.main.ui.ReportActivity"
+        <activity
+            android:name=".features.main.ui.ReportActivity"
             android:label="" />
-        <activity android:name=".features.bookmark.ui.BookmarkCategoryActivity"
+        <activity
+            android:name=".features.bookmark.ui.BookmarkCategoryActivity"
             android:label="" />
         <activity
             android:name=".features.settings.backuprestore.BackupRestoreActivity"
@@ -63,13 +65,14 @@
             android:name=".features.sherlock.ui.SherlockActivity"
             android:label="" />
         <activity android:name=".features.main.ui.OutdatedActivity" />
+
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />
         <meta-data
             android:name="android.allow_multiple_resumed_activities"
             android:value="true" />
-		<meta-data
+        <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
         <meta-data
@@ -78,13 +81,14 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/app_name" />
-		<service
-			android:name=".features.catcher.service.InfoCatcherFCMService"
+
+        <service
+            android:name=".features.catcher.service.InfoCatcherFCMService"
             android:exported="false">
-			<intent-filter>
-				<action android:name="com.google.firebase.MESSAGING_EVENT" />
-			</intent-filter>
-		</service>
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <service
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
             android:enabled="false"

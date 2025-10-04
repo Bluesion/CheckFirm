@@ -18,9 +18,9 @@
             android:pathData="M16.6,8.55C16.849,8.881 16.781,9.352 16.45,9.6L15.25,10.5L16.45,11.4C16.781,11.649 16.849,12.119 16.6,12.45C16.351,12.781 15.881,12.849 15.55,12.6L13.55,11.1C13.361,10.958 13.25,10.736 13.25,10.5C13.25,10.264 13.361,10.042 13.55,9.9L15.55,8.4C15.881,8.152 16.351,8.219 16.6,8.55Z" />
         <path
             android:name="mouth"
-            android:strokeColor="@android:color/white"
+            android:pathData="M8.5,16.5 Q12,18.5 15.5,16.5"
             android:strokeWidth="1.5"
-            android:strokeLineCap="round"
-            android:pathData="M8.5,16.5 Q12,18.5 15.5,16.5" />
+            android:strokeColor="@android:color/white"
+            android:strokeLineCap="round" />
     </group>
 </vector>

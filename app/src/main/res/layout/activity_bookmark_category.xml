@@ -13,8 +13,8 @@
         android:id="@+id/fragment_container_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="48dp"
         android:paddingHorizontal="12dp"
+        android:paddingBottom="48dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,8 +30,8 @@
             android:id="@+id/tab_bookmark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:isTabSelected="true"
             app:customFontFamily="@font/font_wanted_sans"
+            app:isTabSelected="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tab_category"
             app:layout_constraintStart_toStartOf="parent"

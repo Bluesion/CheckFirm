@@ -10,9 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:contentPadding="12dp"
-        app:strokeWidth="1dp"
+        app:layout_constraintBottom_toTopOf="@id/csc_card"
         app:strokeColor="@color/oneui_switch_thumb_off_stroke_color"
-        app:layout_constraintBottom_toTopOf="@id/csc_card">
+        app:strokeWidth="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,16 +30,16 @@
                 android:id="@+id/edit_text_build_prefix"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:textColor="@color/oneui_switch_track_off_stroke_color"
                 android:background="@null"
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="textCapCharacters"
                 android:maxLines="1"
                 android:privateImeOptions="defaultInputmode=english"
-                app:layout_constraintTop_toBottomOf="@id/build_card_title"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/oneui_switch_track_off_stroke_color"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/build_card_title"
                 tools:text="A720SKS" />
 
             <com.google.android.material.textfield.TextInputEditText
@@ -47,16 +47,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 android:background="@null"
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="textCapCharacters"
                 android:maxLines="1"
                 android:privateImeOptions="defaultInputmode=english"
-                app:layout_constraintTop_toBottomOf="@id/build_card_title"
-                app:layout_constraintStart_toEndOf="@id/edit_text_build_prefix"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_text_build_prefix"
+                app:layout_constraintTop_toBottomOf="@id/build_card_title"
                 tools:text="U3BRK1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -69,9 +69,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:contentPadding="12dp"
-        app:strokeWidth="1dp"
+        app:layout_constraintBottom_toTopOf="@id/baseband_card"
         app:strokeColor="@color/oneui_switch_thumb_off_stroke_color"
-        app:layout_constraintBottom_toTopOf="@id/baseband_card">
+        app:strokeWidth="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -89,16 +89,16 @@
                 android:id="@+id/edit_text_csc_prefix"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:textColor="@color/oneui_switch_track_off_stroke_color"
                 android:background="@null"
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="textCapCharacters"
                 android:maxLines="1"
                 android:privateImeOptions="defaultInputmode=english"
-                app:layout_constraintTop_toBottomOf="@id/csc_card_title"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/oneui_switch_track_off_stroke_color"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/csc_card_title"
                 tools:text="A720SSK" />
 
             <com.google.android.material.textfield.TextInputEditText
@@ -106,16 +106,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 android:background="@null"
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="textCapCharacters"
                 android:maxLines="1"
                 android:privateImeOptions="defaultInputmode=english"
-                app:layout_constraintTop_toBottomOf="@id/csc_card_title"
-                app:layout_constraintStart_toEndOf="@id/edit_text_csc_prefix"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_text_csc_prefix"
+                app:layout_constraintTop_toBottomOf="@id/csc_card_title"
                 tools:text="C3BRK1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -127,9 +127,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentPadding="12dp"
-        app:strokeWidth="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:strokeColor="@color/oneui_switch_thumb_off_stroke_color"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:strokeWidth="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -147,16 +147,16 @@
                 android:id="@+id/edit_text_baseband_prefix"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:textColor="@color/oneui_switch_track_off_stroke_color"
                 android:background="@null"
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:inputType="textCapCharacters"
                 android:maxLines="1"
                 android:privateImeOptions="defaultInputmode=english"
-                app:layout_constraintTop_toBottomOf="@id/baseband_card_title"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/oneui_switch_track_off_stroke_color"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/baseband_card_title"
                 tools:text="A720NKO" />
 
             <com.google.android.material.textfield.TextInputEditText
@@ -164,16 +164,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 android:background="@null"
                 android:imeOptions="actionDone"
                 android:importantForAutofill="no"
                 android:inputType="textCapCharacters"
                 android:maxLines="1"
                 android:privateImeOptions="defaultInputmode=english"
-                app:layout_constraintTop_toBottomOf="@id/baseband_card_title"
-                app:layout_constraintStart_toEndOf="@id/edit_text_baseband_prefix"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_text_baseband_prefix"
+                app:layout_constraintTop_toBottomOf="@id/baseband_card_title"
                 tools:text="U3BRK1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,8 @@
 <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="100"
+    android:interpolator="@android:anim/cycle_interpolator"
     android:propertyName="translateX"
+    android:repeatCount="1"
     android:valueFrom="0"
     android:valueTo="2"
-    android:repeatCount="1"
-    android:interpolator="@android:anim/cycle_interpolator"
     android:valueType="floatType" />

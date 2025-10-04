@@ -58,9 +58,9 @@
                 android:layout_marginTop="48dp"
                 android:text="@string/welcome_search_add_device"
                 app:icon="@drawable/oneui_ic_add"
-                app:layout_constraintTop_toBottomOf="@id/welcome_search_description"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/welcome_search_description" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/empty_text"
@@ -68,11 +68,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
-                android:textColor="@color/oneui_outline"
                 android:text="@string/welcome_search_empty_device_list"
-                app:layout_constraintTop_toBottomOf="@id/empty_button"
+                android:textColor="@color/oneui_outline"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/empty_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

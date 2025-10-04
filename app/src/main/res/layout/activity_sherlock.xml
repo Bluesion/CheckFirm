@@ -9,8 +9,8 @@
         style="@style/OneUI.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_back"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/status_image"
@@ -18,19 +18,19 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="12dp"
-        app:srcCompat="@drawable/ic_sherlock_normal_face"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:srcCompat="@drawable/ic_sherlock_normal_face" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/status_text"
         style="@style/TextAppearance.Material3.TitleMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="12dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
         android:text="@string/sherlock_manual_description"
         app:layout_constraintTop_toBottomOf="@id/status_image" />
 
@@ -41,10 +41,10 @@
         android:layout_marginTop="32dp"
         android:visibility="gone"
         app:cardElevation="16dp"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_text"
+        app:layout_constraintWidth_percent="0.8"
         tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,13 +56,13 @@
                 style="@style/TextAppearance.Material3.LabelMedium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:ellipsize="end"
+                android:maxLines="1"
                 android:padding="8dp"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/success_card_copy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="A720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1" />
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -73,11 +73,11 @@
                 android:layout_gravity="center"
                 android:background="@color/oneui_primary"
                 app:contentPadding="12dp"
-                app:srcCompat="@drawable/ic_copy"
-                app:tint="@android:color/white"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_copy"
+                app:tint="@android:color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -88,28 +88,28 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="12dp"
-        app:layout_constraintTop_toBottomOf="@id/success_card"
-        app:layout_constraintBottom_toTopOf="@id/tab_manual" />
+        app:layout_constraintBottom_toTopOf="@id/tab_manual"
+        app:layout_constraintTop_toBottomOf="@id/success_card" />
 
     <com.bluesion.oneui.tab.OneUITab
         android:id="@+id/tab_manual"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:tabTitle="@string/sherlock_tab_manual"
-        app:isTabSelected="true"
         app:customFontFamily="@font/font_wanted_sans"
-        app:layout_constraintStart_toStartOf="parent"
+        app:isTabSelected="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tab_script"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabTitle="@string/sherlock_tab_manual" />
 
     <com.bluesion.oneui.tab.OneUITab
         android:id="@+id/tab_script"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:tabTitle="@string/sherlock_tab_script"
         app:customFontFamily="@font/font_wanted_sans"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tab_manual"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:tabTitle="@string/sherlock_tab_script" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

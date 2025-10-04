@@ -20,13 +20,13 @@
         android:id="@+id/empty_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search_no_bookmark"
         android:gravity="center"
-        app:layout_constraintVertical_chainStyle="packed"
+        android:text="@string/search_no_bookmark"
         app:layout_constraintBottom_toTopOf="@id/suggestion_add_bookmark"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/suggestion_add_bookmark"
@@ -39,8 +39,8 @@
         app:cornerRadius="26dp"
         app:icon="@drawable/oneui_ic_bookmark"
         app:layout_constraintBottom_toTopOf="@id/suggestion_search_my_device"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/empty_text" />
 
     <com.google.android.material.button.MaterialButton
@@ -51,9 +51,9 @@
         android:text="@string/suggestion_search_my_device"
         app:cornerRadius="26dp"
         app:icon="@drawable/oneui_ic_search"
-        app:layout_constraintTop_toBottomOf="@id/suggestion_add_bookmark"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/suggestion_add_bookmark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

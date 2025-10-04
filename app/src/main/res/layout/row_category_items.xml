@@ -16,11 +16,11 @@
             style="@style/TextAppearance.Material3.TitleLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="13dp"
             android:layout_marginHorizontal="14dp"
+            android:layout_marginVertical="13dp"
+            android:maxLines="1"
             android:textColor="@color/oneui_primary"
             android:textStyle="bold"
-            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/delete"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +33,11 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             app:contentPadding="12dp"
-            app:srcCompat="@drawable/oneui_ic_delete"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+            app:srcCompat="@drawable/oneui_ic_delete" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

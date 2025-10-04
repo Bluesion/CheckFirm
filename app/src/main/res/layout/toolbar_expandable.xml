@@ -35,8 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:visibility="gone"
-                android:textColor="@color/oneui_toolbar_text_color" />
+                android:textColor="@color/oneui_toolbar_text_color"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -44,12 +44,12 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="20dp"
             android:layout_gravity="bottom"
-            app:titleTextAppearance="@style/OneUI.Toolbar.Title"
+            android:layout_marginTop="20dp"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_collapseMode="pin"
-            app:navigationIcon="@drawable/ic_back">
+            app:navigationIcon="@drawable/ic_back"
+            app:titleTextAppearance="@style/OneUI.Toolbar.Title">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"

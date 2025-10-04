@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/notification_permission_required_title"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dialog_message"
@@ -28,9 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/notification_permission_required_button_deny"
-        app:layout_constraintTop_toBottomOf="@id/dialog_message"
+        app:layout_constraintEnd_toStartOf="@id/positive_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/positive_button" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_message" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/positive_button"
@@ -39,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/notification_permission_required_button_grant"
-        app:layout_constraintTop_toBottomOf="@id/dialog_message"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/negative_button" />
+        app:layout_constraintStart_toEndOf="@id/negative_button"
+        app:layout_constraintTop_toBottomOf="@id/dialog_message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

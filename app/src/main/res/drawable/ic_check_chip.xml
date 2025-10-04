@@ -1,18 +1,18 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
     android:height="24dp"
-    android:viewportHeight="24.0"
     android:viewportWidth="24.0"
-    android:width="24dp">
+    android:viewportHeight="24.0">
     <!-- The circle -->
     <path
         android:fillColor="@color/oneui_primary"
         android:pathData="M12,12m-12,0a12,12 0,1 1,24 0a12,12 0,1 1,-24 0"
-        android:strokeColor="#00000000"
-        android:strokeWidth="1"/>
+        android:strokeWidth="1"
+        android:strokeColor="#00000000" />
     <!-- The checkmark -->
     <path
         android:fillColor="@color/oneui_surface"
         android:pathData="M9.189,15.939l-3.127,-3.128l-1.061,1.061l4.189,4.189l9,-9l-1.061,-1.061z"
-        android:strokeColor="#00000000"
-        android:strokeWidth="1"/>
+        android:strokeWidth="1"
+        android:strokeColor="#00000000" />
 </vector>

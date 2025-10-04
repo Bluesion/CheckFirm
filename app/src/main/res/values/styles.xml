@@ -125,9 +125,10 @@
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
-    
+
     <style name="CheckFirm.Spinner.DropDownItem" parent="OneUI.Spinner.DropDownItem">
-        <item name="android:textAppearance">@style/CheckFirm.TextAppearance.Widget.DropDownItem</item>
+        <item name="android:textAppearance">@style/CheckFirm.TextAppearance.Widget.DropDownItem
+        </item>
     </style>
 
     <style name="CheckFirm.TextAppearance.Widget.DropDownItem" parent="OneUI.TextAppearance.Widget.DropDownItem">

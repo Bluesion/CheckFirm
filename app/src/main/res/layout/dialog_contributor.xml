@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/contributor"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/sub_title_1"
@@ -18,10 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textStyle="bold"
         android:text="@string/contributor_application"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/designer_title"
@@ -31,10 +31,10 @@
         android:layout_marginTop="8dp"
         android:text="@string/contributor_designer"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintWidth_percent="0.4"
-        app:layout_constraintTop_toBottomOf="@id/sub_title_1"
         app:layout_constraintEnd_toStartOf="@id/designer_name"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sub_title_1"
+        app:layout_constraintWidth_percent="0.4" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/designer_name"
@@ -42,12 +42,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/contributor_newfit"
         android:gravity="end"
-        app:layout_constraintWidth_percent="0.6"
-        app:layout_constraintTop_toBottomOf="@id/sub_title_1"
+        android:text="@string/contributor_newfit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/designer_title"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/sub_title_1"
+        app:layout_constraintWidth_percent="0.6" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/developer_title"
@@ -57,9 +57,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/contributor_developer"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/designer_title"
+        app:layout_constraintEnd_toEndOf="@id/designer_title"
         app:layout_constraintStart_toStartOf="@id/designer_title"
-        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+        app:layout_constraintTop_toBottomOf="@id/designer_title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/developer_name"
@@ -67,11 +67,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/contributor_bluesion"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/designer_name"
+        android:text="@string/contributor_bluesion"
+        app:layout_constraintEnd_toEndOf="@id/designer_name"
         app:layout_constraintStart_toStartOf="@id/designer_name"
-        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+        app:layout_constraintTop_toBottomOf="@id/designer_name" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/sub_title_2"
@@ -79,10 +79,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textStyle="bold"
         android:text="@string/contributor_translator"
-        app:layout_constraintTop_toBottomOf="@id/developer_title"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/developer_title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_russian"
@@ -92,9 +92,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/contributor_russian"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/sub_title_2"
+        app:layout_constraintEnd_toEndOf="@id/designer_title"
         app:layout_constraintStart_toStartOf="@id/designer_title"
-        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+        app:layout_constraintTop_toBottomOf="@id/sub_title_2" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_russian_translator"
@@ -102,11 +102,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/contributor_russian_translator"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/sub_title_2"
+        android:text="@string/contributor_russian_translator"
+        app:layout_constraintEnd_toEndOf="@id/designer_name"
         app:layout_constraintStart_toStartOf="@id/designer_name"
-        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+        app:layout_constraintTop_toBottomOf="@id/sub_title_2" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_chinese"
@@ -116,9 +116,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/contributor_chinese"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/contributor_russian"
+        app:layout_constraintEnd_toEndOf="@id/designer_title"
         app:layout_constraintStart_toStartOf="@id/designer_title"
-        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_russian" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_chinese_translator"
@@ -126,11 +126,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/contributor_chinese_translator"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/contributor_russian_translator"
+        android:text="@string/contributor_chinese_translator"
+        app:layout_constraintEnd_toEndOf="@id/designer_name"
         app:layout_constraintStart_toStartOf="@id/designer_name"
-        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_russian_translator" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_czech"
@@ -140,9 +140,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/contributor_czech"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/contributor_chinese"
+        app:layout_constraintEnd_toEndOf="@id/designer_title"
         app:layout_constraintStart_toStartOf="@id/designer_title"
-        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_chinese" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_czech_translator"
@@ -150,11 +150,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/contributor_czech_translator"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/contributor_chinese_translator"
+        android:text="@string/contributor_czech_translator"
+        app:layout_constraintEnd_toEndOf="@id/designer_name"
         app:layout_constraintStart_toStartOf="@id/designer_name"
-        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_chinese_translator" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_portuguese"
@@ -164,9 +164,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/contributor_portuguese"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/contributor_czech"
+        app:layout_constraintEnd_toEndOf="@id/designer_title"
         app:layout_constraintStart_toStartOf="@id/designer_title"
-        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_czech" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_portuguese_translator"
@@ -174,11 +174,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/contributor_portuguese_translator"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/contributor_czech_translator"
+        android:text="@string/contributor_portuguese_translator"
+        app:layout_constraintEnd_toEndOf="@id/designer_name"
         app:layout_constraintStart_toStartOf="@id/designer_name"
-        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_czech_translator" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_romanian"
@@ -188,9 +188,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/contributor_romanian"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/contributor_portuguese"
+        app:layout_constraintEnd_toEndOf="@id/designer_title"
         app:layout_constraintStart_toStartOf="@id/designer_title"
-        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_portuguese" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_romanian_translator"
@@ -198,11 +198,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/contributor_romanian_translator"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/contributor_portuguese_translator"
+        android:text="@string/contributor_romanian_translator"
+        app:layout_constraintEnd_toEndOf="@id/designer_name"
         app:layout_constraintStart_toStartOf="@id/designer_name"
-        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_portuguese_translator" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_sinhala"
@@ -212,9 +212,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/contributor_sinhala"
         android:textColor="@color/oneui_primary"
-        app:layout_constraintTop_toBottomOf="@id/contributor_romanian"
+        app:layout_constraintEnd_toEndOf="@id/designer_title"
         app:layout_constraintStart_toStartOf="@id/designer_title"
-        app:layout_constraintEnd_toEndOf="@id/designer_title" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_romanian" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/contributor_sinhala_translator"
@@ -222,11 +222,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/contributor_sinhala_translator"
         android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/contributor_romanian_translator"
+        android:text="@string/contributor_sinhala_translator"
+        app:layout_constraintEnd_toEndOf="@id/designer_name"
         app:layout_constraintStart_toStartOf="@id/designer_name"
-        app:layout_constraintEnd_toEndOf="@id/designer_name" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_romanian_translator" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ok"

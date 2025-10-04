@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/info_catcher"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
         android:id="@+id/chip_group_scroll_view"
@@ -42,10 +42,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/model"
-            android:text="@string/default_string"
             android:inputType="textCapCharacters"
             android:maxLines="1"
-            android:privateImeOptions="defaultInputmode=english" />
+            android:privateImeOptions="defaultInputmode=english"
+            android:text="@string/default_string" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,9 +74,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@android:string/cancel"
-        app:layout_constraintTop_toBottomOf="@id/csc_input_layout"
+        app:layout_constraintEnd_toStartOf="@id/add"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/add" />
+        app:layout_constraintTop_toBottomOf="@id/csc_input_layout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add"
@@ -84,8 +84,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/add_item"
-        app:layout_constraintTop_toBottomOf="@id/csc_input_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/cancel" />
+        app:layout_constraintStart_toEndOf="@id/cancel"
+        app:layout_constraintTop_toBottomOf="@id/csc_input_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

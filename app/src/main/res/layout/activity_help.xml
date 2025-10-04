@@ -33,22 +33,22 @@
                         android:id="@+id/ic_help_manual"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        app:srcCompat="@drawable/ic_help_manual"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_help_manual" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/help_manual_title"
                         style="@style/SettingsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/help_manual"
                         android:layout_marginStart="12dp"
-                        app:layout_constraintVertical_chainStyle="packed"
+                        android:text="@string/help_manual"
+                        app:layout_constraintBottom_toTopOf="@id/help_manual_description"
                         app:layout_constraintStart_toEndOf="@id/ic_help_manual"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/help_manual_description" />
+                        app:layout_constraintVertical_chainStyle="packed" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/help_manual_description"
@@ -57,9 +57,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:text="@string/help_manual_description"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/ic_help_manual"
-                        app:layout_constraintTop_toBottomOf="@id/help_manual_title"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/help_manual_title" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -80,22 +80,22 @@
                         android:id="@+id/ic_help_device"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        app:srcCompat="@drawable/ic_help_device"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_help_device" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/help_device_title"
                         style="@style/SettingsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/help_device_info"
                         android:layout_marginStart="12dp"
-                        app:layout_constraintVertical_chainStyle="packed"
+                        android:text="@string/help_device_info"
+                        app:layout_constraintBottom_toTopOf="@id/help_device_description"
                         app:layout_constraintStart_toEndOf="@id/ic_help_device"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/help_device_description" />
+                        app:layout_constraintVertical_chainStyle="packed" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/help_device_description"
@@ -104,9 +104,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:text="@string/help_device_info_description"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/ic_help_device"
-                        app:layout_constraintTop_toBottomOf="@id/help_device_title"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/help_device_title" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

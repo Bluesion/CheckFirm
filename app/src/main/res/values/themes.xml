@@ -1,5 +1,5 @@
 <resources>
-    
+
     <style name="Theme.App.Start" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/oneui_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/checkfirm_splash_screen</item>
@@ -57,7 +57,7 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="elevationOverlayEnabled">false</item>
     </style>
-    
+
     <style name="ThemeOverlay.CheckFirm.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:backgroundDimAmount">0.8</item>

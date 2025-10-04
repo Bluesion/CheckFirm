@@ -9,11 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/outdated_emoji"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintBottom_toTopOf="@id/title"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
@@ -23,9 +23,9 @@
         android:layout_marginTop="16dp"
         android:text="@string/outdated_title"
         app:layout_constraintBottom_toTopOf="@id/description"
-        app:layout_constraintTop_toBottomOf="@id/emoji"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/emoji" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/description"
@@ -35,10 +35,10 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/outdated_description"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/update"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/update"
@@ -50,9 +50,9 @@
         android:textColor="@color/oneui_onPrimary"
         app:backgroundTint="@color/oneui_primary"
         app:layout_constraintBottom_toTopOf="@id/close"
-        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/description" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/close"
@@ -62,8 +62,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/close"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/update"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/update" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

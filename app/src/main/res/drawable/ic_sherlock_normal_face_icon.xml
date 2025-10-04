@@ -18,8 +18,8 @@
         android:pathData="M16,10.5C16,11.328 15.552,12 15,12C14.448,12 14,11.328 14,10.5C14,9.672 14.448,9 15,9C15.552,9 16,9.672 16,10.5Z" />
     <path
         android:name="mouth"
-        android:strokeColor="@android:color/white"
+        android:pathData="M8.5,16.5 Q12,18.5 15.5,16.5"
         android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:pathData="M8.5,16.5 Q12,18.5 15.5,16.5" />
+        android:strokeColor="@android:color/white"
+        android:strokeLineCap="round" />
 </vector>

@@ -13,9 +13,9 @@
             android:id="@+id/image"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            app:srcCompat="@drawable/checkfirm_icon"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:srcCompat="@drawable/checkfirm_icon" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/device"
@@ -24,9 +24,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="@id/image"
             app:layout_constraintBottom_toBottomOf="@id/image"
             app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintTop_toTopOf="@id/image"
             tools:text="SM-A720S (SKC)" />
 
         <com.google.android.material.card.MaterialCardView
@@ -35,11 +35,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             app:contentPadding="14dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/oneui_divider_color"
-            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintEnd_toStartOf="@id/test_firmware_card"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/test_firmware_card">
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:strokeColor="@color/oneui_divider_color"
+            app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -51,14 +51,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="@string/official_latest"
-                    android:textStyle="bold"
-                    android:maxLines="1"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="marquee_forever"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:maxLines="1"
+                    android:text="@string/official_latest"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/official_firmware_more"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/official_firmware_more" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/official_firmware_text"
@@ -68,9 +68,9 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/official_firmware_title"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/official_firmware_more"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/official_firmware_title"
                     tools:text="CXE4" />
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -78,18 +78,18 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:background="@color/oneui_divider_color"
-                    app:srcCompat="@drawable/ic_chevron_right"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
-                    app:layout_constraintTop_toTopOf="@id/official_firmware_title"
+                    app:layout_constraintBottom_toBottomOf="@id/official_firmware_text"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/official_firmware_text" />
+                    app:layout_constraintTop_toTopOf="@id/official_firmware_title"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+                    app:srcCompat="@drawable/ic_chevron_right" />
 
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/official_firmware_card_divider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:dividerColor="@color/oneui_divider_color"
                     android:layout_marginTop="8dp"
+                    app:dividerColor="@color/oneui_divider_color"
                     app:layout_constraintTop_toBottomOf="@id/official_firmware_text" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -103,9 +103,9 @@
                         android:id="@+id/smart_search_official_device_icon"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        app:srcCompat="@drawable/ic_smart_search_device"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:srcCompat="@drawable/ic_smart_search_device" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/smart_search_official_device_text"
@@ -113,12 +113,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        app:layout_constraintStart_toEndOf="@id/smart_search_official_device_icon"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:maxLines="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/smart_search_official_device_icon"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="Galaxy S23 Ultra" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -134,9 +134,9 @@
                         android:id="@+id/smart_search_official_date_icon"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        app:srcCompat="@drawable/ic_smart_search_discovered_date"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:srcCompat="@drawable/ic_smart_search_discovered_date" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/smart_search_official_date_text"
@@ -144,12 +144,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        app:layout_constraintStart_toEndOf="@id/smart_search_official_date_icon"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:maxLines="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/smart_search_official_date_icon"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="2024-05-01" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -165,9 +165,9 @@
                         android:id="@+id/smart_search_official_android_version_icon"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        app:srcCompat="@drawable/ic_smart_search_android_version"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:srcCompat="@drawable/ic_smart_search_android_version" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/smart_search_official_android_version_text"
@@ -175,12 +175,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        app:layout_constraintStart_toEndOf="@id/smart_search_official_android_version_icon"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:maxLines="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/smart_search_official_android_version_icon"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="ANDROID VERSION" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -195,12 +195,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/oneui_divider_color"
             app:contentPadding="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/official_firmware_card"
-            app:layout_constraintTop_toBottomOf="@id/image">
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:strokeColor="@color/oneui_divider_color"
+            app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -211,15 +211,15 @@
                     style="@style/TextAppearance.Material3.LabelMedium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:maxLines="1"
                     android:text="@string/test_latest"
                     android:textStyle="bold"
-                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@id/test_firmware_more"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/test_firmware_more" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/test_firmware_text"
@@ -249,8 +249,8 @@
                     android:id="@+id/test_firmware_card_divider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:dividerColor="@color/oneui_divider_color"
                     android:layout_marginTop="8dp"
+                    app:dividerColor="@color/oneui_divider_color"
                     app:layout_constraintTop_toBottomOf="@id/test_firmware_text" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -264,9 +264,9 @@
                         android:id="@+id/smart_search_test_discoverer_icon"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        app:srcCompat="@drawable/ic_smart_search_discoverer"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:srcCompat="@drawable/ic_smart_search_discoverer" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/smart_search_test_discoverer_text"
@@ -274,12 +274,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        app:layout_constraintStart_toEndOf="@id/smart_search_test_discoverer_icon"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:maxLines="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/smart_search_test_discoverer_icon"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="DISCOVERER" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -295,9 +295,9 @@
                         android:id="@+id/smart_search_test_date_icon"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        app:srcCompat="@drawable/ic_smart_search_discovered_date"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:srcCompat="@drawable/ic_smart_search_discovered_date" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/smart_search_test_date_text"
@@ -305,12 +305,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        app:layout_constraintStart_toEndOf="@id/smart_search_test_date_icon"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:maxLines="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/smart_search_test_date_icon"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="2024-05-01" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -326,9 +326,9 @@
                         android:id="@+id/smart_search_test_dynamic_icon"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        app:srcCompat="@drawable/ic_smart_search_android_version"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:srcCompat="@drawable/ic_smart_search_android_version" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/smart_search_test_dynamic_text"
@@ -336,12 +336,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:maxLines="1"
                         android:ellipsize="end"
-                        app:layout_constraintStart_toEndOf="@id/smart_search_test_dynamic_icon"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:maxLines="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/smart_search_test_dynamic_icon"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="ANDROID VERSION" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

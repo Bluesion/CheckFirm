@@ -108,8 +108,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:textStyle="bold"
                     android:text="@string/main_hello_title"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@id/hello_image" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -126,10 +126,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    app:contentPaddingBottom="4dp"
                     app:contentPaddingLeft="12dp"
                     app:contentPaddingRight="12dp"
                     app:contentPaddingTop="4dp"
-                    app:contentPaddingBottom="4dp"
                     app:layout_constraintTop_toBottomOf="@id/hello_description">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -149,13 +149,13 @@
                                 android:layout_width="36dp"
                                 android:layout_height="36dp"
                                 android:background="@color/oneui_surfaceVariant"
-                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
                                 app:contentPadding="8dp"
-                                app:tint="@color/oneui_onSurfaceVariant"
-                                app:srcCompat="@drawable/oneui_ic_search"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+                                app:srcCompat="@drawable/oneui_ic_search"
+                                app:tint="@color/oneui_onSurfaceVariant" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_search_title"
@@ -164,11 +164,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/search"
-                                app:layout_constraintVertical_chainStyle="packed"
+                                app:layout_constraintBottom_toTopOf="@id/hello_search_description"
+                                app:layout_constraintEnd_toStartOf="@id/hello_search_chevron"
                                 app:layout_constraintStart_toEndOf="@id/hello_search_icon"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/hello_search_chevron"
-                                app:layout_constraintBottom_toTopOf="@id/hello_search_description" />
+                                app:layout_constraintVertical_chainStyle="packed" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_search_description"
@@ -177,20 +177,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/main_hello_search_description"
-                                app:layout_constraintStart_toEndOf="@id/hello_search_icon"
-                                app:layout_constraintTop_toBottomOf="@id/hello_search_title"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/hello_search_chevron"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintStart_toEndOf="@id/hello_search_icon"
+                                app:layout_constraintTop_toBottomOf="@id/hello_search_title" />
 
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/hello_search_chevron"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
                                 app:contentPadding="12dp"
-                                app:srcCompat="@drawable/ic_chevron_right"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_chevron_right" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -213,13 +213,13 @@
                                 android:layout_width="36dp"
                                 android:layout_height="36dp"
                                 android:background="@color/oneui_surfaceVariant"
-                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
                                 app:contentPadding="8dp"
-                                app:tint="@color/oneui_onSurfaceVariant"
-                                app:srcCompat="@drawable/oneui_ic_bookmark"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+                                app:srcCompat="@drawable/oneui_ic_bookmark"
+                                app:tint="@color/oneui_onSurfaceVariant" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_bookmark_title"
@@ -228,11 +228,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/bookmark"
-                                app:layout_constraintVertical_chainStyle="packed"
+                                app:layout_constraintBottom_toTopOf="@id/hello_bookmark_description"
+                                app:layout_constraintEnd_toStartOf="@id/hello_bookmark_chevron"
                                 app:layout_constraintStart_toEndOf="@id/hello_bookmark_icon"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/hello_bookmark_chevron"
-                                app:layout_constraintBottom_toTopOf="@id/hello_bookmark_description" />
+                                app:layout_constraintVertical_chainStyle="packed" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_bookmark_description"
@@ -241,20 +241,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/main_hello_bookmark_description"
-                                app:layout_constraintStart_toEndOf="@id/hello_bookmark_icon"
-                                app:layout_constraintTop_toBottomOf="@id/hello_bookmark_title"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/hello_bookmark_chevron"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintStart_toEndOf="@id/hello_bookmark_icon"
+                                app:layout_constraintTop_toBottomOf="@id/hello_bookmark_title" />
 
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/hello_bookmark_chevron"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
                                 app:contentPadding="12dp"
-                                app:srcCompat="@drawable/ic_chevron_right"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_chevron_right" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -277,13 +277,13 @@
                                 android:layout_width="36dp"
                                 android:layout_height="36dp"
                                 android:background="@color/oneui_surfaceVariant"
-                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
                                 app:contentPadding="8dp"
-                                app:tint="@color/oneui_onSurfaceVariant"
-                                app:srcCompat="@drawable/ic_welcome_search"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+                                app:srcCompat="@drawable/ic_welcome_search"
+                                app:tint="@color/oneui_onSurfaceVariant" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_welcome_search_title"
@@ -292,11 +292,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/welcome_search"
-                                app:layout_constraintVertical_chainStyle="packed"
+                                app:layout_constraintBottom_toTopOf="@id/hello_welcome_search_description"
+                                app:layout_constraintEnd_toStartOf="@id/hello_welcome_search_chevron"
                                 app:layout_constraintStart_toEndOf="@id/hello_welcome_search_icon"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/hello_welcome_search_chevron"
-                                app:layout_constraintBottom_toTopOf="@id/hello_welcome_search_description" />
+                                app:layout_constraintVertical_chainStyle="packed" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_welcome_search_description"
@@ -305,20 +305,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/settings_welcome_search_description"
-                                app:layout_constraintStart_toEndOf="@id/hello_welcome_search_icon"
-                                app:layout_constraintTop_toBottomOf="@id/hello_welcome_search_title"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/hello_welcome_search_chevron"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintStart_toEndOf="@id/hello_welcome_search_icon"
+                                app:layout_constraintTop_toBottomOf="@id/hello_welcome_search_title" />
 
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/hello_welcome_search_chevron"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
                                 app:contentPadding="12dp"
-                                app:srcCompat="@drawable/ic_chevron_right"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_chevron_right" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -341,13 +341,13 @@
                                 android:layout_width="36dp"
                                 android:layout_height="36dp"
                                 android:background="@color/oneui_surfaceVariant"
-                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
                                 app:contentPadding="8dp"
-                                app:tint="@color/oneui_onSurfaceVariant"
-                                app:srcCompat="@drawable/ic_info_catcher"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+                                app:srcCompat="@drawable/ic_info_catcher"
+                                app:tint="@color/oneui_onSurfaceVariant" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_info_catcher_title"
@@ -356,11 +356,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/info_catcher"
-                                app:layout_constraintVertical_chainStyle="packed"
+                                app:layout_constraintBottom_toTopOf="@id/hello_info_catcher_description"
+                                app:layout_constraintEnd_toStartOf="@id/hello_info_catcher_chevron"
                                 app:layout_constraintStart_toEndOf="@id/hello_info_catcher_icon"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/hello_info_catcher_chevron"
-                                app:layout_constraintBottom_toTopOf="@id/hello_info_catcher_description" />
+                                app:layout_constraintVertical_chainStyle="packed" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_info_catcher_description"
@@ -369,20 +369,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/main_hello_info_catcher_description"
-                                app:layout_constraintStart_toEndOf="@id/hello_info_catcher_icon"
-                                app:layout_constraintTop_toBottomOf="@id/hello_info_catcher_title"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/hello_info_catcher_chevron"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintStart_toEndOf="@id/hello_info_catcher_icon"
+                                app:layout_constraintTop_toBottomOf="@id/hello_info_catcher_title" />
 
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/hello_info_catcher_chevron"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
                                 app:contentPadding="12dp"
-                                app:srcCompat="@drawable/ic_chevron_right"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_chevron_right" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -405,13 +405,13 @@
                                 android:layout_width="36dp"
                                 android:layout_height="36dp"
                                 android:background="@color/oneui_surfaceVariant"
-                                app:tint="@color/oneui_onSurfaceVariant"
-                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
                                 app:contentPadding="8dp"
-                                app:srcCompat="@drawable/oneui_ic_settings"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+                                app:srcCompat="@drawable/oneui_ic_settings"
+                                app:tint="@color/oneui_onSurfaceVariant" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_settings_title"
@@ -420,11 +420,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/settings"
-                                app:layout_constraintVertical_chainStyle="packed"
+                                app:layout_constraintBottom_toTopOf="@id/hello_settings_description"
+                                app:layout_constraintEnd_toStartOf="@id/hello_settings_chevron"
                                 app:layout_constraintStart_toEndOf="@id/hello_settings_icon"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/hello_settings_chevron"
-                                app:layout_constraintBottom_toTopOf="@id/hello_settings_description" />
+                                app:layout_constraintVertical_chainStyle="packed" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/hello_settings_description"
@@ -433,20 +433,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="12dp"
                                 android:text="@string/main_hello_settings_description"
-                                app:layout_constraintStart_toEndOf="@id/hello_settings_icon"
-                                app:layout_constraintTop_toBottomOf="@id/hello_settings_title"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/hello_settings_chevron"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintStart_toEndOf="@id/hello_settings_icon"
+                                app:layout_constraintTop_toBottomOf="@id/hello_settings_title" />
 
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/hello_settings_chevron"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
                                 app:contentPadding="12dp"
-                                app:srcCompat="@drawable/ic_chevron_right"
-                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_chevron_right" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

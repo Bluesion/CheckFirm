@@ -9,8 +9,8 @@
         style="@style/TextAppearance.Material3.BodyLarge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="12dp"
         android:maxLines="1"
+        android:paddingHorizontal="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/delete"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,12 +21,12 @@
         style="@style/ClickableLayout"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        app:srcCompat="@drawable/ic_close"
         app:contentPadding="12dp"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/device"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
+        app:srcCompat="@drawable/ic_close" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

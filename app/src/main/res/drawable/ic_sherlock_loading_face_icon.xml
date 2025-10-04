@@ -10,42 +10,42 @@
         <!-- First quarter of the circular border (top-right) with gaps -->
         <path
             android:name="border_segment_1"
-            android:strokeColor="@color/sesl_loading_progress_color2"
+            android:pathData="M12,2 A10,10 0 0,1 22,12"
             android:strokeWidth="2"
+            android:strokeColor="@color/sesl_loading_progress_color2"
             android:strokeLineCap="round"
             android:trimPathStart="0.12"
-            android:trimPathEnd="0.88"
-            android:pathData="M12,2 A10,10 0 0,1 22,12" />
+            android:trimPathEnd="0.88" />
 
         <!-- Second quarter of the circular border (bottom-right) with gaps -->
         <path
             android:name="border_segment_2"
-            android:strokeColor="@color/sesl_loading_progress_color2"
+            android:pathData="M22,12 A10,10 0 0,1 12,22"
             android:strokeWidth="2"
+            android:strokeColor="@color/sesl_loading_progress_color2"
             android:strokeLineCap="round"
             android:trimPathStart="0.12"
-            android:trimPathEnd="0.88"
-            android:pathData="M22,12 A10,10 0 0,1 12,22" />
+            android:trimPathEnd="0.88" />
 
         <!-- Third quarter of the circular border (bottom-left) with gaps -->
         <path
             android:name="border_segment_3"
-            android:strokeColor="@color/sesl_loading_progress_color2"
+            android:pathData="M12,22 A10,10 0 0,1 2,12"
             android:strokeWidth="2"
+            android:strokeColor="@color/sesl_loading_progress_color2"
             android:strokeLineCap="round"
             android:trimPathStart="0.12"
-            android:trimPathEnd="0.88"
-            android:pathData="M12,22 A10,10 0 0,1 2,12" />
+            android:trimPathEnd="0.88" />
 
         <!-- Fourth quarter of the circular border (top-left) with gaps -->
         <path
             android:name="border_segment_4"
-            android:strokeColor="@color/sesl_loading_progress_color1"
+            android:pathData="M2,12 A10,10 0 0,1 12,2"
             android:strokeWidth="2"
+            android:strokeColor="@color/sesl_loading_progress_color1"
             android:strokeLineCap="round"
             android:trimPathStart="0.12"
-            android:trimPathEnd="0.88"
-            android:pathData="M2,12 A10,10 0 0,1 12,2" />
+            android:trimPathEnd="0.88" />
     </group>
     <path
         android:name="face"

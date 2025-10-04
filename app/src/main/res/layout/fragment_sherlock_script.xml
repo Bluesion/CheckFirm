@@ -18,9 +18,9 @@
                 android:id="@+id/script_start_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/script_end_layout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/script_end_layout">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/script_start"
@@ -30,8 +30,8 @@
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:inputType="textCapCharacters"
-                    android:maxLines="1"
                     android:maxLength="6"
+                    android:maxLines="1"
                     android:privateImeOptions="defaultInputmode=english" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -41,9 +41,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/script_start_layout"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/script_end"
@@ -53,8 +53,8 @@
                     android:imeOptions="actionDone"
                     android:importantForAutofill="no"
                     android:inputType="textCapCharacters"
-                    android:maxLines="1"
                     android:maxLength="6"
+                    android:maxLines="1"
                     android:privateImeOptions="defaultInputmode=english" />
 
             </com.google.android.material.textfield.TextInputLayout>

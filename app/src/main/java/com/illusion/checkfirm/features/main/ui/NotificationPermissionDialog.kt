@@ -7,10 +7,11 @@ import com.illusion.checkfirm.common.ui.base.CheckFirmBottomSheetDialogFragment
 import com.illusion.checkfirm.databinding.DialogNotificationPermissionBinding
 
 class NotificationPermissionDialog(
-    private val onPositiveButtonClicked : () -> Unit
+    private val onPositiveButtonClicked: () -> Unit
 ) : CheckFirmBottomSheetDialogFragment<DialogNotificationPermissionBinding>() {
 
-    override fun onCreateView(inflater: LayoutInflater) = DialogNotificationPermissionBinding.inflate(inflater)
+    override fun onCreateView(inflater: LayoutInflater) =
+        DialogNotificationPermissionBinding.inflate(inflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

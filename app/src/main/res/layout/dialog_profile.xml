@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings_profile_user_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.bluesion.oneui.edittext.OneUIEditText
         android:id="@+id/name"
@@ -19,8 +19,8 @@
         android:layout_marginTop="16dp"
         app:enableClearIcon="true"
         app:inputType="text"
-        app:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:maxLines="1" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/cancel"
@@ -28,9 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@android:string/cancel"
-        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintEnd_toStartOf="@id/save"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/save" />
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save"
@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/bookmark_save"
-        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cancel"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

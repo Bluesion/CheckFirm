@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:text="@string/settings_bookmark_reset_dialog_title"
         android:textColor="@color/oneui_error"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/content"
@@ -43,8 +43,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="@android:string/cancel"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/ok"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content" />
 
     <com.google.android.material.button.MaterialButton
@@ -54,8 +54,8 @@
         android:layout_marginTop="16dp"
         android:text="@android:string/ok"
         android:textColor="@color/oneui_error"
-        app:layout_constraintStart_toEndOf="@id/cancel"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cancel"
         app:layout_constraintTop_toBottomOf="@id/content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
