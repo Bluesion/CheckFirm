@@ -5,25 +5,30 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.net.toUri
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.features.main.ui.MainActivity
-import com.illusion.checkfirm.data.source.local.SettingsDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import androidx.core.net.toUri
 
 class InfoCatcherFCMService : FirebaseMessagingService() {
+
+    private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         if (remoteMessage.data["model"] == "update" || remoteMessage.data["csc"] == "update") {
             updateNotification()
         } else {
-            CoroutineScope(Dispatchers.IO).launch {
+            serviceScope.launch {
                 sendNotification(
                     remoteMessage.data["model"].toString(),
                     remoteMessage.data["csc"].toString()
@@ -33,7 +38,9 @@ class InfoCatcherFCMService : FirebaseMessagingService() {
     }
 
     private suspend fun sendNotification(model: String, csc: String) {
-        if (SettingsDataSource(this).isInfoCatcherEnabled.first()) {
+        if ((application as CheckFirm).repositoryProvider.getSettingsRepository()
+                .isInfoCatcherEnabled().first()
+        ) {
             val intent = Intent(this, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 putExtra("new_model", model)
@@ -41,7 +48,7 @@ class InfoCatcherFCMService : FirebaseMessagingService() {
             }
 
             val channelID = getString(R.string.app_name)
-            val notificationManager: NotificationManager =
+            val notificationManager =
                 this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             val channel = NotificationChannel(
                 channelID,
@@ -80,7 +87,7 @@ class InfoCatcherFCMService : FirebaseMessagingService() {
         )
 
         val channelID = getString(R.string.app_name)
-        val notificationManager: NotificationManager =
+        val notificationManager =
             this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channel = NotificationChannel(
             channelID,
@@ -103,5 +110,16 @@ class InfoCatcherFCMService : FirebaseMessagingService() {
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
         notificationManager.notify(0, notificationBuilder.build())
+    }
+
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+
+        Log.d("CHECKFIRM_FCM_TOKEN", token)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        serviceScope.cancel()
     }
 }

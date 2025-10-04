@@ -6,11 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.illusion.checkfirm.data.model.BCDao
-import com.illusion.checkfirm.data.model.BookmarkEntity
-import com.illusion.checkfirm.data.model.CategoryEntity
+import com.illusion.checkfirm.data.model.local.BCDao
+import com.illusion.checkfirm.data.model.local.BookmarkEntity
+import com.illusion.checkfirm.data.model.local.CategoryEntity
 
-@Database(entities = [BookmarkEntity::class, CategoryEntity::class], version = 3, exportSchema = false)
+@Database(
+    entities = [BookmarkEntity::class, CategoryEntity::class],
+    version = 3,
+    exportSchema = false
+)
 abstract class BCDatabase : RoomDatabase() {
 
     abstract fun bcDao(): BCDao
@@ -21,9 +25,13 @@ abstract class BCDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context): BCDatabase {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(context.applicationContext, BCDatabase::class.java, "bookmarks")
-                        .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
-                        .build()
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    BCDatabase::class.java,
+                    "bookmarks"
+                )
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                    .build()
                 INSTANCE = instance
                 instance
             }

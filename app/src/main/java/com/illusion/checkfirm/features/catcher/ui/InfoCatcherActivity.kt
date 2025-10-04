@@ -14,18 +14,32 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.bluesion.oneui.switchcard.OneUISwitchCardListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
-import com.illusion.checkfirm.features.catcher.viewmodel.InfoCatcherViewModel
-import com.illusion.checkfirm.databinding.ActivityInfoCatcherBinding
 import com.illusion.checkfirm.common.ui.recyclerview.CheckFirmDivider
-import kotlinx.coroutines.Dispatchers
+import com.illusion.checkfirm.databinding.ActivityInfoCatcherBinding
+import com.illusion.checkfirm.features.catcher.viewmodel.InfoCatcherViewModel
+import com.illusion.checkfirm.features.catcher.viewmodel.InfoCatcherViewModelFactory
+import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
+import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModelFactory
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class InfoCatcherActivity : CheckFirmActivity<ActivityInfoCatcherBinding>() {
 
-    private val icViewModel: InfoCatcherViewModel by viewModels()
+    private val settingsViewModel by viewModels<SettingsViewModel> {
+        SettingsViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
+
+    private val icViewModel by viewModels<InfoCatcherViewModel> {
+        InfoCatcherViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getInfoCatcherRepository()
+        )
+    }
+
     private var showToolbarMenuIcon = false
 
     override fun createBinding() = ActivityInfoCatcherBinding.inflate(layoutInflater)
@@ -66,7 +80,7 @@ class InfoCatcherActivity : CheckFirmActivity<ActivityInfoCatcherBinding>() {
             addDevice()
         }
 
-        lifecycleScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             if (settingsViewModel.settingsState.first().isInfoCatcherEnabled) {
                 val channelID = getString(R.string.app_name)
                 val notificationManager =

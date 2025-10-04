@@ -13,16 +13,22 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.common.ui.base.CheckFirmBottomSheetDialogFragment
 import com.illusion.checkfirm.databinding.DialogThemeBinding
 import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
+import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 // TODO: API 32부터 지원하는 Dynamic color 대응하기
 class ThemeDialog : CheckFirmBottomSheetDialogFragment<DialogThemeBinding>() {
 
-    private val settingsViewModel: SettingsViewModel by viewModels()
+    private val settingsViewModel by viewModels<SettingsViewModel> {
+        SettingsViewModelFactory(
+            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater) = DialogThemeBinding.inflate(inflater)
 

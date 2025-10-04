@@ -4,10 +4,10 @@ import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.view.View
+import androidx.core.graphics.withSave
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import kotlin.math.roundToInt
-import androidx.core.graphics.withSave
 
 class CheckFirmDivider(private val mDivider: Drawable) : ItemDecoration() {
     private val mBounds: Rect = Rect()

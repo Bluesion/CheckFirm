@@ -36,15 +36,20 @@ class FirmwareManualActivity : CheckFirmActivity<ActivityHelpFirmwareManualBindi
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
                     0 -> {
-                        binding.commonDescription.text = getString(R.string.help_firmware_manual_build_description)
+                        binding.commonDescription.text =
+                            getString(R.string.help_firmware_manual_build_description)
                         binding.buildView.visibility = View.VISIBLE
                     }
+
                     1 -> {
-                        binding.commonDescription.text = getString(R.string.help_firmware_manual_csc_description)
+                        binding.commonDescription.text =
+                            getString(R.string.help_firmware_manual_csc_description)
                         binding.buildView.visibility = View.GONE
                     }
+
                     else -> {
-                        binding.commonDescription.text = getString(R.string.help_firmware_manual_baseband_description)
+                        binding.commonDescription.text =
+                            getString(R.string.help_firmware_manual_baseband_description)
                         binding.buildView.visibility = View.GONE
                     }
                 }
@@ -59,37 +64,44 @@ class FirmwareManualActivity : CheckFirmActivity<ActivityHelpFirmwareManualBindi
 
         binding.deviceCard.setOnClickListener {
             binding.detailTitle.text = getString(R.string.help_firmware_manual_build_device)
-            binding.detailText.text = getString(R.string.help_firmware_manual_build_device_description)
+            binding.detailText.text =
+                getString(R.string.help_firmware_manual_build_device_description)
         }
 
         binding.regionCard.setOnClickListener {
             binding.detailTitle.text = getString(R.string.help_firmware_manual_build_region)
-            binding.detailText.text = getString(R.string.help_firmware_manual_build_region_description)
+            binding.detailText.text =
+                getString(R.string.help_firmware_manual_build_region_description)
         }
 
         binding.bootloaderCard.setOnClickListener {
             binding.detailTitle.text = getString(R.string.help_firmware_manual_build_bootloader)
-            binding.detailText.text = getString(R.string.help_firmware_manual_build_bootloader_description)
+            binding.detailText.text =
+                getString(R.string.help_firmware_manual_build_bootloader_description)
         }
 
         binding.oneUiCard.setOnClickListener {
             binding.detailTitle.text = getString(R.string.help_firmware_manual_build_one_ui)
-            binding.detailText.text = getString(R.string.help_firmware_manual_build_one_ui_description)
+            binding.detailText.text =
+                getString(R.string.help_firmware_manual_build_one_ui_description)
         }
 
         binding.yearCard.setOnClickListener {
             binding.detailTitle.text = getString(R.string.help_firmware_manual_build_year)
-            binding.detailText.text = getString(R.string.help_firmware_manual_build_year_description)
+            binding.detailText.text =
+                getString(R.string.help_firmware_manual_build_year_description)
         }
 
         binding.monthCard.setOnClickListener {
             binding.detailTitle.text = getString(R.string.help_firmware_manual_build_month)
-            binding.detailText.text = getString(R.string.help_firmware_manual_build_month_description)
+            binding.detailText.text =
+                getString(R.string.help_firmware_manual_build_month_description)
         }
 
         binding.revisionCard.setOnClickListener {
             binding.detailTitle.text = getString(R.string.help_firmware_manual_build_revision)
-            binding.detailText.text = getString(R.string.help_firmware_manual_build_revision_description)
+            binding.detailText.text =
+                getString(R.string.help_firmware_manual_build_revision_description)
         }
     }
 }

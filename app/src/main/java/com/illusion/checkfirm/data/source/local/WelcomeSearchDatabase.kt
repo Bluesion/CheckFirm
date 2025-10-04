@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.illusion.checkfirm.data.model.WelcomeSearchDao
-import com.illusion.checkfirm.data.model.WelcomeSearchEntity
+import com.illusion.checkfirm.data.model.local.WelcomeSearchDao
+import com.illusion.checkfirm.data.model.local.WelcomeSearchEntity
 
 @Database(entities = [WelcomeSearchEntity::class], version = 1, exportSchema = false)
 abstract class WelcomeSearchDatabase : RoomDatabase() {

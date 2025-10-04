@@ -1,35 +1,24 @@
 package com.illusion.checkfirm.features.settings.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.illusion.checkfirm.data.model.SettingsItem
-import com.illusion.checkfirm.data.source.local.SettingsDataSource
+import com.illusion.checkfirm.data.model.local.SettingsItem
 import com.illusion.checkfirm.data.repository.SettingsRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class SettingsViewModel(application: Application) : AndroidViewModel(application) {
+class SettingsViewModel(private val settingsRepository: SettingsRepository) : ViewModel() {
 
-    private val settingsRepository: SettingsRepository
-
-    private val _settingsState = MutableStateFlow(SettingsItem())
-    val settingsState: StateFlow<SettingsItem> = _settingsState.asStateFlow()
-
-    init {
-        val settingsDataSource = SettingsDataSource(application)
-        settingsRepository = SettingsRepository(settingsDataSource)
-
-        viewModelScope.launch {
-            settingsRepository.getAllSettings().collect {
-                _settingsState.value = it
-            }
-        }
-    }
+    val settingsState: StateFlow<SettingsItem> = settingsRepository.getAllSettings()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = SettingsItem()
+        )
 
     suspend fun getAllSettings(): SettingsItem {
         return settingsRepository.getAllSettings().first()

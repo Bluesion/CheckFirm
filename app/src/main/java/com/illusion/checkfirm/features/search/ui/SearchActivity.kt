@@ -11,14 +11,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
-import com.illusion.checkfirm.databinding.ActivitySearchBinding
-import com.illusion.checkfirm.features.search.viewmodel.HistoryViewModel
 import com.illusion.checkfirm.common.util.Tools
-import com.illusion.checkfirm.data.model.DeviceItem
-import com.illusion.checkfirm.data.model.SearchDeviceItem
+import com.illusion.checkfirm.data.model.local.DeviceItem
+import com.illusion.checkfirm.data.model.local.SearchDeviceItem
+import com.illusion.checkfirm.databinding.ActivitySearchBinding
 import com.illusion.checkfirm.features.search.util.SearchValidationResult
+import com.illusion.checkfirm.features.search.viewmodel.HistoryViewModel
+import com.illusion.checkfirm.features.search.viewmodel.HistoryViewModelFactory
 import com.illusion.checkfirm.features.search.viewmodel.SearchViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -28,7 +30,11 @@ class SearchActivity : CheckFirmActivity<ActivitySearchBinding>() {
     private lateinit var searchListAdapter: SearchDeviceListAdapter
     private val searchViewModel: SearchViewModel by viewModels()
 
-    private val historyViewModel: HistoryViewModel by viewModels()
+    private val historyViewModel by viewModels<HistoryViewModel> {
+        HistoryViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getHistoryRepository()
+        )
+    }
 
     override fun createBinding() = ActivitySearchBinding.inflate(layoutInflater)
 
@@ -47,7 +53,9 @@ class SearchActivity : CheckFirmActivity<ActivitySearchBinding>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 searchViewModel.searchList.collectLatest {
                     binding.summary.text = resources.getQuantityString(
-                        R.plurals.search_device_summary, searchViewModel.searchList.value.size, searchViewModel.searchList.value.size
+                        R.plurals.search_device_summary,
+                        searchViewModel.searchList.value.size,
+                        searchViewModel.searchList.value.size
                     )
                     searchListAdapter.submitList(it.toList())
                 }
@@ -64,7 +72,10 @@ class SearchActivity : CheckFirmActivity<ActivitySearchBinding>() {
         }
 
         binding.add.setOnClickListener {
-            when (searchViewModel.addToSearchList(binding.model.text.toString(), binding.csc.text.toString())) {
+            when (searchViewModel.addToSearchList(
+                binding.model.text.toString(),
+                binding.csc.text.toString()
+            )) {
                 SearchValidationResult.INVALID_DEVICE -> {
                     Toast.makeText(
                         this,
@@ -72,6 +83,7 @@ class SearchActivity : CheckFirmActivity<ActivitySearchBinding>() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 SearchValidationResult.MAX_SEARCH_CAPACITY_EXCEEDED -> {
                     Toast.makeText(
                         this,
@@ -79,6 +91,7 @@ class SearchActivity : CheckFirmActivity<ActivitySearchBinding>() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 else -> {
                     // Don't have to show a toast message for SearchValidationResult.SUCCESS and SearchValidationResult.DUPLICATED_DEVICE.
                 }
@@ -163,7 +176,6 @@ class SearchActivity : CheckFirmActivity<ActivitySearchBinding>() {
                     )
                     intent.putExtra("model", binding.model.text.toString().trim())
                     intent.putExtra("csc", binding.csc.text.toString().trim())
-                    intent.putExtra("total", 1)
                     setResult(Activity.RESULT_OK, intent)
                     finish()
                 } else {
@@ -176,20 +188,14 @@ class SearchActivity : CheckFirmActivity<ActivitySearchBinding>() {
                     .show()
             }
         } else {
-            var modelString = ""
-            var cscString = ""
-
             if (Tools.isOnline(this)) {
-                for (element in searchViewModel.searchList.value) {
-                    modelString += element.device.model + "%"
-                    cscString += element.device.csc + "%"
-                }
-
                 historyViewModel.createHistory(searchViewModel.searchList.value)
 
-                intent.putExtra("model", modelString)
-                intent.putExtra("csc", cscString)
-                intent.putExtra("total", searchViewModel.searchList.value.size)
+                val modelArray = Array(searchViewModel.searchList.value.size) { searchViewModel.searchList.value[it].device.model }
+                val cscArray = Array(searchViewModel.searchList.value.size) { searchViewModel.searchList.value[it].device.csc }
+
+                intent.putExtra("model", modelArray)
+                intent.putExtra("csc", cscArray)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
             } else {

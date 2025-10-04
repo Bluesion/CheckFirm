@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
@@ -13,21 +14,20 @@ import androidx.core.view.marginBottom
 import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.textview.MaterialTextView
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.util.Tools
-import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
-import kotlin.jvm.java
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
-abstract class CheckFirmActivity<VB: ViewBinding> : AppCompatActivity() {
+abstract class CheckFirmActivity<VB : ViewBinding> : AppCompatActivity() {
 
     protected lateinit var binding: VB
-    protected lateinit var settingsViewModel: SettingsViewModel
 
     protected abstract fun createBinding(): VB
 
@@ -40,8 +40,25 @@ abstract class CheckFirmActivity<VB: ViewBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
+        // This runBlocking is okay here because it's called before super.onCreate and the UI is not yet drawn.
+        runBlocking {
+            val theme =
+                (application as CheckFirm).repositoryProvider.getSettingsRepository().getTheme()
+                    .first()
+            when (theme) {
+                "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                "system" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+
+            /*
+            if ((application as CheckFirm).settingsRepository.isDynamicColorEnabled().first() && DynamicColors.isDynamicColorAvailable()) {
+                DynamicColors.applyToActivityIfAvailable(this@CheckFirmActivity)
+            }
+            */
+        }
+
         super.onCreate(savedInstanceState)
-        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
         binding = createBinding()
         setContentView(binding.root)
 
@@ -65,12 +82,18 @@ abstract class CheckFirmActivity<VB: ViewBinding> : AppCompatActivity() {
             setToolbarInset(toolbar, false)
         } else {
             val appBar = toolbar as AppBarLayout
-            val collapsingToolbar = appBar.children.find { it.id == R.id.collapsing_toolbar } as CollapsingToolbarLayout
-            val expandedLayout = collapsingToolbar.children.find { it.id == R.id.expanded_layout } as LinearLayout
-            val expandedTitle = expandedLayout.children.find { it.id == R.id.expanded_title } as MaterialTextView
-            val expandedSubTitle = expandedLayout.children.find { it.id == R.id.expanded_sub_title } as MaterialTextView
-            val materialToolbar = collapsingToolbar.children.find { it.id == R.id.toolbar } as MaterialToolbar
-            val toolbarTitle = materialToolbar.children.find { it.id == R.id.title } as MaterialTextView
+            val collapsingToolbar =
+                appBar.children.find { it.id == R.id.collapsing_toolbar } as CollapsingToolbarLayout
+            val expandedLayout =
+                collapsingToolbar.children.find { it.id == R.id.expanded_layout } as LinearLayout
+            val expandedTitle =
+                expandedLayout.children.find { it.id == R.id.expanded_title } as MaterialTextView
+            val expandedSubTitle =
+                expandedLayout.children.find { it.id == R.id.expanded_sub_title } as MaterialTextView
+            val materialToolbar =
+                collapsingToolbar.children.find { it.id == R.id.toolbar } as MaterialToolbar
+            val toolbarTitle =
+                materialToolbar.children.find { it.id == R.id.title } as MaterialTextView
 
             setSupportActionBar(materialToolbar)
             toolbarTitle.text = title
@@ -103,8 +126,10 @@ abstract class CheckFirmActivity<VB: ViewBinding> : AppCompatActivity() {
     fun setToolbarInset(view: View, isExpandable: Boolean) {
         val contentPadding = Tools.dpToPx(this, 20F)
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
-                    or WindowInsetsCompat.Type.displayCutout())
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
             if (isExpandable) {
                 v.setPadding(0, systemBars.top, 0, 0)
             } else {
@@ -116,8 +141,10 @@ abstract class CheckFirmActivity<VB: ViewBinding> : AppCompatActivity() {
 
     fun setTopInset(view: View) {
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
-                    or WindowInsetsCompat.Type.displayCutout())
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
             if (v.marginTop == systemBars.top) {
                 v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                     topMargin = systemBars.top
@@ -141,8 +168,10 @@ abstract class CheckFirmActivity<VB: ViewBinding> : AppCompatActivity() {
 
     fun setBottomInset(view: View) {
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
-                    or WindowInsetsCompat.Type.displayCutout())
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
             if (v.marginBottom == systemBars.bottom) {
                 v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                     bottomMargin = systemBars.bottom
@@ -159,8 +188,10 @@ abstract class CheckFirmActivity<VB: ViewBinding> : AppCompatActivity() {
     fun setBottomInset(view: View, dp: Int) {
         val contentPadding = Tools.dpToPx(this, dp.toFloat())
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
-                    or WindowInsetsCompat.Type.displayCutout())
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = systemBars.bottom + contentPadding
             }
@@ -170,8 +201,10 @@ abstract class CheckFirmActivity<VB: ViewBinding> : AppCompatActivity() {
 
     fun setVerticalInset(view: View) {
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
-                    or WindowInsetsCompat.Type.displayCutout())
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 topMargin = systemBars.top
                 bottomMargin = systemBars.bottom

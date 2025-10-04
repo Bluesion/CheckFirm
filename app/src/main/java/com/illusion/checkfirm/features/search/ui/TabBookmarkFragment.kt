@@ -13,16 +13,19 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmFragment
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewVerticalMarginDecorator
 import com.illusion.checkfirm.common.util.Tools
-import com.illusion.checkfirm.data.model.DeviceItem
-import com.illusion.checkfirm.data.model.SearchDeviceItem
+import com.illusion.checkfirm.data.model.local.DeviceItem
+import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 import com.illusion.checkfirm.databinding.FragmentSearchTabBookmarkBinding
 import com.illusion.checkfirm.features.bookmark.ui.BookmarkCategoryActivity
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
 import com.illusion.checkfirm.features.search.util.SearchValidationResult
 import com.illusion.checkfirm.features.search.viewmodel.SearchViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -31,11 +34,24 @@ import kotlinx.coroutines.launch
 class TabBookmarkFragment : CheckFirmFragment<FragmentSearchTabBookmarkBinding>() {
 
     private val searchViewModel: SearchViewModel by activityViewModels()
-    private val bookmarkViewModel: BookmarkViewModel by viewModels()
-    private val categoryViewModel: CategoryViewModel by viewModels()
+    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
+        BookmarkViewModelFactory(
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
+            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
+
+    private val categoryViewModel by viewModels<CategoryViewModel> {
+        CategoryViewModelFactory(
+            getString(R.string.category_all),
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
+        )
+    }
+
     private lateinit var searchBookmarkAdapter: SearchDeviceListAdapter
 
-    override fun onCreateView(inflater: LayoutInflater) = FragmentSearchTabBookmarkBinding.inflate(inflater)
+    override fun onCreateView(inflater: LayoutInflater) =
+        FragmentSearchTabBookmarkBinding.inflate(inflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,9 +61,11 @@ class TabBookmarkFragment : CheckFirmFragment<FragmentSearchTabBookmarkBinding>(
                 override fun onItemSelected(
                     parent: AdapterView<*>, view: View, position: Int, id: Long
                 ) {
-                    bookmarkViewModel.updateCategory(Tools.getCategory(
-                        requireContext(), categoryViewModel.currentCategoryList.value[position]
-                    ))
+                    bookmarkViewModel.updateCategory(
+                        Tools.getCategory(
+                            requireContext(), categoryViewModel.currentCategoryList.value[position]
+                        )
+                    )
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -64,6 +82,7 @@ class TabBookmarkFragment : CheckFirmFragment<FragmentSearchTabBookmarkBinding>(
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+
                     SearchValidationResult.MAX_SEARCH_CAPACITY_EXCEEDED -> {
                         Toast.makeText(
                             requireContext(),
@@ -71,6 +90,7 @@ class TabBookmarkFragment : CheckFirmFragment<FragmentSearchTabBookmarkBinding>(
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+
                     else -> {
                         // Don't have to show a toast message for SearchValidationResult.SUCCESS and SearchValidationResult.DUPLICATED_DEVICE.
                     }
@@ -164,6 +184,7 @@ class TabBookmarkFragment : CheckFirmFragment<FragmentSearchTabBookmarkBinding>(
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 SearchValidationResult.MAX_SEARCH_CAPACITY_EXCEEDED -> {
                     Toast.makeText(
                         requireContext(),
@@ -171,6 +192,7 @@ class TabBookmarkFragment : CheckFirmFragment<FragmentSearchTabBookmarkBinding>(
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 else -> {
                     // Don't have to show a toast message for SearchValidationResult.SUCCESS and SearchValidationResult.DUPLICATED_DEVICE.
                 }

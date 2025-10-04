@@ -7,10 +7,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.illusion.checkfirm.CheckFirm
+import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmBottomSheetDialogFragment
-import com.illusion.checkfirm.databinding.DialogCategoryBinding
 import com.illusion.checkfirm.common.util.Tools
+import com.illusion.checkfirm.databinding.DialogCategoryBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
 import kotlinx.coroutines.launch
 
 class CategoryDialog(
@@ -18,7 +21,12 @@ class CategoryDialog(
     private val onCategoryClicked: (String) -> Unit
 ) : CheckFirmBottomSheetDialogFragment<DialogCategoryBinding>() {
 
-    private val categoryViewModel: CategoryViewModel by viewModels()
+    private val categoryViewModel by viewModels<CategoryViewModel> {
+        CategoryViewModelFactory(
+            getString(R.string.category_all),
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater) = DialogCategoryBinding.inflate(inflater)
 
@@ -45,7 +53,12 @@ class CategoryDialog(
                             categoryList = categoryList,
                             checkedPosition = checkedPosition,
                             onItemClicked = {
-                                onCategoryClicked(Tools.getCategory(requireContext(), categoryList[it]))
+                                onCategoryClicked(
+                                    Tools.getCategory(
+                                        requireContext(),
+                                        categoryList[it]
+                                    )
+                                )
                                 dismiss()
                             }
                         )

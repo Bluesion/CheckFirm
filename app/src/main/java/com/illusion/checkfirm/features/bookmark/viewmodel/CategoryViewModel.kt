@@ -1,13 +1,10 @@
 package com.illusion.checkfirm.features.bookmark.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.illusion.checkfirm.R
-import com.illusion.checkfirm.data.model.BookmarkEntity
-import com.illusion.checkfirm.data.model.CategoryEntity
+import com.illusion.checkfirm.data.model.local.BookmarkEntity
+import com.illusion.checkfirm.data.model.local.CategoryEntity
 import com.illusion.checkfirm.data.repository.BCRepository
-import com.illusion.checkfirm.data.source.local.BCDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,21 +12,19 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class CategoryViewModel(application: Application) : AndroidViewModel(application) {
-
+class CategoryViewModel(
+    private val allString: String,
     private val bcRepository: BCRepository
+) : ViewModel() {
 
     private val _currentCategoryList = MutableStateFlow<List<String>>(emptyList())
     val currentCategoryList: StateFlow<List<String>> = _currentCategoryList.asStateFlow()
 
     init {
-        val bcDao = BCDatabase.getDatabase(application).bcDao()
-        bcRepository = BCRepository(bcDao)
-
         viewModelScope.launch {
             bcRepository.getAllCategory().collect {
                 val tempCategoryList = mutableListOf<String>()
-                tempCategoryList.add(application.applicationContext.getString(R.string.category_all))
+                tempCategoryList.add(allString)
                 tempCategoryList.addAll(it.map { category -> category.name })
                 _currentCategoryList.value = tempCategoryList
             }

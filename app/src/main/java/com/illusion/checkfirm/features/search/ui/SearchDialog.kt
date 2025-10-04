@@ -12,23 +12,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewHorizontalMarginDecorator
 import com.illusion.checkfirm.common.util.Tools
+import com.illusion.checkfirm.data.model.local.SearchResultItem
 import com.illusion.checkfirm.databinding.DialogSearchBinding
 import com.illusion.checkfirm.features.main.ui.ReportActivity
 import com.illusion.checkfirm.features.settings.help.FirmwareManualActivity
 import com.illusion.checkfirm.features.sherlock.ui.SherlockActivity
 
 // SearchDialog는 다른 Dialog와 다르게 디자인이 달라 CheckFirmBottomSheetDialog를 상속받지 않는다.
-class SearchDialog(private val isOfficial: Boolean, private val i: Int) : BottomSheetDialogFragment() {
+class SearchDialog(private val isOfficial: Boolean, private val searchResult: SearchResultItem) :
+    BottomSheetDialogFragment() {
 
     private var binding: DialogSearchBinding? = null
 
@@ -47,7 +47,6 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
 
         val contentPadding = Tools.dpToPx(requireContext(), 12f)
         ViewCompat.setOnApplyWindowInsetsListener(binding!!.root) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(contentPadding, contentPadding, contentPadding, contentPadding)
             insets
         }
@@ -63,15 +62,15 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
         if (isOfficial) {
             binding!!.latestTitle.text = getString(R.string.official_latest)
 
-            if (CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware.isBlank()) {
+            if (searchResult.firmware.officialFirmwareItem.latestFirmware.isBlank()) {
                 binding!!.copyButton.visibility = View.GONE
                 binding!!.latestFirmware.text = getString(R.string.search_error)
-                if (CheckFirm.firmwareItems[i].officialFirmwareItem.previousFirmware.isNotEmpty()) {
+                if (searchResult.firmware.officialFirmwareItem.previousFirmware.isNotEmpty()) {
                     binding!!.dynamicButton.setOnClickListener {
                         startActivity(
                             Intent(
                                 Intent.ACTION_VIEW,
-                                "https://doc.samsungmobile.com/${CheckFirm.searchModel[i]}/${CheckFirm.searchCSC[i]}/doc.html".toUri()
+                                "https://doc.samsungmobile.com/${searchResult.device.model}/${searchResult.device.csc}/doc.html".toUri()
                             )
                         )
                     }
@@ -83,30 +82,28 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                     startActivity(
                         Intent(
                             Intent.ACTION_VIEW,
-                            "https://doc.samsungmobile.com/${CheckFirm.searchModel[i]}/${CheckFirm.searchCSC[i]}/doc.html".toUri()
+                            "https://doc.samsungmobile.com/${searchResult.device.model}/${searchResult.device.csc}/doc.html".toUri()
                         )
                     )
                 }
 
-                copy = CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware
-                binding!!.latestFirmware.text = CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware
+                copy = searchResult.firmware.officialFirmwareItem.latestFirmware
+                binding!!.latestFirmware.text =
+                    searchResult.firmware.officialFirmwareItem.latestFirmware
             }
         } else {
             binding!!.latestTitle.text = getString(R.string.test_latest)
             binding!!.dynamicButton.setImageResource(R.drawable.ic_sherlock)
 
-            if (CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware.isBlank()) {
+            if (searchResult.firmware.testFirmwareItem.latestFirmware.isBlank()) {
                 binding!!.latestFirmware.text = getString(R.string.search_error)
-                if (CheckFirm.firmwareItems[i].testFirmwareItem.previousFirmware.isNotEmpty() && Tools.isEncrypted(
-                        CheckFirm.firmwareItems[i].testFirmwareItem.previousFirmware.firstKey()[0]
+                if (searchResult.firmware.testFirmwareItem.previousFirmware.isNotEmpty() && Tools.isEncrypted(
+                        searchResult.firmware.testFirmwareItem.previousFirmware.firstKey()[0]
                     )
                 ) {
                     binding!!.dynamicButton.setOnClickListener {
                         val intent = Intent(requireActivity(), SherlockActivity::class.java)
-                        intent.putExtra("index", i)
-                        if (CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware.isBlank()) {
-                            intent.putExtra("pro_mode", true)
-                        }
+                        intent.putExtra("search_result", searchResult)
                         startActivity(intent)
                         dismiss()
                     }
@@ -114,15 +111,13 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                     binding!!.dynamicButton.visibility = View.GONE
                 }
             } else {
-                binding!!.latestFirmware.text = CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware
-                copy = CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware
-                if (Tools.isEncrypted(CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware[0])) {
+                binding!!.latestFirmware.text =
+                    searchResult.firmware.testFirmwareItem.latestFirmware
+                copy = searchResult.firmware.testFirmwareItem.latestFirmware
+                if (Tools.isEncrypted(searchResult.firmware.testFirmwareItem.latestFirmware[0])) {
                     binding!!.dynamicButton.setOnClickListener {
                         val intent = Intent(requireActivity(), SherlockActivity::class.java)
-                        intent.putExtra("index", i)
-                        if (CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware.isBlank()) {
-                            intent.putExtra("pro_mode", true)
-                        }
+                        intent.putExtra("search_result", searchResult)
                         startActivity(intent)
                         dismiss()
                     }
@@ -131,14 +126,15 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                 }
             }
 
-            if (CheckFirm.firmwareItems[i].testFirmwareItem.decryptedFirmware.isNotBlank()) {
-                copy = CheckFirm.firmwareItems[i].testFirmwareItem.decryptedFirmware
-                binding!!.latestFirmware.text = CheckFirm.firmwareItems[i].testFirmwareItem.decryptedFirmware
+            if (searchResult.firmware.testFirmwareItem.decryptedFirmware.isNotBlank()) {
+                copy = searchResult.firmware.testFirmwareItem.decryptedFirmware
+                binding!!.latestFirmware.text =
+                    searchResult.firmware.testFirmwareItem.decryptedFirmware
             }
 
-            if (CheckFirm.firmwareItems[i].testFirmwareItem.clue.isNotBlank()) {
-                copy = CheckFirm.firmwareItems[i].testFirmwareItem.clue
-                binding!!.latestFirmware.text = CheckFirm.firmwareItems[i].testFirmwareItem.clue
+            if (searchResult.firmware.testFirmwareItem.clue.isNotBlank()) {
+                copy = searchResult.firmware.testFirmwareItem.clue
+                binding!!.latestFirmware.text = searchResult.firmware.testFirmwareItem.clue
             }
 
             if (binding!!.latestFirmware.text == getString(R.string.search_error)) {
@@ -160,9 +156,11 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
         }
 
         binding!!.reportButton.setOnClickListener {
-            startActivity(Intent(requireContext(), ReportActivity::class.java).apply {
-                putExtra("index", i)
-            })
+            startActivity(
+                Intent(requireContext(), ReportActivity::class.java).apply {
+                    putExtra("device", searchResult.device)
+                }
+            )
         }
 
         binding!!.ok.setOnClickListener {
@@ -175,22 +173,24 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
             binding!!.tabLayout.visibility = View.GONE
             binding!!.previousTitle.text = getString(R.string.official_previous)
 
-            val previousArray = if (CheckFirm.firmwareItems[i].officialFirmwareItem.previousFirmware.isEmpty()) {
-                arrayOf(getString(R.string.search_error))
-            } else {
-                CheckFirm.firmwareItems[i].officialFirmwareItem.previousFirmware.values.toTypedArray()
-            }
+            val previousArray =
+                if (searchResult.firmware.officialFirmwareItem.previousFirmware.isEmpty()) {
+                    arrayOf(getString(R.string.search_error))
+                } else {
+                    searchResult.firmware.officialFirmwareItem.previousFirmware.values.toTypedArray()
+                }
 
             binding!!.dynamicRecyclerView.adapter = SearchDialogAdapter(previousArray)
         } else {
-            val previousArray = if (CheckFirm.firmwareItems[i].testFirmwareItem.previousFirmware.isEmpty()) {
-                arrayOf(getString(R.string.search_error))
-            } else {
-                CheckFirm.firmwareItems[i].testFirmwareItem.previousFirmware.values.toTypedArray()
-            }
+            val previousArray =
+                if (searchResult.firmware.testFirmwareItem.previousFirmware.isEmpty()) {
+                    arrayOf(getString(R.string.search_error))
+                } else {
+                    searchResult.firmware.testFirmwareItem.previousFirmware.values.toTypedArray()
+                }
             binding!!.dynamicRecyclerView.adapter = SearchDialogAdapter(previousArray)
 
-            if (CheckFirm.firmwareItems[i].testFirmwareItem.betaFirmware.isEmpty()) {
+            if (searchResult.firmware.testFirmwareItem.betaFirmware.isEmpty()) {
                 binding!!.tabLayout.visibility = View.GONE
                 binding!!.previousTitle.text = getString(R.string.test_previous)
             } else {
@@ -205,7 +205,8 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                 binding!!.tabBetaFirmware.setOnClickListener {
                     binding!!.tabPreviousFirmware.setTabSelected(false)
                     binding!!.tabBetaFirmware.setTabSelected(true)
-                    binding!!.dynamicRecyclerView.adapter = SearchDialogAdapter(CheckFirm.firmwareItems[i].testFirmwareItem.betaFirmware.values.toTypedArray())
+                    binding!!.dynamicRecyclerView.adapter =
+                        SearchDialogAdapter(searchResult.firmware.testFirmwareItem.betaFirmware.values.toTypedArray())
                 }
             }
         }
@@ -228,10 +229,11 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
         val smartSearchValue: Array<String>
         val smartSearchDescription: Array<String>
 
-        val officialFirmwareInfo = Tools.getBuildInfo(CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware)
+        val officialFirmwareInfo =
+            Tools.getBuildInfo(searchResult.firmware.officialFirmwareItem.latestFirmware)
 
         if (isOfficial) {
-            if (CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware.isBlank()) {
+            if (searchResult.firmware.officialFirmwareItem.latestFirmware.isBlank()) {
                 binding!!.smartSearchCard.visibility = View.GONE
                 return
             }
@@ -247,20 +249,21 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                 "",
                 String.format(
                     getString(R.string.smart_search_android_version_format),
-                    CheckFirm.firmwareItems[i].officialFirmwareItem.androidVersion
+                    searchResult.firmware.officialFirmwareItem.androidVersion
                 ),
                 getFirmwareDate(officialFirmwareInfo.substring(3, 5)),
                 ""
             )
         } else {
-            var testFirmwareInfo = CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware
+            var testFirmwareInfo = searchResult.firmware.testFirmwareItem.latestFirmware
 
-            if (CheckFirm.firmwareItems[i].testFirmwareItem.decryptedFirmware.isNotBlank()) {
-                testFirmwareInfo = Tools.getBuildInfo(CheckFirm.firmwareItems[i].testFirmwareItem.decryptedFirmware)
+            if (searchResult.firmware.testFirmwareItem.decryptedFirmware.isNotBlank()) {
+                testFirmwareInfo =
+                    Tools.getBuildInfo(searchResult.firmware.testFirmwareItem.decryptedFirmware)
             }
 
-            if (CheckFirm.firmwareItems[i].testFirmwareItem.clue.isNotBlank()) {
-                testFirmwareInfo = Tools.getBuildInfo(CheckFirm.firmwareItems[i].testFirmwareItem.clue)
+            if (searchResult.firmware.testFirmwareItem.clue.isNotBlank()) {
+                testFirmwareInfo = Tools.getBuildInfo(searchResult.firmware.testFirmwareItem.clue)
             }
 
             if (officialFirmwareInfo.isBlank() || testFirmwareInfo.isBlank()) {
@@ -275,13 +278,15 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
                 testFirmwareInfo.substring(5, 6)
             )
 
-            val bootloaderDescription = if (officialFirmwareInfo.substring(0, 2) == testFirmwareInfo.substring(0, 2)) {
-                getString(R.string.smart_search_downgrade_possible)
-            } else {
-                getString(R.string.smart_search_downgrade_impossible)
-            }
+            val bootloaderDescription =
+                if (officialFirmwareInfo.substring(0, 2) == testFirmwareInfo.substring(0, 2)) {
+                    getString(R.string.smart_search_downgrade_possible)
+                } else {
+                    getString(R.string.smart_search_downgrade_impossible)
+                }
 
-            val compareMajorVersion = officialFirmwareInfo[2].compareTo(testFirmwareInfo.substring(2, 3)[0])
+            val compareMajorVersion =
+                officialFirmwareInfo[2].compareTo(testFirmwareInfo.substring(2, 3)[0])
             val majorVersionDescription = when {
                 compareMajorVersion < 0 -> {
                     getString(R.string.smart_search_type_major)
@@ -304,12 +309,14 @@ class SearchDialog(private val isOfficial: Boolean, private val i: Int) : Bottom
             )
         }
 
-        binding!!.smartSearchRecyclerView.adapter = SmartSearchAdapter(smartSearchTitle, smartSearchValue, smartSearchDescription)
+        binding!!.smartSearchRecyclerView.adapter =
+            SmartSearchAdapter(smartSearchTitle, smartSearchValue, smartSearchDescription)
         binding!!.smartSearchRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         binding!!.smartSearchRecyclerView.addItemDecoration(
             RecyclerViewHorizontalMarginDecorator(
-            Tools.dpToPx(requireContext(), 32f))
+                Tools.dpToPx(requireContext(), 32f)
+            )
         )
 
         binding!!.smartSearchHelp.setOnClickListener {

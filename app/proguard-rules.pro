@@ -69,3 +69,7 @@
 
 # OneUI SwitchCard
 -keep class com.bluesion.oneui.switchcard.** { *; }
+
+# Ktor
+-dontwarn java.lang.management.ManagementFactory
+-dontwarn java.lang.management.RuntimeMXBean

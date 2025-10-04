@@ -1,12 +1,11 @@
 package com.illusion.checkfirm.features.sherlock.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.common.util.Tools
-import com.illusion.checkfirm.data.source.local.SettingsDataSource
+import com.illusion.checkfirm.data.model.local.SearchResultItem
+import com.illusion.checkfirm.data.repository.SettingsRepository
 import com.illusion.checkfirm.features.sherlock.util.SherlockStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,12 +15,11 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.util.ArrayList
 import java.util.Calendar
 
-class SherlockViewModel(application: Application) : AndroidViewModel(application) {
+class SherlockViewModel(private val settingsRepository: SettingsRepository) : ViewModel() {
 
-    private var i = 0
+    private lateinit var searchResult: SearchResultItem
     private val _buildPrefix = MutableStateFlow("")
     val buildPrefix: StateFlow<String> = _buildPrefix.asStateFlow()
     private val _cscPrefix = MutableStateFlow("")
@@ -49,7 +47,6 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
     private val _userInput = MutableStateFlow("")
     val userInput: StateFlow<String> = _userInput.asStateFlow()
 
-    private val appSettingsRepository: SettingsDataSource = SettingsDataSource(application)
     private var isFirebaseEnabled = false
     private var profileName = "Unknown"
 
@@ -60,20 +57,20 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
 
     init {
         viewModelScope.launch {
-            isFirebaseEnabled = appSettingsRepository.isFirebaseEnabled.first()
-            profileName = appSettingsRepository.getProfileName.first()
+            isFirebaseEnabled = settingsRepository.isFirebaseEnabled().first()
+            profileName = settingsRepository.getProfileName().first()
         }
     }
 
-    fun initialize(currentIndex: Int) {
-        i = currentIndex
-        val officialFirmware = CheckFirm.firmwareItems[i].testFirmwareItem.clue.ifBlank {
-            CheckFirm.firmwareItems[i].officialFirmwareItem.latestFirmware
+    fun initialize(searchResult: SearchResultItem) {
+        this.searchResult = searchResult
+        val officialFirmware = searchResult.firmware.testFirmwareItem.clue.ifBlank {
+            searchResult.firmware.officialFirmwareItem.latestFirmware
         }
 
         val firstIndex = officialFirmware.indexOf("/")
         if (firstIndex == -1) {
-            val prefix = "${CheckFirm.searchModel[i].substring(3)}XX"
+            val prefix = "${searchResult.device.model.substring(3)}XX"
             val dummy = "U0A${getDate()}1"
 
             _buildPrefix.value = prefix
@@ -184,19 +181,20 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun compare() {
-        _userInput.value = "${_buildPrefix.value}${_manualBuild.value}/${_cscPrefix.value}${_manualCsc.value}/${_basebandPrefix.value}${_manualBaseband.value}"
+        _userInput.value =
+            "${_buildPrefix.value}${_manualBuild.value}/${_cscPrefix.value}${_manualCsc.value}/${_basebandPrefix.value}${_manualBaseband.value}"
         viewModelScope.launch {
             val encryptedFirmware = Tools.getMD5Hash(_userInput.value)
 
-            if (CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware.isBlank()) {
-                if (CheckFirm.firmwareItems[i].testFirmwareItem.previousFirmware[encryptedFirmware] != null) {
+            if (searchResult.firmware.testFirmwareItem.latestFirmware.isBlank()) {
+                if (searchResult.firmware.testFirmwareItem.previousFirmware[encryptedFirmware] != null) {
                     _sherlockStatus.value = SherlockStatus.SUCCESS
                     addToFireStore()
                 } else {
                     _sherlockStatus.value = SherlockStatus.FAIL
                 }
             } else {
-                if (CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware == encryptedFirmware) {
+                if (searchResult.firmware.testFirmwareItem.latestFirmware == encryptedFirmware) {
                     _sherlockStatus.value = SherlockStatus.SUCCESS
                     addToFireStore()
                 } else {
@@ -213,18 +211,23 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                     0 -> {
                         _sherlockStatus.value = SherlockStatus.NO_WARNING
                     }
+
                     1, 2 -> {
                         _sherlockStatus.value = SherlockStatus.WARNING_BUILD_NUMBER_BOOTLOADER
                     }
+
                     3 -> {
                         _sherlockStatus.value = SherlockStatus.WARNING_BUILD_NUMBER_ONE_UI_VERSION
                     }
+
                     4 -> {
                         _sherlockStatus.value = SherlockStatus.WARNING_BUILD_NUMBER_YEAR
                     }
+
                     5 -> {
                         _sherlockStatus.value = SherlockStatus.WARNING_BUILD_NUMBER_MONTH
                     }
+
                     else -> {
                         _sherlockStatus.value = SherlockStatus.WARNING_BUILD_NUMBER_REVISION
                     }
@@ -260,14 +263,14 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                         val encryptedFirmware =
                             Tools.getMD5Hash(currentValue)
 
-                        if (CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware.isBlank()) {
+                        if (searchResult.firmware.testFirmwareItem.latestFirmware.isBlank()) {
                             when {
-                                CheckFirm.firmwareItems[i].testFirmwareItem.previousFirmware[encryptedFirmware] != null -> {
+                                searchResult.firmware.testFirmwareItem.previousFirmware[encryptedFirmware] != null -> {
                                     latestValue = currentValue
                                 }
                             }
                         } else {
-                            when (CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware) {
+                            when (searchResult.firmware.testFirmwareItem.latestFirmware) {
                                 encryptedFirmware -> {
                                     latestValue = currentValue
                                 }
@@ -313,6 +316,7 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                                             }
                                         }
                                     }
+
                                     m > _scriptStart.value[4] && m < _scriptEnd.value[4] -> {
                                         for (r in '1'..'Z') {
                                             if (r !in ':'..'@') {
@@ -320,6 +324,7 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                                             }
                                         }
                                     }
+
                                     else -> {
                                         for (r in '1'.._scriptEnd.value[5]) {
                                             if (r !in ':'..'@') {
@@ -330,6 +335,7 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                                 }
                             }
                         }
+
                         y > _scriptStart.value[3] && y < _scriptEnd.value[3] -> {
                             for (m in 'A'..'L') {
                                 for (r in '1'..'Z') {
@@ -339,6 +345,7 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                                 }
                             }
                         }
+
                         else -> {
                             for (m in 'A'.._scriptEnd.value[4]) {
                                 if (m == _scriptEnd.value[4]) {
@@ -380,14 +387,14 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
 
     fun addToFireStore() {
         if (isFirebaseEnabled) {
-            val model = CheckFirm.searchModel[i]
-            val csc = CheckFirm.searchCSC[i]
+            val model = searchResult.device.model
+            val csc = searchResult.device.csc
 
             viewModelScope.launch(Dispatchers.IO) {
                 val docRef = db.collection(model).document(csc)
 
-                if (CheckFirm.firmwareItems[i].testFirmwareItem.latestFirmware.isBlank()) {
-                    if (CheckFirm.firmwareItems[i].testFirmwareItem.clue == "null") {
+                if (searchResult.firmware.testFirmwareItem.latestFirmware.isBlank()) {
+                    if (searchResult.firmware.testFirmwareItem.clue == "null") {
                         docRef.update(
                             mutableMapOf<String, Any>(
                                 "watson" to profileName,
@@ -395,13 +402,17 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                                 "date_latest" to Tools.dateToString(Tools.getCurrentDateTime())
                             )
                         ).await()
-                        CheckFirm.firmwareItems[i].testFirmwareItem.watson = profileName
-                        CheckFirm.firmwareItems[i].testFirmwareItem.clue = _userInput.value
-                        CheckFirm.firmwareItems[i].testFirmwareItem.discoveryDate = Tools.dateToString(Tools.getCurrentDateTime())
+                        searchResult.firmware.testFirmwareItem.watson = profileName
+                        searchResult.firmware.testFirmwareItem.clue = _userInput.value
+                        searchResult.firmware.testFirmwareItem.discoveryDate =
+                            Tools.dateToString(Tools.getCurrentDateTime())
                     } else {
-                        if ((CheckFirm.firmwareItems[i].testFirmwareItem.clue != _userInput.value) && !Tools.isBetaFirmware(_userInput.value)) {
+                        if ((searchResult.firmware.testFirmwareItem.clue != _userInput.value) && !Tools.isBetaFirmware(
+                                _userInput.value
+                            )
+                        ) {
                             if (Tools.compareFirmware(
-                                    CheckFirm.firmwareItems[i].testFirmwareItem.clue,
+                                    searchResult.firmware.testFirmwareItem.clue,
                                     _userInput.value
                                 ) == 0
                             ) {
@@ -412,9 +423,10 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                                         "date_latest" to Tools.dateToString(Tools.getCurrentDateTime())
                                     )
                                 ).await()
-                                CheckFirm.firmwareItems[i].testFirmwareItem.watson = profileName
-                                CheckFirm.firmwareItems[i].testFirmwareItem.clue = _userInput.value
-                                CheckFirm.firmwareItems[i].testFirmwareItem.discoveryDate = Tools.dateToString(Tools.getCurrentDateTime())
+                                searchResult.firmware.testFirmwareItem.watson = profileName
+                                searchResult.firmware.testFirmwareItem.clue = _userInput.value
+                                searchResult.firmware.testFirmwareItem.discoveryDate =
+                                    Tools.dateToString(Tools.getCurrentDateTime())
                             }
                         }
                     }
@@ -426,9 +438,10 @@ class SherlockViewModel(application: Application) : AndroidViewModel(application
                             "date_latest" to Tools.dateToString(Tools.getCurrentDateTime())
                         )
                     ).await()
-                    CheckFirm.firmwareItems[i].testFirmwareItem.watson = profileName
-                    CheckFirm.firmwareItems[i].testFirmwareItem.clue = _userInput.value
-                    CheckFirm.firmwareItems[i].testFirmwareItem.discoveryDate = Tools.dateToString(Tools.getCurrentDateTime())
+                    searchResult.firmware.testFirmwareItem.watson = profileName
+                    searchResult.firmware.testFirmwareItem.clue = _userInput.value
+                    searchResult.firmware.testFirmwareItem.discoveryDate =
+                        Tools.dateToString(Tools.getCurrentDateTime())
                 }
             }
         }

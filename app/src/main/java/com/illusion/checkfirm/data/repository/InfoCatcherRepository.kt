@@ -1,7 +1,7 @@
 package com.illusion.checkfirm.data.repository
 
-import com.illusion.checkfirm.data.model.InfoCatcherDao
-import com.illusion.checkfirm.data.model.InfoCatcherEntity
+import com.illusion.checkfirm.data.model.local.InfoCatcherDao
+import com.illusion.checkfirm.data.model.local.InfoCatcherEntity
 import kotlinx.coroutines.flow.Flow
 
 class InfoCatcherRepository(private val catcherDao: InfoCatcherDao) {

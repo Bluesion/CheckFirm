@@ -8,12 +8,15 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
-import com.illusion.checkfirm.data.model.BackupRestoreItem
+import com.illusion.checkfirm.data.model.local.BackupRestoreItem
 import com.illusion.checkfirm.databinding.ActivityBookmarkBackupRestoreBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import java.io.BufferedReader
@@ -26,8 +29,19 @@ import java.util.Locale
 
 class BackupRestoreActivity : CheckFirmActivity<ActivityBookmarkBackupRestoreBinding>() {
 
-    private val bookmarkViewModel: BookmarkViewModel by viewModels()
-    private val categoryViewModel: CategoryViewModel by viewModels()
+    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
+        BookmarkViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getBCRepository(),
+            (application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
+    private val categoryViewModel by viewModels<CategoryViewModel> {
+        CategoryViewModelFactory(
+            getString(R.string.category_all),
+            (application as CheckFirm).repositoryProvider.getBCRepository()
+        )
+    }
+
     private val startBackup =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -121,7 +135,12 @@ class BackupRestoreActivity : CheckFirmActivity<ActivityBookmarkBackupRestoreBin
         val restoreItem = json.decodeFromString<BackupRestoreItem>(stringBuilder.toString())
 
         for (element in restoreItem.bookmarkList) {
-            bookmarkViewModel.addBookmark(element.name, element.model, element.csc, element.category)
+            bookmarkViewModel.addBookmark(
+                element.name,
+                element.model,
+                element.csc,
+                element.category
+            )
         }
 
         for (element in restoreItem.categoryList) {

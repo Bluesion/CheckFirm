@@ -5,13 +5,15 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.DisplayMetrics
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.data.model.DeviceItem
+import com.illusion.checkfirm.data.model.local.DeviceItem
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 object Tools {
     fun isOnline(context: Context): Boolean {
@@ -51,7 +53,7 @@ object Tools {
 
         val slashIndex = firmware.indexOf("/")
         if (slashIndex == -1) {
-            return ""
+            return firmware
         }
 
         return firmware.split("/")[0]
@@ -184,59 +186,71 @@ object Tools {
             original[0] > new[0] -> {
                 return 1
             }
+
             original[0] == new[0] -> {
                 when {
                     original[1] > new[1] -> {
                         return 2
                     }
+
                     original[1] == new[1] -> {
                         when {
                             original[2] > new[2] -> {
                                 return 3
                             }
+
                             original[2] == new[2] -> {
                                 when {
                                     original[3] > new[3] -> {
                                         return 4
                                     }
+
                                     original[3] == new[3] -> {
                                         when {
                                             original[4] > new[4] -> {
                                                 return 5
                                             }
+
                                             original[4] == new[4] -> {
                                                 return when {
                                                     original[5] > new[5] -> {
                                                         6
                                                     }
+
                                                     original[5] == new[5] -> {
                                                         -1
                                                     }
+
                                                     else -> {
                                                         0
                                                     }
                                                 }
                                             }
+
                                             else -> {
                                                 return 0
                                             }
                                         }
                                     }
+
                                     else -> {
                                         return 0
                                     }
                                 }
                             }
+
                             else -> {
                                 return 0
                             }
                         }
                     }
+
                     else -> {
                         return 0
                     }
                 }
             }
+
             else -> {
                 return 0
             }
@@ -296,6 +310,7 @@ object Tools {
                     com.bluesion.oneui.R.drawable.oneui_ic_buds
                 }
             }
+
             'Q' -> com.bluesion.oneui.R.drawable.oneui_ic_ring
             'L' -> com.bluesion.oneui.R.drawable.oneui_ic_watch
             else -> com.bluesion.oneui.R.drawable.oneui_ic_phone

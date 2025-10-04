@@ -1,8 +1,8 @@
 package com.illusion.checkfirm.data.repository
 
-import com.illusion.checkfirm.data.model.BCDao
-import com.illusion.checkfirm.data.model.BookmarkEntity
-import com.illusion.checkfirm.data.model.CategoryEntity
+import com.illusion.checkfirm.data.model.local.BCDao
+import com.illusion.checkfirm.data.model.local.BookmarkEntity
+import com.illusion.checkfirm.data.model.local.CategoryEntity
 import kotlinx.coroutines.flow.Flow
 
 class BCRepository(private val bcDao: BCDao) {
@@ -11,7 +11,11 @@ class BCRepository(private val bcDao: BCDao) {
         return bcDao.getBookmarkCount()
     }
 
-    fun getAllBookmark(order: String, isDesc: Boolean, category: String = ""): Flow<List<BookmarkEntity>> {
+    fun getAllBookmark(
+        order: String,
+        isDesc: Boolean,
+        category: String = ""
+    ): Flow<List<BookmarkEntity>> {
         return bcDao.getAllBookmark(order, isDesc, category)
     }
 
@@ -19,11 +23,19 @@ class BCRepository(private val bcDao: BCDao) {
         return bcDao.getAllBookmarkList(order, isDesc)
     }
 
-    fun getBookmarkByCategory(order: String, isDesc: Boolean, category: String): Flow<List<BookmarkEntity>> {
+    fun getBookmarkByCategory(
+        order: String,
+        isDesc: Boolean,
+        category: String
+    ): Flow<List<BookmarkEntity>> {
         return bcDao.getBookmarkByCategory(order, isDesc, category)
     }
 
-    suspend fun getBookmarkListByCategory(order: String, isDesc: Boolean, category: String): List<BookmarkEntity> {
+    suspend fun getBookmarkListByCategory(
+        order: String,
+        isDesc: Boolean,
+        category: String
+    ): List<BookmarkEntity> {
         return bcDao.getBookmarkListByCategory(order, isDesc, category)
     }
 

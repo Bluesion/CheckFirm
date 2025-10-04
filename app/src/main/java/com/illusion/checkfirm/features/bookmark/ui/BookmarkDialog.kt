@@ -7,23 +7,30 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmBottomSheetDialogFragment
-import com.illusion.checkfirm.databinding.DialogBookmarkBinding
 import com.illusion.checkfirm.common.util.Tools
-import com.illusion.checkfirm.data.model.BookmarkEntity
+import com.illusion.checkfirm.data.model.local.BookmarkEntity
+import com.illusion.checkfirm.databinding.DialogBookmarkBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
+import java.util.Locale
 
 class BookmarkDialog(
     private var bookmarkEntity: BookmarkEntity? = null,
     private val onDialogClose: (entity: BookmarkEntity) -> Unit
 ) : CheckFirmBottomSheetDialogFragment<DialogBookmarkBinding>() {
 
-    private val categoryViewModel: CategoryViewModel by viewModels()
+    private val categoryViewModel by viewModels<CategoryViewModel> {
+        CategoryViewModelFactory(
+            getString(R.string.category_all),
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater) = DialogBookmarkBinding.inflate(inflater)
 
@@ -87,7 +94,8 @@ class BookmarkDialog(
             val csc = binding!!.csc.text!!.trim().toString().uppercase(Locale.US)
 
             if (name.isBlank()) {
-                Toast.makeText(context, getString(R.string.bookmark_name_error), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.bookmark_name_error), Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 if (Tools.isValidDevice(model, csc)) {
                     bookmarkEntity!!.name = name

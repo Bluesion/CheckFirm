@@ -1,7 +1,7 @@
 package com.illusion.checkfirm.features.bookmark.ui
 
 import androidx.recyclerview.widget.RecyclerView
-import com.illusion.checkfirm.data.model.BookmarkEntity
+import com.illusion.checkfirm.data.model.local.BookmarkEntity
 import com.illusion.checkfirm.databinding.RowBookmarkItemsBinding
 
 class BookmarkViewHolder(

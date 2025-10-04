@@ -10,20 +10,33 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.chip.Chip
 import com.google.firebase.messaging.FirebaseMessaging
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmBottomSheetDialogFragment
 import com.illusion.checkfirm.common.util.Tools
 import com.illusion.checkfirm.databinding.DialogInfoCatcherBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.catcher.viewmodel.InfoCatcherViewModel
+import com.illusion.checkfirm.features.catcher.viewmodel.InfoCatcherViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 class InfoCatcherDialog : CheckFirmBottomSheetDialogFragment<DialogInfoCatcherBinding>() {
 
-    private val icViewModel: InfoCatcherViewModel by viewModels()
-    private val bookmarkViewModel: BookmarkViewModel by viewModels()
+    private val icViewModel by viewModels<InfoCatcherViewModel> {
+        InfoCatcherViewModelFactory(
+            (requireActivity().application as CheckFirm).repositoryProvider.getInfoCatcherRepository()
+        )
+    }
+
+    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
+        BookmarkViewModelFactory(
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
+            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater) = DialogInfoCatcherBinding.inflate(inflater)
 

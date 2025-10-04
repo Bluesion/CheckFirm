@@ -1,7 +1,7 @@
 package com.illusion.checkfirm.features.bookmark.ui
 
 import androidx.recyclerview.widget.RecyclerView
-import com.illusion.checkfirm.data.model.CategoryEntity
+import com.illusion.checkfirm.data.model.local.CategoryEntity
 import com.illusion.checkfirm.databinding.RowCategoryItemsBinding
 
 class CategoryViewHolder(

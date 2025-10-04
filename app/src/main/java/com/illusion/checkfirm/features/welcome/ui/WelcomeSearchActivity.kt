@@ -11,11 +11,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.bluesion.oneui.switchcard.OneUISwitchCardListener
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
-import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModel
-import com.illusion.checkfirm.databinding.ActivityWelcomeSearchBinding
 import com.illusion.checkfirm.common.ui.recyclerview.CheckFirmDivider
+import com.illusion.checkfirm.data.repository.WelcomeSearchRepository
+import com.illusion.checkfirm.data.source.local.DatabaseProvider
+import com.illusion.checkfirm.databinding.ActivityWelcomeSearchBinding
+import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
+import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModelFactory
+import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModel
+import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -23,7 +29,19 @@ import kotlinx.coroutines.launch
 class WelcomeSearchActivity : CheckFirmActivity<ActivityWelcomeSearchBinding>() {
 
     private lateinit var adapter: WelcomeSearchAdapter
-    private val wsViewModel: WelcomeSearchViewModel by viewModels()
+
+    private val settingsViewModel by viewModels<SettingsViewModel> {
+        SettingsViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
+
+    private val wsViewModel by viewModels<WelcomeSearchViewModel> {
+        WelcomeSearchViewModelFactory(
+            WelcomeSearchRepository(DatabaseProvider.getWelcomeSearchDao())
+        )
+    }
+
     private var showToolbarMenuIcon = false
 
     override fun createBinding() = ActivityWelcomeSearchBinding.inflate(layoutInflater)

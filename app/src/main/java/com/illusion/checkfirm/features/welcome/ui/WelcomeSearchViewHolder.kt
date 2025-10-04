@@ -2,7 +2,7 @@ package com.illusion.checkfirm.features.welcome.ui
 
 import androidx.recyclerview.widget.RecyclerView
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.data.model.WelcomeSearchEntity
+import com.illusion.checkfirm.data.model.local.WelcomeSearchEntity
 import com.illusion.checkfirm.databinding.RowWelcomeSearchItemsBinding
 
 class WelcomeSearchViewHolder(
@@ -16,6 +16,10 @@ class WelcomeSearchViewHolder(
         }
 
         binding.device.text =
-            String.format(binding.device.context.getString(R.string.device_format_1), item.model, item.csc)
+            String.format(
+                binding.device.context.getString(R.string.device_format_1),
+                item.model,
+                item.csc
+            )
     }
 }

@@ -1,7 +1,7 @@
 package com.illusion.checkfirm.data.repository
 
-import com.illusion.checkfirm.data.model.WelcomeSearchDao
-import com.illusion.checkfirm.data.model.WelcomeSearchEntity
+import com.illusion.checkfirm.data.model.local.WelcomeSearchDao
+import com.illusion.checkfirm.data.model.local.WelcomeSearchEntity
 import kotlinx.coroutines.flow.Flow
 
 class WelcomeSearchRepository(private val welcomeSearchDao: WelcomeSearchDao) {

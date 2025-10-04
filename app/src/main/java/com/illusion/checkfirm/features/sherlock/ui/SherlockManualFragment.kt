@@ -10,18 +10,24 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.illusion.checkfirm.R
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.common.ui.base.CheckFirmFragment
 import com.illusion.checkfirm.databinding.FragmentSherlockManualBinding
 import com.illusion.checkfirm.features.sherlock.util.SherlockStatus
 import com.illusion.checkfirm.features.sherlock.viewmodel.SherlockViewModel
+import com.illusion.checkfirm.features.sherlock.viewmodel.SherlockViewModelFactory
 import kotlinx.coroutines.launch
 
 class SherlockManualFragment : CheckFirmFragment<FragmentSherlockManualBinding>() {
 
-    private val sherlockViewModel by activityViewModels<SherlockViewModel>()
+    private val sherlockViewModel by activityViewModels<SherlockViewModel> {
+        SherlockViewModelFactory(
+            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
 
-    override fun onCreateView(inflater: LayoutInflater) = FragmentSherlockManualBinding.inflate(inflater)
+    override fun onCreateView(inflater: LayoutInflater) =
+        FragmentSherlockManualBinding.inflate(inflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,19 +37,48 @@ class SherlockManualFragment : CheckFirmFragment<FragmentSherlockManualBinding>(
                 sherlockViewModel.sherlockStatus.collect {
                     when (it) {
                         SherlockStatus.FAIL -> {
-                            binding!!.buildCard.strokeColor = ContextCompat.getColor(requireContext(), com.bluesion.oneui.R.color.oneui_error)
-                            binding!!.cscCard.strokeColor = ContextCompat.getColor(requireContext(), com.bluesion.oneui.R.color.oneui_error)
-                            binding!!.basebandCard.strokeColor = ContextCompat.getColor(requireContext(), com.bluesion.oneui.R.color.oneui_error)
+                            binding!!.buildCard.strokeColor = ContextCompat.getColor(
+                                requireContext(),
+                                com.bluesion.oneui.R.color.oneui_error
+                            )
+                            binding!!.cscCard.strokeColor = ContextCompat.getColor(
+                                requireContext(),
+                                com.bluesion.oneui.R.color.oneui_error
+                            )
+                            binding!!.basebandCard.strokeColor = ContextCompat.getColor(
+                                requireContext(),
+                                com.bluesion.oneui.R.color.oneui_error
+                            )
                         }
+
                         SherlockStatus.SUCCESS -> {
-                            binding!!.buildCard.strokeColor = ContextCompat.getColor(requireContext(), com.bluesion.oneui.R.color.sesl_loading_progress_color1)
-                            binding!!.cscCard.strokeColor = ContextCompat.getColor(requireContext(), com.bluesion.oneui.R.color.sesl_loading_progress_color1)
-                            binding!!.basebandCard.strokeColor = ContextCompat.getColor(requireContext(), com.bluesion.oneui.R.color.sesl_loading_progress_color1)
+                            binding!!.buildCard.strokeColor = ContextCompat.getColor(
+                                requireContext(),
+                                com.bluesion.oneui.R.color.sesl_loading_progress_color1
+                            )
+                            binding!!.cscCard.strokeColor = ContextCompat.getColor(
+                                requireContext(),
+                                com.bluesion.oneui.R.color.sesl_loading_progress_color1
+                            )
+                            binding!!.basebandCard.strokeColor = ContextCompat.getColor(
+                                requireContext(),
+                                com.bluesion.oneui.R.color.sesl_loading_progress_color1
+                            )
                         }
+
                         else -> {
-                            binding!!.buildCard.strokeColor = ContextCompat.getColor(requireContext(), com.bluesion.oneui.R.color.oneui_switch_thumb_off_stroke_color)
-                            binding!!.cscCard.strokeColor = ContextCompat.getColor(requireContext(), com.bluesion.oneui.R.color.oneui_switch_thumb_off_stroke_color)
-                            binding!!.basebandCard.strokeColor = ContextCompat.getColor(requireContext(), com.bluesion.oneui.R.color.oneui_switch_thumb_off_stroke_color)
+                            binding!!.buildCard.strokeColor = ContextCompat.getColor(
+                                requireContext(),
+                                com.bluesion.oneui.R.color.oneui_switch_thumb_off_stroke_color
+                            )
+                            binding!!.cscCard.strokeColor = ContextCompat.getColor(
+                                requireContext(),
+                                com.bluesion.oneui.R.color.oneui_switch_thumb_off_stroke_color
+                            )
+                            binding!!.basebandCard.strokeColor = ContextCompat.getColor(
+                                requireContext(),
+                                com.bluesion.oneui.R.color.oneui_switch_thumb_off_stroke_color
+                            )
                         }
                     }
                 }

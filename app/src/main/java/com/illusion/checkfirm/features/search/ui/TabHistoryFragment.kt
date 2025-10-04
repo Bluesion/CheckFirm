@@ -7,28 +7,34 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmFragment
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewVerticalMarginDecorator
 import com.illusion.checkfirm.common.util.Tools
-import com.illusion.checkfirm.data.model.DeviceItem
-import com.illusion.checkfirm.data.model.SearchDeviceItem
+import com.illusion.checkfirm.data.model.local.DeviceItem
+import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 import com.illusion.checkfirm.databinding.FragmentSearchTabHistoryBinding
 import com.illusion.checkfirm.features.search.util.SearchValidationResult
 import com.illusion.checkfirm.features.search.viewmodel.HistoryViewModel
+import com.illusion.checkfirm.features.search.viewmodel.HistoryViewModelFactory
 import com.illusion.checkfirm.features.search.viewmodel.SearchViewModel
 import kotlinx.coroutines.launch
 import java.util.Locale
-import kotlin.getValue
 
 class TabHistoryFragment : CheckFirmFragment<FragmentSearchTabHistoryBinding>() {
 
     private val searchViewModel: SearchViewModel by activityViewModels()
-    private val historyViewModel: HistoryViewModel by activityViewModels()
+    private val historyViewModel by activityViewModels<HistoryViewModel> {
+        HistoryViewModelFactory(
+            (requireActivity().application as CheckFirm).repositoryProvider.getHistoryRepository()
+        )
+    }
     private lateinit var searchHistoryAdapter: SearchDeviceListAdapter
     private var historyList = mutableListOf<SearchDeviceItem>()
 
-    override fun onCreateView(inflater: LayoutInflater) = FragmentSearchTabHistoryBinding.inflate(inflater)
+    override fun onCreateView(inflater: LayoutInflater) =
+        FragmentSearchTabHistoryBinding.inflate(inflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +50,7 @@ class TabHistoryFragment : CheckFirmFragment<FragmentSearchTabHistoryBinding>() 
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
+
                         SearchValidationResult.MAX_SEARCH_CAPACITY_EXCEEDED -> {
                             Toast.makeText(
                                 requireContext(),
@@ -51,6 +58,7 @@ class TabHistoryFragment : CheckFirmFragment<FragmentSearchTabHistoryBinding>() 
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
+
                         else -> {
                             // Don't have to show a toast message for SearchValidationResult.SUCCESS and SearchValidationResult.DUPLICATED_DEVICE.
                         }

@@ -10,7 +10,6 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -20,24 +19,31 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
+import com.google.firebase.firestore.FirebaseFirestore
 import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
-import com.illusion.checkfirm.features.bookmark.ui.BookmarkCategoryActivity
-import com.illusion.checkfirm.features.catcher.ui.InfoCatcherActivity
-import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModel
-import com.illusion.checkfirm.databinding.ActivityMainBinding
-import com.illusion.checkfirm.features.main.viewmodel.MainViewModel
-import com.illusion.checkfirm.data.source.remote.FWFetcher
-import com.illusion.checkfirm.features.search.ui.SearchActivity
-import com.illusion.checkfirm.features.settings.SettingsActivity
-import com.illusion.checkfirm.features.settings.help.MyDeviceActivity
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewVerticalMarginDecorator
 import com.illusion.checkfirm.common.util.Tools
+import com.illusion.checkfirm.data.model.local.DeviceItem
+import com.illusion.checkfirm.data.model.local.SearchResultItem
+import com.illusion.checkfirm.data.model.remote.ApiResponse
+import com.illusion.checkfirm.data.model.remote.AppVersionStatus
+import com.illusion.checkfirm.data.source.remote.FirmwareFetcher
+import com.illusion.checkfirm.databinding.ActivityMainBinding
+import com.illusion.checkfirm.features.bookmark.ui.BookmarkCategoryActivity
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
+import com.illusion.checkfirm.features.catcher.ui.InfoCatcherActivity
+import com.illusion.checkfirm.features.main.viewmodel.MainViewModel
+import com.illusion.checkfirm.features.main.viewmodel.MainViewModelFactory
+import com.illusion.checkfirm.features.search.ui.SearchActivity
 import com.illusion.checkfirm.features.search.ui.SearchDialog
+import com.illusion.checkfirm.features.settings.SettingsActivity
+import com.illusion.checkfirm.features.settings.help.MyDeviceActivity
 import com.illusion.checkfirm.features.welcome.ui.WelcomeSearchActivity
-import kotlinx.coroutines.Dispatchers
+import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModel
+import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModelFactory
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -52,7 +58,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
             }
         }
 
-    private lateinit var fwFetcher: FWFetcher
+    private lateinit var fwFetcher: FirmwareFetcher
 
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -60,23 +66,44 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
             if (result.resultCode == Activity.RESULT_OK) {
                 when (data?.getIntExtra("search_code", -1)) {
                     0 -> {
-                        val model = data.getStringExtra("model") as String
-                        val csc = data.getStringExtra("csc") as String
-                        val total = data.getIntExtra("total", 1)
+                        val modelString = data.getStringExtra("model")
+                        val cscString = data.getStringExtra("csc")
 
-                        searchFirmware(model, csc, total)
+                        if (modelString == null || cscString == null) {
+                            val modelArray = data.getStringArrayExtra("model") as Array<String>
+                            val cscArray = data.getStringArrayExtra("csc") as Array<String>
+                            searchFirmware(modelArray, cscArray)
+                        } else {
+                            searchFirmware(modelString, cscString)
+                        }
                     }
 
                     else -> {
-                        showMainLayout(3)
+                        showMainLayout(SEARCH_ERROR_LAYOUT)
                     }
                 }
             }
         }
 
-    private val mainViewModel: MainViewModel by viewModels()
-    private val bookmarkViewModel: BookmarkViewModel by viewModels()
-    private val wsViewModel: WelcomeSearchViewModel by viewModels()
+    private val mainViewModel by viewModels<MainViewModel> {
+        MainViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getMainRepository(),
+            (application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
+
+    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
+        BookmarkViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getBCRepository(),
+            (application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
+    private val wsViewModel by viewModels<WelcomeSearchViewModel> {
+        WelcomeSearchViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getWelcomeSearchRepository()
+        )
+    }
+
     private var currentCategory = ""
 
     override fun createBinding() = ActivityMainBinding.inflate(layoutInflater)
@@ -86,7 +113,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
         initToolbar(binding.includeToolbar.appBar, getString(R.string.app_name))
@@ -97,44 +124,55 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
             notificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
         }
 
-        fwFetcher = FWFetcher(this@MainActivity)
+        initFetcher()
 
         lifecycleScope.launch {
-            binding.searchResult.apply {
-                addItemDecoration(
-                    RecyclerViewVerticalMarginDecorator(
-                        Tools.dpToPx(this@MainActivity, 12f)
-                    )
-                )
-                adapter = MainAdapter(
-                    total = 0,
-                    isFirebaseEnabled = settingsViewModel.getAllSettings().isFirebaseEnabled,
-                    onCardClicked = { isOfficial, position ->
-                        SearchDialog(isOfficial, position).show(supportFragmentManager, null)
-                    },
-                    onCardLongClicked = { firmware ->
-                        (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(
-                            ClipData.newPlainText(
-                                "CheckFirm",
-                                firmware
-                            )
-                        )
-                        Toast.makeText(this@MainActivity, R.string.clipboard, Toast.LENGTH_SHORT).show()
+            val firstState = mainViewModel.isOldVersion.first { it !is ApiResponse.Loading }
+            when (firstState) {
+                is ApiResponse.Error -> {
+                    if (firstState is ApiResponse.Error.NetworkError) {
+                        showMainLayout(NETWORK_ERROR_LAYOUT)
+                    } else {
+                        showMainLayout(HELLO_LAYOUT)
                     }
-                )
-                layoutManager = LinearLayoutManager(this@MainActivity)
+                    splashScreen.setKeepOnScreenCondition { false }
+                }
+
+                is ApiResponse.Success -> {
+                    splashScreen.setKeepOnScreenCondition { false }
+
+                    when (firstState.data) {
+                        // If update required, open outdated activity
+                        AppVersionStatus.UPDATE_REQUIRED -> {
+                            startActivity(Intent(this@MainActivity, OutdatedActivity::class.java))
+                            finish()
+                        }
+                        // Currently, do nothing if it's latest or old version
+                        else -> {
+                            if (mainViewModel.settingsState.first().isWelcomeSearchEnabled) {
+                                welcomeSearch()
+                            } else {
+                                startSearch()
+                            }
+                        }
+                    }
+                }
+
+                else -> {
+                    // NO-OP (Should not happen after flow cancel(first()))
+                }
             }
 
-            val isConnectedToInternet = Tools.isOnline(this@MainActivity)
-            if (isConnectedToInternet) {
-                initQuickSearchBar()
-                if (settingsViewModel.getAllSettings().isWelcomeSearchEnabled) {
-                    welcomeSearch()
-                } else {
-                    startSearch()
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mainViewModel.settingsState.collect {
+                    if (it.isQuickSearchBarEnabled) {
+                        initQuickSearchBar()
+                    } else {
+                        binding.quickSearchBar.visibility = View.GONE
+                    }
+
+                    (binding.searchResult.adapter as MainAdapter).updateFirebaseStatus(it.isFirebaseEnabled)
                 }
-            } else {
-                showMainLayout(2)
             }
         }
     }
@@ -168,40 +206,64 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
         return super.onOptionsItemSelected(item)
     }
 
-    private suspend fun initQuickSearchBar() {
-        if (settingsViewModel.getAllSettings().isQuickSearchBarEnabled) {
-            binding.categoryIcon.setOnClickListener {
-                CategoryDialog(
-                    category = currentCategory,
-                    onCategoryClicked = {
-                        currentCategory = it
-                        bookmarkViewModel.updateCategory(it)
-                    }
-                ).show(supportFragmentManager, null)
-            }
+    private fun initFetcher() {
+        fwFetcher = FirmwareFetcher(FirebaseFirestore.getInstance())
 
-            lifecycleScope.launch {
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    bookmarkViewModel.bookmarkList.collect { bookmarkList ->
-                        if (bookmarkList.isEmpty()) {
-                            binding.quickSearchBar.visibility = View.GONE
-                        } else {
-                            binding.chipGroup.removeAllViews()
-                            for (bookmark in bookmarkList) {
-                                Chip(this@MainActivity).apply {
-                                    text = bookmark.name
-                                    setOnClickListener {
-                                        searchFirmware(bookmark.model, bookmark.csc, 1)
-                                    }
-                                }.also { binding.chipGroup.addView(it) }
-                            }
-                            binding.quickSearchBar.visibility = View.VISIBLE
+        binding.searchResult.apply {
+            addItemDecoration(
+                RecyclerViewVerticalMarginDecorator(
+                    Tools.dpToPx(this@MainActivity, 12f)
+                )
+            )
+            adapter = MainAdapter(
+                emptyList(),
+                onCardClicked = { isOfficial, searchResult ->
+                    SearchDialog(isOfficial, searchResult).show(supportFragmentManager, null)
+                },
+                onCardLongClicked = { firmware ->
+                    (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(
+                        ClipData.newPlainText(
+                            "CheckFirm",
+                            firmware
+                        )
+                    )
+                    Toast.makeText(this@MainActivity, R.string.clipboard, Toast.LENGTH_SHORT).show()
+                }
+            )
+            layoutManager = LinearLayoutManager(this@MainActivity)
+        }
+    }
+
+    private fun initQuickSearchBar() {
+        binding.categoryIcon.setOnClickListener {
+            CategoryDialog(
+                category = currentCategory,
+                onCategoryClicked = {
+                    currentCategory = it
+                    bookmarkViewModel.updateCategory(it)
+                }
+            ).show(supportFragmentManager, null)
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                bookmarkViewModel.bookmarkList.collect { bookmarkList ->
+                    if (bookmarkList.isEmpty()) {
+                        binding.quickSearchBar.visibility = View.GONE
+                    } else {
+                        binding.chipGroup.removeAllViews()
+                        for (bookmark in bookmarkList) {
+                            Chip(this@MainActivity).apply {
+                                text = bookmark.name
+                                setOnClickListener {
+                                    searchFirmware(bookmark.model, bookmark.csc)
+                                }
+                            }.also { binding.chipGroup.addView(it) }
                         }
+                        binding.quickSearchBar.visibility = View.VISIBLE
                     }
                 }
             }
-        } else {
-            binding.quickSearchBar.visibility = View.GONE
         }
     }
 
@@ -210,79 +272,58 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
         val csc = Tools.getCSC()
 
         if (Tools.isValidDevice(model, csc)) {
-            searchFirmware(model, csc, 1)
+            searchFirmware(model, csc)
         } else {
-            showMainLayout(4)
+            // Show hello layout for non-samsung devices
+            showMainLayout(HELLO_LAYOUT)
         }
     }
 
-    private fun welcomeSearch() {
-        lifecycleScope.launch(Dispatchers.Main) {
-            val welcomeSearchDeviceList = wsViewModel.allDevices.first()
-            if (welcomeSearchDeviceList.isEmpty()) {
-                showMainLayout(1)
-            } else {
-                var model = ""
-                var csc = ""
+    private suspend fun welcomeSearch() {
+        val welcomeSearchDeviceList = wsViewModel.allDevices.first()
+        if (welcomeSearchDeviceList.isEmpty()) {
+            showMainLayout(WELCOME_DEVICE_EMPTY_LAYOUT)
+        } else {
+            val modelArray = Array(welcomeSearchDeviceList.size) { welcomeSearchDeviceList[it].model }
+            val cscArray = Array(welcomeSearchDeviceList.size) { welcomeSearchDeviceList[it].csc }
 
-                for (element in welcomeSearchDeviceList) {
-                    model += "${element.model}%"
-                    csc += "${element.csc}%"
-                }
-                searchFirmware(model, csc, welcomeSearchDeviceList.size)
-            }
+            searchFirmware(modelArray, cscArray)
         }
     }
 
-    private fun searchFirmware(tempModel: String, tempCSC: String, total: Int) {
+    private fun searchFirmware(modelArray: Array<String>, cscArray: Array<String>) {
         if (Tools.isOnline(this)) {
-            showMainLayout(0)
+            showMainLayout(LOADING_LAYOUT)
 
-            when {
-                total == 1 -> {
-                    val model = if (tempModel.endsWith("%")) {
-                        tempModel.substring(0, tempModel.length - 1)
-                    } else {
-                        tempModel
-                    }
+            lifecycleScope.launch {
+                val searchResultList = mutableListOf<SearchResultItem>()
 
-                    val csc = if (tempCSC.endsWith("%")) {
-                        tempCSC.substring(0, tempCSC.length - 1)
-                    } else {
-                        tempCSC
-                    }
+                for (i in 0 until modelArray.size) {
+                    val model = modelArray[i].uppercase().trim()
+                    val csc = cscArray[i].uppercase().trim()
 
-                    CheckFirm.searchModel[0] = model.uppercase().trim()
-                    CheckFirm.searchCSC[0] = csc.uppercase().trim()
-                }
-
-                total > 1 -> {
-                    val modelList = tempModel.split("%")
-                    val cscList = tempCSC.split("%")
-
-                    for (i in 0 until modelList.size - 1) {
-                        CheckFirm.searchModel[i] = modelList[i].uppercase().trim()
-                        CheckFirm.searchCSC[i] = cscList[i].uppercase().trim()
+                    if (Tools.isValidDevice(model, csc)) {
+                        searchResultList.add(
+                            fwFetcher.search(
+                                DeviceItem(model, csc),
+                                mainViewModel.settingsState.first().isFirebaseEnabled,
+                                mainViewModel.settingsState.first().profileName
+                            )
+                        )
                     }
                 }
-            }
 
-            lifecycleScope.launch(Dispatchers.Main) {
-                if (fwFetcher.start(total) == 0) {
-                    showSearchResult(total)
-                } else {
-                    showMainLayout(3)
-                }
+                binding.loadingProgress.visibility = View.GONE
+                binding.errorView.visibility = View.GONE
+                (binding.searchResult.adapter as MainAdapter).updateLists(searchResultList)
             }
         } else {
-            showMainLayout(2)
+            showMainLayout(NETWORK_ERROR_LAYOUT)
         }
     }
 
-    private fun showSearchResult(total: Int) {
-        binding.loadingProgress.visibility = View.GONE
-        binding.errorView.visibility = View.GONE
-        (binding.searchResult.adapter as MainAdapter).updateTotal(total)
+    private fun searchFirmware(model: String, csc: String) {
+        searchFirmware(arrayOf(model), arrayOf(csc))
     }
 
     private fun showNotificationPermissionRationale() {
@@ -295,16 +336,9 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
         ).show(supportFragmentManager, null)
     }
 
-    /**
-     * code 0: Loading Layout
-     * code 1: No Welcome Layout
-     * code 2: Network Error Layout
-     * code 3: Search Error Layout
-     * code 4: Hello Layout
-     */
-    private fun showMainLayout(code: Int) {
-        when (code) {
-            1 -> {
+    private fun showMainLayout(layout: Int) {
+        when (layout) {
+            WELCOME_DEVICE_EMPTY_LAYOUT -> {
                 binding.errorTitle.text = getString(R.string.welcome_search)
                 binding.errorDescription.text = getString(R.string.main_welcome_search_text)
                 binding.errorTip1.apply {
@@ -319,7 +353,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
                 binding.errorView.visibility = View.VISIBLE
             }
 
-            2 -> {
+            NETWORK_ERROR_LAYOUT -> {
                 binding.errorTitle.text = getString(R.string.main_network_error_title)
                 binding.errorDescription.text = getString(R.string.main_network_error_text)
                 binding.errorTip1.apply {
@@ -340,7 +374,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
                 binding.errorView.visibility = View.VISIBLE
             }
 
-            3 -> {
+            SEARCH_ERROR_LAYOUT -> {
                 binding.errorTitle.text = getString(R.string.main_search_error_title)
                 binding.errorDescription.text = getString(R.string.main_search_error_text)
                 binding.errorTip1.apply {
@@ -355,7 +389,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
                 binding.errorView.visibility = View.VISIBLE
             }
 
-            4 -> {
+            HELLO_LAYOUT -> {
                 binding.helloSearchLayout.setOnClickListener {
                     startForResult.launch(Intent(this, SearchActivity::class.java).apply {
                         putExtra("search_code", 0)
@@ -386,5 +420,13 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
                 binding.helloView.visibility = View.GONE
             }
         }
+    }
+
+    companion object {
+        private const val LOADING_LAYOUT = 0
+        private const val WELCOME_DEVICE_EMPTY_LAYOUT = 1
+        private const val NETWORK_ERROR_LAYOUT = 2
+        private const val SEARCH_ERROR_LAYOUT = 3
+        private const val HELLO_LAYOUT = 4
     }
 }

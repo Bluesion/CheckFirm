@@ -5,16 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmBottomSheetDialogFragment
 import com.illusion.checkfirm.databinding.DialogBookmarkResetBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
 
 class BookmarkResetDialog : CheckFirmBottomSheetDialogFragment<DialogBookmarkResetBinding>() {
 
-    private val bookmarkViewModel: BookmarkViewModel by viewModels()
-    private val categoryViewModel: CategoryViewModel by viewModels()
+    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
+        BookmarkViewModelFactory(
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
+            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
+    private val categoryViewModel by viewModels<CategoryViewModel> {
+        CategoryViewModelFactory(
+            getString(R.string.category_all),
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater) =
         DialogBookmarkResetBinding.inflate(inflater)

@@ -3,7 +3,7 @@ package com.illusion.checkfirm.features.welcome.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.illusion.checkfirm.data.model.WelcomeSearchEntity
+import com.illusion.checkfirm.data.model.local.WelcomeSearchEntity
 import com.illusion.checkfirm.databinding.RowWelcomeSearchItemsBinding
 
 class WelcomeSearchAdapter(

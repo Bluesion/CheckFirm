@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.net.toUri
 import com.illusion.checkfirm.common.ui.base.CheckFirmBottomSheetDialogFragment
 import com.illusion.checkfirm.databinding.DialogLicenseBinding
-import androidx.core.net.toUri
 
 class LicenseDialog : CheckFirmBottomSheetDialogFragment<DialogLicenseBinding>() {
 

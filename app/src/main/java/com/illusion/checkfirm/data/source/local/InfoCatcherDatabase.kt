@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.illusion.checkfirm.data.model.InfoCatcherDao
-import com.illusion.checkfirm.data.model.InfoCatcherEntity
+import com.illusion.checkfirm.data.model.local.InfoCatcherDao
+import com.illusion.checkfirm.data.model.local.InfoCatcherEntity
 
 @Database(entities = [InfoCatcherEntity::class], version = 1, exportSchema = false)
 abstract class InfoCatcherDatabase : RoomDatabase() {
 
-    abstract fun catcherDao(): InfoCatcherDao
+    abstract fun infoCatcherDao(): InfoCatcherDao
 
     companion object {
         @Volatile

@@ -3,7 +3,7 @@ package com.illusion.checkfirm.features.search.ui
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.data.model.SearchDeviceItem
+import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 import com.illusion.checkfirm.databinding.RowSearchDeviceItemsBinding
 import java.util.Locale
 

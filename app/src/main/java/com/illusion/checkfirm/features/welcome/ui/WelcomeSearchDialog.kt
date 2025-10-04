@@ -9,21 +9,34 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.chip.Chip
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmBottomSheetDialogFragment
-import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModel
-import com.illusion.checkfirm.databinding.DialogWelcomeSearchBinding
-import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
 import com.illusion.checkfirm.common.util.Tools
+import com.illusion.checkfirm.data.repository.WelcomeSearchRepository
+import com.illusion.checkfirm.data.source.local.DatabaseProvider
+import com.illusion.checkfirm.databinding.DialogWelcomeSearchBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
+import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModel
+import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModelFactory
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 class WelcomeSearchDialog : CheckFirmBottomSheetDialogFragment<DialogWelcomeSearchBinding>() {
 
-    private val settingsViewModel: SettingsViewModel by viewModels()
-    private val wsViewModel: WelcomeSearchViewModel by viewModels()
-    private val bookmarkViewModel: BookmarkViewModel by viewModels()
+    private val wsViewModel by viewModels<WelcomeSearchViewModel> {
+        WelcomeSearchViewModelFactory(
+            WelcomeSearchRepository(DatabaseProvider.getWelcomeSearchDao())
+        )
+    }
+
+    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
+        BookmarkViewModelFactory(
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
+            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater) =
         DialogWelcomeSearchBinding.inflate(inflater)

@@ -1,30 +1,21 @@
 package com.illusion.checkfirm.features.search.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.illusion.checkfirm.data.model.HistoryEntity
-import com.illusion.checkfirm.data.model.SearchDeviceItem
+import com.illusion.checkfirm.data.model.local.HistoryEntity
+import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 import com.illusion.checkfirm.data.repository.HistoryRepository
-import com.illusion.checkfirm.data.source.local.HistoryDatabase
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class HistoryViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository: HistoryRepository
-
-    init {
-        val historyDao = HistoryDatabase.getDatabase(application).historyDao()
-        repository = HistoryRepository(historyDao)
-    }
+class HistoryViewModel(private val historyRepository: HistoryRepository) : ViewModel() {
 
     suspend fun getAllHistoryList(): List<HistoryEntity> {
-        return repository.getAllHistoryList()
+        return historyRepository.getAllHistoryList()
     }
 
     fun cleanUpHistory() = viewModelScope.launch {
-        repository.cleanUpHistory()
+        historyRepository.cleanUpHistory()
     }
 
     fun createHistory(list: List<SearchDeviceItem>) {
@@ -49,21 +40,22 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
                 }
             }
 
-            repository.insert(HistoryEntity(null, model, csc, year, month, day))
+            historyRepository.insert(HistoryEntity(null, model, csc, year, month, day))
         }
 
         cleanUpHistory()
     }
 
-    fun update(id: Long, model: String, csc: String, year: Int, month: Int, day: Int) = viewModelScope.launch {
-        repository.update(HistoryEntity(id, model, csc, year, month, day))
-    }
+    fun update(id: Long, model: String, csc: String, year: Int, month: Int, day: Int) =
+        viewModelScope.launch {
+            historyRepository.update(HistoryEntity(id, model, csc, year, month, day))
+        }
 
     fun delete(model: String, csc: String) = viewModelScope.launch {
-        repository.delete(model, csc)
+        historyRepository.delete(model, csc)
     }
 
     fun deleteAll() = viewModelScope.launch {
-        repository.deleteAll()
+        historyRepository.deleteAll()
     }
 }

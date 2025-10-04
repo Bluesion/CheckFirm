@@ -1,7 +1,7 @@
 package com.illusion.checkfirm.features.search.ui
 
 import androidx.recyclerview.widget.DiffUtil
-import com.illusion.checkfirm.data.model.SearchDeviceItem
+import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 
 class SearchDeviceItemDiffCallback : DiffUtil.ItemCallback<SearchDeviceItem>() {
     override fun areItemsTheSame(oldItem: SearchDeviceItem, newItem: SearchDeviceItem): Boolean {

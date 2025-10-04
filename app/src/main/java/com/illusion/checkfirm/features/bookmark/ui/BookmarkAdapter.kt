@@ -3,7 +3,7 @@ package com.illusion.checkfirm.features.bookmark.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.illusion.checkfirm.data.model.BookmarkEntity
+import com.illusion.checkfirm.data.model.local.BookmarkEntity
 import com.illusion.checkfirm.databinding.RowBookmarkItemsBinding
 
 class BookmarkAdapter(

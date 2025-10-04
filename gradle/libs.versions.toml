@@ -12,15 +12,18 @@ fcm = "24.1.2"
 firestore = "25.1.4"
 fragment = "1.8.9"
 gms = "4.4.3"
-lifecycle = "2.9.3"
+lifecycle = "2.9.4"
 jakarta-activation = "2.1.4"
 jsoup = "1.21.2"
 kotlin = "2.2.20"
 kotlin-serialization-json = "1.9.0"
+ksoup = "0.2.5"
 ksp = "2.2.20-2.0.3"
-material = "1.14.0-alpha04"
+ktor = "3.3.0"
+material = "1.14.0-alpha05"
 recyclerview = "1.4.0"
-room = "2.8.0"
+room = "2.8.1"
+slf4j = "1.7.36"
 splashscreen = "1.2.0-rc01"
 
 [libraries]
@@ -43,11 +46,19 @@ lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmode
 jakarta-activation = { group = "jakarta.activation", name = "jakarta.activation-api", version.ref = "jakarta-activation" }
 jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
+ksoup = { group = "com.fleeksoft.ksoup", name = "ksoup", version.ref = "ksoup" }
+ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-serialization-kotlinx-xml = { group = "io.ktor", name = "ktor-serialization-kotlinx-xml", version.ref = "ktor" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+slf4j-android = { group = "org.slf4j", name = "slf4j-android", version.ref = "slf4j" }
 splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 
 [plugins]
@@ -57,6 +68,7 @@ androidx-room = { id = "androidx.room", version.ref = "room" }
 google-gms = { id = "com.google.gms.google-services", version.ref = "gms" }
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 [bundles]
@@ -66,4 +78,5 @@ coroutines = ["coroutine-android", "coroutine-core", "coroutine-jvm"]
 datas = ["datastore", "kotlin-serialization-json", "room", "room-ktx"]
 designs = ["constraintlayout", "coordinatorlayout", "material"]
 firebases = ["fcm", "firestore"]
+ktors = ["ktor-client-android", "ktor-client-content-negotiation", "ktor-client-core", "ktor-client-logging", "ktor-serialization-kotlinx-json", "ktor-serialization-kotlinx-xml", "slf4j-android"]
 lifecycles = ["lifecycle", "lifecycle-livedata", "lifecycle-viewmodel"]

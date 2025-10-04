@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.util.Properties
 import java.io.FileInputStream
+import java.util.Properties
 
 val keystorePropertiesFile = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.google.gms)
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -96,6 +97,7 @@ dependencies {
     implementation(project(":oneui"))
     implementation(libs.appcompat)
     implementation(libs.jsoup)
+    implementation(libs.ksoup)
     implementation(libs.recyclerview)
     implementation(libs.splashscreen)
 
@@ -105,6 +107,7 @@ dependencies {
     implementation(libs.bundles.datas)
     implementation(libs.bundles.designs)
     implementation(libs.bundles.firebases)
+    implementation(libs.bundles.ktors)
     implementation(libs.bundles.lifecycles)
 
     ksp(libs.room.compiler)

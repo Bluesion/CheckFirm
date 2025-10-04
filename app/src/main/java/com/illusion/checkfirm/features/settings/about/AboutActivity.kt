@@ -6,21 +6,30 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.illusion.checkfirm.BuildConfig
-import com.illusion.checkfirm.R
-import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
-import com.illusion.checkfirm.databinding.ActivityAboutBinding
-import com.illusion.checkfirm.common.util.Tools
-import kotlinx.coroutines.launch
 import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.illusion.checkfirm.BuildConfig
+import com.illusion.checkfirm.CheckFirm
+import com.illusion.checkfirm.R
+import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
+import com.illusion.checkfirm.common.util.Tools
+import com.illusion.checkfirm.data.model.remote.ApiResponse
+import com.illusion.checkfirm.data.model.remote.AppVersionStatus
+import com.illusion.checkfirm.databinding.ActivityAboutBinding
 import com.illusion.checkfirm.features.main.viewmodel.MainViewModel
+import com.illusion.checkfirm.features.main.viewmodel.MainViewModelFactory
+import kotlinx.coroutines.launch
 
 class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
 
-    private val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel by viewModels<MainViewModel> {
+        MainViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getMainRepository(),
+            (application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
 
     override fun createBinding() = ActivityAboutBinding.inflate(layoutInflater)
 
@@ -39,18 +48,23 @@ class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 if (Tools.isOnline(this@AboutActivity)) {
                     mainViewModel.isOldVersion.collect {
-                        if (it == null) {
-                            binding.progress.visibility = View.VISIBLE
-                            binding.latest.visibility = View.GONE
-                            binding.update.visibility = View.GONE
-                        } else {
-                            binding.progress.visibility = View.GONE
-                            if (it) {
+                        when (it) {
+                            is ApiResponse.Loading -> {
+                                binding.progress.visibility = View.VISIBLE
                                 binding.latest.visibility = View.GONE
-                                binding.update.visibility = View.VISIBLE
-                            } else {
-                                binding.latest.visibility = View.VISIBLE
                                 binding.update.visibility = View.GONE
+                            }
+
+                            else -> {
+                                binding.progress.visibility = View.GONE
+                                // I don't care if it's an error, just show the update button
+                                if (it is ApiResponse.Success && it.data == AppVersionStatus.LATEST_VERSION) {
+                                    binding.latest.visibility = View.VISIBLE
+                                    binding.update.visibility = View.GONE
+                                } else {
+                                    binding.latest.visibility = View.GONE
+                                    binding.update.visibility = View.VISIBLE
+                                }
                             }
                         }
                     }
@@ -65,20 +79,21 @@ class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
 
         binding.update.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = "https://play.google.com/store/apps/details?id=${applicationContext.packageName}".toUri()
+                data =
+                    "https://play.google.com/store/apps/details?id=${applicationContext.packageName}".toUri()
             })
         }
 
         binding.contributor.setOnClickListener {
-            ContributorDialog().show(supportFragmentManager, "ContributorDialog")
+            ContributorDialog().show(supportFragmentManager, null)
         }
 
         binding.legal.setOnClickListener {
-            LegalDialog().show(supportFragmentManager, "LegalDialog")
+            LegalDialog().show(supportFragmentManager, null)
         }
 
         binding.license.setOnClickListener {
-            LicenseDialog().show(supportFragmentManager, "LicenseDialog")
+            LicenseDialog().show(supportFragmentManager, null)
         }
     }
 
@@ -95,6 +110,7 @@ class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
                 })
                 return true
             }
+
             android.R.id.home -> {
                 finish()
                 return true

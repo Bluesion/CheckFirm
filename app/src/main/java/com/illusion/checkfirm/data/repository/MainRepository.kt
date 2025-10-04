@@ -1,16 +1,12 @@
 package com.illusion.checkfirm.data.repository
 
-import android.content.Context
-import com.illusion.checkfirm.common.util.Tools
-import com.illusion.checkfirm.data.source.remote.MainDataSource
+import com.illusion.checkfirm.data.model.remote.ApiResponse
+import com.illusion.checkfirm.data.model.remote.AppVersionStatus
+import com.illusion.checkfirm.data.source.remote.VersionFetcher
 
-class MainRepository(private val mainDataSource: MainDataSource, private val context: Context) {
+class MainRepository(private val versionFetcher: VersionFetcher) {
 
-    suspend fun checkAppVersion(): Boolean {
-        return if (Tools.isOnline(context)) {
-            mainDataSource.checkAppVersion()
-        } else {
-            return false
-        }
+    suspend fun checkAppVersion(): ApiResponse<AppVersionStatus> {
+        return versionFetcher.checkAppVersion()
     }
 }

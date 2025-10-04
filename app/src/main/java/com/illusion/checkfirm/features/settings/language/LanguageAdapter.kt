@@ -12,7 +12,11 @@ class LanguageAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LanguageViewHolder {
         val binding =
-            RowSettingsLanguageItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RowSettingsLanguageItemsBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
 
         return LanguageViewHolder(binding, onItemClicked)
     }

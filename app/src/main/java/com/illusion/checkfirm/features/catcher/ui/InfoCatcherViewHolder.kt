@@ -2,7 +2,7 @@ package com.illusion.checkfirm.features.catcher.ui
 
 import androidx.recyclerview.widget.RecyclerView
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.data.model.InfoCatcherEntity
+import com.illusion.checkfirm.data.model.local.InfoCatcherEntity
 import com.illusion.checkfirm.databinding.RowInfoCatcherItemsBinding
 
 class InfoCatcherViewHolder(

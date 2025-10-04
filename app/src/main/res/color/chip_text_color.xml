@@ -1,6 +1,0 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 87% opacity. -->
-    <item android:alpha="0.87" android:color="?attr/colorOnSurface" android:state_enabled="true"/>
-    <!-- 38% of 87% opacity. -->
-    <item android:alpha="0.33" android:color="?attr/colorOnSurface"/>
-</selector>

@@ -6,28 +6,38 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.illusion.checkfirm.BuildConfig
+import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
-import com.illusion.checkfirm.features.catcher.ui.InfoCatcherActivity
-import com.illusion.checkfirm.databinding.ActivitySettingsBinding
-import com.illusion.checkfirm.features.settings.about.AboutActivity
-import com.illusion.checkfirm.features.settings.help.HelpActivity
-import com.illusion.checkfirm.features.settings.language.LanguageDialog
 import com.illusion.checkfirm.common.util.Tools
+import com.illusion.checkfirm.databinding.ActivitySettingsBinding
+import com.illusion.checkfirm.features.catcher.ui.InfoCatcherActivity
+import com.illusion.checkfirm.features.settings.about.AboutActivity
 import com.illusion.checkfirm.features.settings.backuprestore.BackupRestoreActivity
 import com.illusion.checkfirm.features.settings.bookmark.BookmarkOrderDialog
 import com.illusion.checkfirm.features.settings.bookmark.BookmarkResetDialog
+import com.illusion.checkfirm.features.settings.help.HelpActivity
+import com.illusion.checkfirm.features.settings.language.LanguageDialog
 import com.illusion.checkfirm.features.settings.profile.ProfileDialog
 import com.illusion.checkfirm.features.settings.theme.ThemeDialog
+import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
+import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModelFactory
 import com.illusion.checkfirm.features.welcome.ui.WelcomeSearchActivity
 import kotlinx.coroutines.launch
 
 class SettingsActivity : CheckFirmActivity<ActivitySettingsBinding>(),
     CompoundButton.OnCheckedChangeListener {
+
+    private val settingsViewModel by viewModels<SettingsViewModel> {
+        SettingsViewModelFactory(
+            (application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
 
     override fun createBinding() = ActivitySettingsBinding.inflate(layoutInflater)
 
@@ -114,7 +124,11 @@ class SettingsActivity : CheckFirmActivity<ActivitySettingsBinding>(),
                     putExtra(Intent.EXTRA_TEXT, getDefaultEmailBody())
                 })
             } catch (_: ActivityNotFoundException) {
-                Toast.makeText(this, getString(R.string.settings_inquiry_not_found_exception), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.settings_inquiry_not_found_exception),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 

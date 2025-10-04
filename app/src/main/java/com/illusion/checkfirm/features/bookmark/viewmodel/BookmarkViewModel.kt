@@ -1,12 +1,10 @@
 package com.illusion.checkfirm.features.bookmark.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.illusion.checkfirm.data.model.BookmarkEntity
+import com.illusion.checkfirm.data.model.local.BookmarkEntity
 import com.illusion.checkfirm.data.repository.BCRepository
-import com.illusion.checkfirm.data.source.local.BCDatabase
-import com.illusion.checkfirm.data.source.local.SettingsDataSource
+import com.illusion.checkfirm.data.repository.SettingsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,10 +12,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class BookmarkViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val bcRepository: BCRepository
-    private val appSettingsRepository: SettingsDataSource
+class BookmarkViewModel(
+    private val bcRepository: BCRepository,
+    private val settingsRepository: SettingsRepository
+) : ViewModel() {
 
     private var bookmarkOrder = "time"
     private var isBookmarkOrderDesc = false
@@ -28,13 +26,9 @@ class BookmarkViewModel(application: Application) : AndroidViewModel(application
     private val _selectedCategory = MutableStateFlow("")
 
     init {
-        val bcDao = BCDatabase.getDatabase(application).bcDao()
-        bcRepository = BCRepository(bcDao)
-        appSettingsRepository = SettingsDataSource(application)
-
         viewModelScope.launch(Dispatchers.IO) {
-            bookmarkOrder = appSettingsRepository.getBookmarkOrder.first()
-            isBookmarkOrderDesc = !appSettingsRepository.isBookmarkAscOrder.first()
+            bookmarkOrder = settingsRepository.getBookmarkOrder().first()
+            isBookmarkOrderDesc = !settingsRepository.isBookmarkAscOrder().first()
             getAllBookmarkByCategory()
         }
     }
@@ -55,7 +49,8 @@ class BookmarkViewModel(application: Application) : AndroidViewModel(application
         }
 
         _bookmarkList.value =
-            bcRepository.getAllBookmark(bookmarkOrder, isBookmarkOrderDesc, _selectedCategory.value).first()
+            bcRepository.getAllBookmark(bookmarkOrder, isBookmarkOrderDesc, _selectedCategory.value)
+                .first()
     }
 
     /**
@@ -63,7 +58,8 @@ class BookmarkViewModel(application: Application) : AndroidViewModel(application
      */
     private fun updateBookmarkList() = viewModelScope.launch(Dispatchers.IO) {
         _bookmarkList.value = bcRepository.getAllBookmark(
-            bookmarkOrder, isBookmarkOrderDesc, _selectedCategory.value).first()
+            bookmarkOrder, isBookmarkOrderDesc, _selectedCategory.value
+        ).first()
     }
 
     fun updateCategory(category: String = "") {

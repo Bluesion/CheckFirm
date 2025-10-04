@@ -1,7 +1,7 @@
 package com.illusion.checkfirm.data.repository
 
-import com.illusion.checkfirm.data.model.HistoryDao
-import com.illusion.checkfirm.data.model.HistoryEntity
+import com.illusion.checkfirm.data.model.local.HistoryDao
+import com.illusion.checkfirm.data.model.local.HistoryEntity
 
 class HistoryRepository(private val historyDao: HistoryDao) {
 

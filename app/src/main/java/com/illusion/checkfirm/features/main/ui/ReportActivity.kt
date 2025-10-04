@@ -1,15 +1,16 @@
 package com.illusion.checkfirm.features.main.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
-import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
-import com.illusion.checkfirm.databinding.ActivityReportBinding
 import com.illusion.checkfirm.common.ui.LoadingDialog
+import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
+import com.illusion.checkfirm.data.model.local.DeviceItem
+import com.illusion.checkfirm.databinding.ActivityReportBinding
 import jakarta.mail.Authenticator
 import jakarta.mail.Message
 import jakarta.mail.PasswordAuthentication
@@ -27,6 +28,7 @@ import java.util.Properties
 class ReportActivity : CheckFirmActivity<ActivityReportBinding>() {
 
     private lateinit var loadingDialog: LoadingDialog
+    private var device: DeviceItem? = null
 
     override fun createBinding() = ActivityReportBinding.inflate(layoutInflater)
     override fun setContentInset() {
@@ -38,6 +40,12 @@ class ReportActivity : CheckFirmActivity<ActivityReportBinding>() {
         super.onCreate(savedInstanceState)
 
         initToolbar(binding.includeToolbar.appBar, getString(R.string.report))
+
+        device = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("device", DeviceItem::class.java)
+        } else {
+            intent.getParcelableExtra("device") as? DeviceItem
+        }
 
         binding.report1Layout.setOnClickListener {
             binding.report1.toggle()
@@ -70,7 +78,7 @@ class ReportActivity : CheckFirmActivity<ActivityReportBinding>() {
                     loadingDialog.show()
                 }
                 lifecycleScope.launch(Dispatchers.IO) {
-                    submit(intent.getIntExtra("index", 0))
+                    submit()
                 }
                 return true
             }
@@ -78,7 +86,7 @@ class ReportActivity : CheckFirmActivity<ActivityReportBinding>() {
         return super.onOptionsItemSelected(item)
     }
 
-    private suspend fun submit(i: Int) {
+    private suspend fun submit() {
         var isSuccess = true
         try {
             val props = Properties().apply {
@@ -99,7 +107,11 @@ class ReportActivity : CheckFirmActivity<ActivityReportBinding>() {
                 addRecipient(
                     Message.RecipientType.TO, InternetAddress("checkfirmhelpdesk@gmail.com")
                 )
-                subject = "[신고] ${CheckFirm.searchModel[i]} (${CheckFirm.searchCSC[i]})"
+                subject = if (device == null) {
+                    "[신고] (device null)"
+                } else {
+                    "[신고] ${device!!.model} (${device!!.csc})"
+                }
             }
 
             var message = "[오류 내용]"
@@ -135,19 +147,25 @@ class ReportActivity : CheckFirmActivity<ActivityReportBinding>() {
             })
 
             Transport.send(mail)
-        } catch (e1: Exception) {
+        } catch (_: Exception) {
             isSuccess = false
-            e1.printStackTrace()
-        } catch (e2: Error) {
+        } catch (_: Error) {
             isSuccess = false
-            e2.printStackTrace()
         } finally {
             withContext(Dispatchers.Main) {
                 loadingDialog.dismiss()
                 if (isSuccess) {
-                    Toast.makeText(this@ReportActivity, getString(R.string.report_success), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@ReportActivity,
+                        getString(R.string.report_success),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    Toast.makeText(this@ReportActivity, getString(R.string.report_fail), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@ReportActivity,
+                        getString(R.string.report_fail),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 finish()
             }

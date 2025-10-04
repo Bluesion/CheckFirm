@@ -3,7 +3,7 @@ package com.illusion.checkfirm.features.bookmark.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.illusion.checkfirm.data.model.CategoryDeviceListItem
+import com.illusion.checkfirm.data.model.local.CategoryDeviceListItem
 import com.illusion.checkfirm.databinding.RowCategoryDeviceItemBinding
 
 class CategoryDeviceAdapter :

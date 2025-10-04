@@ -8,19 +8,32 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.illusion.checkfirm.CheckFirm
+import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmFragment
-import com.illusion.checkfirm.databinding.FragmentBookmarkBinding
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewVerticalMarginDecorator
 import com.illusion.checkfirm.common.util.Tools
-import com.illusion.checkfirm.data.model.BookmarkEntity
+import com.illusion.checkfirm.databinding.FragmentBookmarkBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
+import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
 import kotlinx.coroutines.launch
 
 class BookmarkFragment : CheckFirmFragment<FragmentBookmarkBinding>() {
 
-    private val bookmarkViewModel: BookmarkViewModel by activityViewModels()
-    private val categoryViewModel: CategoryViewModel by activityViewModels()
+    private val bookmarkViewModel by activityViewModels<BookmarkViewModel> {
+        BookmarkViewModelFactory(
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
+            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
+        )
+    }
+    private val categoryViewModel by activityViewModels<CategoryViewModel> {
+        CategoryViewModelFactory(
+            getString(R.string.category_all),
+            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
+        )
+    }
     private lateinit var bookmarkAdapter: BookmarkAdapter
 
     override fun onCreateView(inflater: LayoutInflater) = FragmentBookmarkBinding.inflate(inflater)
@@ -33,9 +46,11 @@ class BookmarkFragment : CheckFirmFragment<FragmentBookmarkBinding>() {
                 override fun onItemSelected(
                     parent: AdapterView<*>, view: View, position: Int, id: Long
                 ) {
-                    bookmarkViewModel.updateCategory(Tools.getCategory(
-                        requireContext(), categoryViewModel.currentCategoryList.value[position]
-                    ))
+                    bookmarkViewModel.updateCategory(
+                        Tools.getCategory(
+                            requireContext(), categoryViewModel.currentCategoryList.value[position]
+                        )
+                    )
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -48,7 +63,8 @@ class BookmarkFragment : CheckFirmFragment<FragmentBookmarkBinding>() {
                 (requireActivity() as BookmarkCategoryActivity).onBookmarkCardClicked(model, csc)
             },
             onEditClicked = { bookmarkEntity ->
-                BookmarkDialog(bookmarkEntity,
+                BookmarkDialog(
+                    bookmarkEntity,
                     onDialogClose = { entity ->
                         bookmarkViewModel.addOrEditBookmark(entity)
                     }
