@@ -33,7 +33,7 @@ class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
     override fun createBinding() = ActivityAboutBinding.inflate(layoutInflater)
 
     override fun setContentInset() {
-        setBottomInset(binding.license)
+        setBottomInset(binding.legal)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,10 +89,6 @@ class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
 
         binding.legal.setOnClickListener {
             LegalDialog().show(supportFragmentManager, null)
-        }
-
-        binding.license.setOnClickListener {
-            LicenseDialog().show(supportFragmentManager, null)
         }
     }
 

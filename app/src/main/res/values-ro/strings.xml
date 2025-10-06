@@ -123,7 +123,6 @@
     <string name="about_version">Versiune</string>
     <string name="about_latest">Cea mai recentă versiune este deja instalată.</string>
     <string name="about_update">Actualizare</string>
-    <string name="license">Licență</string>
     <string name="legal">Informații Legale</string>
     <string name="legal_text">Informațiile oficiale despre firmware provin de la https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml.\n\nInformațiile despre firmware-ul de test provin de la https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml.\n\nAcestea nu sunt modalitățile oficiale prin care Samsung Electronics furnizează informații despre firmware clienților. Orice utilizare a acestor informații este pe propriul risc.</string>
 

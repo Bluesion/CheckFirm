@@ -98,17 +98,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/legal"
-        app:layout_constraintBottom_toTopOf="@id/license"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/license"
-        style="@style/OneUI.AboutPageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="@string/license"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -138,7 +138,6 @@
     <string name="about_version">버전</string>
     <string name="about_latest">최신 버전입니다.</string>
     <string name="about_update">업데이트</string>
-    <string name="license">라이선스</string>
     <string name="legal">법적 고지</string>
     <string name="legal_text">정식 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.xml 에서 불러옵니다.\n\n테스트 펌웨어 정보는 https://fota-cloud-dn.ospserver.net/firmware/CSC/DEVICE/version.test.xml 에서 불러옵니다.\n\n위 링크는 삼성전자가 소비자에게 정식으로 펌웨어 정보를 제공하는 경로가 아니며, 이 정보의 이용에 대한 책임은 모두 사용자에게 있습니다.</string>
 

@@ -14,7 +14,6 @@ fragment = "1.8.9"
 gms = "4.4.3"
 lifecycle = "2.9.4"
 jakarta-activation = "2.1.4"
-jsoup = "1.21.2"
 kotlin = "2.2.20"
 kotlin-serialization-json = "1.9.0"
 ksoup = "0.2.5"
@@ -44,7 +43,6 @@ lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-core", version.ref = "lifecycle" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle" }
 jakarta-activation = { group = "jakarta.activation", name = "jakarta.activation-api", version.ref = "jakarta-activation" }
-jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
 ksoup = { group = "com.fleeksoft.ksoup", name = "ksoup", version.ref = "ksoup" }
 ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }

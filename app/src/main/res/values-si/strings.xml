@@ -123,7 +123,6 @@
     <string name="about_version">අනුවාදය</string>
     <string name="about_latest">අවසන් අනුවාදය දැනටමත් ස්ථාපනය කර ඇත.</string>
     <string name="about_update">යාවත්කාලීන කරන්න</string>
-    <string name="license">බලපත්‍රය</string>
     <string name="legal">නීතිමය තොරතුරු</string>
     <string name="legal_text">නිල ස්ථිරාංග තොරතුරු https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml වෙතින් ලබාගෙන ඇත.\n\nපරීක්ෂණ ස්ථිරාංග තොරතුරු https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml වෙතින් ලබාගෙන ඇත.\n\nමේවා Samsung Electronics විසින් පාරිභෝගිකයින්ට ස්ථිරාංග තොරතුරු සපයන නිල ක්‍රම නොවේ. මෙම තොරතුරු භාවිතා කිරීම ඔබේම අවදානමකිනි.</string>
 

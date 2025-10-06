@@ -123,7 +123,6 @@
     <string name="about_version">Sürüm</string>
     <string name="about_latest">Zaten en son sürüm yüklü.</string>
     <string name="about_update">Güncelle</string>
-    <string name="license">Lisans</string>
     <string name="legal">Yasal Bilgi</string>
     <string name="legal_text">Resmi firmware bilgileri şu adresten alınır:\nhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml\n\nTest firmware bilgileri:\nhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml\n\nBu kaynaklar Samsung Electronics’in resmi bilgi sağlayıcıları değildir. Bilgilerin kullanımı tamamen sizin sorumluluğunuzdadır.</string>
 

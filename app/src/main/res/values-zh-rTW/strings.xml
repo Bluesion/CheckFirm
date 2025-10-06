@@ -123,7 +123,6 @@
     <string name="about_version">版本</string>
     <string name="about_latest">最新版本已安裝。</string>
     <string name="about_update">更新</string>
-    <string name="license">授權</string>
     <string name="legal">法律資訊</string>
     <string name="legal_text">官方韌體資訊來自 https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml。\n\n測試韌體資訊來自 https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml。\n\n這些並非三星電子向客戶提供韌體資訊的官方途徑。任何使用這些資訊的風險由您自行承擔。</string>
 

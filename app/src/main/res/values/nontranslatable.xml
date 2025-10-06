@@ -13,16 +13,6 @@
     <string name="contributor_portuguese_translator" translatable="false">Yan Varão</string>
     <string name="contributor_romanian_translator" translatable="false">George Christian Cotea</string>
     <string name="contributor_sinhala_translator" translatable="false">Thusiru Kodithuwakku</string>
-    <string name="license_library" translatable="false">Library</string>
-    <string name="license_copyright" translatable="false">Copyright (C)</string>
-    <string name="license_apache" translatable="false">Apache 2.0</string>
-    <string name="license_mit" translatable="false">MIT</string>
-    <string name="license_androidx" translatable="false">Android X</string>
-    <string name="license_firebase" translatable="false">Firebase</string>
-    <string name="license_material_components" translatable="false">MDC-Android</string>
-    <string name="license_google" translatable="false">Google</string>
-    <string name="license_jsoup" translatable="false">Jsoup</string>
-    <string name="license_jonathan_hedley" translatable="false">Jonathan Hedley</string>
     <string name="smart_search_android_version_format" translatable="false">Android %s</string>
     <string name="year_a" translatable="false">2027</string>
     <string name="year_b" translatable="false">2028</string>

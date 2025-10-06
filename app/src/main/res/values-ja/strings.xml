@@ -123,7 +123,6 @@
     <string name="about_version">バージョン</string>
     <string name="about_latest">最新バージョンはすでにインストールされています。</string>
     <string name="about_update">アップデート</string>
-    <string name="license">ライセンス</string>
     <string name="legal">法的情報</string>
     <string name="legal_text">公式ファームウェア情報はhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xmlから取得しています。\n\nテストファームウェア情報はhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xmlから取得しています。\n\nこれらはSamsung Electronicsが顧客にファームウェア情報を提供する公式な方法ではありません。これらの情報の使用は自己責任でお願いします。</string>
 

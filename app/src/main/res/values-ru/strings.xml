@@ -123,7 +123,6 @@
     <string name="about_version">Версия</string>
     <string name="about_latest">Последняя версия уже установлена.</string>
     <string name="about_update">Обновить</string>
-    <string name="license">Лицензия</string>
     <string name="legal">Юридическая информация</string>
     <string name="legal_text">Информация об официальной прошивке взята с https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml.\n\nИнформация о тестовой прошивке взята с https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml.\n\nЭто не официальные способы предоставления информации о прошивке компанией Samsung Electronics клиентам. Любое использование этой информации осуществляется на ваш страх и риск.</string>
 

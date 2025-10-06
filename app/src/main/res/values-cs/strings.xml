@@ -123,7 +123,6 @@
     <string name="about_version">Verze</string>
     <string name="about_latest">Nejnovější verze je již nainstalována.</string>
     <string name="about_update">Aktualizovat</string>
-    <string name="license">Licence</string>
     <string name="legal">Právní informace</string>
     <string name="legal_text">Informace o oficiálním firmwaru pocházejí z https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml.\n\nInformace o testovacím firmwaru pocházejí z https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml.\n\nNejedná se o oficiální způsoby, jakými společnost Samsung Electronics poskytuje informace o firmwaru zákazníkům. Jakékoli použití těchto informací je na vaše vlastní riziko.</string>
 

@@ -123,7 +123,6 @@
     <string name="about_version">Versão</string>
     <string name="about_latest">A versão mais recente já está instalada.</string>
     <string name="about_update">Atualizar</string>
-    <string name="license">Licença</string>
     <string name="legal">Informações Legais</string>
     <string name="legal_text">As informações oficiais de firmware vieram de https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml.\n\nAs informações de firmware de teste vieram de https://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml.\n\nEstas não são as formas oficiais que a Samsung Electronics fornece informações de firmware aos clientes. Qualquer uso dessas informações é por sua conta e risco.</string>
 

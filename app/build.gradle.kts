@@ -96,7 +96,6 @@ android {
 dependencies {
     implementation(project(":oneui"))
     implementation(libs.appcompat)
-    implementation(libs.jsoup)
     implementation(libs.ksoup)
     implementation(libs.recyclerview)
     implementation(libs.splashscreen)
