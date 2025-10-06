@@ -22,8 +22,6 @@ import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
 import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModelFactory
 import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModel
 import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModelFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class WelcomeSearchActivity : CheckFirmActivity<ActivityWelcomeSearchBinding>() {
@@ -70,36 +68,44 @@ class WelcomeSearchActivity : CheckFirmActivity<ActivityWelcomeSearchBinding>() 
             )
         )
 
-        lifecycleScope.launch(Dispatchers.Main) {
-            binding.welcomeSwitchCard.setStatus(settingsViewModel.settingsState.first().isWelcomeSearchEnabled)
-
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                wsViewModel.allDevices.collect {
-                    adapter.updateList(it)
-                    if (it.isEmpty()) {
-                        showToolbarMenuIcon = false
-                        binding.savedDevicesLayout.visibility = View.GONE
-                        binding.emptyButton.visibility = View.VISIBLE
-                        binding.emptyText.visibility = View.VISIBLE
-                    } else {
-                        showToolbarMenuIcon = true
-                        binding.savedDevicesLayout.visibility = View.VISIBLE
-                        binding.emptyButton.visibility = View.GONE
-                        binding.emptyText.visibility = View.GONE
-                    }
-                    invalidateOptionsMenu()
-                }
-            }
+        binding.emptyButton.setOnClickListener {
+            addDevice()
         }
 
-        binding.welcomeSwitchCard.setSwitchCardListener(object : OneUISwitchCardListener {
+        val switchCardListener = object : OneUISwitchCardListener {
             override fun onCheckedChange(isChecked: Boolean) {
                 settingsViewModel.enableWelcomeSearch(isChecked)
             }
-        })
+        }
 
-        binding.emptyButton.setOnClickListener {
-            addDevice()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    wsViewModel.allDevices.collect {
+                        adapter.updateList(it)
+                        if (it.isEmpty()) {
+                            showToolbarMenuIcon = false
+                            binding.savedDevicesLayout.visibility = View.GONE
+                            binding.emptyButton.visibility = View.VISIBLE
+                            binding.emptyText.visibility = View.VISIBLE
+                        } else {
+                            showToolbarMenuIcon = true
+                            binding.savedDevicesLayout.visibility = View.VISIBLE
+                            binding.emptyButton.visibility = View.GONE
+                            binding.emptyText.visibility = View.GONE
+                        }
+                        invalidateOptionsMenu()
+                    }
+                }
+
+                launch {
+                    settingsViewModel.settingsState.collect {
+                        binding.welcomeSwitchCard.setSwitchCardListener(null)
+                        binding.welcomeSwitchCard.setStatus(it.isWelcomeSearchEnabled)
+                        binding.welcomeSwitchCard.setSwitchCardListener(switchCardListener)
+                    }
+                }
+            }
         }
     }
 

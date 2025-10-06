@@ -62,7 +62,7 @@ class OneUISwitchCard : MaterialCardView {
         listener?.onCheckedChange(false)
     }
 
-    fun setSwitchCardListener(listener: OneUISwitchCardListener) {
+    fun setSwitchCardListener(listener: OneUISwitchCardListener?) {
         this.listener = listener
     }
 

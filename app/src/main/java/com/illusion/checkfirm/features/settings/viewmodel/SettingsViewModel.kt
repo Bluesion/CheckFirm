@@ -16,7 +16,7 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository) : Vi
     val settingsState: StateFlow<SettingsItem> = settingsRepository.getAllSettings()
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000L),
+            started = SharingStarted.Eagerly,
             initialValue = SettingsItem()
         )
 

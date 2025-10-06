@@ -23,7 +23,6 @@ import com.illusion.checkfirm.features.catcher.viewmodel.InfoCatcherViewModel
 import com.illusion.checkfirm.features.catcher.viewmodel.InfoCatcherViewModelFactory
 import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
 import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModelFactory
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class InfoCatcherActivity : CheckFirmActivity<ActivityInfoCatcherBinding>() {
@@ -53,12 +52,6 @@ class InfoCatcherActivity : CheckFirmActivity<ActivityInfoCatcherBinding>() {
 
         initToolbar(binding.includeToolbar.appBar, getString(R.string.info_catcher))
 
-        binding.catcherSwitchCard.setSwitchCardListener(object : OneUISwitchCardListener {
-            override fun onCheckedChange(isChecked: Boolean) {
-                settingsViewModel.enableInfoCatcher(isChecked)
-            }
-        })
-
         val adapter =
             InfoCatcherAdapter(
                 deviceList = emptyList(),
@@ -80,36 +73,46 @@ class InfoCatcherActivity : CheckFirmActivity<ActivityInfoCatcherBinding>() {
             addDevice()
         }
 
-        lifecycleScope.launch {
-            if (settingsViewModel.settingsState.first().isInfoCatcherEnabled) {
-                val channelID = getString(R.string.app_name)
-                val notificationManager =
-                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                val channel = NotificationChannel(
-                    channelID,
-                    getString(R.string.notification_channel_new_firmware),
-                    NotificationManager.IMPORTANCE_DEFAULT
-                )
-                notificationManager.createNotificationChannel(channel)
+        val channelID = getString(R.string.app_name)
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val channel = NotificationChannel(
+            channelID,
+            getString(R.string.notification_channel_new_firmware),
+            NotificationManager.IMPORTANCE_DEFAULT
+        )
+        notificationManager.createNotificationChannel(channel)
 
-                binding.catcherSwitchCard.turnOn()
-            } else {
-                binding.catcherSwitchCard.turnOff()
+        val switchCardListener = object : OneUISwitchCardListener {
+            override fun onCheckedChange(isChecked: Boolean) {
+                settingsViewModel.enableInfoCatcher(isChecked)
+            }
+        }
+
+        lifecycleScope.launch {
+            launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    icViewModel.allDevices.collect {
+                        adapter.setDevices(it)
+                        if (it.isEmpty()) {
+                            showToolbarMenuIcon = false
+                            binding.savedDevicesLayout.visibility = View.GONE
+                            binding.emptyButton.visibility = View.VISIBLE
+                        } else {
+                            showToolbarMenuIcon = true
+                            binding.savedDevicesLayout.visibility = View.VISIBLE
+                            binding.emptyButton.visibility = View.GONE
+                        }
+                        invalidateOptionsMenu()
+                    }
+                }
             }
 
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                icViewModel.allDevices.collect {
-                    adapter.setDevices(it)
-                    if (it.isEmpty()) {
-                        showToolbarMenuIcon = false
-                        binding.savedDevicesLayout.visibility = View.GONE
-                        binding.emptyButton.visibility = View.VISIBLE
-                    } else {
-                        showToolbarMenuIcon = true
-                        binding.savedDevicesLayout.visibility = View.VISIBLE
-                        binding.emptyButton.visibility = View.GONE
-                    }
-                    invalidateOptionsMenu()
+            launch {
+                settingsViewModel.settingsState.collect {
+                    binding.catcherSwitchCard.setSwitchCardListener(null)
+                    binding.catcherSwitchCard.setStatus(it.isInfoCatcherEnabled)
+                    binding.catcherSwitchCard.setSwitchCardListener(switchCardListener)
                 }
             }
         }
