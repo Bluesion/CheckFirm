@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.illusion.checkfirm.BuildConfig
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.LoadingDialog
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
@@ -139,6 +140,7 @@ class ReportActivity : CheckFirmActivity<ActivityReportBinding>() {
             } else {
                 binding.detailText.text.toString()
             }
+            message += "<br><br>[앱 버전] ${BuildConfig.VERSION_NAME}"
 
             messageBodyPart.setText(message, "utf-8", "html")
 
