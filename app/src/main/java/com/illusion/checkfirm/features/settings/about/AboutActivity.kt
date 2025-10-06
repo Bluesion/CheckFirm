@@ -26,8 +26,7 @@ class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
 
     private val mainViewModel by viewModels<MainViewModel> {
         MainViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getMainRepository(),
-            (application as CheckFirm).repositoryProvider.getSettingsRepository()
+            (application as CheckFirm).repositoryProvider.getMainRepository()
         )
     }
 

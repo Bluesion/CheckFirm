@@ -41,9 +41,12 @@ import com.illusion.checkfirm.features.search.ui.SearchActivity
 import com.illusion.checkfirm.features.search.ui.SearchDialog
 import com.illusion.checkfirm.features.settings.SettingsActivity
 import com.illusion.checkfirm.features.settings.help.MyDeviceActivity
+import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
+import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModelFactory
 import com.illusion.checkfirm.features.welcome.ui.WelcomeSearchActivity
 import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModel
 import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModelFactory
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -87,7 +90,12 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
 
     private val mainViewModel by viewModels<MainViewModel> {
         MainViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getMainRepository(),
+            (application as CheckFirm).repositoryProvider.getMainRepository()
+        )
+    }
+
+    private val settingsViewModel by viewModels<SettingsViewModel> {
+        SettingsViewModelFactory(
             (application as CheckFirm).repositoryProvider.getSettingsRepository()
         )
     }
@@ -98,6 +106,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
             (application as CheckFirm).repositoryProvider.getSettingsRepository()
         )
     }
+
     private val wsViewModel by viewModels<WelcomeSearchViewModel> {
         WelcomeSearchViewModelFactory(
             (application as CheckFirm).repositoryProvider.getWelcomeSearchRepository()
@@ -149,7 +158,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
                         }
                         // Currently, do nothing if it's latest or old version
                         else -> {
-                            if (mainViewModel.settingsState.first().isWelcomeSearchEnabled) {
+                            if (settingsViewModel.settingsState.drop(1).first().isWelcomeSearchEnabled) {
                                 welcomeSearch()
                             } else {
                                 startSearch()
@@ -164,7 +173,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
             }
 
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.settingsState.collect {
+                settingsViewModel.settingsState.collect {
                     if (it.isQuickSearchBarEnabled) {
                         initQuickSearchBar()
                     } else {
@@ -306,8 +315,8 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
                         searchResultList.add(
                             fwFetcher.search(
                                 DeviceItem(model, csc),
-                                mainViewModel.settingsState.first().isFirebaseEnabled,
-                                mainViewModel.settingsState.first().profileName
+                                settingsViewModel.settingsState.first().isFirebaseEnabled,
+                                settingsViewModel.settingsState.first().profileName
                             )
                         )
                     }
