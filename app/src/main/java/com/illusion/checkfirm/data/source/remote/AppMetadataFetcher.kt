@@ -3,7 +3,7 @@ package com.illusion.checkfirm.data.source.remote
 import com.illusion.checkfirm.BuildConfig
 import com.illusion.checkfirm.data.model.remote.ApiException
 import com.illusion.checkfirm.data.model.remote.ApiResponse
-import com.illusion.checkfirm.data.model.remote.AppVersionInfo
+import com.illusion.checkfirm.data.model.remote.AppMetadataInfo
 import com.illusion.checkfirm.data.model.remote.AppVersionStatus
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -18,7 +18,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import java.net.UnknownHostException
 
-class VersionFetcher {
+class AppMetadataFetcher {
 
     private val client = HttpClient(Android) {
         install(ContentNegotiation) {
@@ -65,12 +65,13 @@ class VersionFetcher {
                         append("Accept", "application/vnd.github.raw+json")
                     }
                 }
-            val responseJson = response.body<AppVersionInfo>().appVersionData
+
+            val appVersionData = response.body<AppMetadataInfo>().appVersionData
 
             val currentAppVersion = BuildConfig.VERSION_CODE
-            if (currentAppVersion < responseJson.minimum.versionCode) {
+            if (currentAppVersion < appVersionData.minimum.versionCode) {
                 ApiResponse.Success(AppVersionStatus.UPDATE_REQUIRED)
-            } else if (currentAppVersion < responseJson.latest.versionCode) {
+            } else if (currentAppVersion < appVersionData.latest.versionCode) {
                 ApiResponse.Success(AppVersionStatus.OLD_VERSION)
             } else {
                 ApiResponse.Success(AppVersionStatus.LATEST_VERSION)

@@ -4,7 +4,7 @@ import android.content.Context
 import com.illusion.checkfirm.data.di.dataStore
 import com.illusion.checkfirm.data.source.local.DataStoreManager
 import com.illusion.checkfirm.data.source.local.DatabaseProvider
-import com.illusion.checkfirm.data.source.remote.VersionFetcher
+import com.illusion.checkfirm.data.source.remote.AppMetadataFetcher
 
 // Context should be application context
 class RepositoryProvider(private val context: Context) {
@@ -14,7 +14,7 @@ class RepositoryProvider(private val context: Context) {
     private lateinit var infoCatcherRepository: InfoCatcherRepository
     private lateinit var welcomeSearchRepository: WelcomeSearchRepository
     private lateinit var settingsRepository: SettingsRepository
-    private lateinit var mainRepository: MainRepository
+    private lateinit var appMetadataRepository: AppMetadataRepository
 
     fun initialize() {
         bcRepository = BCRepository(DatabaseProvider.getBCDao())
@@ -22,7 +22,7 @@ class RepositoryProvider(private val context: Context) {
         infoCatcherRepository = InfoCatcherRepository(DatabaseProvider.getInfoCatcherDao())
         welcomeSearchRepository = WelcomeSearchRepository(DatabaseProvider.getWelcomeSearchDao())
         settingsRepository = SettingsRepository(DataStoreManager(context.dataStore))
-        mainRepository = MainRepository(VersionFetcher())
+        appMetadataRepository = AppMetadataRepository(AppMetadataFetcher())
     }
 
     fun getBCRepository(): BCRepository = bcRepository
@@ -30,5 +30,5 @@ class RepositoryProvider(private val context: Context) {
     fun getInfoCatcherRepository(): InfoCatcherRepository = infoCatcherRepository
     fun getWelcomeSearchRepository(): WelcomeSearchRepository = welcomeSearchRepository
     fun getSettingsRepository(): SettingsRepository = settingsRepository
-    fun getMainRepository(): MainRepository = mainRepository
+    fun getMainRepository(): AppMetadataRepository = appMetadataRepository
 }

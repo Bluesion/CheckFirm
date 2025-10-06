@@ -35,8 +35,8 @@ import com.illusion.checkfirm.features.bookmark.ui.BookmarkCategoryActivity
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.catcher.ui.InfoCatcherActivity
-import com.illusion.checkfirm.features.main.viewmodel.MainViewModel
-import com.illusion.checkfirm.features.main.viewmodel.MainViewModelFactory
+import com.illusion.checkfirm.features.main.viewmodel.AppMetadataViewModel
+import com.illusion.checkfirm.features.main.viewmodel.AppMetadataViewModelFactory
 import com.illusion.checkfirm.features.search.ui.SearchActivity
 import com.illusion.checkfirm.features.search.ui.SearchDialog
 import com.illusion.checkfirm.features.settings.SettingsActivity
@@ -88,8 +88,8 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
             }
         }
 
-    private val mainViewModel by viewModels<MainViewModel> {
-        MainViewModelFactory(
+    private val appMetadataViewModel by viewModels<AppMetadataViewModel> {
+        AppMetadataViewModelFactory(
             (application as CheckFirm).repositoryProvider.getMainRepository()
         )
     }
@@ -136,7 +136,7 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
         initFetcher()
 
         lifecycleScope.launch {
-            val firstState = mainViewModel.isOldVersion.first { it !is ApiResponse.Loading }
+            val firstState = appMetadataViewModel.isOldVersion.first { it !is ApiResponse.Loading }
             when (firstState) {
                 is ApiResponse.Error -> {
                     if (firstState is ApiResponse.Error.NetworkError) {

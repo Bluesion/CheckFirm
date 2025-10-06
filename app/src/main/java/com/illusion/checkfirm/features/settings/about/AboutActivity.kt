@@ -18,14 +18,14 @@ import com.illusion.checkfirm.common.util.Tools
 import com.illusion.checkfirm.data.model.remote.ApiResponse
 import com.illusion.checkfirm.data.model.remote.AppVersionStatus
 import com.illusion.checkfirm.databinding.ActivityAboutBinding
-import com.illusion.checkfirm.features.main.viewmodel.MainViewModel
-import com.illusion.checkfirm.features.main.viewmodel.MainViewModelFactory
+import com.illusion.checkfirm.features.main.viewmodel.AppMetadataViewModel
+import com.illusion.checkfirm.features.main.viewmodel.AppMetadataViewModelFactory
 import kotlinx.coroutines.launch
 
 class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
 
-    private val mainViewModel by viewModels<MainViewModel> {
-        MainViewModelFactory(
+    private val appMetadataViewModel by viewModels<AppMetadataViewModel> {
+        AppMetadataViewModelFactory(
             (application as CheckFirm).repositoryProvider.getMainRepository()
         )
     }
@@ -46,7 +46,7 @@ class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 if (Tools.isOnline(this@AboutActivity)) {
-                    mainViewModel.isOldVersion.collect {
+                    appMetadataViewModel.isOldVersion.collect {
                         when (it) {
                             is ApiResponse.Loading -> {
                                 binding.progress.visibility = View.VISIBLE

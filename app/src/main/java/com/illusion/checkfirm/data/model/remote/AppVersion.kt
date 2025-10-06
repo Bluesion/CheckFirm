@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AppVersionInfo(
+data class AppMetadataInfo(
     @SerialName("version_data") val appVersionData: AppVersionData
 )
 
