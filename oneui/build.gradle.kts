@@ -16,11 +16,11 @@ android {
     sourceSets {
         getByName("main") {
             java {
-                srcDir("src/divider/java")
-                srcDir("src/edittext/java")
-                srcDir("src/spinner/java")
-                srcDir("src/switch/java")
-                srcDir("src/tab/java")
+                srcDir("src/divider/kotlin")
+                srcDir("src/edittext/kotlin")
+                srcDir("src/spinner/kotlin")
+                srcDir("src/switch/kotlin")
+                srcDir("src/tab/kotlin")
             }
 
             res {

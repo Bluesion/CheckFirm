@@ -48,16 +48,8 @@ class CheckFirmLogger {
 
         private fun logMessage(message: String): String {
             val ste = Thread.currentThread().stackTrace
-            val className: String
-            val methodName: String
-            // java
-            if (ste[3].methodName == ste[4].methodName) {
-                className = ste[5].className
-                methodName = ste[5].methodName
-            } else { // kotlin
-                className = ste[4].className
-                methodName = ste[4].methodName
-            }
+            val className: String = ste[4].className
+            val methodName: String = ste[4].methodName
 
             return StringBuilder().append("[")
                 .append(className.substring(className.lastIndexOf(".") + 1))
