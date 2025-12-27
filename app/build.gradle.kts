@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.google.gms)
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
 }
@@ -76,8 +77,9 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        compose = true
         buildConfig = true
+        viewBinding = true
     }
 
     room {
@@ -97,6 +99,8 @@ android {
 
 dependencies {
     implementation(project(":oneui"))
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.bundles.androidx.compose)
     implementation(libs.appcompat)
     implementation(libs.ksoup)
     implementation(libs.recyclerview)
@@ -112,4 +116,6 @@ dependencies {
     implementation(libs.bundles.lifecycles)
 
     ksp(libs.room.compiler)
+
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }
