@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.google.gms)
+    alias(libs.plugins.google.hilt)
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
@@ -82,11 +83,6 @@ android {
         viewBinding = true
     }
 
-    room {
-        schemaDirectory("$projectDir/schemas")
-        generateKotlin = true
-    }
-
     packaging {
         resources {
             pickFirsts += arrayOf(
@@ -95,26 +91,35 @@ android {
             )
         }
     }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+        generateKotlin = true
+    }
+
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 dependencies {
-    implementation(project(":oneui"))
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.androidx.compose)
-    implementation(libs.appcompat)
-    implementation(libs.ksoup)
-    implementation(libs.recyclerview)
-    implementation(libs.splashscreen)
-
+    implementation(libs.bundles.androidx.lifecycle)
+    implementation(libs.bundles.androidx.navigation3)
     implementation(libs.bundles.angus)
-    implementation(libs.bundles.bases)
-    implementation(libs.bundles.coroutines)
-    implementation(libs.bundles.datas)
-    implementation(libs.bundles.designs)
-    implementation(libs.bundles.firebases)
-    implementation(libs.bundles.ktors)
-    implementation(libs.bundles.lifecycles)
+    implementation(libs.bundles.data)
+    implementation(libs.bundles.firebase)
+    implementation(libs.bundles.hilt)
+    implementation(libs.bundles.ktor)
 
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.google.accompanist.permissions)
+    implementation(libs.kotlinx.coroutine.android)
+    implementation(libs.ksoup)
+
+    ksp(libs.google.hilt.compiler)
+    ksp(libs.kotlin.metadata.jvm)
     ksp(libs.room.compiler)
 
     debugImplementation(libs.androidx.compose.ui.tooling)

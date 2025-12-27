@@ -1,34 +1,32 @@
 [versions]
+accompanistPermissions = "0.37.3"
 activity = "1.12.2"
 agp = "8.13.2"
 angus = "2.0.5"
-angus-activation = "2.0.3"
-appcompat = "1.7.1"
+angusActivation = "2.0.3"
 composeBom = "2025.12.01"
-constraintlayout = "2.2.1"
-coordinatorlayout = "1.3.0"
-coroutine = "1.10.2"
+core = "1.17.0"
 datastore = "1.2.0"
 fcm = "24.1.2"
 firestore = "25.1.4"
-fragment = "1.8.9"
 gms = "4.4.4"
-lifecycle = "2.10.0"
-jakarta-activation = "2.1.4"
+hilt = "2.57.2"
+hiltX = "1.3.0"
+jakartaActivation = "2.1.4"
 kotlin = "2.3.0"
-kotlin-serialization-json = "1.9.0"
+kotlinxCoroutine = "1.10.2"
+kotlinxSerialization = "1.9.0"
 ksoup = "0.2.5"
 ksp = "2.3.4"
 ktor = "3.3.3"
-material = "1.14.0-alpha08"
-recyclerview = "1.4.0"
+lifecycle = "2.10.0"
+navigation3 = "1.0.0"
 room = "2.8.4"
 slf4j = "1.7.36"
-splashscreen = "1.2.0"
+viewmodelNavigation3 = "2.10.0"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-compose-material-icon = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
@@ -36,23 +34,27 @@ androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
+androidx-hilt-lifecycle-viewmodel-compose = { group = "androidx.hilt", name = "hilt-lifecycle-viewmodel-compose", version.ref = "hiltX" }
+androidx-lifeycycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-navigation = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-navigation3", version.ref = "viewmodelNavigation3" }
+androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3" }
+androidx-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3" }
 angus = { group = "org.eclipse.angus", name = "jakarta.mail", version.ref = "angus" }
-angus-activation = { group = "org.eclipse.angus", name = "angus-activation", version.ref = "angus-activation" }
-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-coordinatorlayout = { group = "androidx.coordinatorlayout", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
-coroutine-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
-coroutine-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutine" }
-coroutine-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "coroutine" }
+angus-activation = { group = "org.eclipse.angus", name = "angus-activation", version.ref = "angusActivation" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 fcm = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "fcm" }
 firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firestore" }
-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "lifecycle" }
-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-core", version.ref = "lifecycle" }
-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle" }
-jakarta-activation = { group = "jakarta.activation", name = "jakarta.activation-api", version.ref = "jakarta-activation" }
-kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
+google-accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistPermissions" }
+google-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+google-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+jakarta-activation = { group = "jakarta.activation", name = "jakarta.activation-api", version.ref = "jakartaActivation" }
+kotlin-metadata-jvm = { group = "org.jetbrains.kotlin", name = "kotlin-metadata-jvm", version.ref = "kotlin" }
+kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-coroutine-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutine" }
 ksoup = { group = "com.fleeksoft.ksoup", name = "ksoup", version.ref = "ksoup" }
 ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
@@ -60,19 +62,17 @@ ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref =
 ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-serialization-kotlinx-xml = { group = "io.ktor", name = "ktor-serialization-kotlinx-xml", version.ref = "ktor" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 slf4j-android = { group = "org.slf4j", name = "slf4j-android", version.ref = "slf4j" }
-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 androidx-room = { id = "androidx.room", version.ref = "room" }
 google-gms = { id = "com.google.gms.google-services", version.ref = "gms" }
+google-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
@@ -81,11 +81,10 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 [bundles]
 androidx-compose = ["androidx-activity-compose", "androidx-compose-material3", "androidx-compose-material-icon", "androidx-compose-ui", "androidx-compose-ui-graphics", "androidx-compose-ui-tooling-preview"]
+androidx-lifecycle = ["androidx-lifeycycle-runtime-compose", "androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-compose", "androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-viewmodel-navigation"]
+androidx-navigation3 = ["androidx-navigation3-runtime", "androidx-navigation3-ui"]
 angus = ["angus", "angus-activation", "jakarta-activation"]
-bases = ["activity", "fragment"]
-coroutines = ["coroutine-android", "coroutine-core", "coroutine-jvm"]
-datas = ["datastore", "kotlin-serialization-json", "room", "room-ktx"]
-designs = ["constraintlayout", "coordinatorlayout", "material"]
-firebases = ["fcm", "firestore"]
-ktors = ["ktor-client-android", "ktor-client-content-negotiation", "ktor-client-core", "ktor-client-logging", "ktor-serialization-kotlinx-json", "ktor-serialization-kotlinx-xml", "slf4j-android"]
-lifecycles = ["lifecycle", "lifecycle-livedata", "lifecycle-viewmodel"]
+data = ["datastore", "kotlin-serialization-json", "room", "room-ktx"]
+firebase = ["fcm", "firestore"]
+hilt = ["androidx-hilt-lifecycle-viewmodel-compose", "google-hilt-android"]
+ktor = ["ktor-client-android", "ktor-client-content-negotiation", "ktor-client-core", "ktor-client-logging", "ktor-serialization-kotlinx-json", "ktor-serialization-kotlinx-xml", "slf4j-android"]

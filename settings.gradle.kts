@@ -22,4 +22,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "CheckFirm"
 include(":app")
-include(":oneui")
