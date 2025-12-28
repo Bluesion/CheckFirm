@@ -25,12 +25,7 @@ class BookmarkDialog(
     private val onDialogClose: (entity: BookmarkEntity) -> Unit
 ) : CheckFirmBottomSheetDialogFragment<DialogBookmarkBinding>() {
 
-    private val categoryViewModel by viewModels<CategoryViewModel> {
-        CategoryViewModelFactory(
-            getString(R.string.category_all),
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
-        )
-    }
+    private val categoryViewModel by viewModels<CategoryViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater) = DialogBookmarkBinding.inflate(inflater)
 

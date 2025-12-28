@@ -5,10 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.data.model.local.HistoryEntity
 import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 import com.illusion.checkfirm.data.repository.HistoryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import javax.inject.Inject
 
-class HistoryViewModel(private val historyRepository: HistoryRepository) : ViewModel() {
+@HiltViewModel
+class HistoryViewModel @Inject constructor(
+    private val historyRepository: HistoryRepository
+) : ViewModel() {
 
     suspend fun getAllHistoryList(): List<HistoryEntity> {
         return historyRepository.getAllHistoryList()

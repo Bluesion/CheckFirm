@@ -21,12 +21,7 @@ class CategoryDialog(
     private val onCategoryClicked: (String) -> Unit
 ) : CheckFirmBottomSheetDialogFragment<DialogCategoryBinding>() {
 
-    private val categoryViewModel by viewModels<CategoryViewModel> {
-        CategoryViewModelFactory(
-            getString(R.string.category_all),
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
-        )
-    }
+    private val categoryViewModel by viewModels<CategoryViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater) = DialogCategoryBinding.inflate(inflater)
 

@@ -5,13 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.data.model.remote.ApiResponse
 import com.illusion.checkfirm.data.model.remote.AppVersionStatus
 import com.illusion.checkfirm.data.repository.AppMetadataRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AppMetadataViewModel(
+@HiltViewModel
+class AppMetadataViewModel @Inject constructor(
     private val appMetadataRepository: AppMetadataRepository
 ) : ViewModel() {
 

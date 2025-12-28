@@ -16,18 +16,8 @@ import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFacto
 
 class BookmarkResetDialog : CheckFirmBottomSheetDialogFragment<DialogBookmarkResetBinding>() {
 
-    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
-        BookmarkViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
-            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
-    private val categoryViewModel by viewModels<CategoryViewModel> {
-        CategoryViewModelFactory(
-            getString(R.string.category_all),
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
-        )
-    }
+    private val bookmarkViewModel by viewModels<BookmarkViewModel>()
+    private val categoryViewModel by viewModels<CategoryViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater) =
         DialogBookmarkResetBinding.inflate(inflater)

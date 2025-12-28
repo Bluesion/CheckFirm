@@ -4,26 +4,63 @@ import com.illusion.checkfirm.data.model.local.BCDao
 import com.illusion.checkfirm.data.model.local.BookmarkEntity
 import com.illusion.checkfirm.data.model.local.CategoryEntity
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class BCRepository(private val bcDao: BCDao) {
-
-    suspend fun getBookmarkCount(): Int {
-        return bcDao.getBookmarkCount()
-    }
-
+interface BCRepository {
+    suspend fun getBookmarkCount(): Int
     fun getAllBookmark(
         order: String,
         isDesc: Boolean,
         category: String = ""
+    ): Flow<List<BookmarkEntity>>
+    suspend fun getAllBookmarkList(
+        order: String,
+        isDesc: Boolean
+    ): List<BookmarkEntity>
+    fun getBookmarkByCategory(
+        order: String,
+        isDesc: Boolean,
+        category: String
+    ): Flow<List<BookmarkEntity>>
+    suspend fun getBookmarkListByCategory(
+        order: String,
+        isDesc: Boolean,
+        category: String
+    ): List<BookmarkEntity>
+    suspend fun addBookmark(bookmark: BookmarkEntity)
+    suspend fun editBookmark(bookmark: BookmarkEntity)
+    suspend fun deleteBookmark(device: String)
+    suspend fun deleteAllBookmark()
+    suspend fun getCategoryCount(): Int
+    fun getAllCategory(): Flow<List<CategoryEntity>>
+    suspend fun getAllCategoryList(): List<CategoryEntity>
+    suspend fun addCategory(entity: CategoryEntity)
+    suspend fun editCategory(entity: CategoryEntity)
+    suspend fun deleteCategory(name: String)
+    suspend fun deleteAllCategory()
+}
+
+class BCRepositoryImpl @Inject constructor(
+    private val bcDao: BCDao
+) : BCRepository {
+
+    override suspend fun getBookmarkCount(): Int {
+        return bcDao.getBookmarkCount()
+    }
+
+    override fun getAllBookmark(
+        order: String,
+        isDesc: Boolean,
+        category: String
     ): Flow<List<BookmarkEntity>> {
         return bcDao.getAllBookmark(order, isDesc, category)
     }
 
-    suspend fun getAllBookmarkList(order: String, isDesc: Boolean): List<BookmarkEntity> {
+    override suspend fun getAllBookmarkList(order: String, isDesc: Boolean): List<BookmarkEntity> {
         return bcDao.getAllBookmarkList(order, isDesc)
     }
 
-    fun getBookmarkByCategory(
+    override fun getBookmarkByCategory(
         order: String,
         isDesc: Boolean,
         category: String
@@ -31,7 +68,7 @@ class BCRepository(private val bcDao: BCDao) {
         return bcDao.getBookmarkByCategory(order, isDesc, category)
     }
 
-    suspend fun getBookmarkListByCategory(
+    override suspend fun getBookmarkListByCategory(
         order: String,
         isDesc: Boolean,
         category: String
@@ -39,47 +76,47 @@ class BCRepository(private val bcDao: BCDao) {
         return bcDao.getBookmarkListByCategory(order, isDesc, category)
     }
 
-    suspend fun addBookmark(bookmark: BookmarkEntity) {
+    override suspend fun addBookmark(bookmark: BookmarkEntity) {
         bcDao.addBookmark(bookmark)
     }
 
-    suspend fun editBookmark(bookmark: BookmarkEntity) {
+    override suspend fun editBookmark(bookmark: BookmarkEntity) {
         bcDao.editBookmark(bookmark)
     }
 
-    suspend fun deleteBookmark(device: String) {
+    override suspend fun deleteBookmark(device: String) {
         bcDao.deleteBookmark(device)
     }
 
-    suspend fun deleteAllBookmark() {
+    override suspend fun deleteAllBookmark() {
         bcDao.deleteAllBookmark()
     }
 
-    suspend fun getCategoryCount(): Int {
+    override suspend fun getCategoryCount(): Int {
         return bcDao.getCategoryCount()
     }
 
-    fun getAllCategory(): Flow<List<CategoryEntity>> {
+    override fun getAllCategory(): Flow<List<CategoryEntity>> {
         return bcDao.getAllCategory()
     }
 
-    suspend fun getAllCategoryList(): List<CategoryEntity> {
+    override suspend fun getAllCategoryList(): List<CategoryEntity> {
         return bcDao.getAllCategoryList()
     }
 
-    suspend fun addCategory(entity: CategoryEntity) {
+    override suspend fun addCategory(entity: CategoryEntity) {
         bcDao.addCategory(entity)
     }
 
-    suspend fun editCategory(entity: CategoryEntity) {
+    override suspend fun editCategory(entity: CategoryEntity) {
         bcDao.editCategory(entity)
     }
 
-    suspend fun deleteCategory(name: String) {
+    override suspend fun deleteCategory(name: String) {
         bcDao.deleteCategory(name)
     }
 
-    suspend fun deleteAllCategory() {
+    override suspend fun deleteAllCategory() {
         bcDao.deleteAllCategory()
     }
 }

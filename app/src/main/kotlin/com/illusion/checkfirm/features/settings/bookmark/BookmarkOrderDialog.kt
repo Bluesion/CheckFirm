@@ -20,11 +20,7 @@ import kotlinx.coroutines.launch
 class BookmarkOrderDialog : CheckFirmBottomSheetDialogFragment<DialogBookmarkOrderBinding>(),
     CompoundButton.OnCheckedChangeListener {
 
-    private val settingsViewModel by viewModels<SettingsViewModel> {
-        SettingsViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val settingsViewModel by viewModels<SettingsViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater) =
         DialogBookmarkOrderBinding.inflate(inflater)

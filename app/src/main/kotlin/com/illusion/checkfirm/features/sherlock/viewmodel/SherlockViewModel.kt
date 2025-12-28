@@ -7,6 +7,7 @@ import com.illusion.checkfirm.common.util.Tools
 import com.illusion.checkfirm.data.model.local.SearchResultItem
 import com.illusion.checkfirm.data.repository.SettingsRepository
 import com.illusion.checkfirm.features.sherlock.util.SherlockStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,8 +17,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.util.Calendar
+import javax.inject.Inject
 
-class SherlockViewModel(private val settingsRepository: SettingsRepository) : ViewModel() {
+@HiltViewModel
+class SherlockViewModel @Inject constructor(
+    private val settingsRepository: SettingsRepository
+) : ViewModel() {
 
     private lateinit var searchResult: SearchResultItem
     private val _buildPrefix = MutableStateFlow("")

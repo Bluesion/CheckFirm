@@ -24,11 +24,7 @@ import kotlinx.coroutines.launch
 // TODO: API 32부터 지원하는 Dynamic color 대응하기
 class ThemeDialog : CheckFirmBottomSheetDialogFragment<DialogThemeBinding>() {
 
-    private val settingsViewModel by viewModels<SettingsViewModel> {
-        SettingsViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val settingsViewModel by viewModels<SettingsViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater) = DialogThemeBinding.inflate(inflater)
 

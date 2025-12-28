@@ -3,16 +3,25 @@ package com.illusion.checkfirm.data.repository
 import com.illusion.checkfirm.data.model.local.WelcomeSearchDao
 import com.illusion.checkfirm.data.model.local.WelcomeSearchEntity
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class WelcomeSearchRepository(private val welcomeSearchDao: WelcomeSearchDao) {
+interface WelcomeSearchRepository {
+    val allDevices: Flow<List<WelcomeSearchEntity>>
+    suspend fun insert(entity: WelcomeSearchEntity)
+    suspend fun delete(device: String)
+}
 
-    val allDevices: Flow<List<WelcomeSearchEntity>> = welcomeSearchDao.getAll()
+class WelcomeSearchRepositoryImpl @Inject constructor(
+    private val welcomeSearchDao: WelcomeSearchDao
+) : WelcomeSearchRepository {
 
-    suspend fun insert(entity: WelcomeSearchEntity) {
+    override val allDevices: Flow<List<WelcomeSearchEntity>> = welcomeSearchDao.getAll()
+
+    override suspend fun insert(entity: WelcomeSearchEntity) {
         welcomeSearchDao.insert(entity)
     }
 
-    suspend fun delete(device: String) {
+    override suspend fun delete(device: String) {
         welcomeSearchDao.delete(device)
     }
 }

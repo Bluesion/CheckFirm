@@ -29,18 +29,8 @@ import java.util.Locale
 
 class BackupRestoreActivity : CheckFirmActivity<ActivityBookmarkBackupRestoreBinding>() {
 
-    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
-        BookmarkViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getBCRepository(),
-            (application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
-    private val categoryViewModel by viewModels<CategoryViewModel> {
-        CategoryViewModelFactory(
-            getString(R.string.category_all),
-            (application as CheckFirm).repositoryProvider.getBCRepository()
-        )
-    }
+    private val bookmarkViewModel by viewModels<BookmarkViewModel>()
+    private val categoryViewModel by viewModels<CategoryViewModel>()
 
     private val startBackup =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

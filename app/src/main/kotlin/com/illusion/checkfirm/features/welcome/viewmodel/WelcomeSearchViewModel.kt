@@ -4,12 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.data.model.local.WelcomeSearchEntity
 import com.illusion.checkfirm.data.repository.WelcomeSearchRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WelcomeSearchViewModel(private val welcomeSearchRepository: WelcomeSearchRepository) :
-    ViewModel() {
+@HiltViewModel
+class WelcomeSearchViewModel @Inject constructor(
+    private val welcomeSearchRepository: WelcomeSearchRepository
+) : ViewModel() {
 
     val allDevices: Flow<List<WelcomeSearchEntity>> = welcomeSearchRepository.allDevices
 

@@ -8,24 +8,18 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.illusion.checkfirm.CheckFirm
-import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmFragment
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewVerticalMarginDecorator
 import com.illusion.checkfirm.common.util.Tools
 import com.illusion.checkfirm.databinding.FragmentCategoryBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
-import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class CategoryFragment : CheckFirmFragment<FragmentCategoryBinding>() {
 
-    private val categoryViewModel by activityViewModels<CategoryViewModel> {
-        CategoryViewModelFactory(
-            getString(R.string.category_all),
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
-        )
-    }
+    private val categoryViewModel by activityViewModels<CategoryViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater) = FragmentCategoryBinding.inflate(inflater)
 

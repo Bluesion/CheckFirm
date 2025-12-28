@@ -25,8 +25,10 @@ import com.illusion.checkfirm.databinding.DialogSearchBinding
 import com.illusion.checkfirm.features.main.ui.ReportActivity
 import com.illusion.checkfirm.features.settings.help.FirmwareManualActivity
 import com.illusion.checkfirm.features.sherlock.ui.SherlockActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 // SearchDialog는 다른 Dialog와 다르게 디자인이 달라 CheckFirmBottomSheetDialog를 상속받지 않는다.
+@AndroidEntryPoint
 class SearchDialog(private val isOfficial: Boolean, private val searchResult: SearchResultItem) :
     BottomSheetDialogFragment() {
 

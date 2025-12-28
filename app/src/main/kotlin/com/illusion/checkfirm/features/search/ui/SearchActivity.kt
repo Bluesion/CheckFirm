@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
 import com.illusion.checkfirm.common.util.Tools
@@ -20,21 +19,18 @@ import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 import com.illusion.checkfirm.databinding.ActivitySearchBinding
 import com.illusion.checkfirm.features.search.util.SearchValidationResult
 import com.illusion.checkfirm.features.search.viewmodel.HistoryViewModel
-import com.illusion.checkfirm.features.search.viewmodel.HistoryViewModelFactory
 import com.illusion.checkfirm.features.search.viewmodel.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SearchActivity : CheckFirmActivity<ActivitySearchBinding>() {
 
     private lateinit var searchListAdapter: SearchDeviceListAdapter
     private val searchViewModel: SearchViewModel by viewModels()
 
-    private val historyViewModel by viewModels<HistoryViewModel> {
-        HistoryViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getHistoryRepository()
-        )
-    }
+    private val historyViewModel by viewModels<HistoryViewModel>()
 
     override fun createBinding() = ActivitySearchBinding.inflate(layoutInflater)
 

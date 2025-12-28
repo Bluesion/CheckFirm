@@ -17,12 +17,7 @@ import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFacto
 
 class MyDeviceActivity : CheckFirmActivity<ActivityHelpDeviceBinding>() {
 
-    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
-        BookmarkViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getBCRepository(),
-            (application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val bookmarkViewModel by viewModels<BookmarkViewModel>()
 
     override fun createBinding() = ActivityHelpDeviceBinding.inflate(layoutInflater)
 

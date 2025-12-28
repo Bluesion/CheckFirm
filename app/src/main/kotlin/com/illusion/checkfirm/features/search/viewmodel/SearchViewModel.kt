@@ -5,11 +5,14 @@ import com.illusion.checkfirm.common.util.Tools
 import com.illusion.checkfirm.data.model.local.DeviceItem
 import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 import com.illusion.checkfirm.features.search.util.SearchValidationResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.util.Locale
+import javax.inject.Inject
 
-class SearchViewModel : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor() : ViewModel() {
 
     private val _searchList = MutableStateFlow<List<SearchDeviceItem>>(emptyList())
     val searchList = _searchList.asStateFlow()

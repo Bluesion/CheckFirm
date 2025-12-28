@@ -4,11 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.data.model.local.InfoCatcherEntity
 import com.illusion.checkfirm.data.repository.InfoCatcherRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class InfoCatcherViewModel(private val infoCatcherRepository: InfoCatcherRepository) : ViewModel() {
+@HiltViewModel
+class InfoCatcherViewModel @Inject constructor(
+    private val infoCatcherRepository: InfoCatcherRepository
+) : ViewModel() {
 
     val allDevices: Flow<List<InfoCatcherEntity>> = infoCatcherRepository.allDevices
 

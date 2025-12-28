@@ -13,23 +13,19 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
 import com.illusion.checkfirm.data.model.local.SearchResultItem
 import com.illusion.checkfirm.databinding.ActivitySherlockBinding
 import com.illusion.checkfirm.features.sherlock.util.SherlockStatus
 import com.illusion.checkfirm.features.sherlock.viewmodel.SherlockViewModel
-import com.illusion.checkfirm.features.sherlock.viewmodel.SherlockViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SherlockActivity : CheckFirmActivity<ActivitySherlockBinding>() {
 
-    private val sherlockViewModel by viewModels<SherlockViewModel> {
-        SherlockViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val sherlockViewModel by viewModels<SherlockViewModel>()
 
     override fun createBinding() = ActivitySherlockBinding.inflate(layoutInflater)
 

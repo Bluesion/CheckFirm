@@ -2,30 +2,42 @@ package com.illusion.checkfirm.data.repository
 
 import com.illusion.checkfirm.data.model.local.HistoryDao
 import com.illusion.checkfirm.data.model.local.HistoryEntity
+import javax.inject.Inject
 
-class HistoryRepository(private val historyDao: HistoryDao) {
+interface HistoryRepository {
+    suspend fun getAllHistoryList(): List<HistoryEntity>
+    suspend fun cleanUpHistory()
+    suspend fun insert(entity: HistoryEntity)
+    suspend fun update(entity: HistoryEntity)
+    suspend fun delete(model: String, csc: String)
+    suspend fun deleteAll()
+}
 
-    suspend fun getAllHistoryList(): List<HistoryEntity> {
+class HistoryRepositoryImpl @Inject constructor(
+    private val historyDao: HistoryDao
+) : HistoryRepository {
+
+    override suspend fun getAllHistoryList(): List<HistoryEntity> {
         return historyDao.getAllHistoryList()
     }
 
-    suspend fun cleanUpHistory() {
+    override suspend fun cleanUpHistory() {
         historyDao.cleanUpHistory()
     }
 
-    suspend fun insert(entity: HistoryEntity) {
+    override suspend fun insert(entity: HistoryEntity) {
         historyDao.insert(entity)
     }
 
-    suspend fun update(entity: HistoryEntity) {
+    override suspend fun update(entity: HistoryEntity) {
         historyDao.update(entity)
     }
 
-    suspend fun delete(model: String, csc: String) {
+    override suspend fun delete(model: String, csc: String) {
         historyDao.delete(model, csc)
     }
 
-    suspend fun deleteAll() {
+    override suspend fun deleteAll() {
         historyDao.deleteAll()
     }
 }

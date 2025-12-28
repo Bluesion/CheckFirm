@@ -25,18 +25,9 @@ import java.util.Locale
 
 class InfoCatcherDialog : CheckFirmBottomSheetDialogFragment<DialogInfoCatcherBinding>() {
 
-    private val icViewModel by viewModels<InfoCatcherViewModel> {
-        InfoCatcherViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getInfoCatcherRepository()
-        )
-    }
+    private val icViewModel by viewModels<InfoCatcherViewModel>()
 
-    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
-        BookmarkViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
-            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val bookmarkViewModel by viewModels<BookmarkViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater) = DialogInfoCatcherBinding.inflate(inflater)
 

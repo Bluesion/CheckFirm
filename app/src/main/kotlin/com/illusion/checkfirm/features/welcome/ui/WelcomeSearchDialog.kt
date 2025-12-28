@@ -25,18 +25,9 @@ import java.util.Locale
 
 class WelcomeSearchDialog : CheckFirmBottomSheetDialogFragment<DialogWelcomeSearchBinding>() {
 
-    private val wsViewModel by viewModels<WelcomeSearchViewModel> {
-        WelcomeSearchViewModelFactory(
-            WelcomeSearchRepository(DatabaseProvider.getWelcomeSearchDao())
-        )
-    }
+    private val wsViewModel by viewModels<WelcomeSearchViewModel>()
 
-    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
-        BookmarkViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
-            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val bookmarkViewModel by viewModels<BookmarkViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater) =
         DialogWelcomeSearchBinding.inflate(inflater)

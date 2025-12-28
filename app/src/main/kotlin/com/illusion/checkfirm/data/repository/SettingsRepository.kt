@@ -3,92 +3,117 @@ package com.illusion.checkfirm.data.repository
 import com.illusion.checkfirm.data.model.local.SettingsItem
 import com.illusion.checkfirm.data.source.local.DataStoreManager
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class SettingsRepository(
+interface SettingsRepository {
+    fun getAllSettings(): Flow<SettingsItem>
+    fun getProfileName(): Flow<String>
+    suspend fun setProfileName(name: String)
+    fun getTheme(): Flow<String>
+    suspend fun setTheme(theme: String)
+    fun isDynamicColorEnabled(): Flow<Boolean>
+    suspend fun enableDynamicColor(enable: Boolean)
+    fun getAppLanguage(): Flow<String>
+    suspend fun setAppLanguage(language: String)
+    fun isQuickSearchBarEnabled(): Flow<Boolean>
+    suspend fun enableQuickSearchBar(enable: Boolean)
+    fun getBookmarkOrder(): Flow<String>
+    suspend fun setBookmarkOrder(order: String)
+    fun isBookmarkAscOrder(): Flow<Boolean>
+    suspend fun setBookmarkAscOrder(isAscOrder: Boolean)
+    fun isWelcomeSearchEnabled(): Flow<Boolean>
+    suspend fun enableWelcomeSearch(enable: Boolean)
+    fun isInfoCatcherEnabled(): Flow<Boolean>
+    suspend fun enableInfoCatcher(enable: Boolean)
+    fun isFirebaseEnabled(): Flow<Boolean>
+    suspend fun enableFirebase(enable: Boolean)
+}
+
+class SettingsRepositoryImpl @Inject constructor(
     private val dataStoreManager: DataStoreManager
-) {
+) : SettingsRepository {
 
-    fun getAllSettings(): Flow<SettingsItem> {
+    override fun getAllSettings(): Flow<SettingsItem> {
         return dataStoreManager.getAllSettings
     }
 
-    fun getProfileName(): Flow<String> {
+    override fun getProfileName(): Flow<String> {
         return dataStoreManager.getProfileName
     }
 
-    suspend fun setProfileName(name: String) {
+    override suspend fun setProfileName(name: String) {
         dataStoreManager.setProfileName(name)
     }
 
-    fun getTheme(): Flow<String> {
+    override fun getTheme(): Flow<String> {
         return dataStoreManager.getTheme
     }
 
-    suspend fun setTheme(theme: String) {
+    override suspend fun setTheme(theme: String) {
         dataStoreManager.setTheme(theme)
     }
 
-    fun isDynamicColorEnabled(): Flow<Boolean> {
+    override fun isDynamicColorEnabled(): Flow<Boolean> {
         return dataStoreManager.isDynamicColorEnabled
     }
 
-    suspend fun enableDynamicColor(enable: Boolean) {
+    override suspend fun enableDynamicColor(enable: Boolean) {
         dataStoreManager.enableDynamicColor(enable)
     }
 
-    fun getAppLanguage(): Flow<String> {
+    override fun getAppLanguage(): Flow<String> {
         return dataStoreManager.getAppLanguage
     }
 
-    suspend fun setAppLanguage(language: String) {
+    override suspend fun setAppLanguage(language: String) {
         dataStoreManager.setAppLanguage(language)
     }
 
-    fun isQuickSearchBarEnabled(): Flow<Boolean> {
+    override fun isQuickSearchBarEnabled(): Flow<Boolean> {
         return dataStoreManager.isQuickSearchBarEnabled
     }
 
-    suspend fun enableQuickSearchBar(enable: Boolean) {
+    override suspend fun enableQuickSearchBar(enable: Boolean) {
         dataStoreManager.enableQuickSearchBar(enable)
     }
 
-    fun getBookmarkOrder(): Flow<String> {
+    override fun getBookmarkOrder(): Flow<String> {
         return dataStoreManager.getBookmarkOrder
     }
 
-    suspend fun setBookmarkOrder(order: String) {
+    override suspend fun setBookmarkOrder(order: String) {
         dataStoreManager.setBookmarkOrder(order)
     }
 
-    fun isBookmarkAscOrder(): Flow<Boolean> {
+    override fun isBookmarkAscOrder(): Flow<Boolean> {
         return dataStoreManager.isBookmarkAscOrder
     }
 
-    suspend fun setBookmarkAscOrder(isAscOrder: Boolean) {
+    override suspend fun setBookmarkAscOrder(isAscOrder: Boolean) {
         dataStoreManager.setBookmarkAscOrder(isAscOrder)
     }
 
-    fun isWelcomeSearchEnabled(): Flow<Boolean> {
+    override fun isWelcomeSearchEnabled(): Flow<Boolean> {
         return dataStoreManager.isWelcomeSearchEnabled
     }
 
-    suspend fun enableWelcomeSearch(enable: Boolean) {
+    override suspend fun enableWelcomeSearch(enable: Boolean) {
         dataStoreManager.enableWelcomeSearch(enable)
     }
 
-    fun isInfoCatcherEnabled(): Flow<Boolean> {
+    override fun isInfoCatcherEnabled(): Flow<Boolean> {
         return dataStoreManager.isInfoCatcherEnabled
     }
 
-    suspend fun enableInfoCatcher(enable: Boolean) {
+    override suspend fun enableInfoCatcher(enable: Boolean) {
         dataStoreManager.enableInfoCatcher(enable)
     }
 
-    fun isFirebaseEnabled(): Flow<Boolean> {
+    override fun isFirebaseEnabled(): Flow<Boolean> {
         return dataStoreManager.isFirebaseEnabled
     }
 
-    suspend fun enableFirebase(enable: Boolean) {
+    override suspend fun enableFirebase(enable: Boolean) {
         dataStoreManager.enableFirebase(enable)
     }
 }

@@ -10,21 +10,17 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.common.ui.base.CheckFirmFragment
 import com.illusion.checkfirm.databinding.FragmentSherlockManualBinding
 import com.illusion.checkfirm.features.sherlock.util.SherlockStatus
 import com.illusion.checkfirm.features.sherlock.viewmodel.SherlockViewModel
-import com.illusion.checkfirm.features.sherlock.viewmodel.SherlockViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SherlockManualFragment : CheckFirmFragment<FragmentSherlockManualBinding>() {
 
-    private val sherlockViewModel by activityViewModels<SherlockViewModel> {
-        SherlockViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val sherlockViewModel by activityViewModels<SherlockViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater) =
         FragmentSherlockManualBinding.inflate(inflater)

@@ -20,7 +20,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.firebase.firestore.FirebaseFirestore
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewVerticalMarginDecorator
@@ -33,23 +32,21 @@ import com.illusion.checkfirm.data.source.remote.FirmwareFetcher
 import com.illusion.checkfirm.databinding.ActivityMainBinding
 import com.illusion.checkfirm.features.bookmark.ui.BookmarkCategoryActivity
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
-import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.catcher.ui.InfoCatcherActivity
 import com.illusion.checkfirm.features.main.viewmodel.AppMetadataViewModel
-import com.illusion.checkfirm.features.main.viewmodel.AppMetadataViewModelFactory
 import com.illusion.checkfirm.features.search.ui.SearchActivity
 import com.illusion.checkfirm.features.search.ui.SearchDialog
 import com.illusion.checkfirm.features.settings.SettingsActivity
 import com.illusion.checkfirm.features.settings.help.MyDeviceActivity
 import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModel
-import com.illusion.checkfirm.features.settings.viewmodel.SettingsViewModelFactory
 import com.illusion.checkfirm.features.welcome.ui.WelcomeSearchActivity
 import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModel
-import com.illusion.checkfirm.features.welcome.viewmodel.WelcomeSearchViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
 
     private val notificationPermissionLauncher =
@@ -88,30 +85,13 @@ class MainActivity : CheckFirmActivity<ActivityMainBinding>() {
             }
         }
 
-    private val appMetadataViewModel by viewModels<AppMetadataViewModel> {
-        AppMetadataViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getMainRepository()
-        )
-    }
+    private val appMetadataViewModel by viewModels<AppMetadataViewModel>()
 
-    private val settingsViewModel by viewModels<SettingsViewModel> {
-        SettingsViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val settingsViewModel by viewModels<SettingsViewModel>()
 
-    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
-        BookmarkViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getBCRepository(),
-            (application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val bookmarkViewModel by viewModels<BookmarkViewModel>()
 
-    private val wsViewModel by viewModels<WelcomeSearchViewModel> {
-        WelcomeSearchViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getWelcomeSearchRepository()
-        )
-    }
+    private val wsViewModel by viewModels<WelcomeSearchViewModel>()
 
     private var currentCategory = ""
 

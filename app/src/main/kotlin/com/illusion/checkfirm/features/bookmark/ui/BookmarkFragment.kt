@@ -8,32 +8,20 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.illusion.checkfirm.CheckFirm
-import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmFragment
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewVerticalMarginDecorator
 import com.illusion.checkfirm.common.util.Tools
 import com.illusion.checkfirm.databinding.FragmentBookmarkBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
-import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
-import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class BookmarkFragment : CheckFirmFragment<FragmentBookmarkBinding>() {
 
-    private val bookmarkViewModel by activityViewModels<BookmarkViewModel> {
-        BookmarkViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
-            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
-    private val categoryViewModel by activityViewModels<CategoryViewModel> {
-        CategoryViewModelFactory(
-            getString(R.string.category_all),
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
-        )
-    }
+    private val bookmarkViewModel by activityViewModels<BookmarkViewModel>()
+    private val categoryViewModel by activityViewModels<CategoryViewModel>()
     private lateinit var bookmarkAdapter: BookmarkAdapter
 
     override fun onCreateView(inflater: LayoutInflater) = FragmentBookmarkBinding.inflate(inflater)

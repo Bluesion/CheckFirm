@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmFragment
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewVerticalMarginDecorator
@@ -17,19 +16,16 @@ import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 import com.illusion.checkfirm.databinding.FragmentSearchTabHistoryBinding
 import com.illusion.checkfirm.features.search.util.SearchValidationResult
 import com.illusion.checkfirm.features.search.viewmodel.HistoryViewModel
-import com.illusion.checkfirm.features.search.viewmodel.HistoryViewModelFactory
 import com.illusion.checkfirm.features.search.viewmodel.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Locale
 
+@AndroidEntryPoint
 class TabHistoryFragment : CheckFirmFragment<FragmentSearchTabHistoryBinding>() {
 
     private val searchViewModel: SearchViewModel by activityViewModels()
-    private val historyViewModel by activityViewModels<HistoryViewModel> {
-        HistoryViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getHistoryRepository()
-        )
-    }
+    private val historyViewModel by activityViewModels<HistoryViewModel>()
     private lateinit var searchHistoryAdapter: SearchDeviceListAdapter
     private var historyList = mutableListOf<SearchDeviceItem>()
 

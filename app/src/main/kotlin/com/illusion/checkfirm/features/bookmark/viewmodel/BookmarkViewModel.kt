@@ -5,14 +5,17 @@ import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.data.model.local.BookmarkEntity
 import com.illusion.checkfirm.data.repository.BCRepository
 import com.illusion.checkfirm.data.repository.SettingsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BookmarkViewModel(
+@HiltViewModel
+class BookmarkViewModel @Inject constructor(
     private val bcRepository: BCRepository,
     private val settingsRepository: SettingsRepository
 ) : ViewModel() {

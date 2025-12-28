@@ -24,11 +24,7 @@ import kotlinx.coroutines.launch
 
 class AboutActivity : CheckFirmActivity<ActivityAboutBinding>() {
 
-    private val appMetadataViewModel by viewModels<AppMetadataViewModel> {
-        AppMetadataViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getMainRepository()
-        )
-    }
+    private val appMetadataViewModel by viewModels<AppMetadataViewModel>()
 
     override fun createBinding() = ActivityAboutBinding.inflate(layoutInflater)
 

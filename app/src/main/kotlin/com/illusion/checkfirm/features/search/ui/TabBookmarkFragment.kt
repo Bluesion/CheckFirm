@@ -13,7 +13,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmFragment
 import com.illusion.checkfirm.common.ui.recyclerview.RecyclerViewVerticalMarginDecorator
@@ -23,30 +22,20 @@ import com.illusion.checkfirm.data.model.local.SearchDeviceItem
 import com.illusion.checkfirm.databinding.FragmentSearchTabBookmarkBinding
 import com.illusion.checkfirm.features.bookmark.ui.BookmarkCategoryActivity
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
-import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
-import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
 import com.illusion.checkfirm.features.search.util.SearchValidationResult
 import com.illusion.checkfirm.features.search.viewmodel.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class TabBookmarkFragment : CheckFirmFragment<FragmentSearchTabBookmarkBinding>() {
 
     private val searchViewModel: SearchViewModel by activityViewModels()
-    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
-        BookmarkViewModelFactory(
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository(),
-            (requireActivity().application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val bookmarkViewModel by viewModels<BookmarkViewModel>()
 
-    private val categoryViewModel by viewModels<CategoryViewModel> {
-        CategoryViewModelFactory(
-            getString(R.string.category_all),
-            (requireActivity().application as CheckFirm).repositoryProvider.getBCRepository()
-        )
-    }
+    private val categoryViewModel by viewModels<CategoryViewModel>()
 
     private lateinit var searchBookmarkAdapter: SearchDeviceListAdapter
 

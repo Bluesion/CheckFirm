@@ -5,15 +5,19 @@ import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.data.model.local.BookmarkEntity
 import com.illusion.checkfirm.data.model.local.CategoryEntity
 import com.illusion.checkfirm.data.repository.BCRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Named
 
-class CategoryViewModel(
-    private val allString: String,
+@HiltViewModel
+class CategoryViewModel @Inject constructor(
+    @Named("allString") private val allString: String,
     private val bcRepository: BCRepository
 ) : ViewModel() {
 

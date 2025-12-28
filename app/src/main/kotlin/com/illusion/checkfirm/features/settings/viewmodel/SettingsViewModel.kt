@@ -4,14 +4,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.data.model.local.SettingsItem
 import com.illusion.checkfirm.data.repository.SettingsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SettingsViewModel(private val settingsRepository: SettingsRepository) : ViewModel() {
+@HiltViewModel
+class SettingsViewModel @Inject constructor(
+    private val settingsRepository: SettingsRepository
+) : ViewModel() {
 
     val settingsState: StateFlow<SettingsItem> = settingsRepository.getAllSettings()
         .stateIn(

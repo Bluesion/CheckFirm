@@ -9,34 +9,23 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.illusion.checkfirm.CheckFirm
 import com.illusion.checkfirm.R
 import com.illusion.checkfirm.common.ui.base.CheckFirmActivity
 import com.illusion.checkfirm.common.util.Tools
 import com.illusion.checkfirm.databinding.ActivityBookmarkCategoryBinding
 import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModel
-import com.illusion.checkfirm.features.bookmark.viewmodel.BookmarkViewModelFactory
 import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModel
-import com.illusion.checkfirm.features.bookmark.viewmodel.CategoryViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class BookmarkCategoryActivity : CheckFirmActivity<ActivityBookmarkCategoryBinding>() {
 
-    private val bookmarkViewModel by viewModels<BookmarkViewModel> {
-        BookmarkViewModelFactory(
-            (application as CheckFirm).repositoryProvider.getBCRepository(),
-            (application as CheckFirm).repositoryProvider.getSettingsRepository()
-        )
-    }
+    private val bookmarkViewModel by viewModels<BookmarkViewModel>()
 
-    private val categoryViewModel by viewModels<CategoryViewModel> {
-        CategoryViewModelFactory(
-            getString(R.string.category_all),
-            (application as CheckFirm).repositoryProvider.getBCRepository()
-        )
-    }
+    private val categoryViewModel by viewModels<CategoryViewModel>()
 
     private var currentTab = MutableStateFlow(-1)
 
