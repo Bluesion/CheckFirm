@@ -19,7 +19,7 @@ plugins {
 android {
     namespace = "com.illusion.checkfirm"
     compileSdk {
-        release(36)
+        version = release(36)
     }
 
     defaultConfig {
