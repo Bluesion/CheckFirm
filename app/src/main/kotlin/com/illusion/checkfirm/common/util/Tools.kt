@@ -111,8 +111,8 @@ object Tools {
     }
 
     private fun isValidModel(model: String): Boolean {
-        // Hyphen이 하나만 있는지 확인
-        if (model.count { it == '-' } != 1) {
+        // Hyphen > 1 is invalid. Japanese KDDI models have no hyphen
+        if (model.count { it == '-' } > 1) {
             return false
         }
 
