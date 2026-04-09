@@ -16,6 +16,7 @@ import com.illusion.checkfirm.data.model.local.UpdateType
 import com.illusion.checkfirm.data.model.remote.ApiException
 import com.illusion.checkfirm.data.model.remote.FirmwareVersionInfo
 import com.illusion.checkfirm.data.util.FirmwareXmlConverter
+import com.illusion.checkfirm.data.util.VersionTestFirmwareParser
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android
@@ -234,7 +235,7 @@ class FirmwareFetcher(
 
         try {
             val response =
-                xmlClient.get {
+                commonClient.get {
                     url {
                         protocol = URLProtocol.HTTPS
                         host = OSP_PREFIX
@@ -242,20 +243,22 @@ class FirmwareFetcher(
                     }
                 }
 
-            val fetchResult = response.body<FirmwareVersionInfo>()
+            val fetchResult =
+                runCatching { VersionTestFirmwareParser.parse(response.body<String>()) }.getOrNull()
+                    ?: return testFirmwareItem
 
-            testFirmwareItem.latestFirmware = fetchResult.firmware.version.latest.firmware
-            testFirmwareItem.androidVersion = fetchResult.firmware.version.latest.androidVersion
+            testFirmwareItem.latestFirmware = fetchResult.latestFirmware
+            testFirmwareItem.androidVersion = fetchResult.androidVersion
 
-            fetchResult.firmware.version.previous.list.forEach {
-                if (Character.isUpperCase(it.firmware[0])) {
-                    if (Tools.isBetaFirmware(it.firmware)) {
-                        betaHashMap[it.firmware] = it.firmware
+            fetchResult.previousFirmware.forEach { firmware ->
+                if (Character.isUpperCase(firmware[0])) {
+                    if (Tools.isBetaFirmware(firmware)) {
+                        betaHashMap[firmware] = firmware
                     } else {
-                        previousHashMap[it.firmware] = it.firmware
+                        previousHashMap[firmware] = firmware
                     }
                 } else {
-                    previousHashMap[it.firmware] = it.firmware
+                    previousHashMap[firmware] = firmware
                 }
             }
 
@@ -388,7 +391,7 @@ class FirmwareFetcher(
                     )
                 } else {
                     if (firestoreDecrypted != "null") {
-                        if (Tools.getMD5Hash(firestoreDecrypted) == firestoreLatest) {
+                        if (Tools.matchesVersionTestHash(firestoreDecrypted, firestoreLatest)) {
                             firmwareItem.testFirmwareItem.decryptedFirmware =
                                 firestoreDecrypted
                             firmwareItem.testFirmwareItem.watson = firestoreWatson

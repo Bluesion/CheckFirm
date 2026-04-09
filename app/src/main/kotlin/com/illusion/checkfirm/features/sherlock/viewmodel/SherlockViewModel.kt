@@ -8,6 +8,7 @@ import com.illusion.checkfirm.data.model.local.SearchResultItem
 import com.illusion.checkfirm.data.repository.SettingsRepository
 import com.illusion.checkfirm.features.sherlock.util.SherlockStatus
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -54,6 +55,9 @@ class SherlockViewModel(private val settingsRepository: SettingsRepository) : Vi
     val sherlockStatus: StateFlow<SherlockStatus> = _sherlockStatus.asStateFlow()
 
     val db = FirebaseFirestore.getInstance()
+    private var compareJob: Job? = null
+    private var encryptedMd5Targets: Set<String> = emptySet()
+    private var encryptedHmacTargets: Set<String> = emptySet()
 
     init {
         viewModelScope.launch {
@@ -64,6 +68,7 @@ class SherlockViewModel(private val settingsRepository: SettingsRepository) : Vi
 
     fun initialize(searchResult: SearchResultItem) {
         this.searchResult = searchResult
+        prepareEncryptedTargets()
         val officialFirmware = searchResult.firmware.testFirmwareItem.clue.ifBlank {
             searchResult.firmware.officialFirmwareItem.latestFirmware
         }
@@ -181,20 +186,18 @@ class SherlockViewModel(private val settingsRepository: SettingsRepository) : Vi
     }
 
     fun compare() {
-        _userInput.value =
-            "${_buildPrefix.value}${_manualBuild.value}/${_cscPrefix.value}${_manualCsc.value}/${_basebandPrefix.value}${_manualBaseband.value}"
-        viewModelScope.launch {
-            val encryptedFirmware = Tools.getMD5Hash(_userInput.value)
+        val candidate = buildManualFirmware()
+        _userInput.value = candidate
+        compareJob?.cancel()
+        compareJob = viewModelScope.launch(Dispatchers.Default) {
+            val isMatch = matchesEncryptedFirmware(candidate)
 
-            if (searchResult.firmware.testFirmwareItem.latestFirmware.isBlank()) {
-                if (searchResult.firmware.testFirmwareItem.previousFirmware[encryptedFirmware] != null) {
-                    _sherlockStatus.value = SherlockStatus.SUCCESS
-                    addToFireStore()
-                } else {
-                    _sherlockStatus.value = SherlockStatus.FAIL
+            withContext(Dispatchers.Main) {
+                if (_userInput.value != candidate) {
+                    return@withContext
                 }
-            } else {
-                if (searchResult.firmware.testFirmwareItem.latestFirmware == encryptedFirmware) {
+
+                if (isMatch) {
                     _sherlockStatus.value = SherlockStatus.SUCCESS
                     addToFireStore()
                 } else {
@@ -246,38 +249,29 @@ class SherlockViewModel(private val settingsRepository: SettingsRepository) : Vi
             var latestValue: String? = null
             initArrayList()
             val stringBuilder = StringBuilder()
-            for (x in 0 until scriptBuildList.size) {
-                for (y in 0..x) {
-                    for (z in 0..x) {
-                        stringBuilder.append(_buildPrefix.value)
-                        stringBuilder.append(scriptBuildList[x])
-                        stringBuilder.append("/")
-                        stringBuilder.append(_cscPrefix.value)
-                        stringBuilder.append(scriptCscList[y])
-                        stringBuilder.append("/")
-                        stringBuilder.append(_basebandPrefix.value)
-                        stringBuilder.append(scriptBasebandList[z])
+            for (buildIndex in scriptBuildList.indices) {
+                val buildSuffix = scriptBuildList[buildIndex]
+                val cscSuffix = scriptCscList[buildIndex]
 
-                        val currentValue = stringBuilder.toString()
+                for (basebandIndex in buildIndex downTo 0) {
+                    stringBuilder.append(_buildPrefix.value)
+                    stringBuilder.append(buildSuffix)
+                    stringBuilder.append("/")
+                    stringBuilder.append(_cscPrefix.value)
+                    stringBuilder.append(cscSuffix)
+                    stringBuilder.append("/")
+                    stringBuilder.append(_basebandPrefix.value)
+                    stringBuilder.append(scriptBasebandList[basebandIndex])
 
-                        val encryptedFirmware =
-                            Tools.getMD5Hash(currentValue)
+                    val currentValue = stringBuilder.toString()
 
-                        if (searchResult.firmware.testFirmwareItem.latestFirmware.isBlank()) {
-                            when {
-                                searchResult.firmware.testFirmwareItem.previousFirmware[encryptedFirmware] != null -> {
-                                    latestValue = currentValue
-                                }
-                            }
-                        } else {
-                            when (searchResult.firmware.testFirmwareItem.latestFirmware) {
-                                encryptedFirmware -> {
-                                    latestValue = currentValue
-                                }
-                            }
-                        }
+                    if (matchesEncryptedFirmware(currentValue)) {
+                        latestValue = currentValue
                         stringBuilder.setLength(0)
+                        break
                     }
+
+                    stringBuilder.setLength(0)
                 }
             }
 
@@ -299,65 +293,67 @@ class SherlockViewModel(private val settingsRepository: SettingsRepository) : Vi
         scriptBasebandList.clear()
 
         // b stands for bootloader, v for one ui version, y for year, m for month, r for revision
-        for (b in _scriptStart.value[1].._scriptEnd.value[1]) {
-            for (v in _scriptStart.value[2].._scriptEnd.value[2]) {
-                for (y in _scriptStart.value[3].._scriptEnd.value[3]) {
-                    when {
-                        y == _scriptStart.value[3] -> {
-                            for (m in _scriptStart.value[4].._scriptEnd.value[4]) {
-                                when {
-                                    m == _scriptStart.value[4] -> {
-                                        for (r in _scriptStart.value[5]..'Z') {
-                                            if (r !in ':'..'@') {
-                                                addToArrayList(b, v, y, m, r)
-                                                if ("${_scriptEnd.value[0]}$b$v$y$m$r" == _scriptEnd.value) {
-                                                    break
+        for (u in _scriptStart.value[0].._scriptEnd.value[0]) {
+            for (b in _scriptStart.value[1].._scriptEnd.value[1]) {
+                for (v in _scriptStart.value[2].._scriptEnd.value[2]) {
+                    for (y in _scriptStart.value[3].._scriptEnd.value[3]) {
+                        when {
+                            y == _scriptStart.value[3] -> {
+                                for (m in _scriptStart.value[4].._scriptEnd.value[4]) {
+                                    when {
+                                        m == _scriptStart.value[4] -> {
+                                            for (r in _scriptStart.value[5]..'Z') {
+                                                if (r !in ':'..'@') {
+                                                    addToArrayList(u, b, v, y, m, r)
+                                                    if ("$u$b$v$y$m$r" == _scriptEnd.value) {
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        m > _scriptStart.value[4] && m < _scriptEnd.value[4] -> {
+                                            for (r in '1'..'Z') {
+                                                if (r !in ':'..'@') {
+                                                    addToArrayList(u, b, v, y, m, r)
+                                                }
+                                            }
+                                        }
+
+                                        else -> {
+                                            for (r in '1'.._scriptEnd.value[5]) {
+                                                if (r !in ':'..'@') {
+                                                    addToArrayList(u, b, v, y, m, r)
                                                 }
                                             }
                                         }
                                     }
-
-                                    m > _scriptStart.value[4] && m < _scriptEnd.value[4] -> {
-                                        for (r in '1'..'Z') {
-                                            if (r !in ':'..'@') {
-                                                addToArrayList(b, v, y, m, r)
-                                            }
-                                        }
-                                    }
-
-                                    else -> {
-                                        for (r in '1'.._scriptEnd.value[5]) {
-                                            if (r !in ':'..'@') {
-                                                addToArrayList(b, v, y, m, r)
-                                            }
-                                        }
-                                    }
                                 }
                             }
-                        }
 
-                        y > _scriptStart.value[3] && y < _scriptEnd.value[3] -> {
-                            for (m in 'A'..'L') {
-                                for (r in '1'..'Z') {
-                                    if (r !in ':'..'@') {
-                                        addToArrayList(b, v, y, m, r)
-                                    }
-                                }
-                            }
-                        }
-
-                        else -> {
-                            for (m in 'A'.._scriptEnd.value[4]) {
-                                if (m == _scriptEnd.value[4]) {
-                                    for (r in '1'.._scriptEnd.value[5]) {
-                                        if (r !in ':'..'@') {
-                                            addToArrayList(b, v, y, m, r)
-                                        }
-                                    }
-                                } else {
+                            y > _scriptStart.value[3] && y < _scriptEnd.value[3] -> {
+                                for (m in 'A'..'L') {
                                     for (r in '1'..'Z') {
                                         if (r !in ':'..'@') {
-                                            addToArrayList(b, v, y, m, r)
+                                            addToArrayList(u, b, v, y, m, r)
+                                        }
+                                    }
+                                }
+                            }
+
+                            else -> {
+                                for (m in 'A'.._scriptEnd.value[4]) {
+                                    if (m == _scriptEnd.value[4]) {
+                                        for (r in '1'.._scriptEnd.value[5]) {
+                                            if (r !in ':'..'@') {
+                                                addToArrayList(u, b, v, y, m, r)
+                                            }
+                                        }
+                                    } else {
+                                        for (r in '1'..'Z') {
+                                            if (r !in ':'..'@') {
+                                                addToArrayList(u, b, v, y, m, r)
+                                            }
                                         }
                                     }
                                 }
@@ -369,9 +365,9 @@ class SherlockViewModel(private val settingsRepository: SettingsRepository) : Vi
         }
     }
 
-    private fun addToArrayList(b: Char, v: Char, y: Char, m: Char, r: Char) {
+    private fun addToArrayList(u: Char, b: Char, v: Char, y: Char, m: Char, r: Char) {
         val stringBuilder = StringBuilder()
-        stringBuilder.append(_scriptStart.value[0])
+        stringBuilder.append(u)
         stringBuilder.append(b)
         stringBuilder.append(v)
         stringBuilder.append(y)
@@ -383,6 +379,68 @@ class SherlockViewModel(private val settingsRepository: SettingsRepository) : Vi
 
         stringBuilder.deleteAt(0)
         scriptCscList.add(stringBuilder.toString())
+    }
+
+    private fun buildManualFirmware(): String {
+        val build = normalizeManualSegment(_buildPrefix.value, _manualBuild.value)
+        val csc = normalizeManualSegment(_cscPrefix.value, _manualCsc.value)
+        val baseband = normalizeManualSegment(_basebandPrefix.value, _manualBaseband.value)
+
+        return "$build/$csc/$baseband"
+    }
+
+    private fun normalizeManualSegment(prefix: String, manual: String): String {
+        val normalizedPrefix = prefix.trim().uppercase()
+        val normalizedManual = manual.trim().uppercase()
+
+        if (normalizedManual.isBlank()) {
+            return normalizedPrefix
+        }
+
+        return if (normalizedPrefix.isNotBlank() && normalizedManual.startsWith(normalizedPrefix)) {
+            normalizedManual
+        } else {
+            normalizedPrefix + normalizedManual
+        }
+    }
+
+    private fun prepareEncryptedTargets() {
+        val encryptedFirmwares = linkedSetOf<String>().apply {
+            add(searchResult.firmware.testFirmwareItem.latestFirmware)
+            addAll(searchResult.firmware.testFirmwareItem.previousFirmware.keys)
+        }
+
+        encryptedMd5Targets =
+            encryptedFirmwares
+                .asSequence()
+                .filter(Tools::isVersionTestMD5Hash)
+                .map(String::lowercase)
+                .toSet()
+
+        encryptedHmacTargets =
+            encryptedFirmwares
+                .asSequence()
+                .filter(Tools::isVersionTestHmacSHA256Hash)
+                .map(String::lowercase)
+                .toSet()
+    }
+
+    private fun matchesEncryptedFirmware(value: String): Boolean {
+        if (encryptedHmacTargets.isNotEmpty()) {
+            val candidateHash = Tools.getHmacSHA256Hash(value).lowercase()
+            if (candidateHash in encryptedHmacTargets) {
+                return true
+            }
+        }
+
+        if (encryptedMd5Targets.isNotEmpty()) {
+            val candidateHash = Tools.getMD5Hash(value).lowercase()
+            if (candidateHash in encryptedMd5Targets) {
+                return true
+            }
+        }
+
+        return false
     }
 
     fun addToFireStore() {

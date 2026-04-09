@@ -8,14 +8,19 @@ import com.illusion.checkfirm.R
 import com.illusion.checkfirm.data.model.local.DeviceItem
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.math.BigInteger
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import javax.crypto.Mac
+import javax.crypto.spec.SecretKeySpec
 
 object Tools {
+    private const val VERSION_TEST_HMAC_SHA256_KEY = "fcjimts25@%"
+    private const val MD5_HEX_LENGTH = 32
+    private const val HMAC_SHA256_HEX_LENGTH = 64
+
     fun isOnline(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val n = cm.activeNetwork
@@ -105,9 +110,49 @@ object Tools {
     }
 
     fun getMD5Hash(text: String): String {
-        val md = MessageDigest.getInstance("MD5")
-        val bigInt = BigInteger(1, md.digest(text.toByteArray(Charsets.UTF_8)))
-        return String.format("%032x", bigInt)
+        return MessageDigest.getInstance("MD5")
+            .digest(text.toByteArray(Charsets.UTF_8))
+            .toHexString()
+    }
+
+    fun getHmacSHA256Hash(text: String): String {
+        val mac = Mac.getInstance("HmacSHA256")
+        val secretKey = SecretKeySpec(
+            VERSION_TEST_HMAC_SHA256_KEY.toByteArray(Charsets.US_ASCII),
+            "HmacSHA256"
+        )
+
+        mac.init(secretKey)
+
+        return mac.doFinal(text.toByteArray(Charsets.US_ASCII)).toHexString()
+    }
+
+    fun isVersionTestHash(value: String): Boolean {
+        return isVersionTestMD5Hash(value) || isVersionTestHmacSHA256Hash(value)
+    }
+
+    fun isVersionTestMD5Hash(value: String): Boolean {
+        return value.length == MD5_HEX_LENGTH && value.all { it.isHexDigit() }
+    }
+
+    fun isVersionTestHmacSHA256Hash(value: String): Boolean {
+        return value.length == HMAC_SHA256_HEX_LENGTH && value.all { it.isHexDigit() }
+    }
+
+    fun getVersionTestHash(text: String, targetHash: String): String {
+        return if (isVersionTestHmacSHA256Hash(targetHash)) {
+            getHmacSHA256Hash(text)
+        } else {
+            getMD5Hash(text)
+        }
+    }
+
+    fun matchesVersionTestHash(text: String, targetHash: String): Boolean {
+        if (targetHash.isBlank()) {
+            return false
+        }
+
+        return getVersionTestHash(text, targetHash).equals(targetHash, ignoreCase = true)
     }
 
     private fun isValidModel(model: String): Boolean {
@@ -332,4 +377,25 @@ object Tools {
             category
         }
     }
+
+    private fun ByteArray.toHexString(): String {
+        val chars = CharArray(size * 2)
+
+        forEachIndexed { index, byte ->
+            val value = byte.toInt() and 0xff
+            chars[index * 2] = HEX_DIGITS[value ushr 4]
+            chars[index * 2 + 1] = HEX_DIGITS[value and 0x0f]
+        }
+
+        return String(chars)
+    }
+
+    private fun Char.isHexDigit(): Boolean {
+        return this in '0'..'9' || lowercaseChar() in 'a'..'f'
+    }
+
+    private val HEX_DIGITS = charArrayOf(
+        '0', '1', '2', '3', '4', '5', '6', '7',
+        '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+    )
 }
