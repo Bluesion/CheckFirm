@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -24,6 +25,29 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "CheckFirm"
 include(":app")
-include(":oneui")
+include(":core:designsystem")
+include(":core:navigation")
+include(":core:preference:api")
+include(":core:preference:impl")
+include(":domain")
+include(":data")
+include(":feature:bookmark:api")
+include(":feature:bookmark:impl")
+include(":feature:catcher:api")
+include(":feature:catcher:impl")
+include(":feature:main:api")
+include(":feature:main:impl")
+include(":feature:settings:api")
+include(":feature:settings:impl")
+include(":feature:report:api")
+include(":feature:report:impl")
+include(":feature:search:api")
+include(":feature:search:impl")
+include(":feature:sherlock:api")
+include(":feature:sherlock:impl")
+include(":feature:welcome:api")
+include(":feature:welcome:impl")

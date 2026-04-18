@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CheckFirm</string>
+    <string name="notification_channel_new_firmware">New Firmware</string>
+    <string name="notification_channel_new_update">App Update</string>
+    <string name="notification_new_update_title">CheckFirm urgent update</string>
+    <string name="notification_new_update_text">Critical bugs are reported. Please update it from Play Store right now.</string>
+    <string name="notification_info_catcher_title">%1$s (%2$s) new firmware found!</string>
+    <string name="notification_info_catcher_text">Check it now.</string>
+
+    <string name="txt_list_screen_title">File selection</string>
+    <string name="txt_folder_storage">Internal Storage</string>
+    <string name="txt_folder_download">Download</string>
+    <string name="txt_folder_deepmedi" translatable="false">deepmedi</string>
+    <string name="txt_folder_super_app" translatable="false">SuperApp</string>
+    <string name="txt_folder_rgb" translatable="false">RGB</string>
+    <string name="txt_folder_root" translatable="false">/</string>
+    <string name="txt_folder_data" translatable="false">data</string>
+    <string name="txt_folder_package" translatable="false">com.deepmedi.android.sdk.superapp</string>
+    <string name="txt_folder_files" translatable="false">files</string>
+</resources>

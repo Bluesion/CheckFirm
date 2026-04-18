@@ -1,0 +1,11 @@
+package com.illusion.checkfirm.domain.model
+
+sealed class ApiResponse<out T> {
+    data object Loading : ApiResponse<Nothing>()
+    data class Success<out T>(val data: T) : ApiResponse<T>()
+    sealed class Error : ApiResponse<Nothing>() {
+        data object NetworkError : Error()
+        data object ServerError : Error()
+        data object UnknownError : Error()
+    }
+}

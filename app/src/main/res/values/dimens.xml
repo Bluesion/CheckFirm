@@ -1,6 +1,0 @@
-<resources>
-    <dimen name="chip_ripple_default_alpha">0.12</dimen>
-    <dimen name="chip_ripple_focused_alpha">0.20</dimen>
-    <dimen name="chip_ripple_hovered_alpha">0.20</dimen>
-    <dimen name="chip_ripple_pressed_alpha">0.12</dimen>
-</resources>

@@ -6,24 +6,19 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 plugins {
-    alias(libs.plugins.android.application)
+    id("checkfirm.android.application")
+    id("checkfirm.android.application.compose")
+    id("checkfirm.hilt")
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.google.gms)
-    alias(libs.plugins.google.ksp)
-    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "com.illusion.checkfirm"
-    compileSdk {
-        version = release(36)
-    }
 
     defaultConfig {
         applicationId = "com.illusion.checkfirm"
-        minSdk = 28
-        targetSdk = 36
         versionCode = 58
         versionName = "11.2.1"
     }
@@ -39,13 +34,9 @@ android {
 
     buildTypes {
         debug {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
+            isShrinkResources = false
+            // signingConfig = signingConfigs.getByName("release")
         }
         release {
             isMinifyEnabled = true
@@ -62,13 +53,7 @@ android {
         generateLocaleConfig = true
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
     buildFeatures {
-        viewBinding = true
         buildConfig = true
     }
 
@@ -82,29 +67,76 @@ android {
     }
 }
 
-kotlin {
-    jvmToolchain(jdkVersion = 21)
-}
-
 room {
     schemaDirectory("$projectDir/schemas")
+    generateKotlin = true
+}
+
+hilt {
+    enableAggregatingTask = true
 }
 
 dependencies {
-    implementation(project(":oneui"))
-    implementation(libs.appcompat)
-    implementation(libs.ksoup)
-    implementation(libs.recyclerview)
-    implementation(libs.splashscreen)
+    implementation(projects.data)
+    implementation(projects.domain)
 
+    // Bookmark
+    implementation(projects.feature.bookmark.api)
+    implementation(projects.feature.bookmark.impl)
+
+    // Catcher
+    implementation(projects.feature.catcher.api)
+    implementation(projects.feature.catcher.impl)
+
+    // Main
+    implementation(projects.feature.main.api)
+    implementation(projects.feature.main.impl)
+
+    // Report
+    implementation(projects.feature.report.api)
+    implementation(projects.feature.report.impl)
+
+    // Search
+    implementation(projects.feature.search.api)
+    implementation(projects.feature.search.impl)
+
+    // Settings
+    implementation(projects.feature.settings.api)
+    implementation(projects.feature.settings.impl)
+
+    // Sherlock
+    implementation(projects.feature.sherlock.api)
+    implementation(projects.feature.sherlock.impl)
+
+    // Welcome
+    implementation(projects.feature.welcome.api)
+    implementation(projects.feature.welcome.impl)
+
+    // Core
+    implementation(projects.core.designsystem)
+    implementation(projects.core.navigation)
+    implementation(projects.core.preference.api)
+    implementation(projects.core.preference.impl)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.bundles.androidx.compose)
+    implementation(libs.bundles.androidx.lifecycle)
+    implementation(libs.bundles.androidx.navigation3)
     implementation(libs.bundles.angus)
-    implementation(libs.bundles.bases)
-    implementation(libs.bundles.coroutines)
-    implementation(libs.bundles.datas)
-    implementation(libs.bundles.designs)
-    implementation(libs.bundles.firebases)
-    implementation(libs.bundles.ktors)
-    implementation(libs.bundles.lifecycles)
+    implementation(libs.bundles.data)
+    implementation(libs.bundles.firebase)
+    implementation(libs.bundles.hilt)
+    implementation(libs.bundles.ktor)
 
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.google.accompanist.permissions)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.ksoup)
+
+    ksp(libs.google.hilt.compiler)
+    ksp(libs.kotlin.metadata.jvm)
     ksp(libs.room.compiler)
+
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }

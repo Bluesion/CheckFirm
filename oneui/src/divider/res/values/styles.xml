@@ -1,5 +1,0 @@
-<resources>
-    <style name="OneUI.Divider" parent="Widget.Material3.MaterialDivider">
-        <item name="dividerColor">@color/oneui_divider_color</item>
-    </style>
-</resources>

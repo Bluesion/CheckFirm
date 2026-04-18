@@ -1,9 +1,0 @@
-<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/checkfirm_app_icon">
-    <target
-        android:name="yellow"
-        android:animation="@animator/splash_screen_yellow" />
-    <target
-        android:name="blue"
-        android:animation="@animator/splash_screen_blue" />
-</animated-vector>

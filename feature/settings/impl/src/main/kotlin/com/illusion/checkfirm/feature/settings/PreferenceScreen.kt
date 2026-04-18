@@ -1,0 +1,203 @@
+package com.illusion.checkfirm.feature.settings
+
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.domain.model.Preference
+import com.illusion.checkfirm.feature.settings.bookmark.BookmarkOrderDialog
+import com.illusion.checkfirm.feature.settings.bookmark.BookmarkResetDialog
+import com.illusion.checkfirm.feature.settings.language.LanguageDialog
+import com.illusion.checkfirm.feature.settings.profile.ProfileDialog
+import com.illusion.checkfirm.feature.settings.theme.ThemeDialog
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PreferenceScreen(
+    preference: Preference,
+    onNavigateToAbout: () -> Unit,
+    onNavigateToBackupRestore: () -> Unit,
+    onNavigateToHelp: () -> Unit,
+    onNavigateToWelcomeSearch: () -> Unit,
+    onNavigateToInfoCatcher: () -> Unit,
+    onNavigateBack: () -> Unit,
+    onProfileNameChange: (String) -> Unit,
+    onThemeChange: (String) -> Unit,
+    onLanguageChange: (String) -> Unit,
+    onQuickSearchBarChange: (Boolean) -> Unit,
+    onBookmarkOrderChange: (String, Boolean) -> Unit,
+    onWelcomeSearchChange: (Boolean) -> Unit,
+    onInfoCatcherChange: (Boolean) -> Unit,
+    onFirebaseChange: (Boolean) -> Unit,
+) {
+    val context = LocalContext.current
+
+    var activeDialog by remember { mutableStateOf(PreferenceDialog.None) }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(R.string.settings_title)) },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(horizontal = 12.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            ProfileCard(
+                profileName = preference.profileName,
+                onClick = { activeDialog = PreferenceDialog.Profile },
+            )
+            AppearanceCard(
+                onThemeClick = { activeDialog = PreferenceDialog.Theme },
+                onLanguageClick = { activeDialog = PreferenceDialog.Language },
+                isQuickSearchBarEnabled = preference.isQuickSearchBarEnabled,
+                onQuickSearchBarClick = { onQuickSearchBarChange(!preference.isQuickSearchBarEnabled) },
+                onQuickSearchBarChanged = onQuickSearchBarChange,
+            )
+            BookmarkCard(
+                onBookmarkOrderClick = { activeDialog = PreferenceDialog.BookmarkOrder },
+                onBookmarkResetClick = { activeDialog = PreferenceDialog.BookmarkReset },
+                onBackupRestoreClick = onNavigateToBackupRestore,
+            )
+            SearchCard(
+                isWelcomeSearchEnabled = preference.isWelcomeSearchEnabled,
+                onWelcomeSearchClick = onNavigateToWelcomeSearch,
+                onWelcomeSearchChanged = onWelcomeSearchChange,
+                isInfoCatcherEnabled = preference.isInfoCatcherEnabled,
+                onInfoCatcherClick = onNavigateToInfoCatcher,
+                onInfoCatcherChanged = onInfoCatcherChange,
+                isFirebaseEnabled = preference.isFirebaseEnabled,
+                onFirebaseClick = { onFirebaseChange(!preference.isFirebaseEnabled) },
+                onFirebaseChanged = onFirebaseChange,
+            )
+            AboutCard(
+                onHelpClick = onNavigateToHelp,
+                onAboutClick = onNavigateToAbout,
+                onInquiryClick = {
+                    runCatching {
+                        val intent = Intent(Intent.ACTION_SENDTO).apply {
+                            data = "mailto:illusionis.dev@gmail.com".toUri()
+                            putExtra(Intent.EXTRA_SUBJECT, "CheckFirm Inquiry")
+                        }
+                        context.startActivity(intent)
+                    }
+                },
+            )
+        }
+    }
+
+    when (activeDialog) {
+        PreferenceDialog.Profile -> ProfileDialog(
+            initialName = preference.profileName,
+            onDismiss = { activeDialog = PreferenceDialog.None },
+            onConfirm = {
+                onProfileNameChange(it)
+                activeDialog = PreferenceDialog.None
+            }
+        )
+
+        PreferenceDialog.Theme -> ThemeDialog(
+            selectedTheme = preference.theme,
+            onDismiss = { activeDialog = PreferenceDialog.None },
+            onConfirm = {
+                onThemeChange(it)
+                activeDialog = PreferenceDialog.None
+            }
+        )
+
+        PreferenceDialog.Language -> LanguageDialog(
+            selectedLanguage = preference.language,
+            onDismiss = { activeDialog = PreferenceDialog.None },
+            onConfirm = {
+                onLanguageChange(it)
+                activeDialog = PreferenceDialog.None
+            }
+        )
+
+        PreferenceDialog.BookmarkOrder -> BookmarkOrderDialog(
+            selectedOrder = preference.bookmarkOrder,
+            isAscending = preference.isBookmarkAscOrder,
+            onDismiss = { activeDialog = PreferenceDialog.None },
+            onConfirm = { order, ascending ->
+                onBookmarkOrderChange(order, ascending)
+                activeDialog = PreferenceDialog.None
+            }
+        )
+
+        PreferenceDialog.BookmarkReset -> BookmarkResetDialog(
+            onDismiss = { activeDialog = PreferenceDialog.None },
+            onConfirm = {
+                activeDialog = PreferenceDialog.None
+            }
+        )
+
+        PreferenceDialog.None -> Unit
+    }
+}
+
+@Composable
+fun PreferenceRoute(
+    onNavigateToAbout: () -> Unit,
+    onNavigateToBackupRestore: () -> Unit,
+    onNavigateToHelp: () -> Unit,
+    onNavigateToWelcomeSearch: () -> Unit,
+    onNavigateToInfoCatcher: () -> Unit,
+    onNavigateBack: () -> Unit,
+    viewModel: PreferenceViewModel = hiltViewModel()
+) {
+    val preference by viewModel.preference.collectAsStateWithLifecycle()
+
+    PreferenceScreen(
+        preference = preference,
+        onNavigateToAbout = onNavigateToAbout,
+        onNavigateToBackupRestore = onNavigateToBackupRestore,
+        onNavigateToHelp = onNavigateToHelp,
+        onNavigateToWelcomeSearch = onNavigateToWelcomeSearch,
+        onNavigateToInfoCatcher = onNavigateToInfoCatcher,
+        onNavigateBack = onNavigateBack,
+        onProfileNameChange = viewModel::updateProfileName,
+        onThemeChange = viewModel::updateTheme,
+        onLanguageChange = viewModel::updateLanguage,
+        onQuickSearchBarChange = viewModel::updateQuickSearchBar,
+        onBookmarkOrderChange = viewModel::updateBookmarkOrder,
+        onWelcomeSearchChange = viewModel::updateWelcomeSearch,
+        onInfoCatcherChange = viewModel::updateInfoCatcher,
+        onFirebaseChange = viewModel::updateFirebase,
+    )
+}

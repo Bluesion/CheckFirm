@@ -1,6 +1,0 @@
-<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/ic_sherlock_normal_face_icon">
-    <target
-        android:name="mouth"
-        android:animation="@animator/sherlock_normal_animator" />
-</animated-vector>

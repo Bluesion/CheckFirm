@@ -1,0 +1,19 @@
+<resources>
+    <string name="preference">Preference</string>
+    <string name="preference_section_camera">Camera</string>
+    <string name="preference_raw_image_rotation">Raw image rotation</string>
+    <string name="preference_preview_rotation">Preview rotation</string>
+    <string name="preference_rotation_default">Default</string>
+    <string name="preference_camera_selection">Camera selection</string>
+    <string name="preference_camera_selection_standard_format" translatable="false">Camera2 %1$s (ID: %2$s)</string>
+    <string name="preference_camera_selection_uvc_format" translatable="false">UVC (VID: %1$d, PID: %2$d)</string>
+    <string name="preference_camera_standard_front">Front</string>
+    <string name="preference_camera_standard_back">Back</string>
+    <string name="preference_camera_standard_external">External</string>
+    <string name="preference_image_size">Image size</string>
+    <string name="preference_image_size_format" translatable="false">%1$dx%2$d</string>
+    <string name="preference_section_debug">Debugging</string>
+    <string name="preference_face_hole">Show face hole</string>
+    <string name="preference_roi">Show ROI</string>
+    <string name="preference_show_face_contour">Show Face Contour</string>
+</resources>

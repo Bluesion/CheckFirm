@@ -15,75 +15,28 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@android:style/Theme.Material.Light.NoActionBar">
         <activity
-            android:name=".features.main.ui.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.App.Start">
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".features.main.ui.ReportActivity"
-            android:label="" />
-        <activity
-            android:name=".features.bookmark.ui.BookmarkCategoryActivity"
-            android:label="" />
-        <activity
-            android:name=".features.settings.backuprestore.BackupRestoreActivity"
-            android:label="@string/settings_bookmark_backup_restore" />
-        <activity
-            android:name=".features.bookmark.ui.CategoryEditActivity"
-            android:label="" />
-        <activity
-            android:name=".features.settings.help.FirmwareManualActivity"
-            android:label="" />
-        <activity
-            android:name=".features.settings.help.MyDeviceActivity"
-            android:label="" />
-        <activity
-            android:name=".features.settings.help.HelpActivity"
-            android:label="" />
-        <activity
-            android:name=".features.search.ui.SearchActivity"
-            android:label="" />
-        <activity
-            android:name=".features.settings.about.AboutActivity"
-            android:label="" />
-        <activity
-            android:name=".features.catcher.ui.InfoCatcherActivity"
-            android:label="" />
-        <activity
-            android:name=".features.settings.SettingsActivity"
-            android:label="" />
-        <activity
-            android:name=".features.welcome.ui.WelcomeSearchActivity"
-            android:label="" />
-        <activity
-            android:name=".features.sherlock.ui.SherlockActivity"
-            android:label="" />
-        <activity android:name=".features.main.ui.OutdatedActivity" />
 
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.4" />
-        <meta-data
-            android:name="android.allow_multiple_resumed_activities"
-            android:value="true" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/oneui_primary" />
+            android:resource="@android:color/white" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/app_name" />
 
         <service
-            android:name=".features.catcher.service.InfoCatcherFCMService"
+            android:name=".feature.catcher.impl.service.InfoCatcherFCMService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -98,4 +51,5 @@
                 android:value="true" />
         </service>
     </application>
+
 </manifest>
