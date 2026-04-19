@@ -42,8 +42,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Category
@@ -349,25 +347,4 @@ private fun CategoryItem(
             IconButton(onClick = onDeleteClick) { Icon(Icons.Rounded.Delete, "Delete") }
         }
     }
-}
-
-@Composable
-fun BookmarkListRoute(
-    onNavigationIconClick: () -> Unit = {},
-    viewModel: BookmarkListViewModel = hiltViewModel()
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    BookmarkListScreen(
-        uiState = uiState,
-        onExpandedChange = viewModel::updateExpanded,
-        onCategoryChange = viewModel::updateSelectedCategory,
-        onNavigationIconClick = onNavigationIconClick,
-        onAddBookmark = viewModel::addBookmark,
-        onEditBookmark = viewModel::editBookmark,
-        onDeleteBookmark = viewModel::deleteBookmark,
-        onAddCategory = viewModel::addCategory,
-        onEditCategory = viewModel::editCategory,
-        onDeleteCategory = viewModel::deleteCategory,
-    )
 }

@@ -1,5 +1,8 @@
 package com.illusion.checkfirm.core.preference.api
 
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.Flow
 
-interface PreferenceRepository
+interface PreferenceRepository {
+    fun getSettings(): Flow<Preference>
+    suspend fun updateSettings(settings: Preference)
+}

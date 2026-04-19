@@ -6,9 +6,7 @@ plugins {
 android {
     namespace = "com.illusion.checkfirm.core.designsystem"
 
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 28

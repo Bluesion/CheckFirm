@@ -89,8 +89,8 @@ dependencies {
     implementation(projects.feature.catcher.impl)
 
     // Main
-    implementation(projects.feature.main.api)
-    implementation(projects.feature.main.impl)
+    implementation(projects.feature.home.api)
+    implementation(projects.feature.home.impl)
 
     // Report
     implementation(projects.feature.report.api)
@@ -134,8 +134,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.ksoup)
 
-    ksp(libs.google.hilt.compiler)
-    ksp(libs.kotlin.metadata.jvm)
+    ksp(libs.bundles.hilt.compiler)
     ksp(libs.room.compiler)
 
     debugImplementation(libs.androidx.compose.ui.tooling)

@@ -8,9 +8,8 @@ plugins {
 
 android {
     namespace = "com.illusion.checkfirm.data"
-    compileSdk {
-        version = release(36)
-    }
+
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 28
@@ -55,7 +54,6 @@ dependencies {
     implementation(libs.firestore)
     implementation(libs.ksoup)
 
-    ksp(libs.google.hilt.compiler)
-    ksp(libs.kotlin.metadata.jvm)
+    ksp(libs.bundles.hilt.compiler)
     ksp(libs.room.compiler)
 }

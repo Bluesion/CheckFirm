@@ -8,11 +8,11 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 typealias EntryProviderInstaller = EntryProviderScope<Any>.() -> Unit
 
 @ActivityRetainedScoped
-class Navigator(startDestination: Any) {
-    val backStack: SnapshotStateList<Any> = mutableStateListOf(startDestination)
+class Navigator(startNavKey: Any) {
+    val backStack: SnapshotStateList<Any> = mutableStateListOf(startNavKey)
 
-    fun goTo(destination: Any) {
-        backStack.add(destination)
+    fun goTo(navKey: Any) {
+        backStack.add(navKey)
     }
 
     fun goBack() {

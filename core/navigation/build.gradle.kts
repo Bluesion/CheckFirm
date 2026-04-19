@@ -7,9 +7,7 @@ plugins {
 android {
     namespace = "com.illusion.checkfirm.core.navigation"
 
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 28
@@ -36,7 +34,7 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.bundles.androidx.navigation3)
+    api(libs.bundles.androidx.navigation3)
     implementation(libs.bundles.hilt)
     ksp(libs.bundles.hilt.compiler)
 }

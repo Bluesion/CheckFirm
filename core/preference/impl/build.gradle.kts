@@ -2,18 +2,15 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.google.hilt)
     alias(libs.plugins.google.ksp)
-    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.illusion.checkfirm.core.preference.impl"
-    compileSdk {
-        version = release(36)
-    }
+
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 28
-
     }
 
     buildFeatures {
@@ -41,14 +38,9 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.core.designsystem)
-    implementation(projects.core.navigation)
     implementation(projects.core.preference.api)
-    implementation(projects.domain)
     implementation(libs.datastore)
 
-    implementation(libs.bundles.androidx.navigation3)
     implementation(libs.bundles.hilt)
-
     ksp(libs.bundles.hilt.compiler)
 }

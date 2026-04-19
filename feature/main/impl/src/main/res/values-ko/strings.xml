@@ -1,5 +1,0 @@
-<resources>
-    <string name="txt_list_screen_title">파일 선택</string>
-    <string name="txt_folder_storage">내장 스토리지</string>
-    <string name="txt_folder_download">다운로드</string>
-</resources>
