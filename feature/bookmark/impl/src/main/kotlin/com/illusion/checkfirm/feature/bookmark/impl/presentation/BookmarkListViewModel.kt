@@ -14,19 +14,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-
-data class BookmarkListUiState(
-    val expanded: Boolean = false,
-    val selectedCategory: String = "All",
-    val categories: List<Category> = emptyList(),
-    val bookmarks: List<Bookmark> = emptyList()
-)
 
 @HiltViewModel
 class BookmarkListViewModel @Inject constructor(
     private val repository: BCRepository
 ) : ViewModel() {
+
     private val _expanded = MutableStateFlow(false)
     private val _selectedCategory = MutableStateFlow("All")
 
@@ -39,17 +34,33 @@ class BookmarkListViewModel @Inject constructor(
         }
     }
 
+    private data class UiFlags(
+        val selectedTab: Int = 0,
+        val editingBookmark: Bookmark? = null,
+        val showNewBookmark: Boolean = false,
+        val editingCategory: Category? = null,
+        val showNewCategory: Boolean = false,
+    )
+
+    private val _uiFlags = MutableStateFlow(UiFlags())
+
     val uiState: StateFlow<BookmarkListUiState> = combine(
         _expanded,
         _selectedCategory,
         repository.getAllCategory(),
-        _bookmarksFlow
-    ) { expanded, selectedCategory, categories, bookmarks ->
+        _bookmarksFlow,
+        _uiFlags,
+    ) { expanded, selectedCategory, categories, bookmarks, flags ->
         BookmarkListUiState(
             expanded = expanded,
             selectedCategory = selectedCategory,
             categories = categories,
-            bookmarks = bookmarks
+            bookmarks = bookmarks,
+            selectedTab = flags.selectedTab,
+            editingBookmark = flags.editingBookmark,
+            showNewBookmark = flags.showNewBookmark,
+            editingCategory = flags.editingCategory,
+            showNewCategory = flags.showNewCategory,
         )
     }.stateIn(
         scope = viewModelScope,
@@ -63,6 +74,26 @@ class BookmarkListViewModel @Inject constructor(
 
     fun updateSelectedCategory(value: String) {
         _selectedCategory.value = value
+    }
+
+    fun updateSelectedTab(value: Int) {
+        _uiFlags.update { it.copy(selectedTab = value) }
+    }
+
+    fun updateEditingBookmark(value: Bookmark?) {
+        _uiFlags.update { it.copy(editingBookmark = value) }
+    }
+
+    fun updateShowNewBookmark(value: Boolean) {
+        _uiFlags.update { it.copy(showNewBookmark = value) }
+    }
+
+    fun updateEditingCategory(value: Category?) {
+        _uiFlags.update { it.copy(editingCategory = value) }
+    }
+
+    fun updateShowNewCategory(value: Boolean) {
+        _uiFlags.update { it.copy(showNewCategory = value) }
     }
 
     fun addBookmark(bookmark: Bookmark) {

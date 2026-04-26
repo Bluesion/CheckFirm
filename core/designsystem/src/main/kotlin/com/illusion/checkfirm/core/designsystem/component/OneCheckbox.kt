@@ -5,6 +5,8 @@ import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneCheckbox(
@@ -21,4 +23,15 @@ fun OneCheckbox(
             checkedColor = checkedColor
         )
     )
+}
+
+@ComponentPreview
+@Composable
+private fun OneCheckboxPreview() {
+    CheckFirmTheme {
+        OneCheckbox(
+            checked = true,
+            onCheckedChange = {},
+        )
+    }
 }

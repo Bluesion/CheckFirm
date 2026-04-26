@@ -5,6 +5,8 @@ import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneRadioButton(
@@ -23,4 +25,14 @@ fun OneRadioButton(
     )
 }
 
+@ComponentPreview
+@Composable
+private fun OneRadioButtonPreview() {
+    CheckFirmTheme {
+        OneRadioButton(
+            selected = true,
+            onClick = {},
+        )
+    }
+}
 

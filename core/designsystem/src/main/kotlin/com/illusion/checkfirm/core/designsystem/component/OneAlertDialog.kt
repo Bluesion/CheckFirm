@@ -8,6 +8,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneAlertDialog(
@@ -60,4 +62,15 @@ fun OneAlertDialog(
     )
 }
 
+@ComponentPreview
+@Composable
+private fun OneAlertDialogPreview() {
+    CheckFirmTheme {
+        OneAlertDialog(
+            title = "Delete bookmark?",
+            text = "This action cannot be undone.",
+            onConfirmButtonClick = {},
+        )
+    }
+}
 

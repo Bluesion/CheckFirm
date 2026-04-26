@@ -22,6 +22,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneSwitch(
@@ -82,5 +84,27 @@ fun OneSwitchCard(
             Spacer(modifier = Modifier.weight(1f))
             OneSwitch(checked = checked, onCheckedChange = null)
         }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun OneSwitchPreview() {
+    CheckFirmTheme {
+        OneSwitch(
+            checked = true,
+            onCheckedChange = {},
+        )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun OneSwitchCardPreview() {
+    CheckFirmTheme {
+        OneSwitchCard(
+            checked = true,
+            onCheckedChange = {},
+        )
     }
 }

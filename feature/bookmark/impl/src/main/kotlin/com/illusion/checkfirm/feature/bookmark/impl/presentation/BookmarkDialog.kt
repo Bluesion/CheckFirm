@@ -24,6 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Device
 
@@ -120,4 +122,16 @@ fun BookmarkDialog(
             TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
+}
+
+@ComponentPreview
+@Composable
+private fun BookmarkDialogPreview() {
+    CheckFirmTheme {
+        BookmarkDialog(
+            categories = listOf("Galaxy S", "Galaxy Z"),
+            onDismiss = {},
+            onConfirm = {},
+        )
+    }
 }

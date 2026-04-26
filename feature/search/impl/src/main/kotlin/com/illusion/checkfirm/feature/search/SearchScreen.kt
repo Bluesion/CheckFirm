@@ -47,6 +47,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Device
 import com.illusion.checkfirm.domain.model.SearchHistory
@@ -445,4 +447,12 @@ private fun SearchBottomSheetContent(
 
 private fun toast(context: android.content.Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+
+@ScreenPreview
+@Composable
+private fun SearchScreenPreview() {
+    CheckFirmTheme {
+        SearchScreen(onNavigationIconClick = {})
+    }
 }

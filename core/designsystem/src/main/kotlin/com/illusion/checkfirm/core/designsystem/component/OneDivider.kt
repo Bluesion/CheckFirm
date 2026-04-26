@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneDivider(
@@ -21,4 +23,12 @@ fun OneDivider(
         thickness = thickness,
         color = color ?: defaultColor
     )
+}
+
+@ComponentPreview
+@Composable
+private fun OneDividerPreview() {
+    CheckFirmTheme {
+        OneDivider()
+    }
 }

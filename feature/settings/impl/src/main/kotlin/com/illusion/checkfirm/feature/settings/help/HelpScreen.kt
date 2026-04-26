@@ -19,6 +19,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneListCard
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.component.OneSettingsDivider
 import com.illusion.checkfirm.core.designsystem.component.OneSettingsItem
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
@@ -64,5 +65,17 @@ fun HelpScreen(
                 )
             }
         }
+    }
+}
+
+@ScreenPreview
+@Composable
+private fun HelpScreenPreview() {
+    CheckFirmTheme {
+        HelpScreen(
+            onNavigateBack = {},
+            onNavigateToFirmwareManual = {},
+            onNavigateToMyDevice = {},
+        )
     }
 }

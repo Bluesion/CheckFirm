@@ -16,6 +16,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 data class FirmwareVersions(
     val officialLatest: String = "",
@@ -73,5 +75,22 @@ private fun FirmwareRow(label: String, value: String) {
                 style = MaterialTheme.typography.bodyMedium
             )
         }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun SearchDialogPreview() {
+    CheckFirmTheme {
+        SearchDialog(
+            deviceTitle = "SM-S928B / KOO",
+            versions = FirmwareVersions(
+                officialLatest = "S928BKSU3AXL5",
+                officialPrevious = "S928BKSU2AXJ2",
+                testLatest = "S928BKSU3BXL5",
+                testPrevious = "-",
+            ),
+            onDismiss = {},
+        )
     }
 }

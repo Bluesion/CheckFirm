@@ -12,9 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
@@ -62,7 +62,7 @@ fun SherlockDialog(
     }
 }
 
-@Preview(showBackground = true)
+@ComponentPreview
 @Composable
 private fun SherlockDialogPreview() {
     CheckFirmTheme {

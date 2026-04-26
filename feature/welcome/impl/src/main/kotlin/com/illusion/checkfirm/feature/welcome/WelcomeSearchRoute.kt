@@ -8,7 +8,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun WelcomeSearchRoute(
     viewModel: WelcomeSearchViewModel = hiltViewModel(),
-    onNavigationIconClick: () -> Unit
+    onNavigationIconClick: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -19,6 +19,8 @@ fun WelcomeSearchRoute(
         onModelChange = viewModel::updateModel,
         onCscChange = viewModel::updateCsc,
         onSelectedChipChange = viewModel::updateSelectedChip,
-        onNavigationIconClick = onNavigationIconClick
+        onAddDevice = viewModel::addDevice,
+        onRemoveDevice = viewModel::removeDevice,
+        onNavigationIconClick = onNavigationIconClick,
     )
 }

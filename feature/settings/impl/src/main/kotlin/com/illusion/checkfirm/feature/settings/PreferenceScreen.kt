@@ -1,4 +1,3 @@
-
 package com.illusion.checkfirm.feature.settings
 
 import android.content.Intent
@@ -11,10 +10,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -23,8 +18,8 @@ import androidx.core.net.toUri
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import com.illusion.checkfirm.core.preference.api.Preference
 import com.illusion.checkfirm.feature.settings.bookmark.BookmarkOrderDialog
 import com.illusion.checkfirm.feature.settings.bookmark.BookmarkResetDialog
 import com.illusion.checkfirm.feature.settings.language.LanguageDialog
@@ -33,13 +28,14 @@ import com.illusion.checkfirm.feature.settings.theme.ThemeDialog
 
 @Composable
 fun PreferenceScreen(
-    preference: Preference,
+    uiState: PreferenceUiState,
     onNavigateToAbout: () -> Unit,
     onNavigateToBackupRestore: () -> Unit,
     onNavigateToHelp: () -> Unit,
     onNavigateToWelcomeSearch: () -> Unit,
     onNavigateToInfoCatcher: () -> Unit,
     onNavigateBack: () -> Unit,
+    onActiveDialogChange: (PreferenceDialog) -> Unit,
     onProfileNameChange: (String) -> Unit,
     onThemeChange: (String) -> Unit,
     onLanguageChange: (String) -> Unit,
@@ -50,7 +46,7 @@ fun PreferenceScreen(
     onFirebaseChange: (Boolean) -> Unit,
 ) {
     val context = LocalContext.current
-    var activeDialog by remember { mutableStateOf(PreferenceDialog.None) }
+    val preference = uiState.preference
 
     OneScaffold(
         title = stringResource(R.string.settings),
@@ -74,18 +70,18 @@ fun PreferenceScreen(
         ) {
             ProfileCard(
                 profileName = preference.profileName,
-                onClick = { activeDialog = PreferenceDialog.Profile },
+                onClick = { onActiveDialogChange(PreferenceDialog.Profile) },
             )
             AppearanceCard(
-                onThemeClick = { activeDialog = PreferenceDialog.Theme },
-                onLanguageClick = { activeDialog = PreferenceDialog.Language },
+                onThemeClick = { onActiveDialogChange(PreferenceDialog.Theme) },
+                onLanguageClick = { onActiveDialogChange(PreferenceDialog.Language) },
                 isQuickSearchBarEnabled = preference.isQuickSearchBarEnabled,
                 onQuickSearchBarClick = { onQuickSearchBarChange(!preference.isQuickSearchBarEnabled) },
                 onQuickSearchBarChanged = onQuickSearchBarChange,
             )
             BookmarkCard(
-                onBookmarkOrderClick = { activeDialog = PreferenceDialog.BookmarkOrder },
-                onBookmarkResetClick = { activeDialog = PreferenceDialog.BookmarkReset },
+                onBookmarkOrderClick = { onActiveDialogChange(PreferenceDialog.BookmarkOrder) },
+                onBookmarkResetClick = { onActiveDialogChange(PreferenceDialog.BookmarkReset) },
                 onBackupRestoreClick = onNavigateToBackupRestore,
             )
             SearchCard(
@@ -115,49 +111,74 @@ fun PreferenceScreen(
         }
     }
 
-    when (activeDialog) {
+    when (uiState.activeDialog) {
         PreferenceDialog.Profile -> ProfileDialog(
             initialName = preference.profileName,
-            onDismiss = { activeDialog = PreferenceDialog.None },
+            onDismiss = { onActiveDialogChange(PreferenceDialog.None) },
             onConfirm = {
                 onProfileNameChange(it)
-                activeDialog = PreferenceDialog.None
+                onActiveDialogChange(PreferenceDialog.None)
             },
         )
 
         PreferenceDialog.Theme -> ThemeDialog(
             selectedTheme = preference.theme,
-            onDismiss = { activeDialog = PreferenceDialog.None },
+            onDismiss = { onActiveDialogChange(PreferenceDialog.None) },
             onConfirm = {
                 onThemeChange(it)
-                activeDialog = PreferenceDialog.None
+                onActiveDialogChange(PreferenceDialog.None)
             },
         )
 
         PreferenceDialog.Language -> LanguageDialog(
             selectedLanguage = preference.language,
-            onDismiss = { activeDialog = PreferenceDialog.None },
+            onDismiss = { onActiveDialogChange(PreferenceDialog.None) },
             onConfirm = {
                 onLanguageChange(it)
-                activeDialog = PreferenceDialog.None
+                onActiveDialogChange(PreferenceDialog.None)
             },
         )
 
         PreferenceDialog.BookmarkOrder -> BookmarkOrderDialog(
             selectedOrder = preference.bookmarkOrder,
             isAscending = preference.isBookmarkAscOrder,
-            onDismiss = { activeDialog = PreferenceDialog.None },
+            onDismiss = { onActiveDialogChange(PreferenceDialog.None) },
             onConfirm = { order, ascending ->
                 onBookmarkOrderChange(order, ascending)
-                activeDialog = PreferenceDialog.None
+                onActiveDialogChange(PreferenceDialog.None)
             },
         )
 
         PreferenceDialog.BookmarkReset -> BookmarkResetDialog(
-            onDismiss = { activeDialog = PreferenceDialog.None },
-            onConfirm = { activeDialog = PreferenceDialog.None },
+            onDismiss = { onActiveDialogChange(PreferenceDialog.None) },
+            onConfirm = { onActiveDialogChange(PreferenceDialog.None) },
         )
 
         PreferenceDialog.None -> Unit
+    }
+}
+
+@ScreenPreview
+@Composable
+private fun PreferenceScreenPreview() {
+    CheckFirmTheme {
+        PreferenceScreen(
+            uiState = PreferenceUiState(),
+            onNavigateToAbout = {},
+            onNavigateToBackupRestore = {},
+            onNavigateToHelp = {},
+            onNavigateToWelcomeSearch = {},
+            onNavigateToInfoCatcher = {},
+            onNavigateBack = {},
+            onActiveDialogChange = {},
+            onProfileNameChange = {},
+            onThemeChange = {},
+            onLanguageChange = {},
+            onQuickSearchBarChange = {},
+            onBookmarkOrderChange = { _, _ -> },
+            onWelcomeSearchChange = {},
+            onInfoCatcherChange = {},
+            onFirebaseChange = {},
+        )
     }
 }

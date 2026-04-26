@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneProgress(
@@ -18,4 +20,12 @@ fun OneProgress(
         color = color,
         strokeWidth = strokeWidth.dp
     )
+}
+
+@ComponentPreview
+@Composable
+private fun OneProgressPreview() {
+    CheckFirmTheme {
+        OneProgress()
+    }
 }

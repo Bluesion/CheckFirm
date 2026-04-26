@@ -7,6 +7,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun BookmarkResetDialog(
@@ -34,4 +36,15 @@ fun BookmarkResetDialog(
             TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
+}
+
+@ComponentPreview
+@Composable
+private fun BookmarkResetDialogPreview() {
+    CheckFirmTheme {
+        BookmarkResetDialog(
+            onDismiss = {},
+            onConfirm = {},
+        )
+    }
 }

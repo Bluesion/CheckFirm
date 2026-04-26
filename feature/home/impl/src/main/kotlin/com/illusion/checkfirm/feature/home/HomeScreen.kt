@@ -36,6 +36,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneListCard
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.component.OneSettingsDivider
 import com.illusion.checkfirm.core.designsystem.component.OneSettingsItem
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
@@ -104,6 +105,22 @@ fun HomeScreen(
                 )
             }
         }
+    }
+}
+
+@ScreenPreview
+@Composable
+private fun HomeScreenPreview() {
+    CheckFirmTheme {
+        HomeScreen(
+            uiState = HomeUiState(),
+            onSearchIconClick = {},
+            onBookmarkIconClick = {},
+            onPreferenceIconClick = {},
+            onWelcomeSearchClick = {},
+            onInfoCatcherClick = {},
+            onCategoryChipClick = {},
+        )
     }
 }
 

@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneTabs(
@@ -59,4 +61,14 @@ fun OneTabs(
     }
 }
 
-
+@ComponentPreview
+@Composable
+private fun OneTabsPreview() {
+    CheckFirmTheme {
+        OneTabs(
+            titles = listOf("Bookmark", "History"),
+            selectedTabIndex = 0,
+            onTabSelected = {},
+        )
+    }
+}

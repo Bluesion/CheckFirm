@@ -1,7 +1,5 @@
-
 package com.illusion.checkfirm.feature.settings.help
 
-import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,7 +17,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -28,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
@@ -35,12 +33,6 @@ fun MyDeviceScreen(
     uiState: MyDeviceUiState,
     onNavigationIconClick: () -> Unit,
 ) {
-    val model = remember { Build.MODEL ?: "" }
-    val hardware = remember { Build.DEVICE ?: "" }
-    val manufacturer = remember { Build.MANUFACTURER ?: "" }
-    val sdk = remember { Build.VERSION.SDK_INT.toString() }
-    val release = remember { Build.VERSION.RELEASE ?: "" }
-
     OneScaffold(
         title = stringResource(R.string.help_device_info),
         navigationIcon = {
@@ -80,10 +72,10 @@ fun MyDeviceScreen(
                         color = MaterialTheme.colorScheme.primary,
                     )
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-                    InfoRow(label = stringResource(R.string.model), value = model)
-                    InfoRow(label = "Manufacturer", value = manufacturer)
-                    InfoRow(label = "Hardware", value = hardware)
-                    InfoRow(label = "Android", value = "$release (SDK $sdk)")
+                    InfoRow(label = stringResource(R.string.model), value = uiState.model)
+                    InfoRow(label = "Manufacturer", value = uiState.manufacturer)
+                    InfoRow(label = "Hardware", value = uiState.hardware)
+                    InfoRow(label = "Android", value = "${uiState.release} (SDK ${uiState.sdk})")
                 }
             }
         }
@@ -107,6 +99,23 @@ private fun InfoRow(label: String, value: String) {
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurface,
+        )
+    }
+}
+
+@ScreenPreview
+@Composable
+private fun MyDeviceScreenPreview() {
+    CheckFirmTheme {
+        MyDeviceScreen(
+            uiState = MyDeviceUiState(
+                model = "SM-S928B",
+                hardware = "e3q",
+                manufacturer = "Samsung",
+                sdk = "35",
+                release = "15",
+            ),
+            onNavigationIconClick = {},
         )
     }
 }

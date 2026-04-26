@@ -29,6 +29,8 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneEditText(
@@ -113,4 +115,15 @@ fun OneEditText(
     }
 }
 
+@ComponentPreview
+@Composable
+private fun OneEditTextPreview() {
+    CheckFirmTheme {
+        OneEditText(
+            value = "SM-S928B",
+            onValueChange = {},
+            hint = "Enter model",
+        )
+    }
+}
 

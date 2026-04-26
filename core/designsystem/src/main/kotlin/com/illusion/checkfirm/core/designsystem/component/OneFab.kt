@@ -2,12 +2,16 @@ package com.illusion.checkfirm.core.designsystem.component
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneFab(
@@ -35,4 +39,15 @@ fun OneFab(
     }
 }
 
+@ComponentPreview
+@Composable
+private fun OneFabPreview() {
+    CheckFirmTheme {
+        OneFab(
+            onClick = {},
+            icon = Icons.Rounded.Add,
+            contentDescription = "Add",
+        )
+    }
+}
 

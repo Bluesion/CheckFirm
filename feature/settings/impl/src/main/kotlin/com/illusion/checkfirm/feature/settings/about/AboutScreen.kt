@@ -1,4 +1,3 @@
-
 package com.illusion.checkfirm.feature.settings.about
 
 import androidx.compose.foundation.layout.Column
@@ -26,6 +25,8 @@ import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
@@ -139,6 +140,29 @@ private fun AboutPageButton(text: String, onClick: () -> Unit) {
                 fontSize = 18.sp,
             ),
             maxLines = 1,
+        )
+    }
+}
+
+@ScreenPreview
+@Composable
+private fun AboutScreenPreview() {
+    CheckFirmTheme {
+        AboutScreen(
+            onNavigateBack = {},
+            showDialog = {},
+            hideDialog = {},
+        )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun AboutPageButtonPreview() {
+    CheckFirmTheme {
+        AboutPageButton(
+            text = "Contributor",
+            onClick = {},
         )
     }
 }

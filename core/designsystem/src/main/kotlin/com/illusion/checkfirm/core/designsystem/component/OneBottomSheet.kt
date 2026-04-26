@@ -1,4 +1,3 @@
-
 package com.illusion.checkfirm.core.designsystem.component
 
 import androidx.compose.foundation.layout.Column
@@ -16,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneBottomSheetDialog(
@@ -46,6 +47,19 @@ fun OneBottomSheetDialog(
                 color = MaterialTheme.colorScheme.onSurface,
             )
             content()
+        }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun OneBottomSheetDialogPreview() {
+    CheckFirmTheme {
+        OneBottomSheetDialog(
+            title = "Select option",
+            onDismiss = {},
+        ) {
+            Text(text = "Content goes here")
         }
     }
 }

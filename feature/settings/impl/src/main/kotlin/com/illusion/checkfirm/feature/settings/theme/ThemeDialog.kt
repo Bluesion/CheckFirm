@@ -29,6 +29,8 @@ import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.component.OneRadioButton
 import com.illusion.checkfirm.core.designsystem.component.OneSwitch
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun ThemeDialog(
@@ -124,5 +126,17 @@ private fun ThemePreview(
             modifier = Modifier.padding(top = 8.dp),
         )
         OneRadioButton(selected = selected, onClick = onClick)
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun ThemeDialogPreview() {
+    CheckFirmTheme {
+        ThemeDialog(
+            selectedTheme = "system",
+            onDismiss = {},
+            onConfirm = {},
+        )
     }
 }

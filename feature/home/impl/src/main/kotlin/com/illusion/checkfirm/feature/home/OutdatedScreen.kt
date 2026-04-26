@@ -22,6 +22,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OutdatedScreen(
@@ -74,5 +76,13 @@ fun OutdatedScreen(
                 Text(text = stringResource(R.string.close))
             }
         }
+    }
+}
+
+@ScreenPreview
+@Composable
+private fun OutdatedScreenPreview() {
+    CheckFirmTheme {
+        OutdatedScreen(onClose = {})
     }
 }

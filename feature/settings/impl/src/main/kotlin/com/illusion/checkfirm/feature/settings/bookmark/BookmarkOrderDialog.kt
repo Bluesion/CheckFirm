@@ -22,6 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun BookmarkOrderDialog(
@@ -80,4 +82,17 @@ fun BookmarkOrderDialog(
             TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
+}
+
+@ComponentPreview
+@Composable
+private fun BookmarkOrderDialogPreview() {
+    CheckFirmTheme {
+        BookmarkOrderDialog(
+            selectedOrder = "time",
+            isAscending = true,
+            onDismiss = {},
+            onConfirm = { _, _ -> },
+        )
+    }
 }

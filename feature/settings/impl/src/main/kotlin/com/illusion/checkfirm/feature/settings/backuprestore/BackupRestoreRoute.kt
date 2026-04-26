@@ -14,8 +14,8 @@ import java.util.Locale
 
 @Composable
 fun BackupRestoreRoute(
-    viewModel: BackupRestoreViewModel = hiltViewModel(),
     onNavigationIconClick: () -> Unit,
+    viewModel: BackupRestoreViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     LocalContext.current

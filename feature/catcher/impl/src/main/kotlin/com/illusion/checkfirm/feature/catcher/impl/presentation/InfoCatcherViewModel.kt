@@ -14,16 +14,11 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-data class InfoCatcherUiState(
-    val showDialog: Boolean = false,
-    val isEnabled: Boolean = false,
-    val devices: List<Device> = emptyList()
-)
-
 @HiltViewModel
 class InfoCatcherViewModel @Inject constructor(
     private val repository: InfoCatcherRepository
 ) : ViewModel() {
+
     private val _uiState = MutableStateFlow(InfoCatcherUiState())
 
     val uiState: StateFlow<InfoCatcherUiState> =
@@ -40,23 +35,29 @@ class InfoCatcherViewModel @Inject constructor(
     }
 
     fun dismissDialog() {
-        _uiState.update { it.copy(showDialog = false) }
+        _uiState.update { it.copy(showDialog = false, dialogModel = "SM-", dialogCsc = "") }
     }
 
     fun toggleEnabled(enabled: Boolean) {
         _uiState.update { it.copy(isEnabled = enabled) }
     }
 
+    fun updateDialogModel(value: String) {
+        _uiState.update { it.copy(dialogModel = value) }
+    }
+
+    fun updateDialogCsc(value: String) {
+        _uiState.update { it.copy(dialogCsc = value) }
+    }
+
     fun addDevice(model: String, csc: String) {
         viewModelScope.launch {
             repository.insert(Device(model, csc))
-            _uiState.update { it.copy(showDialog = false) }
+            _uiState.update { it.copy(showDialog = false, dialogModel = "SM-", dialogCsc = "") }
         }
     }
 
     fun removeDevice(device: Device) {
-        viewModelScope.launch {
-            repository.delete(device)
-        }
+        viewModelScope.launch { repository.delete(device) }
     }
 }

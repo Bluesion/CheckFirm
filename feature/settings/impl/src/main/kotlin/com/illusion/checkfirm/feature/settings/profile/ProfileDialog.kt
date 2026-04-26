@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.component.OneEditText
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun ProfileDialog(
@@ -66,5 +68,17 @@ fun ProfileDialog(
                 Text(text = stringResource(R.string.bookmark_save))
             }
         }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun ProfileDialogPreview() {
+    CheckFirmTheme {
+        ProfileDialog(
+            initialName = "Bluesion",
+            onDismiss = {},
+            onConfirm = {},
+        )
     }
 }

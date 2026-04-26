@@ -26,6 +26,8 @@ import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.component.OneRadioButton
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 private val LANGUAGES = listOf(
     "" to "System default",
@@ -87,5 +89,17 @@ fun LanguageDialog(
         ) {
             Text(text = stringResource(android.R.string.ok))
         }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun LanguageDialogPreview() {
+    CheckFirmTheme {
+        LanguageDialog(
+            selectedLanguage = "en",
+            onDismiss = {},
+            onConfirm = {},
+        )
     }
 }

@@ -15,16 +15,17 @@ fun PreferenceRoute(
     onNavigateBack: () -> Unit,
     viewModel: PreferenceViewModel = hiltViewModel(),
 ) {
-    val preference by viewModel.preference.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     PreferenceScreen(
-        preference = preference,
+        uiState = uiState,
         onNavigateToAbout = onNavigateToAbout,
         onNavigateToBackupRestore = onNavigateToBackupRestore,
         onNavigateToHelp = onNavigateToHelp,
         onNavigateToWelcomeSearch = onNavigateToWelcomeSearch,
         onNavigateToInfoCatcher = onNavigateToInfoCatcher,
         onNavigateBack = onNavigateBack,
+        onActiveDialogChange = viewModel::updateActiveDialog,
         onProfileNameChange = viewModel::updateProfileName,
         onThemeChange = viewModel::updateTheme,
         onLanguageChange = viewModel::updateLanguage,

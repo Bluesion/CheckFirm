@@ -34,6 +34,7 @@ android {
 
 kotlin {
     jvmToolchain(jdkVersion = 21)
+    compilerOptions.optIn.add("androidx.compose.material3.ExperimentalMaterial3Api")
 }
 
 dependencies {

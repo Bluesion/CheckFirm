@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
@@ -191,5 +192,13 @@ private fun SherlockField(label: String, value: String, onChange: (String) -> Un
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+}
+
+@ScreenPreview
+@Composable
+private fun SherlockScreenPreview() {
+    CheckFirmTheme {
+        SherlockScreen(onNavigationIconClick = {})
     }
 }

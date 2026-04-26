@@ -17,6 +17,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun <T> OneSpinner(
@@ -63,4 +65,15 @@ fun <T> OneSpinner(
     }
 }
 
+@ComponentPreview
+@Composable
+private fun OneSpinnerPreview() {
+    CheckFirmTheme {
+        OneSpinner(
+            items = listOf("Option A", "Option B", "Option C"),
+            selectedItem = "Option A",
+            onItemSelected = {},
+        )
+    }
+}
 

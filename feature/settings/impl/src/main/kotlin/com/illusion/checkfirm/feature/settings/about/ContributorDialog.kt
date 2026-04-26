@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun ContributorDialog(onDismiss: () -> Unit) {
@@ -58,5 +60,13 @@ private fun ContributorGroup(title: Int, names: List<String>) {
             text = name,
             style = MaterialTheme.typography.bodyMedium
         )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun ContributorDialogPreview() {
+    CheckFirmTheme {
+        ContributorDialog(onDismiss = {})
     }
 }

@@ -16,7 +16,7 @@ class AboutViewModel @Inject constructor() : ViewModel() {
     fun showDialog(dialogType: DialogType) {
         _uiState.update {
             it.copy(
-                activeDialog = dialogType
+                activeDialog = dialogType,
             )
         }
     }
@@ -24,7 +24,7 @@ class AboutViewModel @Inject constructor() : ViewModel() {
     fun hideDialog() {
         _uiState.update {
             it.copy(
-                activeDialog = DialogType.NONE
+                activeDialog = DialogType.NONE,
             )
         }
     }

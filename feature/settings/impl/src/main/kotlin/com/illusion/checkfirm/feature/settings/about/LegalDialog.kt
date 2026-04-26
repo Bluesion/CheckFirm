@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun LegalDialog(onDismiss: () -> Unit) {
@@ -28,4 +30,12 @@ fun LegalDialog(onDismiss: () -> Unit) {
             TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
+}
+
+@ComponentPreview
+@Composable
+private fun LegalDialogPreview() {
+    CheckFirmTheme {
+        LegalDialog(onDismiss = {})
+    }
 }

@@ -1,7 +1,5 @@
 package com.illusion.checkfirm.feature.catcher.impl.presentation
 
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,29 +19,22 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.component.OneSwitchCard
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
@@ -54,6 +45,8 @@ fun InfoCatcherScreen(
     onAddDeviceClick: () -> Unit,
     onDeleteDevice: (com.illusion.checkfirm.domain.model.Device) -> Unit,
     onDialogDismiss: () -> Unit,
+    onDialogModelChange: (String) -> Unit,
+    onDialogCscChange: (String) -> Unit,
     onAddDevice: (String, String) -> Unit,
 ) {
     OneScaffold(
@@ -132,8 +125,12 @@ fun InfoCatcherScreen(
 
     if (uiState.showDialog) {
         InfoCatcherDialog(
+            model = uiState.dialogModel,
+            csc = uiState.dialogCsc,
+            onModelChange = onDialogModelChange,
+            onCscChange = onDialogCscChange,
             onDismissRequest = onDialogDismiss,
-            onAdd = onAddDevice
+            onAdd = onAddDevice,
         )
     }
 }
@@ -171,92 +168,31 @@ fun InfoCatcherItem(
     }
 }
 
+@ScreenPreview
 @Composable
-fun InfoCatcherDialog(
-    onDismissRequest: () -> Unit,
-    onAdd: (String, String) -> Unit
-) {
-    var model by remember { mutableStateOf("SM-") }
-    var csc by remember { mutableStateOf("") }
-
-    val chipScrollState = rememberScrollState()
-
-    ModalBottomSheet(
-        onDismissRequest = onDismissRequest
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .padding(bottom = 32.dp)
-        ) {
-            Text(
-                text = "Info Catcher",
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(chipScrollState),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                listOf("Galaxy S", "Galaxy Z", "Galaxy A", "Galaxy Tab").forEach { series ->
-                    FilterChip(
-                        selected = false,
-                        onClick = {
-                            when (series) {
-                                "Galaxy S" -> model = "SM-S9"
-                                "Galaxy Z" -> model = "SM-F"
-                                "Galaxy A" -> model = "SM-A"
-                                "Galaxy Tab" -> model = "SM-X"
-                            }
-                        },
-                        label = { Text(series) }
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            OutlinedTextField(
-                value = model,
-                onValueChange = { model = it.uppercase() },
-                label = { Text(text = stringResource(R.string.model)) },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OutlinedTextField(
-                value = csc,
-                onValueChange = {
-                    if (it.length <= 3) csc = it.uppercase()
-                },
-                label = { Text(text = stringResource(R.string.csc)) },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                TextButton(onClick = onDismissRequest) {
-                    Text(text = stringResource(android.R.string.cancel))
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                Button(onClick = { onAdd(model, csc) }) {
-                    Text(text = stringResource(R.string.add_item))
-                }
-            }
-        }
+private fun InfoCatcherScreenPreview() {
+    CheckFirmTheme {
+        InfoCatcherScreen(
+            uiState = InfoCatcherUiState(),
+            onNavigationIconClick = {},
+            onEnableChange = {},
+            onAddDeviceClick = {},
+            onDeleteDevice = {},
+            onDialogDismiss = {},
+            onDialogModelChange = {},
+            onDialogCscChange = {},
+            onAddDevice = { _, _ -> },
+        )
     }
 }
 
+@ComponentPreview
+@Composable
+private fun InfoCatcherItemPreview() {
+    CheckFirmTheme {
+        InfoCatcherItem(
+            deviceText = "SM-S928B / KOO",
+            onDelete = {},
+        )
+    }
+}

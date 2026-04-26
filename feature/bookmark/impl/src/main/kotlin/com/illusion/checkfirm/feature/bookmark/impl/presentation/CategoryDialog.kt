@@ -13,6 +13,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun CategoryDialog(
@@ -53,4 +55,16 @@ fun CategoryDialog(
             TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
+}
+
+@ComponentPreview
+@Composable
+private fun CategoryDialogPreview() {
+    CheckFirmTheme {
+        CategoryDialog(
+            initial = null,
+            onDismiss = {},
+            onConfirm = {},
+        )
+    }
 }

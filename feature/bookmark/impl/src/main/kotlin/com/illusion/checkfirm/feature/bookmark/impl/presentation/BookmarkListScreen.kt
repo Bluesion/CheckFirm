@@ -29,10 +29,6 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -41,6 +37,8 @@ import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
+import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Category
@@ -51,6 +49,11 @@ fun BookmarkListScreen(
     onExpandedChange: (Boolean) -> Unit = {},
     onCategoryChange: (String) -> Unit = {},
     onNavigationIconClick: () -> Unit,
+    onSelectedTabChange: (Int) -> Unit = {},
+    onEditingBookmarkChange: (Bookmark?) -> Unit = {},
+    onShowNewBookmarkChange: (Boolean) -> Unit = {},
+    onEditingCategoryChange: (Category?) -> Unit = {},
+    onShowNewCategoryChange: (Boolean) -> Unit = {},
     onAddBookmark: (Bookmark) -> Unit = {},
     onEditBookmark: (Bookmark) -> Unit = {},
     onDeleteBookmark: (String) -> Unit = {},
@@ -58,12 +61,6 @@ fun BookmarkListScreen(
     onEditCategory: (Category) -> Unit = {},
     onDeleteCategory: (String) -> Unit = {},
 ) {
-    var selectedTab by remember { mutableStateOf(0) }
-    var editingBookmark by remember { mutableStateOf<Bookmark?>(null) }
-    var showNewBookmark by remember { mutableStateOf(false) }
-    var editingCategory by remember { mutableStateOf<Category?>(null) }
-    var showNewCategory by remember { mutableStateOf(false) }
-
     OneScaffold(
         title = stringResource(R.string.bookmark),
         navigationIcon = {
@@ -78,7 +75,8 @@ fun BookmarkListScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    if (selectedTab == 0) showNewBookmark = true else showNewCategory = true
+                    if (uiState.selectedTab == 0) onShowNewBookmarkChange(true)
+                    else onShowNewCategoryChange(true)
                 },
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.primary,
@@ -92,31 +90,31 @@ fun BookmarkListScreen(
                 .fillMaxSize()
                 .padding(bottom = innerPadding.calculateBottomPadding())
         ) {
-            TabRow(selectedTabIndex = selectedTab) {
+            TabRow(selectedTabIndex = uiState.selectedTab) {
                 Tab(
-                    selected = selectedTab == 0,
-                    onClick = { selectedTab = 0 },
+                    selected = uiState.selectedTab == 0,
+                    onClick = { onSelectedTabChange(0) },
                     text = { Text(text = stringResource(R.string.bookmark)) }
                 )
                 Tab(
-                    selected = selectedTab == 1,
-                    onClick = { selectedTab = 1 },
+                    selected = uiState.selectedTab == 1,
+                    onClick = { onSelectedTabChange(1) },
                     text = { Text(text = stringResource(R.string.category)) }
                 )
             }
 
-            when (selectedTab) {
+            when (uiState.selectedTab) {
                 0 -> BookmarkTab(
                     uiState = uiState,
                     onExpandedChange = onExpandedChange,
                     onCategoryChange = onCategoryChange,
-                    onEditClick = { editingBookmark = it },
+                    onEditClick = { onEditingBookmarkChange(it) },
                     onDeleteClick = { onDeleteBookmark(it.device.model) }
                 )
 
                 1 -> CategoryTab(
                     categories = uiState.categories,
-                    onEditClick = { editingCategory = it },
+                    onEditClick = { onEditingCategoryChange(it) },
                     onDeleteClick = { onDeleteCategory(it.name) }
                 )
             }
@@ -126,47 +124,47 @@ fun BookmarkListScreen(
     val categoryNames =
         listOf(stringResource(R.string.category_all)) + uiState.categories.map { it.name }
 
-    if (showNewBookmark) {
+    if (uiState.showNewBookmark) {
         BookmarkDialog(
             categories = categoryNames.drop(1),
-            onDismiss = { showNewBookmark = false },
+            onDismiss = { onShowNewBookmarkChange(false) },
             onConfirm = {
                 onAddBookmark(it)
-                showNewBookmark = false
+                onShowNewBookmarkChange(false)
             }
         )
     }
 
-    editingBookmark?.let { bm ->
+    uiState.editingBookmark?.let { bm ->
         BookmarkDialog(
             initial = bm,
             categories = categoryNames.drop(1),
-            onDismiss = { editingBookmark = null },
+            onDismiss = { onEditingBookmarkChange(null) },
             onConfirm = {
                 onEditBookmark(it)
-                editingBookmark = null
+                onEditingBookmarkChange(null)
             }
         )
     }
 
-    if (showNewCategory) {
+    if (uiState.showNewCategory) {
         CategoryDialog(
             initial = null,
-            onDismiss = { showNewCategory = false },
+            onDismiss = { onShowNewCategoryChange(false) },
             onConfirm = {
                 onAddCategory(Category(it))
-                showNewCategory = false
+                onShowNewCategoryChange(false)
             }
         )
     }
 
-    editingCategory?.let { cat ->
+    uiState.editingCategory?.let { cat ->
         CategoryDialog(
             initial = cat.name,
-            onDismiss = { editingCategory = null },
+            onDismiss = { onEditingCategoryChange(null) },
             onConfirm = {
                 onEditCategory(Category(it))
-                editingCategory = null
+                onEditingCategoryChange(null)
             }
         )
     }
@@ -345,5 +343,29 @@ private fun CategoryItem(
             IconButton(onClick = onEditClick) { Icon(Icons.Rounded.Edit, "Edit") }
             IconButton(onClick = onDeleteClick) { Icon(Icons.Rounded.Delete, "Delete") }
         }
+    }
+}
+
+@ScreenPreview
+@Composable
+private fun BookmarkListScreenPreview() {
+    CheckFirmTheme {
+        BookmarkListScreen(onNavigationIconClick = {})
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun BookmarkItemPreview() {
+    CheckFirmTheme {
+        BookmarkItem(
+            bookmark = Bookmark(
+                name = "Galaxy S24",
+                device = com.illusion.checkfirm.domain.model.Device("SM-S928B", "KOO"),
+                category = "Galaxy S",
+            ),
+            onEditClick = {},
+            onDeleteClick = {},
+        )
     }
 }

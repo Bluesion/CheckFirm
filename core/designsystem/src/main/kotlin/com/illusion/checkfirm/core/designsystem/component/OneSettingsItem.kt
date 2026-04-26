@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
@@ -209,6 +210,37 @@ fun OneEmptyState(
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(top = 8.dp),
+        )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun OneSettingsItemPreview() {
+    CheckFirmTheme {
+        OneListCard {
+            OneSettingsItem(
+                title = "Theme",
+                description = "Change app theme",
+                onClick = {},
+            )
+            OneSettingsDivider()
+            OneSettingsItem(
+                title = "Language",
+                description = "Change app language",
+                onClick = {},
+            )
+        }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun OneEmptyStatePreview() {
+    CheckFirmTheme {
+        OneEmptyState(
+            title = "No bookmarks",
+            description = "Add your first bookmark to get started.",
         )
     }
 }
