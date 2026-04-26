@@ -8,6 +8,10 @@ data object BackupRestoreRouteNavKey
 
 data object HelpRouteNavKey
 
+data object FirmwareManualScreenNavKey
+
+data object MyDeviceScreenNavKey
+
 data object WelcomeSearchRouteNavKey
 
 data object InfoCatcherRouteNavKey

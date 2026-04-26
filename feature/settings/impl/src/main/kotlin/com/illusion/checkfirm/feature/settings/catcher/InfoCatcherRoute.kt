@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.feature.catcher.impl.presentation
+package com.illusion.checkfirm.feature.settings.catcher
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue

@@ -36,7 +36,7 @@
             android:value="@string/app_name" />
 
         <service
-            android:name=".feature.catcher.impl.service.InfoCatcherFCMService"
+            android:name=".feature.settings.catcher.InfoCatcherFCMService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

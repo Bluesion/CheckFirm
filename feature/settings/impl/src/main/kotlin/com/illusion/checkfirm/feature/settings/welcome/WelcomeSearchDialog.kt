@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.feature.welcome
+package com.illusion.checkfirm.feature.settings.welcome
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement

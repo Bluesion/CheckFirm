@@ -84,10 +84,6 @@ dependencies {
     implementation(projects.feature.bookmark.api)
     implementation(projects.feature.bookmark.impl)
 
-    // Catcher
-    implementation(projects.feature.catcher.api)
-    implementation(projects.feature.catcher.impl)
-
     // Main
     implementation(projects.feature.home.api)
     implementation(projects.feature.home.impl)
@@ -107,10 +103,6 @@ dependencies {
     // Sherlock
     implementation(projects.feature.sherlock.api)
     implementation(projects.feature.sherlock.impl)
-
-    // Welcome
-    implementation(projects.feature.welcome.api)
-    implementation(projects.feature.welcome.impl)
 
     // Core
     implementation(projects.core.designsystem)

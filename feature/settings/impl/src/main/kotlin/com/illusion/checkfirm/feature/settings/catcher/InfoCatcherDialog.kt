@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.feature.catcher.impl.presentation
+package com.illusion.checkfirm.feature.settings.catcher
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement

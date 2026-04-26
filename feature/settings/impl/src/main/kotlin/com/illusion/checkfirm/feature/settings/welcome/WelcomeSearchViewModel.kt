@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.feature.welcome
+package com.illusion.checkfirm.feature.settings.welcome
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

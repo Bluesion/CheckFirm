@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.feature.catcher.impl.presentation
+package com.illusion.checkfirm.feature.settings.catcher
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

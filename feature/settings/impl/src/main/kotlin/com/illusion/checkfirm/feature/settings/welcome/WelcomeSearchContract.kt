@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.feature.welcome
+package com.illusion.checkfirm.feature.settings.welcome
 
 data class WelcomeSearchDevice(val model: String, val csc: String)
 

@@ -1,4 +1,4 @@
-package com.illusion.checkfirm.feature.catcher.impl.service
+package com.illusion.checkfirm.feature.settings.catcher
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,7 +9,7 @@ import androidx.core.net.toUri
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.illusion.checkfirm.core.preference.api.PreferenceRepository
-import com.illusion.checkfirm.feature.catcher.R
+import com.illusion.checkfirm.feature.settings.R
 import dagger.hilt.android.AndroidEntryPoint
 import jakarta.inject.Inject
 import kotlinx.coroutines.CoroutineScope
@@ -43,7 +43,7 @@ class InfoCatcherFCMService : FirebaseMessagingService() {
     private suspend fun sendNotification(model: String, csc: String) {
         if (preferenceRepository.getSettings().first().isInfoCatcherEnabled) {
             val intent = packageManager.getLaunchIntentForPackage(packageName)?.apply {
-                setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 putExtra("new_model", model)
                 putExtra("new_csc", csc)
             } ?: Intent()

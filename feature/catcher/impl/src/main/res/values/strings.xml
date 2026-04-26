@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">CheckFirm</string>
-    <string name="notification_channel_new_firmware">New Firmware</string>
-    <string name="notification_channel_new_update">App Update</string>
-    <string name="notification_new_update_title">CheckFirm urgent update</string>
-    <string name="notification_new_update_text">Critical bugs are reported. Please update it from Play Store right now.</string>
-    <string name="notification_info_catcher_title">%1$s (%2$s) new firmware found!</string>
-    <string name="notification_info_catcher_text">Check it now.</string>
-</resources>

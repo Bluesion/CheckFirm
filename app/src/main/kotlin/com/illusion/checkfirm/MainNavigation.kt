@@ -3,12 +3,12 @@ package com.illusion.checkfirm
 import com.illusion.checkfirm.core.navigation.EntryProviderInstaller
 import com.illusion.checkfirm.core.navigation.Navigator
 import com.illusion.checkfirm.feature.bookmark.api.BookmarkRouteNavKey
-import com.illusion.checkfirm.feature.catcher.api.InfoCatcherRouteNavKey
 import com.illusion.checkfirm.feature.home.HomeRoute
 import com.illusion.checkfirm.feature.home.api.HomeRouteNavKey
 import com.illusion.checkfirm.feature.search.SearchRouteNavKey
+import com.illusion.checkfirm.feature.settings.InfoCatcherRouteNavKey
 import com.illusion.checkfirm.feature.settings.SettingsRouteNavKey
-import com.illusion.checkfirm.feature.welcome.WelcomeSearchRouteNavKey
+import com.illusion.checkfirm.feature.settings.WelcomeSearchRouteNavKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
