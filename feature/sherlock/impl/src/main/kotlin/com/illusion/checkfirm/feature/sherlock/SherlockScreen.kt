@@ -21,13 +21,10 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
@@ -36,7 +33,7 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 @Composable
 fun SherlockScreen(
     uiState: SherlockUiState = SherlockUiState(),
-    onNavigationIconClick: () -> Unit = {},
+    onNavigationIconClick: () -> Unit,
     onTabChange: (Int) -> Unit = {},
     onPdaChange: (String) -> Unit = {},
     onCscChange: (String) -> Unit = {},
@@ -196,25 +193,4 @@ private fun SherlockField(label: String, value: String, onChange: (String) -> Un
             )
         }
     }
-}
-
-@Composable
-fun SherlockRoute(
-    onNavigationIconClick: () -> Unit = {},
-    viewModel: SherlockViewModel = hiltViewModel()
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    SherlockScreen(
-        uiState = uiState,
-        onNavigationIconClick = onNavigationIconClick,
-        onTabChange = viewModel::selectTab,
-        onPdaChange = viewModel::updatePda,
-        onCscChange = viewModel::updateCsc,
-        onBasebandChange = viewModel::updateBaseband,
-        onScriptStartChange = viewModel::updateScriptStart,
-        onScriptEndChange = viewModel::updateScriptEnd,
-        onStartScript = { viewModel.setResult("Script completed") },
-        onDismissResult = viewModel::clearResult,
-    )
 }

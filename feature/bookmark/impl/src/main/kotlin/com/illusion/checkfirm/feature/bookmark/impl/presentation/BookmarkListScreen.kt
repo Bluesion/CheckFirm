@@ -52,7 +52,7 @@ fun BookmarkListScreen(
     uiState: BookmarkListUiState = BookmarkListUiState(),
     onExpandedChange: (Boolean) -> Unit = {},
     onCategoryChange: (String) -> Unit = {},
-    onNavigationIconClick: () -> Unit = {},
+    onNavigationIconClick: () -> Unit,
     onAddBookmark: (Bookmark) -> Unit = {},
     onEditBookmark: (Bookmark) -> Unit = {},
     onDeleteBookmark: (String) -> Unit = {},

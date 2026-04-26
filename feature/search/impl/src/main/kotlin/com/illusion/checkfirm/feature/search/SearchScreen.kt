@@ -38,7 +38,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -48,8 +47,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Device
@@ -71,7 +68,7 @@ fun SearchScreen(
     onDeleteHistory: (SearchHistory) -> Unit = {},
     onDeleteAllHistory: () -> Unit = {},
     onSearchClick: () -> Unit = {},
-    onNavigationIconClick: () -> Unit = {},
+    onNavigationIconClick: () -> Unit,
 ) {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val context = LocalContext.current
@@ -450,37 +447,4 @@ private fun SearchBottomSheetContent(
 
 private fun toast(context: android.content.Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-}
-
-@Composable
-fun SearchRoute(
-    onNavigationIconClick: () -> Unit = {},
-    onSherlockClick: () -> Unit = {},
-    viewModel: SearchViewModel = hiltViewModel(),
-    historyViewModel: HistoryViewModel = hiltViewModel(),
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val historyList by historyViewModel.historyList.collectAsStateWithLifecycle()
-    val bookmarks by viewModel.bookmarks.collectAsStateWithLifecycle()
-
-    SearchScreen(
-        uiState = uiState,
-        historyList = historyList,
-        bookmarks = bookmarks,
-        onModelChange = viewModel::updateModel,
-        onCscChange = viewModel::updateCsc,
-        onTabIndexChange = viewModel::updateSelectedTabIndex,
-        onAddClick = viewModel::onAddClick,
-        onDeviceClick = { viewModel.addToSearchList(it) },
-        onRemoveFromSearchList = viewModel::removeFromSearchList,
-        onDeleteHistory = { historyViewModel.delete(it.device.model, it.device.csc) },
-        onDeleteAllHistory = historyViewModel::deleteAll,
-        onSearchClick = {
-            if (uiState.searchList.isNotEmpty()) {
-                historyViewModel.createHistory(uiState.searchList)
-                onNavigationIconClick()
-            }
-        },
-        onNavigationIconClick = onNavigationIconClick
-    )
 }

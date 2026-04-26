@@ -11,9 +11,9 @@ import com.illusion.checkfirm.core.navigation.EntryProviderInstaller
 import com.illusion.checkfirm.core.navigation.Navigator
 import com.illusion.checkfirm.core.preference.api.PreferenceRepository
 import dagger.hilt.android.AndroidEntryPoint
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

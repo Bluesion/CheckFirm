@@ -3,11 +3,11 @@ package com.illusion.checkfirm.data.repository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.illusion.checkfirm.domain.model.SearchResult
 import com.illusion.checkfirm.domain.repository.SherlockRepository
+import jakarta.inject.Inject
 import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import javax.inject.Inject
 
 class SherlockRepositoryImpl @Inject constructor() : SherlockRepository {
     private val db = FirebaseFirestore.getInstance()

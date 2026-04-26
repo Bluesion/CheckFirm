@@ -1,5 +1,6 @@
 package com.illusion.checkfirm.feature.report.domain.usecase
 
+import jakarta.inject.Inject
 import jakarta.mail.Authenticator
 import jakarta.mail.Message
 import jakarta.mail.PasswordAuthentication
@@ -12,7 +13,6 @@ import jakarta.mail.internet.MimeMultipart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.Properties
-import javax.inject.Inject
 
 class SubmitReportUseCase @Inject constructor() {
     suspend operator fun invoke(

@@ -5,9 +5,9 @@ import com.illusion.checkfirm.data.local.entity.asEntity
 import com.illusion.checkfirm.data.local.entity.asExternalModel
 import com.illusion.checkfirm.domain.model.SearchHistory
 import com.illusion.checkfirm.domain.repository.HistoryRepository
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 class HistoryRepositoryImpl @Inject constructor(
     private val historyDao: HistoryDao

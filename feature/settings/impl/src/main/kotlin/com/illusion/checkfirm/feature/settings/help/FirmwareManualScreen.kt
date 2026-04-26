@@ -17,13 +17,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
@@ -32,7 +29,7 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 @Composable
 fun FirmwareManualScreen(
     uiState: FirmwareManualUiState = FirmwareManualUiState(),
-    onNavigationIconClick: () -> Unit = {},
+    onNavigationIconClick: () -> Unit,
 ) {
     OneScaffold(
         title = stringResource(R.string.help_manual),
@@ -177,13 +174,4 @@ private fun ManualDetail(title: String, body: String) {
             )
         }
     }
-}
-
-@Composable
-fun FirmwareManualRoute(
-    onNavigationIconClick: () -> Unit = {},
-    viewModel: FirmwareManualViewModel = hiltViewModel(),
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    FirmwareManualScreen(uiState = uiState, onNavigationIconClick = onNavigationIconClick)
 }

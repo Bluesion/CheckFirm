@@ -6,6 +6,7 @@ import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Category
 import com.illusion.checkfirm.domain.repository.BCRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,7 +15,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 data class BookmarkListUiState(
     val expanded: Boolean = false,

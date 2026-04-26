@@ -17,10 +17,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -28,8 +24,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
@@ -38,12 +32,11 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 @Composable
 fun AboutScreen(
     uiState: AboutUiState = AboutUiState(),
-    onNavigateBack: () -> Unit = {},
-    onNavigateToReport: () -> Unit = {},
+    onNavigateBack: () -> Unit,
+    showDialog: (DialogType) -> Unit,
+    hideDialog: () -> Unit,
 ) {
     val context = LocalContext.current
-    var showContributor by remember { mutableStateOf(false) }
-    var showLegal by remember { mutableStateOf(false) }
 
     OneScaffold(
         title = "",
@@ -97,16 +90,33 @@ fun AboutScreen(
 
             Spacer(Modifier.weight(1f))
 
-            AboutPageButton(text = stringResource(R.string.contributor)) { showContributor = true }
+            AboutPageButton(
+                text = stringResource(R.string.contributor),
+                onClick = { showDialog(DialogType.CONTRIBUTOR) },
+            )
             Spacer(Modifier.height(8.dp))
-            AboutPageButton(text = stringResource(R.string.legal)) { showLegal = true }
-            Spacer(Modifier.height(8.dp))
-            AboutPageButton(text = stringResource(R.string.report), onClick = onNavigateToReport)
+            AboutPageButton(
+                text = stringResource(R.string.legal),
+                onClick = { showDialog(DialogType.LEGAL) },
+            )
         }
     }
 
-    if (showContributor) ContributorDialog(onDismiss = { showContributor = false })
-    if (showLegal) LegalDialog(onDismiss = { showLegal = false })
+    when (uiState.activeDialog) {
+        DialogType.CONTRIBUTOR -> {
+            ContributorDialog(
+                onDismiss = hideDialog,
+            )
+        }
+
+        DialogType.LEGAL -> {
+            LegalDialog(
+                onDismiss = hideDialog,
+            )
+        }
+
+        else -> Unit
+    }
 }
 
 @Composable
@@ -132,18 +142,4 @@ private fun AboutPageButton(text: String, onClick: () -> Unit) {
             maxLines = 1,
         )
     }
-}
-
-@Composable
-fun AboutRoute(
-    onNavigateBack: () -> Unit = {},
-    onNavigateToReport: () -> Unit = {},
-    viewModel: AboutViewModel = hiltViewModel(),
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    AboutScreen(
-        uiState = uiState,
-        onNavigateBack = onNavigateBack,
-        onNavigateToReport = onNavigateToReport,
-    )
 }

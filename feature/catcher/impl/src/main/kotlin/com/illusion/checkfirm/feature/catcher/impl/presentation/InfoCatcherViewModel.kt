@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.domain.model.Device
 import com.illusion.checkfirm.domain.repository.InfoCatcherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +13,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 data class InfoCatcherUiState(
     val showDialog: Boolean = false,

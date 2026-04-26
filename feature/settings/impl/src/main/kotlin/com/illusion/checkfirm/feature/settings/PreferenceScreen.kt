@@ -21,8 +21,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
@@ -127,6 +125,7 @@ fun PreferenceScreen(
                 activeDialog = PreferenceDialog.None
             },
         )
+
         PreferenceDialog.Theme -> ThemeDialog(
             selectedTheme = preference.theme,
             onDismiss = { activeDialog = PreferenceDialog.None },
@@ -135,6 +134,7 @@ fun PreferenceScreen(
                 activeDialog = PreferenceDialog.None
             },
         )
+
         PreferenceDialog.Language -> LanguageDialog(
             selectedLanguage = preference.language,
             onDismiss = { activeDialog = PreferenceDialog.None },
@@ -143,6 +143,7 @@ fun PreferenceScreen(
                 activeDialog = PreferenceDialog.None
             },
         )
+
         PreferenceDialog.BookmarkOrder -> BookmarkOrderDialog(
             selectedOrder = preference.bookmarkOrder,
             isAscending = preference.isBookmarkAscOrder,
@@ -152,41 +153,12 @@ fun PreferenceScreen(
                 activeDialog = PreferenceDialog.None
             },
         )
+
         PreferenceDialog.BookmarkReset -> BookmarkResetDialog(
             onDismiss = { activeDialog = PreferenceDialog.None },
             onConfirm = { activeDialog = PreferenceDialog.None },
         )
+
         PreferenceDialog.None -> Unit
     }
-}
-
-@Composable
-fun PreferenceRoute(
-    onNavigateToAbout: () -> Unit,
-    onNavigateToBackupRestore: () -> Unit,
-    onNavigateToHelp: () -> Unit,
-    onNavigateToWelcomeSearch: () -> Unit,
-    onNavigateToInfoCatcher: () -> Unit,
-    onNavigateBack: () -> Unit,
-    viewModel: PreferenceViewModel = hiltViewModel(),
-) {
-    val preference by viewModel.preference.collectAsStateWithLifecycle()
-
-    PreferenceScreen(
-        preference = preference,
-        onNavigateToAbout = onNavigateToAbout,
-        onNavigateToBackupRestore = onNavigateToBackupRestore,
-        onNavigateToHelp = onNavigateToHelp,
-        onNavigateToWelcomeSearch = onNavigateToWelcomeSearch,
-        onNavigateToInfoCatcher = onNavigateToInfoCatcher,
-        onNavigateBack = onNavigateBack,
-        onProfileNameChange = viewModel::updateProfileName,
-        onThemeChange = viewModel::updateTheme,
-        onLanguageChange = viewModel::updateLanguage,
-        onQuickSearchBarChange = viewModel::updateQuickSearchBar,
-        onBookmarkOrderChange = viewModel::updateBookmarkOrder,
-        onWelcomeSearchChange = viewModel::updateWelcomeSearch,
-        onInfoCatcherChange = viewModel::updateInfoCatcher,
-        onFirebaseChange = viewModel::updateFirebase,
-    )
 }

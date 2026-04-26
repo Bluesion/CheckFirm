@@ -29,7 +29,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -37,8 +36,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
@@ -57,7 +54,7 @@ fun WelcomeSearchScreen(
     onModelChange: (String) -> Unit = {},
     onCscChange: (String) -> Unit = {},
     onSelectedChipChange: (String?) -> Unit = {},
-    onNavigationIconClick: () -> Unit = {},
+    onNavigationIconClick: () -> Unit,
 ) {
     val devices = remember { mutableStateListOf<WelcomeSearchDevice>() }
 
@@ -313,24 +310,6 @@ fun WelcomeSearchDialog(
             }
         }
     }
-}
-
-@Composable
-fun WelcomeSearchRoute(
-    viewModel: WelcomeSearchViewModel = hiltViewModel(),
-    onNavigationIconClick: () -> Unit = {}
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    WelcomeSearchScreen(
-        uiState = uiState,
-        onIsWelcomeSearchEnabledChange = viewModel::updateIsWelcomeSearchEnabled,
-        onShowDialogChange = viewModel::updateShowDialog,
-        onModelChange = viewModel::updateModel,
-        onCscChange = viewModel::updateCsc,
-        onSelectedChipChange = viewModel::updateSelectedChip,
-        onNavigationIconClick = onNavigationIconClick
-    )
 }
 
 @ScreenPreview

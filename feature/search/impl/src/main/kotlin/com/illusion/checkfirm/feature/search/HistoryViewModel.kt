@@ -7,12 +7,12 @@ import com.illusion.checkfirm.domain.model.Device
 import com.illusion.checkfirm.domain.model.SearchHistory
 import com.illusion.checkfirm.domain.repository.HistoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.util.Calendar
-import javax.inject.Inject
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor(

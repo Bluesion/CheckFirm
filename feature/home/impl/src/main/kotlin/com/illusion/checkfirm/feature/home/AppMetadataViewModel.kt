@@ -6,12 +6,12 @@ import com.illusion.checkfirm.domain.model.ApiResponse
 import com.illusion.checkfirm.domain.model.AppVersionStatus
 import com.illusion.checkfirm.domain.repository.AppMetadataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class AppMetadataViewModel @Inject constructor(

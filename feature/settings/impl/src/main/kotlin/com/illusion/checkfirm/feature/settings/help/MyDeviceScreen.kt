@@ -19,16 +19,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
@@ -37,7 +33,7 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 @Composable
 fun MyDeviceScreen(
     uiState: MyDeviceUiState = MyDeviceUiState(),
-    onNavigationIconClick: () -> Unit = {},
+    onNavigationIconClick: () -> Unit,
 ) {
     val model = remember { Build.MODEL ?: "" }
     val hardware = remember { Build.DEVICE ?: "" }
@@ -113,13 +109,4 @@ private fun InfoRow(label: String, value: String) {
             color = MaterialTheme.colorScheme.onSurface,
         )
     }
-}
-
-@Composable
-fun MyDeviceRoute(
-    onNavigationIconClick: () -> Unit = {},
-    viewModel: MyDeviceViewModel = hiltViewModel(),
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    MyDeviceScreen(uiState = uiState, onNavigationIconClick = onNavigationIconClick)
 }

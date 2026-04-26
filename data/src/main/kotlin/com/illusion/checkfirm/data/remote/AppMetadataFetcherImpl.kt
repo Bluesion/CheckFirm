@@ -13,9 +13,9 @@ import io.ktor.client.request.headers
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
+import jakarta.inject.Inject
 import kotlinx.serialization.json.Json
 import java.net.UnknownHostException
-import javax.inject.Inject
 
 class AppMetadataFetcherImpl @Inject constructor() : AppMetadataFetcher {
 

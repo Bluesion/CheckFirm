@@ -18,10 +18,10 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.URLProtocol
 import io.ktor.http.encodedPath
+import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.UnknownHostException
-import javax.inject.Inject
 
 private data class OfficialFirmwareDetail(
     val deviceName: String,

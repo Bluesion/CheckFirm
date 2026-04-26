@@ -6,9 +6,9 @@ import com.illusion.checkfirm.data.local.entity.asExternalModel
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Category
 import com.illusion.checkfirm.domain.repository.BCRepository
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 class BCRepositoryImpl @Inject constructor(
     private val bcDao: BCDao

@@ -10,9 +10,9 @@ import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
+import jakarta.inject.Singleton
 import kotlinx.serialization.json.Json
 import nl.adaptivity.xmlutil.serialization.XML
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)

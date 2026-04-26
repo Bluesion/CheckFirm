@@ -5,11 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.core.preference.api.Preference
 import com.illusion.checkfirm.core.preference.api.PreferenceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 enum class PreferenceDialog {
     None, Profile, Theme, Language, BookmarkOrder, BookmarkReset

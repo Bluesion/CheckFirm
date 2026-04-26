@@ -7,13 +7,13 @@ import com.illusion.checkfirm.domain.model.Device
 import com.illusion.checkfirm.domain.repository.BCRepository
 import com.illusion.checkfirm.feature.search.util.SearchValidationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import java.util.Locale
-import javax.inject.Inject
 
 data class SearchUiState(
     val model: String = "",
