@@ -1,4 +1,3 @@
-@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 
 package com.illusion.checkfirm.feature.settings.profile
 
@@ -52,7 +51,7 @@ fun ProfileDialog(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {
-                Text(stringResource(android.R.string.cancel))
+                Text(text = stringResource(android.R.string.cancel))
             }
             Spacer(Modifier.width(8.dp))
             Button(
@@ -64,7 +63,7 @@ fun ProfileDialog(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {
-                Text(stringResource(R.string.bookmark_save))
+                Text(text = stringResource(R.string.bookmark_save))
             }
         }
     }

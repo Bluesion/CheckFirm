@@ -32,11 +32,11 @@ fun CategoryDialog(
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
-                label = { Text(stringResource(R.string.category_edit_name)) },
+                label = { Text(text = stringResource(R.string.category_edit_name)) },
                 singleLine = true,
                 isError = isAll,
                 supportingText = {
-                    if (isAll) Text(stringResource(R.string.category_edit_name_error_all))
+                    if (isAll) Text(text = stringResource(R.string.category_edit_name_error_all))
                 },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -46,11 +46,11 @@ fun CategoryDialog(
                 onClick = { onConfirm(name.trim()) },
                 enabled = name.isNotBlank() && !isAll
             ) {
-                Text(stringResource(R.string.bookmark_save))
+                Text(text = stringResource(R.string.bookmark_save))
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) }
+            TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
 }

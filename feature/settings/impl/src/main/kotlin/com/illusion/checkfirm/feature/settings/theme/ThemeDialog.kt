@@ -1,4 +1,3 @@
-@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 
 package com.illusion.checkfirm.feature.settings.theme
 
@@ -95,7 +94,7 @@ fun ThemeDialog(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
         ) {
-            Text(stringResource(R.string.close))
+            Text(text = stringResource(R.string.close))
         }
     }
 }

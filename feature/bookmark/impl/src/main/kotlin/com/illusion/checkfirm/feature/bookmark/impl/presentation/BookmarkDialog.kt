@@ -56,21 +56,21 @@ fun BookmarkDialog(
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text(stringResource(R.string.bookmark_name)) },
+                    label = { Text(text = stringResource(R.string.bookmark_name)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
                 OutlinedTextField(
                     value = model,
                     onValueChange = { model = it.uppercase() },
-                    label = { Text(stringResource(R.string.model)) },
+                    label = { Text(text = stringResource(R.string.model)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
                 OutlinedTextField(
                     value = csc,
                     onValueChange = { if (it.length <= 3) csc = it.uppercase() },
-                    label = { Text(stringResource(R.string.csc)) },
+                    label = { Text(text = stringResource(R.string.csc)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -79,7 +79,7 @@ fun BookmarkDialog(
                         value = category,
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text(stringResource(R.string.category)) },
+                        label = { Text(text = stringResource(R.string.category)) },
                         trailingIcon = {
                             IconButton(onClick = { categoryExpanded = true }) {
                                 Icon(Icons.Rounded.ArrowDropDown, contentDescription = null)
@@ -113,11 +113,11 @@ fun BookmarkDialog(
                 },
                 enabled = name.isNotBlank() && model.isNotBlank() && csc.length == 3 && category.isNotBlank()
             ) {
-                Text(stringResource(R.string.bookmark_save))
+                Text(text = stringResource(R.string.bookmark_save))
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) }
+            TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
 }

@@ -15,7 +15,7 @@ import com.illusion.checkfirm.core.designsystem.R
 fun LegalDialog(onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(stringResource(R.string.legal)) },
+        title = { Text(text = stringResource(R.string.legal)) },
         text = {
             Text(
                 text = stringResource(R.string.legal_text),
@@ -25,7 +25,7 @@ fun LegalDialog(onDismiss: () -> Unit) {
             )
         },
         confirmButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) }
+            TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
 }

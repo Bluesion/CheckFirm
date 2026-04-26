@@ -30,7 +30,7 @@ fun CategoryDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(stringResource(R.string.category)) },
+        title = { Text(text = stringResource(R.string.category)) },
         text = {
             Column(Modifier.fillMaxWidth()) {
                 Text(
@@ -62,11 +62,11 @@ fun CategoryDialog(
         },
         confirmButton = {
             TextButton(onClick = { onConfirm(picked.toSet()) }) {
-                Text(stringResource(R.string.bookmark_save))
+                Text(text = stringResource(R.string.bookmark_save))
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) }
+            TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
 }

@@ -1,4 +1,3 @@
-@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 
 package com.illusion.checkfirm.feature.settings.language
 
@@ -86,7 +85,7 @@ fun LanguageDialog(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
         ) {
-            Text(stringResource(android.R.string.ok))
+            Text(text = stringResource(android.R.string.ok))
         }
     }
 }

@@ -21,7 +21,7 @@ fun BookmarkResetDialog(
                 color = MaterialTheme.colorScheme.error
             )
         },
-        text = { Text(stringResource(R.string.settings_bookmark_reset_dialog_message)) },
+        text = { Text(text = stringResource(R.string.settings_bookmark_reset_dialog_message)) },
         confirmButton = {
             TextButton(onClick = onConfirm) {
                 Text(
@@ -31,7 +31,7 @@ fun BookmarkResetDialog(
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) }
+            TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
 }

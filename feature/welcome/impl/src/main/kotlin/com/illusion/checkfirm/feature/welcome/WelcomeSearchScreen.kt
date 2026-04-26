@@ -18,7 +18,6 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -45,7 +44,6 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 // Domain Mock for UI representation
 data class WelcomeSearchDevice(val model: String, val csc: String)
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WelcomeSearchScreen(
     uiState: WelcomeSearchUiState = WelcomeSearchUiState(),
@@ -153,7 +151,7 @@ fun WelcomeSearchScreen(
                     ) {
                         Icon(Icons.Rounded.Add, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.welcome_search_add_device))
+                        Text(text = stringResource(R.string.welcome_search_add_device))
                     }
 
                     Text(
@@ -179,7 +177,7 @@ fun WelcomeSearchScreen(
                     ) {
                         Icon(Icons.Rounded.Add, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.welcome_search_add_device))
+                        Text(text = stringResource(R.string.welcome_search_add_device))
                     }
 
                     Text(
@@ -226,7 +224,6 @@ fun WelcomeSearchItem(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WelcomeSearchDialog(
     uiState: WelcomeSearchUiState,
@@ -273,7 +270,7 @@ fun WelcomeSearchDialog(
                 OutlinedTextField(
                     value = uiState.model,
                     onValueChange = { onModelChange(it.uppercase()) },
-                    label = { Text(stringResource(R.string.model)) },
+                    label = { Text(text = stringResource(R.string.model)) },
                     singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -283,7 +280,7 @@ fun WelcomeSearchDialog(
                 OutlinedTextField(
                     value = uiState.csc,
                     onValueChange = { if (it.length <= 3) onCscChange(it.uppercase()) },
-                    label = { Text(stringResource(R.string.csc)) },
+                    label = { Text(text = stringResource(R.string.csc)) },
                     singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -297,14 +294,14 @@ fun WelcomeSearchDialog(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = onDismissRequest) {
-                        Text(stringResource(android.R.string.cancel))
+                        Text(text = stringResource(android.R.string.cancel))
                     }
                     Spacer(Modifier.width(8.dp))
                     TextButton(
                         onClick = { onAddDevice(uiState.model, uiState.csc) },
                         enabled = uiState.model.isNotBlank() && uiState.csc.length == 3
                     ) {
-                        Text(stringResource(R.string.add_item))
+                        Text(text = stringResource(R.string.add_item))
                     }
                 }
             }

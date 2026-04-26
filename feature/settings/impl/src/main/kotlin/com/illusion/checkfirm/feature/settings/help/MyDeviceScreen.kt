@@ -1,4 +1,3 @@
-@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 
 package com.illusion.checkfirm.feature.settings.help
 
@@ -19,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,7 +32,7 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun MyDeviceScreen(
-    uiState: MyDeviceUiState = MyDeviceUiState(),
+    uiState: MyDeviceUiState,
     onNavigationIconClick: () -> Unit,
 ) {
     val model = remember { Build.MODEL ?: "" }

@@ -1,10 +1,13 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal val Project.libs: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
@@ -15,10 +18,13 @@ internal fun Project.configureKotlinAndroid(
     if (commonExtension is ApplicationExtension) {
         commonExtension.apply {
             compileSdk = 37
-            defaultConfig { minSdk = 28 }
+            defaultConfig {
+                minSdk = 28
+                targetSdk = 37
+            }
             compileOptions {
-                sourceCompatibility = org.gradle.api.JavaVersion.VERSION_21
-                targetCompatibility = org.gradle.api.JavaVersion.VERSION_21
+                sourceCompatibility = JavaVersion.VERSION_21
+                targetCompatibility = JavaVersion.VERSION_21
             }
         }
     } else if (commonExtension is LibraryExtension) {
@@ -26,8 +32,8 @@ internal fun Project.configureKotlinAndroid(
             compileSdk = 37
             defaultConfig { minSdk = 28 }
             compileOptions {
-                sourceCompatibility = org.gradle.api.JavaVersion.VERSION_21
-                targetCompatibility = org.gradle.api.JavaVersion.VERSION_21
+                sourceCompatibility = JavaVersion.VERSION_21
+                targetCompatibility = JavaVersion.VERSION_21
             }
         }
     }
@@ -44,6 +50,10 @@ internal fun Project.configureAndroidCompose(
         commonExtension.apply {
             buildFeatures { compose = true }
         }
+    }
+
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions.optIn.add("androidx.compose.material3.ExperimentalMaterial3Api")
     }
 
     dependencies {

@@ -17,7 +17,6 @@ import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
@@ -46,7 +45,6 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Category
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookmarkListScreen(
     uiState: BookmarkListUiState = BookmarkListUiState(),
@@ -98,12 +96,12 @@ fun BookmarkListScreen(
                 Tab(
                     selected = selectedTab == 0,
                     onClick = { selectedTab = 0 },
-                    text = { Text(stringResource(R.string.bookmark)) }
+                    text = { Text(text = stringResource(R.string.bookmark)) }
                 )
                 Tab(
                     selected = selectedTab == 1,
                     onClick = { selectedTab = 1 },
-                    text = { Text(stringResource(R.string.category)) }
+                    text = { Text(text = stringResource(R.string.category)) }
                 )
             }
 
@@ -174,7 +172,6 @@ fun BookmarkListScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BookmarkTab(
     uiState: BookmarkListUiState,

@@ -1,5 +1,3 @@
-@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
-
 package com.illusion.checkfirm.feature.report
 
 import androidx.compose.foundation.clickable
@@ -25,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
@@ -102,7 +101,7 @@ fun ReportScreen(
             OutlinedTextField(
                 value = uiState.logs,
                 onValueChange = onLogsChange,
-                placeholder = { Text(stringResource(R.string.report_detail)) },
+                placeholder = { Text(text = stringResource(R.string.report_detail)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp),
@@ -119,7 +118,7 @@ fun ReportScreen(
                 if (uiState.isSubmitting) {
                     CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
                 } else {
-                    Text(stringResource(R.string.report_submit))
+                    Text(text = stringResource(R.string.report_submit))
                 }
             }
         }

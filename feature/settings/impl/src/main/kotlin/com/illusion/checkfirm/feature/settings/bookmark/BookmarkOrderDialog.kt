@@ -41,7 +41,7 @@ fun BookmarkOrderDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(stringResource(R.string.settings_bookmark_order)) },
+        title = { Text(text = stringResource(R.string.settings_bookmark_order)) },
         text = {
             Column(Modifier.fillMaxWidth()) {
                 options.forEach { (key, label) ->
@@ -67,17 +67,17 @@ fun BookmarkOrderDialog(
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Checkbox(checked = !ascending, onCheckedChange = { ascending = !it })
-                    Text(stringResource(R.string.settings_bookmark_order_by_desc))
+                    Text(text = stringResource(R.string.settings_bookmark_order_by_desc))
                 }
             }
         },
         confirmButton = {
             TextButton(onClick = { onConfirm(order, ascending) }) {
-                Text(stringResource(R.string.bookmark_save))
+                Text(text = stringResource(R.string.bookmark_save))
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) }
+            TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
 }

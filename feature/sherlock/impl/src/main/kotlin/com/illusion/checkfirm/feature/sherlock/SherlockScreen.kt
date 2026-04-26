@@ -1,4 +1,3 @@
-@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 
 package com.illusion.checkfirm.feature.sherlock
 
@@ -64,12 +63,12 @@ fun SherlockScreen(
                 Tab(
                     selected = uiState.selectedTab == 0,
                     onClick = { onTabChange(0) },
-                    text = { Text(stringResource(R.string.sherlock_tab_manual)) }
+                    text = { Text(text = stringResource(R.string.sherlock_tab_manual)) }
                 )
                 Tab(
                     selected = uiState.selectedTab == 1,
                     onClick = { onTabChange(1) },
-                    text = { Text(stringResource(R.string.sherlock_tab_script)) }
+                    text = { Text(text = stringResource(R.string.sherlock_tab_script)) }
                 )
             }
 
@@ -161,7 +160,7 @@ private fun ScriptTab(
         onChange = onEndChange
     )
     Button(onClick = onStart, modifier = Modifier.fillMaxWidth()) {
-        Text(stringResource(R.string.sherlock_script_start))
+        Text(text = stringResource(R.string.sherlock_script_start))
     }
 }
 

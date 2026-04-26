@@ -19,7 +19,7 @@ import com.illusion.checkfirm.core.designsystem.R
 fun ContributorDialog(onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(stringResource(R.string.contributor)) },
+        title = { Text(text = stringResource(R.string.contributor)) },
         text = {
             Column(
                 modifier = Modifier
@@ -41,7 +41,7 @@ fun ContributorDialog(onDismiss: () -> Unit) {
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) }
+            TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
     )
 }

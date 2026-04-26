@@ -28,7 +28,6 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -53,7 +52,6 @@ import com.illusion.checkfirm.domain.model.Device
 import com.illusion.checkfirm.domain.model.SearchHistory
 import com.illusion.checkfirm.feature.search.util.SearchValidationResult
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
     uiState: SearchUiState = SearchUiState(),
@@ -122,12 +120,12 @@ fun SearchScreen(
                 Tab(
                     selected = uiState.selectedTabIndex == 0,
                     onClick = { onTabIndexChange(0) },
-                    text = { Text(stringResource(R.string.bookmark)) }
+                    text = { Text(text = stringResource(R.string.bookmark)) }
                 )
                 Tab(
                     selected = uiState.selectedTabIndex == 1,
                     onClick = { onTabIndexChange(1) },
-                    text = { Text(stringResource(R.string.search_history)) }
+                    text = { Text(text = stringResource(R.string.search_history)) }
                 )
             }
 
@@ -218,7 +216,7 @@ private fun HistoryTab(
                 onClick = onDeleteAll,
                 enabled = historyList.isNotEmpty()
             ) {
-                Text(stringResource(R.string.search_history_delete_all))
+                Text(text = stringResource(R.string.search_history_delete_all))
             }
         }
 
@@ -410,7 +408,7 @@ private fun SearchBottomSheetContent(
                 modifier = Modifier.weight(1f)
             )
             Button(onClick = onSearchClick, enabled = searchList.isNotEmpty()) {
-                Text(stringResource(R.string.search))
+                Text(text = stringResource(R.string.search))
             }
         }
 

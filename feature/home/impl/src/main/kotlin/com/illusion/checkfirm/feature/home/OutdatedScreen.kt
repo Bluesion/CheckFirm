@@ -64,14 +64,14 @@ fun OutdatedScreen(
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(stringResource(R.string.about_update))
+                Text(text = stringResource(R.string.about_update))
             }
             Spacer(Modifier.height(8.dp))
             OutlinedButton(
                 onClick = onClose,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(stringResource(R.string.close))
+                Text(text = stringResource(R.string.close))
             }
         }
     }

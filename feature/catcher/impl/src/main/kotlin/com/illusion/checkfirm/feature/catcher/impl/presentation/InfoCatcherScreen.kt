@@ -21,7 +21,6 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -47,7 +46,6 @@ import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.component.OneSwitchCard
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoCatcherScreen(
     uiState: InfoCatcherUiState,
@@ -173,7 +171,6 @@ fun InfoCatcherItem(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoCatcherDialog(
     onDismissRequest: () -> Unit,
@@ -228,7 +225,7 @@ fun InfoCatcherDialog(
             OutlinedTextField(
                 value = model,
                 onValueChange = { model = it.uppercase() },
-                label = { Text(stringResource(R.string.model)) },
+                label = { Text(text = stringResource(R.string.model)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -240,7 +237,7 @@ fun InfoCatcherDialog(
                 onValueChange = {
                     if (it.length <= 3) csc = it.uppercase()
                 },
-                label = { Text(stringResource(R.string.csc)) },
+                label = { Text(text = stringResource(R.string.csc)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -252,11 +249,11 @@ fun InfoCatcherDialog(
                 horizontalArrangement = Arrangement.End
             ) {
                 TextButton(onClick = onDismissRequest) {
-                    Text(stringResource(android.R.string.cancel))
+                    Text(text = stringResource(android.R.string.cancel))
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Button(onClick = { onAdd(model, csc) }) {
-                    Text(stringResource(R.string.add_item))
+                    Text(text = stringResource(R.string.add_item))
                 }
             }
         }
