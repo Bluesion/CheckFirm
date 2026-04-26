@@ -4,9 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material3.AlertDialog
@@ -72,7 +70,7 @@ fun BookmarkDialog(
                 OutlinedTextField(
                     value = csc,
                     onValueChange = { if (it.length <= 3) csc = it.uppercase() },
-                    label = { Text(stringResource(R.string.csc_text)) },
+                    label = { Text(stringResource(R.string.csc)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )

@@ -13,14 +13,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
@@ -28,11 +28,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,7 +42,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
-import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
+import com.illusion.checkfirm.core.designsystem.component.OneIcons
+import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.component.OneSwitchCard
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,48 +58,32 @@ fun InfoCatcherScreen(
     onDialogDismiss: () -> Unit,
     onAddDevice: (String, String) -> Unit,
 ) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.info_catcher_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onNavigationIconClick) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
-                    }
-                },
-            )
+    OneScaffold(
+        title = stringResource(R.string.info_catcher),
+        navigationIcon = {
+            IconButton(onClick = onNavigationIconClick) {
+                Icon(
+                    imageVector = OneIcons.IcBack,
+                    contentDescription = null,
+                    tint = CheckFirmTheme.colors.toolbarIconTint,
+                )
+            }
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding)
                 .padding(horizontal = 12.dp)
+                .padding(bottom = innerPadding.calculateBottomPadding())
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
         ) {
             Spacer(modifier = Modifier.height(4.dp))
 
-            // Switch Card equivalent
-            ElevatedCard(
+            OneSwitchCard(
+                checked = uiState.isEnabled,
+                onCheckedChange = onEnableChange,
                 modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "Enable Info Catcher",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Switch(
-                        checked = uiState.isEnabled,
-                        onCheckedChange = onEnableChange
-                    )
-                }
-            }
+            )
 
             Text(
                 text = "Info catcher periodically checks for firmware updates of saved devices in background and notifies you.",
@@ -111,7 +94,10 @@ fun InfoCatcherScreen(
             )
 
             Card(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(14.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             ) {
                 Column {
                     if (uiState.devices.isEmpty()) {
@@ -242,7 +228,7 @@ fun InfoCatcherDialog(
             OutlinedTextField(
                 value = model,
                 onValueChange = { model = it.uppercase() },
-                label = { Text(stringResource(R.string.model_text)) },
+                label = { Text(stringResource(R.string.model)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -254,7 +240,7 @@ fun InfoCatcherDialog(
                 onValueChange = {
                     if (it.length <= 3) csc = it.uppercase()
                 },
-                label = { Text(stringResource(R.string.csc_text)) },
+                label = { Text(stringResource(R.string.csc)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -266,29 +252,14 @@ fun InfoCatcherDialog(
                 horizontalArrangement = Arrangement.End
             ) {
                 TextButton(onClick = onDismissRequest) {
-                    Text(stringResource(R.string.cancel_text))
+                    Text(stringResource(android.R.string.cancel))
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Button(onClick = { onAdd(model, csc) }) {
-                    Text(stringResource(R.string.add_item_text))
+                    Text(stringResource(R.string.add_item))
                 }
             }
         }
     }
 }
 
-@ScreenPreview
-@Composable
-private fun InfoCatcherScreenPreview() {
-    CheckFirmTheme {
-        InfoCatcherScreen(
-            uiState = InfoCatcherUiState(),
-            onNavigationIconClick = {},
-            onEnableChange = {},
-            onAddDeviceClick = {},
-            onDeleteDevice = {},
-            onDialogDismiss = {},
-            onAddDevice = { _, _ -> }
-        )
-    }
-}

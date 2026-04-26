@@ -6,7 +6,6 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.graphics.Color
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -89,20 +88,13 @@ fun CheckFirmTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-    val extendedColors = ExtendedColors(
-        dmDarkBlue = if (darkTheme) Color(0xFFFFFFFF) else Color(0xFF262161),
-        dmLightBlue = Color(0xFF00ADEE),
-    )
-
-    val colorScheme = if (darkTheme) {
-        darkScheme
-    } else {
-        lightScheme
-    }
+    val extendedColors = if (darkTheme) DarkExtendedColors else LightExtendedColors
+    val colorScheme = if (darkTheme) darkScheme else lightScheme
 
     CompositionLocalProvider(LocalExtendedColors provides extendedColors) {
         MaterialTheme(
             colorScheme = colorScheme,
+            typography = WantedSansTypography,
             content = content,
         )
     }

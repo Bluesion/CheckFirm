@@ -1,15 +1,19 @@
 package com.illusion.checkfirm.data.di
 
-import com.illusion.checkfirm.data.repository.*
+import com.illusion.checkfirm.data.remote.AppMetadataFetcherImpl
+import com.illusion.checkfirm.data.repository.AppMetadataRepositoryImpl
+import com.illusion.checkfirm.data.repository.BCRepositoryImpl
+import com.illusion.checkfirm.data.repository.HistoryRepositoryImpl
+import com.illusion.checkfirm.data.repository.InfoCatcherRepositoryImpl
+import com.illusion.checkfirm.data.repository.SherlockRepositoryImpl
+import com.illusion.checkfirm.data.repository.WelcomeSearchRepositoryImpl
+import com.illusion.checkfirm.domain.remote.AppMetadataFetcher
 import com.illusion.checkfirm.domain.repository.AppMetadataRepository
 import com.illusion.checkfirm.domain.repository.BCRepository
 import com.illusion.checkfirm.domain.repository.HistoryRepository
 import com.illusion.checkfirm.domain.repository.InfoCatcherRepository
-import com.illusion.checkfirm.domain.repository.PreferenceRepository
 import com.illusion.checkfirm.domain.repository.SherlockRepository
 import com.illusion.checkfirm.domain.repository.WelcomeSearchRepository
-import com.illusion.checkfirm.domain.remote.AppMetadataFetcher
-import com.illusion.checkfirm.data.remote.AppMetadataFetcherImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

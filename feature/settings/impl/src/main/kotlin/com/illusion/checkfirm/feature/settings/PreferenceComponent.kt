@@ -1,73 +1,75 @@
 package com.illusion.checkfirm.feature.settings
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
-import androidx.compose.ui.tooling.preview.Devices.PIXEL_2
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.component.OneIcons
+import com.illusion.checkfirm.core.designsystem.component.OneSettingsDivider
+import com.illusion.checkfirm.core.designsystem.component.OneSwitch
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import com.illusion.checkfirm.core.designsystem.component.OneUIDivider
-import com.illusion.checkfirm.core.designsystem.component.OneUISwitch
 
 @Composable
 fun ProfileCard(
     profileName: String = "Unknown",
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         onClick = onClick,
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(14.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(
-                text = profileName,
-                modifier = Modifier.weight(1f),
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleLarge,
-            )
-            Spacer(modifier = Modifier.size(12.dp))
-            Surface(
-                modifier = Modifier.size(48.dp),
-                color = MaterialTheme.colorScheme.primary,
-                shape = CircleShape,
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 16.dp),
             ) {
-                Icon(
-                    modifier = Modifier.padding(8.dp),
-                    imageVector = PreferenceIcon.Profile,
-                    contentDescription = null,
+                Text(
+                    text = stringResource(R.string.settings_profile_user_name),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Text(
+                    text = profileName,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
             }
+            Icon(
+                imageVector = OneIcons.IcProfile,
+                contentDescription = null,
+                tint = Color.Unspecified,
+                modifier = Modifier.size(50.dp),
+            )
         }
     }
 }
@@ -86,13 +88,13 @@ fun AppearanceCard(
             title = stringResource(R.string.settings_theme),
             description = stringResource(R.string.settings_theme_description),
         )
-        OneUIDivider(modifier = Modifier.padding(horizontal = 12.dp))
+        OneSettingsDivider()
         PreferenceItem(
             onClick = onLanguageClick,
             title = stringResource(R.string.settings_language),
             description = stringResource(R.string.settings_language_description),
         )
-        OneUIDivider(modifier = Modifier.padding(horizontal = 12.dp))
+        OneSettingsDivider()
         PreferenceItem(
             onClick = onQuickSearchBarClick,
             title = stringResource(R.string.settings_quick_search_bar),
@@ -115,13 +117,13 @@ fun BookmarkCard(
             title = stringResource(R.string.settings_bookmark_order),
             description = stringResource(R.string.settings_bookmark_order_description),
         )
-        OneUIDivider(modifier = Modifier.padding(horizontal = 12.dp))
+        OneSettingsDivider()
         PreferenceItem(
             onClick = onBookmarkResetClick,
             title = stringResource(R.string.settings_bookmark_reset),
             description = stringResource(R.string.settings_bookmark_reset_description),
         )
-        OneUIDivider(modifier = Modifier.padding(horizontal = 12.dp))
+        OneSettingsDivider()
         PreferenceItem(
             onClick = onBackupRestoreClick,
             title = stringResource(R.string.settings_bookmark_backup_restore),
@@ -150,7 +152,7 @@ fun SearchCard(
             isSwitchChecked = isWelcomeSearchEnabled,
             onSwitchToggle = onWelcomeSearchChanged,
         )
-        OneUIDivider(modifier = Modifier.padding(horizontal = 12.dp))
+        OneSettingsDivider()
         PreferenceItem(
             onClick = onInfoCatcherClick,
             title = stringResource(R.string.info_catcher),
@@ -158,7 +160,7 @@ fun SearchCard(
             isSwitchChecked = isInfoCatcherEnabled,
             onSwitchToggle = onInfoCatcherChanged,
         )
-        OneUIDivider(modifier = Modifier.padding(horizontal = 12.dp))
+        OneSettingsDivider()
         PreferenceItem(
             onClick = onFirebaseClick,
             title = stringResource(R.string.settings_firebase),
@@ -176,37 +178,23 @@ fun AboutCard(
     onInquiryClick: () -> Unit,
 ) {
     PreferenceCard {
-        PreferenceItem(
-            onClick = onHelpClick,
-            title = stringResource(R.string.help),
-        )
-        OneUIDivider(modifier = Modifier.padding(horizontal = 12.dp))
-        PreferenceItem(
-            onClick = onAboutClick,
-            title = stringResource(R.string.settings_about),
-        )
-        OneUIDivider(modifier = Modifier.padding(horizontal = 12.dp))
-        PreferenceItem(
-            onClick = onInquiryClick,
-            title = stringResource(R.string.settings_inquiry),
-        )
+        PreferenceItem(onClick = onHelpClick, title = stringResource(R.string.help))
+        OneSettingsDivider()
+        PreferenceItem(onClick = onAboutClick, title = stringResource(R.string.settings_about))
+        OneSettingsDivider()
+        PreferenceItem(onClick = onInquiryClick, title = stringResource(R.string.settings_inquiry))
     }
 }
 
 @Composable
-private fun PreferenceCard(
-    content: @Composable ColumnScope. () -> Unit,
-) {
+private fun PreferenceCard(content: @Composable ColumnScope.() -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Min)
-        ) {
-            content()
-        }
+        Column(modifier = Modifier.fillMaxWidth()) { content() }
     }
 }
 
@@ -222,79 +210,30 @@ private fun PreferenceItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(12.dp)
+            .padding(14.dp)
             .defaultMinSize(minHeight = 48.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
+        Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = title,
-                modifier = Modifier.fillMaxWidth(),
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 17.sp),
+                color = MaterialTheme.colorScheme.onSurface,
+                maxLines = 1,
             )
             if (description != null) {
                 Text(
                     text = description,
-                    modifier = Modifier.fillMaxWidth(),
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp),
+                    color = CheckFirmTheme.colors.settingsDescription,
                 )
             }
         }
         if (onSwitchToggle != null) {
             Spacer(modifier = Modifier.size(12.dp))
-            OneUISwitch(
+            OneSwitch(
                 checked = isSwitchChecked,
-                onCheckedChange = onSwitchToggle
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true, device = PIXEL_2)
-@Preview(showBackground = true, device = PIXEL_2, uiMode = UI_MODE_NIGHT_YES)
-@Composable
-private fun PreferenceCardPreview() {
-    CheckFirmTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(24.dp),
-        ) {
-            ProfileCard(
-                profileName = "TEST PROFILE",
-                onClick = {},
-            )
-            AppearanceCard(
-                onThemeClick = {},
-                onLanguageClick = {},
-                isQuickSearchBarEnabled = false,
-                onQuickSearchBarClick = {},
-                onQuickSearchBarChanged = {},
-            )
-            BookmarkCard(
-                onBookmarkOrderClick = {},
-                onBookmarkResetClick = {},
-                onBackupRestoreClick = {},
-            )
-            SearchCard(
-                isWelcomeSearchEnabled = false,
-                onWelcomeSearchClick = {},
-                onWelcomeSearchChanged = {},
-                isInfoCatcherEnabled = false,
-                onInfoCatcherClick = {},
-                onInfoCatcherChanged = {},
-                isFirebaseEnabled = false,
-                onFirebaseClick = {},
-                onFirebaseChanged = {},
-            )
-            AboutCard(
-                onHelpClick = {},
-                onAboutClick = {},
-                onInquiryClick = {}
+                onCheckedChange = onSwitchToggle,
             )
         }
     }

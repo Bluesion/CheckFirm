@@ -1,21 +1,16 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
+
 package com.illusion.checkfirm.feature.settings
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,14 +24,16 @@ import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.illusion.checkfirm.core.designsystem.R
-import com.illusion.checkfirm.domain.model.Preference
+import com.illusion.checkfirm.core.designsystem.component.OneIcons
+import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.core.preference.api.Preference
 import com.illusion.checkfirm.feature.settings.bookmark.BookmarkOrderDialog
 import com.illusion.checkfirm.feature.settings.bookmark.BookmarkResetDialog
 import com.illusion.checkfirm.feature.settings.language.LanguageDialog
 import com.illusion.checkfirm.feature.settings.profile.ProfileDialog
 import com.illusion.checkfirm.feature.settings.theme.ThemeDialog
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PreferenceScreen(
     preference: Preference,
@@ -56,28 +53,27 @@ fun PreferenceScreen(
     onFirebaseChange: (Boolean) -> Unit,
 ) {
     val context = LocalContext.current
-
     var activeDialog by remember { mutableStateOf(PreferenceDialog.None) }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.settings_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
-                    }
-                }
-            )
-        }
-    ) { paddingValues ->
+    OneScaffold(
+        title = stringResource(R.string.settings),
+        navigationIcon = {
+            IconButton(onClick = onNavigateBack) {
+                Icon(
+                    imageVector = OneIcons.IcBack,
+                    contentDescription = null,
+                    tint = CheckFirmTheme.colors.toolbarIconTint,
+                )
+            }
+        },
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
-                .padding(horizontal = 12.dp)
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+                .padding(horizontal = 10.dp)
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = innerPadding.calculateBottomPadding() + 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             ProfileCard(
                 profileName = preference.profileName,
@@ -129,27 +125,24 @@ fun PreferenceScreen(
             onConfirm = {
                 onProfileNameChange(it)
                 activeDialog = PreferenceDialog.None
-            }
+            },
         )
-
         PreferenceDialog.Theme -> ThemeDialog(
             selectedTheme = preference.theme,
             onDismiss = { activeDialog = PreferenceDialog.None },
             onConfirm = {
                 onThemeChange(it)
                 activeDialog = PreferenceDialog.None
-            }
+            },
         )
-
         PreferenceDialog.Language -> LanguageDialog(
             selectedLanguage = preference.language,
             onDismiss = { activeDialog = PreferenceDialog.None },
             onConfirm = {
                 onLanguageChange(it)
                 activeDialog = PreferenceDialog.None
-            }
+            },
         )
-
         PreferenceDialog.BookmarkOrder -> BookmarkOrderDialog(
             selectedOrder = preference.bookmarkOrder,
             isAscending = preference.isBookmarkAscOrder,
@@ -157,16 +150,12 @@ fun PreferenceScreen(
             onConfirm = { order, ascending ->
                 onBookmarkOrderChange(order, ascending)
                 activeDialog = PreferenceDialog.None
-            }
+            },
         )
-
         PreferenceDialog.BookmarkReset -> BookmarkResetDialog(
             onDismiss = { activeDialog = PreferenceDialog.None },
-            onConfirm = {
-                activeDialog = PreferenceDialog.None
-            }
+            onConfirm = { activeDialog = PreferenceDialog.None },
         )
-
         PreferenceDialog.None -> Unit
     }
 }
@@ -179,7 +168,7 @@ fun PreferenceRoute(
     onNavigateToWelcomeSearch: () -> Unit,
     onNavigateToInfoCatcher: () -> Unit,
     onNavigateBack: () -> Unit,
-    viewModel: PreferenceViewModel = hiltViewModel()
+    viewModel: PreferenceViewModel = hiltViewModel(),
 ) {
     val preference by viewModel.preference.collectAsStateWithLifecycle()
 

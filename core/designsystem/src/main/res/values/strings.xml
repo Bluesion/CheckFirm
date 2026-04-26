@@ -242,28 +242,4 @@
     <!-- Outdated -->
     <string name="outdated_title">Needs update</string>
     <string name="outdated_description">The current version is no longer supported. Please update to the latest version. Sorry for your inconvenience.</string>
-    <string name="settings_title">Settings</string>
-    <string name="about_title">About</string>
-    <string name="backup_restore_title">Backup &amp; Restore</string>
-    <string name="backup_settings_text">Backup Settings</string>
-    <string name="restore_settings_text">Restore Settings</string>
-    <string name="help_title">Help</string>
-    <string name="bookmarks_title">Bookmarks</string>
-    <string name="bookmark_text">Bookmark</string>
-    <string name="recent_search_text">Recent Search</string>
-    <string name="model_text">Model</string>
-    <string name="csc_text">CSC</string>
-    <string name="search_text">Search</string>
-    <string name="info_catcher_title">Info Catcher</string>
-    <string name="cancel_text">Cancel</string>
-    <string name="add_item_text">Add Item</string>
-    <string name="report_bug_title">Report a Bug</string>
-    <string name="type_of_bug_text">Type of Bug</string>
-    <string name="device_details_text">Device Details (Model, OS)</string>
-    <string name="logs_steps_text">Logs / Steps to reproduce</string>
-    <string name="submit_report_text">Submit Report</string>
-    <string name="bookmarks_empty_text">Bookmarks Empty</string>
-    <string name="recent_history_empty_text">Recent History Empty</string>
-    <string name="summary_text">Summary</string>
-    <string name="no_recent_searches_text">No recent searches</string>
 </resources>

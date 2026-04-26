@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="oneui_primary">#0381FE</color>
+    <color name="oneui_surface">#171719</color>
+    <color name="oneui_onBackground">#E3E2E6</color>
+    <color name="oneui_divider_color">#44474E</color>
+    <color name="oneui_toolbar_icon_tint">#FAFAFA</color>
+    <color name="oneui_menu_popup_background_color">#252525</color>
+    <color name="oneui_menu_popup_background_stroke_color">#252525</color>
+    <color name="sherlock_warning_color">#FF9B17</color>
+    <color name="sherlock_fail_color">#FFB4A9</color>
+    <color name="sherlock_normal_color">#0381FE</color>
+    <color name="sherlock_success_color">#8DD483</color>
+    <color name="sherlock_loading_color">#C1C1C1</color>
+    <color name="sesl_loading_progress_color1">#FF0072D2</color>
+    <color name="sesl_loading_progress_color2">#FF5DAAF2</color>
+</resources>

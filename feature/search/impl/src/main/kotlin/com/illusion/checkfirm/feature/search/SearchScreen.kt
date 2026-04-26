@@ -32,7 +32,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -126,7 +125,7 @@ fun SearchScreen(
                 Tab(
                     selected = uiState.selectedTabIndex == 0,
                     onClick = { onTabIndexChange(0) },
-                    text = { Text(stringResource(R.string.bookmark_text)) }
+                    text = { Text(stringResource(R.string.bookmark)) }
                 )
                 Tab(
                     selected = uiState.selectedTabIndex == 1,
@@ -349,7 +348,7 @@ private fun SearchTopBar(
                     decorationBox = { innerTextField ->
                         if (model.isEmpty()) {
                             Text(
-                                stringResource(R.string.model_text),
+                                stringResource(R.string.model),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
@@ -376,7 +375,7 @@ private fun SearchTopBar(
                     decorationBox = { innerTextField ->
                         if (csc.isEmpty()) {
                             Text(
-                                stringResource(R.string.csc_text),
+                                stringResource(R.string.csc),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
@@ -409,12 +408,12 @@ private fun SearchBottomSheetContent(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "${stringResource(R.string.summary_text)} (${searchList.size})",
+                text = "(${searchList.size})",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.weight(1f)
             )
             Button(onClick = onSearchClick, enabled = searchList.isNotEmpty()) {
-                Text(stringResource(R.string.search_text))
+                Text(stringResource(R.string.search))
             }
         }
 

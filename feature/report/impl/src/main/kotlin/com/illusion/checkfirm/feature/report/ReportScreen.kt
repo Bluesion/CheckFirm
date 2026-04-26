@@ -1,6 +1,9 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
+
 package com.illusion.checkfirm.feature.report
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,20 +11,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -33,6 +34,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.component.OneIcons
+import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
@@ -69,7 +72,6 @@ fun ReportRoute(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReportScreen(
     uiState: ReportUiState,
@@ -80,81 +82,110 @@ fun ReportScreen(
     onSubmitClick: () -> Unit,
     onNavigationIconClick: () -> Unit,
 ) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.report_bug_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onNavigationIconClick) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
-                    }
-                },
-            )
+    OneScaffold(
+        title = stringResource(R.string.report),
+        navigationIcon = {
+            IconButton(onClick = onNavigationIconClick) {
+                Icon(
+                    imageVector = OneIcons.IcBack,
+                    contentDescription = null,
+                    tint = CheckFirmTheme.colors.toolbarIconTint,
+                )
+            }
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding)
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 12.dp)
+                .padding(top = 12.dp, bottom = innerPadding.calculateBottomPadding() + 16.dp)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text(
-                text = "Please describe the issue you encountered. Provide as much detail as possible.",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(top = 8.dp)
-            )
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(14.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+            ) {
+                Text(
+                    text = stringResource(R.string.report_description),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(12.dp),
+                )
+            }
 
-            OutlinedTextField(
-                value = uiState.bugType,
-                onValueChange = onBugTypeChange,
-                label = { Text(stringResource(R.string.type_of_bug_text)) },
-                modifier = Modifier.fillMaxWidth()
+            ReportTypeRow(
+                title = stringResource(R.string.report_type_1),
+                checked = uiState.bugType == "type_1",
+                onCheckedChange = { if (it) onBugTypeChange("type_1") else onBugTypeChange("") },
             )
-
-            OutlinedTextField(
-                value = uiState.deviceDetails,
-                onValueChange = onDeviceDetailsChange,
-                label = { Text(stringResource(R.string.device_details_text)) },
-                modifier = Modifier.fillMaxWidth()
+            ReportTypeRow(
+                title = stringResource(R.string.report_type_2),
+                checked = uiState.bugType == "type_2",
+                onCheckedChange = { if (it) onBugTypeChange("type_2") else onBugTypeChange("") },
+            )
+            ReportTypeRow(
+                title = stringResource(R.string.report_type_3),
+                checked = uiState.bugType == "type_3",
+                onCheckedChange = { if (it) onBugTypeChange("type_3") else onBugTypeChange("") },
+            )
+            ReportTypeRow(
+                title = stringResource(R.string.report_type_4),
+                checked = uiState.bugType == "type_4",
+                onCheckedChange = { if (it) onBugTypeChange("type_4") else onBugTypeChange("") },
             )
 
             OutlinedTextField(
                 value = uiState.logs,
                 onValueChange = onLogsChange,
-                label = { Text(stringResource(R.string.logs_steps_text)) },
-                modifier = Modifier.fillMaxWidth(),
-                minLines = 4
+                placeholder = { Text(stringResource(R.string.report_detail)) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                minLines = 4,
             )
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Checkbox(
-                    checked = uiState.consentGiven,
-                    onCheckedChange = onConsentChange
-                )
-                Text(
-                    text = "I consent to sharing this data for debugging purposes.",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
 
             Button(
                 onClick = onSubmitClick,
-                modifier = Modifier.fillMaxWidth(),
-                enabled = uiState.consentGiven && uiState.bugType.isNotBlank() && uiState.deviceDetails.isNotBlank() && uiState.logs.isNotBlank() && !uiState.isSubmitting
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                enabled = uiState.bugType.isNotBlank() && !uiState.isSubmitting,
             ) {
                 if (uiState.isSubmitting) {
                     CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
                 } else {
-                    Text(stringResource(R.string.submit_report_text))
+                    Text(stringResource(R.string.report_submit))
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ReportTypeRow(
+    title: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onCheckedChange(!checked) }
+            .padding(vertical = 4.dp),
+    ) {
+        Checkbox(checked = checked, onCheckedChange = onCheckedChange)
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.padding(start = 8.dp),
+        )
     }
 }
 

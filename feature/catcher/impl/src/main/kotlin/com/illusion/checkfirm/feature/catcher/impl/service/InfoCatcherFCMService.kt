@@ -8,7 +8,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.net.toUri
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.illusion.checkfirm.domain.repository.PreferenceRepository
+import com.illusion.checkfirm.core.preference.api.PreferenceRepository
 import com.illusion.checkfirm.feature.catcher.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope

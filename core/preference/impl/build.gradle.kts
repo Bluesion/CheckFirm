@@ -13,10 +13,6 @@ android {
         minSdk = 28
     }
 
-    buildFeatures {
-        compose = true
-    }
-
     buildTypes {
         release {
             isMinifyEnabled = false

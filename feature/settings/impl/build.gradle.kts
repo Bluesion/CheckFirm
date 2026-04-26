@@ -8,5 +8,6 @@ android {
 
 dependencies {
     implementation(projects.feature.settings.api)
+    implementation(projects.core.preference.api)
     implementation(libs.bundles.androidx.navigation3)
 }

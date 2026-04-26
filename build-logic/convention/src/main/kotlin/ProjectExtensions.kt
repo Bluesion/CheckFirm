@@ -3,7 +3,6 @@ import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
-import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
@@ -15,7 +14,7 @@ internal fun Project.configureKotlinAndroid(
 ) {
     if (commonExtension is ApplicationExtension) {
         commonExtension.apply {
-            compileSdk = 36
+            compileSdk = 37
             defaultConfig { minSdk = 28 }
             compileOptions {
                 sourceCompatibility = org.gradle.api.JavaVersion.VERSION_21
@@ -24,7 +23,7 @@ internal fun Project.configureKotlinAndroid(
         }
     } else if (commonExtension is LibraryExtension) {
         commonExtension.apply {
-            compileSdk = 36
+            compileSdk = 37
             defaultConfig { minSdk = 28 }
             compileOptions {
                 sourceCompatibility = org.gradle.api.JavaVersion.VERSION_21

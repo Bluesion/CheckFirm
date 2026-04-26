@@ -2,8 +2,8 @@ package com.illusion.checkfirm.feature.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.illusion.checkfirm.domain.model.Preference
-import com.illusion.checkfirm.domain.repository.PreferenceRepository
+import com.illusion.checkfirm.core.preference.api.Preference
+import com.illusion.checkfirm.core.preference.api.PreferenceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

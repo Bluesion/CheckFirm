@@ -8,5 +8,6 @@ android {
 
 dependencies {
     implementation(projects.feature.catcher.api)
+    implementation(projects.core.preference.api)
     implementation(libs.bundles.firebase)
 }

@@ -1,0 +1,245 @@
+<resources>
+    <!-- Test -->
+
+    <!-- General -->
+    <string name="add_item">Ekle</string>
+    <string name="check_network">Lütfen ağı kontrol edin</string>
+    <string name="check_device">Model ve CSC kodunu doğru yazdığınızdan emin olun.</string>
+    <string name="close">Kapat</string>
+    <string name="unknown">Bilinmeyen</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_new_firmware">Yeni Firmware</string>
+    <string name="notification_channel_new_update">Uygulama Güncellemesi</string>
+    <string name="notification_new_update_title">CheckFirm acil güncelleme</string>
+    <string name="notification_new_update_text">Kritik hatalar bildirildi. Lütfen hemen Play Store\'dan güncelleyin.</string>
+    <string name="notification_info_catcher_title">%1$s (%2$s) için yeni firmware bulundu!</string>
+    <string name="notification_info_catcher_text">Hemen kontrol edin.</string>
+    <string name="notification_permission_required_title">İzin gerekli</string>
+    <string name="notification_permission_required_message">CheckFirm, yeni firmware bulunduğunda sizi bilgilendiren Info Catcher özelliği sunar. Bu özelliği kullanmak için bildirim izni vermelisiniz.</string>
+    <string name="notification_permission_required_button_deny">Reddet</string>
+    <string name="notification_permission_required_button_grant">İzin Ver</string>
+
+    <!-- Main -->
+    <string name="main_welcome_search_text">Karşılama Araması devre dışı. Açmanız önerilir.</string>
+    <string name="main_network_error_title">Ağ hatası</string>
+    <string name="main_network_error_text">Ağa bağlanılamıyor veya çok yavaş.</string>
+    <string name="main_search_error_title">Arama hatası</string>
+    <string name="main_search_error_text">Model veya CSC hatalı.</string>
+    <string name="main_category_dialog_description">Hızlı arama çubuğunda göstermek istediğiniz kategoriyi seçin.</string>
+    <string name="main_hello_title">CheckFirm\'e hoş geldiniz!</string>
+    <string name="main_hello_description">Samsung cihazların firmware bilgilerini arayabilirsiniz. Aşağıdaki özellikleri inceleyin.</string>
+    <string name="main_hello_search_description">Firmware bilgilerini arayın.</string>
+    <string name="main_hello_bookmark_description">Yer imleri ve kategoriler ekleyin.</string>
+    <string name="main_hello_info_catcher_description">Yeni firmware’i kaçırmayın.</string>
+    <string name="main_hello_settings_description">Daha fazla özellik sizi bekliyor.</string>
+
+    <!-- Search -->
+    <string name="search">Ara</string>
+    <string name="official_latest">En son resmi firmware</string>
+    <string name="test_latest">En son test firmware</string>
+    <string name="model">Model</string>
+    <string name="official_previous">Önceki resmi firmware</string>
+    <string name="test_previous">Önceki test firmware</string>
+    <string name="clipboard">Panoya kopyalandı.</string>
+    <string name="search_error">Arama başarısız. Bu cihaz için Samsung sunucusunda veri bulunamadı.</string>
+    <string name="multi_search_limit">En fazla 5 cihaz arayabilirsiniz</string>
+    <string name="search_history">Arama geçmişi</string>
+    <string name="search_history_delete_all">Hepsini Sil</string>
+    <string name="search_list_empty">Arama listesi boş.</string>
+    <string name="search_no_bookmark">Yer imi yok</string>
+    <string name="search_no_history">Geçmiş yok</string>
+    <string name="search_add_bookmark">Yer imi ekle</string>
+    <string name="search_result_tab_previous">Önceki</string>
+    <string name="search_result_tab_beta">Beta</string>
+
+    <!-- Sherlock -->
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_build">Yapı versiyonu</string>
+    <string name="sherlock_baseband">Baseband versiyonu</string>
+    <string name="sherlock_tab_manual">Manuel</string>
+    <string name="sherlock_tab_script">Komut</string>
+    <string name="sherlock_result_success">Tebrikler! Şifreli firmware bilgilerini çözdünüz.</string>
+    <string name="sherlock_result_fail">Şifre çözme başarısız oldu. Değerleri değiştirerek tekrar deneyebilirsiniz.</string>
+    <string name="sherlock_manual_description">Şimdi şifreli firmware bilgilerini çözen bir dedektifsiniz! Her alana değer girerek çözmeyi deneyin.</string>
+
+    <!-- Sherlock script -->
+    <string name="sherlock_script">Sherlock komutu</string>
+    <string name="sherlock_script_description">Başlangıç ve bitiş değerini girmeniz yeterlidir. Sherlock Komutu bu aralıktaki tüm değerleri deneyerek firmware bilgisini çözmeye çalışacaktır. Ancak başlangıç ve bitiş değerleri arasındaki fark çok büyükse uygulama kapanabilir.</string>
+    <string name="sherlock_script_start_value">Başlangıç</string>
+    <string name="sherlock_script_end_value">Bitiş</string>
+    <string name="sherlock_script_start">Komutu Başlat</string>
+    <string name="sherlock_script_error_1">Bootloader: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_2">Bootloader: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_3">One UI sürümü: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_4">Yıl: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_5">Ay: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_6">Revizyon: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_7">Başlangıç değeri hatalı.</string>
+    <string name="sherlock_script_error_8">Bitiş değeri hatalı.</string>
+    <string name="sherlock_script_no_error">Hata görünmüyor.\nHazırsınız!</string>
+    <string name="sherlock_script_running">Komut çalışıyor…\nBu ekrandan çıkmayın.</string>
+
+    <!-- Bookmark -->
+    <string name="bookmark">Yer imi</string>
+    <string name="bookmark_new">Yeni yer imi</string>
+    <string name="bookmark_edit">Yer imini düzenle</string>
+    <string name="bookmark_name">Yer imi adı</string>
+    <string name="bookmark_save">Kaydet</string>
+    <string name="bookmark_search_error">Model ve CSC kodunun doğru kaydedildiğinden emin olun.</string>
+    <string name="bookmark_name_error">Lütfen bu yer imine bir ad verin!</string>
+
+    <!-- Bookmark backup and restore -->
+    <string name="backup">Yedekle</string>
+    <string name="backup_description">CheckFirm yer imlerini ve kategorileri JSON dosyası olarak kaydedin.</string>
+    <string name="restore">Geri Yükle</string>
+    <string name="restore_description">Yedek JSON dosyasını yükleyerek geri yükleyin.</string>
+    <string name="backup_toast">Yedekleme tamamlandı.</string>
+    <string name="restore_toast">Geri yükleme tamamlandı.</string>
+
+    <!-- Help -->
+    <string name="help">Yardım</string>
+    <string name="help_device_info">Cihaz bilgisi</string>
+    <string name="help_device_info_description">Model · CSC</string>
+    <string name="help_device_info_edit">Düzenle</string>
+    <string name="help_device_name">Cihaz adı</string>
+    <string name="help_device_info_bookmark">Yer imi kaydedildi.</string>
+    <string name="help_manual">Firmware kılavuzu</string>
+    <string name="help_manual_description">Firmware bilgileri</string>
+    <string name="help_firmware_manual_description">Firmware bilgileri 3 kısımdan oluşur: yapı versiyonu, CSC versiyonu ve baseband versiyonu.\n\nÖrneğin arama sonucu şu şekilde olsun:\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1.\n\nİlki (A720SKSU3BRK1) yapı versiyonunu,\nikiincisi (A720SSKC3BRK1) CSC versiyonunu,\nsonuncusu (A720NKOU3BRK1) baseband versiyonunu gösterir.</string>
+    <string name="help_firmware_manual_build_description">A720SKSU3BRK1 yapı versiyonunu ifade eder. Bootloader versiyonu, One UI versiyonu, firmware\'in üretildiği yıl, ay ve revizyon numarası bu alandan anlaşılabilir.</string>
+    <string name="help_firmware_manual_build_device_description">Bu model numarasıdır. Bu örnekte, A720 = Samsung Galaxy A7 (2017).</string>
+    <string name="help_firmware_manual_build_region_description">Bu bölge kodudur. SKS = Güney Kore. 4 harfli de olabilir.</string>
+    <string name="help_firmware_manual_build_bootloader_description">Bu bootloader versiyonudur. Samsung’un güvenlik politikası nedeniyle, daha yüksek bootloader versiyonuna sahip firmware’den daha düşük bir versiyona geçiş yapılamaz.</string>
+    <string name="help_firmware_manual_build_one_ui_description">Bu One UI versiyonudur.\nSarı metin güncellenmişse, One UI güncellemesi var demektir.\n\nA = ilk büyük sürüm,\nB = bir kez büyük güncelleme almış,\nC = iki kez almış,\n.\n.\n.\nZ = beta firmware.</string>
+    <string name="help_firmware_manual_build_year_description">Firmware’in üretildiği yılı gösterir.\n\nT = 2020,\nU = 2021,\nV = 2022, vb.</string>
+    <string name="help_firmware_manual_build_month_description">Firmware’in üretildiği ayı gösterir.\n\nA = Ocak,\nB = Şubat,\n.\n.\n.\nL = Aralık.</string>
+    <string name="help_firmware_manual_build_revision_description">Revizyon numarası (küçük sürüm).\n\n1 = ilk sürüm,\n.\n.\n.\n9 = dokuzuncu sürüm,\nA = onuncu,\n.\n.\n.\nF = on altıncı sürüm.</string>
+    <string name="help_firmware_manual_csc_description">A720SSKC3BRK1 CSC versiyonunu ifade eder. CSC, "Tüketici Yazılım Özelleştirme" anlamına gelir ve cihaza özel bölgesel veya operatör yazılımını gösterir.</string>
+    <string name="help_firmware_manual_baseband_description">A720NKOU3BRK1 baseband versiyonunu ifade eder. Baseband, cihazın radyo modülünü kontrol eden firmware’dir ve cihazın ağla iletişimini sağlar.</string>
+
+    <!-- About -->
+    <string name="about_app_information">Uygulama bilgisi</string>
+    <string name="about_version">Sürüm</string>
+    <string name="about_latest">Zaten en son sürüm yüklü.</string>
+    <string name="about_update">Güncelle</string>
+    <string name="legal">Yasal Bilgi</string>
+    <string name="legal_text">Resmi firmware bilgileri şu adresten alınır:\nhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml\n\nTest firmware bilgileri:\nhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml\n\nBu kaynaklar Samsung Electronics’in resmi bilgi sağlayıcıları değildir. Bilgilerin kullanımı tamamen sizin sorumluluğunuzdadır.</string>
+
+    <!-- Contributor -->
+    <string name="contributor">Katkıda Bulunan</string>
+    <string name="contributor_application">Uygulama</string>
+    <string name="contributor_designer">Tasarımcı</string>
+    <string name="contributor_developer">Geliştirici</string>
+    <string name="contributor_russian">Rusça</string>
+    <string name="contributor_chinese">Çince</string>
+    <string name="contributor_czech">Çekçe</string>
+    <string name="contributor_portuguese">Portekizce</string>
+    <string name="contributor_romanian">Romence</string>
+    <string name="contributor_sinhala">Sinhala</string>
+    <string name="contributor_translator">Çevirmen</string>
+
+    <!-- Settings -->
+    <string name="settings">Ayarlar</string>
+    <string name="settings_profile_user_name">Kullanıcı adı</string>
+    <string name="settings_theme">Tema</string>
+    <string name="settings_theme_description">Uygulama temasını ayarla.</string>
+    <string name="settings_theme_light">Açık</string>
+    <string name="settings_theme_dark">Koyu</string>
+    <string name="settings_theme_system">Sistem varsayılanı</string>
+    <string name="settings_language">Dil</string>
+    <string name="settings_language_description">Uygulama dilini ayarla</string>
+    <string name="settings_language_default">Sistem varsayılanı</string>
+    <string name="settings_quick_search_bar">Hızlı arama çubuğu</string>
+    <string name="settings_quick_search_bar_description">Ana ekranda yer imlerini göster.</string>
+    <string name="settings_bookmark_order">Yer imi sırası</string>
+    <string name="settings_bookmark_order_description">Yer imlerini sırala</string>
+    <string name="settings_bookmark_order_by_created_time">Oluşturulma zamanına göre sırala</string>
+    <string name="settings_bookmark_order_by_device">Cihaza göre sırala</string>
+    <string name="settings_bookmark_order_by_name">İsme göre sırala</string>
+    <string name="settings_bookmark_order_by_desc">Azalan düzende sırala</string>
+    <string name="settings_bookmark_reset">Yer imlerini sıfırla</string>
+    <string name="settings_bookmark_reset_description">Tüm yer imleri ve kategorileri sıfırla. Yalnızca bir hata varsa bu işlemi kullanın.</string>
+    <string name="settings_bookmark_reset_dialog_title">Emin misiniz?</string>
+    <string name="settings_bookmark_reset_dialog_message">Tüm yer imleri ve kategoriler silinecek.</string>
+    <string name="settings_bookmark_reset_toast">Sıfırlama başarılı.</string>
+    <string name="settings_bookmark_backup_restore">Yedekle &amp; Geri yükle</string>
+    <string name="settings_bookmark_backup_restore_description">CheckFirm yer imlerini ve kategorilerini yedekleyin veya geri yükleyin.</string>
+    <string name="settings_welcome_search_description">Başlangıçta firmware araması yap.</string>
+    <string name="settings_info_catcher_description">Firmware güncellendiğinde Info Catcher size bildirim gönderir.</string>
+    <string name="settings_firebase">Arama hatasını düzelt</string>
+    <string name="settings_firebase_description">Çin veya İran gibi ülkeler Firebase\'i engellediği için arama hatası oluşabilir. Bu ülkelerdeyseniz bu ayarı etkinleştirin.</string>
+    <string name="settings_inquiry">İletişim</string>
+    <string name="settings_inquiry_not_found_exception">Lütfen Google Play Store\'dan bir e-posta uygulaması yükleyin.</string>
+    <string name="settings_about">CheckFirm Hakkında</string>
+
+    <!-- Welcome Search -->
+    <string name="welcome_search">Karşılama Araması</string>
+    <string name="welcome_search_description">Uygulama başladığında firmware ara.\nBaşlangıçta aramak istediğiniz cihazı girin.</string>
+    <string name="welcome_search_add_device">Cihaz ekle</string>
+    <string name="welcome_search_empty_device_list">En fazla 5 cihaz ekleyebilirsiniz.</string>
+
+    <!-- Smart Search -->
+    <string name="smart_search">Akıllı Arama</string>
+    <string name="smart_search_type_major">One UI güncellemesi</string>
+    <string name="smart_search_type_minor">Küçük güncelleme</string>
+    <string name="smart_search_type_rollback">Geri alma</string>
+    <string name="smart_search_bootloader">Bootloader versiyonu</string>
+    <string name="smart_search_major_version">Ana sürüm</string>
+    <string name="smart_search_build_date">Yapım tarihi</string>
+    <string name="smart_search_minor_version">Alt sürüm</string>
+    <string name="smart_search_date_format">%2$s, %1$s</string>
+    <string name="smart_search_downgrade_possible">Sürüm düşürme mümkün</string>
+    <string name="smart_search_downgrade_impossible">Sürüm düşürme mümkün değil</string>
+    <string name="january">Ocak</string>
+    <string name="february">Şubat</string>
+    <string name="march">Mart</string>
+    <string name="april">Nisan</string>
+    <string name="may">Mayıs</string>
+    <string name="june">Haziran</string>
+    <string name="july">Temmuz</string>
+    <string name="august">Ağustos</string>
+    <string name="september">Eylül</string>
+    <string name="october">Ekim</string>
+    <string name="november">Kasım</string>
+    <string name="december">Aralık</string>
+
+    <!-- Info Catcher -->
+    <string name="info_catcher">Info Catcher</string>
+    <string name="info_catcher_description">Firmware güncellendiğinde Info Catcher size bildirim gönderir.\nTakip etmek istediğiniz cihazı girin.</string>
+
+    <!-- Suggestion -->
+    <string name="suggestion">Öneri</string>
+    <string name="suggestion_title">Başka bir şey mi arıyorsunuz?</string>
+    <string name="suggestion_bookmark_my_device">Cihazımı yer imine ekle</string>
+    <string name="suggestion_enable_welcome_search">Karşılama Aramasını etkinleştir</string>
+    <string name="suggestion_check_my_device_info">Cihaz bilgilerini kontrol et</string>
+    <string name="suggestion_wifi">Wi-Fi\'ı aç</string>
+    <string name="suggestion_data">Mobil veriyi aç</string>
+    <string name="suggestion_search_my_device">Bu cihazı ara</string>
+
+    <!-- Category -->
+    <string name="category">Kategori</string>
+    <string name="category_all">Tümü</string>
+    <string name="category_edit_name">Kategori adı</string>
+    <string name="category_edit_devices_title">Cihazlar</string>
+    <string name="category_edit_name_error_all">Kategori adı "Tümü" olamaz.</string>
+    <string name="category_edit_name_error_empty">Kategori adı boş olmamalı.</string>
+    <string name="category_edit_device_list_error_empty">Cihaz listesi boş olmamalı.</string>
+
+    <!-- Report -->
+    <string name="report">Raporla</string>
+    <string name="report_description">Geri bildiriminiz için teşekkürler. Raporunuz 1 hafta içinde değerlendirilecektir ve bildirim gönderilmeyecektir. Uygunsuz raporlar dikkate alınmayabilir. Lütfen bir neden seçin.</string>
+    <string name="report_type_1">Firmware bilgisi hatası</string>
+    <string name="report_type_2">Uygunsuz kullanıcı adı</string>
+    <string name="report_type_3">Akıllı Arama bilgisi hatası</string>
+    <string name="report_type_4">Diğer hatalar</string>
+    <string name="report_detail">(İsteğe bağlı) Herhangi bir ayrıntı yardımcı olur.</string>
+    <string name="report_submit">Gönder</string>
+    <string name="report_success">Gönderim başarılı.</string>
+    <string name="report_fail">Gönderim başarısız.</string>
+
+    <!-- Outdated -->
+    <string name="outdated_title">Güncelleme gerekli</string>
+    <string name="outdated_description">Bu sürüm artık desteklenmiyor. Lütfen en son sürüme güncelleyin. Verdiğimiz rahatsızlıktan dolayı özür dileriz.</string>
+</resources>

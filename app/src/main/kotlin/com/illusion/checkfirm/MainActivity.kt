@@ -9,7 +9,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.core.navigation.EntryProviderInstaller
 import com.illusion.checkfirm.core.navigation.Navigator
-import com.illusion.checkfirm.domain.repository.PreferenceRepository
+import com.illusion.checkfirm.core.preference.api.PreferenceRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
