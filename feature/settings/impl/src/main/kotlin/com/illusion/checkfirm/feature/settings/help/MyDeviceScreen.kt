@@ -15,6 +15,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -107,15 +108,17 @@ private fun InfoRow(label: String, value: String) {
 @Composable
 private fun MyDeviceScreenPreview() {
     CheckFirmTheme {
-        MyDeviceScreen(
-            uiState = MyDeviceUiState(
-                model = "SM-S928B",
-                hardware = "e3q",
-                manufacturer = "Samsung",
-                sdk = "35",
-                release = "15",
-            ),
-            onNavigationIconClick = {},
-        )
+        Surface {
+            MyDeviceScreen(
+                uiState = MyDeviceUiState(
+                    model = "SM-S928B",
+                    hardware = "e3q",
+                    manufacturer = "Samsung",
+                    sdk = "35",
+                    release = "15",
+                ),
+                onNavigationIconClick = {},
+            )
+        }
     }
 }

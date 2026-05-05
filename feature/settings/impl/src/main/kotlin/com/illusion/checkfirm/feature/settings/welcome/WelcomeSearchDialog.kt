@@ -112,13 +112,15 @@ fun WelcomeSearchDialog(
 @Composable
 private fun WelcomeSearchDialogPreview() {
     CheckFirmTheme {
-        WelcomeSearchDialog(
-            uiState = WelcomeSearchUiState(model = "SM-S928", csc = "KOO"),
-            onModelChange = {},
-            onCscChange = {},
-            onSelectedChipChange = {},
-            onDismissRequest = {},
-            onAddDevice = { _, _ -> },
-        )
+        Surface {
+            WelcomeSearchDialog(
+                uiState = WelcomeSearchUiState(model = "SM-S928", csc = "KOO"),
+                onModelChange = {},
+                onCscChange = {},
+                onSelectedChipChange = {},
+                onDismissRequest = {},
+                onAddDevice = { _, _ -> },
+            )
+        }
     }
 }

@@ -10,6 +10,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -88,11 +89,13 @@ fun BookmarkOrderDialog(
 @Composable
 private fun BookmarkOrderDialogPreview() {
     CheckFirmTheme {
-        BookmarkOrderDialog(
-            selectedOrder = "time",
-            isAscending = true,
-            onDismiss = {},
-            onConfirm = { _, _ -> },
-        )
+        Surface {
+            BookmarkOrderDialog(
+                selectedOrder = "time",
+                isAscending = true,
+                onDismiss = {},
+                onConfirm = { _, _ -> },
+            )
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.illusion.checkfirm.core.designsystem.component
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
@@ -65,10 +66,12 @@ fun OneTab(
 @Composable
 private fun OneTabPreview() {
     CheckFirmTheme {
-        OneTab(
-            titles = listOf("Bookmark", "History"),
-            selectedTabIndex = 0,
-            onTabSelected = {},
-        )
+        Surface {
+            OneTab(
+                titles = listOf("Bookmark", "History"),
+                selectedTabIndex = 0,
+                onTabSelected = {},
+            )
+        }
     }
 }

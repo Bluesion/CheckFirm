@@ -19,6 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -152,14 +153,16 @@ private fun ReportTypeRow(
 @Composable
 private fun ReportScreenPreview() {
     CheckFirmTheme {
-        ReportScreen(
-            uiState = ReportUiState(),
-            onBugTypeChange = {},
-            onDeviceDetailsChange = {},
-            onLogsChange = {},
-            onConsentChange = {},
-            onSubmitClick = {},
-            onNavigationIconClick = {},
-        )
+        Surface {
+            ReportScreen(
+                uiState = ReportUiState(),
+                onBugTypeChange = {},
+                onDeviceDetailsChange = {},
+                onLogsChange = {},
+                onConsentChange = {},
+                onSubmitClick = {},
+                onNavigationIconClick = {},
+            )
+        }
     }
 }

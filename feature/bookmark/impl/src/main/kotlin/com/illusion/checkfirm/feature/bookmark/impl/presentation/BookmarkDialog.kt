@@ -13,6 +13,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -128,10 +129,12 @@ fun BookmarkDialog(
 @Composable
 private fun BookmarkDialogPreview() {
     CheckFirmTheme {
-        BookmarkDialog(
-            categories = listOf("Galaxy S", "Galaxy Z"),
-            onDismiss = {},
-            onConfirm = {},
-        )
+        Surface {
+            BookmarkDialog(
+                categories = listOf("Galaxy S", "Galaxy Z"),
+                onDismiss = {},
+                onConfirm = {},
+            )
+        }
     }
 }

@@ -15,6 +15,7 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -116,13 +117,15 @@ fun InfoCatcherDialog(
 @Composable
 private fun InfoCatcherDialogPreview() {
     CheckFirmTheme {
-        InfoCatcherDialog(
-            model = "SM-S928",
-            csc = "KOO",
-            onModelChange = {},
-            onCscChange = {},
-            onDismissRequest = {},
-            onAdd = { _, _ -> },
-        )
+        Surface {
+            InfoCatcherDialog(
+                model = "SM-S928",
+                csc = "KOO",
+                onModelChange = {},
+                onCscChange = {},
+                onDismissRequest = {},
+                onAdd = { _, _ -> },
+            )
+        }
     }
 }

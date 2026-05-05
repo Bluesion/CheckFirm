@@ -22,6 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -172,17 +173,19 @@ fun InfoCatcherItem(
 @Composable
 private fun InfoCatcherScreenPreview() {
     CheckFirmTheme {
-        InfoCatcherScreen(
-            uiState = InfoCatcherUiState(),
-            onNavigationIconClick = {},
-            onEnableChange = {},
-            onAddDeviceClick = {},
-            onDeleteDevice = {},
-            onDialogDismiss = {},
-            onDialogModelChange = {},
-            onDialogCscChange = {},
-            onAddDevice = { _, _ -> },
-        )
+        Surface {
+            InfoCatcherScreen(
+                uiState = InfoCatcherUiState(),
+                onNavigationIconClick = {},
+                onEnableChange = {},
+                onAddDeviceClick = {},
+                onDeleteDevice = {},
+                onDialogDismiss = {},
+                onDialogModelChange = {},
+                onDialogCscChange = {},
+                onAddDevice = { _, _ -> },
+            )
+        }
     }
 }
 
@@ -190,9 +193,11 @@ private fun InfoCatcherScreenPreview() {
 @Composable
 private fun InfoCatcherItemPreview() {
     CheckFirmTheme {
-        InfoCatcherItem(
-            deviceText = "SM-S928B / KOO",
-            onDelete = {},
-        )
+        Surface {
+            InfoCatcherItem(
+                deviceText = "SM-S928B / KOO",
+                onDelete = {},
+            )
+        }
     }
 }

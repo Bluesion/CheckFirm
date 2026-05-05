@@ -20,6 +20,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -213,7 +214,9 @@ fun WelcomeSearchItem(
 @Composable
 private fun WelcomeSearchScreenPreview() {
     CheckFirmTheme {
-        WelcomeSearchScreen(onNavigationIconClick = {})
+        Surface {
+            WelcomeSearchScreen(onNavigationIconClick = {})
+        }
     }
 }
 
@@ -221,9 +224,11 @@ private fun WelcomeSearchScreenPreview() {
 @Composable
 private fun WelcomeSearchItemPreview() {
     CheckFirmTheme {
-        WelcomeSearchItem(
-            device = WelcomeSearchDevice(model = "SM-S928B", csc = "KOO"),
-            onDelete = {},
-        )
+        Surface {
+            WelcomeSearchItem(
+                device = WelcomeSearchDevice(model = "SM-S928B", csc = "KOO"),
+                onDelete = {},
+            )
+        }
     }
 }

@@ -66,9 +66,11 @@ fun SherlockDialog(
 @Composable
 private fun SherlockDialogPreview() {
     CheckFirmTheme {
-        SherlockDialog(
-            onDismiss = {},
-            onConfirm = {},
-        )
+        Surface {
+            SherlockDialog(
+                onDismiss = {},
+                onConfirm = {},
+            )
+        }
     }
 }

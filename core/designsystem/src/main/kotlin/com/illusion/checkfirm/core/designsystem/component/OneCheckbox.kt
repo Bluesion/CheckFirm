@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -138,9 +139,11 @@ fun OneCheckbox(
 private fun OneCheckboxPreview() {
     var isChecked by remember { mutableStateOf(false) }
     CheckFirmTheme {
-        OneCheckbox(
-            checked = isChecked,
-            onCheckedChange = { isChecked = !isChecked },
-        )
+        Surface {
+            OneCheckbox(
+                checked = isChecked,
+                onCheckedChange = { isChecked = !isChecked },
+            )
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.illusion.checkfirm.core.designsystem.component
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +28,8 @@ fun OneProgress(
 @Composable
 private fun OneProgressPreview() {
     CheckFirmTheme {
-        OneProgress()
+        Surface {
+            OneProgress()
+        }
     }
 }

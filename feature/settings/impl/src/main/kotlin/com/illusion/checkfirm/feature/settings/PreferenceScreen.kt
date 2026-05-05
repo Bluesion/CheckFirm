@@ -9,6 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -162,23 +163,25 @@ fun PreferenceScreen(
 @Composable
 private fun PreferenceScreenPreview() {
     CheckFirmTheme {
-        PreferenceScreen(
-            uiState = PreferenceUiState(),
-            onNavigateToAbout = {},
-            onNavigateToBackupRestore = {},
-            onNavigateToHelp = {},
-            onNavigateToWelcomeSearch = {},
-            onNavigateToInfoCatcher = {},
-            onNavigateBack = {},
-            onActiveDialogChange = {},
-            onProfileNameChange = {},
-            onThemeChange = {},
-            onLanguageChange = {},
-            onQuickSearchBarChange = {},
-            onBookmarkOrderChange = { _, _ -> },
-            onWelcomeSearchChange = {},
-            onInfoCatcherChange = {},
-            onFirebaseChange = {},
-        )
+        Surface {
+            PreferenceScreen(
+                uiState = PreferenceUiState(),
+                onNavigateToAbout = {},
+                onNavigateToBackupRestore = {},
+                onNavigateToHelp = {},
+                onNavigateToWelcomeSearch = {},
+                onNavigateToInfoCatcher = {},
+                onNavigateBack = {},
+                onActiveDialogChange = {},
+                onProfileNameChange = {},
+                onThemeChange = {},
+                onLanguageChange = {},
+                onQuickSearchBarChange = {},
+                onBookmarkOrderChange = { _, _ -> },
+                onWelcomeSearchChange = {},
+                onInfoCatcherChange = {},
+                onFirebaseChange = {},
+            )
+        }
     }
 }

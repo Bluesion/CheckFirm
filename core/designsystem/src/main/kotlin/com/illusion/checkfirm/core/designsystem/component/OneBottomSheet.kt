@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -55,11 +56,13 @@ fun OneBottomSheetDialog(
 @Composable
 private fun OneBottomSheetDialogPreview() {
     CheckFirmTheme {
-        OneBottomSheetDialog(
-            title = "Select option",
-            onDismiss = {},
-        ) {
-            Text(text = "Content goes here")
+        Surface {
+            OneBottomSheetDialog(
+                title = "Select option",
+                onDismiss = {},
+            ) {
+                Text(text = "Content goes here")
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -119,11 +120,13 @@ fun OneEditText(
 @Composable
 private fun OneEditTextPreview() {
     CheckFirmTheme {
-        OneEditText(
-            value = "SM-S928B",
-            onValueChange = {},
-            hint = "Enter model",
-        )
+        Surface {
+            OneEditText(
+                value = "SM-S928B",
+                onValueChange = {},
+                hint = "Enter model",
+            )
+        }
     }
 }
 

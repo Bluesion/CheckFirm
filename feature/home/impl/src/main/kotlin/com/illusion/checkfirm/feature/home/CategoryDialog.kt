@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -77,11 +78,13 @@ fun CategoryDialog(
 @Composable
 private fun CategoryDialogPreview() {
     CheckFirmTheme {
-        CategoryDialog(
-            categories = listOf("Galaxy S", "Galaxy Z", "Galaxy A"),
-            selected = setOf("Galaxy S"),
-            onDismiss = {},
-            onConfirm = {},
-        )
+        Surface {
+            CategoryDialog(
+                categories = listOf("Galaxy S", "Galaxy Z", "Galaxy A"),
+                selected = setOf("Galaxy S"),
+                onDismiss = {},
+                onConfirm = {},
+            )
+        }
     }
 }

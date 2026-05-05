@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -132,10 +133,12 @@ private fun ThemePreview(
 @Composable
 private fun ThemeDialogPreview() {
     CheckFirmTheme {
-        ThemeDialog(
-            selectedTheme = "system",
-            onDismiss = {},
-            onConfirm = {},
-        )
+        Surface {
+            ThemeDialog(
+                selectedTheme = "system",
+                onDismiss = {},
+                onConfirm = {},
+            )
+        }
     }
 }

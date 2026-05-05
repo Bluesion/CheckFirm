@@ -8,6 +8,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -82,15 +83,17 @@ private fun FirmwareRow(label: String, value: String) {
 @Composable
 private fun SearchDialogPreview() {
     CheckFirmTheme {
-        SearchDialog(
-            deviceTitle = "SM-S928B / KOO",
-            versions = FirmwareVersions(
-                officialLatest = "S928BKSU3AXL5",
-                officialPrevious = "S928BKSU2AXJ2",
-                testLatest = "S928BKSU3BXL5",
-                testPrevious = "-",
-            ),
-            onDismiss = {},
-        )
+        Surface {
+            SearchDialog(
+                deviceTitle = "SM-S928B / KOO",
+                versions = FirmwareVersions(
+                    officialLatest = "S928BKSU3AXL5",
+                    officialPrevious = "S928BKSU2AXJ2",
+                    testLatest = "S928BKSU3BXL5",
+                    testPrevious = "-",
+                ),
+                onDismiss = {},
+            )
+        }
     }
 }

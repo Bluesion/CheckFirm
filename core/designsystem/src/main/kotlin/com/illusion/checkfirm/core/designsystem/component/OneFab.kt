@@ -7,6 +7,7 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,11 +45,13 @@ fun OneFab(
 @Composable
 private fun OneFabPreview() {
     CheckFirmTheme {
-        OneFab(
-            onClick = {},
-            icon = Icons.Rounded.Add,
-            contentDescription = "Add",
-        )
+        Surface {
+            OneFab(
+                onClick = {},
+                icon = Icons.Rounded.Add,
+                contentDescription = "Add",
+            )
+        }
     }
 }
 

@@ -2,6 +2,7 @@ package com.illusion.checkfirm.core.designsystem.component
 
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +28,8 @@ fun OneDivider(
 @Composable
 private fun OneDividerPreview() {
     CheckFirmTheme {
-        OneDivider()
+        Surface {
+            OneDivider()
+        }
     }
 }

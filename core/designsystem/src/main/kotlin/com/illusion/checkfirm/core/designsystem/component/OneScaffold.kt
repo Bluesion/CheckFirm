@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -266,7 +267,9 @@ private fun OneCollapsingToolbar(
 @Composable
 private fun OneScaffoldPreview() {
     CheckFirmTheme {
-        OneScaffold(title = "CheckFirm") { }
+        Surface {
+            OneScaffold(title = "CheckFirm") { }
+        }
     }
 }
 
@@ -274,6 +277,8 @@ private fun OneScaffoldPreview() {
 @Composable
 private fun OneScaffoldFixedPreview() {
     CheckFirmTheme {
-        OneScaffold(title = "CheckFirm", expandable = false) { }
+        Surface {
+            OneScaffold(title = "CheckFirm", expandable = false) { }
+        }
     }
 }

@@ -13,6 +13,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -71,14 +72,16 @@ internal fun CategoryItem(
 @Composable
 private fun BookmarkItemPreview() {
     CheckFirmTheme {
-        BookmarkItem(
-            bookmark = Bookmark(
-                name = "Galaxy S24",
-                device = Device("SM-S928B", "KOO"),
-                category = "Galaxy S",
-            ),
-            onEditClick = {},
-            onDeleteClick = {},
-        )
+        Surface {
+            BookmarkItem(
+                bookmark = Bookmark(
+                    name = "Galaxy S24",
+                    device = Device("SM-S928B", "KOO"),
+                    category = "Galaxy S",
+                ),
+                onEditClick = {},
+                onDeleteClick = {},
+            )
+        }
     }
 }

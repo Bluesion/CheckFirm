@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -91,14 +92,16 @@ fun HomeScreen(
 @Composable
 private fun HomeScreenPreview() {
     CheckFirmTheme {
-        HomeScreen(
-            uiState = HomeUiState(),
-            onSearchIconClick = {},
-            onBookmarkIconClick = {},
-            onPreferenceIconClick = {},
-            onWelcomeSearchClick = {},
-            onInfoCatcherClick = {},
-            onCategoryChipClick = {},
-        )
+        Surface {
+            HomeScreen(
+                uiState = HomeUiState(),
+                onSearchIconClick = {},
+                onBookmarkIconClick = {},
+                onPreferenceIconClick = {},
+                onWelcomeSearchClick = {},
+                onInfoCatcherClick = {},
+                onCategoryChipClick = {},
+            )
+        }
     }
 }

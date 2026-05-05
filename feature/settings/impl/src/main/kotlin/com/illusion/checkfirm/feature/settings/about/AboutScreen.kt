@@ -13,6 +13,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -148,11 +149,13 @@ private fun AboutPageButton(text: String, onClick: () -> Unit) {
 @Composable
 private fun AboutScreenPreview() {
     CheckFirmTheme {
-        AboutScreen(
-            onNavigateBack = {},
-            showDialog = {},
-            hideDialog = {},
-        )
+        Surface {
+            AboutScreen(
+                onNavigateBack = {},
+                showDialog = {},
+                hideDialog = {},
+            )
+        }
     }
 }
 
@@ -160,9 +163,11 @@ private fun AboutScreenPreview() {
 @Composable
 private fun AboutPageButtonPreview() {
     CheckFirmTheme {
-        AboutPageButton(
-            text = "Contributor",
-            onClick = {},
-        )
+        Surface {
+            AboutPageButton(
+                text = "Contributor",
+                onClick = {},
+            )
+        }
     }
 }
