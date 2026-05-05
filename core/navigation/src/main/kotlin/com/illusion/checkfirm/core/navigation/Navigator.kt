@@ -11,8 +11,14 @@ typealias EntryProviderInstaller = EntryProviderScope<Any>.() -> Unit
 class Navigator(startNavKey: Any) {
     val backStack: SnapshotStateList<Any> = mutableStateListOf(startNavKey)
 
-    fun goTo(navKey: Any) {
+    fun goTo(
+        navKey: Any,
+        removeFirstScreen: Boolean = false,
+    ) {
         backStack.add(navKey)
+        if (removeFirstScreen) {
+            backStack.removeAt(0)
+        }
     }
 
     fun goBack() {

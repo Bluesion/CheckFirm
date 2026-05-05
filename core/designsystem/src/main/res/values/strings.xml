@@ -1,4 +1,8 @@
 <resources>
+    <!-- Switch -->
+    <string name="switch_on">On</string>
+    <string name="switch_off">Off</string>
+
     <!-- Test -->
 
     <!-- General -->

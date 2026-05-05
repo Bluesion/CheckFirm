@@ -18,10 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
@@ -51,8 +53,8 @@ fun OneSwitchCard(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    textOn: String = "On",
-    textOff: String = "Off",
+    textOn: String = stringResource(R.string.switch_on),
+    textOff: String = stringResource(R.string.switch_off),
 ) {
     val darkTheme = isSystemInDarkTheme()
     val cardOff = if (darkTheme) Color(0xFF171719) else Color(0xFFFDFCFF)

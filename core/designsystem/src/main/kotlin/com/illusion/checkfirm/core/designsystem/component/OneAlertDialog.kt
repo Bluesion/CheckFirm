@@ -1,6 +1,5 @@
 package com.illusion.checkfirm.core.designsystem.component
 
-import androidx.compose.foundation.clickable
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -51,14 +50,17 @@ fun OneAlertDialog(
             }
         },
         dismissButton = {
-            Text(
-                text = "취소",
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.clickable { /*TODO*/ }
-            )
+            TextButton(
+                onClick = onDismissButtonClick,
+            ) {
+                Text(
+                    text = dismissButtonText,
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+            }
         },
-        modifier = modifier
+        modifier = modifier,
     )
 }
 

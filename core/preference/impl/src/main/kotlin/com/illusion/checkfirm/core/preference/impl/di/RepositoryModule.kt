@@ -1,6 +1,7 @@
-package com.illusion.checkfirm.core.preference.impl
+package com.illusion.checkfirm.core.preference.impl.di
 
 import com.illusion.checkfirm.core.preference.api.PreferenceRepository
+import com.illusion.checkfirm.core.preference.impl.PreferenceRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,7 +14,7 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindMyRepository(
+    abstract fun bindPreferenceRepository(
         impl: PreferenceRepositoryImpl,
     ): PreferenceRepository
 }

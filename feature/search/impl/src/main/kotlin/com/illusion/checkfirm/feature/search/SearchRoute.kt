@@ -8,7 +8,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun SearchRoute(
     onNavigationIconClick: () -> Unit,
-    onSherlockClick: () -> Unit = {},
     viewModel: SearchViewModel = hiltViewModel(),
     historyViewModel: HistoryViewModel = hiltViewModel(),
 ) {

@@ -5,18 +5,18 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AppMetadataInfo(
-    @SerialName("version_data") val appVersionData: AppVersionData
+    @SerialName("version_data") val appVersionData: AppVersionData,
 )
 
 @Serializable
 data class AppVersionData(
     val latest: AppVersion,
-    val minimum: AppVersion
+    val minimum: AppVersion,
 )
 
 @Serializable
 data class AppVersion(
     @SerialName("version_name") val versionName: String,
     @SerialName("version_code") val versionCode: Int,
-    @SerialName("version_date") val versionDate: String
+    @SerialName("version_date") val versionDate: String,
 )

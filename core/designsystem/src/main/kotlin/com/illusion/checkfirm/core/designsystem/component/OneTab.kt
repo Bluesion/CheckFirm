@@ -16,7 +16,7 @@ import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
-fun OneTabs(
+fun OneTab(
     titles: List<String>,
     selectedTabIndex: Int,
     onTabSelected: (Int) -> Unit,
@@ -63,9 +63,9 @@ fun OneTabs(
 
 @ComponentPreview
 @Composable
-private fun OneTabsPreview() {
+private fun OneTabPreview() {
     CheckFirmTheme {
-        OneTabs(
+        OneTab(
             titles = listOf("Bookmark", "History"),
             selectedTabIndex = 0,
             onTabSelected = {},

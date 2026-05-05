@@ -6,6 +6,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,7 +21,7 @@ fun OneFab(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     containerColor: Color? = null,
-    contentColor: Color = Color(0xFF0381FE)
+    contentColor: Color = MaterialTheme.colorScheme.primary,
 ) {
     val darkTheme = isSystemInDarkTheme()
     val defaultContainerColor = if (darkTheme) Color(0xFF272727) else Color(0xFFFCFCFC)
@@ -30,11 +31,11 @@ fun OneFab(
         modifier = modifier,
         containerColor = containerColor ?: defaultContainerColor,
         contentColor = contentColor,
-        shape = CircleShape
+        shape = CircleShape,
     ) {
         Icon(
             imageVector = icon,
-            contentDescription = contentDescription
+            contentDescription = contentDescription,
         )
     }
 }

@@ -36,8 +36,8 @@ class HomeViewModel @Inject constructor(
         )
     }.stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = HomeUiState()
+        started = SharingStarted.Eagerly,
+        initialValue = HomeUiState(),
     )
 
     fun updateSelectedCategory(category: String) {

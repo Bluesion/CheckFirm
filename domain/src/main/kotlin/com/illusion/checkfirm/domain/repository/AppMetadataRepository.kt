@@ -1,8 +1,8 @@
 package com.illusion.checkfirm.domain.repository
 
 import com.illusion.checkfirm.domain.model.ApiResponse
-import com.illusion.checkfirm.domain.model.AppVersionStatus
+import com.illusion.checkfirm.domain.model.AppMetadata
 
 interface AppMetadataRepository {
-    suspend fun checkAppVersion(currentAppVersion: Int): ApiResponse<AppVersionStatus>
+    suspend fun fetchAppMetadata(): ApiResponse<AppMetadata>
 }

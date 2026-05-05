@@ -22,11 +22,17 @@ object MainNavModule {
 
     @Provides
     @ActivityRetainedScoped
-    fun provideNavigator(): Navigator = Navigator(startNavKey = HomeRouteNavKey)
+    fun provideNavigator(): Navigator = Navigator(startNavKey = SplashRouteNavKey)
 
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
+        entry<SplashRouteNavKey> {
+            SplashRoute(
+                navigateToRoute = { navigator.goTo(navKey = it, removeFirstScreen = true) }
+            )
+        }
+
         entry<HomeRouteNavKey> {
             HomeRoute(
                 onSearchIconClick = { navigator.goTo(SearchRouteNavKey) },

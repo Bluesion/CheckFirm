@@ -22,12 +22,14 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -45,13 +47,34 @@ fun OneScaffold(
     navigationIcon: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
-    scrollBehavior: TopAppBarScrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState()),
+    expandable: Boolean = true,
     content: @Composable ColumnScope.(PaddingValues) -> Unit,
 ) {
+    if (!expandable) {
+        OneFixedScaffold(
+            title = title,
+            modifier = modifier,
+            navigationIcon = navigationIcon,
+            actions = actions,
+            floatingActionButton = floatingActionButton,
+            content = content,
+        )
+        return
+    }
+
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
     val expandedHeight = remember(screenHeight) { screenHeight * 0.38f }
+
+    val density = LocalDensity.current
+    val limitPx = with(density) { (expandedHeight - ToolbarHeight).toPx() }
+
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        rememberTopAppBarState(
+            initialHeightOffsetLimit = -limitPx,
+            initialHeightOffset = -limitPx,
+        ),
+    )
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -79,6 +102,73 @@ fun OneScaffold(
 }
 
 @Composable
+private fun OneFixedScaffold(
+    title: String,
+    modifier: Modifier,
+    navigationIcon: @Composable () -> Unit,
+    actions: @Composable RowScope.() -> Unit,
+    floatingActionButton: @Composable () -> Unit,
+    content: @Composable ColumnScope.(PaddingValues) -> Unit,
+) {
+    Scaffold(
+        modifier = modifier,
+        containerColor = MaterialTheme.colorScheme.background,
+        topBar = {
+            OneFixedToolbar(
+                title = title,
+                navigationIcon = navigationIcon,
+                actions = actions,
+            )
+        },
+        floatingActionButton = floatingActionButton,
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = innerPadding.calculateTopPadding()),
+        ) {
+            content(innerPadding)
+        }
+    }
+}
+
+@Composable
+private fun OneFixedToolbar(
+    title: String,
+    navigationIcon: @Composable () -> Unit,
+    actions: @Composable RowScope.() -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.background)
+            .windowInsetsPadding(WindowInsets.statusBars)
+            .height(ToolbarHeight)
+            .padding(horizontal = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        navigationIcon()
+
+        Text(
+            text = title,
+            color = CheckFirmTheme.colors.toolbarText,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 4.dp),
+        )
+
+        Row(
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically,
+            content = actions,
+        )
+    }
+}
+
+@Composable
 private fun OneCollapsingToolbar(
     title: String,
     subTitle: String?,
@@ -90,11 +180,10 @@ private fun OneCollapsingToolbar(
     val collapsedFraction = scrollBehavior.state.collapsedFraction
     val currentHeight = expandedHeight - (expandedHeight - ToolbarHeight) * collapsedFraction
 
-    // Wire scroll heights so behavior knows offsets
-    val density = androidx.compose.ui.platform.LocalDensity.current
+    val density = LocalDensity.current
     val expandedPx = with(density) { expandedHeight.toPx() }
     val collapsedPx = with(density) { ToolbarHeight.toPx() }
-    androidx.compose.runtime.SideEffect {
+    SideEffect {
         scrollBehavior.state.heightOffsetLimit = -(expandedPx - collapsedPx)
     }
 
@@ -169,5 +258,13 @@ private fun OneCollapsingToolbar(
 private fun OneScaffoldPreview() {
     CheckFirmTheme {
         OneScaffold(title = "CheckFirm") { }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun OneScaffoldFixedPreview() {
+    CheckFirmTheme {
+        OneScaffold(title = "CheckFirm", expandable = false) { }
     }
 }

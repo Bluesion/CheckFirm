@@ -18,6 +18,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import com.illusion.checkfirm.core.designsystem.R as DesignSystemR
 
 @AndroidEntryPoint
 class InfoCatcherFCMService : FirebaseMessagingService() {
@@ -48,7 +49,7 @@ class InfoCatcherFCMService : FirebaseMessagingService() {
                 putExtra("new_csc", csc)
             } ?: Intent()
 
-            val channelID = getString(R.string.app_name)
+            val channelID = getString(DesignSystemR.string.app_name)
             val notificationManager =
                 this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             val channel = NotificationChannel(
@@ -87,7 +88,7 @@ class InfoCatcherFCMService : FirebaseMessagingService() {
             ("market://details?id=" + applicationContext.packageName).toUri()
         )
 
-        val channelID = getString(R.string.app_name)
+        val channelID = getString(DesignSystemR.string.app_name)
         val notificationManager =
             this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val channel = NotificationChannel(

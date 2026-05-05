@@ -85,9 +85,15 @@ private val darkScheme = darkColorScheme(
 
 @Composable
 fun CheckFirmTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    theme: String = "light",
     content: @Composable () -> Unit,
 ) {
+    val darkTheme = when (theme) {
+        "light" -> false
+        "dark" -> true
+        else -> isSystemInDarkTheme()
+    }
+
     val extendedColors = if (darkTheme) DarkExtendedColors else LightExtendedColors
     val colorScheme = if (darkTheme) darkScheme else lightScheme
 

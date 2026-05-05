@@ -84,6 +84,10 @@ dependencies {
     implementation(projects.feature.bookmark.api)
     implementation(projects.feature.bookmark.impl)
 
+    // Force update
+    implementation(projects.feature.forceupdate.api)
+    implementation(projects.feature.forceupdate.impl)
+
     // Main
     implementation(projects.feature.home.api)
     implementation(projects.feature.home.impl)
@@ -121,6 +125,7 @@ dependencies {
     implementation(libs.bundles.ktor)
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.accompanist.permissions)
     implementation(libs.kotlinx.coroutines.android)

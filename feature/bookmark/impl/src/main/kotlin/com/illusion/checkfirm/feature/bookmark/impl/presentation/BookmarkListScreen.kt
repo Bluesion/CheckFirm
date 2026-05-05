@@ -1,43 +1,23 @@
 package com.illusion.checkfirm.feature.bookmark.impl.presentation
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Delete
-import androidx.compose.material.icons.rounded.Edit
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExposedDropdownMenuAnchorType
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
-import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
@@ -104,7 +84,7 @@ fun BookmarkListScreen(
             }
 
             when (uiState.selectedTab) {
-                0 -> BookmarkTab(
+                0 -> BookmarkContent(
                     uiState = uiState,
                     onExpandedChange = onExpandedChange,
                     onCategoryChange = onCategoryChange,
@@ -112,7 +92,7 @@ fun BookmarkListScreen(
                     onDeleteClick = { onDeleteBookmark(it.device.model) }
                 )
 
-                1 -> CategoryTab(
+                1 -> CategoryContent(
                     categories = uiState.categories,
                     onEditClick = { onEditingCategoryChange(it) },
                     onDeleteClick = { onDeleteCategory(it.name) }
@@ -170,202 +150,10 @@ fun BookmarkListScreen(
     }
 }
 
-@Composable
-private fun BookmarkTab(
-    uiState: BookmarkListUiState,
-    onExpandedChange: (Boolean) -> Unit,
-    onCategoryChange: (String) -> Unit,
-    onEditClick: (Bookmark) -> Unit,
-    onDeleteClick: (Bookmark) -> Unit,
-) {
-    val categories =
-        listOf(stringResource(R.string.category_all)) + uiState.categories.map { it.name }
-
-    Column(modifier = Modifier.fillMaxSize()) {
-        ExposedDropdownMenuBox(
-            expanded = uiState.expanded,
-            onExpandedChange = onExpandedChange,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-        ) {
-            OutlinedTextField(
-                value = uiState.selectedCategory,
-                onValueChange = {},
-                readOnly = true,
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = uiState.expanded) },
-                modifier = Modifier
-                    .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true)
-                    .fillMaxWidth()
-            )
-            ExposedDropdownMenu(
-                expanded = uiState.expanded,
-                onDismissRequest = { onExpandedChange(false) }
-            ) {
-                categories.forEach { category ->
-                    DropdownMenuItem(
-                        text = { Text(category) },
-                        onClick = {
-                            onCategoryChange(category)
-                            onExpandedChange(false)
-                        }
-                    )
-                }
-            }
-        }
-
-        if (uiState.bookmarks.isEmpty()) {
-            EmptyMessage(text = stringResource(R.string.search_no_bookmark))
-        } else {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                items(
-                    items = uiState.bookmarks,
-                    key = { it.device.model + it.device.csc }
-                ) { item ->
-                    BookmarkItem(
-                        bookmark = item,
-                        onEditClick = { onEditClick(item) },
-                        onDeleteClick = { onDeleteClick(item) }
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun CategoryTab(
-    categories: List<Category>,
-    onEditClick: (Category) -> Unit,
-    onDeleteClick: (Category) -> Unit,
-) {
-    if (categories.isEmpty()) {
-        EmptyMessage(text = "No categories")
-        return
-    }
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        items(items = categories, key = { it.name }) { category ->
-            CategoryItem(
-                category = category,
-                onEditClick = { onEditClick(category) },
-                onDeleteClick = { onDeleteClick(category) }
-            )
-        }
-    }
-}
-
-@Composable
-private fun EmptyMessage(text: String) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
-
-@Composable
-fun BookmarkItem(
-    bookmark: Bookmark,
-    onEditClick: () -> Unit,
-    onDeleteClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 12.dp, top = 12.dp, bottom = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = bookmark.name,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(bookmark.device.model, style = MaterialTheme.typography.bodyMedium)
-                    Text(" / ", style = MaterialTheme.typography.bodyMedium)
-                    Text(bookmark.device.csc, style = MaterialTheme.typography.bodyMedium)
-                    if (bookmark.category.isNotBlank()) {
-                        Text(
-                            "  ·  ${bookmark.category}",
-                            style = MaterialTheme.typography.labelMedium
-                        )
-                    }
-                }
-            }
-            IconButton(onClick = onEditClick) { Icon(Icons.Rounded.Edit, "Edit") }
-            IconButton(onClick = onDeleteClick) { Icon(Icons.Rounded.Delete, "Delete") }
-        }
-    }
-}
-
-@Composable
-private fun CategoryItem(
-    category: Category,
-    onEditClick: () -> Unit,
-    onDeleteClick: () -> Unit,
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, top = 12.dp, bottom = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = category.name,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.weight(1f)
-            )
-            IconButton(onClick = onEditClick) { Icon(Icons.Rounded.Edit, "Edit") }
-            IconButton(onClick = onDeleteClick) { Icon(Icons.Rounded.Delete, "Delete") }
-        }
-    }
-}
-
 @ScreenPreview
 @Composable
 private fun BookmarkListScreenPreview() {
     CheckFirmTheme {
         BookmarkListScreen(onNavigationIconClick = {})
-    }
-}
-
-@ComponentPreview
-@Composable
-private fun BookmarkItemPreview() {
-    CheckFirmTheme {
-        BookmarkItem(
-            bookmark = Bookmark(
-                name = "Galaxy S24",
-                device = com.illusion.checkfirm.domain.model.Device("SM-S928B", "KOO"),
-                category = "Galaxy S",
-            ),
-            onEditClick = {},
-            onDeleteClick = {},
-        )
     }
 }

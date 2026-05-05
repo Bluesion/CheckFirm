@@ -2,6 +2,7 @@ package com.illusion.checkfirm.core.designsystem.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,7 +13,7 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 @Composable
 fun OneProgress(
     modifier: Modifier = Modifier,
-    color: Color = Color(0xFF387AFF),
+    color: Color = MaterialTheme.colorScheme.primary,
     strokeWidth: Float = 4f
 ) {
     CircularProgressIndicator(

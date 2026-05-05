@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">CheckFirm</string>
     <string name="notification_channel_new_firmware">New Firmware</string>
     <string name="notification_channel_new_update">App Update</string>
     <string name="notification_new_update_title">CheckFirm urgent update</string>

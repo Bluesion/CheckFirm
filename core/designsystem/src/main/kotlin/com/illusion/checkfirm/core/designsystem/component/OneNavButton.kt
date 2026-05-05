@@ -23,13 +23,10 @@ fun OneNavButton(
     icon: ImageVector,
     isEncapsulated: Boolean = true,
 ) {
-    // Animate padding and background alpha
-
     Box(
         modifier = Modifier
             .padding(horizontal = 4.dp)
             .size(40.dp)
-            // 4. Encapsulation: Drop shadow, Blur, and Background
             .then(
                 if (isEncapsulated) {
                     Modifier
