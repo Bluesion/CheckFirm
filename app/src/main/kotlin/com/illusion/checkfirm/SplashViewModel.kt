@@ -27,7 +27,7 @@ class SplashViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
 
-    private val _appTheme = MutableStateFlow("light")
+    private val _appTheme = MutableStateFlow("system")
     val appTheme = _appTheme.asStateFlow()
 
     private val _nextRoute = MutableStateFlow<Any?>(null)

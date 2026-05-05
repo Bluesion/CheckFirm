@@ -2,7 +2,7 @@ package com.illusion.checkfirm.core.preference.api
 
 data class Preference(
     val profileName: String = "Unknown",
-    val theme: String = "light",
+    val theme: String = "system",
     val isDynamicColorEnabled: Boolean = false,
     val language: String = "",
     val isQuickSearchBarEnabled: Boolean = false,

@@ -1,4 +1,3 @@
-
 package com.illusion.checkfirm.feature.settings.theme
 
 import androidx.compose.foundation.Image

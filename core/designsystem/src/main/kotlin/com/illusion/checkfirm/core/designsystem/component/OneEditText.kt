@@ -85,7 +85,7 @@ fun OneEditText(
                     maxLines = maxLines,
                     minLines = minLines,
                     visualTransformation = visualTransformation,
-                    cursorBrush = SolidColor(textColor)
+                    cursorBrush = SolidColor(textColor),
                 )
             }
 
@@ -101,7 +101,7 @@ fun OneEditText(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
                             onClick = { onValueChange("") }
-                        )
+                        ),
                 )
             }
         }
@@ -110,7 +110,7 @@ fun OneEditText(
 
         HorizontalDivider(
             thickness = lineHeight.dp,
-            color = actualLineColor
+            color = actualLineColor,
         )
     }
 }

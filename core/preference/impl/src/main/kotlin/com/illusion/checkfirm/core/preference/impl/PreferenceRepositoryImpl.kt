@@ -19,7 +19,7 @@ class PreferenceRepositoryImpl @Inject constructor(
         return dataStore.data.map {
             Preference(
                 profileName = it[PROFILE_NAME] ?: "Unknown",
-                theme = it[APPEARANCE_THEME] ?: "light",
+                theme = it[APPEARANCE_THEME] ?: "system",
                 language = it[APPEARANCE_LANGUAGE] ?: "",
                 isQuickSearchBarEnabled = it[APPEARANCE_QUICK_SEARCH_BAR] ?: false,
                 bookmarkOrder = it[BOOKMARK_ORDER] ?: "time",
