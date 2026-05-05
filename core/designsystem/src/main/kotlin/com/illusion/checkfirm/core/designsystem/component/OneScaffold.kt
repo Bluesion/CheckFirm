@@ -1,6 +1,9 @@
 package com.illusion.checkfirm.core.designsystem.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -76,6 +79,8 @@ fun OneScaffold(
         ),
     )
 
+    val emptyScrollableState = rememberScrollableState { 0f }
+
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.background,
@@ -94,7 +99,11 @@ fun OneScaffold(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding()),
+                .padding(top = innerPadding.calculateTopPadding())
+                .scrollable(
+                    state = emptyScrollableState,
+                    orientation = Orientation.Vertical,
+                ),
         ) {
             content(innerPadding)
         }

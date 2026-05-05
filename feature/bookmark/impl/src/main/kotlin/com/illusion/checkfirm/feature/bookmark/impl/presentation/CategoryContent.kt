@@ -21,19 +21,15 @@ internal fun CategoryContent(
     onDeleteClick: (Category) -> Unit,
 ) {
     if (categories.isEmpty()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            item {
-                Box(
-                    modifier = Modifier.fillParentMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Text(
-                        text = "T No categories",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "T No categories",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     } else {
         LazyColumn(
