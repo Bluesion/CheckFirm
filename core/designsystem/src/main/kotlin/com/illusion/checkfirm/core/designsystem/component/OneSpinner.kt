@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,7 +46,8 @@ fun <T> OneSpinner(
 
         DropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.fillMaxWidth(),
         ) {
             items.forEach { item ->
                 DropdownMenuItem(
@@ -69,11 +71,13 @@ fun <T> OneSpinner(
 @Composable
 private fun OneSpinnerPreview() {
     CheckFirmTheme {
-        OneSpinner(
-            items = listOf("Option A", "Option B", "Option C"),
-            selectedItem = "Option A",
-            onItemSelected = {},
-        )
+        Surface {
+            OneSpinner(
+                items = listOf("Option A", "Option B", "Option C"),
+                selectedItem = "Option A",
+                onItemSelected = {},
+            )
+        }
     }
 }
 

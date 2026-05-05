@@ -9,10 +9,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun SearchRoute(
     onNavigationIconClick: () -> Unit,
     viewModel: SearchViewModel = hiltViewModel(),
-    historyViewModel: HistoryViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val historyList by historyViewModel.historyList.collectAsStateWithLifecycle()
+    val historyList by viewModel.historyList.collectAsStateWithLifecycle()
     val bookmarks by viewModel.bookmarks.collectAsStateWithLifecycle()
 
     SearchScreen(
@@ -23,13 +22,13 @@ fun SearchRoute(
         onCscChange = viewModel::updateCsc,
         onTabIndexChange = viewModel::updateSelectedTabIndex,
         onAddClick = viewModel::onAddClick,
-        onDeviceClick = { viewModel.addToSearchList(it) },
+        onDeviceClick = viewModel::addToSearchList,
         onRemoveFromSearchList = viewModel::removeFromSearchList,
-        onDeleteHistory = { historyViewModel.delete(it.device.model, it.device.csc) },
-        onDeleteAllHistory = historyViewModel::deleteAll,
+        onDeleteHistory = { viewModel.delete(it.device.model, it.device.csc) },
+        onDeleteAllHistory = viewModel::deleteAll,
         onSearchClick = {
             if (uiState.searchList.isNotEmpty()) {
-                historyViewModel.createHistory(uiState.searchList)
+                viewModel.createHistory(uiState.searchList)
                 onNavigationIconClick()
             }
         },

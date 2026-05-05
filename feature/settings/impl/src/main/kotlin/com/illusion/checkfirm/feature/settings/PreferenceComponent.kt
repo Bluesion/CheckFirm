@@ -2,10 +2,8 @@ package com.illusion.checkfirm.feature.settings
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,8 +22,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.component.OneCard
+import com.illusion.checkfirm.core.designsystem.component.OneDivider
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
-import com.illusion.checkfirm.core.designsystem.component.OneSettingsDivider
 import com.illusion.checkfirm.core.designsystem.component.OneSwitch
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
@@ -82,19 +81,19 @@ fun AppearanceCard(
     onQuickSearchBarClick: () -> Unit,
     onQuickSearchBarChanged: (Boolean) -> Unit,
 ) {
-    PreferenceCard {
+    OneCard(modifier = Modifier.fillMaxWidth()) {
         PreferenceItem(
             onClick = onThemeClick,
             title = stringResource(R.string.settings_theme),
             description = stringResource(R.string.settings_theme_description),
         )
-        OneSettingsDivider()
+        OneDivider(modifier = Modifier.padding(12.dp))
         PreferenceItem(
             onClick = onLanguageClick,
             title = stringResource(R.string.settings_language),
             description = stringResource(R.string.settings_language_description),
         )
-        OneSettingsDivider()
+        OneDivider(modifier = Modifier.padding(12.dp))
         PreferenceItem(
             onClick = onQuickSearchBarClick,
             title = stringResource(R.string.settings_quick_search_bar),
@@ -111,19 +110,19 @@ fun BookmarkCard(
     onBookmarkResetClick: () -> Unit,
     onBackupRestoreClick: () -> Unit,
 ) {
-    PreferenceCard {
+    OneCard(modifier = Modifier.fillMaxWidth()) {
         PreferenceItem(
             onClick = onBookmarkOrderClick,
             title = stringResource(R.string.settings_bookmark_order),
             description = stringResource(R.string.settings_bookmark_order_description),
         )
-        OneSettingsDivider()
+        OneDivider(modifier = Modifier.padding(12.dp))
         PreferenceItem(
             onClick = onBookmarkResetClick,
             title = stringResource(R.string.settings_bookmark_reset),
             description = stringResource(R.string.settings_bookmark_reset_description),
         )
-        OneSettingsDivider()
+        OneDivider(modifier = Modifier.padding(12.dp))
         PreferenceItem(
             onClick = onBackupRestoreClick,
             title = stringResource(R.string.settings_bookmark_backup_restore),
@@ -144,7 +143,7 @@ fun SearchCard(
     onFirebaseClick: () -> Unit,
     onFirebaseChanged: (Boolean) -> Unit,
 ) {
-    PreferenceCard {
+    OneCard(modifier = Modifier.fillMaxWidth()) {
         PreferenceItem(
             onClick = onWelcomeSearchClick,
             title = stringResource(R.string.welcome_search),
@@ -152,7 +151,7 @@ fun SearchCard(
             isSwitchChecked = isWelcomeSearchEnabled,
             onSwitchToggle = onWelcomeSearchChanged,
         )
-        OneSettingsDivider()
+        OneDivider(modifier = Modifier.padding(12.dp))
         PreferenceItem(
             onClick = onInfoCatcherClick,
             title = stringResource(R.string.info_catcher),
@@ -160,7 +159,7 @@ fun SearchCard(
             isSwitchChecked = isInfoCatcherEnabled,
             onSwitchToggle = onInfoCatcherChanged,
         )
-        OneSettingsDivider()
+        OneDivider(modifier = Modifier.padding(12.dp))
         PreferenceItem(
             onClick = onFirebaseClick,
             title = stringResource(R.string.settings_firebase),
@@ -177,24 +176,12 @@ fun AboutCard(
     onAboutClick: () -> Unit,
     onInquiryClick: () -> Unit,
 ) {
-    PreferenceCard {
+    OneCard(modifier = Modifier.fillMaxWidth()) {
         PreferenceItem(onClick = onHelpClick, title = stringResource(R.string.help))
-        OneSettingsDivider()
+        OneDivider(modifier = Modifier.padding(12.dp))
         PreferenceItem(onClick = onAboutClick, title = stringResource(R.string.settings_about))
-        OneSettingsDivider()
+        OneDivider(modifier = Modifier.padding(12.dp))
         PreferenceItem(onClick = onInquiryClick, title = stringResource(R.string.settings_inquiry))
-    }
-}
-
-@Composable
-private fun PreferenceCard(content: @Composable ColumnScope.() -> Unit) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-    ) {
-        Column(modifier = Modifier.fillMaxWidth()) { content() }
     }
 }
 
@@ -210,8 +197,7 @@ private fun PreferenceItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(14.dp)
-            .defaultMinSize(minHeight = 48.dp),
+            .padding(14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(modifier = Modifier.weight(1f)) {

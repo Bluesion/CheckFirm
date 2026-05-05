@@ -1,5 +1,6 @@
 package com.illusion.checkfirm.core.designsystem.component
 
+import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -21,7 +22,7 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 @Composable
 fun OneNavButton(
     icon: ImageVector,
-    isEncapsulated: Boolean = true,
+    isEncapsulated: Boolean = Build.VERSION.SDK_INT >= 31,
 ) {
     Box(
         modifier = Modifier

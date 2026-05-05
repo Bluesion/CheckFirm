@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -18,10 +19,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.component.OneCard
+import com.illusion.checkfirm.core.designsystem.component.OneCardItem
+import com.illusion.checkfirm.core.designsystem.component.OneDivider
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
-import com.illusion.checkfirm.core.designsystem.component.OneListCard
-import com.illusion.checkfirm.core.designsystem.component.OneSettingsDivider
-import com.illusion.checkfirm.core.designsystem.component.OneSettingsItem
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
@@ -60,36 +61,36 @@ internal fun HelloDashboard(
         )
         Spacer(Modifier.height(24.dp))
 
-        OneListCard {
-            OneSettingsItem(
+        OneCard {
+            OneCardItem(
                 title = stringResource(R.string.search),
                 description = stringResource(R.string.main_hello_search_description),
                 iconVector = OneIcons.OneuiSearch,
                 onClick = onSearchClick,
             )
-            OneSettingsDivider()
-            OneSettingsItem(
+            OneDivider(modifier = Modifier.padding(12.dp))
+            OneCardItem(
                 title = stringResource(R.string.bookmark),
                 description = stringResource(R.string.main_hello_bookmark_description),
                 iconVector = OneIcons.OneuiBookmark,
                 onClick = onBookmarkClick,
             )
-            OneSettingsDivider()
-            OneSettingsItem(
+            OneDivider(modifier = Modifier.padding(12.dp))
+            OneCardItem(
                 title = stringResource(R.string.welcome_search),
                 description = stringResource(R.string.settings_welcome_search_description),
                 iconVector = OneIcons.IcWelcomeSearch,
                 onClick = onWelcomeSearchClick,
             )
-            OneSettingsDivider()
-            OneSettingsItem(
+            OneDivider(modifier = Modifier.padding(12.dp))
+            OneCardItem(
                 title = stringResource(R.string.info_catcher),
                 description = stringResource(R.string.main_hello_info_catcher_description),
                 iconVector = OneIcons.IcInfoCatcher,
                 onClick = onInfoCatcherClick,
             )
-            OneSettingsDivider()
-            OneSettingsItem(
+            OneDivider(modifier = Modifier.padding(12.dp))
+            OneCardItem(
                 title = stringResource(R.string.settings),
                 description = stringResource(R.string.main_hello_settings_description),
                 iconVector = OneIcons.OneuiSettings,

@@ -3,8 +3,11 @@ package com.illusion.checkfirm.feature.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.domain.model.Bookmark
+import com.illusion.checkfirm.domain.model.Date
 import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.domain.model.SearchHistory
 import com.illusion.checkfirm.domain.repository.BCRepository
+import com.illusion.checkfirm.domain.repository.HistoryRepository
 import com.illusion.checkfirm.feature.search.util.SearchValidationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
@@ -13,6 +16,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import java.util.Calendar
 import java.util.Locale
 
 data class SearchUiState(
@@ -24,13 +29,21 @@ data class SearchUiState(
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    bcRepository: BCRepository
+    bcRepository: BCRepository,
+    private val historyRepository: HistoryRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SearchUiState())
     val uiState: StateFlow<SearchUiState> = _uiState.asStateFlow()
 
     val bookmarks: StateFlow<List<Bookmark>> =
         bcRepository.getAllBookmark("date", true).stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = emptyList()
+        )
+
+    val historyList: StateFlow<List<SearchHistory>> = historyRepository.getAllHistory()
+        .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = emptyList()
@@ -90,6 +103,55 @@ class SearchViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(
             searchList = currentList.filter { it.device != device }
         )
+    }
+
+    suspend fun getAllHistoryList(): List<SearchHistory> {
+        return historyRepository.getAllHistoryList()
+    }
+
+    fun cleanUpHistory() = viewModelScope.launch {
+        historyRepository.cleanUpHistory()
+    }
+
+    fun createHistory(list: List<SearchDeviceItem>) {
+        insert(list)
+    }
+
+    fun insert(list: List<SearchDeviceItem>) = viewModelScope.launch {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val previousHistoryList = getAllHistoryList()
+
+        for (deviceItem in list) {
+            val model = deviceItem.device.model
+            val csc = deviceItem.device.csc
+
+            for (history in previousHistoryList) {
+                if (history.device.model == model && history.device.csc == csc) {
+                    delete(model, csc)
+                }
+            }
+
+            historyRepository.insert(SearchHistory(Device(model, csc), Date(year, month, day)))
+        }
+
+        cleanUpHistory()
+    }
+
+    fun update(model: String, csc: String, year: Int, month: Int, day: Int) =
+        viewModelScope.launch {
+            historyRepository.update(SearchHistory(Device(model, csc), Date(year, month, day)))
+        }
+
+    fun delete(model: String, csc: String) = viewModelScope.launch {
+        historyRepository.delete(SearchHistory(Device(model, csc), Date(0, 0, 0)))
+    }
+
+    fun deleteAll() = viewModelScope.launch {
+        historyRepository.deleteAll()
     }
 
     companion object {

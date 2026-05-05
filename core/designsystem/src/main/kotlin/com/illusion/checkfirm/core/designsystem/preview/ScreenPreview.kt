@@ -6,5 +6,4 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(showBackground = true, device = PIXEL_4)
 @Preview(showBackground = true, device = PIXEL_4, uiMode = UI_MODE_NIGHT_YES)
-@Repeatable
 annotation class ScreenPreview

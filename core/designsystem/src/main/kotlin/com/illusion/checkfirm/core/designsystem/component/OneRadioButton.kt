@@ -3,7 +3,12 @@ package com.illusion.checkfirm.core.designsystem.component
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
@@ -30,10 +35,13 @@ fun OneRadioButton(
 @Composable
 private fun OneRadioButtonPreview() {
     CheckFirmTheme {
-        OneRadioButton(
-            selected = true,
-            onClick = {},
-        )
+        Surface {
+            var isChecked by remember { mutableStateOf(false) }
+            OneRadioButton(
+                selected = isChecked,
+                onClick = { isChecked = !isChecked },
+            )
+        }
     }
 }
 

@@ -316,7 +316,7 @@ private fun SearchTopBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(onClick = onNavigationIconClick) {
-            Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
+            Icon(imageVector = Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
         }
 
         Card(

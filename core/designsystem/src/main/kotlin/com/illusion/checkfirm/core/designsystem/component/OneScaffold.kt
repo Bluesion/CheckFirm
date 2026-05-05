@@ -31,8 +31,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -65,15 +65,15 @@ fun OneScaffold(
         return
     }
 
-    val configuration = LocalConfiguration.current
-    val screenHeight = configuration.screenHeightDp.dp
+    val windowInfo = LocalWindowInfo.current
+    val screenHeight = windowInfo.containerDpSize.height
     val expandedHeight = remember(screenHeight) { screenHeight * 0.38f }
 
     val density = LocalDensity.current
     val limitPx = with(density) { (expandedHeight - ToolbarHeight).toPx() }
 
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-        rememberTopAppBarState(
+        state = rememberTopAppBarState(
             initialHeightOffsetLimit = -limitPx,
             initialHeightOffset = -limitPx,
         ),
