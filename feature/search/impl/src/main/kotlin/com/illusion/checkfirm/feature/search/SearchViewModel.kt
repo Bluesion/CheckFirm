@@ -2,6 +2,8 @@ package com.illusion.checkfirm.feature.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.illusion.checkfirm.core.navigation.NavResultBus
+import com.illusion.checkfirm.core.navigation.NavResultKey
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Date
 import com.illusion.checkfirm.domain.model.Device
@@ -30,7 +32,8 @@ data class SearchUiState(
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     bcRepository: BCRepository,
-    private val historyRepository: HistoryRepository
+    private val historyRepository: HistoryRepository,
+    private val resultBus: NavResultBus,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SearchUiState())
     val uiState: StateFlow<SearchUiState> = _uiState.asStateFlow()
@@ -115,6 +118,16 @@ class SearchViewModel @Inject constructor(
 
     fun createHistory(list: List<SearchDeviceItem>) {
         insert(list)
+    }
+
+    fun confirmAndEmit() = viewModelScope.launch {
+        val devices = _uiState.value.searchList
+        if (devices.isEmpty()) return@launch
+        insert(devices)
+        resultBus.emit(
+            NavResultKey.HomeSearch,
+            devices.map { it.device.model to it.device.csc },
+        )
     }
 
     fun insert(list: List<SearchDeviceItem>) = viewModelScope.launch {

@@ -39,8 +39,8 @@ fun ForceUpdateScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "\uD83D\uDCF1",
-                style = MaterialTheme.typography.displayLarge
+                text = stringResource(R.string.outdated_emoji),
+                style = MaterialTheme.typography.displaySmall,
             )
             Spacer(Modifier.height(16.dp))
             Text(

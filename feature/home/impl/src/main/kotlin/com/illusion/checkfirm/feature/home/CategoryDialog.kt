@@ -1,77 +1,81 @@
 package com.illusion.checkfirm.feature.home
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Checkbox
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
+import com.illusion.checkfirm.core.designsystem.component.OneRadioButton
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun CategoryDialog(
+    selected: String,
     categories: List<String>,
-    selected: Set<String>,
     onDismiss: () -> Unit,
-    onConfirm: (Set<String>) -> Unit,
+    onCategoryPick: (String) -> Unit,
 ) {
-    val picked = remember(selected) { selected.toMutableStateList() }
+    val all = stringResource(R.string.category_all)
+    val options = listOf(all) + categories
 
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(text = stringResource(R.string.category)) },
-        text = {
-            Column(Modifier.fillMaxWidth()) {
-                Text(
-                    text = stringResource(R.string.main_category_dialog_description),
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-                categories.forEach { category ->
-                    val isChecked = category in picked
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                if (isChecked) picked.remove(category) else picked.add(category)
-                            }
-                            .padding(vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Checkbox(
-                            checked = isChecked,
-                            onCheckedChange = {
-                                if (it) picked.add(category) else picked.remove(category)
-                            }
-                        )
-                        Text(category)
-                    }
+    OneBottomSheetDialog(
+        title = stringResource(R.string.category),
+        onDismiss = onDismiss,
+    ) {
+        Spacer(Modifier.height(16.dp))
+        Text(
+            text = stringResource(R.string.main_category_dialog_description),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Spacer(Modifier.height(8.dp))
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
+        ) {
+            options.forEach { name ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            onCategoryPick(name)
+                            onDismiss()
+                        }
+                        .padding(vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = name,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.weight(1f),
+                    )
+                    OneRadioButton(
+                        selected = name == selected,
+                        onClick = {
+                            onCategoryPick(name)
+                            onDismiss()
+                        },
+                    )
                 }
             }
-        },
-        confirmButton = {
-            TextButton(onClick = { onConfirm(picked.toSet()) }) {
-                Text(text = stringResource(R.string.bookmark_save))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) { Text(text = stringResource(R.string.close)) }
         }
-    )
+    }
 }
 
 @ComponentPreview
@@ -80,10 +84,10 @@ private fun CategoryDialogPreview() {
     CheckFirmTheme {
         Surface {
             CategoryDialog(
+                selected = "Galaxy S",
                 categories = listOf("Galaxy S", "Galaxy Z", "Galaxy A"),
-                selected = setOf("Galaxy S"),
                 onDismiss = {},
-                onConfirm = {},
+                onCategoryPick = {},
             )
         }
     }

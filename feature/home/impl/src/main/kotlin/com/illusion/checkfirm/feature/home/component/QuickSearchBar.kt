@@ -1,6 +1,7 @@
 package com.illusion.checkfirm.feature.home.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -11,7 +12,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.FilterChip
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -26,12 +28,14 @@ import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.domain.model.Bookmark
+import com.illusion.checkfirm.domain.model.Device
 
 @Composable
 internal fun QuickSearchBar(
-    selected: String,
-    categories: List<String>,
-    onChipClick: (String) -> Unit,
+    bookmarks: List<Bookmark>,
+    onCategoryIconClick: () -> Unit,
+    onBookmarkClick: (Bookmark) -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -41,7 +45,8 @@ internal fun QuickSearchBar(
             modifier = Modifier
                 .size(24.dp)
                 .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.surfaceVariant),
+                .background(MaterialTheme.colorScheme.surfaceVariant)
+                .clickable(onClick = onCategoryIconClick),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
@@ -54,15 +59,19 @@ internal fun QuickSearchBar(
             )
         }
         Spacer(Modifier.width(8.dp))
-        val all = listOf(stringResource(R.string.category_all)) + categories
         LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            items(count = all.size, key = { all[it] }) { idx ->
-                val chip = all[idx]
-                FilterChip(
-                    selected = chip == selected,
-                    onClick = { onChipClick(chip) },
-                    label = { Text(chip) },
+            items(
+                count = bookmarks.size,
+                key = { bookmarks[it].device.model + bookmarks[it].device.csc },
+            ) { idx ->
+                val bookmark = bookmarks[idx]
+                AssistChip(
+                    onClick = { onBookmarkClick(bookmark) },
+                    label = { Text(bookmark.name) },
                     shape = CircleShape,
+                    colors = AssistChipDefaults.assistChipColors(
+                        labelColor = MaterialTheme.colorScheme.onSurface,
+                    ),
                 )
             }
         }
@@ -75,9 +84,12 @@ fun QuickSearchBarPreview() {
     CheckFirmTheme {
         Surface {
             QuickSearchBar(
-                selected = "A",
-                categories = listOf("A", "B", "C"),
-                onChipClick = {},
+                bookmarks = listOf(
+                    Bookmark("S24", Device("SM-S928B", "KOO"), "Galaxy S"),
+                    Bookmark("Z Fold5", Device("SM-F946B", "KOO"), "Galaxy Z"),
+                ),
+                onCategoryIconClick = {},
+                onBookmarkClick = {},
             )
         }
     }

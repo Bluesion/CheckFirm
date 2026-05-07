@@ -10,19 +10,19 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.component.OneTab
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Category
+import com.illusion.checkfirm.domain.model.Device
 
 @Composable
 fun BookmarkListScreen(
@@ -33,17 +33,25 @@ fun BookmarkListScreen(
     onSelectedTabChange: (Int) -> Unit = {},
     onEditingBookmarkChange: (Bookmark?) -> Unit = {},
     onShowNewBookmarkChange: (Boolean) -> Unit = {},
-    onEditingCategoryChange: (Category?) -> Unit = {},
-    onShowNewCategoryChange: (Boolean) -> Unit = {},
     onAddBookmark: (Bookmark) -> Unit = {},
     onEditBookmark: (Bookmark) -> Unit = {},
-    onDeleteBookmark: (String) -> Unit = {},
-    onAddCategory: (Category) -> Unit = {},
-    onEditCategory: (Category) -> Unit = {},
+    onDeleteBookmark: (Device) -> Unit = {},
     onDeleteCategory: (String) -> Unit = {},
+    onItemClick: (Bookmark) -> Unit = {},
+    onNewCategoryClick: () -> Unit = {},
+    onEditCategoryClick: (Category) -> Unit = {},
 ) {
+    val isBookmarkTab = uiState.selectedTab == 0
+    val count = if (isBookmarkTab) uiState.bookmarks.size else uiState.categories.size
+    val subtitle = pluralStringResource(
+        id = if (isBookmarkTab) R.plurals.bookmark_subtitle else R.plurals.category_subtitle,
+        count = count,
+        count,
+    )
+
     OneScaffold(
         title = stringResource(R.string.bookmark),
+        subTitle = subtitle,
         navigationIcon = {
             IconButton(onClick = onNavigationIconClick) {
                 Icon(
@@ -56,47 +64,44 @@ fun BookmarkListScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    if (uiState.selectedTab == 0) onShowNewBookmarkChange(true)
-                    else onShowNewCategoryChange(true)
+                    if (isBookmarkTab) onShowNewBookmarkChange(true)
+                    else onNewCategoryClick()
                 },
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.primary,
             ) {
                 Icon(Icons.Rounded.Add, contentDescription = "Add")
             }
-        }
+        },
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = innerPadding.calculateBottomPadding())
+                .padding(bottom = innerPadding.calculateBottomPadding()),
         ) {
-            TabRow(selectedTabIndex = uiState.selectedTab) {
-                Tab(
-                    selected = uiState.selectedTab == 0,
-                    onClick = { onSelectedTabChange(0) },
-                    text = { Text(text = stringResource(R.string.bookmark)) }
-                )
-                Tab(
-                    selected = uiState.selectedTab == 1,
-                    onClick = { onSelectedTabChange(1) },
-                    text = { Text(text = stringResource(R.string.category)) }
-                )
-            }
+            OneTab(
+                titles = listOf(
+                    stringResource(R.string.bookmark),
+                    stringResource(R.string.category),
+                ),
+                selectedTabIndex = uiState.selectedTab,
+                onTabSelected = onSelectedTabChange,
+            )
 
             when (uiState.selectedTab) {
                 0 -> BookmarkContent(
                     uiState = uiState,
                     onExpandedChange = onExpandedChange,
                     onCategoryChange = onCategoryChange,
+                    onItemClick = onItemClick,
                     onEditClick = { onEditingBookmarkChange(it) },
-                    onDeleteClick = { onDeleteBookmark(it.device.model) }
+                    onDeleteClick = { onDeleteBookmark(it.device) },
                 )
 
                 1 -> CategoryContent(
                     categories = uiState.categories,
-                    onEditClick = { onEditingCategoryChange(it) },
-                    onDeleteClick = { onDeleteCategory(it.name) }
+                    onEditClick = { onEditCategoryClick(it) },
+                    onDeleteClick = { onDeleteCategory(it.name) },
                 )
             }
         }
@@ -112,7 +117,7 @@ fun BookmarkListScreen(
             onConfirm = {
                 onAddBookmark(it)
                 onShowNewBookmarkChange(false)
-            }
+            },
         )
     }
 
@@ -124,29 +129,7 @@ fun BookmarkListScreen(
             onConfirm = {
                 onEditBookmark(it)
                 onEditingBookmarkChange(null)
-            }
-        )
-    }
-
-    if (uiState.showNewCategory) {
-        CategoryDialog(
-            initial = null,
-            onDismiss = { onShowNewCategoryChange(false) },
-            onConfirm = {
-                onAddCategory(Category(it))
-                onShowNewCategoryChange(false)
-            }
-        )
-    }
-
-    uiState.editingCategory?.let { cat ->
-        CategoryDialog(
-            initial = cat.name,
-            onDismiss = { onEditingCategoryChange(null) },
-            onConfirm = {
-                onEditCategory(Category(it))
-                onEditingCategoryChange(null)
-            }
+            },
         )
     }
 }

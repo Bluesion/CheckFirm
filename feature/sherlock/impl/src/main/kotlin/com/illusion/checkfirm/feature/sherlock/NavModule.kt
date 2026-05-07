@@ -15,8 +15,9 @@ object NavModule {
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<SherlockRouteNavKey> {
+        entry<SherlockRouteNavKey> { key ->
             SherlockRoute(
+                payload = key.searchResult,
                 onNavigationIconClick = navigator::goBack,
             )
         }

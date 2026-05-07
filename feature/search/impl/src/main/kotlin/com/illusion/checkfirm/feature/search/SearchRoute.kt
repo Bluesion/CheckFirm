@@ -28,7 +28,7 @@ fun SearchRoute(
         onDeleteAllHistory = viewModel::deleteAll,
         onSearchClick = {
             if (uiState.searchList.isNotEmpty()) {
-                viewModel.createHistory(uiState.searchList)
+                viewModel.confirmAndEmit()
                 onNavigationIconClick()
             }
         },

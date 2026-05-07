@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:name="face"
+        android:fillColor="@color/sherlock_warning_color"
+        android:fillType="evenOdd"
+        android:pathData="M12,22C17.523,22 22,17.523 22,12C22,6.477 17.523,2 12,2C6.477,2 2,6.477 2,12C2,17.523 6.477,22 12,22Z" />
+    <group
+        android:name="left_eye"
+        android:pivotY="10.5">
+        <path
+            android:fillColor="@android:color/white"
+            android:pathData="M10,10.5C10,11.328 9.552,12 9,12C8.448,12 8,11.328 8,10.5C8,9.672 8.448,9 9,9C9.552,9 10,9.672 10,10.5Z" />
+    </group>
+    <group
+        android:name="right_eye"
+        android:pivotY="10.5">
+        <path
+            android:fillColor="@android:color/white"
+            android:pathData="M15,12C15.552,12 16,11.328 16,10.5C16,9.672 15.552,9 15,9C14.448,9 14,9.672 14,10.5C14,11.328 14.448,12 15,12Z" />
+    </group>
+    <path
+        android:name="mouth"
+        android:fillColor="@android:color/white"
+        android:pathData="M8.25,16C8.25,15.586 8.586,15.25 9,15.25H15C15.414,15.25 15.75,15.586 15.75,16C15.75,16.414 15.414,16.75 15,16.75H9C8.586,16.75 8.25,16.414 8.25,16Z" />
+</vector>

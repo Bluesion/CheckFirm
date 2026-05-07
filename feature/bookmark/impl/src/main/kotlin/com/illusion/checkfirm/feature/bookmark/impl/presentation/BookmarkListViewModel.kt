@@ -2,8 +2,10 @@ package com.illusion.checkfirm.feature.bookmark.impl.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.illusion.checkfirm.core.navigation.NavResultBus
+import com.illusion.checkfirm.core.navigation.NavResultKey
 import com.illusion.checkfirm.domain.model.Bookmark
-import com.illusion.checkfirm.domain.model.Category
+import com.illusion.checkfirm.domain.model.Device
 import com.illusion.checkfirm.domain.repository.BCRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
@@ -19,15 +21,19 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class BookmarkListViewModel @Inject constructor(
-    private val repository: BCRepository
+    private val repository: BCRepository,
+    private val resultBus: NavResultBus,
 ) : ViewModel() {
 
     private val _expanded = MutableStateFlow(false)
-    private val _selectedCategory = MutableStateFlow("All")
+
+    // Empty string is the "All" sentinel; the screen substitutes the localized
+    // R.string.category_all label when rendering the dropdown selection.
+    private val _selectedCategory = MutableStateFlow("")
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private val _bookmarksFlow = _selectedCategory.flatMapLatest { category ->
-        if (category == "All") {
+        if (category.isBlank()) {
             repository.getAllBookmark("date", true)
         } else {
             repository.getBookmarkByCategory("date", true, category)
@@ -38,8 +44,6 @@ class BookmarkListViewModel @Inject constructor(
         val selectedTab: Int = 0,
         val editingBookmark: Bookmark? = null,
         val showNewBookmark: Boolean = false,
-        val editingCategory: Category? = null,
-        val showNewCategory: Boolean = false,
     )
 
     private val _uiFlags = MutableStateFlow(UiFlags())
@@ -59,8 +63,6 @@ class BookmarkListViewModel @Inject constructor(
             selectedTab = flags.selectedTab,
             editingBookmark = flags.editingBookmark,
             showNewBookmark = flags.showNewBookmark,
-            editingCategory = flags.editingCategory,
-            showNewCategory = flags.showNewCategory,
         )
     }.stateIn(
         scope = viewModelScope,
@@ -88,14 +90,6 @@ class BookmarkListViewModel @Inject constructor(
         _uiFlags.update { it.copy(showNewBookmark = value) }
     }
 
-    fun updateEditingCategory(value: Category?) {
-        _uiFlags.update { it.copy(editingCategory = value) }
-    }
-
-    fun updateShowNewCategory(value: Boolean) {
-        _uiFlags.update { it.copy(showNewCategory = value) }
-    }
-
     fun addBookmark(bookmark: Bookmark) {
         viewModelScope.launch { repository.addBookmark(bookmark) }
     }
@@ -104,19 +98,20 @@ class BookmarkListViewModel @Inject constructor(
         viewModelScope.launch { repository.editBookmark(bookmark) }
     }
 
-    fun deleteBookmark(deviceModel: String) {
-        viewModelScope.launch { repository.deleteBookmark(deviceModel) }
-    }
-
-    fun addCategory(category: Category) {
-        viewModelScope.launch { repository.addCategory(category) }
-    }
-
-    fun editCategory(category: Category) {
-        viewModelScope.launch { repository.editCategory(category) }
+    fun deleteBookmark(device: Device) {
+        viewModelScope.launch { repository.deleteBookmark(device) }
     }
 
     fun deleteCategory(name: String) {
         viewModelScope.launch { repository.deleteCategory(name) }
+    }
+
+    fun emitItemPicked(bookmark: Bookmark) {
+        viewModelScope.launch {
+            resultBus.emit(
+                NavResultKey.HomeBookmarkPick,
+                bookmark.device.model to bookmark.device.csc,
+            )
+        }
     }
 }

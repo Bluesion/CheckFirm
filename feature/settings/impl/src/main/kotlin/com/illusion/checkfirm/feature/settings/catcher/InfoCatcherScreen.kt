@@ -48,6 +48,7 @@ fun InfoCatcherScreen(
     onDialogDismiss: () -> Unit,
     onDialogModelChange: (String) -> Unit,
     onDialogCscChange: (String) -> Unit,
+    onSelectBookmark: (com.illusion.checkfirm.domain.model.Bookmark) -> Unit,
     onAddDevice: (String, String) -> Unit,
 ) {
     OneScaffold(
@@ -78,11 +79,11 @@ fun InfoCatcherScreen(
             )
 
             Text(
-                text = "Info catcher periodically checks for firmware updates of saved devices in background and notifies you.",
+                text = stringResource(R.string.info_catcher_description),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier
                     .padding(horizontal = 12.dp)
-                    .padding(top = 16.dp, bottom = 24.dp)
+                    .padding(top = 16.dp, bottom = 24.dp),
             )
 
             Card(
@@ -94,9 +95,9 @@ fun InfoCatcherScreen(
                 Column {
                     if (uiState.devices.isEmpty()) {
                         Text(
-                            text = "No saved devices",
+                            text = stringResource(R.string.info_catcher_no_device),
                             modifier = Modifier.padding(16.dp),
-                            style = MaterialTheme.typography.bodyMedium
+                            style = MaterialTheme.typography.bodyMedium,
                         )
                     } else {
                         uiState.devices.forEach { device ->
@@ -117,7 +118,7 @@ fun InfoCatcherScreen(
             ) {
                 Icon(Icons.Rounded.Add, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "Add device")
+                Text(text = stringResource(R.string.welcome_search_add_device))
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -128,8 +129,10 @@ fun InfoCatcherScreen(
         InfoCatcherDialog(
             model = uiState.dialogModel,
             csc = uiState.dialogCsc,
+            bookmarks = uiState.bookmarks,
             onModelChange = onDialogModelChange,
             onCscChange = onDialogCscChange,
+            onSelectBookmark = onSelectBookmark,
             onDismissRequest = onDialogDismiss,
             onAdd = onAddDevice,
         )
@@ -183,6 +186,7 @@ private fun InfoCatcherScreenPreview() {
                 onDialogDismiss = {},
                 onDialogModelChange = {},
                 onDialogCscChange = {},
+                onSelectBookmark = {},
                 onAddDevice = { _, _ -> },
             )
         }

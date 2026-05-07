@@ -1,5 +1,6 @@
 package com.illusion.checkfirm.feature.bookmark.impl.presentation
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,12 +28,15 @@ import com.illusion.checkfirm.domain.model.Device
 @Composable
 internal fun BookmarkItem(
     bookmark: Bookmark,
+    onClick: () -> Unit,
     onEditClick: () -> Unit,
     onDeleteClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Row(
@@ -77,6 +81,7 @@ private fun BookmarkItemPreview() {
                     device = Device(model = "SM-S928B", csc = "KOO"),
                     category = "Galaxy S",
                 ),
+                onClick = {},
                 onEditClick = {},
                 onDeleteClick = {},
             )

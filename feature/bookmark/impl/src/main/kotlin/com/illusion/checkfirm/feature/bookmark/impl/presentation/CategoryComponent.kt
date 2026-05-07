@@ -79,6 +79,7 @@ private fun BookmarkItemPreview() {
                     device = Device("SM-S928B", "KOO"),
                     category = "Galaxy S",
                 ),
+                onClick = {},
                 onEditClick = {},
                 onDeleteClick = {},
             )

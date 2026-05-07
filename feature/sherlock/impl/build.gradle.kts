@@ -8,4 +8,7 @@ android {
 
 dependencies {
     implementation(projects.feature.sherlock.api)
+    implementation(projects.core.preference.api)
+    implementation(libs.bundles.firebase)
+    implementation(libs.bundles.androidx.navigation3)
 }

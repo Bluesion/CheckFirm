@@ -32,8 +32,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberBottomSheetScaffoldState
@@ -41,6 +39,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -48,6 +47,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.component.OneTab
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
@@ -95,7 +95,7 @@ fun SearchScreen(
                     when (onAddClick()) {
                         SearchValidationResult.DUPLICATED_DEVICE -> toast(
                             context,
-                            "Duplicated device"
+                            context.getString(R.string.search_duplicate_device),
                         )
 
                         SearchValidationResult.INVALID_DEVICE -> toast(
@@ -119,18 +119,14 @@ fun SearchScreen(
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            TabRow(selectedTabIndex = uiState.selectedTabIndex) {
-                Tab(
-                    selected = uiState.selectedTabIndex == 0,
-                    onClick = { onTabIndexChange(0) },
-                    text = { Text(text = stringResource(R.string.bookmark)) }
-                )
-                Tab(
-                    selected = uiState.selectedTabIndex == 1,
-                    onClick = { onTabIndexChange(1) },
-                    text = { Text(text = stringResource(R.string.search_history)) }
-                )
-            }
+            OneTab(
+                titles = listOf(
+                    stringResource(R.string.bookmark),
+                    stringResource(R.string.search_history),
+                ),
+                selectedTabIndex = uiState.selectedTabIndex,
+                onTabSelected = onTabIndexChange,
+            )
 
             when (uiState.selectedTabIndex) {
                 0 -> BookmarkTab(
@@ -139,7 +135,7 @@ fun SearchScreen(
                         when (onDeviceClick(it)) {
                             SearchValidationResult.DUPLICATED_DEVICE -> toast(
                                 context,
-                                "Already added"
+                                context.getString(R.string.search_duplicate_device)
                             )
 
                             SearchValidationResult.MAX_SEARCH_CAPACITY_EXCEEDED -> toast(
@@ -160,7 +156,7 @@ fun SearchScreen(
                         when (onDeviceClick(it)) {
                             SearchValidationResult.DUPLICATED_DEVICE -> toast(
                                 context,
-                                "Already added"
+                                context.getString(R.string.search_duplicate_device)
                             )
 
                             SearchValidationResult.MAX_SEARCH_CAPACITY_EXCEEDED -> toast(
@@ -406,7 +402,11 @@ private fun SearchBottomSheetContent(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "(${searchList.size})",
+                text = pluralStringResource(
+                    id = R.plurals.search_device_summary,
+                    count = searchList.size,
+                    searchList.size,
+                ),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.weight(1f)
             )

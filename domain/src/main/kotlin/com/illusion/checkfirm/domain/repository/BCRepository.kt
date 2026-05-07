@@ -2,6 +2,7 @@ package com.illusion.checkfirm.domain.repository
 
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Category
+import com.illusion.checkfirm.domain.model.Device
 import kotlinx.coroutines.flow.Flow
 
 interface BCRepository {
@@ -15,7 +16,7 @@ interface BCRepository {
 
     suspend fun addBookmark(bookmark: Bookmark)
     suspend fun editBookmark(bookmark: Bookmark)
-    suspend fun deleteBookmark(device: String)
+    suspend fun deleteBookmark(device: Device)
     suspend fun deleteAllBookmark()
     fun getAllCategory(): Flow<List<Category>>
     suspend fun addCategory(category: Category)

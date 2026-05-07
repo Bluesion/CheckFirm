@@ -1,5 +1,8 @@
 package com.illusion.checkfirm.feature.settings.about
 
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,8 +11,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
@@ -46,6 +53,22 @@ fun AboutScreen(
                 Icon(
                     imageVector = OneIcons.IcBack,
                     contentDescription = null,
+                    tint = CheckFirmTheme.colors.toolbarIconTint,
+                )
+            }
+        },
+        actions = {
+            IconButton(
+                onClick = {
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                        data = Uri.fromParts("package", context.packageName, null)
+                    }
+                    context.startActivity(intent)
+                },
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = stringResource(R.string.about_app_information),
                     tint = CheckFirmTheme.colors.toolbarIconTint,
                 )
             }
@@ -83,10 +106,15 @@ fun AboutScreen(
 
             Spacer(Modifier.height(8.dp))
 
-            Text(
-                text = stringResource(R.string.about_latest),
-                style = MaterialTheme.typography.bodyMedium,
-                color = CheckFirmTheme.colors.settingsDescription,
+            VersionStatus(
+                state = uiState.versionCheck,
+                onUpdateClick = {
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        "market://details?id=${context.packageName}".toUri(),
+                    )
+                    context.startActivity(intent)
+                },
             )
 
             Spacer(Modifier.weight(1f))
@@ -117,6 +145,43 @@ fun AboutScreen(
         }
 
         else -> Unit
+    }
+}
+
+@Composable
+private fun VersionStatus(state: VersionCheckState, onUpdateClick: () -> Unit) {
+    when (state) {
+        VersionCheckState.Loading -> {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .padding(top = 4.dp)
+                    .height(24.dp),
+                strokeWidth = 2.dp,
+            )
+        }
+
+        VersionCheckState.Latest -> {
+            Text(
+                text = stringResource(R.string.about_latest),
+                style = MaterialTheme.typography.bodyMedium,
+                color = CheckFirmTheme.colors.settingsDescription,
+            )
+        }
+
+        VersionCheckState.NetworkError -> {
+            Text(
+                text = stringResource(R.string.check_network),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.error,
+            )
+        }
+
+        VersionCheckState.Outdated -> {
+            AboutPageButton(
+                text = stringResource(R.string.about_update),
+                onClick = onUpdateClick,
+            )
+        }
     }
 }
 

@@ -21,6 +21,7 @@ fun InfoCatcherRoute(
         onDialogDismiss = viewModel::dismissDialog,
         onDialogModelChange = viewModel::updateDialogModel,
         onDialogCscChange = viewModel::updateDialogCsc,
+        onSelectBookmark = viewModel::selectBookmark,
         onAddDevice = viewModel::addDevice,
     )
 }

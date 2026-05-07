@@ -1,6 +1,7 @@
 package com.illusion.checkfirm.data.di
 
 import com.illusion.checkfirm.data.remote.AppMetadataFetcherImpl
+import com.illusion.checkfirm.data.remote.FirmwareFetcherImpl
 import com.illusion.checkfirm.data.repository.AppMetadataRepositoryImpl
 import com.illusion.checkfirm.data.repository.BCRepositoryImpl
 import com.illusion.checkfirm.data.repository.HistoryRepositoryImpl
@@ -8,6 +9,7 @@ import com.illusion.checkfirm.data.repository.InfoCatcherRepositoryImpl
 import com.illusion.checkfirm.data.repository.SherlockRepositoryImpl
 import com.illusion.checkfirm.data.repository.WelcomeSearchRepositoryImpl
 import com.illusion.checkfirm.domain.remote.AppMetadataFetcher
+import com.illusion.checkfirm.domain.remote.FirmwareFetcher
 import com.illusion.checkfirm.domain.repository.AppMetadataRepository
 import com.illusion.checkfirm.domain.repository.BCRepository
 import com.illusion.checkfirm.domain.repository.HistoryRepository
@@ -64,4 +66,10 @@ abstract class RepositoryModule {
     abstract fun bindAppMetadataFetcher(
         impl: AppMetadataFetcherImpl
     ): AppMetadataFetcher
+
+    @Binds
+    @Singleton
+    abstract fun bindFirmwareFetcher(
+        impl: FirmwareFetcherImpl
+    ): FirmwareFetcher
 }

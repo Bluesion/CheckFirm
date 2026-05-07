@@ -29,11 +29,13 @@ fun BookmarkContent(
     uiState: BookmarkListUiState,
     onExpandedChange: (Boolean) -> Unit,
     onCategoryChange: (String) -> Unit,
+    onItemClick: (Bookmark) -> Unit,
     onEditClick: (Bookmark) -> Unit,
     onDeleteClick: (Bookmark) -> Unit,
 ) {
-    val categories =
-        listOf(stringResource(R.string.category_all)) + uiState.categories.map { it.name }
+    val allLabel = stringResource(R.string.category_all)
+    val categories = listOf(allLabel) + uiState.categories.map { it.name }
+    val displayedSelection = uiState.selectedCategory.ifBlank { allLabel }
 
     Column(modifier = Modifier.fillMaxSize()) {
         ExposedDropdownMenuBox(
@@ -44,7 +46,7 @@ fun BookmarkContent(
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             OutlinedTextField(
-                value = uiState.selectedCategory,
+                value = displayedSelection,
                 onValueChange = {},
                 readOnly = true,
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = uiState.expanded) },
@@ -60,7 +62,8 @@ fun BookmarkContent(
                     DropdownMenuItem(
                         text = { Text(category) },
                         onClick = {
-                            onCategoryChange(category)
+                            // Convert "All" label back to empty-string sentinel
+                            onCategoryChange(if (category == allLabel) "" else category)
                             onExpandedChange(false)
                         }
                     )
@@ -91,6 +94,7 @@ fun BookmarkContent(
                 ) { item ->
                     BookmarkItem(
                         bookmark = item,
+                        onClick = { onItemClick(item) },
                         onEditClick = { onEditClick(item) },
                         onDeleteClick = { onDeleteClick(item) }
                     )

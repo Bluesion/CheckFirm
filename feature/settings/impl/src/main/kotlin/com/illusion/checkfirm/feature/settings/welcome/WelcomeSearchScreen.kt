@@ -21,7 +21,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,9 +30,12 @@ import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.component.OneSwitch
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.domain.model.Bookmark
+import com.illusion.checkfirm.domain.model.Device
 
 @Composable
 fun WelcomeSearchScreen(
@@ -42,9 +44,9 @@ fun WelcomeSearchScreen(
     onShowDialogChange: (Boolean) -> Unit = {},
     onModelChange: (String) -> Unit = {},
     onCscChange: (String) -> Unit = {},
-    onSelectedChipChange: (String?) -> Unit = {},
+    onSelectBookmark: (Bookmark) -> Unit = {},
     onAddDevice: (String, String) -> Unit = { _, _ -> },
-    onRemoveDevice: (WelcomeSearchDevice) -> Unit = {},
+    onRemoveDevice: (Device) -> Unit = {},
     onNavigationIconClick: () -> Unit,
 ) {
     if (uiState.showDialog) {
@@ -52,7 +54,7 @@ fun WelcomeSearchScreen(
             uiState = uiState,
             onModelChange = onModelChange,
             onCscChange = onCscChange,
-            onSelectedChipChange = onSelectedChipChange,
+            onSelectBookmark = onSelectBookmark,
             onDismissRequest = { onShowDialogChange(false) },
             onAddDevice = onAddDevice,
         )
@@ -95,9 +97,9 @@ fun WelcomeSearchScreen(
                         text = stringResource(R.string.welcome_search),
                         style = MaterialTheme.typography.titleMedium
                     )
-                    Switch(
+                    OneSwitch(
                         checked = uiState.isWelcomeSearchEnabled,
-                        onCheckedChange = { onIsWelcomeSearchEnabledChange(it) }
+                        onCheckedChange = { onIsWelcomeSearchEnabledChange(it) },
                     )
                 }
             }
@@ -180,9 +182,9 @@ fun WelcomeSearchScreen(
 
 @Composable
 fun WelcomeSearchItem(
-    device: WelcomeSearchDevice,
+    device: Device,
     onDelete: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
@@ -226,7 +228,7 @@ private fun WelcomeSearchItemPreview() {
     CheckFirmTheme {
         Surface {
             WelcomeSearchItem(
-                device = WelcomeSearchDevice(model = "SM-S928B", csc = "KOO"),
+                device = Device(model = "SM-S928B", csc = "KOO"),
                 onDelete = {},
             )
         }

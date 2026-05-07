@@ -8,7 +8,11 @@
     <!-- General -->
     <string name="add_item">Add</string>
     <string name="check_network">Please check network</string>
+    <string name="check_network_description">CheckFirm couldn\'t reach the firmware servers. Make sure Wi-Fi or mobile data is on, then tap a device to retry.</string>
     <string name="check_device">Please check if you wrote model and CSC code correctly.</string>
+    <string name="check_device_description">No firmware found for this device. Try a different model/CSC or enable Welcome Search devices in Settings.</string>
+    <string name="enable_wifi">Enable Wi-Fi</string>
+    <string name="data_settings">Mobile data</string>
     <string name="close">Close</string>
     <string name="unknown">Unknown</string>
 
@@ -52,7 +56,9 @@
     <string name="search_history_delete_all">Delete All</string>
     <string name="search_list_empty">Search list is empty.</string>
     <string name="search_no_bookmark">No bookmark</string>
+    <string name="search_no_category">No category</string>
     <string name="search_no_history">No history</string>
+    <string name="search_duplicate_device">Already added</string>
     <string name="search_add_bookmark">Add bookmark</string>
     <string name="search_result_tab_previous">Previous</string>
     <string name="search_result_tab_beta">Beta</string>
@@ -99,7 +105,9 @@
     <string name="restore">Restore</string>
     <string name="restore_description">Load backup JSON file to restore.</string>
     <string name="backup_toast">Backup complete.</string>
+    <string name="backup_failed">Backup failed.</string>
     <string name="restore_toast">Restore completed.</string>
+    <string name="restore_failed">Restore failed.</string>
 
     <!-- Help -->
     <string name="help">Help</string>
@@ -181,6 +189,7 @@
     <string name="welcome_search">Welcome Search</string>
     <string name="welcome_search_description">Search firmware on app start.\nPlease input device that you want to search on start.</string>
     <string name="welcome_search_add_device">Add device</string>
+    <string name="info_catcher_no_device">No saved devices</string>
     <string name="welcome_search_empty_device_list">You can add up to 5 devices.</string>
 
     <!-- Smart Search -->

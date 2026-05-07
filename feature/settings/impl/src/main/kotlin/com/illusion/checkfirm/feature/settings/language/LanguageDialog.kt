@@ -1,4 +1,3 @@
-
 package com.illusion.checkfirm.feature.settings.language
 
 import androidx.compose.foundation.clickable
@@ -30,18 +29,22 @@ import com.illusion.checkfirm.core.designsystem.component.OneRadioButton
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
+private data class LanguageEntry(val tag: String, val labelRes: Int)
+
 private val LANGUAGES = listOf(
-    "" to "System default",
-    "en" to "English",
-    "ko" to "한국어",
-    "ja" to "日本語",
-    "zh" to "中文",
-    "ru" to "Русский",
-    "cs" to "Čeština",
-    "pt" to "Português",
-    "ro" to "Română",
-    "si" to "සිංහල",
-    "tr" to "Türkçe",
+    LanguageEntry("", R.string.settings_language_default),
+    LanguageEntry("cs", R.string.settings_language_cs),
+    LanguageEntry("en-US", R.string.settings_language_en),
+    LanguageEntry("ja", R.string.settings_language_ja),
+    LanguageEntry("ko", R.string.settings_language_ko),
+    LanguageEntry("pt-BR", R.string.settings_language_pt_rBR),
+    LanguageEntry("pt-PT", R.string.settings_language_pt_rPT),
+    LanguageEntry("ro", R.string.settings_language_ro),
+    LanguageEntry("ru", R.string.settings_language_ru),
+    LanguageEntry("si", R.string.settings_language_si),
+    LanguageEntry("tr", R.string.settings_language_tr),
+    LanguageEntry("zh-Hans", R.string.settings_language_zh_rCN),
+    LanguageEntry("zh-Hant", R.string.settings_language_zh_rTW),
 )
 
 @Composable
@@ -62,20 +65,23 @@ fun LanguageDialog(
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState()),
         ) {
-            LANGUAGES.forEach { (code, label) ->
+            LANGUAGES.forEach { entry ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { current = code }
+                        .clickable { current = entry.tag }
                         .padding(vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = label,
+                        text = stringResource(entry.labelRes),
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.weight(1f),
                     )
-                    OneRadioButton(selected = current == code, onClick = { current = code })
+                    OneRadioButton(
+                        selected = current == entry.tag,
+                        onClick = { current = entry.tag },
+                    )
                 }
             }
         }
@@ -99,7 +105,7 @@ private fun LanguageDialogPreview() {
     CheckFirmTheme {
         Surface {
             LanguageDialog(
-                selectedLanguage = "en",
+                selectedLanguage = "en-US",
                 onDismiss = {},
                 onConfirm = {},
             )

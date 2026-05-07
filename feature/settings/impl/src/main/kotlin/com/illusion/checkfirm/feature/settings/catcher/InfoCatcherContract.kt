@@ -1,5 +1,6 @@
 package com.illusion.checkfirm.feature.settings.catcher
 
+import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Device
 
 data class InfoCatcherUiState(
@@ -8,4 +9,5 @@ data class InfoCatcherUiState(
     val devices: List<Device> = emptyList(),
     val dialogModel: String = "SM-",
     val dialogCsc: String = "",
+    val bookmarks: List<Bookmark> = emptyList(),
 )

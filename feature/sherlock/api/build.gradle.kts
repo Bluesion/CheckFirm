@@ -5,3 +5,7 @@ plugins {
 kotlin {
     jvmToolchain(jdkVersion = 21)
 }
+
+dependencies {
+    implementation(projects.domain)
+}

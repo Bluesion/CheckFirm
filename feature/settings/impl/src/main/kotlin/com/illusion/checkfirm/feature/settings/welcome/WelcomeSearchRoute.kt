@@ -18,8 +18,8 @@ fun WelcomeSearchRoute(
         onShowDialogChange = viewModel::updateShowDialog,
         onModelChange = viewModel::updateModel,
         onCscChange = viewModel::updateCsc,
-        onSelectedChipChange = viewModel::updateSelectedChip,
-        onAddDevice = viewModel::addDevice,
+        onSelectBookmark = viewModel::selectBookmark,
+        onAddDevice = { model, csc -> viewModel.addDevice(model, csc) },
         onRemoveDevice = viewModel::removeDevice,
         onNavigationIconClick = onNavigationIconClick,
     )

@@ -8,6 +8,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun BookmarkRoute(
     onNavigationIconClick: () -> Unit,
+    onNewCategory: () -> Unit,
+    onEditCategory: (categoryName: String) -> Unit,
     viewModel: BookmarkListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -20,13 +22,15 @@ fun BookmarkRoute(
         onSelectedTabChange = viewModel::updateSelectedTab,
         onEditingBookmarkChange = viewModel::updateEditingBookmark,
         onShowNewBookmarkChange = viewModel::updateShowNewBookmark,
-        onEditingCategoryChange = viewModel::updateEditingCategory,
-        onShowNewCategoryChange = viewModel::updateShowNewCategory,
         onAddBookmark = viewModel::addBookmark,
         onEditBookmark = viewModel::editBookmark,
         onDeleteBookmark = viewModel::deleteBookmark,
-        onAddCategory = viewModel::addCategory,
-        onEditCategory = viewModel::editCategory,
         onDeleteCategory = viewModel::deleteCategory,
+        onItemClick = { bookmark ->
+            viewModel.emitItemPicked(bookmark)
+            onNavigationIconClick()
+        },
+        onNewCategoryClick = onNewCategory,
+        onEditCategoryClick = { category -> onEditCategory(category.name) },
     )
 }

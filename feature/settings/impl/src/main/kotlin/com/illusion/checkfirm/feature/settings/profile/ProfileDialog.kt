@@ -59,10 +59,10 @@ fun ProfileDialog(
             Spacer(Modifier.width(8.dp))
             Button(
                 onClick = {
+                    // XML behavior: blank → "Unknown" sentinel
                     onConfirm(name.ifBlank { "Unknown" })
                     onDismiss()
                 },
-                enabled = name.isNotBlank(),
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {

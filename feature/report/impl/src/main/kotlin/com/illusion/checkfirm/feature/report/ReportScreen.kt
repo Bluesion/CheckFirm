@@ -32,16 +32,23 @@ import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
+private val BUG_TYPE_KEYS = listOf("type_1", "type_2", "type_3", "type_4")
+
 @Composable
 fun ReportScreen(
     uiState: ReportUiState,
-    onBugTypeChange: (String) -> Unit,
-    onDeviceDetailsChange: (String) -> Unit,
+    onBugTypeToggle: (String) -> Unit,
     onLogsChange: (String) -> Unit,
-    onConsentChange: (Boolean) -> Unit,
     onSubmitClick: () -> Unit,
     onNavigationIconClick: () -> Unit,
 ) {
+    val labels = mapOf(
+        "type_1" to stringResource(R.string.report_type_1),
+        "type_2" to stringResource(R.string.report_type_2),
+        "type_3" to stringResource(R.string.report_type_3),
+        "type_4" to stringResource(R.string.report_type_4),
+    )
+
     OneScaffold(
         title = stringResource(R.string.report),
         navigationIcon = {
@@ -52,7 +59,7 @@ fun ReportScreen(
                     tint = CheckFirmTheme.colors.toolbarIconTint,
                 )
             }
-        }
+        },
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -60,7 +67,7 @@ fun ReportScreen(
                 .padding(top = 12.dp, bottom = innerPadding.calculateBottomPadding() + 16.dp)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -78,26 +85,13 @@ fun ReportScreen(
                 )
             }
 
-            ReportTypeRow(
-                title = stringResource(R.string.report_type_1),
-                checked = uiState.bugType == "type_1",
-                onCheckedChange = { if (it) onBugTypeChange("type_1") else onBugTypeChange("") },
-            )
-            ReportTypeRow(
-                title = stringResource(R.string.report_type_2),
-                checked = uiState.bugType == "type_2",
-                onCheckedChange = { if (it) onBugTypeChange("type_2") else onBugTypeChange("") },
-            )
-            ReportTypeRow(
-                title = stringResource(R.string.report_type_3),
-                checked = uiState.bugType == "type_3",
-                onCheckedChange = { if (it) onBugTypeChange("type_3") else onBugTypeChange("") },
-            )
-            ReportTypeRow(
-                title = stringResource(R.string.report_type_4),
-                checked = uiState.bugType == "type_4",
-                onCheckedChange = { if (it) onBugTypeChange("type_4") else onBugTypeChange("") },
-            )
+            BUG_TYPE_KEYS.forEach { key ->
+                ReportTypeRow(
+                    title = labels.getValue(key),
+                    checked = key in uiState.bugTypes,
+                    onCheckedChange = { onBugTypeToggle(key) },
+                )
+            }
 
             OutlinedTextField(
                 value = uiState.logs,
@@ -114,7 +108,7 @@ fun ReportScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp),
-                enabled = uiState.bugType.isNotBlank() && !uiState.isSubmitting,
+                enabled = uiState.bugTypes.isNotEmpty() && !uiState.isSubmitting,
             ) {
                 if (uiState.isSubmitting) {
                     CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
@@ -130,16 +124,16 @@ fun ReportScreen(
 private fun ReportTypeRow(
     title: String,
     checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
+    onCheckedChange: () -> Unit,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onCheckedChange(!checked) }
+            .clickable { onCheckedChange() }
             .padding(vertical = 4.dp),
     ) {
-        Checkbox(checked = checked, onCheckedChange = onCheckedChange)
+        Checkbox(checked = checked, onCheckedChange = { onCheckedChange() })
         Text(
             text = title,
             style = MaterialTheme.typography.bodyMedium,
@@ -156,10 +150,8 @@ private fun ReportScreenPreview() {
         Surface {
             ReportScreen(
                 uiState = ReportUiState(),
-                onBugTypeChange = {},
-                onDeviceDetailsChange = {},
+                onBugTypeToggle = {},
                 onLogsChange = {},
-                onConsentChange = {},
                 onSubmitClick = {},
                 onNavigationIconClick = {},
             )

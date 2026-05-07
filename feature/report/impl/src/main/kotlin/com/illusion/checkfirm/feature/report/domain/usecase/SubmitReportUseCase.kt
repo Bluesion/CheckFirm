@@ -15,12 +15,16 @@ import kotlinx.coroutines.withContext
 import java.util.Properties
 
 class SubmitReportUseCase @Inject constructor() {
+    /**
+     * @param bugTypeLabels Localized labels for each selected bug type. The use-case
+     *   joins them into the email body so support reads "펌웨어 정보 오류" instead of
+     *   raw "type_1" keys.
+     */
     suspend operator fun invoke(
-        bugType: String,
-        deviceDetails: String,
-        logs: String
+        bugTypeLabels: List<String>,
+        logs: String,
     ): Result<Unit> = withContext(Dispatchers.IO) {
-        try {
+        runCatching {
             val props = Properties().apply {
                 this["mail.smtp.host"] = "smtp.gmail.com"
                 this["mail.smtp.socketFactory.port"] = "465"
@@ -37,28 +41,24 @@ class SubmitReportUseCase @Inject constructor() {
             val mail = MimeMessage(session).apply {
                 setFrom(InternetAddress("checkfirmhelpdesk@gmail.com"))
                 addRecipient(
-                    Message.RecipientType.TO, InternetAddress("checkfirmhelpdesk@gmail.com")
+                    Message.RecipientType.TO,
+                    InternetAddress("checkfirmhelpdesk@gmail.com"),
                 )
-                subject = "[신고] $deviceDetails"
+                subject = "[신고]"
             }
 
-            var message = "[오류 내용]<br>- $bugType"
-            message += "<br><br>[유저 메시지]<br>"
-            message += logs.ifBlank { "메시지 없음" }
+            val errorList = bugTypeLabels.joinToString(separator = "<br>") { "- $it" }
+            val message = buildString {
+                append("[오류 내용]<br>")
+                append(errorList.ifBlank { "- (none)" })
+                append("<br><br>[유저 메시지]<br>")
+                append(logs.ifBlank { "메시지 없음" })
+            }
 
-            val messageBodyPart = MimeBodyPart()
-            messageBodyPart.setText(message, "utf-8", "html")
-
-            mail.setContent(MimeMultipart().apply {
-                addBodyPart(messageBodyPart)
-            })
+            val bodyPart = MimeBodyPart().apply { setText(message, "utf-8", "html") }
+            mail.setContent(MimeMultipart().apply { addBodyPart(bodyPart) })
 
             Transport.send(mail)
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        } catch (e: Error) {
-            Result.failure(Exception(e.message))
         }
     }
 }

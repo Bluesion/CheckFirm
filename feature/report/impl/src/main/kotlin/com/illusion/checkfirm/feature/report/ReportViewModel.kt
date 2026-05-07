@@ -14,21 +14,20 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class ReportUiState(
-    val bugType: String = "",
-    val deviceDetails: String = "",
+    /** Multi-select: any combination of "type_1".."type_4". */
+    val bugTypes: Set<String> = emptySet(),
     val logs: String = "",
-    val consentGiven: Boolean = false,
-    val isSubmitting: Boolean = false
+    val isSubmitting: Boolean = false,
 )
 
 sealed interface ReportEvent {
-    data class SubmitSuccess(val message: String) : ReportEvent
-    data class SubmitError(val message: String) : ReportEvent
+    data object SubmitSuccess : ReportEvent
+    data object SubmitError : ReportEvent
 }
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(
-    private val submitReportUseCase: SubmitReportUseCase
+    private val submitReportUseCase: SubmitReportUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ReportUiState())
@@ -37,44 +36,34 @@ class ReportViewModel @Inject constructor(
     private val _events = MutableSharedFlow<ReportEvent>()
     val events = _events.asSharedFlow()
 
-    fun updateBugType(type: String) {
-        _uiState.update { it.copy(bugType = type) }
-    }
-
-    fun updateDeviceDetails(details: String) {
-        _uiState.update { it.copy(deviceDetails = details) }
+    fun toggleBugType(type: String) {
+        _uiState.update {
+            val next = if (type in it.bugTypes) it.bugTypes - type else it.bugTypes + type
+            it.copy(bugTypes = next)
+        }
     }
 
     fun updateLogs(logs: String) {
         _uiState.update { it.copy(logs = logs) }
     }
 
-    fun updateConsent(consent: Boolean) {
-        _uiState.update { it.copy(consentGiven = consent) }
-    }
-
-    fun submitReport() {
-        val currentState = uiState.value
-        if (!currentState.consentGiven || currentState.bugType.isBlank() || currentState.deviceDetails.isBlank() || currentState.logs.isBlank()) {
-            return
-        }
+    fun submitReport(bugTypeLabels: Map<String, String>) {
+        val current = uiState.value
+        if (current.bugTypes.isEmpty()) return
 
         _uiState.update { it.copy(isSubmitting = true) }
         viewModelScope.launch {
+            val labels = current.bugTypes.mapNotNull { bugTypeLabels[it] }
             val result = submitReportUseCase(
-                bugType = currentState.bugType,
-                deviceDetails = currentState.deviceDetails,
-                logs = currentState.logs
+                bugTypeLabels = labels,
+                logs = current.logs,
             )
-
             _uiState.update { it.copy(isSubmitting = false) }
-
-            result.onSuccess {
-                _events.emit(ReportEvent.SubmitSuccess("Report submitted successfully."))
-                // clear form
-                _uiState.update { ReportUiState() }
-            }.onFailure {
-                _events.emit(ReportEvent.SubmitError("Failed to submit report: ${it.message}"))
+            if (result.isSuccess) {
+                _uiState.value = ReportUiState()
+                _events.emit(ReportEvent.SubmitSuccess)
+            } else {
+                _events.emit(ReportEvent.SubmitError)
             }
         }
     }

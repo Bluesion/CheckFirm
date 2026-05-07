@@ -6,6 +6,8 @@ import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.illusion.checkfirm.data.di.CommonClient
+import com.illusion.checkfirm.data.di.XmlClient
 import com.illusion.checkfirm.domain.model.Device
 import com.illusion.checkfirm.domain.model.Firmware
 import com.illusion.checkfirm.domain.model.FirmwareUpdateType
@@ -30,9 +32,9 @@ private data class OfficialFirmwareDetail(
 )
 
 class FirmwareFetcherImpl @Inject constructor(
-    private val xmlClient: HttpClient,
-    private val commonClient: HttpClient,
-    private val db: FirebaseFirestore
+    @XmlClient private val xmlClient: HttpClient,
+    @CommonClient private val commonClient: HttpClient,
+    private val db: FirebaseFirestore,
 ) : FirmwareFetcher {
 
     suspend fun search(

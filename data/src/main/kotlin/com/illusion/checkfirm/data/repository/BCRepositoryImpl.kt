@@ -5,6 +5,7 @@ import com.illusion.checkfirm.data.local.entity.asEntity
 import com.illusion.checkfirm.data.local.entity.asExternalModel
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Category
+import com.illusion.checkfirm.domain.model.Device
 import com.illusion.checkfirm.domain.repository.BCRepository
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -41,8 +42,8 @@ class BCRepositoryImpl @Inject constructor(
         bcDao.editBookmark(bookmark.asEntity())
     }
 
-    override suspend fun deleteBookmark(device: String) {
-        bcDao.deleteBookmark(device)
+    override suspend fun deleteBookmark(device: Device) {
+        bcDao.deleteBookmark(device.toString())
     }
 
     override suspend fun deleteAllBookmark() {

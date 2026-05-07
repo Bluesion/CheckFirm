@@ -1,6 +1,9 @@
 package com.illusion.checkfirm.feature.settings
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.os.Build
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
@@ -45,6 +47,7 @@ fun PreferenceScreen(
     onWelcomeSearchChange: (Boolean) -> Unit,
     onInfoCatcherChange: (Boolean) -> Unit,
     onFirebaseChange: (Boolean) -> Unit,
+    onResetBookmarks: () -> Unit,
 ) {
     val context = LocalContext.current
     val preference = uiState.preference
@@ -100,12 +103,28 @@ fun PreferenceScreen(
                 onHelpClick = onNavigateToHelp,
                 onAboutClick = onNavigateToAbout,
                 onInquiryClick = {
-                    runCatching {
-                        val intent = Intent(Intent.ACTION_SENDTO).apply {
-                            data = "mailto:illusionis.dev@gmail.com".toUri()
-                            putExtra(Intent.EXTRA_SUBJECT, "CheckFirm Inquiry")
-                        }
+                    val body = buildString {
+                        append("\n\n\n\n*****\n")
+                        append("App version: ").append(Build.VERSION.RELEASE)
+                            .append('\n')
+                        append("Android version: ").append(Build.VERSION.RELEASE).append('\n')
+                        append("Device: ").append(Build.MODEL).append('\n')
+                        append("*****\n\n")
+                    }
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "plain/text"
+                        putExtra(Intent.EXTRA_EMAIL, arrayOf("checkfirmhelpdesk@gmail.com"))
+                        putExtra(Intent.EXTRA_SUBJECT, "")
+                        putExtra(Intent.EXTRA_TEXT, body)
+                    }
+                    try {
                         context.startActivity(intent)
+                    } catch (_: ActivityNotFoundException) {
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.settings_inquiry_not_found_exception),
+                            Toast.LENGTH_SHORT,
+                        ).show()
                     }
                 },
             )
@@ -144,15 +163,15 @@ fun PreferenceScreen(
             selectedOrder = preference.bookmarkOrder,
             isAscending = preference.isBookmarkAscOrder,
             onDismiss = { onActiveDialogChange(PreferenceDialog.None) },
-            onConfirm = { order, ascending ->
-                onBookmarkOrderChange(order, ascending)
-                onActiveDialogChange(PreferenceDialog.None)
-            },
+            onConfirm = { order, ascending -> onBookmarkOrderChange(order, ascending) },
         )
 
         PreferenceDialog.BookmarkReset -> BookmarkResetDialog(
             onDismiss = { onActiveDialogChange(PreferenceDialog.None) },
-            onConfirm = { onActiveDialogChange(PreferenceDialog.None) },
+            onConfirm = {
+                onResetBookmarks()
+                onActiveDialogChange(PreferenceDialog.None)
+            },
         )
 
         PreferenceDialog.None -> Unit
@@ -181,6 +200,7 @@ private fun PreferenceScreenPreview() {
                 onWelcomeSearchChange = {},
                 onInfoCatcherChange = {},
                 onFirebaseChange = {},
+                onResetBookmarks = {},
             )
         }
     }

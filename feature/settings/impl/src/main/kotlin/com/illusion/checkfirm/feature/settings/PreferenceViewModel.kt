@@ -3,6 +3,7 @@ package com.illusion.checkfirm.feature.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.illusion.checkfirm.core.preference.api.PreferenceRepository
+import com.illusion.checkfirm.domain.repository.BCRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class PreferenceViewModel @Inject constructor(
-    private val preferenceRepository: PreferenceRepository
+    private val preferenceRepository: PreferenceRepository,
+    private val bcRepository: BCRepository,
 ) : ViewModel() {
 
     private val _activeDialog = MutableStateFlow(PreferenceDialog.None)
@@ -62,5 +64,10 @@ class PreferenceViewModel @Inject constructor(
 
     fun updateFirebase(enabled: Boolean) = viewModelScope.launch {
         preferenceRepository.updateSettings(uiState.value.preference.copy(isFirebaseEnabled = enabled))
+    }
+
+    fun resetBookmarks() = viewModelScope.launch {
+        bcRepository.deleteAllBookmark()
+        bcRepository.deleteAllCategory()
     }
 }
