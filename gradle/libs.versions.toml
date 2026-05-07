@@ -1,11 +1,11 @@
 [versions]
 accompanistPermissions = "0.37.3"
 activity = "1.13.0"
-agp = "9.2.0"
+agp = "9.2.1"
 angus = "2.0.5"
 angusActivation = "2.0.3"
 appcompat = "1.7.1"
-composeBom = "2026.04.01"
+composeBom = "2026.05.00"
 core = "1.18.0"
 coreSplashscreen = "1.2.0"
 datastore = "1.2.1"
@@ -72,9 +72,10 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 slf4j-android = { group = "org.slf4j", name = "slf4j-android", version.ref = "slf4j" }
 
-ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "ksp" }
-kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "ksp" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
@@ -96,4 +97,3 @@ firebase = ["fcm", "firestore"]
 hilt = ["androidx-hilt-lifecycle-viewmodel-compose", "google-hilt-android"]
 hilt-compiler = ["google-hilt-compiler", "kotlin-metadata-jvm"]
 ktor = ["ktor-client-android", "ktor-client-content-negotiation", "ktor-client-core", "ktor-client-logging", "ktor-serialization-kotlinx-json", "ktor-serialization-kotlinx-xml", "slf4j-android"]
-
