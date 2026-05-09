@@ -1,8 +1,6 @@
 package com.illusion.checkfirm.core.designsystem.component
 
-import android.os.Build
 import android.view.Gravity
-import android.view.WindowManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -30,9 +28,6 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import com.illusion.checkfirm.core.designsystem.theme.LocalHazeState
-import dev.chrisbanes.haze.blur.blurEffect
-import dev.chrisbanes.haze.hazeEffect
 
 @Composable
 fun OneAlertDialog(
@@ -52,14 +47,16 @@ fun OneAlertDialog(
         val dialogWindow = (LocalView.current.parent as? DialogWindowProvider)?.window
         SideEffect {
             dialogWindow?.setGravity(Gravity.BOTTOM)
-            if (Build.VERSION.SDK_INT >= 31) {
-                dialogWindow?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-            }
         }
 
-        AlertDialogSurface(
-            modifier = modifier,
-            horizontalPadding = horizontalPadding,
+        Surface(
+            shape = RoundedCornerShape(size = 28.dp),
+            color = CheckFirmTheme.colors.dialogBackground,
+            contentColor = MaterialTheme.colorScheme.onSurface,
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = horizontalPadding)
+                .padding(bottom = 12.dp),
         ) {
             Column(
                 modifier = Modifier
@@ -110,43 +107,6 @@ fun OneAlertDialog(
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun AlertDialogSurface(
-    modifier: Modifier,
-    horizontalPadding: Dp,
-    content: @Composable (() -> Unit),
-) {
-    val shape = RoundedCornerShape(size = 28.dp)
-    val hazeState = LocalHazeState.current
-    // Haze가 연결돼 있을 때만 frosted glass; 아니면 평소처럼 불투명 배경.
-    val surfaceColor = if (hazeState != null) {
-        CheckFirmTheme.colors.dialogBackground.copy(alpha = 0.3f)
-    } else {
-        CheckFirmTheme.colors.dialogBackground
-    }
-    val baseModifier = modifier
-        .fillMaxWidth()
-        .padding(horizontal = horizontalPadding)
-        .padding(bottom = 12.dp)
-    val surfaceModifier = if (hazeState != null) {
-        baseModifier.hazeEffect(state = hazeState) {
-            blurEffect {
-                blurRadius = 20.dp
-            }
-        }
-    } else {
-        baseModifier
-    }
-    Surface(
-        shape = shape,
-        color = surfaceColor,
-        contentColor = MaterialTheme.colorScheme.onSurface,
-        modifier = surfaceModifier,
-    ) {
-        content()
     }
 }
 
