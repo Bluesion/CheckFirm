@@ -7,7 +7,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -16,6 +15,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
+import com.illusion.checkfirm.core.designsystem.component.OneNavButton
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.component.OneTab
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
@@ -53,13 +53,7 @@ fun BookmarkListScreen(
         title = stringResource(R.string.bookmark),
         subTitle = subtitle,
         navigationIcon = {
-            IconButton(onClick = onNavigationIconClick) {
-                Icon(
-                    imageVector = OneIcons.IcBack,
-                    contentDescription = null,
-                    tint = CheckFirmTheme.colors.toolbarIconTint,
-                )
-            }
+            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigationIconClick)
         },
         floatingActionButton = {
             FloatingActionButton(

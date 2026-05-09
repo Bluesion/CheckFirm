@@ -32,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
+import com.illusion.checkfirm.core.designsystem.component.OneNavButton
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.component.OneSwitchCard
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
@@ -54,13 +55,7 @@ fun InfoCatcherScreen(
     OneScaffold(
         title = stringResource(R.string.info_catcher),
         navigationIcon = {
-            IconButton(onClick = onNavigationIconClick) {
-                Icon(
-                    imageVector = OneIcons.IcBack,
-                    contentDescription = null,
-                    tint = CheckFirmTheme.colors.toolbarIconTint,
-                )
-            }
+            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigationIconClick)
         }
     ) { innerPadding ->
         Column(

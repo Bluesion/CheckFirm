@@ -22,12 +22,13 @@ fun OneTab(
     selectedTabIndex: Int,
     onTabSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    indicatorColor: Color = Color(0xFF0381FE)
+    indicatorColor: Color? = null,
 ) {
     val darkTheme = isSystemInDarkTheme()
-    val containerColor = if (darkTheme) Color(0xFF000000) else Color(0xFFFFFFFF)
-    val contentColor = if (darkTheme) Color(0xFFFAFAFA) else Color(0xFF252525)
-    val unselectedContentColor = if (darkTheme) Color(0xFF757575) else Color(0xFF8B8B8B)
+    val containerColor = MaterialTheme.colorScheme.background
+    val contentColor = if (darkTheme) Color(0xFFFFFFFF) else Color(0xFF000000)
+    val unselectedContentColor = if (darkTheme) Color(0xFFA9A9A9) else Color(0xFF636363)
+    val resolvedIndicator = indicatorColor ?: contentColor
 
     TabRow(
         selectedTabIndex = selectedTabIndex,
@@ -37,7 +38,7 @@ fun OneTab(
         indicator = { tabPositions ->
             TabRowDefaults.SecondaryIndicator(
                 modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-                color = indicatorColor,
+                color = resolvedIndicator,
                 height = 2.dp
             )
         },

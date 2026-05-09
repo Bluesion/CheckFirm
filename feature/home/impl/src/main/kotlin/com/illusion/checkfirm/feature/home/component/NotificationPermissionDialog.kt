@@ -29,7 +29,6 @@ internal fun NotificationPermissionDialog(
         title = stringResource(R.string.notification_permission_required_title),
         onDismiss = onDismiss,
     ) {
-        Spacer(Modifier.height(16.dp))
         Text(
             text = stringResource(R.string.notification_permission_required_message),
             style = MaterialTheme.typography.bodyMedium,

@@ -45,8 +45,6 @@ fun ThemeDialog(
         title = stringResource(R.string.settings_theme),
         onDismiss = onDismiss,
     ) {
-        Spacer(Modifier.height(16.dp))
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()

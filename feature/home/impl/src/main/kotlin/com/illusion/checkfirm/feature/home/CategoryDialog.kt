@@ -37,7 +37,6 @@ fun CategoryDialog(
         title = stringResource(R.string.category),
         onDismiss = onDismiss,
     ) {
-        Spacer(Modifier.height(16.dp))
         Text(
             text = stringResource(R.string.main_category_dialog_description),
             style = MaterialTheme.typography.bodyMedium,

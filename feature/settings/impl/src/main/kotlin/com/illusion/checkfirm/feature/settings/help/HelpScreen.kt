@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,6 +16,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.component.OneCardItem
 import com.illusion.checkfirm.core.designsystem.component.OneDivider
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
+import com.illusion.checkfirm.core.designsystem.component.OneNavButton
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
@@ -32,13 +31,7 @@ fun HelpScreen(
     OneScaffold(
         title = stringResource(R.string.help),
         navigationIcon = {
-            IconButton(onClick = onNavigateBack) {
-                Icon(
-                    imageVector = OneIcons.IcBack,
-                    contentDescription = null,
-                    tint = CheckFirmTheme.colors.toolbarIconTint,
-                )
-            }
+            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigateBack)
         },
     ) { innerPadding ->
         Column(

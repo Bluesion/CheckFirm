@@ -46,7 +46,6 @@ fun InfoCatcherDialog(
         onDismiss = onDismissRequest,
     ) {
         if (bookmarks.isNotEmpty()) {
-            Spacer(Modifier.height(12.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -63,9 +62,8 @@ fun InfoCatcherDialog(
                     )
                 }
             }
+            Spacer(Modifier.height(16.dp))
         }
-
-        Spacer(Modifier.height(16.dp))
 
         OutlinedTextField(
             value = model,

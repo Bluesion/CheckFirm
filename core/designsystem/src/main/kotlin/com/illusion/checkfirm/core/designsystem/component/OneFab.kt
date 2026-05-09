@@ -25,7 +25,7 @@ fun OneFab(
     contentColor: Color = MaterialTheme.colorScheme.primary,
 ) {
     val darkTheme = isSystemInDarkTheme()
-    val defaultContainerColor = if (darkTheme) Color(0xFF272727) else Color(0xFFFCFCFC)
+    val defaultContainerColor = if (darkTheme) Color(0xFF3A3A3A) else Color(0xFFFCFCFC)
 
     FloatingActionButton(
         onClick = onClick,

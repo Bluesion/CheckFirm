@@ -55,8 +55,8 @@ fun OneEditText(
     val darkTheme = isSystemInDarkTheme()
     val defaultLineColor = if (darkTheme) Color.White else Color.Black
     val actualLineColor = lineColor ?: defaultLineColor
-    val textColor = if (darkTheme) Color.White else Color.Black
-    val hintColor = if (darkTheme) Color.Gray else Color.DarkGray
+    val textColor = MaterialTheme.colorScheme.onSurface
+    val hintColor = if (darkTheme) Color(0xFF8B8B8B) else Color(0xFF8B8B8B)
 
     Column(modifier = modifier.fillMaxWidth()) {
         Row(

@@ -38,7 +38,6 @@ fun LegalDialog(onDismiss: () -> Unit) {
         title = stringResource(R.string.legal),
         onDismiss = onDismiss,
     ) {
-        Spacer(Modifier.height(16.dp))
         Text(
             text = linked,
             style = MaterialTheme.typography.bodyMedium,

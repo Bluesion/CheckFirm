@@ -12,8 +12,12 @@ import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration.Companion.seconds
@@ -27,8 +31,10 @@ class SplashViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
 
-    private val _appTheme = MutableStateFlow("system")
-    val appTheme = _appTheme.asStateFlow()
+    val appTheme = preferenceRepository.getSettings()
+        .map { it.theme }
+        .flowOn(Dispatchers.IO)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, "system")
 
     private val _nextRoute = MutableStateFlow<Any?>(null)
     val nextRoute = _nextRoute.asStateFlow()
@@ -50,7 +56,7 @@ class SplashViewModel @Inject constructor(
                 }
             }
 
-            _appTheme.value = themeDeferred.await()
+            themeDeferred.await()
             val apiResponse = versionDeferred.await()
 
             when (apiResponse) {

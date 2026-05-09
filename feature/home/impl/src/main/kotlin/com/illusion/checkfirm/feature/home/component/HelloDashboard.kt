@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -68,28 +67,28 @@ internal fun HelloDashboard(
                 iconVector = OneIcons.OneuiSearch,
                 onClick = onSearchClick,
             )
-            OneDivider(modifier = Modifier.padding(12.dp))
+            OneDivider()
             OneCardItem(
                 title = stringResource(R.string.bookmark),
                 description = stringResource(R.string.main_hello_bookmark_description),
                 iconVector = OneIcons.OneuiBookmark,
                 onClick = onBookmarkClick,
             )
-            OneDivider(modifier = Modifier.padding(12.dp))
+            OneDivider()
             OneCardItem(
                 title = stringResource(R.string.welcome_search),
                 description = stringResource(R.string.settings_welcome_search_description),
                 iconVector = OneIcons.IcWelcomeSearch,
                 onClick = onWelcomeSearchClick,
             )
-            OneDivider(modifier = Modifier.padding(12.dp))
+            OneDivider()
             OneCardItem(
                 title = stringResource(R.string.info_catcher),
                 description = stringResource(R.string.main_hello_info_catcher_description),
                 iconVector = OneIcons.IcInfoCatcher,
                 onClick = onInfoCatcherClick,
             )
-            OneDivider(modifier = Modifier.padding(12.dp))
+            OneDivider()
             OneCardItem(
                 title = stringResource(R.string.settings),
                 description = stringResource(R.string.main_hello_settings_description),

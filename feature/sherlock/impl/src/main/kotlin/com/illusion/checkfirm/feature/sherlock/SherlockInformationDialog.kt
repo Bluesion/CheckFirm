@@ -27,7 +27,6 @@ internal fun SherlockInformationDialog(onDismiss: () -> Unit) {
         title = stringResource(R.string.sherlock),
         onDismiss = onDismiss,
     ) {
-        Spacer(Modifier.height(16.dp))
         Text(
             text = stringResource(R.string.sherlock_manual_description),
             style = MaterialTheme.typography.bodyMedium,

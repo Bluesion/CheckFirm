@@ -41,6 +41,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
+import com.illusion.checkfirm.core.designsystem.component.OneNavButton
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.component.OneTab
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
@@ -69,13 +70,7 @@ fun SherlockScreen(
     OneScaffold(
         title = stringResource(R.string.sherlock),
         navigationIcon = {
-            IconButton(onClick = onNavigationIconClick) {
-                Icon(
-                    imageVector = OneIcons.IcBack,
-                    contentDescription = null,
-                    tint = CheckFirmTheme.colors.toolbarIconTint,
-                )
-            }
+            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigationIconClick)
         },
         actions = {
             IconButton(onClick = onShowInfo) {

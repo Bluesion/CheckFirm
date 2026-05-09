@@ -45,7 +45,6 @@ fun WelcomeSearchDialog(
         onDismiss = onDismissRequest,
     ) {
         if (uiState.bookmarks.isNotEmpty()) {
-            Spacer(Modifier.height(12.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -62,6 +61,7 @@ fun WelcomeSearchDialog(
                     )
                 }
             }
+            Spacer(Modifier.height(16.dp))
         }
 
         OutlinedTextField(
@@ -70,9 +70,7 @@ fun WelcomeSearchDialog(
             label = { Text(text = stringResource(R.string.model)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
+            modifier = Modifier.fillMaxWidth(),
         )
 
         OutlinedTextField(

@@ -1,9 +1,11 @@
 package com.illusion.checkfirm.core.designsystem.component
 
+import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +30,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -37,9 +40,10 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 private val ToolbarHeight = 56.dp
 
@@ -78,9 +82,9 @@ fun OneScaffold(
             initialHeightOffsetLimit = -limitPx,
             initialHeightOffset = -limitPx,
         ),
+        snapAnimationSpec = spring(stiffness = 800f),
+        flingAnimationSpec = null,
     )
-
-    val emptyScrollableState = rememberScrollableState { 0f }
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -100,11 +104,7 @@ fun OneScaffold(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding())
-                .scrollable(
-                    state = emptyScrollableState,
-                    orientation = Orientation.Vertical,
-                ),
+                .padding(top = innerPadding.calculateTopPadding()),
         ) {
             content(innerPadding)
         }
@@ -162,8 +162,7 @@ private fun OneFixedToolbar(
         Text(
             text = title,
             color = CheckFirmTheme.colors.toolbarText,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
             maxLines = 1,
             modifier = Modifier
                 .weight(1f)
@@ -197,12 +196,26 @@ private fun OneCollapsingToolbar(
         scrollBehavior.state.heightOffsetLimit = -(expandedPx - collapsedPx)
     }
 
+    val coroutineScope = rememberCoroutineScope()
+    val dragModifier = Modifier.draggable(
+        orientation = Orientation.Vertical,
+        state = rememberDraggableState { delta ->
+            scrollBehavior.state.heightOffset += delta
+        },
+        onDragStopped = { velocity ->
+            coroutineScope.launch {
+                settleAppBar(scrollBehavior.state, velocity)
+            }
+        },
+    )
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
-            .height(currentHeight),
+            .height(currentHeight)
+            .then(dragModifier),
     ) {
         // Expanded centered big title
         Box(
@@ -218,14 +231,13 @@ private fun OneCollapsingToolbar(
                 Text(
                     text = title,
                     color = CheckFirmTheme.colors.toolbarText,
-                    fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
                 )
                 if (!subTitle.isNullOrBlank()) {
                     Text(
                         text = subTitle,
                         color = CheckFirmTheme.colors.toolbarText,
-                        fontSize = 14.sp,
+                        style = MaterialTheme.typography.bodyMedium,
                     )
                 }
             }
@@ -245,8 +257,7 @@ private fun OneCollapsingToolbar(
             Text(
                 text = title,
                 color = CheckFirmTheme.colors.toolbarText,
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                 maxLines = 1,
                 modifier = Modifier
                     .weight(1f)
@@ -261,6 +272,24 @@ private fun OneCollapsingToolbar(
             )
         }
     }
+}
+
+private suspend fun settleAppBar(
+    state: androidx.compose.material3.TopAppBarState,
+    velocity: Float,
+) {
+    if (state.collapsedFraction <= 0.01f || state.collapsedFraction >= 0.99f) return
+
+    val target = if (state.collapsedFraction < 0.5f) 0f else state.heightOffsetLimit
+    animate(
+        initialValue = state.heightOffset,
+        targetValue = target,
+        initialVelocity = velocity,
+        animationSpec = spring(stiffness = 800f),
+    ) { value, _ ->
+        state.heightOffset = value
+    }
+    if (abs(velocity) > 0f && target == 0f) Unit
 }
 
 @ComponentPreview

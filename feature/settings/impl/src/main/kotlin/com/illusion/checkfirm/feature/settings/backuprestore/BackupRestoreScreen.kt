@@ -1,4 +1,3 @@
-
 package com.illusion.checkfirm.feature.settings.backuprestore
 
 import androidx.compose.foundation.Image
@@ -10,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
+import com.illusion.checkfirm.core.designsystem.component.OneNavButton
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
@@ -39,13 +37,7 @@ fun BackupRestoreScreen(
     OneScaffold(
         title = stringResource(R.string.settings_bookmark_backup_restore),
         navigationIcon = {
-            IconButton(onClick = onNavigateBack) {
-                Icon(
-                    imageVector = OneIcons.IcBack,
-                    contentDescription = null,
-                    tint = CheckFirmTheme.colors.toolbarIconTint,
-                )
-            }
+            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigateBack)
         },
     ) { innerPadding ->
         Column(
@@ -118,7 +110,9 @@ fun BackupRestoreScreen(
 private fun BackupRestoreScreenPreview() {
     CheckFirmTheme {
         Surface {
-            BackupRestoreScreen(onNavigateBack = {})
+            BackupRestoreScreen(
+                onNavigateBack = {},
+            )
         }
     }
 }

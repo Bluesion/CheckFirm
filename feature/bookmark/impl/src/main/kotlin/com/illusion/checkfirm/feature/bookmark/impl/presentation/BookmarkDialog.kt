@@ -58,7 +58,6 @@ fun BookmarkDialog(
         ),
         onDismiss = onDismiss,
     ) {
-        Spacer(Modifier.height(16.dp))
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp),

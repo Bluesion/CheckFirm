@@ -1,6 +1,11 @@
 package com.illusion.checkfirm.core.designsystem.component
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -14,8 +19,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,15 +27,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+
+private val SwitchTrackWidth = 35.dp
+private val SwitchTrackHeight = 20.dp
+private val SwitchThumbDiameter = 16.dp
+private val SwitchThumbInset = 2.dp
+private val SwitchThumbStrokeWidth = 1.dp
 
 @Composable
 fun OneSwitch(
@@ -40,24 +53,79 @@ fun OneSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
-    Switch(
-        checked = checked,
-        onCheckedChange = onCheckedChange,
-        modifier = modifier,
-        thumbContent = {
-            Box(
-                modifier = Modifier.size(20.dp),
-            )
-        },
-        colors = SwitchDefaults.colors(
-            checkedThumbColor = Color.White,
-            checkedTrackColor = MaterialTheme.colorScheme.primary,
-            checkedBorderColor = MaterialTheme.colorScheme.primary,
-            uncheckedThumbColor = Color.White,
-            uncheckedTrackColor = MaterialTheme.colorScheme.surface,
-            uncheckedBorderColor = MaterialTheme.colorScheme.outline,
-        ),
+    val darkTheme = isSystemInDarkTheme()
+    val checkedTrackColor = MaterialTheme.colorScheme.primary
+    val uncheckedTrackColor = if (darkTheme) Color(0xFF44474E) else Color(0xFF99999E)
+    val thumbColor = Color(0xFFFCFCFF)
+    val uncheckedThumbStroke = if (darkTheme) Color(0xFFA1A1A1) else Color(0xFF8C8C8C)
+    val checkedThumbStroke = MaterialTheme.colorScheme.primary
+
+    val trackColor by animateColorAsState(
+        targetValue = if (checked) checkedTrackColor else uncheckedTrackColor,
+        animationSpec = tween(durationMillis = 200),
+        label = "trackColor",
     )
+    val thumbStrokeColor by animateColorAsState(
+        targetValue = if (checked) checkedThumbStroke else uncheckedThumbStroke,
+        animationSpec = tween(durationMillis = 200),
+        label = "thumbStroke",
+    )
+
+    val thumbTravel = SwitchTrackWidth - SwitchThumbDiameter - (SwitchThumbInset * 2)
+    val thumbOffset by animateDpAsState(
+        targetValue = if (checked) thumbTravel else 0.dp,
+        animationSpec = tween(durationMillis = 200),
+        label = "thumbOffset",
+    )
+
+    val density = LocalDensity.current
+    val thumbStrokePx = with(density) { SwitchThumbStrokeWidth.toPx() }
+
+    val interactionSource = remember { MutableInteractionSource() }
+
+    val baseModifier = if (onCheckedChange != null) {
+        modifier.clickable(
+            interactionSource = interactionSource,
+            indication = null,
+            role = Role.Switch,
+            onClick = { onCheckedChange(!checked) },
+        )
+    } else modifier
+
+    Box(
+        modifier = baseModifier
+            .size(width = SwitchTrackWidth, height = SwitchTrackHeight),
+        contentAlignment = Alignment.CenterStart,
+    ) {
+        Canvas(
+            modifier = Modifier
+                .size(width = SwitchTrackWidth, height = SwitchTrackHeight)
+                .clip(RoundedCornerShape(SwitchTrackHeight / 2)),
+        ) {
+            drawRoundRect(
+                color = trackColor,
+                size = Size(size.width, size.height),
+                cornerRadius = androidx.compose.ui.geometry.CornerRadius(size.height / 2),
+            )
+        }
+        Box(
+            modifier = Modifier
+                .padding(start = SwitchThumbInset + thumbOffset)
+                .size(SwitchThumbDiameter),
+        ) {
+            Canvas(modifier = Modifier.size(SwitchThumbDiameter)) {
+                val radius = size.minDimension / 2f
+                val center = Offset(radius, radius)
+                drawCircle(color = thumbColor, radius = radius, center = center)
+                drawCircle(
+                    color = thumbStrokeColor,
+                    radius = radius - thumbStrokePx / 2,
+                    center = center,
+                    style = Stroke(width = thumbStrokePx),
+                )
+            }
+        }
+    }
 }
 
 @Composable
@@ -89,10 +157,7 @@ fun OneSwitchCard(
         ) {
             Text(
                 text = if (checked) textOn else textOff,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp,
-                ),
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
                 color = MaterialTheme.colorScheme.onSurface,
             )
             Spacer(modifier = Modifier.weight(1f))

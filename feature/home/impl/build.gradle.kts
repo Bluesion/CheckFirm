@@ -7,9 +7,11 @@ android {
 }
 
 dependencies {
-    implementation(projects.feature.home.api)
     implementation(projects.core.preference.api)
-    implementation(projects.feature.sherlock.api)
+    implementation(projects.feature.bookmark.api)
+    implementation(projects.feature.home.api)
     implementation(projects.feature.report.api)
+    implementation(projects.feature.search.api)
     implementation(projects.feature.settings.api)
+    implementation(projects.feature.sherlock.api)
 }

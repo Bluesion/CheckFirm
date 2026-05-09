@@ -37,8 +37,6 @@ fun ProfileDialog(
         title = stringResource(R.string.settings_profile_user_name),
         onDismiss = onDismiss,
     ) {
-        Spacer(Modifier.height(16.dp))
-
         OneEditText(
             value = name,
             onValueChange = { name = it },
