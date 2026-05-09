@@ -56,15 +56,6 @@ android {
     buildFeatures {
         buildConfig = true
     }
-
-    packaging {
-        resources {
-            pickFirsts += arrayOf(
-                "META-INF/LICENSE.md",
-                "META-INF/NOTICE.md"
-            )
-        }
-    }
 }
 
 room {

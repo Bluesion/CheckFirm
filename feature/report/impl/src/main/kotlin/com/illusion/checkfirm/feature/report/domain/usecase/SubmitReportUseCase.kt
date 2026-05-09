@@ -1,5 +1,6 @@
 package com.illusion.checkfirm.feature.report.domain.usecase
 
+import com.illusion.checkfirm.feature.report.BugType
 import jakarta.inject.Inject
 import jakarta.mail.Authenticator
 import jakarta.mail.Message
@@ -15,14 +16,9 @@ import kotlinx.coroutines.withContext
 import java.util.Properties
 
 class SubmitReportUseCase @Inject constructor() {
-    /**
-     * @param bugTypeLabels Localized labels for each selected bug type. The use-case
-     *   joins them into the email body so support reads "펌웨어 정보 오류" instead of
-     *   raw "type_1" keys.
-     */
     suspend operator fun invoke(
-        bugTypeLabels: List<String>,
-        logs: String,
+        bugTypes: Set<BugType>,
+        userMessage: String,
     ): Result<Unit> = withContext(Dispatchers.IO) {
         runCatching {
             val props = Properties().apply {
@@ -47,12 +43,31 @@ class SubmitReportUseCase @Inject constructor() {
                 subject = "[신고]"
             }
 
-            val errorList = bugTypeLabels.joinToString(separator = "<br>") { "- $it" }
+            val errorMessage = buildString {
+                if (BugType.FIRMWARE_INFO_ERROR in bugTypes) {
+                    append("- 펌웨어 정보 오류")
+                }
+
+                if (BugType.INAPPROPRIATE_USER_NAME in bugTypes) {
+                    append("- 부적절한 셜록 닉네임")
+                }
+
+                if (BugType.SMART_SEARCH_INFO_ERROR in bugTypes) {
+                    append("- 스마트 서치 정보 오류")
+                }
+
+                if (BugType.OTHER_ERROR in bugTypes) {
+                    append("- 기타 오류")
+                }
+
+                append("<br>")
+            }
+
             val message = buildString {
                 append("[오류 내용]<br>")
-                append(errorList.ifBlank { "- (none)" })
+                append(errorMessage)
                 append("<br><br>[유저 메시지]<br>")
-                append(logs.ifBlank { "메시지 없음" })
+                append(userMessage.ifBlank { "메시지 없음" })
             }
 
             val bodyPart = MimeBodyPart().apply { setText(message, "utf-8", "html") }

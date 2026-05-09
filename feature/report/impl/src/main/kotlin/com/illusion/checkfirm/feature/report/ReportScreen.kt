@@ -1,9 +1,10 @@
 package com.illusion.checkfirm.feature.report
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -14,6 +15,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -31,7 +33,7 @@ import com.illusion.checkfirm.core.designsystem.R as DesignSystemR
 fun ReportScreen(
     uiState: ReportUiState,
     onBugTypeToggle: (BugType) -> Unit,
-    onLogsChange: (String) -> Unit,
+    onUserMessageUpdate: (String) -> Unit,
     onSubmitClick: () -> Unit,
     onNavigationIconClick: () -> Unit,
 ) {
@@ -50,7 +52,7 @@ fun ReportScreen(
                 .padding(top = 12.dp, bottom = innerPadding.calculateBottomPadding() + 16.dp)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             OneCard(
                 modifier = Modifier.fillMaxWidth(),
@@ -65,12 +67,16 @@ fun ReportScreen(
                 )
             }
 
+            Spacer(modifier = Modifier.height(24.dp))
+
             OneCheckboxCard(
                 text = stringResource(R.string.report_type_1),
                 isChecked = BugType.FIRMWARE_INFO_ERROR in uiState.bugTypes,
                 onCheckedChange = { onBugTypeToggle(BugType.FIRMWARE_INFO_ERROR) },
                 modifier = Modifier.fillMaxWidth(),
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             OneCheckboxCard(
                 text = stringResource(R.string.report_type_2),
@@ -79,12 +85,16 @@ fun ReportScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
+
             OneCheckboxCard(
                 text = stringResource(R.string.report_type_3),
                 isChecked = BugType.SMART_SEARCH_INFO_ERROR in uiState.bugTypes,
                 onCheckedChange = { onBugTypeToggle(BugType.SMART_SEARCH_INFO_ERROR) },
                 modifier = Modifier.fillMaxWidth()
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             OneCheckboxCard(
                 text = stringResource(R.string.report_type_4),
@@ -93,28 +103,30 @@ fun ReportScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
+            Spacer(modifier = Modifier.height(24.dp))
+
             OutlinedTextField(
-                value = uiState.logs,
-                onValueChange = onLogsChange,
+                value = uiState.userMessage,
+                onValueChange = onUserMessageUpdate,
                 placeholder = { Text(text = stringResource(R.string.report_detail)) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
+                modifier = Modifier.fillMaxWidth(),
                 minLines = 4,
             )
 
-            Button(
-                onClick = onSubmitClick,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
-                enabled = uiState.bugTypes.isNotEmpty() && !uiState.isSubmitting,
-            ) {
-                if (uiState.isSubmitting) {
-                    OneLoadingIndicator(
-                        modifier = Modifier.size(96.dp),
-                    )
-                } else {
+            Spacer(modifier = Modifier.height(24.dp))
+
+            if (uiState.isSubmitting) {
+                OneLoadingIndicator(
+                    modifier = Modifier.size(96.dp),
+                )
+            } else {
+                Button(
+                    onClick = onSubmitClick,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    enabled = uiState.bugTypes.isNotEmpty() && !uiState.isSubmitting,
+                ) {
                     Text(text = stringResource(R.string.report_submit))
                 }
             }
@@ -130,7 +142,7 @@ private fun ReportScreenPreview() {
             ReportScreen(
                 uiState = ReportUiState(isSubmitting = true),
                 onBugTypeToggle = {},
-                onLogsChange = {},
+                onUserMessageUpdate = {},
                 onSubmitClick = {},
                 onNavigationIconClick = {},
             )

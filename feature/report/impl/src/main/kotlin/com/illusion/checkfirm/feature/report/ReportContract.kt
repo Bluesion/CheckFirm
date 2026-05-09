@@ -2,7 +2,7 @@ package com.illusion.checkfirm.feature.report
 
 data class ReportUiState(
     val bugTypes: Set<BugType> = emptySet(),
-    val logs: String = "",
+    val userMessage: String = "",
     val isSubmitting: Boolean = false,
 )
 

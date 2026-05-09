@@ -3,6 +3,7 @@ package com.illusion.checkfirm.core.designsystem.component
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -15,8 +16,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
@@ -32,9 +35,9 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import com.illusion.checkfirm.core.designsystem.base.bounceClick
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
@@ -139,38 +142,48 @@ fun OneCheckboxCard(
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
+    showArrow: Boolean = false,
 ) {
-    OneCard(
+    OutlinedCard(
         modifier = modifier,
+        shape = OneCardShape,
+        colors = CardDefaults.outlinedCardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
+        border = BorderStroke(
+            width = 2.dp,
+            color = if (isChecked) MaterialTheme.colorScheme.primary else Color.Transparent,
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .bounceClick { onCheckedChange(!isChecked) }
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            if (icon != null) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-            }
+            OneCheckbox(
+                isChecked = isChecked,
+                onCheckedChange = onCheckedChange,
+            )
+
+            Spacer(modifier = Modifier.width(12.dp))
 
             Text(
                 text = text,
                 modifier = Modifier.weight(1f),
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
-
-            OneCheckbox(
-                isChecked = isChecked,
-                onCheckedChange = onCheckedChange,
-            )
+            if (showArrow) {
+                Spacer(modifier = Modifier.width(12.dp))
+                Icon(
+                    imageVector = OneIcons.IcChevronRight,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
         }
     }
 }
@@ -199,6 +212,7 @@ private fun OneCheckboxCardPreview() {
                 text = "OneCheckboxCard",
                 isChecked = isChecked,
                 onCheckedChange = { isChecked = !isChecked },
+                showArrow = true,
             )
         }
     }

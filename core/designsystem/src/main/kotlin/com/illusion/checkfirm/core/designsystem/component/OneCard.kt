@@ -29,6 +29,8 @@ import com.illusion.checkfirm.core.designsystem.base.bounceClick
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
+val OneCardShape = RoundedCornerShape(size = 14.dp)
+
 @Composable
 fun OneCard(
     modifier: Modifier = Modifier,
@@ -36,7 +38,7 @@ fun OneCard(
 ) {
     Card(
         modifier = modifier,
-        shape = RoundedCornerShape(size = 14.dp),
+        shape = OneCardShape,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {

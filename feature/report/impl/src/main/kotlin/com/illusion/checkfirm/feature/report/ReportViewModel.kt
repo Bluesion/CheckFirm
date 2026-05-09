@@ -32,22 +32,22 @@ class ReportViewModel @Inject constructor(
         }
     }
 
-    fun updateLogs(logs: String) {
-        _uiState.update { it.copy(logs = logs) }
+    fun updateUserMessage(userMessage: String) {
+        _uiState.update { it.copy(userMessage = userMessage) }
     }
 
-    fun submitReport(bugTypeLabels: Map<String, String>) {
+    fun submitReport() {
         val current = uiState.value
         if (current.bugTypes.isEmpty()) return
 
         _uiState.update { it.copy(isSubmitting = true) }
         viewModelScope.launch {
-            val labels = current.bugTypes.mapNotNull { bugTypeLabels[it] }
             val result = submitReportUseCase(
-                bugTypeLabels = labels,
-                logs = current.logs,
+                bugTypes = current.bugTypes,
+                userMessage = current.userMessage,
             )
             _uiState.update { it.copy(isSubmitting = false) }
+
             if (result.isSuccess) {
                 _uiState.value = ReportUiState()
                 _events.emit(ReportEvent.SubmitSuccess)
