@@ -1,0 +1,11 @@
+<resources>
+    <string name="report_description">Obrigado pelo seu relatório. Certificarei-me de incorporar seu relatório dentro de uma semana e ele não será notificado. Se o seu relatório for inadequado, ele poderá ser ignorado. Por favor, selecione um motivo para relatar abaixo.</string>
+    <string name="report_detail">(Opcional) Quaisquer detalhes serão úteis.</string>
+    <string name="report_fail">Envio falhou.</string>
+    <string name="report_submit">Enviar</string>
+    <string name="report_success">Envio bem-sucedido.</string>
+    <string name="report_type_1">Erro de Informação de Firmware</string>
+    <string name="report_type_2">Nome de usuário inadequado</string>
+    <string name="report_type_3">Erro de Informação de Pesquisa Inteligente</string>
+    <string name="report_type_4">Outros Erros</string>
+</resources>

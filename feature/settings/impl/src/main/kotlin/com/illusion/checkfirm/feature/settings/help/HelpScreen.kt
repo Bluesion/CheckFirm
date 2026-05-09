@@ -20,6 +20,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneNavButton
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun HelpScreen(
@@ -44,15 +45,15 @@ fun HelpScreen(
         ) {
             OneCard {
                 OneCardItem(
-                    title = stringResource(R.string.help_manual),
-                    description = stringResource(R.string.help_manual_description),
+                    title = stringResource(FeatureR.string.help_manual),
+                    description = stringResource(FeatureR.string.help_manual_description),
                     iconVector = OneIcons.IcHelpManual,
                     onClick = onNavigateToFirmwareManual,
                 )
                 OneDivider()
                 OneCardItem(
-                    title = stringResource(R.string.help_device_info),
-                    description = stringResource(R.string.help_device_info_description),
+                    title = stringResource(FeatureR.string.help_device_info),
+                    description = stringResource(FeatureR.string.help_device_info_description),
                     iconVector = OneIcons.IcHelpDevice,
                     onClick = onNavigateToMyDevice,
                 )

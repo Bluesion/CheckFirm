@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_category_dialog_description">Selectați categoria pe care doriți să o afișați în bara de căutare rapidă.</string>
+    <string name="home_hello_bookmark_description">Adăugați marcaje și categorii.</string>
+    <string name="home_hello_description">Puteți căuta informații despre firmware pentru dispozitive Samsung. Consultați funcționalitățile de mai jos.</string>
+    <string name="home_hello_info_catcher_description">Nu ratați niciun firmware nou găsit.</string>
+    <string name="home_hello_search_description">Căutați informații despre firmware.</string>
+    <string name="home_hello_settings_description">Mai multe funcționalități vă așteaptă.</string>
+    <string name="home_hello_title">Bun venit la CheckFirm!</string>
+    <string name="notification_permission_required_button_deny">Respinge</string>
+    <string name="notification_permission_required_button_grant">Acordă</string>
+    <string name="notification_permission_required_message">CheckFirm oferă Info Catcher, care vă alertează atunci când este găsit un firmware nou. Pentru a utiliza această funcționalitate, trebuie să acordați permisiunea de notificare.</string>
+    <string name="notification_permission_required_title">Permisiune Necesară</string>
+</resources>

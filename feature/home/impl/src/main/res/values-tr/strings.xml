@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_category_dialog_description">Hızlı arama çubuğunda göstermek istediğiniz kategoriyi seçin.</string>
+    <string name="home_hello_bookmark_description">Yer imleri ve kategoriler ekleyin.</string>
+    <string name="home_hello_description">Samsung cihazların firmware bilgilerini arayabilirsiniz. Aşağıdaki özellikleri inceleyin.</string>
+    <string name="home_hello_info_catcher_description">Yeni firmware’i kaçırmayın.</string>
+    <string name="home_hello_search_description">Firmware bilgilerini arayın.</string>
+    <string name="home_hello_settings_description">Daha fazla özellik sizi bekliyor.</string>
+    <string name="home_hello_title">CheckFirm\'e hoş geldiniz!</string>
+    <string name="notification_permission_required_button_deny">Reddet</string>
+    <string name="notification_permission_required_button_grant">İzin Ver</string>
+    <string name="notification_permission_required_message">CheckFirm, yeni firmware bulunduğunda sizi bilgilendiren Info Catcher özelliği sunar. Bu özelliği kullanmak için bildirim izni vermelisiniz.</string>
+    <string name="notification_permission_required_title">İzin gerekli</string>
+</resources>

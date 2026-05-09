@@ -36,6 +36,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneSwitchCard
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun InfoCatcherScreen(
@@ -72,7 +73,7 @@ fun InfoCatcherScreen(
             )
 
             Text(
-                text = stringResource(R.string.info_catcher_description),
+                text = stringResource(FeatureR.string.info_catcher_description),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier
                     .padding(horizontal = 12.dp)
@@ -85,7 +86,7 @@ fun InfoCatcherScreen(
                 Column {
                     if (uiState.devices.isEmpty()) {
                         Text(
-                            text = stringResource(R.string.info_catcher_no_device),
+                            text = stringResource(FeatureR.string.info_catcher_no_device),
                             modifier = Modifier.padding(16.dp),
                             style = MaterialTheme.typography.bodyMedium,
                         )
@@ -108,7 +109,7 @@ fun InfoCatcherScreen(
             ) {
                 Icon(Icons.Rounded.Add, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = stringResource(R.string.welcome_search_add_device))
+                Text(text = stringResource(FeatureR.string.welcome_search_add_device))
             }
 
             Spacer(modifier = Modifier.height(24.dp))

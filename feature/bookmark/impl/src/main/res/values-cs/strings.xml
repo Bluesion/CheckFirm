@@ -1,0 +1,9 @@
+<resources>
+    <string name="bookmark_edit">Upravit záložku</string>
+    <string name="bookmark_name">Název záložky</string>
+    <string name="bookmark_new">Nová záložka</string>
+    <string name="category_edit_devices_title">Zařízení</string>
+    <string name="category_edit_name">Název kategorie</string>
+    <string name="category_edit_name_error_all">Název kategorie nemůže být Vše.</string>
+    <string name="category_edit_name_error_empty">Název kategorie nesmí být prázdný.</string>
+</resources>

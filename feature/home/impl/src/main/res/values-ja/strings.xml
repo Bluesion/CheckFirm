@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_category_dialog_description">クイック検索バーに表示したいカテゴリを選択してください。</string>
+    <string name="home_hello_bookmark_description">ブックマークとカテゴリを追加します。</string>
+    <string name="home_hello_description">Samsungデバイスのファームウェア情報を検索できます。以下の機能をご覧ください。</string>
+    <string name="home_hello_info_catcher_description">新しいファームウェアを見逃さないでください。</string>
+    <string name="home_hello_search_description">ファームウェア情報を検索します。</string>
+    <string name="home_hello_settings_description">さらに多くの機能が待っています。</string>
+    <string name="home_hello_title">CheckFirmへようこそ！</string>
+    <string name="notification_permission_required_button_deny">拒否</string>
+    <string name="notification_permission_required_button_grant">許可</string>
+    <string name="notification_permission_required_message">CheckFirmは、新しいファームウェアが見つかったときに通知するInfo Catcherを提供します。この機能を使用するには、通知の許可を付与する必要があります。</string>
+    <string name="notification_permission_required_title">権限が必要です</string>
+</resources>

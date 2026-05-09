@@ -1,0 +1,11 @@
+<resources>
+    <string name="report_description">Спасибо за ваш отчет. Я позабочусь о том, чтобы ваш отчет был учтен в течение недели, и вы не будете уведомлены. Если ваш отчет неуместен, он может быть проигнорирован. Пожалуйста, выберите причину для сообщения ниже.</string>
+    <string name="report_detail">(Необязательно) Любые детали будут полезны.</string>
+    <string name="report_fail">Отправка не удалась.</string>
+    <string name="report_submit">Отправить</string>
+    <string name="report_success">Отправка прошла успешно.</string>
+    <string name="report_type_1">Ошибка информации о прошивке</string>
+    <string name="report_type_2">Недопустимое имя пользователя</string>
+    <string name="report_type_3">Ошибка информации Умного поиска</string>
+    <string name="report_type_4">Другие ошибки</string>
+</resources>

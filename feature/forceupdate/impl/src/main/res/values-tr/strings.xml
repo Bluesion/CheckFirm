@@ -1,0 +1,4 @@
+<resources>
+    <string name="outdated_description">Bu sürüm artık desteklenmiyor. Lütfen en son sürüme güncelleyin. Verdiğimiz rahatsızlıktan dolayı özür dileriz.</string>
+    <string name="outdated_title">Güncelleme gerekli</string>
+</resources>

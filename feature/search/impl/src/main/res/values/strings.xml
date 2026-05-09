@@ -1,2 +1,10 @@
 <resources>
+    <string name="multi_search_limit">You can search up to 5 devices</string>
+    <string name="search_add_comparison">Add comparison</string>
+    <string name="search_bookmarks">Bookmarks</string>
+    <string name="search_clear_all">Clear All</string>
+    <string name="search_duplicate_device">Already added</string>
+    <string name="search_model_hint">e.g., SM-S918B</string>
+    <string name="search_new_search">New Search</string>
+    <string name="search_recent_history">Recent History</string>
 </resources>

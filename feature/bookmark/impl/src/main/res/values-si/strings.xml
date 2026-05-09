@@ -1,0 +1,9 @@
+<resources>
+    <string name="bookmark_edit">Bookmak සංස්කරණය කරන්න</string>
+    <string name="bookmark_name">Bookmak නම</string>
+    <string name="bookmark_new">නව Bookmak</string>
+    <string name="category_edit_devices_title">උපාංග</string>
+    <string name="category_edit_name">ප්‍රවර්ග නාමය</string>
+    <string name="category_edit_name_error_all">ප්‍රවර්ග නාමය සියල්ල විය නොහැක.</string>
+    <string name="category_edit_name_error_empty">ප්‍රවර්ග නාමය හිස් විය නොහැක!</string>
+</resources>

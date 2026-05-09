@@ -1,0 +1,11 @@
+<resources>
+    <string name="report_description">感謝您的回報。我將在一周內納入您的回報，且不會通知您。如果您的回報不當，可能會被忽略。請選擇以下回報原因。</string>
+    <string name="report_detail">(可選) 任何詳細資訊都會有幫助。</string>
+    <string name="report_fail">提交失敗。</string>
+    <string name="report_submit">提交</string>
+    <string name="report_success">提交成功。</string>
+    <string name="report_type_1">韌體資訊錯誤</string>
+    <string name="report_type_2">不當的使用者名稱</string>
+    <string name="report_type_3">智慧搜尋資訊錯誤</string>
+    <string name="report_type_4">其他錯誤</string>
+</resources>

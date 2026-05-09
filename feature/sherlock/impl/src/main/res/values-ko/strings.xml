@@ -1,2 +1,21 @@
 <resources>
+    <string name="sherlock">셜록</string>
+    <string name="sherlock_manual_description">당신은 암호화된 펌웨어 정보를 해독하는 탐정입니다! 각 필드에 알맞은 값을 넣어보면서 복호화를 시도해보세요.</string>
+    <string name="sherlock_result_fail">펌웨어 정보를 해독하지 못했어요. 다른 값으로 시도해보세요.</string>
+    <string name="sherlock_result_success">축하합니다! 암호화된 펌웨어 정보를 해독했어요.</string>
+    <string name="sherlock_script_description">암호화된 펌웨어 정보를 해독할 수 있도록 도와주는 스크립트입니다. 시작 값과 종료 값을 넣으면 중간 값들을 자동으로 대입해주며 복호화 된 펌웨어 정보를 찾아줍니다. 시작값과 종료값의 차이가 너무 크면 과부하로 인해 앱이 강제 종료될 수 있으니 주의해주세요.</string>
+    <string name="sherlock_script_end_value">종료값</string>
+    <string name="sherlock_script_error_1">부트로더 버전 시작값이 종료값보다 큽니다.</string>
+    <string name="sherlock_script_error_3">One UI 버전 시작값이 종료값보다 큽니다.</string>
+    <string name="sherlock_script_error_4">펌웨어 날짜(년) 시작값이 종료값보다 큽니다.</string>
+    <string name="sherlock_script_error_5">펌웨어 날짜(월) 시작값이 종료값보다 큽니다.</string>
+    <string name="sherlock_script_error_6">리비전 번호 시작값이 종료값보다 큽니다.</string>
+    <string name="sherlock_script_error_7">시작값이 올바르지 않습니다.</string>
+    <string name="sherlock_script_error_8">종료값이 올바르지 않습니다.</string>
+    <string name="sherlock_script_no_error">스크립트 실행 준비 완료!</string>
+    <string name="sherlock_script_running">스크립트 실행 중…\n이 화면을 벗어나지 마세요.</string>
+    <string name="sherlock_script_start">스크립트 실행</string>
+    <string name="sherlock_script_start_value">시작값</string>
+    <string name="sherlock_tab_manual">셜록</string>
+    <string name="sherlock_tab_script">스크립트</string>
 </resources>

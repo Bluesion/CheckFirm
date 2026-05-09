@@ -1,0 +1,11 @@
+<resources>
+    <string name="report_description">Geri bildiriminiz için teşekkürler. Raporunuz 1 hafta içinde değerlendirilecektir ve bildirim gönderilmeyecektir. Uygunsuz raporlar dikkate alınmayabilir. Lütfen bir neden seçin.</string>
+    <string name="report_detail">(İsteğe bağlı) Herhangi bir ayrıntı yardımcı olur.</string>
+    <string name="report_fail">Gönderim başarısız.</string>
+    <string name="report_submit">Gönder</string>
+    <string name="report_success">Gönderim başarılı.</string>
+    <string name="report_type_1">Firmware bilgisi hatası</string>
+    <string name="report_type_2">Uygunsuz kullanıcı adı</string>
+    <string name="report_type_3">Akıllı Arama bilgisi hatası</string>
+    <string name="report_type_4">Diğer hatalar</string>
+</resources>

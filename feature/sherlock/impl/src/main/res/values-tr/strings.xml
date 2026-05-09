@@ -1,0 +1,21 @@
+<resources>
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_manual_description">Şimdi şifreli firmware bilgilerini çözen bir dedektifsiniz! Her alana değer girerek çözmeyi deneyin.</string>
+    <string name="sherlock_result_fail">Şifre çözme başarısız oldu. Değerleri değiştirerek tekrar deneyebilirsiniz.</string>
+    <string name="sherlock_result_success">Tebrikler! Şifreli firmware bilgilerini çözdünüz.</string>
+    <string name="sherlock_script_description">Başlangıç ve bitiş değerini girmeniz yeterlidir. Sherlock Komutu bu aralıktaki tüm değerleri deneyerek firmware bilgisini çözmeye çalışacaktır. Ancak başlangıç ve bitiş değerleri arasındaki fark çok büyükse uygulama kapanabilir.</string>
+    <string name="sherlock_script_end_value">Bitiş</string>
+    <string name="sherlock_script_error_1">Bootloader: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_3">One UI sürümü: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_4">Yıl: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_5">Ay: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_6">Revizyon: başlangıç değeri bitiş değerinden büyük.</string>
+    <string name="sherlock_script_error_7">Başlangıç değeri hatalı.</string>
+    <string name="sherlock_script_error_8">Bitiş değeri hatalı.</string>
+    <string name="sherlock_script_no_error">Hata görünmüyor.\nHazırsınız!</string>
+    <string name="sherlock_script_running">Komut çalışıyor…\nBu ekrandan çıkmayın.</string>
+    <string name="sherlock_script_start">Komutu Başlat</string>
+    <string name="sherlock_script_start_value">Başlangıç</string>
+    <string name="sherlock_tab_manual">Manuel</string>
+    <string name="sherlock_tab_script">Komut</string>
+</resources>

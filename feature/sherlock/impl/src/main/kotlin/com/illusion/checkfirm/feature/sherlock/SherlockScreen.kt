@@ -48,6 +48,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneTab
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.feature.sherlock.util.SherlockStatus
+import com.illusion.checkfirm.feature.sherlock.R as FeatureR
 
 @Composable
 fun SherlockScreen(
@@ -69,7 +70,7 @@ fun SherlockScreen(
     val context = LocalContext.current
 
     OneScaffold(
-        title = stringResource(R.string.sherlock),
+        title = stringResource(FeatureR.string.sherlock),
         navigationIcon = {
             OneNavButton(icon = OneIcons.IcBack, onClick = onNavigationIconClick)
         },
@@ -90,8 +91,8 @@ fun SherlockScreen(
         ) {
             OneTab(
                 titles = listOf(
-                    stringResource(R.string.sherlock_tab_manual),
-                    stringResource(R.string.sherlock_tab_script),
+                    stringResource(FeatureR.string.sherlock_tab_manual),
+                    stringResource(FeatureR.string.sherlock_tab_script),
                 ),
                 selectedTabIndex = uiState.selectedTab,
                 onTabSelected = onTabChange,
@@ -171,17 +172,17 @@ private fun StatusFace(status: SherlockStatus) {
 @Composable
 private fun StatusBanner(status: SherlockStatus) {
     val message = when (status) {
-        SherlockStatus.SUCCESS -> stringResource(R.string.sherlock_result_success)
-        SherlockStatus.FAIL -> stringResource(R.string.sherlock_result_fail)
-        SherlockStatus.RUNNING -> stringResource(R.string.sherlock_script_running)
-        SherlockStatus.NO_WARNING -> stringResource(R.string.sherlock_script_no_error)
-        SherlockStatus.WARNING_BUILD_NUMBER_BOOTLOADER -> stringResource(R.string.sherlock_script_error_1)
-        SherlockStatus.WARNING_BUILD_NUMBER_ONE_UI_VERSION -> stringResource(R.string.sherlock_script_error_3)
-        SherlockStatus.WARNING_BUILD_NUMBER_YEAR -> stringResource(R.string.sherlock_script_error_4)
-        SherlockStatus.WARNING_BUILD_NUMBER_MONTH -> stringResource(R.string.sherlock_script_error_5)
-        SherlockStatus.WARNING_BUILD_NUMBER_REVISION -> stringResource(R.string.sherlock_script_error_6)
-        SherlockStatus.WARNING_SCRIPT_START_INVALID -> stringResource(R.string.sherlock_script_error_7)
-        SherlockStatus.WARNING_SCRIPT_END_INVALID -> stringResource(R.string.sherlock_script_error_8)
+        SherlockStatus.SUCCESS -> stringResource(FeatureR.string.sherlock_result_success)
+        SherlockStatus.FAIL -> stringResource(FeatureR.string.sherlock_result_fail)
+        SherlockStatus.RUNNING -> stringResource(FeatureR.string.sherlock_script_running)
+        SherlockStatus.NO_WARNING -> stringResource(FeatureR.string.sherlock_script_no_error)
+        SherlockStatus.WARNING_BUILD_NUMBER_BOOTLOADER -> stringResource(FeatureR.string.sherlock_script_error_1)
+        SherlockStatus.WARNING_BUILD_NUMBER_ONE_UI_VERSION -> stringResource(FeatureR.string.sherlock_script_error_3)
+        SherlockStatus.WARNING_BUILD_NUMBER_YEAR -> stringResource(FeatureR.string.sherlock_script_error_4)
+        SherlockStatus.WARNING_BUILD_NUMBER_MONTH -> stringResource(FeatureR.string.sherlock_script_error_5)
+        SherlockStatus.WARNING_BUILD_NUMBER_REVISION -> stringResource(FeatureR.string.sherlock_script_error_6)
+        SherlockStatus.WARNING_SCRIPT_START_INVALID -> stringResource(FeatureR.string.sherlock_script_error_7)
+        SherlockStatus.WARNING_SCRIPT_END_INVALID -> stringResource(FeatureR.string.sherlock_script_error_8)
         SherlockStatus.INITIAL -> return
     }
     val color = when (status) {
@@ -240,7 +241,7 @@ private fun ManualTab(
     onManualBasebandChange: (String) -> Unit,
 ) {
     Text(
-        text = stringResource(R.string.sherlock_manual_description),
+        text = stringResource(FeatureR.string.sherlock_manual_description),
         style = MaterialTheme.typography.bodyMedium,
     )
     PrefixSplitField(
@@ -282,16 +283,16 @@ private fun ScriptTab(
     onStart: () -> Unit,
 ) {
     Text(
-        text = stringResource(R.string.sherlock_script_description),
+        text = stringResource(FeatureR.string.sherlock_script_description),
         style = MaterialTheme.typography.bodyMedium,
     )
     SimpleField(
-        label = stringResource(R.string.sherlock_script_start_value),
+        label = stringResource(FeatureR.string.sherlock_script_start_value),
         value = start,
         onChange = onStartChange,
     )
     SimpleField(
-        label = stringResource(R.string.sherlock_script_end_value),
+        label = stringResource(FeatureR.string.sherlock_script_end_value),
         value = end,
         onChange = onEndChange,
     )
@@ -300,7 +301,7 @@ private fun ScriptTab(
         enabled = !running,
         modifier = Modifier.fillMaxWidth(),
     ) {
-        Text(text = stringResource(R.string.sherlock_script_start))
+        Text(text = stringResource(FeatureR.string.sherlock_script_start))
     }
 }
 

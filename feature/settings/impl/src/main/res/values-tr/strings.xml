@@ -1,0 +1,77 @@
+<resources>
+    <string name="about_app_information">Uygulama bilgisi</string>
+    <string name="about_latest">Zaten en son sürüm yüklü.</string>
+    <string name="about_version">Sürüm</string>
+    <string name="add_item">Ekle</string>
+    <string name="backup">Yedekle</string>
+    <string name="backup_toast">Yedekleme tamamlandı.</string>
+    <string name="contributor">Katkıda Bulunan</string>
+    <string name="contributor_application">Uygulama</string>
+    <string name="contributor_chinese">Çince</string>
+    <string name="contributor_czech">Çekçe</string>
+    <string name="contributor_designer">Tasarımcı</string>
+    <string name="contributor_developer">Geliştirici</string>
+    <string name="contributor_portuguese">Portekizce</string>
+    <string name="contributor_romanian">Romence</string>
+    <string name="contributor_russian">Rusça</string>
+    <string name="contributor_sinhala">Sinhala</string>
+    <string name="contributor_translator">Çevirmen</string>
+    <string name="help_device_info">Cihaz bilgisi</string>
+    <string name="help_device_info_description">Model · CSC</string>
+    <string name="help_firmware_manual_baseband_description">A720NKOU3BRK1 baseband versiyonunu ifade eder. Baseband, cihazın radyo modülünü kontrol eden firmware’dir ve cihazın ağla iletişimini sağlar.</string>
+    <string name="help_firmware_manual_build_bootloader_description">Bu bootloader versiyonudur. Samsung’un güvenlik politikası nedeniyle, daha yüksek bootloader versiyonuna sahip firmware’den daha düşük bir versiyona geçiş yapılamaz.</string>
+    <string name="help_firmware_manual_build_description">A720SKSU3BRK1 yapı versiyonunu ifade eder. Bootloader versiyonu, One UI versiyonu, firmware\'in üretildiği yıl, ay ve revizyon numarası bu alandan anlaşılabilir.</string>
+    <string name="help_firmware_manual_build_device_description">Bu model numarasıdır. Bu örnekte, A720 = Samsung Galaxy A7 (2017).</string>
+    <string name="help_firmware_manual_build_month_description">Firmware’in üretildiği ayı gösterir.\n\nA = Ocak,\nB = Şubat,\n.\n.\n.\nL = Aralık.</string>
+    <string name="help_firmware_manual_build_one_ui_description">Bu One UI versiyonudur.\nSarı metin güncellenmişse, One UI güncellemesi var demektir.\n\nA = ilk büyük sürüm,\nB = bir kez büyük güncelleme almış,\nC = iki kez almış,\n.\n.\n.\nZ = beta firmware.</string>
+    <string name="help_firmware_manual_build_region_description">Bu bölge kodudur. SKS = Güney Kore. 4 harfli de olabilir.</string>
+    <string name="help_firmware_manual_build_revision_description">Revizyon numarası (küçük sürüm).\n\n1 = ilk sürüm,\n.\n.\n.\n9 = dokuzuncu sürüm,\nA = onuncu,\n.\n.\n.\nF = on altıncı sürüm.</string>
+    <string name="help_firmware_manual_build_year_description">Firmware’in üretildiği yılı gösterir.\n\nT = 2020,\nU = 2021,\nV = 2022, vb.</string>
+    <string name="help_firmware_manual_csc_description">A720SSKC3BRK1 CSC versiyonunu ifade eder. CSC, "Tüketici Yazılım Özelleştirme" anlamına gelir ve cihaza özel bölgesel veya operatör yazılımını gösterir.</string>
+    <string name="help_firmware_manual_description">Firmware bilgileri 3 kısımdan oluşur: yapı versiyonu, CSC versiyonu ve baseband versiyonu.\n\nÖrneğin arama sonucu şu şekilde olsun:\nA720SKSU3BRK1/A720SSKC3BRK1/A720NKOU3BRK1.\n\nİlki (A720SKSU3BRK1) yapı versiyonunu,\nikiincisi (A720SSKC3BRK1) CSC versiyonunu,\nsonuncusu (A720NKOU3BRK1) baseband versiyonunu gösterir.</string>
+    <string name="help_manual">Firmware kılavuzu</string>
+    <string name="help_manual_description">Firmware bilgileri</string>
+    <string name="info_catcher_description">Firmware güncellendiğinde Info Catcher size bildirim gönderir.\nTakip etmek istediğiniz cihazı girin.</string>
+    <string name="legal">Yasal Bilgi</string>
+    <string name="legal_text">Resmi firmware bilgileri şu adresten alınır:\nhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.xml\n\nTest firmware bilgileri:\nhttps://fota-cloud-dn.ospserver.net/firmware/CSC/MODEL/version.test.xml\n\nBu kaynaklar Samsung Electronics’in resmi bilgi sağlayıcıları değildir. Bilgilerin kullanımı tamamen sizin sorumluluğunuzdadır.</string>
+    <string name="notification_channel_new_firmware">Yeni Firmware</string>
+    <string name="notification_channel_new_update">Uygulama Güncellemesi</string>
+    <string name="notification_info_catcher_text">Hemen kontrol edin.</string>
+    <string name="notification_info_catcher_title">%1$s (%2$s) için yeni firmware bulundu!</string>
+    <string name="notification_new_update_text">Kritik hatalar bildirildi. Lütfen hemen Play Store\'dan güncelleyin.</string>
+    <string name="notification_new_update_title">CheckFirm acil güncelleme</string>
+    <string name="restore">Geri Yükle</string>
+    <string name="restore_toast">Geri yükleme tamamlandı.</string>
+    <string name="settings_about">CheckFirm Hakkında</string>
+    <string name="settings_bookmark_backup_restore">Yedekle &amp; Geri yükle</string>
+    <string name="settings_bookmark_backup_restore_description">CheckFirm yer imlerini ve kategorilerini yedekleyin veya geri yükleyin.</string>
+    <string name="settings_bookmark_order">Yer imi sırası</string>
+    <string name="settings_bookmark_order_by_created_time">Oluşturulma zamanına göre sırala</string>
+    <string name="settings_bookmark_order_by_desc">Azalan düzende sırala</string>
+    <string name="settings_bookmark_order_by_device">Cihaza göre sırala</string>
+    <string name="settings_bookmark_order_by_name">İsme göre sırala</string>
+    <string name="settings_bookmark_order_description">Yer imlerini sırala</string>
+    <string name="settings_bookmark_reset">Yer imlerini sıfırla</string>
+    <string name="settings_bookmark_reset_description">Tüm yer imleri ve kategorileri sıfırla. Yalnızca bir hata varsa bu işlemi kullanın.</string>
+    <string name="settings_bookmark_reset_dialog_message">Tüm yer imleri ve kategoriler silinecek.</string>
+    <string name="settings_bookmark_reset_dialog_title">Emin misiniz?</string>
+    <string name="settings_firebase">Arama hatasını düzelt</string>
+    <string name="settings_firebase_description">Çin veya İran gibi ülkeler Firebase\'i engellediği için arama hatası oluşabilir. Bu ülkelerdeyseniz bu ayarı etkinleştirin.</string>
+    <string name="settings_info_catcher_description">Firmware güncellendiğinde Info Catcher size bildirim gönderir.</string>
+    <string name="settings_inquiry">İletişim</string>
+    <string name="settings_inquiry_not_found_exception">Lütfen Google Play Store\'dan bir e-posta uygulaması yükleyin.</string>
+    <string name="settings_language">Dil</string>
+    <string name="settings_language_default">Sistem varsayılanı</string>
+    <string name="settings_language_description">Uygulama dilini ayarla</string>
+    <string name="settings_profile_user_name">Kullanıcı adı</string>
+    <string name="settings_quick_search_bar">Hızlı arama çubuğu</string>
+    <string name="settings_quick_search_bar_description">Ana ekranda yer imlerini göster.</string>
+    <string name="settings_theme">Tema</string>
+    <string name="settings_theme_dark">Koyu</string>
+    <string name="settings_theme_description">Uygulama temasını ayarla.</string>
+    <string name="settings_theme_light">Açık</string>
+    <string name="settings_theme_system">Sistem varsayılanı</string>
+    <string name="welcome_search_add_device">Cihaz ekle</string>
+    <string name="welcome_search_description">Uygulama başladığında firmware ara.\nBaşlangıçta aramak istediğiniz cihazı girin.</string>
+    <string name="welcome_search_empty_device_list">En fazla 5 cihaz ekleyebilirsiniz.</string>
+</resources>

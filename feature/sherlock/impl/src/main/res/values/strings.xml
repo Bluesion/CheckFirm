@@ -1,2 +1,21 @@
 <resources>
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_manual_description">Now you are a detective who solves the encrypted firmware information! Try decrypting by entering values in each field.</string>
+    <string name="sherlock_result_fail">Decryption failed. You can try again by changing the value.</string>
+    <string name="sherlock_result_success">Congratulations! You solved the encrypted firmware information.</string>
+    <string name="sherlock_script_description">All you need to do is entering the start and end value. Sherlock Script will try to find decrypted firmware information with all data between start and end value. Please note that if the difference between the start value and the end value is too large, the app may be forced to close due to overload.</string>
+    <string name="sherlock_script_end_value">End</string>
+    <string name="sherlock_script_error_1">Bootloader: start value is larger than end value.</string>
+    <string name="sherlock_script_error_3">One UI version: start value is larger than end value.</string>
+    <string name="sherlock_script_error_4">Year: start value is larger than end value.</string>
+    <string name="sherlock_script_error_5">Month: start value is larger than end value.</string>
+    <string name="sherlock_script_error_6">Revision: start value is larger than end value.</string>
+    <string name="sherlock_script_error_7">Something wrong in start value.</string>
+    <string name="sherlock_script_error_8">Something wrong in end value.</string>
+    <string name="sherlock_script_no_error">There seems to be no error.\nReady to go!</string>
+    <string name="sherlock_script_running">Script running…\nDo not exit this screen.</string>
+    <string name="sherlock_script_start">Start script</string>
+    <string name="sherlock_script_start_value">Start</string>
+    <string name="sherlock_tab_manual">Manual</string>
+    <string name="sherlock_tab_script">Script</string>
 </resources>

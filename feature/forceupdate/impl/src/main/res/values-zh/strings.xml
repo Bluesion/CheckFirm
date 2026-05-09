@@ -1,0 +1,4 @@
+<resources>
+    <string name="outdated_description">当前版本不再受支持。请更新到最新版本。给您带来的不便，敬请谅解。</string>
+    <string name="outdated_title">需要更新</string>
+</resources>

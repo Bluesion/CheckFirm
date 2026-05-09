@@ -37,6 +37,7 @@ import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun WelcomeSearchScreen(
@@ -100,7 +101,7 @@ fun WelcomeSearchScreen(
             }
 
             Text(
-                text = stringResource(R.string.welcome_search_description),
+                text = stringResource(FeatureR.string.welcome_search_description),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -135,11 +136,11 @@ fun WelcomeSearchScreen(
                     ) {
                         Icon(Icons.Rounded.Add, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
-                        Text(text = stringResource(R.string.welcome_search_add_device))
+                        Text(text = stringResource(FeatureR.string.welcome_search_add_device))
                     }
 
                     Text(
-                        text = stringResource(R.string.welcome_search_empty_device_list),
+                        text = stringResource(FeatureR.string.welcome_search_empty_device_list),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.outline,
                         modifier = Modifier
@@ -160,11 +161,11 @@ fun WelcomeSearchScreen(
                     ) {
                         Icon(Icons.Rounded.Add, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
-                        Text(text = stringResource(R.string.welcome_search_add_device))
+                        Text(text = stringResource(FeatureR.string.welcome_search_add_device))
                     }
 
                     Text(
-                        text = stringResource(R.string.welcome_search_empty_device_list),
+                        text = stringResource(FeatureR.string.welcome_search_empty_device_list),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.outline,
                         modifier = Modifier.padding(top = 4.dp)

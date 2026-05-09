@@ -23,6 +23,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneDivider
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneSwitch
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun ProfileCard(
@@ -45,7 +46,7 @@ fun ProfileCard(
                     .padding(end = 16.dp),
             ) {
                 Text(
-                    text = stringResource(R.string.settings_profile_user_name),
+                    text = stringResource(FeatureR.string.settings_profile_user_name),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                 )
@@ -79,20 +80,20 @@ fun AppearanceCard(
     ) {
         PreferenceItem(
             onClick = onThemeClick,
-            title = stringResource(R.string.settings_theme),
-            description = stringResource(R.string.settings_theme_description),
+            title = stringResource(FeatureR.string.settings_theme),
+            description = stringResource(FeatureR.string.settings_theme_description),
         )
         OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onLanguageClick,
-            title = stringResource(R.string.settings_language),
-            description = stringResource(R.string.settings_language_description),
+            title = stringResource(FeatureR.string.settings_language),
+            description = stringResource(FeatureR.string.settings_language_description),
         )
         OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onQuickSearchBarClick,
-            title = stringResource(R.string.settings_quick_search_bar),
-            description = stringResource(R.string.settings_quick_search_bar_description),
+            title = stringResource(FeatureR.string.settings_quick_search_bar),
+            description = stringResource(FeatureR.string.settings_quick_search_bar_description),
             isSwitchChecked = isQuickSearchBarEnabled,
             onSwitchToggle = onQuickSearchBarChanged,
         )
@@ -110,20 +111,20 @@ fun BookmarkCard(
     ) {
         PreferenceItem(
             onClick = onBookmarkOrderClick,
-            title = stringResource(R.string.settings_bookmark_order),
-            description = stringResource(R.string.settings_bookmark_order_description),
+            title = stringResource(FeatureR.string.settings_bookmark_order),
+            description = stringResource(FeatureR.string.settings_bookmark_order_description),
         )
         OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onBookmarkResetClick,
-            title = stringResource(R.string.settings_bookmark_reset),
-            description = stringResource(R.string.settings_bookmark_reset_description),
+            title = stringResource(FeatureR.string.settings_bookmark_reset),
+            description = stringResource(FeatureR.string.settings_bookmark_reset_description),
         )
         OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onBackupRestoreClick,
-            title = stringResource(R.string.settings_bookmark_backup_restore),
-            description = stringResource(R.string.settings_bookmark_backup_restore_description),
+            title = stringResource(FeatureR.string.settings_bookmark_backup_restore),
+            description = stringResource(FeatureR.string.settings_bookmark_backup_restore_description),
         )
     }
 }
@@ -154,15 +155,15 @@ fun SearchCard(
         PreferenceItem(
             onClick = onInfoCatcherClick,
             title = stringResource(R.string.info_catcher),
-            description = stringResource(R.string.settings_info_catcher_description),
+            description = stringResource(FeatureR.string.settings_info_catcher_description),
             isSwitchChecked = isInfoCatcherEnabled,
             onSwitchToggle = onInfoCatcherChanged,
         )
         OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onFirebaseClick,
-            title = stringResource(R.string.settings_firebase),
-            description = stringResource(R.string.settings_firebase_description),
+            title = stringResource(FeatureR.string.settings_firebase),
+            description = stringResource(FeatureR.string.settings_firebase_description),
             isSwitchChecked = isFirebaseEnabled,
             onSwitchToggle = onFirebaseChanged,
         )
@@ -180,9 +181,15 @@ fun AboutCard(
     ) {
         PreferenceItem(onClick = onHelpClick, title = stringResource(R.string.help))
         OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
-        PreferenceItem(onClick = onAboutClick, title = stringResource(R.string.settings_about))
+        PreferenceItem(
+            onClick = onAboutClick,
+            title = stringResource(FeatureR.string.settings_about)
+        )
         OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
-        PreferenceItem(onClick = onInquiryClick, title = stringResource(R.string.settings_inquiry))
+        PreferenceItem(
+            onClick = onInquiryClick,
+            title = stringResource(FeatureR.string.settings_inquiry)
+        )
     }
 }
 

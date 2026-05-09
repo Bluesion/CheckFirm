@@ -26,6 +26,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.feature.home.ResultState
+import com.illusion.checkfirm.feature.home.R as FeatureR
 
 /**
  * Tip card shown on Home when the firmware fetch failed or returned nothing.
@@ -42,10 +43,10 @@ internal fun HomeErrorState(
 
     val (title, message) = when (state) {
         ResultState.NetworkError ->
-            stringResource(R.string.check_network) to stringResource(R.string.check_network_description)
+            stringResource(R.string.check_network) to stringResource(FeatureR.string.check_network_description)
 
         ResultState.Empty ->
-            stringResource(R.string.check_device) to stringResource(R.string.check_device_description)
+            stringResource(R.string.check_device) to stringResource(FeatureR.string.check_device_description)
 
         else -> return
     }
@@ -84,7 +85,7 @@ internal fun HomeErrorState(
                         onClick = {
                             context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
                         },
-                        label = { Text(stringResource(R.string.enable_wifi)) },
+                        label = { Text(stringResource(FeatureR.string.enable_wifi)) },
                         colors = AssistChipDefaults.assistChipColors(
                             labelColor = MaterialTheme.colorScheme.onSurface,
                         ),
@@ -93,7 +94,7 @@ internal fun HomeErrorState(
                         onClick = {
                             context.startActivity(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
                         },
-                        label = { Text(stringResource(R.string.data_settings)) },
+                        label = { Text(stringResource(FeatureR.string.data_settings)) },
                         colors = AssistChipDefaults.assistChipColors(
                             labelColor = MaterialTheme.colorScheme.onSurface,
                         ),

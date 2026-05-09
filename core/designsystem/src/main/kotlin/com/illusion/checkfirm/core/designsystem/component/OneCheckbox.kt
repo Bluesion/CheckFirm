@@ -5,12 +5,20 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +32,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
@@ -31,58 +40,50 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
 @Composable
 fun OneCheckbox(
-    checked: Boolean,
-    onCheckedChange: ((Boolean) -> Unit)?,
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     checkedColor: Color = MaterialTheme.colorScheme.primary,
     uncheckedColor: Color = MaterialTheme.colorScheme.outline,
     checkmarkColor: Color = MaterialTheme.colorScheme.onPrimary,
 ) {
     val color by animateColorAsState(
-        targetValue = if (checked) checkedColor else uncheckedColor,
+        targetValue = if (isChecked) checkedColor else uncheckedColor,
         animationSpec = tween(durationMillis = 200),
         label = "checkbox_color"
     )
 
     val checkFraction by animateFloatAsState(
-        targetValue = if (checked) 1f else 0f,
+        targetValue = if (isChecked) 1f else 0f,
         animationSpec = tween(durationMillis = 200),
         label = "checkbox_check_fraction"
     )
-
-    val toggleableModifier = if (onCheckedChange != null) {
-        Modifier.toggleable(
-            value = checked,
-            onValueChange = onCheckedChange,
-            role = Role.Checkbox,
-            interactionSource = remember { MutableInteractionSource() },
-            indication = ripple(
-                bounded = false,
-                radius = 20.dp
-            )
-        )
-    } else {
-        Modifier
-    }
 
     Canvas(
         modifier = modifier
             .wrapContentSize(Alignment.Center)
             .padding(2.dp)
             .requiredSize(20.dp)
-            .then(toggleableModifier)
+            .toggleable(
+                value = isChecked,
+                onValueChange = onCheckedChange,
+                role = Role.Checkbox,
+                interactionSource = remember { MutableInteractionSource() },
+                indication = ripple(
+                    bounded = false,
+                    radius = 20.dp
+                )
+            ),
     ) {
         val strokeWidth = 2.dp.toPx()
         val radius = size.minDimension / 2f - strokeWidth / 2f
 
-        // Draw border
         drawCircle(
             color = color,
             radius = radius,
             style = Stroke(width = strokeWidth)
         )
 
-        // Draw filled circle
         if (checkFraction > 0f) {
             drawCircle(
                 color = color,
@@ -90,13 +91,11 @@ fun OneCheckbox(
             )
         }
 
-        // Draw checkmark
         if (checkFraction > 0f) {
             val path = Path().apply {
                 val width = size.width
                 val height = size.height
 
-                // Scales from the SVG viewBox (24x24) to the current canvas size
                 val scaleX = width / 24f
                 val scaleY = height / 24f
 
@@ -134,6 +133,48 @@ fun OneCheckbox(
     }
 }
 
+@Composable
+fun OneCheckboxCard(
+    text: String,
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
+) {
+    OneCard(
+        modifier = modifier,
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            if (icon != null) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+
+            Text(
+                text = text,
+                modifier = Modifier.weight(1f),
+            )
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            OneCheckbox(
+                isChecked = isChecked,
+                onCheckedChange = onCheckedChange,
+            )
+        }
+    }
+}
+
 @ComponentPreview
 @Composable
 private fun OneCheckboxPreview() {
@@ -141,7 +182,22 @@ private fun OneCheckboxPreview() {
     CheckFirmTheme {
         Surface {
             OneCheckbox(
-                checked = isChecked,
+                isChecked = isChecked,
+                onCheckedChange = { isChecked = !isChecked },
+            )
+        }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun OneCheckboxCardPreview() {
+    var isChecked by remember { mutableStateOf(false) }
+    CheckFirmTheme {
+        Surface {
+            OneCheckboxCard(
+                text = "OneCheckboxCard",
+                isChecked = isChecked,
                 onCheckedChange = { isChecked = !isChecked },
             )
         }

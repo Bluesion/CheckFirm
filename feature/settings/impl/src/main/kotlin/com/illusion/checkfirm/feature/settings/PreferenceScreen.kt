@@ -27,6 +27,7 @@ import com.illusion.checkfirm.feature.settings.bookmark.BookmarkOrderDialog
 import com.illusion.checkfirm.feature.settings.language.LanguageDialog
 import com.illusion.checkfirm.feature.settings.profile.ProfileDialog
 import com.illusion.checkfirm.feature.settings.theme.ThemeDialog
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun PreferenceScreen(
@@ -115,7 +116,7 @@ fun PreferenceScreen(
                     } catch (_: ActivityNotFoundException) {
                         Toast.makeText(
                             context,
-                            context.getString(R.string.settings_inquiry_not_found_exception),
+                            context.getString(FeatureR.string.settings_inquiry_not_found_exception),
                             Toast.LENGTH_SHORT,
                         ).show()
                     }
@@ -160,8 +161,8 @@ fun PreferenceScreen(
         )
 
         PreferenceDialog.BookmarkReset -> OneAlertDialog(
-            title = stringResource(R.string.settings_bookmark_reset_dialog_title),
-            text = stringResource(R.string.settings_bookmark_reset_dialog_message),
+            title = stringResource(FeatureR.string.settings_bookmark_reset_dialog_title),
+            text = stringResource(FeatureR.string.settings_bookmark_reset_dialog_message),
             onConfirmButtonClick = {
                 onResetBookmarks()
                 onActiveDialogChange(PreferenceDialog.None)

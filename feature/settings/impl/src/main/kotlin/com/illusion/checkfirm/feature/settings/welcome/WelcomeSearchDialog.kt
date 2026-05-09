@@ -30,6 +30,7 @@ import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun WelcomeSearchDialog(
@@ -103,7 +104,7 @@ fun WelcomeSearchDialog(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {
-                Text(text = stringResource(R.string.add_item))
+                Text(text = stringResource(FeatureR.string.add_item))
             }
         }
     }

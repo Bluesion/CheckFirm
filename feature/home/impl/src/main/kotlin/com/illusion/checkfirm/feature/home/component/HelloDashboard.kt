@@ -24,6 +24,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneDivider
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.home.R as FeatureR
 
 @Composable
 internal fun HelloDashboard(
@@ -45,7 +46,7 @@ internal fun HelloDashboard(
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = stringResource(R.string.main_hello_title),
+            text = stringResource(FeatureR.string.home_hello_title),
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
@@ -53,7 +54,7 @@ internal fun HelloDashboard(
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = stringResource(R.string.main_hello_description),
+            text = stringResource(FeatureR.string.home_hello_description),
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onBackground,
@@ -63,14 +64,14 @@ internal fun HelloDashboard(
         OneCard {
             OneCardItem(
                 title = stringResource(R.string.search),
-                description = stringResource(R.string.main_hello_search_description),
+                description = stringResource(FeatureR.string.home_hello_search_description),
                 iconVector = OneIcons.OneuiSearch,
                 onClick = onSearchClick,
             )
             OneDivider()
             OneCardItem(
                 title = stringResource(R.string.bookmark),
-                description = stringResource(R.string.main_hello_bookmark_description),
+                description = stringResource(FeatureR.string.home_hello_bookmark_description),
                 iconVector = OneIcons.OneuiBookmark,
                 onClick = onBookmarkClick,
             )
@@ -84,14 +85,14 @@ internal fun HelloDashboard(
             OneDivider()
             OneCardItem(
                 title = stringResource(R.string.info_catcher),
-                description = stringResource(R.string.main_hello_info_catcher_description),
+                description = stringResource(FeatureR.string.home_hello_info_catcher_description),
                 iconVector = OneIcons.IcInfoCatcher,
                 onClick = onInfoCatcherClick,
             )
             OneDivider()
             OneCardItem(
                 title = stringResource(R.string.settings),
-                description = stringResource(R.string.main_hello_settings_description),
+                description = stringResource(FeatureR.string.home_hello_settings_description),
                 iconVector = OneIcons.OneuiSettings,
                 onClick = onSettingsClick,
             )

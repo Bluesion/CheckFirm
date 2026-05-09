@@ -1,0 +1,11 @@
+<resources>
+    <string name="report_description">ඔබගේ වාර්තාවට ස්තූතියි. මම සතියක් ඇතුළත ඔබේ වාර්තාව ඇතුළත් කරන බවට වග බලා ගන්නෙමි, එය දැනුම් දෙනු නොලැබේ. ඔබේ වාර්තාව අනුචිත නම්, එය නොසලකා හැරිය හැක. කරුණාකර පහත වාර්තා කිරීම සඳහා හේතුවක් තෝරන්න.</string>
+    <string name="report_detail">(විකල්ප) ඕනෑම විස්තරයක් ප්‍රයෝජනවත් වනු ඇත.</string>
+    <string name="report_fail">ඉදිරිපත් කිරීම අසාර්ථක විය.</string>
+    <string name="report_submit">ඉදිරිපත් කරන්න</string>
+    <string name="report_success">ඉදිරිපත් කිරීම සාර්ථක විය.</string>
+    <string name="report_type_1">ස්ථිරාංග තොරතුරු දෝෂය</string>
+    <string name="report_type_2">අනුචිත පරිශීලක නාමය</string>
+    <string name="report_type_3">ස්මාර්ට් සෙවුම් තොරතුරු දෝෂය</string>
+    <string name="report_type_4">වෙනත් දෝෂ</string>
+</resources>

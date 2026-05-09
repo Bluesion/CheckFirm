@@ -1,1 +1,13 @@
-<resources></resources>
+<resources>
+    <string name="home_category_dialog_description">빠른 검색바에 표시할 북마크 카테고리를 선택해주세요.</string>
+    <string name="home_hello_bookmark_description">북마크와 카테고리를 추가해보세요.</string>
+    <string name="home_hello_description">삼성 디바이스의 펌웨어 정보를 검색할 수 있어요. 아래 기능들을 확인해보세요.</string>
+    <string name="home_hello_info_catcher_description">새로운 펌웨어 알림을 받아보세요.</string>
+    <string name="home_hello_search_description">펌웨어 정보를 검색해보세요.</string>
+    <string name="home_hello_settings_description">더 많은 기능을 확인해보세요.</string>
+    <string name="home_hello_title">환영합니다!</string>
+    <string name="notification_permission_required_button_deny">거부</string>
+    <string name="notification_permission_required_button_grant">허용</string>
+    <string name="notification_permission_required_message">CheckFirm은 새로운 펌웨어가 발견되면 사용자에게 알림을 보내는 \'알리미\' 기능을 제공합니다. 해당 기능을 정상적으로 사용을 위해 알림 권한을 허용해주세요.</string>
+    <string name="notification_permission_required_title">권한 설정 필요</string>
+</resources>

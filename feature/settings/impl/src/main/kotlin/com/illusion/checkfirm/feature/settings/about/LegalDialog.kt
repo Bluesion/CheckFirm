@@ -22,20 +22,20 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
-import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 private val URL_PATTERN = Regex("https?://[^\\s]+")
 
 @Composable
 fun LegalDialog(onDismiss: () -> Unit) {
-    val rawText = stringResource(R.string.legal_text)
+    val rawText = stringResource(FeatureR.string.legal_text)
     val linked = remember(rawText) { rawText.linkify() }
 
     OneBottomSheetDialog(
-        title = stringResource(R.string.legal),
+        title = stringResource(FeatureR.string.legal),
         onDismiss = onDismiss,
     ) {
         Text(

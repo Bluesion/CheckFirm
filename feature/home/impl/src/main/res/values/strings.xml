@@ -1,1 +1,17 @@
-<resources></resources>
+<resources>
+    <string name="check_device_description">No firmware found for this device. Try a different model/CSC or enable Welcome Search devices in Settings.</string>
+    <string name="check_network_description">CheckFirm couldn\'t reach the firmware servers. Make sure Wi-Fi or mobile data is on, then tap a device to retry.</string>
+    <string name="data_settings">Mobile data</string>
+    <string name="enable_wifi">Enable Wi-Fi</string>
+    <string name="home_category_dialog_description">Select category you want to show in quick search bar.</string>
+    <string name="home_hello_bookmark_description">Add bookmarks and categories.</string>
+    <string name="home_hello_description">You can search for the firmware information of Samsung devices. Check the features below.</string>
+    <string name="home_hello_info_catcher_description">Do not miss newfound firmware.</string>
+    <string name="home_hello_search_description">Search firmware information.</string>
+    <string name="home_hello_settings_description">More features are waiting.</string>
+    <string name="home_hello_title">Welcome to CheckFirm!</string>
+    <string name="notification_permission_required_button_deny">Deny</string>
+    <string name="notification_permission_required_button_grant">Grant</string>
+    <string name="notification_permission_required_message">CheckFirm provides Info Catcher, which alerts you when there is a newfound firmware. To use this feature, you should grant notification permission.</string>
+    <string name="notification_permission_required_title">Permission required</string>
+</resources>

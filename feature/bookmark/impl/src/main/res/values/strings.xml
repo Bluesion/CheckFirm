@@ -1,2 +1,10 @@
 <resources>
+    <string name="bookmark_edit">Edit bookmark</string>
+    <string name="bookmark_name">Bookmark name</string>
+    <string name="bookmark_new">New bookmark</string>
+    <string name="category_edit_devices_title">Devices</string>
+    <string name="category_edit_name">Category name</string>
+    <string name="category_edit_name_error_all">Category name cannot be All.</string>
+    <string name="category_edit_name_error_empty">Category name should not be empty.</string>
+    <string name="search_no_category">No category</string>
 </resources>

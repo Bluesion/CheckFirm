@@ -1,0 +1,9 @@
+<resources>
+    <string name="bookmark_edit">Редактировать закладку</string>
+    <string name="bookmark_name">Название закладки</string>
+    <string name="bookmark_new">Новая закладка</string>
+    <string name="category_edit_devices_title">Устройства</string>
+    <string name="category_edit_name">Название категории</string>
+    <string name="category_edit_name_error_all">Название категории не может быть «Все».</string>
+    <string name="category_edit_name_error_empty">Название категории не должно быть пустым!</string>
+</resources>

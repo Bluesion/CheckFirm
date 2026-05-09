@@ -1,0 +1,21 @@
+<resources>
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_manual_description">Nyní jste detektiv, který luští šifrované informace o firmwaru! Pokuste se dešifrovat zadáním hodnot do každého pole.</string>
+    <string name="sherlock_result_fail">Dekódování selhalo. Můžete to zkusit znovu změnou hodnoty.</string>
+    <string name="sherlock_result_success">Gratulujeme! Rozluštili jste šifrované informace o firmwaru.</string>
+    <string name="sherlock_script_description">Vše, co musíte udělat, je zadat počáteční a koncovou hodnotu. Skript Sherlock se pokusí najít dešifrované informace o firmwaru se všemi daty mezi počáteční a koncovou hodnotou. Mějte na paměti, že pokud je rozdíl mezi počáteční a koncovou hodnotou příliš velký, aplikace se může kvůli přetížení vynuceně ukončit.</string>
+    <string name="sherlock_script_end_value">Konec</string>
+    <string name="sherlock_script_error_1">Zavaděč: počáteční hodnota je větší než koncová hodnota.</string>
+    <string name="sherlock_script_error_3">Verze One UI: počáteční hodnota je větší než koncová hodnota.</string>
+    <string name="sherlock_script_error_4">Rok: počáteční hodnota je větší než koncová hodnota.</string>
+    <string name="sherlock_script_error_5">Měsíc: počáteční hodnota je větší než koncová hodnota.</string>
+    <string name="sherlock_script_error_6">Revize: počáteční hodnota je větší než koncová hodnota.</string>
+    <string name="sherlock_script_error_7">Něco je špatně s počáteční hodnotou.</string>
+    <string name="sherlock_script_error_8">Něco je špatně s koncovou hodnotou.</string>
+    <string name="sherlock_script_no_error">Zdá se, že žádná chyba není.\nPřipraveno k použití!</string>
+    <string name="sherlock_script_running">Skript se spouští…\nNeopouštějte tuto obrazovku.</string>
+    <string name="sherlock_script_start">Spustit skript</string>
+    <string name="sherlock_script_start_value">Začátek</string>
+    <string name="sherlock_tab_manual">Manuál</string>
+    <string name="sherlock_tab_script">Skript</string>
+</resources>

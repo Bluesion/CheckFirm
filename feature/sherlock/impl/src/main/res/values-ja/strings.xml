@@ -1,0 +1,21 @@
+<resources>
+    <string name="sherlock">シャーロック</string>
+    <string name="sherlock_manual_description">あなたは今、暗号化されたファームウェア情報を解読する探偵です！各フィールドに値を入力して解読してみてください。</string>
+    <string name="sherlock_result_fail">復号化に失敗しました。値を変更して再試行できます。</string>
+    <string name="sherlock_result_success">おめでとうございます！暗号化されたファームウェア情報を解読しました。</string>
+    <string name="sherlock_script_description">開始値と終了値の入力だけで済みます。シャーロック スクリプトは、開始値と終了値の間のすべてのデータを使用して解読されたファームウェア情報を検索しようとします。開始値と終了値の差が大きすぎると、過負荷によりアプリが強制終了する可能性があることに注意してください。</string>
+    <string name="sherlock_script_end_value">終了</string>
+    <string name="sherlock_script_error_1">ブートローダー: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_3">One UIバージョン: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_4">年: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_5">月: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_6">リビジョン: 開始値が終了値より大きいです。</string>
+    <string name="sherlock_script_error_7">開始値に問題があります。</string>
+    <string name="sherlock_script_error_8">終了値に問題があります。</string>
+    <string name="sherlock_script_no_error">エラーはないようです。\n準備完了！</string>
+    <string name="sherlock_script_running">スクリプトを実行中…\nこの画面を終了しないでください。</string>
+    <string name="sherlock_script_start">スクリプトを開始</string>
+    <string name="sherlock_script_start_value">開始</string>
+    <string name="sherlock_tab_manual">マニュアル</string>
+    <string name="sherlock_tab_script">スクリプト</string>
+</resources>
