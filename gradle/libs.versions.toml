@@ -7,6 +7,7 @@ angusActivation = "2.0.3"
 appcompat = "1.7.1"
 composeBom = "2026.05.00"
 core = "1.18.0"
+haze = "2.0.0-alpha02"
 coreSplashscreen = "1.2.0"
 datastore = "1.2.1"
 fcm = "24.1.2"
@@ -55,6 +56,8 @@ firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", ve
 google-accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistPermissions" }
 google-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 google-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+haze = { group = "dev.chrisbanes.haze", name = "haze", version.ref = "haze" }
+haze-blur = { group = "dev.chrisbanes.haze", name = "haze-blur", version.ref = "haze" }
 jakarta-activation = { group = "jakarta.activation", name = "jakarta.activation-api", version.ref = "jakartaActivation" }
 kotlin-metadata-jvm = { group = "org.jetbrains.kotlin", name = "kotlin-metadata-jvm", version.ref = "kotlin" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
@@ -94,6 +97,7 @@ androidx-navigation3 = ["androidx-navigation3-runtime", "androidx-navigation3-ui
 angus = ["angus", "angus-activation", "jakarta-activation"]
 data = ["datastore", "kotlinx-serialization-json", "room", "room-ktx"]
 firebase = ["fcm", "firestore"]
+haze = ["haze", "haze-blur"]
 hilt = ["androidx-hilt-lifecycle-viewmodel-compose", "google-hilt-android"]
 hilt-compiler = ["google-hilt-compiler", "kotlin-metadata-jvm"]
 ktor = ["ktor-client-android", "ktor-client-content-negotiation", "ktor-client-core", "ktor-client-logging", "ktor-serialization-kotlinx-json", "ktor-serialization-kotlinx-xml", "slf4j-android"]

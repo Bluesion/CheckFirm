@@ -1,16 +1,11 @@
 package com.illusion.checkfirm.feature.settings
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.core.designsystem.base.bounceClick
 import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.component.OneDivider
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
@@ -33,16 +29,13 @@ fun ProfileCard(
     profileName: String = "Unknown",
     onClick: () -> Unit,
 ) {
-    Card(
+    OneCard(
         modifier = Modifier.fillMaxWidth(),
-        onClick = onClick,
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .bounceClick { onClick() }
                 .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -83,20 +76,19 @@ fun AppearanceCard(
 ) {
     OneCard(
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(0.dp),
     ) {
         PreferenceItem(
             onClick = onThemeClick,
             title = stringResource(R.string.settings_theme),
             description = stringResource(R.string.settings_theme_description),
         )
-        SettingsDivider()
+        OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onLanguageClick,
             title = stringResource(R.string.settings_language),
             description = stringResource(R.string.settings_language_description),
         )
-        SettingsDivider()
+        OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onQuickSearchBarClick,
             title = stringResource(R.string.settings_quick_search_bar),
@@ -115,20 +107,19 @@ fun BookmarkCard(
 ) {
     OneCard(
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(0.dp),
     ) {
         PreferenceItem(
             onClick = onBookmarkOrderClick,
             title = stringResource(R.string.settings_bookmark_order),
             description = stringResource(R.string.settings_bookmark_order_description),
         )
-        SettingsDivider()
+        OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onBookmarkResetClick,
             title = stringResource(R.string.settings_bookmark_reset),
             description = stringResource(R.string.settings_bookmark_reset_description),
         )
-        SettingsDivider()
+        OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onBackupRestoreClick,
             title = stringResource(R.string.settings_bookmark_backup_restore),
@@ -151,7 +142,6 @@ fun SearchCard(
 ) {
     OneCard(
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(0.dp),
     ) {
         PreferenceItem(
             onClick = onWelcomeSearchClick,
@@ -160,7 +150,7 @@ fun SearchCard(
             isSwitchChecked = isWelcomeSearchEnabled,
             onSwitchToggle = onWelcomeSearchChanged,
         )
-        SettingsDivider()
+        OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onInfoCatcherClick,
             title = stringResource(R.string.info_catcher),
@@ -168,7 +158,7 @@ fun SearchCard(
             isSwitchChecked = isInfoCatcherEnabled,
             onSwitchToggle = onInfoCatcherChanged,
         )
-        SettingsDivider()
+        OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(
             onClick = onFirebaseClick,
             title = stringResource(R.string.settings_firebase),
@@ -187,19 +177,13 @@ fun AboutCard(
 ) {
     OneCard(
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(0.dp),
     ) {
         PreferenceItem(onClick = onHelpClick, title = stringResource(R.string.help))
-        SettingsDivider()
+        OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(onClick = onAboutClick, title = stringResource(R.string.settings_about))
-        SettingsDivider()
+        OneDivider(modifier = Modifier.padding(horizontal = 12.dp))
         PreferenceItem(onClick = onInquiryClick, title = stringResource(R.string.settings_inquiry))
     }
-}
-
-@Composable
-private fun SettingsDivider() {
-    OneDivider(modifier = Modifier.padding(horizontal = 14.dp))
 }
 
 @Composable
@@ -213,7 +197,7 @@ private fun PreferenceItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() }
+            .bounceClick { onClick() }
             .padding(14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {

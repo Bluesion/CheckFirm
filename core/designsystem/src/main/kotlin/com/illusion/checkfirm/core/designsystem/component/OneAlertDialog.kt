@@ -1,6 +1,5 @@
 package com.illusion.checkfirm.core.designsystem.component
 
-import android.content.Context
 import android.os.Build
 import android.view.Gravity
 import android.view.WindowManager
@@ -13,23 +12,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,9 +30,9 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import java.util.function.Consumer
-
-private val DialogBlurRadius = 48.dp
+import com.illusion.checkfirm.core.designsystem.theme.LocalHazeState
+import dev.chrisbanes.haze.blur.blurEffect
+import dev.chrisbanes.haze.hazeEffect
 
 @Composable
 fun OneAlertDialog(
@@ -60,33 +50,22 @@ fun OneAlertDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         val dialogWindow = (LocalView.current.parent as? DialogWindowProvider)?.window
-        val blurActive = rememberCrossWindowBlurEnabled()
-        val backgroundColor = if (blurActive) {
-            CheckFirmTheme.colors.dialogBackgroundBlurred
-        } else {
-            CheckFirmTheme.colors.dialogBackground
-        }
-        val blurRadiusPx = with(LocalDensity.current) { DialogBlurRadius.toPx() }.toInt()
         SideEffect {
             dialogWindow?.setGravity(Gravity.BOTTOM)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                dialogWindow?.setBackgroundBlurRadius(if (blurActive) blurRadiusPx else 0)
+            if (Build.VERSION.SDK_INT >= 31) {
+                dialogWindow?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
             }
         }
-        Surface(
-            shape = RoundedCornerShape(size = 28.dp),
-            color = backgroundColor,
-            contentColor = MaterialTheme.colorScheme.onSurface,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = horizontalPadding)
-                .padding(bottom = 12.dp),
+
+        AlertDialogSurface(
+            modifier = modifier,
+            horizontalPadding = horizontalPadding,
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp)
-                    .padding(top = 24.dp, bottom = 8.dp),
+                    .padding(top = 24.dp, bottom = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Column(
@@ -114,36 +93,20 @@ fun OneAlertDialog(
                         .height(IntrinsicSize.Min),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    TextButton(
+                    OneDialogTextButton(
                         onClick = onDismissButtonClick,
+                        text = dismissButtonText,
                         modifier = Modifier.weight(1f),
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = MaterialTheme.colorScheme.onSurface,
-                        ),
-                    ) {
-                        Text(
-                            text = dismissButtonText,
-                            fontWeight = FontWeight.ExtraBold,
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                    }
+                    )
                     VerticalDivider(
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(12.dp),
                         color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
                     )
-                    TextButton(
+                    OneDialogTextButton(
                         onClick = onConfirmButtonClick,
+                        text = confirmButtonText,
                         modifier = Modifier.weight(1f),
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = MaterialTheme.colorScheme.onSurface,
-                        ),
-                    ) {
-                        Text(
-                            text = confirmButtonText,
-                            fontWeight = FontWeight.ExtraBold,
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                    }
+                    )
                 }
             }
         }
@@ -151,19 +114,40 @@ fun OneAlertDialog(
 }
 
 @Composable
-private fun rememberCrossWindowBlurEnabled(): Boolean {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return false
-    val context = LocalContext.current
-    val windowManager = remember(context) {
-        context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+private fun AlertDialogSurface(
+    modifier: Modifier,
+    horizontalPadding: Dp,
+    content: @Composable (() -> Unit),
+) {
+    val shape = RoundedCornerShape(size = 28.dp)
+    val hazeState = LocalHazeState.current
+    // Haze가 연결돼 있을 때만 frosted glass; 아니면 평소처럼 불투명 배경.
+    val surfaceColor = if (hazeState != null) {
+        CheckFirmTheme.colors.dialogBackground.copy(alpha = 0.3f)
+    } else {
+        CheckFirmTheme.colors.dialogBackground
     }
-    var enabled by remember(windowManager) { mutableStateOf(windowManager.isCrossWindowBlurEnabled) }
-    DisposableEffect(windowManager) {
-        val listener = Consumer<Boolean> { enabled = it }
-        windowManager.addCrossWindowBlurEnabledListener(listener)
-        onDispose { windowManager.removeCrossWindowBlurEnabledListener(listener) }
+    val baseModifier = modifier
+        .fillMaxWidth()
+        .padding(horizontal = horizontalPadding)
+        .padding(bottom = 12.dp)
+    val surfaceModifier = if (hazeState != null) {
+        baseModifier.hazeEffect(state = hazeState) {
+            blurEffect {
+                blurRadius = 20.dp
+            }
+        }
+    } else {
+        baseModifier
     }
-    return enabled
+    Surface(
+        shape = shape,
+        color = surfaceColor,
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        modifier = surfaceModifier,
+    ) {
+        content()
+    }
 }
 
 @ComponentPreview

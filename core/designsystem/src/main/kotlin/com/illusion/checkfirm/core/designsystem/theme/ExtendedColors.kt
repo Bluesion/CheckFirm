@@ -23,7 +23,6 @@ data class ExtendedColors(
     val menuPopupBackground: Color,
     val menuPopupStroke: Color,
     val dialogBackground: Color,
-    val dialogBackgroundBlurred: Color,
 )
 
 val LightExtendedColors = ExtendedColors(
@@ -44,7 +43,6 @@ val LightExtendedColors = ExtendedColors(
     menuPopupBackground = Color(0xFFFCFCFC),
     menuPopupStroke = Color(0xFFFCFCFC),
     dialogBackground = Color(0xFFFCFCFF),
-    dialogBackgroundBlurred = Color(0xFFFCFCFF).copy(alpha = 0.5f),
 )
 
 val DarkExtendedColors = ExtendedColors(
@@ -65,7 +63,6 @@ val DarkExtendedColors = ExtendedColors(
     menuPopupBackground = Color(0xFF252525),
     menuPopupStroke = Color(0xFF252525),
     dialogBackground = Color(0xFF17171A),
-    dialogBackgroundBlurred = Color(0xFF17171A).copy(alpha = 0.6f),
 )
 
 val LocalExtendedColors = staticCompositionLocalOf { LightExtendedColors }

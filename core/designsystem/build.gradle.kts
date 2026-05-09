@@ -40,5 +40,6 @@ kotlin {
 dependencies {
     api(platform(libs.androidx.compose.bom))
     api(libs.bundles.androidx.compose)
+    implementation(libs.bundles.haze)
     debugApi(libs.androidx.compose.ui.tooling)
 }

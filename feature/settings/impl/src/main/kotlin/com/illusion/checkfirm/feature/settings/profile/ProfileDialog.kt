@@ -1,4 +1,3 @@
-
 package com.illusion.checkfirm.feature.settings.profile
 
 import androidx.compose.foundation.layout.Row
@@ -6,11 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
+import com.illusion.checkfirm.core.designsystem.component.OneDialogTextButton
 import com.illusion.checkfirm.core.designsystem.component.OneEditText
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
@@ -46,26 +42,23 @@ fun ProfileDialog(
 
         Spacer(Modifier.height(16.dp))
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            OutlinedButton(
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            OneDialogTextButton(
                 onClick = onDismiss,
+                text = stringResource(android.R.string.cancel),
                 modifier = Modifier.weight(1f),
-                shape = RoundedCornerShape(22.dp),
-            ) {
-                Text(text = stringResource(android.R.string.cancel))
-            }
+            )
             Spacer(Modifier.width(8.dp))
-            Button(
+            OneDialogTextButton(
                 onClick = {
-                    // XML behavior: blank → "Unknown" sentinel
                     onConfirm(name.ifBlank { "Unknown" })
                     onDismiss()
                 },
+                text = stringResource(R.string.bookmark_save),
                 modifier = Modifier.weight(1f),
-                shape = RoundedCornerShape(22.dp),
-            ) {
-                Text(text = stringResource(R.string.bookmark_save))
-            }
+            )
         }
     }
 }
