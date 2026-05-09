@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.forceupdate.R as FeatureR
 
 @Composable
 fun ForceUpdateScreen(
@@ -44,13 +45,13 @@ fun ForceUpdateScreen(
             )
             Spacer(Modifier.height(16.dp))
             Text(
-                text = stringResource(R.string.outdated_title),
+                text = stringResource(FeatureR.string.outdated_title),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold
             )
             Spacer(Modifier.height(16.dp))
             Text(
-                text = stringResource(R.string.outdated_description),
+                text = stringResource(FeatureR.string.outdated_description),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center
             )

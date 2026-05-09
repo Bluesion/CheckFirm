@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_category_dialog_description">選擇要在快速搜尋列中顯示的類別。</string>
+    <string name="home_hello_bookmark_description">新增書籤和類別。</string>
+    <string name="home_hello_description">您可以搜尋三星裝置的韌體資訊。請查看以下功能。</string>
+    <string name="home_hello_info_catcher_description">不要錯過新找到的韌體。</string>
+    <string name="home_hello_search_description">搜尋韌體資訊。</string>
+    <string name="home_hello_settings_description">更多功能等著您。</string>
+    <string name="home_hello_title">歡迎來到 CheckFirm！</string>
+    <string name="notification_permission_required_button_deny">拒絕</string>
+    <string name="notification_permission_required_button_grant">授予</string>
+    <string name="notification_permission_required_message">CheckFirm 提供 Info Catcher，當找到新韌體時會通知您。若要使用此功能，您必須授予通知權限。</string>
+    <string name="notification_permission_required_title">需要權限</string>
+</resources>

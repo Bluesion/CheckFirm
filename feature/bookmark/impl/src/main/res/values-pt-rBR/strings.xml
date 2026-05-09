@@ -1,0 +1,9 @@
+<resources>
+    <string name="bookmark_edit">Editar Favorito</string>
+    <string name="bookmark_name">Nome do Favorito</string>
+    <string name="bookmark_new">Novo Favorito</string>
+    <string name="category_edit_devices_title">Dispositivos</string>
+    <string name="category_edit_name">Nome da Categoria</string>
+    <string name="category_edit_name_error_all">O nome da categoria não pode ser Todos.</string>
+    <string name="category_edit_name_error_empty">O nome da categoria não pode estar vazio!</string>
+</resources>

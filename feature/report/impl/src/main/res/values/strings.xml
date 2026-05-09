@@ -1,2 +1,11 @@
 <resources>
+    <string name="report_description">Thank you for your report. I will make sure to incorporate your report within a week and it will not be notified. If your report is inappropriate, it could be ignored. Please select a reason for reporting below.</string>
+    <string name="report_detail">(Optional) Any details will be helpful.</string>
+    <string name="report_fail">Submit failed.</string>
+    <string name="report_submit">Submit</string>
+    <string name="report_success">Submit succeeded.</string>
+    <string name="report_type_1">Firmware information error</string>
+    <string name="report_type_2">Inappropriate username</string>
+    <string name="report_type_3">Smart Search information error</string>
+    <string name="report_type_4">Other errors</string>
 </resources>

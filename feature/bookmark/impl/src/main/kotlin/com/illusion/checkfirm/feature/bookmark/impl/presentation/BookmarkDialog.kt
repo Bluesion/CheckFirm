@@ -34,6 +34,7 @@ import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.feature.bookmark.R as FeatureR
 
 @Composable
 fun BookmarkDialog(
@@ -54,7 +55,7 @@ fun BookmarkDialog(
 
     OneBottomSheetDialog(
         title = stringResource(
-            if (initial == null) R.string.bookmark_new else R.string.bookmark_edit,
+            if (initial == null) FeatureR.string.bookmark_new else FeatureR.string.bookmark_edit,
         ),
         onDismiss = onDismiss,
     ) {
@@ -65,7 +66,7 @@ fun BookmarkDialog(
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
-                label = { Text(stringResource(R.string.bookmark_name)) },
+                label = { Text(stringResource(FeatureR.string.bookmark_name)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
             )

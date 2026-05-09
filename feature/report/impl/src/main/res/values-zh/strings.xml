@@ -1,0 +1,11 @@
+<resources>
+    <string name="report_description">感谢您的报告。我将在一周内纳入您的报告，并且不会通知您。如果您的报告不当，可能会被忽略。请选择以下报告原因。</string>
+    <string name="report_detail">(可选) 任何细节都会有帮助。</string>
+    <string name="report_fail">提交失败。</string>
+    <string name="report_submit">提交</string>
+    <string name="report_success">提交成功。</string>
+    <string name="report_type_1">固件信息错误</string>
+    <string name="report_type_2">不当用户名</string>
+    <string name="report_type_3">智能搜索信息错误</string>
+    <string name="report_type_4">其他错误</string>
+</resources>

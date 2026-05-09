@@ -1,0 +1,21 @@
+<resources>
+    <string name="sherlock">Шерлок</string>
+    <string name="sherlock_manual_description">Теперь вы детектив, который расшифровывает зашифрованную информацию о прошивке! Попробуйте расшифровать, вводя значения в каждое поле.</string>
+    <string name="sherlock_result_fail">Расшифровка не удалась. Вы можете попробовать снова, изменив значение.</string>
+    <string name="sherlock_result_success">Поздравляем! Вы расшифровали зашифрованную информацию о прошивке.</string>
+    <string name="sherlock_script_description">Все, что вам нужно сделать, это ввести начальное и конечное значение. Скрипт Шерлока попытается найти расшифрованную информацию о прошивке со всеми данными между начальным и конечным значением. Обратите внимание, что если разница между начальным и конечным значением слишком велика, приложение может быть принудительно закрыто из-за перегрузки.</string>
+    <string name="sherlock_script_end_value">Конец</string>
+    <string name="sherlock_script_error_1">Загрузчик: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_3">Версия One UI: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_4">Год: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_5">Месяц: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_6">Ревизия: начальное значение больше конечного.</string>
+    <string name="sherlock_script_error_7">Что-то не так с начальным значением.</string>
+    <string name="sherlock_script_error_8">Что-то не так с конечным значением.</string>
+    <string name="sherlock_script_no_error">Похоже, ошибок нет.\nГотовы к работе!</string>
+    <string name="sherlock_script_running">Скрипт выполняется…\nНе покидайте этот экран.</string>
+    <string name="sherlock_script_start">Запустить скрипт</string>
+    <string name="sherlock_script_start_value">Начало</string>
+    <string name="sherlock_tab_manual">Руководство</string>
+    <string name="sherlock_tab_script">Скрипт</string>
+</resources>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_category_dialog_description">选择要在快速搜索栏中显示的类别。</string>
+    <string name="home_hello_bookmark_description">添加书签和类别。</string>
+    <string name="home_hello_description">您可以搜索三星设备固件信息。查看以下功能。</string>
+    <string name="home_hello_info_catcher_description">不要错过新找到的固件。</string>
+    <string name="home_hello_search_description">搜索固件信息。</string>
+    <string name="home_hello_settings_description">更多功能等待您。</string>
+    <string name="home_hello_title">欢迎来到 CheckFirm！</string>
+    <string name="notification_permission_required_button_deny">拒绝</string>
+    <string name="notification_permission_required_button_grant">授予</string>
+    <string name="notification_permission_required_message">CheckFirm 提供 Info Catcher，当找到新固件时会通知您。要使用此功能，您必须授予通知权限。</string>
+    <string name="notification_permission_required_title">需要权限</string>
+</resources>

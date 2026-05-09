@@ -26,6 +26,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneNavButton
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun BackupRestoreScreen(
@@ -35,7 +36,7 @@ fun BackupRestoreScreen(
     onNavigateBack: () -> Unit,
 ) {
     OneScaffold(
-        title = stringResource(R.string.settings_bookmark_backup_restore),
+        title = stringResource(FeatureR.string.settings_bookmark_backup_restore),
         navigationIcon = {
             OneNavButton(icon = OneIcons.IcBack, onClick = onNavigateBack)
         },
@@ -48,7 +49,7 @@ fun BackupRestoreScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = stringResource(R.string.settings_bookmark_backup_restore_description),
+                text = stringResource(FeatureR.string.settings_bookmark_backup_restore_description),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center,
@@ -65,7 +66,7 @@ fun BackupRestoreScreen(
                         modifier = Modifier.size(48.dp),
                     )
                     Text(
-                        text = stringResource(R.string.backup),
+                        text = stringResource(FeatureR.string.backup),
                         color = MaterialTheme.colorScheme.onBackground,
                     )
                 }
@@ -96,7 +97,7 @@ fun BackupRestoreScreen(
                         modifier = Modifier.size(48.dp),
                     )
                     Text(
-                        text = stringResource(R.string.restore),
+                        text = stringResource(FeatureR.string.restore),
                         color = MaterialTheme.colorScheme.onBackground,
                     )
                 }

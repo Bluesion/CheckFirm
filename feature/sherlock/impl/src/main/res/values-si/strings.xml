@@ -1,0 +1,21 @@
+<resources>
+    <string name="sherlock">ෂර්ලොක්</string>
+    <string name="sherlock_manual_description">දැන් ඔබ ස්ථිරාංගයේ ගුප්ත තොරතුරු විකේතනය කරන අනාවරක කෙනෙකි! සෑම ක්ෂේත්‍රයකම අගයන් ඇතුළත් කිරීමෙන් විකේතනය කිරීමට උත්සාහ කරන්න.</string>
+    <string name="sherlock_result_fail">විකේතනය අසාර්ථක විය. ඔබ අගය වෙනස් කිරීමෙන් නැවත උත්සාහ කළ හැකිය.</string>
+    <string name="sherlock_result_success">සුභ පැතුම්! ඔබ ස්ථිරාංගයේ ගුප්ත තොරතුරු විකේතනය කර ඇත.</string>
+    <string name="sherlock_script_description">ඔබ කළ යුත්තේ ආරම්භක සහ අවසන් අගය ඇතුළත් කිරීම පමණි. ෂර්ලොක් ස්ක්‍රිප්ට් ආරම්භක සහ අවසන් අගය අතර ඇති සියලුම දත්ත සමඟ විකේතනය කරන ලද ස්ථිරාංග තොරතුරු සොයා ගැනීමට උත්සාහ කරනු ඇත. කරුණාකර සටහන් කරන්න, ආරම්භක අගය සහ අවසන් අගය අතර වෙනස ඉතා විශාල නම්, අධික බර නිසා යෙදුම බලහත්කාරයෙන් වසා දැමිය හැකිය.</string>
+    <string name="sherlock_script_end_value">අවසන්</string>
+    <string name="sherlock_script_error_1">බූට්ලෝඩරය: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_3">One UI අනුවාදය: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_4">වසර: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_5">මාසය: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_6">සංශෝධනය: ආරම්භක අගය අවසන් අගයට වඩා වැඩිය.</string>
+    <string name="sherlock_script_error_7">ආරම්භක අගයෙහි යමක් වැරදිය.</string>
+    <string name="sherlock_script_error_8">අවසන් අගයෙහි යමක් වැරදිය.</string>
+    <string name="sherlock_script_no_error">කිසිදු දෝෂයක් නොමැති බව පෙනේ.\nයාමට සූදානම්!</string>
+    <string name="sherlock_script_running">ස්ක්‍රිප්ට් ධාවනය වෙමින් පවතී…\nමෙම තිරයෙන් පිට නොවන්න.</string>
+    <string name="sherlock_script_start">ස්ක්‍රිප්ට් ආරම්භ කරන්න</string>
+    <string name="sherlock_script_start_value">ආරම්භය</string>
+    <string name="sherlock_tab_manual">අත්පොත</string>
+    <string name="sherlock_tab_script">ස්ක්‍රිප්ට්</string>
+</resources>

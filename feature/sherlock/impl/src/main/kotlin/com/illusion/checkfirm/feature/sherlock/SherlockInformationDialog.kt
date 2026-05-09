@@ -12,10 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.sherlock.R as FeatureR
 
 /**
  * Replaces the legacy SherlockInformationDialog. Shows a brief explanation of
@@ -24,17 +24,17 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 @Composable
 internal fun SherlockInformationDialog(onDismiss: () -> Unit) {
     OneBottomSheetDialog(
-        title = stringResource(R.string.sherlock),
+        title = stringResource(FeatureR.string.sherlock),
         onDismiss = onDismiss,
     ) {
         Text(
-            text = stringResource(R.string.sherlock_manual_description),
+            text = stringResource(FeatureR.string.sherlock_manual_description),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Spacer(Modifier.height(12.dp))
         Text(
-            text = stringResource(R.string.sherlock_script_description),
+            text = stringResource(FeatureR.string.sherlock_script_description),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

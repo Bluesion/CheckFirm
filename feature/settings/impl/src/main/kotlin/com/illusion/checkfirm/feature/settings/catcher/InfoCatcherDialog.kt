@@ -29,6 +29,7 @@ import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun InfoCatcherDialog(
@@ -102,7 +103,7 @@ fun InfoCatcherDialog(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {
-                Text(stringResource(R.string.add_item))
+                Text(stringResource(FeatureR.string.add_item))
             }
         }
     }

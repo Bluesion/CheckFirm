@@ -1,0 +1,21 @@
+<resources>
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_manual_description">Acum sunteți un detectiv care decodifică informațiile criptate ale firmware-ului! Încercați să decodificați introducând valori în fiecare câmp.</string>
+    <string name="sherlock_result_fail">Decodificarea a eșuat. Puteți încerca din nou schimbând valoarea.</string>
+    <string name="sherlock_result_success">Felicitări! Ați decodat informațiile criptate ale firmware-ului.</string>
+    <string name="sherlock_script_description">Tot ce trebuie să faceți este să introduceți valoarea de început și de sfârșit. Scriptul Sherlock va încerca să găsească informații despre firmware decodificate cu toate datele dintre valoarea de început și cea de sfârșit. Vă rugăm să rețineți că, dacă diferența dintre valoarea de început și valoarea de sfârșit este prea mare, aplicația se poate închide forțat din cauza suprasolicitării.</string>
+    <string name="sherlock_script_end_value">Sfârșit</string>
+    <string name="sherlock_script_error_1">Bootloader: valoarea de început este mai mare decât valoarea de sfârșit.</string>
+    <string name="sherlock_script_error_3">Versiune One UI: valoarea de început este mai mare decât valoarea de sfârșit.</string>
+    <string name="sherlock_script_error_4">An: valoarea de început este mai mare decât valoarea de sfârșit.</string>
+    <string name="sherlock_script_error_5">Lună: valoarea de început este mai mare decât valoarea de sfârșit.</string>
+    <string name="sherlock_script_error_6">Revizie: valoarea de început este mai mare decât valoarea de sfârșit.</string>
+    <string name="sherlock_script_error_7">Ceva nu este în regulă cu valoarea de început.</string>
+    <string name="sherlock_script_error_8">Ceva nu este în regulă cu valoarea de sfârșit.</string>
+    <string name="sherlock_script_no_error">Se pare că nu există nicio eroare.\nGata de plecare!</string>
+    <string name="sherlock_script_running">Scriptul rulează…\nNu părăsiți acest ecran.</string>
+    <string name="sherlock_script_start">Pornește scriptul</string>
+    <string name="sherlock_script_start_value">Început</string>
+    <string name="sherlock_tab_manual">Manual</string>
+    <string name="sherlock_tab_script">Script</string>
+</resources>

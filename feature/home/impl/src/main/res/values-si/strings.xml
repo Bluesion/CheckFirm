@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_category_dialog_description">ඉක්මන් සෙවුම් තීරුවේ පෙන්වීමට අවශ්‍ය ප්‍රවර්ගය තෝරන්න.</string>
+    <string name="home_hello_bookmark_description">Bookmaks සහ ප්‍රවර්ග එක් කරන්න.</string>
+    <string name="home_hello_description">ඔබට Samsung උපාංග සඳහා ස්ථිරාංග තොරතුරු සෙවිය හැක. පහත විශේෂාංග බලන්න.</string>
+    <string name="home_hello_info_catcher_description">නව ස්ථිරාංගය අතපසු නොකරන්න.</string>
+    <string name="home_hello_search_description">ස්ථිරාංග තොරතුරු සොයන්න.</string>
+    <string name="home_hello_settings_description">තවත් විශේෂාංග බලා සිටී.</string>
+    <string name="home_hello_title">CheckFirm වෙත සාදරයෙන් පිළිගනිමු!</string>
+    <string name="notification_permission_required_button_deny">ප්‍රතික්ෂේප කරන්න</string>
+    <string name="notification_permission_required_button_grant">ප්‍රදානය කරන්න</string>
+    <string name="notification_permission_required_message">CheckFirm විසින් Info Catcher සපයයි, එය නව ස්ථිරාංගයක් සොයාගත් විට ඔබට දැනුම් දෙයි. මෙම අංගය භාවිතා කිරීමට, ඔබ දැනුම්දීම් අවසරය ලබා දිය යුතුය.</string>
+    <string name="notification_permission_required_title">අවසරය අවශ්‍යයි</string>
+</resources>

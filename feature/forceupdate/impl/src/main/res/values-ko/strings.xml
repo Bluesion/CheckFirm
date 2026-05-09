@@ -1,0 +1,4 @@
+<resources>
+    <string name="outdated_description">현재 버전은 더 이상 지원되지 않습니다. 안정적인 앱 서비스 제공을 위해 아래 업데이트 버튼을 눌러 최신 버전의 앱을 사용해주세요.</string>
+    <string name="outdated_title">업데이트 필요</string>
+</resources>

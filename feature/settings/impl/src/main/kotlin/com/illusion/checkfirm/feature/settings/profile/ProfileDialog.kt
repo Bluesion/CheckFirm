@@ -20,6 +20,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneDialogTextButton
 import com.illusion.checkfirm.core.designsystem.component.OneEditText
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun ProfileDialog(
@@ -30,7 +31,7 @@ fun ProfileDialog(
     var name by remember(initialName) { mutableStateOf(initialName) }
 
     OneBottomSheetDialog(
-        title = stringResource(R.string.settings_profile_user_name),
+        title = stringResource(FeatureR.string.settings_profile_user_name),
         onDismiss = onDismiss,
     ) {
         OneEditText(

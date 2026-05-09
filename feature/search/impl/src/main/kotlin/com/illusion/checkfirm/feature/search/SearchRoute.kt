@@ -20,7 +20,6 @@ fun SearchRoute(
         bookmarks = bookmarks,
         onModelChange = viewModel::updateModel,
         onCscChange = viewModel::updateCsc,
-        onTabIndexChange = viewModel::updateSelectedTabIndex,
         onAddClick = viewModel::onAddClick,
         onDeviceClick = viewModel::addToSearchList,
         onRemoveFromSearchList = viewModel::removeFromSearchList,

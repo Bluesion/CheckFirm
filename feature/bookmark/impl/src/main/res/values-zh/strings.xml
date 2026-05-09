@@ -1,0 +1,9 @@
+<resources>
+    <string name="bookmark_edit">编辑书签</string>
+    <string name="bookmark_name">书签名</string>
+    <string name="bookmark_new">新书签</string>
+    <string name="category_edit_devices_title">设备</string>
+    <string name="category_edit_name">类别名称</string>
+    <string name="category_edit_name_error_all">类别名称不能是“全部”。</string>
+    <string name="category_edit_name_error_empty">类别名称不能为空！</string>
+</resources>

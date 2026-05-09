@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_category_dialog_description">Vyberte kategorii, kterou chcete zobrazit v panelu rychlého vyhledávání.</string>
+    <string name="home_hello_bookmark_description">Přidat záložky a kategorie.</string>
+    <string name="home_hello_description">Můžete vyhledávat informace o firmwaru pro zařízení Samsung. Podívejte se na níže uvedené funkce.</string>
+    <string name="home_hello_info_catcher_description">Nenechte si ujít nově nalezený firmware.</string>
+    <string name="home_hello_search_description">Vyhledat informace o firmwaru.</string>
+    <string name="home_hello_settings_description">Čeká na vás více funkcí.</string>
+    <string name="home_hello_title">Vítejte v CheckFirm!</string>
+    <string name="notification_permission_required_button_deny">Odmítnout</string>
+    <string name="notification_permission_required_button_grant">Udělit</string>
+    <string name="notification_permission_required_message">CheckFirm poskytuje Info Catcher, který vás upozorní na nově nalezený firmware. Chcete-li tuto funkci používat, musíte udělit povolení k oznámení.</string>
+    <string name="notification_permission_required_title">Je vyžadováno povolení</string>
+</resources>

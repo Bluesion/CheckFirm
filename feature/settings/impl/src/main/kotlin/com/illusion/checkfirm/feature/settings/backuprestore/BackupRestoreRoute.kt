@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.illusion.checkfirm.core.designsystem.R
+import com.illusion.checkfirm.feature.settings.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

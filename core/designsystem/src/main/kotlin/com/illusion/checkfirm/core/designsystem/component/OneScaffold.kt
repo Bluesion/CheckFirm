@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,6 +41,7 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import kotlinx.coroutines.launch
@@ -49,8 +51,8 @@ private val ToolbarHeight = 56.dp
 
 @Composable
 fun OneScaffold(
-    title: String,
     modifier: Modifier = Modifier,
+    title: String = "",
     subTitle: String? = null,
     navigationIcon: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
@@ -60,8 +62,8 @@ fun OneScaffold(
 ) {
     if (!expandable) {
         OneFixedScaffold(
-            title = title,
             modifier = modifier,
+            title = title,
             navigationIcon = navigationIcon,
             actions = actions,
             floatingActionButton = floatingActionButton,
@@ -86,11 +88,25 @@ fun OneScaffold(
         flingAnimationSpec = null,
     )
 
+    val coroutineScope = rememberCoroutineScope()
+    val dragModifier = Modifier.draggable(
+        orientation = Orientation.Vertical,
+        state = rememberDraggableState { delta ->
+            scrollBehavior.state.heightOffset += delta
+        },
+        onDragStopped = { velocity ->
+            coroutineScope.launch {
+                settleAppBar(scrollBehavior.state, velocity)
+            }
+        },
+    )
+
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             OneCollapsingToolbar(
+                modifier = dragModifier,
                 title = title,
                 subTitle = subTitle,
                 navigationIcon = navigationIcon,
@@ -104,7 +120,8 @@ fun OneScaffold(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding()),
+                .padding(top = innerPadding.calculateTopPadding())
+                .then(dragModifier),
         ) {
             content(innerPadding)
         }
@@ -113,8 +130,8 @@ fun OneScaffold(
 
 @Composable
 private fun OneFixedScaffold(
-    title: String,
     modifier: Modifier,
+    title: String,
     navigationIcon: @Composable () -> Unit,
     actions: @Composable RowScope.() -> Unit,
     floatingActionButton: @Composable () -> Unit,
@@ -151,7 +168,7 @@ private fun OneFixedToolbar(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background)
+            .background(color = MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
             .height(ToolbarHeight)
             .padding(horizontal = 4.dp),
@@ -161,12 +178,13 @@ private fun OneFixedToolbar(
 
         Text(
             text = title,
-            color = CheckFirmTheme.colors.toolbarText,
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-            maxLines = 1,
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 4.dp),
+            color = CheckFirmTheme.colors.toolbarText,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            style = MaterialTheme.typography.titleMedium,
         )
 
         Row(
@@ -179,6 +197,7 @@ private fun OneFixedToolbar(
 
 @Composable
 private fun OneCollapsingToolbar(
+    modifier: Modifier,
     title: String,
     subTitle: String?,
     navigationIcon: @Composable () -> Unit,
@@ -192,30 +211,18 @@ private fun OneCollapsingToolbar(
     val density = LocalDensity.current
     val expandedPx = with(density) { expandedHeight.toPx() }
     val collapsedPx = with(density) { ToolbarHeight.toPx() }
+
     SideEffect {
         scrollBehavior.state.heightOffsetLimit = -(expandedPx - collapsedPx)
     }
 
-    val coroutineScope = rememberCoroutineScope()
-    val dragModifier = Modifier.draggable(
-        orientation = Orientation.Vertical,
-        state = rememberDraggableState { delta ->
-            scrollBehavior.state.heightOffset += delta
-        },
-        onDragStopped = { velocity ->
-            coroutineScope.launch {
-                settleAppBar(scrollBehavior.state, velocity)
-            }
-        },
-    )
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background)
-            .windowInsetsPadding(WindowInsets.statusBars)
+            .background(color = MaterialTheme.colorScheme.background)
+            .windowInsetsPadding(insets = WindowInsets.statusBars)
             .height(currentHeight)
-            .then(dragModifier),
+            .then(other = modifier),
     ) {
         // Expanded centered big title
         Box(
@@ -231,7 +238,8 @@ private fun OneCollapsingToolbar(
                 Text(
                     text = title,
                     color = CheckFirmTheme.colors.toolbarText,
-                    style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.displaySmall,
                 )
                 if (!subTitle.isNullOrBlank()) {
                     Text(
@@ -248,21 +256,23 @@ private fun OneCollapsingToolbar(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .fillMaxWidth()
-                .height(ToolbarHeight)
-                .padding(horizontal = 4.dp),
+                .defaultMinSize(minHeight = ToolbarHeight)
+                .padding(start = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             navigationIcon()
 
             Text(
                 text = title,
-                color = CheckFirmTheme.colors.toolbarText,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                maxLines = 1,
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 4.dp)
                     .graphicsLayer { alpha = collapsedFraction },
+                color = CheckFirmTheme.colors.toolbarText,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 20.sp,
+                maxLines = 1,
+                style = MaterialTheme.typography.titleLarge,
             )
 
             Row(
@@ -297,7 +307,11 @@ private suspend fun settleAppBar(
 private fun OneScaffoldPreview() {
     CheckFirmTheme {
         Surface {
-            OneScaffold(title = "CheckFirm") { }
+            OneScaffold(
+                title = "CheckFirm",
+            ) {
+                Text(text = "content")
+            }
         }
     }
 }
@@ -307,7 +321,12 @@ private fun OneScaffoldPreview() {
 private fun OneScaffoldFixedPreview() {
     CheckFirmTheme {
         Surface {
-            OneScaffold(title = "CheckFirm", expandable = false) { }
+            OneScaffold(
+                title = "CheckFirm",
+                expandable = false,
+            ) {
+                Text(text = "content")
+            }
         }
     }
 }

@@ -25,7 +25,6 @@ import java.util.Locale
 data class SearchUiState(
     val model: String = "",
     val csc: String = "",
-    val selectedTabIndex: Int = 0,
     val searchList: List<SearchDeviceItem> = emptyList()
 )
 
@@ -58,10 +57,6 @@ class SearchViewModel @Inject constructor(
 
     fun updateCsc(value: String) {
         _uiState.value = _uiState.value.copy(csc = value)
-    }
-
-    fun updateSelectedTabIndex(value: Int) {
-        _uiState.value = _uiState.value.copy(selectedTabIndex = value)
     }
 
     fun onAddClick(): SearchValidationResult {

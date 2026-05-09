@@ -31,6 +31,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneRadioButton
 import com.illusion.checkfirm.core.designsystem.component.OneSwitch
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun ThemeDialog(
@@ -42,7 +43,7 @@ fun ThemeDialog(
     val isSystem = current == "system"
 
     OneBottomSheetDialog(
-        title = stringResource(R.string.settings_theme),
+        title = stringResource(FeatureR.string.settings_theme),
         onDismiss = onDismiss,
     ) {
         Row(
@@ -53,7 +54,7 @@ fun ThemeDialog(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = stringResource(R.string.settings_theme_system),
+                text = stringResource(FeatureR.string.settings_theme_system),
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.weight(1f),
             )
@@ -68,14 +69,14 @@ fun ThemeDialog(
                 horizontalArrangement = Arrangement.spacedBy(48.dp),
             ) {
                 ThemePreview(
-                    label = stringResource(R.string.settings_theme_light),
+                    label = stringResource(FeatureR.string.settings_theme_light),
                     drawableRes = R.drawable.oneui_theme_light,
                     selected = current == "light",
                     onClick = { current = "light" },
                     modifier = Modifier.weight(1f),
                 )
                 ThemePreview(
-                    label = stringResource(R.string.settings_theme_dark),
+                    label = stringResource(FeatureR.string.settings_theme_dark),
                     drawableRes = R.drawable.oneui_theme_dark,
                     selected = current == "dark",
                     onClick = { current = "dark" },

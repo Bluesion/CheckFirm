@@ -1,0 +1,9 @@
+<resources>
+    <string name="bookmark_edit">Editare marcaj</string>
+    <string name="bookmark_name">Nume marcaj</string>
+    <string name="bookmark_new">Marcaj nou</string>
+    <string name="category_edit_devices_title">Dispozitive</string>
+    <string name="category_edit_name">Nume categorie</string>
+    <string name="category_edit_name_error_all">Numele categoriei nu poate fi Toate.</string>
+    <string name="category_edit_name_error_empty">Numele categoriei nu trebuie să fie gol!</string>
+</resources>

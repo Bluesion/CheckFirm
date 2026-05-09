@@ -1,0 +1,9 @@
+<resources>
+    <string name="bookmark_edit">Yer imini düzenle</string>
+    <string name="bookmark_name">Yer imi adı</string>
+    <string name="bookmark_new">Yeni yer imi</string>
+    <string name="category_edit_devices_title">Cihazlar</string>
+    <string name="category_edit_name">Kategori adı</string>
+    <string name="category_edit_name_error_all">Kategori adı "Tümü" olamaz.</string>
+    <string name="category_edit_name_error_empty">Kategori adı boş olmamalı.</string>
+</resources>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_category_dialog_description">Selecione a categoria que deseja exibir na barra de pesquisa rápida.</string>
+    <string name="home_hello_bookmark_description">Adicionar favoritos e categorias.</string>
+    <string name="home_hello_description">Você pode pesquisar informações de firmware para dispositivos Samsung. Confira os recursos abaixo.</string>
+    <string name="home_hello_info_catcher_description">Não perca nenhum firmware recém-encontrado.</string>
+    <string name="home_hello_search_description">Pesquisar informações de firmware.</string>
+    <string name="home_hello_settings_description">Mais recursos estão esperando por você.</string>
+    <string name="home_hello_title">Bem-vindo ao CheckFirm!</string>
+    <string name="notification_permission_required_button_deny">Negar</string>
+    <string name="notification_permission_required_button_grant">Conceder</string>
+    <string name="notification_permission_required_message">O CheckFirm fornece o Info Catcher, que alerta você quando um novo firmware é encontrado. Para usar este recurso, você deve conceder permissão de notificação.</string>
+    <string name="notification_permission_required_title">Permissão Necessária</string>
+</resources>

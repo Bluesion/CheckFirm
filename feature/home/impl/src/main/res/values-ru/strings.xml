@@ -1,0 +1,13 @@
+<resources>
+    <string name="home_category_dialog_description">Выберите категорию, которую хотите отобразить на панели быстрого поиска.</string>
+    <string name="home_hello_bookmark_description">Добавляйте закладки и категории.</string>
+    <string name="home_hello_description">Вы можете искать информацию о прошивке для устройств Samsung. Ознакомьтесь с функциями ниже.</string>
+    <string name="home_hello_info_catcher_description">Не пропустите найденную прошивку.</string>
+    <string name="home_hello_search_description">Поиск информации о прошивке.</string>
+    <string name="home_hello_settings_description">Вас ждут дополнительные функции.</string>
+    <string name="home_hello_title">Добро пожаловать в CheckFirm!</string>
+    <string name="notification_permission_required_button_deny">Отклонить</string>
+    <string name="notification_permission_required_button_grant">Предоставить</string>
+    <string name="notification_permission_required_message">CheckFirm предоставляет Info Catcher, который уведомляет вас о найденной новой прошивке. Чтобы использовать эту функцию, вы должны предоставить разрешение на уведомления.</string>
+    <string name="notification_permission_required_title">Требуется разрешение</string>
+</resources>

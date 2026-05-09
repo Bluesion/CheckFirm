@@ -1,0 +1,21 @@
+<resources>
+    <string name="sherlock">Sherlock</string>
+    <string name="sherlock_manual_description">Agora você é um detetive que decifra as informações criptografadas do firmware! Tente decifrar inserindo valores em cada campo.</string>
+    <string name="sherlock_result_fail">Falha na decodificação. Você pode tentar novamente alterando o valor.</string>
+    <string name="sherlock_result_success">Parabéns! Você decifrou as informações criptografadas do firmware.</string>
+    <string name="sherlock_script_description">Tudo o que você precisa fazer é inserir o valor inicial e final. O Script Sherlock tentará encontrar informações de firmware decifradas com todos os dados entre o valor inicial e final. Observe que, se a diferença entre o valor inicial e o valor final for muito grande, o aplicativo poderá ser fechado forçadamente devido a sobrecarga.</string>
+    <string name="sherlock_script_end_value">Fim</string>
+    <string name="sherlock_script_error_1">Bootloader: o valor inicial é maior que o valor final.</string>
+    <string name="sherlock_script_error_3">Versão One UI: o valor inicial é maior que o valor final.</string>
+    <string name="sherlock_script_error_4">Ano: o valor inicial é maior que o valor final.</string>
+    <string name="sherlock_script_error_5">Mês: o valor inicial é maior que o valor final.</string>
+    <string name="sherlock_script_error_6">Revisão: o valor inicial é maior que o valor final.</string>
+    <string name="sherlock_script_error_7">Algo está errado com o valor inicial.</string>
+    <string name="sherlock_script_error_8">Algo está errado com o valor final.</string>
+    <string name="sherlock_script_no_error">Parece não haver erro.\nPronto para começar!</string>
+    <string name="sherlock_script_running">Executando script…\nNão saia desta tela.</string>
+    <string name="sherlock_script_start">Iniciar Script</string>
+    <string name="sherlock_script_start_value">Início</string>
+    <string name="sherlock_tab_manual">Manual</string>
+    <string name="sherlock_tab_script">Script</string>
+</resources>

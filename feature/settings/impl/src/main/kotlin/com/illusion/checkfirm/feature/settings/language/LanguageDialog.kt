@@ -28,11 +28,12 @@ import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.component.OneRadioButton
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 private data class LanguageEntry(val tag: String, val labelRes: Int)
 
 private val LANGUAGES = listOf(
-    LanguageEntry("", R.string.settings_language_default),
+    LanguageEntry("", FeatureR.string.settings_language_default),
     LanguageEntry("cs", R.string.settings_language_cs),
     LanguageEntry("en-US", R.string.settings_language_en),
     LanguageEntry("ja", R.string.settings_language_ja),
@@ -56,7 +57,7 @@ fun LanguageDialog(
     var current by remember(selectedLanguage) { mutableStateOf(selectedLanguage) }
 
     OneBottomSheetDialog(
-        title = stringResource(R.string.settings_language),
+        title = stringResource(FeatureR.string.settings_language),
         onDismiss = onDismiss,
     ) {
         Column(

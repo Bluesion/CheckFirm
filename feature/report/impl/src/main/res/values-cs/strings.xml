@@ -1,0 +1,11 @@
+<resources>
+    <string name="report_description">Děkujeme za vaši zprávu. Zajistím, aby byla vaše zpráva zapracována do týdne a nebudete o tom informováni. Pokud je vaše zpráva nevhodná, může být ignorována. Vyberte prosím níže důvod nahlášení.</string>
+    <string name="report_detail">(Volitelné) Jakékoli podrobnosti pomohou.</string>
+    <string name="report_fail">Odeslání selhalo.</string>
+    <string name="report_submit">Odeslat</string>
+    <string name="report_success">Odeslání úspěšné.</string>
+    <string name="report_type_1">Chyba informací o firmwaru</string>
+    <string name="report_type_2">Nevhodné uživatelské jméno</string>
+    <string name="report_type_3">Chyba informací Chytrého vyhledávání</string>
+    <string name="report_type_4">Jiné chyby</string>
+</resources>

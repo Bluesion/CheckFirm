@@ -24,27 +24,31 @@ import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 private data class ContributorRow(val roleRes: Int, val nameRes: Int)
 
 private val APPLICATION = listOf(
-    ContributorRow(R.string.contributor_designer, R.string.contributor_newfit),
-    ContributorRow(R.string.contributor_developer, R.string.contributor_bluesion),
+    ContributorRow(FeatureR.string.contributor_designer, R.string.contributor_newfit),
+    ContributorRow(FeatureR.string.contributor_developer, R.string.contributor_bluesion),
 )
 
 private val TRANSLATORS = listOf(
-    ContributorRow(R.string.contributor_russian, R.string.contributor_russian_translator),
-    ContributorRow(R.string.contributor_chinese, R.string.contributor_chinese_translator),
-    ContributorRow(R.string.contributor_czech, R.string.contributor_czech_translator),
-    ContributorRow(R.string.contributor_portuguese, R.string.contributor_portuguese_translator),
-    ContributorRow(R.string.contributor_romanian, R.string.contributor_romanian_translator),
-    ContributorRow(R.string.contributor_sinhala, R.string.contributor_sinhala_translator),
+    ContributorRow(FeatureR.string.contributor_russian, R.string.contributor_russian_translator),
+    ContributorRow(FeatureR.string.contributor_chinese, R.string.contributor_chinese_translator),
+    ContributorRow(FeatureR.string.contributor_czech, R.string.contributor_czech_translator),
+    ContributorRow(
+        FeatureR.string.contributor_portuguese,
+        R.string.contributor_portuguese_translator
+    ),
+    ContributorRow(FeatureR.string.contributor_romanian, R.string.contributor_romanian_translator),
+    ContributorRow(FeatureR.string.contributor_sinhala, R.string.contributor_sinhala_translator),
 )
 
 @Composable
 fun ContributorDialog(onDismiss: () -> Unit) {
     OneBottomSheetDialog(
-        title = stringResource(R.string.contributor),
+        title = stringResource(FeatureR.string.contributor),
         onDismiss = onDismiss,
     ) {
         Column(
@@ -53,12 +57,12 @@ fun ContributorDialog(onDismiss: () -> Unit) {
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            SectionHeader(stringResource(R.string.contributor_application))
+            SectionHeader(stringResource(FeatureR.string.contributor_application))
             APPLICATION.forEach { row -> ContributorRow(row) }
 
             Spacer(Modifier.height(8.dp))
 
-            SectionHeader(stringResource(R.string.contributor_translator))
+            SectionHeader(stringResource(FeatureR.string.contributor_translator))
             TRANSLATORS.forEach { row -> ContributorRow(row) }
         }
 

@@ -30,6 +30,7 @@ import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.domain.model.Bookmark
 import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.feature.bookmark.R as FeatureR
 
 @Composable
 fun CategoryEditScreen(
@@ -54,13 +55,13 @@ fun CategoryEditScreen(
             OutlinedTextField(
                 value = uiState.name,
                 onValueChange = onNameChange,
-                label = { Text(stringResource(R.string.category_edit_name)) },
+                label = { Text(stringResource(FeatureR.string.category_edit_name)) },
                 singleLine = true,
                 isError = uiState.nameError != null,
                 supportingText = {
                     when (uiState.nameError) {
-                        NameError.Blank -> Text(stringResource(R.string.category_edit_name_error_empty))
-                        NameError.Reserved -> Text(stringResource(R.string.category_edit_name_error_all))
+                        NameError.Blank -> Text(stringResource(FeatureR.string.category_edit_name_error_empty))
+                        NameError.Reserved -> Text(stringResource(FeatureR.string.category_edit_name_error_all))
                         null -> {}
                     }
                 },
@@ -72,7 +73,7 @@ fun CategoryEditScreen(
             Spacer(Modifier.height(16.dp))
 
             Text(
-                text = stringResource(R.string.category_edit_devices_title),
+                text = stringResource(FeatureR.string.category_edit_devices_title),
                 style = MaterialTheme.typography.titleMedium,
             )
 
@@ -140,7 +141,10 @@ private fun DeviceCheckRow(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
-        OneCheckbox(checked = checked, onCheckedChange = { onCheckedChange() })
+        OneCheckbox(
+            isChecked = checked,
+            onCheckedChange = { onCheckedChange() }
+        )
     }
 }
 

@@ -1,0 +1,11 @@
+<resources>
+    <string name="report_description">Vă mulțumim pentru raportul dumneavoastră. Mă voi asigura că raportul dumneavoastră va fi încorporat în decurs de o săptămână și nu veți fi notificat. Dacă raportul dumneavoastră este inadecvat, acesta poate fi ignorat. Vă rugăm să selectați un motiv pentru raportare mai jos.</string>
+    <string name="report_detail">(Opțional) Orice detalii vor fi utile.</string>
+    <string name="report_fail">Trimiterea a eșuat.</string>
+    <string name="report_submit">Trimite</string>
+    <string name="report_success">Trimitere reușită.</string>
+    <string name="report_type_1">Eroare informații firmware</string>
+    <string name="report_type_2">Nume utilizator inadecvat</string>
+    <string name="report_type_3">Eroare informații Căutare Inteligentă</string>
+    <string name="report_type_4">Alte erori</string>
+</resources>

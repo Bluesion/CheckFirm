@@ -1,2 +1,11 @@
 <resources>
+    <string name="report_description">신고해주셔서 감사합니다. 신고는 최대 일주일 안에 반영이 완료되며, 반영 결과는 따로 통보하지 않습니다. 신고 내용이 부적절한 경우엔 반영되지 않을 수도 있습니다. 아래에서 신고 이유를 선택해주세요.</string>
+    <string name="report_detail">(선택 사항) 자세한 내용을 적어주세요.</string>
+    <string name="report_fail">오류가 발생하였습니다.</string>
+    <string name="report_submit">제출</string>
+    <string name="report_success">신고가 정상적으로 접수되었습니다.</string>
+    <string name="report_type_1">펌웨어 정보 오류</string>
+    <string name="report_type_2">부적절한 셜록 닉네임</string>
+    <string name="report_type_3">스마트 서치 정보 오류</string>
+    <string name="report_type_4">기타 오류</string>
 </resources>

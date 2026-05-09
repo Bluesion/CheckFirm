@@ -22,6 +22,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.component.OneRadioButton
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.home.R as FeatureR
 
 @Composable
 fun CategoryDialog(
@@ -38,7 +39,7 @@ fun CategoryDialog(
         onDismiss = onDismiss,
     ) {
         Text(
-            text = stringResource(R.string.main_category_dialog_description),
+            text = stringResource(FeatureR.string.home_category_dialog_description),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

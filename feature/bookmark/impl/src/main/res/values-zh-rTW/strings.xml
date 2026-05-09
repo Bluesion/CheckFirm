@@ -1,0 +1,9 @@
+<resources>
+    <string name="bookmark_edit">編輯書籤</string>
+    <string name="bookmark_name">書籤名稱</string>
+    <string name="bookmark_new">新書籤</string>
+    <string name="category_edit_devices_title">裝置</string>
+    <string name="category_edit_name">類別名稱</string>
+    <string name="category_edit_name_error_all">類別名稱不能是「全部」。</string>
+    <string name="category_edit_name_error_empty">類別名稱不得為空！</string>
+</resources>

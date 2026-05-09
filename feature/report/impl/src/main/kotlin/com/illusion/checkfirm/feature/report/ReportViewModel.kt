@@ -13,18 +13,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-data class ReportUiState(
-    /** Multi-select: any combination of "type_1".."type_4". */
-    val bugTypes: Set<String> = emptySet(),
-    val logs: String = "",
-    val isSubmitting: Boolean = false,
-)
-
-sealed interface ReportEvent {
-    data object SubmitSuccess : ReportEvent
-    data object SubmitError : ReportEvent
-}
-
 @HiltViewModel
 class ReportViewModel @Inject constructor(
     private val submitReportUseCase: SubmitReportUseCase,
@@ -36,10 +24,11 @@ class ReportViewModel @Inject constructor(
     private val _events = MutableSharedFlow<ReportEvent>()
     val events = _events.asSharedFlow()
 
-    fun toggleBugType(type: String) {
+    fun toggleBugType(type: BugType) {
         _uiState.update {
-            val next = if (type in it.bugTypes) it.bugTypes - type else it.bugTypes + type
-            it.copy(bugTypes = next)
+            it.copy(
+                bugTypes = if (type in it.bugTypes) it.bugTypes - type else it.bugTypes + type
+            )
         }
     }
 

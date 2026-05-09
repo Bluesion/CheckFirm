@@ -1,0 +1,21 @@
+<resources>
+    <string name="sherlock">夏洛克</string>
+    <string name="sherlock_manual_description">您现在是一位破解固件加密信息的侦探！尝试通过在每个字段中输入值来解密。</string>
+    <string name="sherlock_result_fail">解密失败。您可以尝试更改值再次尝试。</string>
+    <string name="sherlock_result_success">恭喜您！您已成功破解固件加密信息。</string>
+    <string name="sherlock_script_description">您需要做的就是输入起始值和结束值。夏洛克脚本将尝试查找起始值和结束值之间所有数据的解密固件信息。请注意，如果起始值和结束值之间的差异过大，应用程序可能会因过载而强制关闭。</string>
+    <string name="sherlock_script_end_value">结束</string>
+    <string name="sherlock_script_error_1">引导加载程序：起始值大于结束值。</string>
+    <string name="sherlock_script_error_3">One UI 版本：起始值大于结束值。</string>
+    <string name="sherlock_script_error_4">年份：起始值大于结束值。</string>
+    <string name="sherlock_script_error_5">月份：起始值大于结束值。</string>
+    <string name="sherlock_script_error_6">修订：起始值大于结束值。</string>
+    <string name="sherlock_script_error_7">起始值有问题。</string>
+    <string name="sherlock_script_error_8">结束值有问题。</string>
+    <string name="sherlock_script_no_error">似乎没有错误\n准备就绪！</string>
+    <string name="sherlock_script_running">脚本正在运行…\n请勿退出此屏幕。</string>
+    <string name="sherlock_script_start">启动脚本</string>
+    <string name="sherlock_script_start_value">开始</string>
+    <string name="sherlock_tab_manual">手册</string>
+    <string name="sherlock_tab_script">脚本</string>
+</resources>

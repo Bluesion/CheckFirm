@@ -36,6 +36,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
+import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun AboutScreen(
@@ -62,7 +63,7 @@ fun AboutScreen(
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Info,
-                    contentDescription = stringResource(R.string.about_app_information),
+                    contentDescription = stringResource(FeatureR.string.about_app_information),
                     tint = CheckFirmTheme.colors.toolbarIconTint,
                 )
             }
@@ -86,7 +87,7 @@ fun AboutScreen(
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = stringResource(R.string.about_version),
+                    text = stringResource(FeatureR.string.about_version),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
@@ -114,12 +115,12 @@ fun AboutScreen(
             Spacer(Modifier.weight(1f))
 
             AboutPageButton(
-                text = stringResource(R.string.contributor),
+                text = stringResource(FeatureR.string.contributor),
                 onClick = { showDialog(DialogType.CONTRIBUTOR) },
             )
             Spacer(Modifier.height(8.dp))
             AboutPageButton(
-                text = stringResource(R.string.legal),
+                text = stringResource(FeatureR.string.legal),
                 onClick = { showDialog(DialogType.LEGAL) },
             )
         }
@@ -156,7 +157,7 @@ private fun VersionStatus(state: VersionCheckState, onUpdateClick: () -> Unit) {
 
         VersionCheckState.Latest -> {
             Text(
-                text = stringResource(R.string.about_latest),
+                text = stringResource(FeatureR.string.about_latest),
                 style = MaterialTheme.typography.bodyMedium,
                 color = CheckFirmTheme.colors.settingsDescription,
             )

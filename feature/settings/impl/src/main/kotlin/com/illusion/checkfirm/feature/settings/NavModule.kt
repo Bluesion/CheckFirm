@@ -5,9 +5,9 @@ import com.illusion.checkfirm.core.navigation.Navigator
 import com.illusion.checkfirm.feature.settings.about.AboutRoute
 import com.illusion.checkfirm.feature.settings.backuprestore.BackupRestoreRoute
 import com.illusion.checkfirm.feature.settings.catcher.InfoCatcherRoute
-import com.illusion.checkfirm.feature.settings.help.FirmwareManualRoute
 import com.illusion.checkfirm.feature.settings.help.HelpRoute
-import com.illusion.checkfirm.feature.settings.help.MyDeviceRoute
+import com.illusion.checkfirm.feature.settings.help.firmware.FirmwareManualRoute
+import com.illusion.checkfirm.feature.settings.help.mydevice.MyDeviceRoute
 import com.illusion.checkfirm.feature.settings.welcome.WelcomeSearchRoute
 import dagger.Module
 import dagger.Provides

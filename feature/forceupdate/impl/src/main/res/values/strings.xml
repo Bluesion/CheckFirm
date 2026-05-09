@@ -1,0 +1,4 @@
+<resources>
+    <string name="outdated_description">The current version is no longer supported. Please update to the latest version. Sorry for your inconvenience.</string>
+    <string name="outdated_title">Needs update</string>
+</resources>

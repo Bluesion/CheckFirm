@@ -1,0 +1,11 @@
+<resources>
+    <string name="report_description">ご報告ありがとうございます。1週間以内に反映させますが、通知はされません。ご報告が不適切であった場合、無視される可能性があります。報告理由を以下から選択してください。</string>
+    <string name="report_detail">(任意) 詳細があれば役立ちます。</string>
+    <string name="report_fail">送信に失敗しました。</string>
+    <string name="report_submit">送信</string>
+    <string name="report_success">送信に成功しました。</string>
+    <string name="report_type_1">ファームウェア情報エラー</string>
+    <string name="report_type_2">不適切なユーザー名</string>
+    <string name="report_type_3">スマート検索情報エラー</string>
+    <string name="report_type_4">その他のエラー</string>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="outdated_description">Aktuální verze již není podporována. Aktualizujte prosím na nejnovější verzi. Omlouváme se za nepříjemnosti.</string>
+    <string name="outdated_title">Vyžaduje aktualizaci</string>
+</resources>
