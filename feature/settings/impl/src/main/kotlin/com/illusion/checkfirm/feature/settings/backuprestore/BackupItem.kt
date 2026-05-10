@@ -1,8 +1,8 @@
 package com.illusion.checkfirm.feature.settings.backuprestore
 
-import com.illusion.checkfirm.domain.model.Bookmark
-import com.illusion.checkfirm.domain.model.Category
-import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.core.domain.model.Bookmark
+import com.illusion.checkfirm.core.domain.model.Category
+import com.illusion.checkfirm.core.domain.model.Device
 import kotlinx.serialization.Serializable
 
 /**

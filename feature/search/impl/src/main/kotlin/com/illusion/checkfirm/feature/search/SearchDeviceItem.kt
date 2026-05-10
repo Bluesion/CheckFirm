@@ -1,6 +1,6 @@
 package com.illusion.checkfirm.feature.search
 
-import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.core.domain.model.Device
 
 /**
  * Bookmark는 additionalInfo에 북마크 이름, isDeleteButtonVisible은 false

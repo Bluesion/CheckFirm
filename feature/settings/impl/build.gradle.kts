@@ -9,8 +9,8 @@ android {
 
 dependencies {
     implementation(projects.feature.settings.api)
+    implementation(projects.core.domain)
     implementation(projects.core.preference.api)
-    implementation(projects.domain)
     implementation(libs.androidx.appcompat)
     implementation(libs.bundles.androidx.navigation3)
     implementation(libs.bundles.firebase)

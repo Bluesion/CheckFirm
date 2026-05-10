@@ -28,8 +28,8 @@ import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import com.illusion.checkfirm.domain.model.Bookmark
-import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.core.domain.model.Bookmark
+import com.illusion.checkfirm.core.domain.model.Device
 
 @Composable
 internal fun QuickSearchBar(

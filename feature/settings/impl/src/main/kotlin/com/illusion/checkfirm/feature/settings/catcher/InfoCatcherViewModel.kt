@@ -3,11 +3,11 @@ package com.illusion.checkfirm.feature.settings.catcher
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.messaging.FirebaseMessaging
+import com.illusion.checkfirm.core.domain.model.Bookmark
+import com.illusion.checkfirm.core.domain.model.Device
+import com.illusion.checkfirm.core.domain.repository.BCRepository
+import com.illusion.checkfirm.core.domain.repository.InfoCatcherRepository
 import com.illusion.checkfirm.core.preference.api.PreferenceRepository
-import com.illusion.checkfirm.domain.model.Bookmark
-import com.illusion.checkfirm.domain.model.Device
-import com.illusion.checkfirm.domain.repository.BCRepository
-import com.illusion.checkfirm.domain.repository.InfoCatcherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow

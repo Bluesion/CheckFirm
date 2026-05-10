@@ -2,9 +2,9 @@ package com.illusion.checkfirm.feature.settings.about
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.illusion.checkfirm.domain.model.ApiResponse
-import com.illusion.checkfirm.domain.model.CheckFirmBuildConfig
-import com.illusion.checkfirm.domain.repository.AppMetadataRepository
+import com.illusion.checkfirm.core.domain.model.ApiResponse
+import com.illusion.checkfirm.core.domain.model.CheckFirmBuildConfig
+import com.illusion.checkfirm.core.domain.repository.AppMetadataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -2,14 +2,14 @@ package com.illusion.checkfirm.feature.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.illusion.checkfirm.core.domain.model.Bookmark
+import com.illusion.checkfirm.core.domain.model.Date
+import com.illusion.checkfirm.core.domain.model.Device
+import com.illusion.checkfirm.core.domain.model.SearchHistory
+import com.illusion.checkfirm.core.domain.repository.BCRepository
+import com.illusion.checkfirm.core.domain.repository.HistoryRepository
 import com.illusion.checkfirm.core.navigation.NavResultBus
 import com.illusion.checkfirm.core.navigation.NavResultKey
-import com.illusion.checkfirm.domain.model.Bookmark
-import com.illusion.checkfirm.domain.model.Date
-import com.illusion.checkfirm.domain.model.Device
-import com.illusion.checkfirm.domain.model.SearchHistory
-import com.illusion.checkfirm.domain.repository.BCRepository
-import com.illusion.checkfirm.domain.repository.HistoryRepository
 import com.illusion.checkfirm.feature.search.util.SearchValidationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject

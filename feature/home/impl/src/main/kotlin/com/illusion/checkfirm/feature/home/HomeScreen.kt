@@ -21,8 +21,8 @@ import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import com.illusion.checkfirm.domain.model.Bookmark
-import com.illusion.checkfirm.domain.model.SearchResult
+import com.illusion.checkfirm.core.domain.model.Bookmark
+import com.illusion.checkfirm.core.domain.model.SearchResult
 import com.illusion.checkfirm.feature.home.component.HelloDashboard
 import com.illusion.checkfirm.feature.home.component.HomeErrorState
 import com.illusion.checkfirm.feature.home.component.HomeFirmwareDialog

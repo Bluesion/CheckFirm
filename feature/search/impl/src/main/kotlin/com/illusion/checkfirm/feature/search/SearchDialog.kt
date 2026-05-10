@@ -40,10 +40,10 @@ import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.component.OneTab
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import com.illusion.checkfirm.domain.model.Firmware
-import com.illusion.checkfirm.domain.model.OfficialFirmware
-import com.illusion.checkfirm.domain.model.SearchResult
-import com.illusion.checkfirm.domain.model.TestFirmware
+import com.illusion.checkfirm.core.domain.model.Firmware
+import com.illusion.checkfirm.core.domain.model.OfficialFirmware
+import com.illusion.checkfirm.core.domain.model.SearchResult
+import com.illusion.checkfirm.core.domain.model.TestFirmware
 
 /**
  * Full-feature firmware-detail bottom sheet (port of legacy SearchDialog).
@@ -357,7 +357,7 @@ private fun SearchDialogPreview() {
         Surface(color = Color.White) {
             SearchDialog(
                 result = SearchResult(
-                    device = com.illusion.checkfirm.domain.model.Device("SM-S928B", "KOO"),
+                    device = com.illusion.checkfirm.core.domain.model.Device("SM-S928B", "KOO"),
                     firmware = Firmware(
                         officialFirmware = OfficialFirmware(
                             latestFirmware = "S928BKSU3AXL5/S928BOXM3AXL5/S928BKSU3AXL5",

@@ -2,15 +2,15 @@ package com.illusion.checkfirm.feature.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.illusion.checkfirm.core.domain.model.Device
+import com.illusion.checkfirm.core.domain.model.Firmware
+import com.illusion.checkfirm.core.domain.model.SearchResult
+import com.illusion.checkfirm.core.domain.remote.FirmwareFetcher
+import com.illusion.checkfirm.core.domain.repository.BCRepository
+import com.illusion.checkfirm.core.domain.repository.WelcomeSearchRepository
 import com.illusion.checkfirm.core.navigation.NavResultBus
 import com.illusion.checkfirm.core.navigation.NavResultKey
 import com.illusion.checkfirm.core.preference.api.PreferenceRepository
-import com.illusion.checkfirm.domain.model.Device
-import com.illusion.checkfirm.domain.model.Firmware
-import com.illusion.checkfirm.domain.model.SearchResult
-import com.illusion.checkfirm.domain.remote.FirmwareFetcher
-import com.illusion.checkfirm.domain.repository.BCRepository
-import com.illusion.checkfirm.domain.repository.WelcomeSearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -93,8 +93,8 @@ class HomeViewModel @Inject constructor(
         @Suppress("UNCHECKED_CAST")
         HomeUiState(
             preference = values[0] as com.illusion.checkfirm.core.preference.api.Preference,
-            categories = values[1] as List<com.illusion.checkfirm.domain.model.Category>,
-            bookmarks = values[2] as List<com.illusion.checkfirm.domain.model.Bookmark>,
+            categories = values[1] as List<com.illusion.checkfirm.core.domain.model.Category>,
+            bookmarks = values[2] as List<com.illusion.checkfirm.core.domain.model.Bookmark>,
             selectedCategory = (values[3] as String?).orEmpty(),
             showCategoryDialog = values[4] as Boolean,
             results = values[5] as List<SearchResult>,
@@ -141,9 +141,9 @@ class HomeViewModel @Inject constructor(
                                 device = device,
                                 firmware = Firmware(
                                     officialFirmware = official
-                                        ?: com.illusion.checkfirm.domain.model.OfficialFirmware(),
+                                        ?: com.illusion.checkfirm.core.domain.model.OfficialFirmware(),
                                     testFirmware = test
-                                        ?: com.illusion.checkfirm.domain.model.TestFirmware(),
+                                        ?: com.illusion.checkfirm.core.domain.model.TestFirmware(),
                                 ),
                             )
                         }

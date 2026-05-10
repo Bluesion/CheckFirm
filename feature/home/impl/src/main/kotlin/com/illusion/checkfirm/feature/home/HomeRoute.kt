@@ -21,7 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.illusion.checkfirm.domain.model.SearchResult
+import com.illusion.checkfirm.core.domain.model.SearchResult
 import com.illusion.checkfirm.feature.home.component.NotificationPermissionDialog
 
 @Composable

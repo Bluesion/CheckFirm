@@ -1,9 +1,9 @@
 package com.illusion.checkfirm.feature.home
 
+import com.illusion.checkfirm.core.domain.model.Bookmark
+import com.illusion.checkfirm.core.domain.model.Category
+import com.illusion.checkfirm.core.domain.model.SearchResult
 import com.illusion.checkfirm.core.preference.api.Preference
-import com.illusion.checkfirm.domain.model.Bookmark
-import com.illusion.checkfirm.domain.model.Category
-import com.illusion.checkfirm.domain.model.SearchResult
 
 data class HomeUiState(
     val preference: Preference = Preference(),

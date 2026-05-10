@@ -1,6 +1,6 @@
 package com.illusion.checkfirm.feature.search.util
 
-import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.core.domain.model.Device
 
 fun Device.isValid(): Boolean {
     return isValidModel(this.model) && isValidCSC(this.csc)

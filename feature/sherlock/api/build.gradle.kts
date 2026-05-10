@@ -7,5 +7,5 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.domain)
+    implementation(projects.core.domain)
 }

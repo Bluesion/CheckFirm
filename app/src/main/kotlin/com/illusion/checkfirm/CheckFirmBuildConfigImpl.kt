@@ -1,6 +1,6 @@
 package com.illusion.checkfirm
 
-import com.illusion.checkfirm.domain.model.CheckFirmBuildConfig
+import com.illusion.checkfirm.core.domain.model.CheckFirmBuildConfig
 import jakarta.inject.Inject
 
 class CheckFirmBuildConfigImpl @Inject constructor() : CheckFirmBuildConfig {

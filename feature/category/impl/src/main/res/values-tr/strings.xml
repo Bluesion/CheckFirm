@@ -1,0 +1,6 @@
+<resources>
+    <string name="category_devices_title">Cihazlar</string>
+    <string name="category_name">Kategori adı</string>
+    <string name="category_name_error_all">Kategori adı "Tümü" olamaz.</string>
+    <string name="category_name_error_empty">Kategori adı boş olmamalı.</string>
+</resources>

@@ -3,8 +3,8 @@ package com.illusion.checkfirm.feature.sherlock
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
+import com.illusion.checkfirm.core.domain.model.SearchResult
 import com.illusion.checkfirm.core.preference.api.PreferenceRepository
-import com.illusion.checkfirm.domain.model.SearchResult
 import com.illusion.checkfirm.feature.sherlock.util.SherlockStatus
 import com.illusion.checkfirm.feature.sherlock.util.SherlockTools
 import dagger.hilt.android.lifecycle.HiltViewModel

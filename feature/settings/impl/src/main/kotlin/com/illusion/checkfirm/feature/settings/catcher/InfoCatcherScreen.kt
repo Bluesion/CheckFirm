@@ -44,11 +44,11 @@ fun InfoCatcherScreen(
     onNavigationIconClick: () -> Unit,
     onEnableChange: (Boolean) -> Unit,
     onAddDeviceClick: () -> Unit,
-    onDeleteDevice: (com.illusion.checkfirm.domain.model.Device) -> Unit,
+    onDeleteDevice: (com.illusion.checkfirm.core.domain.model.Device) -> Unit,
     onDialogDismiss: () -> Unit,
     onDialogModelChange: (String) -> Unit,
     onDialogCscChange: (String) -> Unit,
-    onSelectBookmark: (com.illusion.checkfirm.domain.model.Bookmark) -> Unit,
+    onSelectBookmark: (com.illusion.checkfirm.core.domain.model.Bookmark) -> Unit,
     onAddDevice: (String, String) -> Unit,
 ) {
     OneScaffold(

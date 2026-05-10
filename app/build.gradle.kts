@@ -56,6 +56,15 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            pickFirsts += "META-INF/LICENSE.md"
+            pickFirsts += "META-INF/NOTICE.md"
+            pickFirsts += "META-INF/DEPENDENCIES"
+        }
+    }
 }
 
 room {
@@ -68,8 +77,11 @@ hilt {
 }
 
 dependencies {
-    implementation(projects.data)
-    implementation(projects.domain)
+    implementation(projects.core.data)
+    implementation(projects.core.database)
+    implementation(projects.core.datastore)
+    implementation(projects.core.domain)
+    implementation(projects.core.network)
 
     // Bookmark
     implementation(projects.feature.bookmark.api)
@@ -103,13 +115,11 @@ dependencies {
     implementation(projects.core.designsystem)
     implementation(projects.core.navigation)
     implementation(projects.core.preference.api)
-    implementation(projects.core.preference.impl)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.androidx.compose)
     implementation(libs.bundles.androidx.lifecycle)
     implementation(libs.bundles.androidx.navigation3)
-    implementation(libs.bundles.angus)
     implementation(libs.bundles.data)
     implementation(libs.bundles.firebase)
     implementation(libs.bundles.hilt)

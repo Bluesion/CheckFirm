@@ -55,10 +55,10 @@ import com.illusion.checkfirm.core.designsystem.component.OneNavButton
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import com.illusion.checkfirm.domain.model.Bookmark
-import com.illusion.checkfirm.domain.model.Date
-import com.illusion.checkfirm.domain.model.Device
-import com.illusion.checkfirm.domain.model.SearchHistory
+import com.illusion.checkfirm.core.domain.model.Bookmark
+import com.illusion.checkfirm.core.domain.model.Date
+import com.illusion.checkfirm.core.domain.model.Device
+import com.illusion.checkfirm.core.domain.model.SearchHistory
 import com.illusion.checkfirm.feature.search.util.SearchValidationResult
 import com.illusion.checkfirm.feature.search.R as FeatureR
 

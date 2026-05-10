@@ -1,0 +1,6 @@
+<resources>
+    <string name="category_devices_title">デバイス</string>
+    <string name="category_name">カテゴリ名</string>
+    <string name="category_name_error_all">カテゴリ名は「すべて」にできません。</string>
+    <string name="category_name_error_empty">カテゴリ名は空にできません。</string>
+</resources>

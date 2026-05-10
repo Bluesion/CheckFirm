@@ -28,11 +28,11 @@ import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import com.illusion.checkfirm.domain.model.Device
-import com.illusion.checkfirm.domain.model.Firmware
-import com.illusion.checkfirm.domain.model.OfficialFirmware
-import com.illusion.checkfirm.domain.model.SearchResult
-import com.illusion.checkfirm.domain.model.TestFirmware
+import com.illusion.checkfirm.core.domain.model.Device
+import com.illusion.checkfirm.core.domain.model.Firmware
+import com.illusion.checkfirm.core.domain.model.OfficialFirmware
+import com.illusion.checkfirm.core.domain.model.SearchResult
+import com.illusion.checkfirm.core.domain.model.TestFirmware
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

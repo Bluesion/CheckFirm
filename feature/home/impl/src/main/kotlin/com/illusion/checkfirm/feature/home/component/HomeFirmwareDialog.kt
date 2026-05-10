@@ -36,7 +36,7 @@ import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.component.OneTab
-import com.illusion.checkfirm.domain.model.SearchResult
+import com.illusion.checkfirm.core.domain.model.SearchResult
 
 /**
  * Bottom sheet showing firmware details for a single SearchResult — Home's

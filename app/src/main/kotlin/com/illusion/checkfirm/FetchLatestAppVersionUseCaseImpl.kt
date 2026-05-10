@@ -1,8 +1,8 @@
 package com.illusion.checkfirm
 
-import com.illusion.checkfirm.domain.model.ApiResponse
-import com.illusion.checkfirm.domain.model.CheckFirmBuildConfig
-import com.illusion.checkfirm.domain.repository.AppMetadataRepository
+import com.illusion.checkfirm.core.domain.model.ApiResponse
+import com.illusion.checkfirm.core.domain.model.CheckFirmBuildConfig
+import com.illusion.checkfirm.core.domain.repository.AppMetadataRepository
 import com.illusion.checkfirm.feature.home.api.AppVersionStatus
 import com.illusion.checkfirm.feature.home.api.FetchLatestAppVersionUseCase
 import jakarta.inject.Inject

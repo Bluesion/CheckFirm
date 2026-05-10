@@ -1,6 +1,6 @@
 package com.illusion.checkfirm.feature.sherlock
 
-import com.illusion.checkfirm.domain.model.SearchResult
+import com.illusion.checkfirm.core.domain.model.SearchResult
 
 /**
  * Carries the device + firmware payload Sherlock decrypts. The route is reachable

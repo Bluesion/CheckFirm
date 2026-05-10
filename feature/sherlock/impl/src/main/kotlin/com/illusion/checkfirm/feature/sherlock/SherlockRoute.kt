@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.illusion.checkfirm.domain.model.SearchResult
+import com.illusion.checkfirm.core.domain.model.SearchResult
 
 @Composable
 fun SherlockRoute(

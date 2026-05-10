@@ -1,7 +1,7 @@
 package com.illusion.checkfirm.feature.settings.catcher
 
-import com.illusion.checkfirm.domain.model.Bookmark
-import com.illusion.checkfirm.domain.model.Device
+import com.illusion.checkfirm.core.domain.model.Bookmark
+import com.illusion.checkfirm.core.domain.model.Device
 
 data class InfoCatcherUiState(
     val showDialog: Boolean = false,

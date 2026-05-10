@@ -8,4 +8,5 @@ android {
 
 dependencies {
     implementation(projects.feature.bookmark.api)
+    implementation(projects.feature.category.api)
 }

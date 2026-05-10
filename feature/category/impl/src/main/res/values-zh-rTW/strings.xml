@@ -1,0 +1,6 @@
+<resources>
+    <string name="category_devices_title">裝置</string>
+    <string name="category_name">類別名稱</string>
+    <string name="category_name_error_all">類別名稱不能是「全部」。</string>
+    <string name="category_name_error_empty">類別名稱不得為空！</string>
+</resources>
