@@ -30,22 +30,24 @@ import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun BackupRestoreScreen(
-    uiState: BackupRestoreUiState = BackupRestoreUiState(),
+    uiState: BackupRestoreUiState,
     onBackupClick: () -> Unit = {},
     onRestoreClick: () -> Unit = {},
     onNavigateBack: () -> Unit,
 ) {
     OneScaffold(
-        title = stringResource(FeatureR.string.settings_bookmark_backup_restore),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigateBack)
+            OneNavButton(
+                icon = OneIcons.IcBack,
+                onClick = onNavigateBack,
+            )
         },
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 16.dp)
-                .padding(bottom = innerPadding.calculateBottomPadding()),
+                .padding(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
@@ -112,6 +114,7 @@ private fun BackupRestoreScreenPreview() {
     CheckFirmTheme {
         Surface {
             BackupRestoreScreen(
+                uiState = BackupRestoreUiState(),
                 onNavigateBack = {},
             )
         }

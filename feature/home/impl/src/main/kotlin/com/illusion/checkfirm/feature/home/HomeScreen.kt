@@ -57,21 +57,18 @@ fun HomeScreen(
                 Icon(
                     imageVector = OneIcons.OneuiSearch,
                     contentDescription = stringResource(R.string.search),
-                    tint = CheckFirmTheme.colors.toolbarIconTint,
                 )
             }
             IconButton(onClick = onBookmarkIconClick) {
                 Icon(
                     imageVector = OneIcons.OneuiBookmark,
                     contentDescription = stringResource(R.string.bookmark),
-                    tint = CheckFirmTheme.colors.toolbarIconTint,
                 )
             }
             IconButton(onClick = onPreferenceIconClick) {
                 Icon(
                     imageVector = OneIcons.OneuiSettings,
                     contentDescription = stringResource(R.string.settings),
-                    tint = CheckFirmTheme.colors.toolbarIconTint,
                 )
             }
         },

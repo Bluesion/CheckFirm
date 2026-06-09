@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -62,7 +61,10 @@ fun HomeRoute(
         onCategoryDialogDismiss = { viewModel.showCategoryDialog(false) },
         onResultClick = viewModel::openResultDialog,
         onResultDismiss = viewModel::closeResultDialog,
-        onCopy = { text -> copyToClipboard(context, text) },
+        onCopy = {
+            context.getSystemService(ClipboardManager::class.java)
+                .setPrimaryClip(ClipData.newPlainText("CheckFirm", it))
+        },
         onOpenOfficialDoc = { result ->
             val url =
                 "https://doc.samsungmobile.com/${result.device.model}/${result.device.csc}/doc.html"
@@ -81,11 +83,6 @@ fun HomeRoute(
             onOpenFirmwareManual()
         },
     )
-}
-
-private fun copyToClipboard(context: Context, text: String) {
-    val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    cm.setPrimaryClip(ClipData.newPlainText("CheckFirm", text))
 }
 
 @Composable
