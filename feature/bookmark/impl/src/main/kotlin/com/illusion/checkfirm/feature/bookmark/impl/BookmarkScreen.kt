@@ -38,7 +38,7 @@ fun BookmarkScreen(
         title = stringResource(R.string.bookmark),
         navigationIcon = {
             OneNavButton(
-                icon = OneIcons.IcBack,
+                icon = OneIcons.Back,
                 onClick = onNavigationIconClick,
             )
         },

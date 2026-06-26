@@ -65,7 +65,7 @@ fun WelcomeSearchScreen(
     OneScaffold(
         title = stringResource(R.string.welcome_search),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigationIconClick)
+            OneNavButton(icon = OneIcons.Back, onClick = onNavigationIconClick)
         }
     ) { innerPadding ->
         Column(

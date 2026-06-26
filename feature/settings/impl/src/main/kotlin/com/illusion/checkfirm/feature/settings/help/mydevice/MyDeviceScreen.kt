@@ -35,7 +35,7 @@ fun MyDeviceScreen(
     OneScaffold(
         title = stringResource(FeatureR.string.help_device_info),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigationIconClick)
+            OneNavButton(icon = OneIcons.Back, onClick = onNavigationIconClick)
         },
     ) { innerPadding ->
         Column(

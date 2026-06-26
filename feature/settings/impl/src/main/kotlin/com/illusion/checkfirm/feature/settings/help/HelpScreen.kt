@@ -32,7 +32,7 @@ fun HelpScreen(
     OneScaffold(
         title = stringResource(R.string.help),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigateBack)
+            OneNavButton(icon = OneIcons.Back, onClick = onNavigateBack)
         },
     ) { innerPadding ->
         Column(
@@ -50,14 +50,14 @@ fun HelpScreen(
                 OneCardItem(
                     title = stringResource(FeatureR.string.help_manual),
                     description = stringResource(FeatureR.string.help_manual_description),
-                    iconVector = OneIcons.IcHelpManual,
+                    iconVector = OneIcons.HelpManual,
                     onClick = onNavigateToFirmwareManual,
                 )
                 OneDivider()
                 OneCardItem(
                     title = stringResource(FeatureR.string.help_device_info),
                     description = stringResource(FeatureR.string.help_device_info_description),
-                    iconVector = OneIcons.IcHelpDevice,
+                    iconVector = OneIcons.HelpDevice,
                     onClick = onNavigateToMyDevice,
                 )
             }

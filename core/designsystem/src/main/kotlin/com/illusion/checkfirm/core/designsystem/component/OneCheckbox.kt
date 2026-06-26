@@ -179,7 +179,7 @@ fun OneCheckboxCard(
             if (showArrow) {
                 Spacer(modifier = Modifier.width(12.dp))
                 Icon(
-                    imageVector = OneIcons.IcChevronRight,
+                    imageVector = OneIcons.ChevronRight,
                     contentDescription = null,
                     modifier = Modifier.size(24.dp),
                 )

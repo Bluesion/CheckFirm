@@ -63,7 +63,7 @@ private fun OneNavButtonPreview() {
     CheckFirmTheme {
         Surface {
             OneNavButton(
-                icon = OneIcons.IcBack,
+                icon = OneIcons.Back,
                 onClick = {},
             )
         }

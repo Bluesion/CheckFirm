@@ -113,7 +113,7 @@ fun OneCardItem(
                 Box(modifier = Modifier.padding(end = 12.dp)) { trailing() }
             } else if (showChevron) {
                 Icon(
-                    imageVector = OneIcons.IcChevronRight,
+                    imageVector = OneIcons.ChevronRight,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier

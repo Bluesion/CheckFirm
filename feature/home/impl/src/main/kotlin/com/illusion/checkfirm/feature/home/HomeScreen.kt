@@ -55,19 +55,19 @@ fun HomeScreen(
         actions = {
             IconButton(onClick = onSearchIconClick) {
                 Icon(
-                    imageVector = OneIcons.OneuiSearch,
+                    imageVector = OneIcons.Search,
                     contentDescription = stringResource(R.string.search),
                 )
             }
             IconButton(onClick = onBookmarkIconClick) {
                 Icon(
-                    imageVector = OneIcons.OneuiBookmark,
+                    imageVector = OneIcons.Bookmark,
                     contentDescription = stringResource(R.string.bookmark),
                 )
             }
             IconButton(onClick = onPreferenceIconClick) {
                 Icon(
-                    imageVector = OneIcons.OneuiSettings,
+                    imageVector = OneIcons.Settings,
                     contentDescription = stringResource(R.string.settings),
                 )
             }

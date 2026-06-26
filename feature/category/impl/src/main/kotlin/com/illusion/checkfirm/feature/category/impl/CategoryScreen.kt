@@ -43,7 +43,7 @@ fun CategoryScreen(
     OneScaffold(
         title = stringResource(R.string.category),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigationIconClick)
+            OneNavButton(icon = OneIcons.Back, onClick = onNavigationIconClick)
         },
     ) { innerPadding ->
         Column(

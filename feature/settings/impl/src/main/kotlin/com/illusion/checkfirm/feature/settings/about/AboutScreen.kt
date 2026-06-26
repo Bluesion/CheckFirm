@@ -50,7 +50,7 @@ fun AboutScreen(
     OneScaffold(
         title = "",
         navigationIcon = {
-            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigateBack)
+            OneNavButton(icon = OneIcons.Back, onClick = onNavigateBack)
         },
         actions = {
             IconButton(

@@ -39,7 +39,7 @@ internal fun HelloDashboard(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
-            imageVector = OneIcons.CheckfirmIcon,
+            imageVector = OneIcons.CheckFirm,
             contentDescription = null,
             tint = Color.Unspecified,
             modifier = Modifier.size(64.dp),
@@ -65,35 +65,35 @@ internal fun HelloDashboard(
             OneCardItem(
                 title = stringResource(R.string.search),
                 description = stringResource(FeatureR.string.home_hello_search_description),
-                iconVector = OneIcons.OneuiSearch,
+                iconVector = OneIcons.Search,
                 onClick = onSearchClick,
             )
             OneDivider()
             OneCardItem(
                 title = stringResource(R.string.bookmark),
                 description = stringResource(FeatureR.string.home_hello_bookmark_description),
-                iconVector = OneIcons.OneuiBookmark,
+                iconVector = OneIcons.Bookmark,
                 onClick = onBookmarkClick,
             )
             OneDivider()
             OneCardItem(
                 title = stringResource(R.string.welcome_search),
                 description = stringResource(R.string.settings_welcome_search_description),
-                iconVector = OneIcons.IcWelcomeSearch,
+                iconVector = OneIcons.WelcomeSearch,
                 onClick = onWelcomeSearchClick,
             )
             OneDivider()
             OneCardItem(
                 title = stringResource(R.string.info_catcher),
                 description = stringResource(FeatureR.string.home_hello_info_catcher_description),
-                iconVector = OneIcons.IcInfoCatcher,
+                iconVector = OneIcons.InfoCatcher,
                 onClick = onInfoCatcherClick,
             )
             OneDivider()
             OneCardItem(
                 title = stringResource(R.string.settings),
                 description = stringResource(FeatureR.string.home_hello_settings_description),
-                iconVector = OneIcons.OneuiSettings,
+                iconVector = OneIcons.Settings,
                 onClick = onSettingsClick,
             )
         }

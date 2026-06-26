@@ -72,7 +72,7 @@ fun SherlockScreen(
     OneScaffold(
         title = stringResource(FeatureR.string.sherlock),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigationIconClick)
+            OneNavButton(icon = OneIcons.Back, onClick = onNavigationIconClick)
         },
         actions = {
             IconButton(onClick = onShowInfo) {

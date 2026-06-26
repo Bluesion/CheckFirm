@@ -50,7 +50,7 @@ internal fun QuickSearchBar(
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                imageVector = OneIcons.IcCategory,
+                imageVector = OneIcons.Category,
                 contentDescription = stringResource(R.string.category),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier

@@ -32,7 +32,7 @@ fun FirmwareManualScreen(
     OneScaffold(
         title = stringResource(FeatureR.string.help_manual),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigationIconClick)
+            OneNavButton(icon = OneIcons.Back, onClick = onNavigationIconClick)
         },
     ) { innerPadding ->
         Column(

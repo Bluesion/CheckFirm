@@ -41,7 +41,7 @@ fun ReportScreen(
         title = stringResource(DesignSystemR.string.report),
         navigationIcon = {
             OneNavButton(
-                icon = OneIcons.IcBack,
+                icon = OneIcons.Back,
                 onClick = onNavigationIconClick,
             )
         },

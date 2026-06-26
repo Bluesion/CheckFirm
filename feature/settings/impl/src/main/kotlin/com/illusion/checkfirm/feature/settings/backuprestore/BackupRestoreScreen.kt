@@ -38,7 +38,7 @@ fun BackupRestoreScreen(
     OneScaffold(
         navigationIcon = {
             OneNavButton(
-                icon = OneIcons.IcBack,
+                icon = OneIcons.Back,
                 onClick = onNavigateBack,
             )
         },

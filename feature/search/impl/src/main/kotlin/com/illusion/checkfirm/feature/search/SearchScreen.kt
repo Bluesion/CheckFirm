@@ -99,7 +99,7 @@ fun SearchScreen(
         expandable = false,
         navigationIcon = {
             OneNavButton(
-                icon = OneIcons.IcBack,
+                icon = OneIcons.Back,
                 onClick = onNavigationIconClick,
             )
         }
@@ -198,7 +198,7 @@ private fun NewSearchCard(
             contentAlignment = Alignment.Center,
         ) {
             PillIconButton(
-                icon = OneIcons.OneuiAdd,
+                icon = OneIcons.Add,
                 text = stringResource(FeatureR.string.search_add_comparison),
                 onClick = onAddClick,
             )
@@ -230,7 +230,7 @@ private fun BookmarksCard(
     OneCard {
         SectionHeader(
             title = stringResource(FeatureR.string.search_bookmarks),
-            trailingIcon = OneIcons.OneuiBookmark,
+            trailingIcon = OneIcons.Bookmark,
         )
         OneDivider(modifier = Modifier.padding(horizontal = 20.dp))
 
@@ -449,7 +449,7 @@ private fun SearchPrimaryButton(
         horizontalArrangement = Arrangement.Center,
     ) {
         Icon(
-            imageVector = OneIcons.OneuiSearch,
+            imageVector = OneIcons.Search,
             contentDescription = null,
             tint = contentColor,
             modifier = Modifier.size(20.dp),
@@ -513,7 +513,7 @@ private fun BookmarkRow(
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                imageVector = OneIcons.OneuiDevice,
+                imageVector = OneIcons.Device,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(22.dp),
@@ -535,7 +535,7 @@ private fun BookmarkRow(
             )
         }
         Icon(
-            imageVector = OneIcons.OneuiBookmark,
+            imageVector = OneIcons.Bookmark,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(20.dp),
@@ -557,7 +557,7 @@ private fun HistoryRow(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
-            imageVector = OneIcons.OneuiSearch,
+            imageVector = OneIcons.Search,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.size(20.dp),
@@ -628,7 +628,7 @@ private fun SelectedDeviceList(
                     contentAlignment = Alignment.Center,
                 ) {
                     Icon(
-                        imageVector = OneIcons.IcClear,
+                        imageVector = OneIcons.Clear,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(16.dp),

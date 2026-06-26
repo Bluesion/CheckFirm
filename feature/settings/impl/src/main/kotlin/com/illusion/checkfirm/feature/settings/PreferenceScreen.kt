@@ -55,7 +55,7 @@ fun PreferenceScreen(
     OneScaffold(
         title = stringResource(R.string.settings),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.IcBack, onClick = onNavigateBack)
+            OneNavButton(icon = OneIcons.Back, onClick = onNavigateBack)
         },
     ) { innerPadding ->
         Column(

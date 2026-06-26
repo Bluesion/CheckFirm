@@ -58,7 +58,7 @@ fun ProfileCard(
                 )
             }
             Icon(
-                imageVector = OneIcons.IcProfile,
+                imageVector = OneIcons.Profile,
                 contentDescription = null,
                 tint = Color.Unspecified,
                 modifier = Modifier.size(50.dp),
