@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -35,7 +38,18 @@ fun MyDeviceScreen(
     OneScaffold(
         title = stringResource(FeatureR.string.help_device_info),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.Back, onClick = onNavigationIconClick)
+            OneNavButton(
+                onClick = onNavigationIconClick,
+                shape = CircleShape,
+                modifier = Modifier.size(48.dp),
+            ) {
+                Icon(
+                    imageVector = OneIcons.Back,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
         },
     ) { innerPadding ->
         Column(

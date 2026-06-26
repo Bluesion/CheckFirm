@@ -99,9 +99,17 @@ fun SearchScreen(
         expandable = false,
         navigationIcon = {
             OneNavButton(
-                icon = OneIcons.Back,
                 onClick = onNavigationIconClick,
-            )
+                shape = CircleShape,
+                modifier = Modifier.size(48.dp),
+            ) {
+                Icon(
+                    imageVector = OneIcons.Back,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
         }
     ) { innerPadding ->
         LazyColumn(
@@ -584,7 +592,7 @@ private fun HistoryRow(
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                imageVector = OneIcons.IcClear,
+                imageVector = OneIcons.Clear,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(18.dp),

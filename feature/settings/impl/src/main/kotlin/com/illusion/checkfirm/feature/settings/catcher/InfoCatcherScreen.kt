@@ -54,7 +54,18 @@ fun InfoCatcherScreen(
     OneScaffold(
         title = stringResource(R.string.info_catcher),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.Back, onClick = onNavigationIconClick)
+            OneNavButton(
+                onClick = onNavigationIconClick,
+                shape = CircleShape,
+                modifier = Modifier.size(48.dp),
+            ) {
+                Icon(
+                    imageVector = OneIcons.Back,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
         }
     ) { innerPadding ->
         Column(

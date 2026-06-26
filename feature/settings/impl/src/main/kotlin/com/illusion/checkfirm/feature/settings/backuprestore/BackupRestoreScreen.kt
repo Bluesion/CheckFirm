@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -38,9 +40,17 @@ fun BackupRestoreScreen(
     OneScaffold(
         navigationIcon = {
             OneNavButton(
-                icon = OneIcons.Back,
                 onClick = onNavigateBack,
-            )
+                shape = CircleShape,
+                modifier = Modifier.size(48.dp),
+            ) {
+                Icon(
+                    imageVector = OneIcons.Back,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
         },
     ) { innerPadding ->
         Column(

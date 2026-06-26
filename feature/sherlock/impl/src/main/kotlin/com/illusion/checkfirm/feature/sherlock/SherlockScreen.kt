@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -72,7 +73,18 @@ fun SherlockScreen(
     OneScaffold(
         title = stringResource(FeatureR.string.sherlock),
         navigationIcon = {
-            OneNavButton(icon = OneIcons.Back, onClick = onNavigationIconClick)
+            OneNavButton(
+                onClick = onNavigationIconClick,
+                shape = CircleShape,
+                modifier = Modifier.size(48.dp),
+            ) {
+                Icon(
+                    imageVector = OneIcons.Back,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
         },
         actions = {
             IconButton(onClick = onShowInfo) {

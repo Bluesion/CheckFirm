@@ -30,6 +30,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -51,6 +52,9 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 private val ToolbarHeight = 56.dp
+
+// The fixed toolbar always shows its title, so its nav button never shows a background.
+private val NavButtonBackgroundHidden: () -> Float = { 0f }
 
 @Composable
 fun OneScaffold(
@@ -104,19 +108,35 @@ fun OneScaffold(
         },
     )
 
+    // Show the nav button's background only once content has scrolled up behind the toolbar
+    // (title hidden); keep it hidden while the title is shown. Crossfades over the same
+    // distance as the collapsed title fade. Evaluated at draw time (see OneNavButton).
+    val topBarState = scrollBehavior.state
+    val navFadePx = with(density) { (ToolbarHeight / 2).toPx() }
+    val navButtonBackgroundAlpha = remember(topBarState, navFadePx) {
+        {
+            val overlap = (-topBarState.contentOffset).coerceAtLeast(0f)
+            (overlap / navFadePx).coerceIn(0f, 1f)
+        }
+    }
+
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             // Only the navigation/action icons live in the topBar, so they stay drawn
             // on top of the content (content scrolls behind them, never over them).
-            OneCollapsingControls(
-                modifier = dragModifier,
-                navigationIcon = navigationIcon,
-                actions = actions,
-                expandedHeight = expandedHeight,
-                scrollBehavior = scrollBehavior,
-            )
+            CompositionLocalProvider(
+                LocalOneNavButtonBackgroundAlpha provides navButtonBackgroundAlpha,
+            ) {
+                OneCollapsingControls(
+                    modifier = dragModifier,
+                    navigationIcon = navigationIcon,
+                    actions = actions,
+                    expandedHeight = expandedHeight,
+                    scrollBehavior = scrollBehavior,
+                )
+            }
         },
         floatingActionButton = floatingActionButton,
     ) { innerPadding ->
@@ -159,11 +179,15 @@ private fun OneFixedScaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            OneFixedToolbar(
-                title = title,
-                navigationIcon = navigationIcon,
-                actions = actions,
-            )
+            CompositionLocalProvider(
+                LocalOneNavButtonBackgroundAlpha provides NavButtonBackgroundHidden,
+            ) {
+                OneFixedToolbar(
+                    title = title,
+                    navigationIcon = navigationIcon,
+                    actions = actions,
+                )
+            }
         },
         floatingActionButton = floatingActionButton,
     ) { innerPadding ->
