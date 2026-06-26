@@ -62,7 +62,8 @@ fun InfoCatcherScreen(
                 .padding(horizontal = 12.dp)
                 .padding(bottom = innerPadding.calculateBottomPadding())
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(top = innerPadding.calculateTopPadding()),
         ) {
             Spacer(modifier = Modifier.height(4.dp))
 

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,10 +35,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -105,10 +108,10 @@ fun OneScaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            OneCollapsingToolbar(
+            // Only the navigation/action icons live in the topBar, so they stay drawn
+            // on top of the content (content scrolls behind them, never over them).
+            OneCollapsingControls(
                 modifier = dragModifier,
-                title = title,
-                subTitle = subTitle,
                 navigationIcon = navigationIcon,
                 actions = actions,
                 expandedHeight = expandedHeight,
@@ -117,13 +120,28 @@ fun OneScaffold(
         },
         floatingActionButton = floatingActionButton,
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding())
-                .then(dragModifier),
-        ) {
-            content(innerPadding)
+        Box(modifier = Modifier.fillMaxSize()) {
+            // The title sits behind the content: as content scrolls up it slides over
+            // the title, while the icons in the topBar above stay visible.
+            OneCollapsingTitle(
+                title = title,
+                subTitle = subTitle,
+                navigationIcon = navigationIcon,
+                actions = actions,
+                expandedHeight = expandedHeight,
+                scrollBehavior = scrollBehavior,
+            )
+
+            // No top padding here: content fills the full height behind the (transparent)
+            // collapsing toolbar so it can scroll up above/behind it. Callers inset their
+            // scrollable content with innerPadding.calculateTopPadding() instead.
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .then(dragModifier),
+            ) {
+                content(innerPadding)
+            }
         }
     }
 }
@@ -195,11 +213,17 @@ private fun OneFixedToolbar(
     }
 }
 
+/**
+ * The on-top layer of the collapsing toolbar: just the navigation icon and actions.
+ *
+ * This is placed in the [Scaffold] topBar slot, so it is drawn above the content and
+ * reserves the full collapsing height that the Scaffold reports as the top inset. The
+ * background is transparent — see [OneCollapsingTitle] for the title that sits behind
+ * the content.
+ */
 @Composable
-private fun OneCollapsingToolbar(
+private fun OneCollapsingControls(
     modifier: Modifier,
-    title: String,
-    subTitle: String?,
     navigationIcon: @Composable () -> Unit,
     actions: @Composable RowScope.() -> Unit,
     expandedHeight: Dp,
@@ -219,10 +243,57 @@ private fun OneCollapsingToolbar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = MaterialTheme.colorScheme.background)
             .windowInsetsPadding(insets = WindowInsets.statusBars)
             .height(currentHeight)
             .then(other = modifier),
+    ) {
+        Row(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .fillMaxWidth()
+                .defaultMinSize(minHeight = ToolbarHeight)
+                .padding(start = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            navigationIcon()
+
+            // Empty middle where the title would be; the title itself is rendered in
+            // OneCollapsingTitle behind the content so content can scroll over it.
+            Spacer(modifier = Modifier.weight(1f))
+
+            Row(
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically,
+                content = actions,
+            )
+        }
+    }
+}
+
+/**
+ * The behind-the-content layer of the collapsing toolbar: the big expanded title and the
+ * pinned collapsed title. It is drawn first inside the content area so scrolling content
+ * slides over it. The navigation/action icons are re-rendered here as invisible, semantics-
+ * cleared placeholders purely so the collapsed title lines up with the real icons that
+ * [OneCollapsingControls] draws on top.
+ */
+@Composable
+private fun OneCollapsingTitle(
+    title: String,
+    subTitle: String?,
+    navigationIcon: @Composable () -> Unit,
+    actions: @Composable RowScope.() -> Unit,
+    expandedHeight: Dp,
+    scrollBehavior: TopAppBarScrollBehavior,
+) {
+    val collapsedFraction = scrollBehavior.state.collapsedFraction
+    val currentHeight = expandedHeight - (expandedHeight - ToolbarHeight) * collapsedFraction
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .windowInsetsPadding(insets = WindowInsets.statusBars)
+            .height(currentHeight),
     ) {
         // Expanded centered big title
         Box(
@@ -251,7 +322,7 @@ private fun OneCollapsingToolbar(
             }
         }
 
-        // Pinned bottom 56dp toolbar
+        // Pinned collapsed title, aligned with the real icons via invisible placeholders
         Row(
             modifier = Modifier
                 .align(Alignment.BottomStart)
@@ -260,14 +331,28 @@ private fun OneCollapsingToolbar(
                 .padding(start = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            navigationIcon()
+            Box(
+                modifier = Modifier
+                    .alpha(0f)
+                    .clearAndSetSemantics {},
+            ) {
+                navigationIcon()
+            }
 
             Text(
                 text = title,
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 4.dp)
-                    .graphicsLayer { alpha = collapsedFraction },
+                    .graphicsLayer {
+                        // Fade the title out as content scrolls up over it, so it doesn't
+                        // peek through the gaps between items. contentOffset stays 0 while
+                        // the bar collapses and only grows once content scrolls past it.
+                        val overlap = (-scrollBehavior.state.contentOffset).coerceAtLeast(0f)
+                        val notOverlapped =
+                            (1f - overlap / (ToolbarHeight.toPx() / 2f)).coerceIn(0f, 1f)
+                        alpha = collapsedFraction * notOverlapped
+                    },
                 color = CheckFirmTheme.colors.toolbarText,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 20.sp,
@@ -275,11 +360,13 @@ private fun OneCollapsingToolbar(
                 style = MaterialTheme.typography.titleLarge,
             )
 
-            Row(
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically,
-                content = actions,
-            )
+            Box(
+                modifier = Modifier
+                    .alpha(0f)
+                    .clearAndSetSemantics {},
+            ) {
+                Row(content = actions)
+            }
         }
     }
 }
@@ -309,8 +396,11 @@ private fun OneScaffoldPreview() {
         Surface {
             OneScaffold(
                 title = "CheckFirm",
-            ) {
-                Text(text = "content")
+            ) { innerPadding ->
+                Text(
+                    text = "content",
+                    modifier = Modifier.padding(top = innerPadding.calculateTopPadding()),
+                )
             }
         }
     }

@@ -49,9 +49,10 @@ fun ReportScreen(
         Column(
             modifier = Modifier
                 .padding(horizontal = 12.dp)
-                .padding(top = 12.dp, bottom = innerPadding.calculateBottomPadding() + 16.dp)
+                .padding(bottom = innerPadding.calculateBottomPadding() + 16.dp)
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(top = innerPadding.calculateTopPadding() + 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             OneCard(

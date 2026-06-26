@@ -63,7 +63,10 @@ fun PreferenceScreen(
                 .fillMaxSize()
                 .padding(horizontal = 10.dp)
                 .verticalScroll(rememberScrollState())
-                .padding(bottom = innerPadding.calculateBottomPadding() + 16.dp),
+                .padding(
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = innerPadding.calculateBottomPadding() + 16.dp,
+                ),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             ProfileCard(

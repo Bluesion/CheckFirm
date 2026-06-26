@@ -86,7 +86,10 @@ fun SherlockScreen(
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(bottom = innerPadding.calculateBottomPadding())
+                .padding(
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = innerPadding.calculateBottomPadding(),
+                )
                 .fillMaxSize(),
         ) {
             OneTab(

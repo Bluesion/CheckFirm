@@ -73,7 +73,10 @@ fun AboutScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 24.dp, vertical = 16.dp)
-                .padding(bottom = innerPadding.calculateBottomPadding()),
+                .padding(
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = innerPadding.calculateBottomPadding(),
+                ),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(

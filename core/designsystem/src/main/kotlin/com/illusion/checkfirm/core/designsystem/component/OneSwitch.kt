@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -100,12 +101,12 @@ fun OneSwitch(
         Canvas(
             modifier = Modifier
                 .size(width = SwitchTrackWidth, height = SwitchTrackHeight)
-                .clip(RoundedCornerShape(SwitchTrackHeight / 2)),
+                .clip(shape = RoundedCornerShape(size = SwitchTrackHeight / 2)),
         ) {
             drawRoundRect(
                 color = trackColor,
                 size = Size(size.width, size.height),
-                cornerRadius = androidx.compose.ui.geometry.CornerRadius(size.height / 2),
+                cornerRadius = CornerRadius(size.height / 2),
             )
         }
         Box(

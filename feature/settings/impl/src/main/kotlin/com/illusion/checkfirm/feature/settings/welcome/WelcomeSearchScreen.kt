@@ -74,6 +74,7 @@ fun WelcomeSearchScreen(
                 .fillMaxSize()
                 .padding(horizontal = 12.dp)
                 .verticalScroll(rememberScrollState())
+                .padding(top = innerPadding.calculateTopPadding())
         ) {
             Card(
                 onClick = { onIsWelcomeSearchEnabledChange(!uiState.isWelcomeSearchEnabled) },

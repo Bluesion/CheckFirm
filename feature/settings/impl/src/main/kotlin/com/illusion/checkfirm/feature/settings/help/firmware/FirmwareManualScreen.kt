@@ -40,7 +40,10 @@ fun FirmwareManualScreen(
                 .padding(horizontal = 12.dp)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(bottom = innerPadding.calculateBottomPadding() + 16.dp),
+                .padding(
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = innerPadding.calculateBottomPadding() + 16.dp,
+                ),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             ManualCard(stringResource(FeatureR.string.help_firmware_manual_description))
