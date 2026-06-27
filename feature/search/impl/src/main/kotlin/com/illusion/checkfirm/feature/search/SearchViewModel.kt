@@ -22,12 +22,6 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
 
-data class SearchUiState(
-    val model: String = "",
-    val csc: String = "",
-    val searchList: List<SearchDeviceItem> = emptyList()
-)
-
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     bcRepository: BCRepository,
