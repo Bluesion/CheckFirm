@@ -1,5 +1,6 @@
 package com.illusion.checkfirm.feature.search
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -669,7 +670,7 @@ private fun formatDate(date: Date): String {
     return "${date.year}-$month-$day"
 }
 
-private fun toast(context: android.content.Context, message: String) {
+private fun toast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 

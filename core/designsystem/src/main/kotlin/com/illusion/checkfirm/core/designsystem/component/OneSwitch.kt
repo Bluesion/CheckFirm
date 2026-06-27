@@ -42,7 +42,7 @@ import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
-private val SwitchTrackWidth = 35.dp
+private val SwitchTrackWidth = 32.dp
 private val SwitchTrackHeight = 20.dp
 private val SwitchThumbDiameter = 16.dp
 private val SwitchThumbInset = 2.dp
@@ -146,7 +146,7 @@ fun OneSwitchCard(
             .fillMaxWidth()
             .wrapContentHeight()
             .clickable(role = Role.Switch) { onCheckedChange(!checked) },
-        shape = RoundedCornerShape(26.dp),
+        shape = RoundedCornerShape(size = 32.dp),
         colors = CardDefaults.cardColors(containerColor = if (checked) cardOn else cardOff),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
