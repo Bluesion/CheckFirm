@@ -30,11 +30,14 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 @Composable
 fun OneLoadingIndicator(
     modifier: Modifier = Modifier,
-    dotTop: Color = Color(0xFF00E676),
-    dotRight: Color = Color(0xFF00B0FF),
-    dotBottom: Color = Color(0xFF00BFA5),
-    dotLeft: Color = Color(0xFF2979FF),
+    tint: Color? = null,
 ) {
+    // When a tint is supplied, all four dots use it; otherwise each keeps its own color.
+    val topColor = tint ?: Color(0xFF00E676)
+    val rightColor = tint ?: Color(0xFF00B0FF)
+    val bottomColor = tint ?: Color(0xFF00BFA5)
+    val leftColor = tint ?: Color(0xFF2979FF)
+
     val infiniteTransition = rememberInfiniteTransition(label = "LoadingTransition")
 
     val rotation by infiniteTransition.animateFloat(
@@ -105,28 +108,28 @@ fun OneLoadingIndicator(
 
         rotate(rotation, center) {
             drawCircle(
-                color = dotTop,
+                color = topColor,
                 radius = currentRadius,
                 center = Offset(center.x, center.y - currentDist),
                 blendMode = BlendMode.Screen,
                 alpha = 0.7f
             )
             drawCircle(
-                color = dotRight,
+                color = rightColor,
                 radius = currentRadius,
                 center = Offset(center.x + currentDist, center.y),
                 blendMode = BlendMode.Screen,
                 alpha = 0.7f
             )
             drawCircle(
-                color = dotBottom,
+                color = bottomColor,
                 radius = currentRadius,
                 center = Offset(center.x, center.y + currentDist),
                 blendMode = BlendMode.Screen,
                 alpha = 0.7f
             )
             drawCircle(
-                color = dotLeft,
+                color = leftColor,
                 radius = currentRadius,
                 center = Offset(center.x - currentDist, center.y),
                 blendMode = BlendMode.Screen,
