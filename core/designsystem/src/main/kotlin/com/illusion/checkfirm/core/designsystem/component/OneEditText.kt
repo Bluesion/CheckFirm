@@ -96,13 +96,12 @@ fun OneEditText(
                     contentDescription = androidx.compose.ui.res.stringResource(com.illusion.checkfirm.core.designsystem.R.string.clear_text),
                     tint = CheckFirmTheme.colors.textSecondary,
                     modifier = Modifier
-                        .size(48.dp)
+                        .size(24.dp)
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
                             onClick = { onValueChange("") }
-                        )
-                        .padding(12.dp),
+                        ),
                 )
             }
         }
@@ -129,4 +128,3 @@ private fun OneEditTextPreview() {
         }
     }
 }
-
