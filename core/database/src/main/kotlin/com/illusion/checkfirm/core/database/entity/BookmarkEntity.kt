@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.illusion.checkfirm.core.domain.model.Bookmark
+import com.illusion.checkfirm.core.domain.model.storageKey
 import com.illusion.checkfirm.core.domain.model.Device
 import kotlinx.serialization.Serializable
 
@@ -33,7 +34,7 @@ fun Bookmark.asEntity() = BookmarkEntity(
     name = name,
     model = device.model,
     csc = device.csc,
-    device = device.toString(),
+    device = device.storageKey,
     category = category,
     position = position
 )

@@ -22,6 +22,6 @@ interface InfoCatcherDao {
     @Query("DELETE from catcher_device")
     suspend fun deleteAll()
 
-    @Query("DELETE FROM catcher_device WHERE device = :device")
-    suspend fun delete(device: String): Int
+    @Query("DELETE FROM catcher_device WHERE model = :model AND csc = :csc")
+    suspend fun delete(model: String, csc: String): Int
 }

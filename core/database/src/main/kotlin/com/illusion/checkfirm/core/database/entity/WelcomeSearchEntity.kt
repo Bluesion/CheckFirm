@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.illusion.checkfirm.core.domain.model.storageKey
 import com.illusion.checkfirm.core.domain.model.Device
 
 @Entity(tableName = "welcome_search_device", indices = [Index(value = ["device"], unique = true)])
@@ -24,6 +25,6 @@ fun Device.toWelcomeSearchEntity(): WelcomeSearchEntity {
         id = null,
         model = model,
         csc = csc,
-        device = toString()
+        device = storageKey
     )
 }

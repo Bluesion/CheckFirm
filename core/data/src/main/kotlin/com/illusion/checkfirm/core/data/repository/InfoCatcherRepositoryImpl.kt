@@ -23,6 +23,6 @@ class InfoCatcherRepositoryImpl @Inject constructor(
     }
 
     override suspend fun delete(device: Device) {
-        catcherDao.delete(device.toString())
+        catcherDao.delete(device.model, device.csc)
     }
 }

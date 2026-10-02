@@ -71,3 +71,6 @@ data class Device(
         return true
     }
 }
+
+/** Preserve the XML app's database key format across the UI migration. */
+val Device.storageKey: String get() = "DeviceItem(model=$model, csc=$csc)"

@@ -22,6 +22,6 @@ interface WelcomeSearchDao {
     @Query("DELETE from welcome_search_device")
     suspend fun deleteAll()
 
-    @Query("DELETE FROM welcome_search_device WHERE device = :device")
-    suspend fun delete(device: String): Int
+    @Query("DELETE FROM welcome_search_device WHERE model = :model AND csc = :csc")
+    suspend fun delete(model: String, csc: String): Int
 }

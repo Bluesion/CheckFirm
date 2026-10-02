@@ -30,8 +30,8 @@ interface BCDao {
     @Update(onConflict = REPLACE)
     suspend fun editBookmark(bookmark: BookmarkEntity)
 
-    @Query("DELETE FROM bookmark_info WHERE device=:device")
-    suspend fun deleteBookmark(device: String): Int
+    @Query("DELETE FROM bookmark_info WHERE model=:model AND csc=:csc")
+    suspend fun deleteBookmark(model: String, csc: String): Int
 
     @Query("DELETE FROM bookmark_info")
     suspend fun deleteAllBookmark()
@@ -49,7 +49,16 @@ interface BCDao {
     suspend fun editCategory(category: CategoryEntity)
 
     @Query("DELETE FROM category_info WHERE name=:name")
-    suspend fun deleteCategory(name: String): Int
+    suspend fun deleteCategoryRow(name: String): Int
+
+    @Query("UPDATE bookmark_info SET category='' WHERE category=:name")
+    suspend fun clearCategory(name: String)
+
+    @androidx.room.Transaction
+    suspend fun deleteCategory(name: String) {
+        clearCategory(name)
+        deleteCategoryRow(name)
+    }
 
     @Query("DELETE FROM category_info")
     suspend fun deleteAllCategory()

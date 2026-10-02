@@ -38,3 +38,5 @@ dependencies {
     implementation(libs.bundles.hilt)
     ksp(libs.bundles.hilt.compiler)
 }
+
+dependencies { testImplementation("junit:junit:4.13.2") }

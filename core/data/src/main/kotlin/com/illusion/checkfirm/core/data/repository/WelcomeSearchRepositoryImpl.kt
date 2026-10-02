@@ -23,6 +23,6 @@ class WelcomeSearchRepositoryImpl @Inject constructor(
     }
 
     override suspend fun delete(device: Device) {
-        welcomeSearchDao.delete(device.toString())
+        welcomeSearchDao.delete(device.model, device.csc)
     }
 }

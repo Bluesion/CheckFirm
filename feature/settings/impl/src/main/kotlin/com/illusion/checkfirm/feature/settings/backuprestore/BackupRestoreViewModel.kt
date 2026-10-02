@@ -51,7 +51,7 @@ class BackupRestoreViewModel @Inject constructor(
             _uiState.value = BackupRestoreUiState(isWorking = true)
             val ok = try {
                 val item = BackupItem(
-                    bookmarkList = bcRepository.getAllBookmark("date", true).first()
+                    bookmarkList = bcRepository.getAllBookmark("time", false).first()
                         .map(BookmarkDto::fromDomain),
                     categoryList = bcRepository.getAllCategory().first()
                         .map(CategoryDto::fromDomain),
@@ -63,7 +63,9 @@ class BackupRestoreViewModel @Inject constructor(
                     stream.use { it.write(payload.toByteArray()) }
                 }
                 true
-            } catch (t: Throwable) {
+            } catch (cancelled: kotlinx.coroutines.CancellationException) {
+                throw cancelled
+            } catch (t: Exception) {
                 false
             }
             _uiState.value = BackupRestoreUiState(isWorking = false)
@@ -81,10 +83,11 @@ class BackupRestoreViewModel @Inject constructor(
                     stream.use { it.bufferedReader().readText() }
                 }
                 val parsed = json.decodeFromString(BackupItem.serializer(), text)
-                for (bookmark in parsed.bookmarkList) bcRepository.addBookmark(bookmark.toDomain())
-                for (category in parsed.categoryList) bcRepository.addCategory(category.toDomain())
+                restoreBackup(bcRepository, parsed)
                 true
-            } catch (t: Throwable) {
+            } catch (cancelled: kotlinx.coroutines.CancellationException) {
+                throw cancelled
+            } catch (t: Exception) {
                 false
             }
             _uiState.value = BackupRestoreUiState(isWorking = false)

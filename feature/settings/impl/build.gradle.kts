@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(projects.feature.settings.api)
+    implementation(projects.feature.bookmark.api)
     implementation(projects.core.domain)
     implementation(projects.core.preference.api)
     implementation(libs.androidx.appcompat)
@@ -16,3 +17,5 @@ dependencies {
     implementation(libs.bundles.firebase)
     implementation(libs.kotlinx.serialization.json)
 }
+
+dependencies { testImplementation("junit:junit:4.13.2") }

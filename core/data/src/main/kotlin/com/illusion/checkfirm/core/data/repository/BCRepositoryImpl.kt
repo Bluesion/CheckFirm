@@ -43,7 +43,7 @@ class BCRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteBookmark(device: Device) {
-        bcDao.deleteBookmark(device.toString())
+        bcDao.deleteBookmark(device.model, device.csc)
     }
 
     override suspend fun deleteAllBookmark() {
