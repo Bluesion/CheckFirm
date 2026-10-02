@@ -10,12 +10,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -50,10 +50,14 @@ import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import kotlinx.coroutines.launch
-import kotlin.math.abs
 
-private val ToolbarHeight = 56.dp
-private val CollapsingToolbarHeight = 64.dp
+private val ToolbarHeight = 64.dp
+private val ToolbarControlsTopPadding = 4.dp
+
+// In the supplied Samsung Settings captures the entire expanded header, including the
+// status bar, occupies 749 / 2048 of the window. Do not add the status inset to that
+// proportion a second time. Keep the pinned row at 64 dp on shorter/resized windows.
+private const val ExpandedHeaderWindowFraction = 0.366f
 
 // The fixed toolbar always shows its title, so its toolbar buttons never show a background.
 private val ToolbarButtonBackgroundHidden: () -> Float = { 0f }
@@ -81,12 +85,12 @@ fun OneScaffold(
         return
     }
 
-    val windowInfo = LocalWindowInfo.current
-    val screenHeight = windowInfo.containerDpSize.height
-    val expandedHeight = remember(screenHeight) { screenHeight * 0.3976f }
-
     val density = LocalDensity.current
-    val limitPx = with(density) { (expandedHeight - CollapsingToolbarHeight).toPx() }
+    val statusBarHeight = with(density) { WindowInsets.statusBars.getTop(this).toDp() }
+    val windowHeight = LocalWindowInfo.current.containerDpSize.height
+    val expandedHeight =
+        (windowHeight * ExpandedHeaderWindowFraction - statusBarHeight).coerceAtLeast(ToolbarHeight)
+    val limitPx = with(density) { (expandedHeight - ToolbarHeight).toPx() }
 
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
         state = rememberTopAppBarState(
@@ -115,7 +119,7 @@ fun OneScaffold(
     // Crossfades over the same distance as the collapsed title fade. Evaluated at draw time
     // (see OneNavButton and OneCollapsingControls).
     val topBarState = scrollBehavior.state
-    val buttonFadePx = with(density) { (CollapsingToolbarHeight / 2).toPx() }
+    val buttonFadePx = with(density) { (ToolbarHeight / 2).toPx() }
     val toolbarButtonBackgroundAlpha = remember(topBarState, buttonFadePx) {
         {
             val overlap = (-topBarState.contentOffset).coerceAtLeast(0f)
@@ -215,9 +219,8 @@ private fun OneFixedToolbar(
             .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
-            .padding(top = 20.dp)
             .height(ToolbarHeight)
-            .padding(horizontal = 4.dp),
+            .padding(start = 12.dp, end = 4.dp, top = ToolbarControlsTopPadding),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         navigationIcon()
@@ -225,8 +228,7 @@ private fun OneFixedToolbar(
         Text(
             text = title,
             modifier = Modifier
-                .weight(1f)
-                .padding(start = 4.dp),
+                .weight(1f),
             color = CheckFirmTheme.colors.toolbarText,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
@@ -258,15 +260,20 @@ private fun OneCollapsingControls(
     expandedHeight: Dp,
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    val collapsedFraction = scrollBehavior.state.collapsedFraction
-    val currentHeight = expandedHeight - (expandedHeight - CollapsingToolbarHeight) * collapsedFraction
+    val collapsedFraction = scrollBehavior.state.collapsedFraction.coerceIn(0f, 1f)
+    val currentHeight = expandedHeight - (expandedHeight - ToolbarHeight) * collapsedFraction
 
     val density = LocalDensity.current
+    val statusBarHeight = with(density) { WindowInsets.statusBars.getTop(this).toDp() }
     val expandedPx = with(density) { expandedHeight.toPx() }
-    val collapsedPx = with(density) { CollapsingToolbarHeight.toPx() }
+    val collapsedPx = with(density) { ToolbarHeight.toPx() }
 
     SideEffect {
-        scrollBehavior.state.heightOffsetLimit = -(expandedPx - collapsedPx)
+        val newLimit = -(expandedPx - collapsedPx)
+        if (scrollBehavior.state.heightOffsetLimit != newLimit) {
+            scrollBehavior.state.heightOffsetLimit = newLimit
+            scrollBehavior.state.heightOffset = newLimit * collapsedFraction
+        }
     }
 
     val backgroundColor = MaterialTheme.colorScheme.surfaceBright
@@ -275,17 +282,16 @@ private fun OneCollapsingControls(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .windowInsetsPadding(insets = WindowInsets.statusBars)
-            .padding(top = 20.dp)
-            .height(currentHeight)
+            .height(statusBarHeight + currentHeight)
+            .consumeWindowInsets(WindowInsets.statusBars)
             .then(other = modifier),
     ) {
         Row(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .fillMaxWidth()
-                .defaultMinSize(minHeight = CollapsingToolbarHeight)
-                .padding(start = 12.dp),
+                .height(ToolbarHeight)
+                .padding(start = 12.dp, top = ToolbarControlsTopPadding),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             navigationIcon()
@@ -320,6 +326,16 @@ private fun OneCollapsingControls(
                 )
             }
         }
+
+        // Scrolling cards pass under the floating controls, but never under the status
+        // icons. Its inset is already included in this layer's measured height.
+        Box(
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .fillMaxWidth()
+                .height(statusBarHeight)
+                .background(MaterialTheme.colorScheme.background),
+        )
     }
 }
 
@@ -339,20 +355,23 @@ private fun OneCollapsingTitle(
     expandedHeight: Dp,
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    val collapsedFraction = scrollBehavior.state.collapsedFraction
-    val currentHeight = expandedHeight - (expandedHeight - CollapsingToolbarHeight) * collapsedFraction
+    val collapsedFraction = scrollBehavior.state.collapsedFraction.coerceIn(0f, 1f)
+    val currentHeight = expandedHeight - (expandedHeight - ToolbarHeight) * collapsedFraction
+    val statusBarHeight = with(LocalDensity.current) { WindowInsets.statusBars.getTop(this).toDp() }
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .windowInsetsPadding(insets = WindowInsets.statusBars)
-            .padding(top = 20.dp)
             .height(currentHeight),
     ) {
         // Expanded centered big title
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                // Samsung centers the expanded title in the complete header (including
+                // the status area), rather than only in the region below the status bar.
+                .padding(bottom = statusBarHeight.coerceAtMost(currentHeight - ToolbarHeight))
                 .graphicsLayer { alpha = 1f - collapsedFraction },
             contentAlignment = Alignment.Center,
         ) {
@@ -381,8 +400,8 @@ private fun OneCollapsingTitle(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .fillMaxWidth()
-                .defaultMinSize(minHeight = CollapsingToolbarHeight)
-                .padding(start = 12.dp),
+                .height(ToolbarHeight)
+                .padding(start = 12.dp, top = ToolbarControlsTopPadding),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
@@ -397,14 +416,13 @@ private fun OneCollapsingTitle(
                 text = title,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 4.dp)
                     .graphicsLayer {
                         // Fade the title out as content scrolls up over it, so it doesn't
                         // peek through the gaps between items. contentOffset stays 0 while
                         // the bar collapses and only grows once content scrolls past it.
                         val overlap = (-scrollBehavior.state.contentOffset).coerceAtLeast(0f)
                         val notOverlapped =
-                            (1f - overlap / (CollapsingToolbarHeight.toPx() / 2f)).coerceIn(0f, 1f)
+                            (1f - overlap / (ToolbarHeight.toPx() / 2f)).coerceIn(0f, 1f)
                         alpha = collapsedFraction * notOverlapped
                     },
                 color = CheckFirmTheme.colors.toolbarText,
@@ -440,7 +458,6 @@ private suspend fun settleAppBar(
     ) { value, _ ->
         state.heightOffset = value
     }
-    if (abs(velocity) > 0f && target == 0f) Unit
 }
 
 @ComponentPreview
