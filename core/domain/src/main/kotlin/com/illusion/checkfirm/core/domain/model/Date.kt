@@ -10,5 +10,5 @@ package com.illusion.checkfirm.core.domain.model
 data class Date(
     val year: Int,
     val month: Int,
-    val day: Int
+    val day: Int,
 )

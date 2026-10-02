@@ -153,8 +153,6 @@ object OneIcons {
         ).apply {
             path(
                 fill = SolidColor(Color.White),
-                stroke = SolidColor(Color(0x00000000)),
-                strokeLineWidth = 0f
             ) {
                 moveTo(480f, 536f)
                 lineToRelative(116f, 116f)
