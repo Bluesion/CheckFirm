@@ -119,7 +119,7 @@ fun WelcomeSearchScreen(
                 Column(Modifier.fillMaxWidth().padding(top = 48.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                     Button(onClick = { onShowDialogChange(true) }) {
                         Icon(Icons.Rounded.Add, null, Modifier.size(18.dp))
-                        Text(stringResource(FeatureR.string.welcome_search_add_device), Modifier.padding(start = 4.dp))
+                        Text(stringResource(FeatureR.string.welcome_search_add_device), Modifier.padding(start = 4.dp), color = androidx.compose.material3.LocalContentColor.current)
                     }
                     Text(stringResource(FeatureR.string.welcome_search_empty_device_list), style = MaterialTheme.typography.bodyMedium,
                         color = CheckFirmTheme.colors.settingsDescription, modifier = Modifier.padding(top = 4.dp))

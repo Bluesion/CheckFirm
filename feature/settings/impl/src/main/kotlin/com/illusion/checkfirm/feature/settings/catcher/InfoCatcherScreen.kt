@@ -101,7 +101,7 @@ fun InfoCatcherScreen(
                 androidx.compose.foundation.layout.Box(Modifier.fillMaxWidth().padding(top = 24.dp), contentAlignment = Alignment.Center) {
                     Button(onClick = onAddDeviceClick) {
                         Icon(Icons.Rounded.Add, null, Modifier.size(18.dp))
-                        Text(stringResource(FeatureR.string.welcome_search_add_device), Modifier.padding(start = 4.dp))
+                        Text(stringResource(FeatureR.string.welcome_search_add_device), Modifier.padding(start = 4.dp), color = androidx.compose.material3.LocalContentColor.current)
                     }
                 }
             }

@@ -60,14 +60,14 @@ fun ForceUpdateScreen(
                 onClick = onUpdateButtonClick,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = stringResource(R.string.about_update))
+                Text(text = stringResource(R.string.about_update), color = androidx.compose.material3.LocalContentColor.current)
             }
             Spacer(Modifier.height(8.dp))
             OutlinedButton(
                 onClick = onCloseButtonClick,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = stringResource(R.string.close))
+                Text(text = stringResource(R.string.close), color = androidx.compose.material3.LocalContentColor.current)
             }
         }
     }

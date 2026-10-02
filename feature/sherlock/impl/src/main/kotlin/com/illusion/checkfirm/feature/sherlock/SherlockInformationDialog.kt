@@ -44,7 +44,7 @@ internal fun SherlockInformationDialog(onDismiss: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
         ) {
-            Text(text = stringResource(android.R.string.ok))
+            Text(text = stringResource(android.R.string.ok), color = androidx.compose.material3.LocalContentColor.current)
         }
     }
 }

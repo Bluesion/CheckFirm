@@ -108,7 +108,7 @@ fun SearchScreen(
                     }
                 }
             } else {
-                if (historyList.isNotEmpty()) TextButton(onDeleteAllHistory, Modifier.align(Alignment.End)) { Text(stringResource(R.string.delete_item)) }
+                if (historyList.isNotEmpty()) TextButton(onDeleteAllHistory, Modifier.align(Alignment.End)) { Text(stringResource(R.string.delete_item), color = androidx.compose.material3.LocalContentColor.current) }
                 if (historyList.isEmpty()) SearchEmptyState(stringResource(R.string.search_no_history), null) { validate(onSearchThisDevice()) }
                 else LazyColumn {
                     items(historyList, key = { it.device.toString() }) { history ->
@@ -137,7 +137,7 @@ fun SearchScreen(
                 }
                 Row(Modifier.fillMaxWidth().padding(top = 4.dp).height(48.dp), verticalAlignment = Alignment.CenterVertically) {
                     Text(stringResource(FeatureR.string.search_device_count, uiState.searchList.size), Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
-                    Button(onClick = { focus.clearFocus(); onSearchClick() }, colors = ButtonDefaults.buttonColors(containerColor = androidx.compose.ui.graphics.Color(0xFF377BFF), contentColor = MaterialTheme.colorScheme.surface)) { Text(stringResource(R.string.search)) }
+                    Button(onClick = { focus.clearFocus(); onSearchClick() }, colors = ButtonDefaults.buttonColors(containerColor = androidx.compose.ui.graphics.Color(0xFF377BFF), contentColor = MaterialTheme.colorScheme.surface)) { Text(stringResource(R.string.search), color = androidx.compose.material3.LocalContentColor.current) }
                 }
             }
         }
@@ -154,12 +154,12 @@ private fun SearchEmptyState(label: String, addBookmark: (() -> Unit)?, searchDe
             if (addBookmark != null) {
                 OutlinedButton(addBookmark, colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary), contentPadding = PaddingValues(horizontal = 12.dp)) {
                     Icon(OneIcons.Bookmark, null, Modifier.size(18.dp))
-                    Text(stringResource(FeatureR.string.search_add_bookmark), Modifier.padding(start = 4.dp))
+                    Text(stringResource(FeatureR.string.search_add_bookmark), Modifier.padding(start = 4.dp), color = androidx.compose.material3.LocalContentColor.current)
                 }
             }
             OutlinedButton(searchDevice, colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary), contentPadding = PaddingValues(horizontal = 12.dp)) {
                 Icon(OneIcons.Search, null, Modifier.size(18.dp))
-                Text(stringResource(FeatureR.string.suggestion_search_my_device), Modifier.padding(start = 4.dp))
+                Text(stringResource(FeatureR.string.suggestion_search_my_device), Modifier.padding(start = 4.dp), color = androidx.compose.material3.LocalContentColor.current)
             }
         }
     }

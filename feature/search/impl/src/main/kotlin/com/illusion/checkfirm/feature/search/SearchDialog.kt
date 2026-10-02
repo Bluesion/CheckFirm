@@ -123,7 +123,7 @@ fun SearchDialog(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
         ) {
-            Text(stringResource(android.R.string.ok))
+            Text(stringResource(android.R.string.ok), color = androidx.compose.material3.LocalContentColor.current)
         }
     }
 }

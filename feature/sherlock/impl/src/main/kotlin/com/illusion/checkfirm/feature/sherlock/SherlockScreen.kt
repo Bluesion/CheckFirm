@@ -289,7 +289,7 @@ private fun ScriptTab(
             }
             Spacer(Modifier.height(8.dp))
             Button(onClick = onStart, enabled = !running, modifier = Modifier.fillMaxWidth()) {
-                Text(stringResource(FeatureR.string.sherlock_script_start))
+                Text(stringResource(FeatureR.string.sherlock_script_start), color = androidx.compose.material3.LocalContentColor.current)
             }
         }
     }
