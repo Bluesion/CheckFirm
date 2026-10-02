@@ -6,6 +6,10 @@ import androidx.compose.ui.graphics.Color
 
 @Immutable
 data class ExtendedColors(
+    val textPrimary: Color,
+    val textSecondary: Color,
+    val tabUnselected: Color,
+    val fieldPrefix: Color,
     val toolbarText: Color,
     val toolbarIconTint: Color,
     val settingsDescription: Color,
@@ -26,6 +30,10 @@ data class ExtendedColors(
 )
 
 val LightExtendedColors = ExtendedColors(
+    textPrimary = Color(0xFF1D1B20),
+    textSecondary = Color(0xFF49454F),
+    tabUnselected = Color(0xFF636363),
+    fieldPrefix = Color(0xFFA4A4A4),
     toolbarText = Color(0xFF262628),
     toolbarIconTint = Color(0xFF010101),
     settingsDescription = Color(0xFF848386),
@@ -46,6 +54,10 @@ val LightExtendedColors = ExtendedColors(
 )
 
 val DarkExtendedColors = ExtendedColors(
+    textPrimary = Color(0xFFE6E0E9),
+    textSecondary = Color(0xFFCAC4D0),
+    tabUnselected = Color(0xFFA9A9A9),
+    fieldPrefix = Color(0xFF7A7A7A),
     toolbarText = Color(0xFFE5E5E5),
     toolbarIconTint = Color(0xFFFAFAFA),
     settingsDescription = Color(0xFF959597),

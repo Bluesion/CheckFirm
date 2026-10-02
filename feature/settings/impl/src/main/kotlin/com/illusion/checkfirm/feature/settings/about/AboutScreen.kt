@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
@@ -207,12 +208,12 @@ private fun AboutPageButton(text: String, onClick: () -> Unit) {
         ),
         modifier = Modifier
             .widthIn(min = 216.dp)
-            .height(50.dp)
-            .padding(horizontal = 16.dp),
+            .height(50.dp).padding(vertical = 6.dp),
     ) {
         Text(
             text = text,
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp, fontWeight = FontWeight.Bold),
+            color = CheckFirmTheme.colors.aboutPageButtonText,
             maxLines = 1,
         )
     }

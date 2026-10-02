@@ -27,4 +27,5 @@
     <string name="smart_search_downgrade_possible">可降級</string>
     <string name="smart_search_downgrade_impossible">不可降級</string>
     <string name="official_previous">先前官方韌體</string>
+    <string name="suggestion">建議</string>
 </resources>

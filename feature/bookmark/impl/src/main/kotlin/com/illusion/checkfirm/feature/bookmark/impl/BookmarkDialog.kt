@@ -85,8 +85,10 @@ fun BookmarkDialog(
                 OutlinedTextField(csc, { if (it.length <= 3) csc = it.uppercase(java.util.Locale.US) }, label = { Text(stringResource(R.string.csc)) }, singleLine = true,
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters), modifier = Modifier.weight(1f))
             }
-            Text(stringResource(R.string.category), Modifier.padding(top = 8.dp))
-            OneSpinner(categories, category.ifBlank { allLabel }, { category = if (it == allLabel) "" else it }, Modifier.fillMaxWidth())
+            if (categories.any { it != allLabel }) {
+                Text(stringResource(R.string.category), Modifier.padding(top = 8.dp))
+                OneSpinner(categories, category.ifBlank { allLabel }, { category = if (it == allLabel) "" else it }, Modifier.fillMaxWidth())
+            }
         }
 
         Spacer(Modifier.height(16.dp))

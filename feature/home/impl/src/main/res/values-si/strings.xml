@@ -26,4 +26,5 @@
     <string name="smart_search_downgrade_possible">ඩවුන්ග්‍රේඩ් කළ හැක</string>
     <string name="smart_search_downgrade_impossible">ඩවුන්ග්‍රේඩ් කළ නොහැක</string>
     <string name="official_previous">පෙර නිල ස්ථිරාංගය</string>
+    <string name="suggestion">යෝජනාව</string>
 </resources>

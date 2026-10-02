@@ -82,9 +82,9 @@ fun SearchScreen(
         Row(Modifier.fillMaxWidth().padding(horizontal = 28.dp, vertical = 12.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             listOf(stringResource(R.string.bookmark), stringResource(FeatureR.string.search_history)).forEachIndexed { index, title ->
                 TextButton(onClick = { tab = index }, modifier = Modifier.weight(1f), colors = ButtonDefaults.textButtonColors(
-                    containerColor = if (tab == index) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.04f) else androidx.compose.ui.graphics.Color.Transparent,
+                    containerColor = if (tab == index) CheckFirmTheme.colors.searchAddButtonBackground else androidx.compose.ui.graphics.Color.Transparent,
                     contentColor = if (tab == index) MaterialTheme.colorScheme.onSurface else CheckFirmTheme.colors.settingsDescription)) {
-                    Text(title, style = MaterialTheme.typography.bodyMedium)
+                    Text(title, style = MaterialTheme.typography.bodyMedium, color = if (tab == index) MaterialTheme.colorScheme.onSurface else CheckFirmTheme.colors.settingsDescription)
                 }
             }
         }
@@ -100,7 +100,7 @@ fun SearchScreen(
                         Row(Modifier.fillMaxWidth().toggleable(selected, role = Role.Checkbox) { validate(onDeviceClick(bookmark.device)) }.padding(horizontal = 16.dp, vertical = 20.dp), verticalAlignment = Alignment.CenterVertically) {
                             OneCheckbox(selected, { validate(onDeviceClick(bookmark.device)) }, Modifier.clearAndSetSemantics {})
                             Spacer(Modifier.width(8.dp))
-                            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.Center) {
+                            FlowRow(maxLines = 1, horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.Center) {
                                 Text(bookmark.name, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyLarge)
                                 Text("${bookmark.device.model} · ${bookmark.device.csc}", style = MaterialTheme.typography.bodySmall, color = CheckFirmTheme.colors.settingsDescription)
                             }
@@ -126,8 +126,8 @@ fun SearchScreen(
         OneCard(Modifier.fillMaxWidth()) {
             Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp)) {
                 val selectedDevicesLabel = stringResource(FeatureR.string.search_selected_devices)
-                TextButton({ expanded = !expanded }, Modifier.align(Alignment.CenterHorizontally).height(24.dp).semantics { contentDescription = selectedDevicesLabel }) {
-                    Box(Modifier.size(56.dp, 4.dp).background(MaterialTheme.colorScheme.outlineVariant, CircleShape))
+                Box(Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(0.15f).height(4.dp).clickable { expanded = !expanded }.semantics { contentDescription = selectedDevicesLabel }) {
+                    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.outlineVariant, CircleShape))
                 }
                 if (expanded) uiState.searchList.forEach { item ->
                     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -135,9 +135,9 @@ fun SearchScreen(
                         IconButton({ onRemoveFromSearchList(item.device) }) { Icon(OneIcons.Clear, stringResource(R.string.delete_item)) }
                     }
                 }
-                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    Text(stringResource(FeatureR.string.search_device_count, uiState.searchList.size), Modifier.weight(1f))
-                    Button(onClick = { focus.clearFocus(); onSearchClick() }) { Text(stringResource(R.string.search)) }
+                Row(Modifier.fillMaxWidth().padding(top = 4.dp).height(48.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text(stringResource(FeatureR.string.search_device_count, uiState.searchList.size), Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
+                    Button(onClick = { focus.clearFocus(); onSearchClick() }, colors = ButtonDefaults.buttonColors(containerColor = androidx.compose.ui.graphics.Color(0xFF377BFF), contentColor = MaterialTheme.colorScheme.surface)) { Text(stringResource(R.string.search)) }
                 }
             }
         }

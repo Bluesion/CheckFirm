@@ -2,6 +2,8 @@ package com.illusion.checkfirm.feature.home.component
 
 import android.content.Intent
 import android.provider.Settings
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -56,20 +58,21 @@ internal fun HomeErrorState(
             colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = CheckFirmTheme.colors.tipCardBackground),
             shape = com.illusion.checkfirm.core.designsystem.component.OneCardShape) {
             Column(Modifier.padding(16.dp)) {
-                Text(stringResource(FeatureR.string.suggestion_title), style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(FeatureR.string.suggestion), style = MaterialTheme.typography.bodyLarge)
                 if (network) {
-                    androidx.compose.material3.TextButton(onClick = { context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS)) }) {
-                        Text(stringResource(FeatureR.string.suggestion_wifi), color = CheckFirmTheme.colors.tipText)
-                    }
-                    androidx.compose.material3.TextButton(onClick = { context.startActivity(Intent(Settings.ACTION_DATA_USAGE_SETTINGS)) }) {
-                        Text(stringResource(FeatureR.string.suggestion_data), color = CheckFirmTheme.colors.tipText)
-                    }
-                } else androidx.compose.material3.TextButton(onClick = onCheckDevice) {
-                    Text(stringResource(FeatureR.string.suggestion_check_my_device_info), color = CheckFirmTheme.colors.tipText)
-                }
+                    ErrorTip(stringResource(FeatureR.string.suggestion_wifi)) { context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS)) }
+                    ErrorTip(stringResource(FeatureR.string.suggestion_data)) { context.startActivity(Intent(Settings.ACTION_DATA_USAGE_SETTINGS)) }
+                } else ErrorTip(stringResource(FeatureR.string.suggestion_check_my_device_info), onCheckDevice)
             }
         }
     }
+}
+
+@Composable
+private fun ErrorTip(text: String, onClick: () -> Unit) {
+    Text(text, Modifier.padding(top = 16.dp).clickable(onClick = onClick),
+        style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold,
+        color = CheckFirmTheme.colors.tipText)
 }
 
 @ComponentPreview

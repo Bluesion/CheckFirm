@@ -95,11 +95,11 @@ fun BookmarkScreen(
                 items(uiState.categories, key = { it.id ?: it.name }) { category ->
                     com.illusion.checkfirm.core.designsystem.component.OneCard {
                         Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-                            TextButton(onClick = { onEditCategory(category.name) }, modifier = Modifier.weight(1f)) {
-                                Text(category.name, Modifier.fillMaxWidth(), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                            TextButton(onClick = { onEditCategory(category.name) }, modifier = Modifier.weight(1f), contentPadding = PaddingValues(horizontal = 14.dp, vertical = 13.dp)) {
+                                Text(category.name, Modifier.fillMaxWidth(), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Clip)
                             }
                             IconButton(onClick = { onDeleteCategory(category.name) }) {
-                                Icon(Icons.Rounded.Delete, stringResource(R.string.delete_item))
+                                Icon(androidx.compose.ui.res.painterResource(R.drawable.oneui_ic_delete), stringResource(R.string.delete_item))
                             }
                         }
                     }

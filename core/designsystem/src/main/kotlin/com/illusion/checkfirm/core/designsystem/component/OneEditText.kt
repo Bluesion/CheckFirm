@@ -92,9 +92,9 @@ fun OneEditText(
             if (isClearIconEnabled && value.isNotEmpty()) {
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
-                    imageVector = Icons.Default.Clear,
+                    painter = androidx.compose.ui.res.painterResource(com.illusion.checkfirm.core.designsystem.R.drawable.ic_clear),
                     contentDescription = androidx.compose.ui.res.stringResource(com.illusion.checkfirm.core.designsystem.R.string.clear_text),
-                    tint = textColor,
+                    tint = CheckFirmTheme.colors.textSecondary,
                     modifier = Modifier
                         .size(48.dp)
                         .clickable(

@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -54,7 +57,7 @@ fun ThemeDialog(
             modifier = Modifier
                 .fillMaxWidth()
                 .toggleable(value = isSystem, role = Role.Switch) { current = if (it) "system" else "light" }
-                .padding(vertical = 8.dp),
+                .heightIn(min = 56.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
@@ -120,16 +123,15 @@ private fun ThemePreview(
             painter = painterResource(drawableRes),
             contentDescription = null,
             modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentSize(),
+                .fillMaxWidth().aspectRatio(366f / 282f),
         )
         Text(
             text = label,
             style = MaterialTheme.typography.bodyMedium,
             color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(top = 8.dp),
+            modifier = Modifier.padding(top = 0.dp),
         )
-        OneRadioButton(selected = selected, onClick = null)
+        OneRadioButton(selected = selected, onClick = null, modifier = Modifier.size(48.dp))
     }
 }
 

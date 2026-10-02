@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -82,7 +83,7 @@ fun CategoryScreen(
                         textStyle = MaterialTheme.typography.headlineSmall.copy(color = MaterialTheme.colorScheme.onSurface),
                         cursorBrush = androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.onSurface),
                         decorationBox = { field ->
-                            if (uiState.name.isEmpty()) Text(stringResource(FeatureR.string.category_name), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            if (uiState.name.isEmpty()) Text(stringResource(FeatureR.string.category_name), style = MaterialTheme.typography.headlineSmall, color = CheckFirmTheme.colors.settingsDescription)
                             field()
                         },
                     )
@@ -111,12 +112,12 @@ fun CategoryScreen(
 
 @Composable
 private fun DeviceCheckRow(bookmark: Bookmark, checked: Boolean, onCheckedChange: () -> Unit) {
-    Row(Modifier.fillMaxWidth().toggleable(checked, role = androidx.compose.ui.semantics.Role.Checkbox) { onCheckedChange() }.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-        Column(Modifier.weight(1f)) {
+    Row(Modifier.fillMaxWidth().toggleable(checked, role = androidx.compose.ui.semantics.Role.Checkbox) { onCheckedChange() }.padding(vertical = 14.dp), verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f).padding(end = 29.dp)) {
             Text(bookmark.name, style = MaterialTheme.typography.titleLarge, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-            Text("${bookmark.device.model} · ${bookmark.device.csc}", style = MaterialTheme.typography.bodyMedium)
+            Text("${bookmark.device.model} · ${bookmark.device.csc}", Modifier.padding(top = 4.dp), style = MaterialTheme.typography.bodyMedium)
         }
-        OneCheckbox(checked, { onCheckedChange() }, Modifier.clearAndSetSemantics {})
+        OneCheckbox(checked, { onCheckedChange() }, Modifier.size(48.dp).clearAndSetSemantics {})
     }
 }
 

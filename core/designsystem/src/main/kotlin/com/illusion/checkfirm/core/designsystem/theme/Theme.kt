@@ -114,7 +114,7 @@ fun CheckFirmTheme(
     CompositionLocalProvider(LocalExtendedColors provides extendedColors) {
         MaterialTheme(
             colorScheme = colorScheme,
-            typography = WantedSansTypography,
+            typography = WantedSansTypography.withXmlTextColor(extendedColors.textPrimary),
             content = content,
         )
     }

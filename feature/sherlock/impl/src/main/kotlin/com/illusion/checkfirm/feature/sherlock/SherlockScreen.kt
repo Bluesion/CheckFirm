@@ -43,6 +43,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
@@ -307,7 +308,7 @@ private fun PrefixSplitField(
     val borderColor = when (status) {
         SherlockStatus.SUCCESS -> Color(0xFF2E7D32)
         SherlockStatus.FAIL -> MaterialTheme.colorScheme.error
-        else -> MaterialTheme.colorScheme.outline
+        else -> Color(0xFFA1A1A1)
     }
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -320,22 +321,22 @@ private fun PrefixSplitField(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(12.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = Arrangement.spacedBy(0.dp),
         ) {
             Text(
                 text = label,
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.labelLarge.copy(lineHeight = 18.sp),
+                color = MaterialTheme.colorScheme.onSurface,
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 BasicTextField(prefix, { onPrefixChange(it.uppercase()) },
-                    singleLine = true, textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
+                    singleLine = true, textStyle = MaterialTheme.typography.bodyLarge.copy(lineHeight = 20.sp, color = CheckFirmTheme.colors.fieldPrefix),
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
-                    modifier = Modifier.width(IntrinsicSize.Min).widthIn(min = 32.dp).padding(vertical = 4.dp))
+                    modifier = Modifier.width(IntrinsicSize.Min).widthIn(min = 32.dp))
                 BasicTextField(body, { if (it.length <= bodyMaxLen) onBodyChange(it.uppercase()) },
-                    singleLine = true, textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                    singleLine = true, textStyle = MaterialTheme.typography.bodyLarge.copy(lineHeight = 20.sp, color = MaterialTheme.colorScheme.onSurface),
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
-                    modifier = Modifier.weight(1f).padding(start = 2.dp, top = 4.dp, bottom = 4.dp))
+                    modifier = Modifier.weight(1f).padding(start = 2.dp))
             }
         }
     }

@@ -26,4 +26,5 @@
     <string name="smart_search_type_minor">마이너 업데이트</string>
     <string name="smart_search_type_rollback">롤백 상태</string>
     <string name="official_previous">이전 공식 펌웨어</string>
+    <string name="suggestion">제안</string>
 </resources>

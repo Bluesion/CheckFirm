@@ -26,4 +26,5 @@
     <string name="smart_search_downgrade_possible">可降级</string>
     <string name="smart_search_downgrade_impossible">不可降级</string>
     <string name="official_previous">上一个官方固件</string>
+    <string name="suggestion">建议</string>
 </resources>

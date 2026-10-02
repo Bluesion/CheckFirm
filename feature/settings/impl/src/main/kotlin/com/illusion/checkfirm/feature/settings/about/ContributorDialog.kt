@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
@@ -81,7 +82,7 @@ fun ContributorDialog(onDismiss: () -> Unit) {
 private fun SectionHeader(text: String) {
     Text(
         text = text,
-        style = MaterialTheme.typography.bodyLarge,
+        style = MaterialTheme.typography.bodyLarge.copy(lineHeight = 20.sp),
         fontWeight = FontWeight.Bold,
     )
 }
@@ -95,13 +96,13 @@ private fun ContributorRow(row: ContributorRow) {
     ) {
         Text(
             text = stringResource(row.roleRes),
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge.copy(lineHeight = 20.sp),
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.weight(0.4f),
         )
         Text(
             text = stringResource(row.nameRes),
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge.copy(lineHeight = 20.sp),
             modifier = Modifier.weight(0.6f),
             textAlign = TextAlign.End,
         )

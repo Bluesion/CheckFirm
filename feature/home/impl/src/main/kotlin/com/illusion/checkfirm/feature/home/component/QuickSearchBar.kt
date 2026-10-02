@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Icon
@@ -68,7 +69,7 @@ internal fun QuickSearchBar(
                 AssistChip(
                     onClick = { onBookmarkClick(bookmark) },
                     label = { Text(bookmark.name) },
-                    shape = CircleShape,
+                    shape = RoundedCornerShape(8.dp),
                     colors = AssistChipDefaults.assistChipColors(
                         labelColor = MaterialTheme.colorScheme.onSurface,
                     ),

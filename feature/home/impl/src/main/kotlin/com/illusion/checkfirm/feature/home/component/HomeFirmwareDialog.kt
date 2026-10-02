@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.component.OneCardShape
@@ -70,10 +71,11 @@ internal fun HomeFirmwareDialog(
                     Row(Modifier.padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                         Text(latest.ifBlank { stringResource(R.string.search_result_error) }, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
                         if (latest.isNotBlank()) {
-                            IconButton({ onCopy(latest) }) { Icon(Icons.Outlined.ContentCopy, stringResource(android.R.string.copy)) }
+                            IconButton({ onCopy(latest) }, Modifier.size(24.dp)) { Icon(painterResource(R.drawable.ic_copy), stringResource(android.R.string.copy), tint = CheckFirmTheme.colors.textSecondary) }
+                            Spacer(Modifier.width(8.dp))
                             if (isOfficial || latest.matches(Regex("[a-fA-F0-9]{32}"))) {
-                                IconButton(if (isOfficial) onOpenOfficialDoc else onOpenSherlock) {
-                                    Icon(Icons.Outlined.OpenInBrowser, stringResource(if (isOfficial) R.string.official_latest else R.string.sherlock))
+                                IconButton(if (isOfficial) onOpenOfficialDoc else onOpenSherlock, Modifier.size(24.dp)) {
+                                    Icon(painterResource(R.drawable.ic_web), stringResource(if (isOfficial) R.string.official_latest else R.string.sherlock), tint = CheckFirmTheme.colors.textSecondary)
                                 }
                             }
                         }
@@ -84,9 +86,9 @@ internal fun HomeFirmwareDialog(
                 Column(Modifier.padding(14.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(stringResource(FeatureR.string.smart_search), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
-                        IconButton(onOpenFirmwareManual) { Icon(painterResource(R.drawable.ic_smart_search_help), stringResource(R.string.help), Modifier.size(24.dp)) }
+                        IconButton(onOpenFirmwareManual, Modifier.padding(start = 4.dp).size(16.dp)) { Icon(painterResource(R.drawable.ic_smart_search_help), stringResource(R.string.help), Modifier.size(16.dp)) }
                     }
-                    Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(32.dp)) {
+                    Row(Modifier.padding(top = 8.dp).fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(32.dp)) {
                         SmartDetail(stringResource(R.string.smart_search_bootloader), body.take(2), if (isOfficial) "" else stringResource(
                             if (officialBody.take(2) == body.take(2)) FeatureR.string.smart_search_downgrade_possible else FeatureR.string.smart_search_downgrade_impossible))
                         SmartDetail(stringResource(R.string.smart_search_major_version), body[2].toString(), if (isOfficial) "Android ${official.androidVersion}" else stringResource(

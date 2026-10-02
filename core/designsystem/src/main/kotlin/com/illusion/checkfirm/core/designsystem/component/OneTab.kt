@@ -26,10 +26,12 @@ fun OneTab(
     modifier: Modifier = Modifier,
     indicatorColor: Color? = null,
     textStyle: androidx.compose.ui.text.TextStyle = MaterialTheme.typography.bodyMedium,
+    unselectedColor: Color = CheckFirmTheme.colors.tabUnselected,
+    selectedFontWeight: FontWeight = FontWeight.Bold,
 ) {
     val containerColor = MaterialTheme.colorScheme.background
     val contentColor = MaterialTheme.colorScheme.onSurface
-    val unselectedContentColor = CheckFirmTheme.colors.settingsDescription
+    val unselectedContentColor = unselectedColor
     val resolvedIndicator = indicatorColor ?: contentColor
 
     androidx.compose.foundation.layout.Row(modifier.then(Modifier.fillMaxWidth())) {
@@ -41,9 +43,9 @@ fun OneTab(
             ) {
                 androidx.compose.foundation.layout.Column(Modifier.width(androidx.compose.foundation.layout.IntrinsicSize.Min), horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally) {
                     Text(title, style = textStyle, textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                        fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
+                        fontWeight = if (selected) selectedFontWeight else FontWeight.Normal,
                         color = if (selected) resolvedIndicator else unselectedContentColor)
-                    androidx.compose.foundation.layout.Spacer(Modifier.height(4.dp))
+                    androidx.compose.foundation.layout.Spacer(Modifier.height(2.dp))
                     androidx.compose.foundation.layout.Box(Modifier.fillMaxWidth().height(2.dp).background(if (selected) resolvedIndicator else Color.Transparent))
                 }
             }

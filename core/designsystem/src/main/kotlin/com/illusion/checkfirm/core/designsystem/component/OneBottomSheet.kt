@@ -39,7 +39,7 @@ fun OneBottomSheetDialog(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
         scrimColor = Color.Black.copy(alpha = 0.8f),
-        shape = RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp),
+        shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
         containerColor = MaterialTheme.colorScheme.surface,
         contentColor = MaterialTheme.colorScheme.onSurface,
         modifier = modifier,

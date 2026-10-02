@@ -48,7 +48,7 @@ fun OneCheckbox(
     modifier: Modifier = Modifier,
     checkedColor: Color = MaterialTheme.colorScheme.primary,
     uncheckedColor: Color = MaterialTheme.colorScheme.outline,
-    checkmarkColor: Color = MaterialTheme.colorScheme.onPrimary,
+    checkmarkColor: Color = Color.White,
 ) {
     val color by animateColorAsState(
         targetValue = if (isChecked) checkedColor else uncheckedColor,

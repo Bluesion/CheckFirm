@@ -59,10 +59,10 @@ fun ProfileCard(
                 )
             }
             Icon(
-                imageVector = OneIcons.Profile,
+                painter = androidx.compose.ui.res.painterResource(R.drawable.ic_profile),
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                modifier = Modifier.size(48.dp),
+                tint = CheckFirmTheme.colors.textSecondary,
+                modifier = Modifier.size(50.dp),
             )
         }
     }
@@ -212,7 +212,7 @@ private fun PreferenceItem(
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 17.sp),
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 17.sp),
                 color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 1,
             )

@@ -27,4 +27,5 @@
     <string name="smart_search_downgrade_possible">Snížení verze možné</string>
     <string name="smart_search_downgrade_impossible">Snížení verze nemožné</string>
     <string name="official_previous">Předchozí oficiální firmware</string>
+    <string name="suggestion">Návrh</string>
 </resources>

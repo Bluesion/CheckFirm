@@ -26,7 +26,8 @@ fun OneRadioButton(
         onClick = onClick,
         modifier = modifier,
         colors = RadioButtonDefaults.colors(
-            selectedColor = selectedColor
+            selectedColor = selectedColor,
+            unselectedColor = MaterialTheme.colorScheme.outline
         )
     )
 }

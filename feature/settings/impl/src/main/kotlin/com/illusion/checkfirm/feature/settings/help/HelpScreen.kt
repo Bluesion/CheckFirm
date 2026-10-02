@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.component.OneCardItem
@@ -91,8 +92,8 @@ private fun HelpItem(title: String, description: String, icon: Int, onClick: () 
         androidx.compose.foundation.layout.Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
             Icon(androidx.compose.ui.res.painterResource(icon), null, Modifier.size(40.dp), tint = androidx.compose.ui.graphics.Color.Unspecified)
             Column(Modifier.padding(start = 12.dp)) {
-                Text(title, style = MaterialTheme.typography.bodyLarge)
-                Text(description, style = MaterialTheme.typography.bodyMedium, color = CheckFirmTheme.colors.settingsDescription)
+                Text(title, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 17.sp))
+                Text(description, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp), color = CheckFirmTheme.colors.settingsDescription)
             }
         }
     }

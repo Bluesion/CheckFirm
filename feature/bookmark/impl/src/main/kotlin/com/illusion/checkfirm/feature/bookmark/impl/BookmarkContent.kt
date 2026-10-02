@@ -38,24 +38,13 @@ fun BookmarkContent(
     val displayedSelection = uiState.selectedCategory.ifBlank { allLabel }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        com.illusion.checkfirm.core.designsystem.component.OneSpinner(
+        if (uiState.categories.isNotEmpty()) com.illusion.checkfirm.core.designsystem.component.OneSpinner(
             items = categories, selectedItem = displayedSelection,
             onItemSelected = { onCategoryChange(if (it == allLabel) "" else it) },
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
         )
 
-        if (uiState.bookmarks.isEmpty()) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(
-                    text = stringResource(R.string.search_no_bookmark),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        } else {
+        if (uiState.bookmarks.isNotEmpty()) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),

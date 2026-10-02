@@ -53,6 +53,7 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 private val ToolbarHeight = 56.dp
+private val CollapsingToolbarHeight = 64.dp
 
 // The fixed toolbar always shows its title, so its toolbar buttons never show a background.
 private val ToolbarButtonBackgroundHidden: () -> Float = { 0f }
@@ -85,7 +86,7 @@ fun OneScaffold(
     val expandedHeight = remember(screenHeight) { screenHeight * 0.3976f }
 
     val density = LocalDensity.current
-    val limitPx = with(density) { (expandedHeight - ToolbarHeight).toPx() }
+    val limitPx = with(density) { (expandedHeight - CollapsingToolbarHeight).toPx() }
 
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
         state = rememberTopAppBarState(
@@ -114,7 +115,7 @@ fun OneScaffold(
     // Crossfades over the same distance as the collapsed title fade. Evaluated at draw time
     // (see OneNavButton and OneCollapsingControls).
     val topBarState = scrollBehavior.state
-    val buttonFadePx = with(density) { (ToolbarHeight / 2).toPx() }
+    val buttonFadePx = with(density) { (CollapsingToolbarHeight / 2).toPx() }
     val toolbarButtonBackgroundAlpha = remember(topBarState, buttonFadePx) {
         {
             val overlap = (-topBarState.contentOffset).coerceAtLeast(0f)
@@ -258,11 +259,11 @@ private fun OneCollapsingControls(
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
     val collapsedFraction = scrollBehavior.state.collapsedFraction
-    val currentHeight = expandedHeight - (expandedHeight - ToolbarHeight) * collapsedFraction
+    val currentHeight = expandedHeight - (expandedHeight - CollapsingToolbarHeight) * collapsedFraction
 
     val density = LocalDensity.current
     val expandedPx = with(density) { expandedHeight.toPx() }
-    val collapsedPx = with(density) { ToolbarHeight.toPx() }
+    val collapsedPx = with(density) { CollapsingToolbarHeight.toPx() }
 
     SideEffect {
         scrollBehavior.state.heightOffsetLimit = -(expandedPx - collapsedPx)
@@ -283,7 +284,7 @@ private fun OneCollapsingControls(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .fillMaxWidth()
-                .defaultMinSize(minHeight = ToolbarHeight)
+                .defaultMinSize(minHeight = CollapsingToolbarHeight)
                 .padding(start = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -339,7 +340,7 @@ private fun OneCollapsingTitle(
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
     val collapsedFraction = scrollBehavior.state.collapsedFraction
-    val currentHeight = expandedHeight - (expandedHeight - ToolbarHeight) * collapsedFraction
+    val currentHeight = expandedHeight - (expandedHeight - CollapsingToolbarHeight) * collapsedFraction
 
     Box(
         modifier = Modifier
@@ -380,7 +381,7 @@ private fun OneCollapsingTitle(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .fillMaxWidth()
-                .defaultMinSize(minHeight = ToolbarHeight)
+                .defaultMinSize(minHeight = CollapsingToolbarHeight)
                 .padding(start = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -403,7 +404,7 @@ private fun OneCollapsingTitle(
                         // the bar collapses and only grows once content scrolls past it.
                         val overlap = (-scrollBehavior.state.contentOffset).coerceAtLeast(0f)
                         val notOverlapped =
-                            (1f - overlap / (ToolbarHeight.toPx() / 2f)).coerceIn(0f, 1f)
+                            (1f - overlap / (CollapsingToolbarHeight.toPx() / 2f)).coerceIn(0f, 1f)
                         alpha = collapsedFraction * notOverlapped
                     },
                 color = CheckFirmTheme.colors.toolbarText,

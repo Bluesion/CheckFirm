@@ -27,4 +27,5 @@
     <string name="smart_search_downgrade_possible">Downgrade posibil</string>
     <string name="smart_search_downgrade_impossible">Downgrade imposibil</string>
     <string name="official_previous">Firmware oficial anterior</string>
+    <string name="suggestion">Sugestie</string>
 </resources>
