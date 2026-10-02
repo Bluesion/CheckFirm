@@ -10,6 +10,7 @@ import com.illusion.checkfirm.core.domain.repository.BCRepository
 import com.illusion.checkfirm.core.domain.repository.HistoryRepository
 import com.illusion.checkfirm.core.navigation.NavResultBus
 import com.illusion.checkfirm.core.navigation.NavResultKey
+import com.illusion.checkfirm.feature.search.util.isValid
 import com.illusion.checkfirm.feature.search.util.SearchValidationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
@@ -71,11 +72,11 @@ class SearchViewModel @Inject constructor(
             if (device == item.device) return SearchValidationResult.DUPLICATED_DEVICE
         }
 
-        if (device.model.isBlank() || device.csc.isBlank()) {
+        if (!device.isValid()) {
             return SearchValidationResult.INVALID_DEVICE
         }
 
-        if (MAX_SEARCH_CAPACITY - currentList.size == 0) {
+        if (currentList.size >= MAX_SEARCH_CAPACITY) {
             return SearchValidationResult.MAX_SEARCH_CAPACITY_EXCEEDED
         }
 

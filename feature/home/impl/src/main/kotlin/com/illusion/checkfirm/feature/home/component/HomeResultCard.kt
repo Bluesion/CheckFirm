@@ -3,135 +3,130 @@ package com.illusion.checkfirm.feature.home.component
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneCard
-import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
-import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
-import com.illusion.checkfirm.core.domain.model.Device
-import com.illusion.checkfirm.core.domain.model.Firmware
-import com.illusion.checkfirm.core.domain.model.OfficialFirmware
+import com.illusion.checkfirm.core.designsystem.component.OneCardShape
 import com.illusion.checkfirm.core.domain.model.SearchResult
-import com.illusion.checkfirm.core.domain.model.TestFirmware
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun HomeResultCard(
-    result: SearchResult,
-    onCardClick: () -> Unit,
-) {
+internal fun HomeResultCard(result: SearchResult, onCardClick: () -> Unit) {
     val context = LocalContext.current
-
-    OneCard(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .combinedClickable(
-                    onClick = onCardClick,
-                    onLongClick = {
-                        val build = result.firmware.officialFirmware.latestFirmware
-                        if (build.isNotBlank()) {
-                            copyToClipboard(context, build)
-                        }
-                    },
-                )
-                .padding(12.dp),
-        ) {
+    val official = result.firmware.officialFirmware
+    val test = result.firmware.testFirmware
+    val testBuild = test.clue.ifBlank { test.decryptedFirmware.ifBlank { test.latestFirmware } }
+    OneCard(modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = "${result.device.model} (${result.device.csc})",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.weight(1f),
+                Icon(painterResource(R.drawable.checkfirm_icon), contentDescription = null,
+                    modifier = Modifier.size(24.dp), tint = androidx.compose.ui.graphics.Color.Unspecified)
+                Text("${result.device.model} (${result.device.csc})",
+                    modifier = Modifier.padding(start = 4.dp),
+                    style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+            }
+            Spacer(Modifier.height(12.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FirmwareSummary(
+                    label = stringResource(R.string.official_latest), firmware = official.latestFirmware,
+                    details = listOf(
+                        R.drawable.ic_smart_search_device to official.deviceName,
+                        R.drawable.ic_smart_search_discovered_date to official.releaseDate,
+                        R.drawable.ic_smart_search_android_version to official.androidVersion,
+                    ),
+                    modifier = Modifier.weight(1f), onClick = onCardClick,
+                    onLongClick = { copyToClipboard(context, official.latestFirmware) },
                 )
-                Icon(
-                    imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
-                    contentDescription = null,
-                    modifier = Modifier.size(20.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                FirmwareSummary(
+                    label = stringResource(R.string.test_latest), firmware = testBuild,
+                    details = listOf(
+                        R.drawable.ic_smart_search_discoverer to test.watson.ifBlank { test.discoverer },
+                        R.drawable.ic_smart_search_discovered_date to test.discoveryDate,
+                        R.drawable.ic_smart_search_android_version to test.androidVersion,
+                    ),
+                    modifier = Modifier.weight(1f), onClick = onCardClick,
+                    onLongClick = { copyToClipboard(context, testBuild) },
                 )
             }
-
-            FirmwareRow(
-                label = stringResource(R.string.official_latest),
-                value = result.firmware.officialFirmware.latestFirmware,
-            )
-            FirmwareRow(
-                label = stringResource(R.string.test_latest),
-                value = result.firmware.testFirmware.latestFirmware,
-            )
         }
     }
 }
 
 @Composable
-private fun FirmwareRow(label: String, value: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
+private fun FirmwareSummary(
+    label: String, firmware: String, details: List<Pair<Int, String>>,
+    modifier: Modifier, onClick: () -> Unit, onLongClick: () -> Unit,
+) {
+    Card(
+        modifier = modifier.combinedClickable(onClick = onClick, onLongClick = onLongClick),
+        shape = OneCardShape,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
     ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.primary,
-        )
-        Text(
-            text = value.ifBlank { "-" },
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
+        Column(Modifier.padding(14.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(label, style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(
+                        text = shortBuild(firmware).ifBlank { stringResource(R.string.search_result_error) },
+                        modifier = Modifier.padding(top = 4.dp),
+                        style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold,
+                        color = if (firmware.isBlank()) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface,
+                    )
+                }
+                androidx.compose.material3.Surface(shape = CircleShape, color = MaterialTheme.colorScheme.outlineVariant) {
+                    Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, contentDescription = null,
+                        modifier = Modifier.size(24.dp))
+                }
+            }
+            if (firmware.isNotBlank()) {
+                HorizontalDivider(Modifier.padding(vertical = 8.dp))
+                details.forEach { (icon, text) ->
+                    Row(Modifier.padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(painterResource(icon), contentDescription = null, modifier = Modifier.size(16.dp))
+                        Text(text.ifBlank { "-" }, modifier = Modifier.padding(start = 8.dp),
+                            style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    }
+                }
+            }
+        }
     }
+}
+
+private fun shortBuild(firmware: String): String {
+    val build = firmware.substringBefore('/').substringBefore('_').substringBefore('.')
+    return if (build.length >= 6 && !build.matches(Regex("[a-fA-F0-9]{32}"))) build.takeLast(4) else build
 }
 
 private fun copyToClipboard(context: Context, text: String) {
-    val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    cm.setPrimaryClip(ClipData.newPlainText("CheckFirm", text))
-}
-
-@ComponentPreview
-@Composable
-private fun HomeResultCardPreview() {
-    CheckFirmTheme {
-        Surface {
-            HomeResultCard(
-                result = SearchResult(
-                    device = Device("SM-S928B", "KOO"),
-                    firmware = Firmware(
-                        officialFirmware = OfficialFirmware(
-                            latestFirmware = "S928BKSU3AXL5/S928BOXM3AXL5/S928BKSU3AXL5",
-                        ),
-                        testFirmware = TestFirmware(
-                            latestFirmware = "abc123def456abc123def456abc12345",
-                        ),
-                    ),
-                ),
-                onCardClick = {},
-            )
-        }
-    }
+    if (text.isBlank()) return
+    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    clipboard.setPrimaryClip(ClipData.newPlainText("CheckFirm", text))
 }

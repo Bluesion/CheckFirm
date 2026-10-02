@@ -55,20 +55,9 @@ fun BookmarkScreen(
             }
         },
         actions = {
-            OneNavButton(shape = androidx.compose.foundation.shape.CircleShape, modifier = Modifier.size(48.dp), onClick = onCategoryClick) {
-                Icon(OneIcons.Category, contentDescription = stringResource(R.string.category))
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { onShowNewBookmarkChange(true) },
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = MaterialTheme.colorScheme.primary,
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Add,
-                    contentDescription = "Add",
-                )
+            OneNavButton(onClick = { onShowNewBookmarkChange(true) }, shape = CircleShape,
+                modifier = Modifier.size(48.dp)) {
+                Icon(Icons.Rounded.Add, contentDescription = stringResource(com.illusion.checkfirm.feature.bookmark.R.string.bookmark_new))
             }
         },
     ) { innerPadding ->
@@ -80,6 +69,7 @@ fun BookmarkScreen(
                     bottom = innerPadding.calculateBottomPadding(),
                 ),
         ) {
+            androidx.compose.foundation.layout.Box(Modifier.weight(1f)) {
             BookmarkContent(
                 uiState = uiState,
                 onExpandedChange = onExpandedChange,
@@ -87,6 +77,11 @@ fun BookmarkScreen(
                 onItemClick = onItemClick,
                 onEditClick = { onEditingBookmarkChange(it) },
                 onDeleteClick = { onDeleteBookmark(it.device) },
+            )
+            }
+            com.illusion.checkfirm.core.designsystem.component.OneTab(
+                titles = listOf(stringResource(R.string.bookmark), stringResource(R.string.category)),
+                selectedTabIndex = 0, onTabSelected = { if (it == 1) onCategoryClick() },
             )
         }
     }

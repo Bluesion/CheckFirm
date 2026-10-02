@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -69,12 +70,13 @@ fun CategoryListRoute(
             }
         },
     ) { padding ->
+        Column(Modifier.fillMaxSize().padding(bottom = padding.calculateBottomPadding())) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(
                 start = 12.dp, end = 12.dp,
                 top = padding.calculateTopPadding() + 8.dp,
-                bottom = padding.calculateBottomPadding() + 8.dp,
+                bottom = 8.dp,
             ),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
@@ -97,6 +99,11 @@ fun CategoryListRoute(
                     }
                 }
             }
+        }
+        com.illusion.checkfirm.core.designsystem.component.OneTab(
+            titles = listOf(stringResource(R.string.bookmark), stringResource(R.string.category)),
+            selectedTabIndex = 1, onTabSelected = { if (it == 0) onNavigationIconClick() },
+        )
         }
     }
 }
