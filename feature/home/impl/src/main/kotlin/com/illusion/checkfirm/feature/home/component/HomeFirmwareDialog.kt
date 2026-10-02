@@ -1,322 +1,128 @@
 package com.illusion.checkfirm.feature.home.component
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.OpenInBrowser
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
-import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import com.illusion.checkfirm.core.designsystem.component.OneCard
+import com.illusion.checkfirm.core.designsystem.component.OneCardShape
 import com.illusion.checkfirm.core.designsystem.component.OneTab
 import com.illusion.checkfirm.core.domain.model.SearchResult
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import com.illusion.checkfirm.feature.home.R as FeatureR
 
-/**
- * Bottom sheet showing firmware details for a single SearchResult — Home's
- * version of feature/search/impl/SearchDialog. Kept local to avoid an
- * impl→impl dependency; the contract (callbacks for sherlock/report/manual)
- * is identical.
- */
 @Composable
 internal fun HomeFirmwareDialog(
-    result: SearchResult,
-    onDismiss: () -> Unit,
-    onCopy: (String) -> Unit,
-    onOpenOfficialDoc: () -> Unit,
-    onOpenSherlock: () -> Unit,
-    onOpenReport: () -> Unit,
-    onOpenFirmwareManual: () -> Unit,
+    result: SearchResult, isOfficial: Boolean = true,
+    onDismiss: () -> Unit, onCopy: (String) -> Unit, onOpenOfficialDoc: () -> Unit,
+    onOpenSherlock: () -> Unit, onOpenReport: () -> Unit, onOpenFirmwareManual: () -> Unit,
 ) {
-    OneBottomSheetDialog(
-        title = "${result.device.model} (${result.device.csc})",
-        onDismiss = onDismiss,
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End,
-        ) {
-            TextButton(onClick = onOpenReport, shape = RoundedCornerShape(50)) {
-                Text(stringResource(R.string.report))
-            }
-        }
-
-        Spacer(Modifier.height(8.dp))
-
-        FirmwareSection(
-            title = stringResource(R.string.official_latest),
-            firmware = result.firmware.officialFirmware.latestFirmware,
-            previousMap = result.firmware.officialFirmware.previousFirmware,
-            betaMap = emptyMap(),
-            isOfficial = true,
-            onCopy = onCopy,
-            onActionClick = onOpenOfficialDoc,
-            onHelpClick = onOpenFirmwareManual,
-        )
-
-        Spacer(Modifier.height(12.dp))
-
-        FirmwareSection(
-            title = stringResource(R.string.test_latest),
-            firmware = result.firmware.testFirmware.latestFirmware,
-            previousMap = result.firmware.testFirmware.previousFirmware,
-            betaMap = result.firmware.testFirmware.betaFirmware,
-            isOfficial = false,
-            onCopy = onCopy,
-            onActionClick = {
-                if (isEncryptedFirmware(result.firmware.testFirmware.latestFirmware)) {
-                    onOpenSherlock()
-                }
-            },
-            onHelpClick = onOpenFirmwareManual,
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        Button(
-            onClick = onDismiss,
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(22.dp),
-        ) {
-            Text(stringResource(android.R.string.ok))
-        }
+    val official = result.firmware.officialFirmware
+    val test = result.firmware.testFirmware
+    val latest = if (isOfficial) official.latestFirmware else test.latestFirmware
+    val smartFirmware = if (isOfficial) latest else test.clue.ifBlank { test.decryptedFirmware.ifBlank { latest } }
+    val previous = if (isOfficial) official.previousFirmware else test.previousFirmware
+    val beta = if (isOfficial) emptyMap() else test.betaFirmware
+    var tab by rememberSaveable(result.device, isOfficial) { mutableIntStateOf(0) }
+    val body = firmwareBody(smartFirmware)
+    val officialBody = firmwareBody(official.latestFirmware)
+    val locale = LocalConfiguration.current.locales[0]
+    val date = remember(body, locale) {
+        if (body.length == 6 && body[3] in 'A'..'Z' && body[4] in 'A'..'L')
+            LocalDate.of(2000 + body[3].code - 'A'.code + 1, body[4].code - 'A'.code + 1, 1).format(DateTimeFormatter.ofPattern("MMMM, yyyy", locale))
+        else ""
     }
-}
-
-@Composable
-private fun FirmwareSection(
-    title: String,
-    firmware: String,
-    previousMap: Map<String, String>,
-    betaMap: Map<String, String>,
-    isOfficial: Boolean,
-    onCopy: (String) -> Unit,
-    onActionClick: () -> Unit,
-    onHelpClick: () -> Unit,
-) {
-    OneCard(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Column(modifier = Modifier.padding(12.dp)) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary,
-            )
-
-            Spacer(Modifier.height(8.dp))
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = firmware.ifBlank { stringResource(R.string.search_result_error) },
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.weight(1f),
-                )
-                if (firmware.isNotBlank()) {
-                    IconButton(onClick = { onCopy(firmware) }) {
-                        Icon(
-                            imageVector = Icons.Outlined.ContentCopy,
-                            contentDescription = stringResource(android.R.string.copy),
-                        )
-                    }
-                    val actionEnabled = isOfficial || isEncryptedFirmware(firmware)
-                    if (actionEnabled) {
-                        IconButton(onClick = onActionClick) {
-                            Icon(
-                                imageVector = if (isOfficial) Icons.Outlined.OpenInBrowser
-                                else Icons.AutoMirrored.Outlined.HelpOutline,
-                                contentDescription = null,
-                            )
+    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        scrimColor = Color.Black.copy(alpha = 0.8f),
+        containerColor = Color.Transparent, tonalElevation = 0.dp, dragHandle = null) {
+        Column(Modifier.fillMaxWidth().heightIn(max = LocalWindowInfo.current.containerDpSize.height * 0.9f)
+            .verticalScroll(rememberScrollState()).padding(horizontal = 24.dp).padding(top = 24.dp, bottom = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Card(onClick = onOpenReport, modifier = Modifier.align(Alignment.End), shape = OneCardShape,
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFFFDBC9))) {
+                Row(Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(painterResource(R.drawable.ic_report), null, Modifier.size(24.dp), tint = Color.Unspecified)
+                    Text(stringResource(R.string.report).uppercase(locale), Modifier.padding(start = 4.dp), style = MaterialTheme.typography.labelSmall, color = Color(0xFF341000))
+                }
+            }
+            OneCard {
+                Column(Modifier.padding(14.dp)) {
+                    Text(stringResource(if (isOfficial) R.string.official_latest else R.string.test_latest), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
+                    Row(Modifier.padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Text(latest.ifBlank { stringResource(R.string.search_result_error) }, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
+                        if (latest.isNotBlank()) {
+                            IconButton({ onCopy(latest) }) { Icon(Icons.Outlined.ContentCopy, stringResource(android.R.string.copy)) }
+                            if (isOfficial || latest.matches(Regex("[a-fA-F0-9]{32}"))) {
+                                IconButton(if (isOfficial) onOpenOfficialDoc else onOpenSherlock) {
+                                    Icon(Icons.Outlined.OpenInBrowser, stringResource(if (isOfficial) R.string.official_latest else R.string.sherlock))
+                                }
+                            }
                         }
                     }
                 }
             }
-
-            if (firmware.isNotBlank()) {
-                SmartSearchRow(firmware = firmware, onHelpClick = onHelpClick)
-            }
-
-            if (previousMap.isNotEmpty() || betaMap.isNotEmpty()) {
-                Spacer(Modifier.height(8.dp))
-                PreviousBetaTabs(previous = previousMap, beta = betaMap, onCopy = onCopy)
-            }
-        }
-    }
-}
-
-@Composable
-private fun SmartSearchRow(firmware: String, onHelpClick: () -> Unit) {
-    val parts = remember(firmware) { parseSmartSearch(firmware) }
-    Spacer(Modifier.height(8.dp))
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-    ) {
-        SmartSearchTile(
-            iconRes = R.drawable.ic_smart_search_device,
-            label = stringResource(R.string.smart_search_bootloader),
-            value = parts.bootloader,
-            modifier = Modifier.weight(1f),
-        )
-        SmartSearchTile(
-            iconRes = R.drawable.ic_smart_search_android_version,
-            label = stringResource(R.string.smart_search_major_version),
-            value = parts.majorVersion,
-            modifier = Modifier.weight(1f),
-        )
-        SmartSearchTile(
-            iconRes = R.drawable.ic_smart_search_discovered_date,
-            label = stringResource(R.string.smart_search_build_date),
-            value = parts.buildDate,
-            modifier = Modifier.weight(1f),
-        )
-        SmartSearchTile(
-            iconRes = R.drawable.ic_smart_search_firmware_type,
-            label = stringResource(R.string.smart_search_minor_version),
-            value = parts.minorVersion,
-            modifier = Modifier.weight(1f),
-        )
-        IconButton(onClick = onHelpClick, modifier = Modifier.size(32.dp)) {
-            Icon(
-                painter = painterResource(R.drawable.ic_smart_search_help),
-                contentDescription = stringResource(R.string.help),
-                modifier = Modifier.size(20.dp),
-            )
-        }
-    }
-}
-
-@Composable
-private fun SmartSearchTile(
-    iconRes: Int,
-    label: String,
-    value: String,
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier
-            .clip(RoundedCornerShape(10.dp))
-            .background(MaterialTheme.colorScheme.surfaceVariant)
-            .padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Icon(
-            painter = painterResource(iconRes),
-            contentDescription = label,
-            modifier = Modifier.size(20.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-        Spacer(Modifier.height(4.dp))
-        Text(
-            text = value.ifBlank { "-" },
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurface,
-            maxLines = 1,
-        )
-    }
-}
-
-@Composable
-private fun PreviousBetaTabs(
-    previous: Map<String, String>,
-    beta: Map<String, String>,
-    onCopy: (String) -> Unit,
-) {
-    var tab by remember { mutableIntStateOf(0) }
-    val showBeta = beta.isNotEmpty()
-
-    val titles = if (showBeta) {
-        listOf(
-            stringResource(R.string.search_result_tab_previous),
-            stringResource(R.string.search_result_tab_beta),
-        )
-    } else {
-        listOf(stringResource(R.string.search_result_tab_previous))
-    }
-
-    OneTab(titles = titles, selectedTabIndex = tab, onTabSelected = { tab = it })
-
-    Spacer(Modifier.height(8.dp))
-
-    val items = if (tab == 0) previous else beta
-    if (items.isEmpty()) {
-        Text(
-            text = stringResource(R.string.search_no_history),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-    } else {
-        items.values.take(5).forEach { value ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = value,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(vertical = 2.dp),
-                )
-                IconButton(onClick = { onCopy(value) }, modifier = Modifier.size(28.dp)) {
-                    Icon(
-                        imageVector = Icons.Outlined.ContentCopy,
-                        contentDescription = stringResource(android.R.string.copy),
-                        modifier = Modifier.size(16.dp),
-                    )
+            if (body.length == 6) OneCard {
+                Column(Modifier.padding(14.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(stringResource(FeatureR.string.smart_search), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
+                        IconButton(onOpenFirmwareManual) { Icon(painterResource(R.drawable.ic_smart_search_help), stringResource(R.string.help), Modifier.size(24.dp)) }
+                    }
+                    Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(32.dp)) {
+                        SmartDetail(stringResource(R.string.smart_search_bootloader), body.take(2), if (isOfficial) "" else stringResource(
+                            if (officialBody.take(2) == body.take(2)) FeatureR.string.smart_search_downgrade_possible else FeatureR.string.smart_search_downgrade_impossible))
+                        SmartDetail(stringResource(R.string.smart_search_major_version), body[2].toString(), if (isOfficial) "Android ${official.androidVersion}" else stringResource(
+                            if (officialBody.length < 3 || officialBody[2] == body[2]) FeatureR.string.smart_search_type_minor
+                            else if (officialBody[2] < body[2]) FeatureR.string.smart_search_type_major else FeatureR.string.smart_search_type_rollback))
+                        SmartDetail(stringResource(R.string.smart_search_build_date), body.substring(3,5), date.ifBlank { stringResource(FeatureR.string.unknown) })
+                        SmartDetail(stringResource(R.string.smart_search_minor_version), body[5].toString(), "")
+                    }
                 }
             }
+            OneCard {
+                Column(Modifier.padding(14.dp)) {
+                    if (isOfficial) Text(stringResource(FeatureR.string.official_previous), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
+                    else OneTab(listOf(stringResource(R.string.search_result_tab_previous), stringResource(R.string.search_result_tab_beta)), tab, { tab = it })
+                    val values = if (tab == 0) previous.values else beta.values
+                    Column(Modifier.height(150.dp).padding(top = 8.dp).verticalScroll(rememberScrollState())) {
+                    if (values.isEmpty()) Text(stringResource(R.string.search_no_history), Modifier.padding(vertical = 12.dp))
+                    else values.forEach { value ->
+                        Text(value, Modifier.fillMaxWidth().clickable { onCopy(value) }.padding(vertical = 4.dp),
+                            style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    }
+                    }
+                }
+            }
+            TextButton(onDismiss, Modifier.fillMaxWidth()) { Text(stringResource(android.R.string.ok), color = Color.White) }
         }
     }
 }
 
-private data class SmartSearchParts(
-    val bootloader: String = "",
-    val majorVersion: String = "",
-    val buildDate: String = "",
-    val minorVersion: String = "",
-)
-
-private fun parseSmartSearch(firmware: String): SmartSearchParts {
-    val build = firmware.substringBefore('/')
-    if (build.length < 6) return SmartSearchParts()
-    val body = build.takeLast(6)
-    return SmartSearchParts(
-        bootloader = body[1].toString(),
-        majorVersion = body[2].toString(),
-        buildDate = "${body[3]}${body[4]}",
-        minorVersion = body[5].toString(),
-    )
+@Composable
+private fun SmartDetail(label: String, value: String, description: String) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(label, style = MaterialTheme.typography.bodyMedium)
+        Text(value, Modifier.padding(top = 4.dp), style = MaterialTheme.typography.bodyMedium)
+        if (description.isNotBlank()) Text(description, style = MaterialTheme.typography.labelLarge)
+    }
 }
 
-private fun isEncryptedFirmware(firmware: String): Boolean {
-    if (firmware.isBlank()) return false
-    val build = firmware.substringBefore('/')
-    return build.any { it.isLowerCase() || it.isDigit() }
-}
+private fun firmwareBody(value: String): String = value.substringBefore('/').substringBefore('_').substringBefore('.').let { if (it.length >= 6) it.takeLast(6) else "" }

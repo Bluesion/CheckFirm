@@ -74,4 +74,10 @@
     <string name="welcome_search_add_device">新增裝置</string>
     <string name="welcome_search_description">應用程式啟動時搜尋韌體。\n請輸入您希望在啟動時搜尋的裝置。</string>
     <string name="welcome_search_empty_device_list">您最多可以新增 5 台裝置。</string>
+    <string name="unknown">未知</string>
+    <string name="help_device_info_edit">編輯</string>
+    <string name="help_device_name">裝置名稱</string>
+    <string name="help_device_info_bookmark">書籤已儲存。</string>
+    <string name="suggestion_title">還在尋找其他東西嗎？</string>
+    <string name="suggestion_bookmark_my_device">將我的裝置加入書籤</string>
 </resources>

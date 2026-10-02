@@ -3,9 +3,13 @@ package com.illusion.checkfirm.feature.bookmark.impl
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.TextButton
+import com.illusion.checkfirm.core.designsystem.component.OneSpinner
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -45,7 +49,7 @@ fun BookmarkDialog(
 ) {
     val allLabel = stringResource(R.string.category_all)
     var name by remember { mutableStateOf(initial?.name.orEmpty()) }
-    var model by remember { mutableStateOf(initial?.device?.model.orEmpty()) }
+    var model by remember { mutableStateOf(initial?.device?.model ?: "SM-") }
     var csc by remember { mutableStateOf(initial?.device?.csc.orEmpty()) }
     var category by remember {
         mutableStateOf(
@@ -71,65 +75,26 @@ fun BookmarkDialog(
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
             )
-            OutlinedTextField(
-                value = model,
-                onValueChange = { model = it.uppercase() },
-                label = { Text(stringResource(R.string.model)) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
-                modifier = Modifier.fillMaxWidth(),
-            )
-            OutlinedTextField(
-                value = csc,
-                onValueChange = { if (it.length <= 3) csc = it.uppercase() },
-                label = { Text(stringResource(R.string.csc)) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
-                modifier = Modifier.fillMaxWidth(),
-            )
-            Box(modifier = Modifier.fillMaxWidth()) {
-                OutlinedTextField(
-                    value = category.ifBlank { allLabel },
-                    onValueChange = {},
-                    readOnly = true,
-                    label = { Text(stringResource(R.string.category)) },
-                    trailingIcon = {
-                        IconButton(onClick = { categoryExpanded = true }) {
-                            Icon(Icons.Rounded.ArrowDropDown, contentDescription = null)
-                        }
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { categoryExpanded = true },
-                )
-                DropdownMenu(
-                    expanded = categoryExpanded,
-                    onDismissRequest = { categoryExpanded = false },
-                ) {
-                    categories.forEach { item ->
-                        DropdownMenuItem(
-                            text = { Text(item) },
-                            onClick = {
-                                category = if (item == allLabel) "" else item
-                                categoryExpanded = false
-                            },
-                        )
-                    }
-                }
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedTextField(model, { model = it.uppercase(java.util.Locale.US) }, label = { Text(stringResource(R.string.model)) }, singleLine = true,
+                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters), modifier = Modifier.weight(1f))
+                OutlinedTextField(csc, { if (it.length <= 3) csc = it.uppercase(java.util.Locale.US) }, label = { Text(stringResource(R.string.csc)) }, singleLine = true,
+                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters), modifier = Modifier.weight(1f))
+            }
+            Text(stringResource(R.string.category), Modifier.padding(top = 8.dp))
+            OneSpinner(categories, category.ifBlank { allLabel }, { category = if (it == allLabel) "" else it }, Modifier.fillMaxWidth())
+        }
+
+        Spacer(Modifier.height(16.dp))
+        Row(Modifier.fillMaxWidth()) {
+            TextButton(onDismiss, Modifier.weight(1f)) { Text(stringResource(android.R.string.cancel)) }
+            TextButton(onClick = {
+                onConfirm(Bookmark(name.trim(), Device(model.trim(), csc.trim()), category, initial?.id, initial?.position ?: 0))
+            }, enabled = name.isNotBlank() && Device(model.trim(), csc.trim()).isValidDevice(), modifier = Modifier.weight(1f)) {
+                Text(stringResource(R.string.bookmark_save))
             }
         }
-        Spacer(Modifier.height(16.dp))
-        Button(
-            onClick = {
-                onConfirm(Bookmark(name.trim(), Device(model.trim(), csc.trim()), category,
-                    id = initial?.id, position = initial?.position ?: 0))
-            },
-            enabled = name.isNotBlank() && model.isNotBlank() && csc.length == 3,
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(22.dp),
-        ) {
-            Text(stringResource(R.string.bookmark_save))
-        }
+
     }
 }
 

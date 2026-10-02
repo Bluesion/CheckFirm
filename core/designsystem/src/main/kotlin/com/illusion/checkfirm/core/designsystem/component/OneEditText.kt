@@ -2,13 +2,13 @@ package com.illusion.checkfirm.core.designsystem.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
@@ -52,11 +52,10 @@ fun OneEditText(
     lineColor: Color? = null,
     lineHeight: Float = 2f
 ) {
-    val darkTheme = isSystemInDarkTheme()
-    val defaultLineColor = if (darkTheme) Color.White else Color.Black
+    val defaultLineColor = MaterialTheme.colorScheme.onSurface
     val actualLineColor = lineColor ?: defaultLineColor
     val textColor = MaterialTheme.colorScheme.onSurface
-    val hintColor = if (darkTheme) Color(0xFF8B8B8B) else Color(0xFF8B8B8B)
+    val hintColor = CheckFirmTheme.colors.settingsDescription
 
     Column(modifier = modifier.fillMaxWidth()) {
         Row(
@@ -94,15 +93,16 @@ fun OneEditText(
                 Spacer(modifier = Modifier.width(8.dp))
                 Icon(
                     imageVector = Icons.Default.Clear,
-                    contentDescription = "Clear text",
+                    contentDescription = androidx.compose.ui.res.stringResource(com.illusion.checkfirm.core.designsystem.R.string.clear_text),
                     tint = textColor,
                     modifier = Modifier
-                        .size(24.dp)
+                        .size(48.dp)
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
                             onClick = { onValueChange("") }
-                        ),
+                        )
+                        .padding(12.dp),
                 )
             }
         }

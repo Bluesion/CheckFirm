@@ -74,4 +74,10 @@
     <string name="welcome_search_add_device">Přidat zařízení</string>
     <string name="welcome_search_description">Vyhledat firmware při spuštění aplikace.\nZadejte prosím zařízení, které chcete vyhledat při spuštění.</string>
     <string name="welcome_search_empty_device_list">Můžete přidat až 5 zařízení.</string>
+    <string name="unknown">Neznámý</string>
+    <string name="help_device_info_edit">Upravit</string>
+    <string name="help_device_name">Název zařízení</string>
+    <string name="help_device_info_bookmark">Záložka uložena.</string>
+    <string name="suggestion_title">Hledáte něco jiného?</string>
+    <string name="suggestion_bookmark_my_device">Přidat mé zařízení do záložek</string>
 </resources>

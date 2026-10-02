@@ -18,7 +18,7 @@ enum class NameError { Blank, Reserved, NoDevices, Duplicate }
 @JvmInline
 value class DeviceKey(val key: String)
 
-fun Bookmark.deviceKey() = DeviceKey(device.toString())
+fun Bookmark.deviceKey() = DeviceKey(id?.let { "bookmark:$it" } ?: "${name}:${device}")
 
 sealed interface CategoryEditEvent {
     data object Saved : CategoryEditEvent

@@ -10,4 +10,21 @@
     <string name="notification_permission_required_button_grant">Предоставить</string>
     <string name="notification_permission_required_message">CheckFirm предоставляет Info Catcher, который уведомляет вас о найденной новой прошивке. Чтобы использовать эту функцию, вы должны предоставить разрешение на уведомления.</string>
     <string name="notification_permission_required_title">Требуется разрешение</string>
+    <string name="main_network_error_title">Сетевая ошибка</string>
+    <string name="main_network_error_text">Сеть не подключена или слишком медленная.</string>
+    <string name="main_search_error_title">Ошибка поиска</string>
+    <string name="main_search_error_text">Модель или CSC указаны неверно.</string>
+    <string name="suggestion_title">Ищете что-то еще?</string>
+    <string name="suggestion_check_my_device_info">Проверить информацию о моем устройстве</string>
+    <string name="suggestion_wifi">Включить Wi-Fi</string>
+    <string name="suggestion_data">Включить мобильные данные</string>
+
+    <string name="unknown">Неизвестно</string>
+    <string name="smart_search">Умный поиск</string>
+    <string name="smart_search_type_major">Обновление One UI</string>
+    <string name="smart_search_type_minor">Минорное обновление</string>
+    <string name="smart_search_type_rollback">Откат</string>
+    <string name="smart_search_downgrade_possible">Возможен откат</string>
+    <string name="smart_search_downgrade_impossible">Откат невозможен</string>
+    <string name="official_previous">Предыдущая официальная прошивка</string>
 </resources>

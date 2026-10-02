@@ -7,5 +7,6 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.preference.api)
     implementation(projects.feature.search.api)
 }

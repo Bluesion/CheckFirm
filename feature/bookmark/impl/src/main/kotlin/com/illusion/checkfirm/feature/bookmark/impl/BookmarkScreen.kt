@@ -11,7 +11,16 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.IconButton
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -27,6 +36,7 @@ import com.illusion.checkfirm.core.domain.model.Device
 @Composable
 fun BookmarkScreen(
     uiState: BookmarkUiState,
+    initialTab: Int = 0,
     onExpandedChange: (Boolean) -> Unit,
     onCategoryChange: (String) -> Unit,
     onEditingBookmarkChange: (Bookmark?) -> Unit,
@@ -37,9 +47,12 @@ fun BookmarkScreen(
     onItemClick: (Bookmark) -> Unit,
     onNavigationIconClick: () -> Unit,
     onCategoryClick: () -> Unit = {},
+    onEditCategory: (String) -> Unit = {},
+    onDeleteCategory: (String) -> Unit = {},
 ) {
+    var tab by rememberSaveable { mutableIntStateOf(initialTab) }
     OneScaffold(
-        title = stringResource(R.string.bookmark),
+        title = stringResource(if (tab == 0) R.string.bookmark else R.string.category),
         navigationIcon = {
             OneNavButton(
                 onClick = onNavigationIconClick,
@@ -48,14 +61,14 @@ fun BookmarkScreen(
             ) {
                 Icon(
                     imageVector = OneIcons.Back,
-                    contentDescription = null,
+                    contentDescription = stringResource(com.illusion.checkfirm.core.designsystem.R.string.navigate_back),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
             }
         },
         actions = {
-            OneNavButton(onClick = { onShowNewBookmarkChange(true) }, shape = CircleShape,
+            OneNavButton(onClick = { if (tab == 0) onShowNewBookmarkChange(true) else onCategoryClick() }, shape = CircleShape,
                 modifier = Modifier.size(48.dp)) {
                 Icon(Icons.Rounded.Add, contentDescription = stringResource(com.illusion.checkfirm.feature.bookmark.R.string.bookmark_new))
             }
@@ -70,7 +83,7 @@ fun BookmarkScreen(
                 ),
         ) {
             androidx.compose.foundation.layout.Box(Modifier.weight(1f)) {
-            BookmarkContent(
+            if (tab == 0) BookmarkContent(
                 uiState = uiState,
                 onExpandedChange = onExpandedChange,
                 onCategoryChange = onCategoryChange,
@@ -78,10 +91,24 @@ fun BookmarkScreen(
                 onEditClick = { onEditingBookmarkChange(it) },
                 onDeleteClick = { onDeleteBookmark(it.device) },
             )
+            else LazyColumn(contentPadding = PaddingValues(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                items(uiState.categories, key = { it.id ?: it.name }) { category ->
+                    com.illusion.checkfirm.core.designsystem.component.OneCard {
+                        Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                            TextButton(onClick = { onEditCategory(category.name) }, modifier = Modifier.weight(1f)) {
+                                Text(category.name, Modifier.fillMaxWidth(), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                            }
+                            IconButton(onClick = { onDeleteCategory(category.name) }) {
+                                Icon(Icons.Rounded.Delete, stringResource(R.string.delete_item))
+                            }
+                        }
+                    }
+                }
+            }
             }
             com.illusion.checkfirm.core.designsystem.component.OneTab(
                 titles = listOf(stringResource(R.string.bookmark), stringResource(R.string.category)),
-                selectedTabIndex = 0, onTabSelected = { if (it == 1) onCategoryClick() },
+                selectedTabIndex = tab, onTabSelected = { tab = it },
             )
         }
     }

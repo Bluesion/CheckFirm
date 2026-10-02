@@ -42,7 +42,7 @@ fun HomeScreen(
     onCategoryPick: (String) -> Unit,
     onBookmarkChipClick: (Bookmark) -> Unit,
     onCategoryDialogDismiss: () -> Unit,
-    onResultClick: (SearchResult) -> Unit,
+    onResultClick: (SearchResult, Boolean) -> Unit,
     onResultDismiss: () -> Unit,
     onCopy: (String) -> Unit,
     onOpenOfficialDoc: (SearchResult) -> Unit,
@@ -83,7 +83,7 @@ fun HomeScreen(
             ),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            if (uiState.preference.isQuickSearchBarEnabled && visibleBookmarks.isNotEmpty()) {
+            if (uiState.preference.isQuickSearchBarEnabled && uiState.bookmarks.isNotEmpty()) {
                 item("quick_search_bar") {
                     QuickSearchBar(
                         bookmarks = visibleBookmarks,
@@ -118,7 +118,8 @@ fun HomeScreen(
                         val result = uiState.results[idx]
                         HomeResultCard(
                             result = result,
-                            onCardClick = { onResultClick(result) },
+                            isFirebaseEnabled = uiState.preference.isFirebaseEnabled,
+                            onCardClick = { official -> onResultClick(result, official) },
                         )
                     }
                 }
@@ -126,7 +127,7 @@ fun HomeScreen(
                 ResultState.Idle -> {}
             }
 
-            item("hello_dashboard") {
+            if (uiState.resultState == ResultState.Idle) item("hello_dashboard") {
                 HelloDashboard(
                     onSearchClick = onSearchIconClick,
                     onBookmarkClick = onBookmarkIconClick,
@@ -150,6 +151,7 @@ fun HomeScreen(
     uiState.openedDialog?.let { result ->
         HomeFirmwareDialog(
             result = result,
+            isOfficial = uiState.openedDialogIsOfficial,
             onDismiss = onResultDismiss,
             onCopy = onCopy,
             onOpenOfficialDoc = { onOpenOfficialDoc(result) },
@@ -177,7 +179,7 @@ private fun HomeScreenPreview() {
                 onCategoryPick = {},
                 onBookmarkChipClick = {},
                 onCategoryDialogDismiss = {},
-                onResultClick = {},
+                onResultClick = { _, _ -> },
                 onResultDismiss = {},
                 onCopy = {},
                 onOpenOfficialDoc = {},

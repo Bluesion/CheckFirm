@@ -1,5 +1,9 @@
 package com.illusion.checkfirm.core.designsystem.component
 
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +18,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -32,7 +37,8 @@ fun OneBottomSheetDialog(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+        scrimColor = Color.Black.copy(alpha = 0.8f),
+        shape = RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp),
         containerColor = MaterialTheme.colorScheme.surface,
         contentColor = MaterialTheme.colorScheme.onSurface,
         modifier = modifier,
@@ -41,12 +47,14 @@ fun OneBottomSheetDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .heightIn(max = LocalWindowInfo.current.containerDpSize.height * 0.9f)
+                .verticalScroll(rememberScrollState())
                 .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 12.dp),
         ) {
             Text(
                 text = title,
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
+                style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
             )
             Spacer(Modifier.height(16.dp))
             content()

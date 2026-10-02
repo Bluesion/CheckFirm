@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -20,6 +21,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import android.widget.Toast
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -41,6 +44,7 @@ fun WelcomeSearchDialog(
     onDismissRequest: () -> Unit,
     onAddDevice: (model: String, csc: String) -> Unit,
 ) {
+    val context = LocalContext.current
     OneBottomSheetDialog(
         title = stringResource(R.string.welcome_search),
         onDismiss = onDismissRequest,
@@ -90,7 +94,7 @@ fun WelcomeSearchDialog(
                 .fillMaxWidth()
                 .padding(top = 16.dp),
         ) {
-            OutlinedButton(
+            TextButton(
                 onClick = onDismissRequest,
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
@@ -98,9 +102,13 @@ fun WelcomeSearchDialog(
                 Text(text = stringResource(android.R.string.cancel))
             }
             Spacer(Modifier.width(8.dp))
-            Button(
-                onClick = { onAddDevice(uiState.model, uiState.csc) },
-                enabled = uiState.model.isNotBlank() && uiState.csc.length == 3,
+            TextButton(
+                onClick = {
+                    val device = Device(uiState.model.trim().uppercase(java.util.Locale.US), uiState.csc.trim().uppercase(java.util.Locale.US))
+                    if (device.isValidDevice()) onAddDevice(device.model, device.csc)
+                    else Toast.makeText(context, context.getString(R.string.check_device), Toast.LENGTH_SHORT).show()
+                },
+                enabled = true,
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {

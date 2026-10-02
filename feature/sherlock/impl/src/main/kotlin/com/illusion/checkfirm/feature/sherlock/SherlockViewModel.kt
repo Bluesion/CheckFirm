@@ -40,10 +40,13 @@ class SherlockViewModel @Inject constructor(
     val uiState: StateFlow<SherlockUiState> = _uiState.asStateFlow()
 
     private var searchResult: SearchResult? = null
+    private var initialized = false
 
     private val firestore by lazy { FirebaseFirestore.getInstance() }
 
     fun initialize(payload: SearchResult?) {
+        if (initialized && searchResult == payload) return
+        initialized = true
         if (payload == null) {
             _uiState.value = SherlockUiState()
             return
@@ -231,6 +234,9 @@ class SherlockViewModel @Inject constructor(
     fun runScript() {
         val state = _uiState.value
         val test = searchResult?.firmware?.testFirmware ?: return
+        if (state.status == SherlockStatus.RUNNING) return
+        validateScript()
+        if (_uiState.value.status != SherlockStatus.NO_WARNING) return
 
         _uiState.update { it.copy(status = SherlockStatus.RUNNING) }
 

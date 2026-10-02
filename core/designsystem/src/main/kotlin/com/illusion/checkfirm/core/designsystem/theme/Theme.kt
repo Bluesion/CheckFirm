@@ -97,6 +97,20 @@ fun CheckFirmTheme(
     val extendedColors = if (darkTheme) DarkExtendedColors else LightExtendedColors
     val colorScheme = if (darkTheme) darkScheme else lightScheme
 
+    val view = androidx.compose.ui.platform.LocalView.current
+    val lightBars = !darkTheme
+    androidx.compose.runtime.SideEffect {
+        if (!view.isInEditMode) {
+            var context = view.context
+            while (context is android.content.ContextWrapper && context !is android.app.Activity) context = context.baseContext
+            (context as? android.app.Activity)?.let { activity ->
+                androidx.core.view.WindowCompat.getInsetsController(activity.window, view).apply {
+                    isAppearanceLightStatusBars = lightBars
+                    isAppearanceLightNavigationBars = lightBars
+                }
+            }
+        }
+    }
     CompositionLocalProvider(LocalExtendedColors provides extendedColors) {
         MaterialTheme(
             colorScheme = colorScheme,

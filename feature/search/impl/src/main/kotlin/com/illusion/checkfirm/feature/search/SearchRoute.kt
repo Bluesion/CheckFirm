@@ -2,6 +2,8 @@ package com.illusion.checkfirm.feature.search
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
@@ -10,6 +12,7 @@ fun SearchRoute(
     onNavigationIconClick: () -> Unit,
     viewModel: SearchViewModel = hiltViewModel(),
 ) {
+    val scope = rememberCoroutineScope()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val historyList by viewModel.historyList.collectAsStateWithLifecycle()
     val bookmarks by viewModel.bookmarks.collectAsStateWithLifecycle()
@@ -27,8 +30,10 @@ fun SearchRoute(
         onDeleteAllHistory = viewModel::deleteAll,
         onSearchClick = {
             if (uiState.searchList.isNotEmpty()) {
-                viewModel.confirmAndEmit()
-                onNavigationIconClick()
+                scope.launch {
+                    viewModel.confirmAndEmit()
+                    onNavigationIconClick()
+                }
             }
         },
         onNavigationIconClick = onNavigationIconClick

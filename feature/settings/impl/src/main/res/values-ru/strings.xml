@@ -74,4 +74,10 @@
     <string name="welcome_search_add_device">Добавить устройство</string>
     <string name="welcome_search_description">Искать прошивку при запуске приложения.\nПожалуйста, введите устройство, которое вы хотите искать при запуске.</string>
     <string name="welcome_search_empty_device_list">Вы можете добавить до 5 устройств.</string>
+    <string name="unknown">Неизвестно</string>
+    <string name="help_device_info_edit">Редактировать</string>
+    <string name="help_device_name">Название устройства</string>
+    <string name="help_device_info_bookmark">Закладка сохранена.</string>
+    <string name="suggestion_title">Ищете что-то еще?</string>
+    <string name="suggestion_bookmark_my_device">Добавить мое устройство в закладки</string>
 </resources>

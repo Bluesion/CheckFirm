@@ -10,4 +10,21 @@
     <string name="notification_permission_required_button_grant">Conceder</string>
     <string name="notification_permission_required_message">O CheckFirm fornece o Info Catcher, que alerta você quando um novo firmware é encontrado. Para usar este recurso, você deve conceder permissão de notificação.</string>
     <string name="notification_permission_required_title">Permissão Necessária</string>
+    <string name="main_network_error_title">Erro de Rede</string>
+    <string name="main_network_error_text">A rede não está conectada ou está muito lenta.</string>
+    <string name="main_search_error_title">Erro de Pesquisa</string>
+    <string name="main_search_error_text">Modelo ou CSC incorreto.</string>
+    <string name="suggestion_title">Procurando por algo mais?</string>
+    <string name="suggestion_check_my_device_info">Verificar as informações do meu dispositivo</string>
+    <string name="suggestion_wifi">Ligar Wi-Fi</string>
+    <string name="suggestion_data">Ligar dados móveis</string>
+
+    <string name="unknown">Desconhecido</string>
+    <string name="smart_search">Pesquisa Inteligente</string>
+    <string name="smart_search_type_major">Atualização do One UI</string>
+    <string name="smart_search_type_minor">Atualização Menor</string>
+    <string name="smart_search_type_rollback">Reversão</string>
+    <string name="smart_search_downgrade_possible">Downgrade Possível</string>
+    <string name="smart_search_downgrade_impossible">Downgrade Impossível</string>
+    <string name="official_previous">Firmware oficial anterior</string>
 </resources>

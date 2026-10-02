@@ -51,6 +51,7 @@ fun AboutScreen(
 
     OneScaffold(
         title = "",
+        expandable = false,
         navigationIcon = {
             OneNavButton(
                 onClick = onNavigateBack,
@@ -59,7 +60,7 @@ fun AboutScreen(
             ) {
                 Icon(
                     imageVector = OneIcons.Back,
-                    contentDescription = null,
+                    contentDescription = stringResource(com.illusion.checkfirm.core.designsystem.R.string.navigate_back),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
@@ -87,7 +88,7 @@ fun AboutScreen(
                 .fillMaxSize()
                 .padding(horizontal = 24.dp, vertical = 16.dp)
                 .padding(
-                    top = innerPadding.calculateTopPadding(),
+                    top = 0.dp,
                     bottom = innerPadding.calculateBottomPadding(),
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -95,8 +96,7 @@ fun AboutScreen(
             Text(
                 text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.displaySmall,
-                color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface,
             )
 
             Spacer(Modifier.height(8.dp))
@@ -183,7 +183,7 @@ private fun VersionStatus(state: VersionCheckState, onUpdateClick: () -> Unit) {
             Text(
                 text = stringResource(R.string.check_network),
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.error,
+                color = CheckFirmTheme.colors.settingsDescription,
             )
         }
 

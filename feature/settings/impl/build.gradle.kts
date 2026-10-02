@@ -10,6 +10,7 @@ android {
 dependencies {
     implementation(projects.feature.settings.api)
     implementation(projects.feature.bookmark.api)
+    implementation(projects.feature.bookmark.impl)
     implementation(projects.core.domain)
     implementation(projects.core.preference.api)
     implementation(libs.androidx.appcompat)

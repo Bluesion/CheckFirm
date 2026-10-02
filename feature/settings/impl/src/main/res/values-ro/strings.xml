@@ -74,4 +74,10 @@
     <string name="welcome_search_add_device">Adaugă dispozitiv</string>
     <string name="welcome_search_description">Căutați firmware la pornirea aplicației.\nVă rugăm să introduceți dispozitivul pe care doriți să îl căutați la pornire.</string>
     <string name="welcome_search_empty_device_list">Puteți adăuga până la 5 dispozitive.</string>
+    <string name="unknown">Necunoscut</string>
+    <string name="help_device_info_edit">Editare</string>
+    <string name="help_device_name">Nume dispozitiv</string>
+    <string name="help_device_info_bookmark">Marcaj salvat.</string>
+    <string name="suggestion_title">Căutați altceva?</string>
+    <string name="suggestion_bookmark_my_device">Adaugă dispozitivul meu la marcaje</string>
 </resources>

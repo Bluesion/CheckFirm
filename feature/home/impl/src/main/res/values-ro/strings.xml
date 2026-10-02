@@ -10,4 +10,21 @@
     <string name="notification_permission_required_button_grant">Acordă</string>
     <string name="notification_permission_required_message">CheckFirm oferă Info Catcher, care vă alertează atunci când este găsit un firmware nou. Pentru a utiliza această funcționalitate, trebuie să acordați permisiunea de notificare.</string>
     <string name="notification_permission_required_title">Permisiune Necesară</string>
+    <string name="main_network_error_title">Eroare de Rețea</string>
+    <string name="main_network_error_text">Rețeaua nu este conectată sau este prea lentă.</string>
+    <string name="main_search_error_title">Eroare de Căutare</string>
+    <string name="main_search_error_text">Modelul sau CSC este incorect.</string>
+    <string name="suggestion_title">Căutați altceva?</string>
+    <string name="suggestion_check_my_device_info">Verifică informațiile dispozitivului meu</string>
+    <string name="suggestion_wifi">Pornește Wi-Fi</string>
+    <string name="suggestion_data">Pornește datele mobile</string>
+
+    <string name="unknown">Necunoscut</string>
+    <string name="smart_search">Căutare Inteligentă</string>
+    <string name="smart_search_type_major">Actualizare One UI</string>
+    <string name="smart_search_type_minor">Actualizare Minoră</string>
+    <string name="smart_search_type_rollback">Revenire</string>
+    <string name="smart_search_downgrade_possible">Downgrade posibil</string>
+    <string name="smart_search_downgrade_impossible">Downgrade imposibil</string>
+    <string name="official_previous">Firmware oficial anterior</string>
 </resources>

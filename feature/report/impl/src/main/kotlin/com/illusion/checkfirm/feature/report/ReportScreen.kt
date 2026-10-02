@@ -1,5 +1,12 @@
 package com.illusion.checkfirm.feature.report
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.Role
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,6 +50,12 @@ fun ReportScreen(
 ) {
     OneScaffold(
         title = stringResource(DesignSystemR.string.report),
+        actions = {
+            androidx.compose.material3.TextButton(onClick = onSubmitClick, enabled = !uiState.isSubmitting) {
+                if (uiState.isSubmitting) OneLoadingIndicator(Modifier.size(24.dp))
+                else Text(stringResource(R.string.report_submit), color = MaterialTheme.colorScheme.onSurface)
+            }
+        },
         navigationIcon = {
             OneNavButton(
                 onClick = onNavigationIconClick,
@@ -51,7 +64,7 @@ fun ReportScreen(
             ) {
                 Icon(
                     imageVector = OneIcons.Back,
-                    contentDescription = null,
+                    contentDescription = stringResource(com.illusion.checkfirm.core.designsystem.R.string.navigate_back),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
@@ -80,71 +93,37 @@ fun ReportScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
-            OneCheckboxCard(
-                text = stringResource(R.string.report_type_1),
-                isChecked = BugType.FIRMWARE_INFO_ERROR in uiState.bugTypes,
-                onCheckedChange = { onBugTypeToggle(BugType.FIRMWARE_INFO_ERROR) },
-                modifier = Modifier.fillMaxWidth(),
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OneCheckboxCard(
-                text = stringResource(R.string.report_type_2),
-                isChecked = BugType.INAPPROPRIATE_USER_NAME in uiState.bugTypes,
-                onCheckedChange = { onBugTypeToggle(BugType.INAPPROPRIATE_USER_NAME) },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OneCheckboxCard(
-                text = stringResource(R.string.report_type_3),
-                isChecked = BugType.SMART_SEARCH_INFO_ERROR in uiState.bugTypes,
-                onCheckedChange = { onBugTypeToggle(BugType.SMART_SEARCH_INFO_ERROR) },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OneCheckboxCard(
-                text = stringResource(R.string.report_type_4),
-                isChecked = BugType.OTHER_ERROR in uiState.bugTypes,
-                onCheckedChange = { onBugTypeToggle(BugType.OTHER_ERROR) },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            OutlinedTextField(
-                value = uiState.userMessage,
-                onValueChange = onUserMessageUpdate,
-                placeholder = { Text(text = stringResource(R.string.report_detail)) },
-                modifier = Modifier.fillMaxWidth(),
-                minLines = 4,
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Button(
-                onClick = onSubmitClick,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = 56.dp)
-                    .padding(top = 16.dp),
-                enabled = uiState.bugTypes.isNotEmpty() && !uiState.isSubmitting,
-            ) {
-                if (uiState.isSubmitting) {
-                    OneLoadingIndicator(
-                        modifier = Modifier.size(24.dp),
-                        tint = Color.White,
-                    )
-                } else {
-                    Text(text = stringResource(R.string.report_submit))
+            Spacer(Modifier.height(16.dp))
+            listOf(
+                BugType.FIRMWARE_INFO_ERROR to R.string.report_type_1,
+                BugType.INAPPROPRIATE_USER_NAME to R.string.report_type_2,
+                BugType.SMART_SEARCH_INFO_ERROR to R.string.report_type_3,
+                BugType.OTHER_ERROR to R.string.report_type_4,
+            ).forEach { (type, label) ->
+                Row(
+                    Modifier.fillMaxWidth().toggleable(value = type in uiState.bugTypes, role = Role.Checkbox) { onBugTypeToggle(type) },
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Checkbox(checked = type in uiState.bugTypes, onCheckedChange = null, modifier = Modifier.size(48.dp))
+                    Text(stringResource(label), style = MaterialTheme.typography.bodyMedium)
                 }
             }
+            Spacer(Modifier.height(16.dp))
+            BasicTextField(
+                value = uiState.userMessage,
+                onValueChange = onUserMessageUpdate,
+                textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp),
+                decorationBox = { inner ->
+                    Column {
+                        Box(Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+                            if (uiState.userMessage.isEmpty()) Text(stringResource(R.string.report_detail), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            inner()
+                        }
+                        HorizontalDivider(color = MaterialTheme.colorScheme.primary)
+                    }
+                },
+            )
         }
     }
 }

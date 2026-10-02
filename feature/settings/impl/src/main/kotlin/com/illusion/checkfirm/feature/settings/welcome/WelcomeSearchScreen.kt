@@ -25,6 +25,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import android.widget.Toast
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -33,6 +35,8 @@ import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneIcons
 import com.illusion.checkfirm.core.designsystem.component.OneNavButton
 import com.illusion.checkfirm.core.designsystem.component.OneScaffold
+import com.illusion.checkfirm.core.designsystem.component.OneSwitchCard
+import com.illusion.checkfirm.core.designsystem.component.OneCard
 import com.illusion.checkfirm.core.designsystem.component.OneSwitch
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
@@ -53,6 +57,7 @@ fun WelcomeSearchScreen(
     onRemoveDevice: (Device) -> Unit = {},
     onNavigationIconClick: () -> Unit,
 ) {
+    val context = LocalContext.current
     if (uiState.showDialog) {
         WelcomeSearchDialog(
             uiState = uiState,
@@ -66,6 +71,14 @@ fun WelcomeSearchScreen(
 
     OneScaffold(
         title = stringResource(R.string.welcome_search),
+        actions = {
+            OneNavButton({
+                if (uiState.devices.size < 5) onShowDialogChange(true)
+                else Toast.makeText(context, context.getString(FeatureR.string.welcome_search_empty_device_list), Toast.LENGTH_SHORT).show()
+            }, CircleShape, Modifier.size(48.dp)) {
+                Icon(Icons.Rounded.Add, stringResource(FeatureR.string.welcome_search_add_device))
+            }
+        },
         navigationIcon = {
             OneNavButton(
                 onClick = onNavigationIconClick,
@@ -74,7 +87,7 @@ fun WelcomeSearchScreen(
             ) {
                 Icon(
                     imageVector = OneIcons.Back,
-                    contentDescription = null,
+                    contentDescription = stringResource(com.illusion.checkfirm.core.designsystem.R.string.navigate_back),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
@@ -89,30 +102,9 @@ fun WelcomeSearchScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(top = innerPadding.calculateTopPadding())
         ) {
-            Card(
-                onClick = { onIsWelcomeSearchEnabledChange(!uiState.isWelcomeSearchEnabled) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 4.dp),
-                shape = MaterialTheme.shapes.large
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(R.string.welcome_search),
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    OneSwitch(
-                        checked = uiState.isWelcomeSearchEnabled,
-                        onCheckedChange = { onIsWelcomeSearchEnabledChange(it) },
-                    )
-                }
-            }
+            OneSwitchCard(checked = uiState.isWelcomeSearchEnabled,
+                onCheckedChange = onIsWelcomeSearchEnabledChange,
+                modifier = Modifier.fillMaxWidth().padding(top = 4.dp))
 
             Text(
                 text = stringResource(FeatureR.string.welcome_search_description),
@@ -124,66 +116,11 @@ fun WelcomeSearchScreen(
             )
 
             if (uiState.devices.isNotEmpty()) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 24.dp),
-                    shape = MaterialTheme.shapes.large
-                ) {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        uiState.devices.forEach { device ->
-                            WelcomeSearchItem(
-                                device = device,
-                                onDelete = { onRemoveDevice(device) }
-                            )
-                        }
+                OneCard(Modifier.fillMaxWidth().padding(top = 24.dp)) {
+                    uiState.devices.forEachIndexed { index, device ->
+                        WelcomeSearchItem(device = device, onDelete = { onRemoveDevice(device) })
+                        if (index < uiState.devices.lastIndex) androidx.compose.material3.HorizontalDivider(Modifier.padding(horizontal = 12.dp))
                     }
-                }
-
-                if (uiState.devices.size < 5) {
-                    Button(
-                        onClick = { onShowDialogChange(true) },
-                        modifier = Modifier
-                            .padding(top = 48.dp)
-                            .align(Alignment.CenterHorizontally),
-                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-                    ) {
-                        Icon(Icons.Rounded.Add, contentDescription = null)
-                        Spacer(Modifier.width(8.dp))
-                        Text(text = stringResource(FeatureR.string.welcome_search_add_device))
-                    }
-
-                    Text(
-                        text = stringResource(FeatureR.string.welcome_search_empty_device_list),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.outline,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .padding(top = 4.dp)
-                    )
-                }
-            } else {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 48.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Button(
-                        onClick = { onShowDialogChange(true) },
-                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-                    ) {
-                        Icon(Icons.Rounded.Add, contentDescription = null)
-                        Spacer(Modifier.width(8.dp))
-                        Text(text = stringResource(FeatureR.string.welcome_search_add_device))
-                    }
-
-                    Text(
-                        text = stringResource(FeatureR.string.welcome_search_empty_device_list),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.outline,
-                        modifier = Modifier.padding(top = 4.dp)
-                    )
                 }
             }
         }
@@ -205,7 +142,7 @@ fun WelcomeSearchItem(
     ) {
         Text(
             text = "${device.model} (${device.csc})",
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.weight(1f),
             maxLines = 1
         )
@@ -216,7 +153,7 @@ fun WelcomeSearchItem(
         ) {
             Icon(
                 imageVector = Icons.Rounded.Close,
-                contentDescription = "Delete"
+                contentDescription = stringResource(R.string.delete_item)
             )
         }
     }

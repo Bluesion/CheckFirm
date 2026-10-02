@@ -10,4 +10,20 @@
     <string name="notification_permission_required_button_grant">ප්‍රදානය කරන්න</string>
     <string name="notification_permission_required_message">CheckFirm විසින් Info Catcher සපයයි, එය නව ස්ථිරාංගයක් සොයාගත් විට ඔබට දැනුම් දෙයි. මෙම අංගය භාවිතා කිරීමට, ඔබ දැනුම්දීම් අවසරය ලබා දිය යුතුය.</string>
     <string name="notification_permission_required_title">අවසරය අවශ්‍යයි</string>
+    <string name="main_network_error_title">ජාල දෝෂය</string>
+    <string name="main_network_error_text">ජාලය සම්බන්ධ වී නැත හෝ ඉතා මන්දගාමී වේ.</string>
+    <string name="main_search_error_title">සෙවුම් දෝෂය</string>
+    <string name="main_search_error_text">ආකෘතිය හෝ CSC වැරදිය.</string>
+    <string name="suggestion_title">වෙනත් දෙයක් සොයනවාද?</string>
+    <string name="suggestion_check_my_device_info">මගේ උපාංග තොරතුරු පරීක්ෂා කරන්න</string>
+    <string name="suggestion_wifi">Wi-Fi සක්‍රිය කරන්න</string>
+    <string name="suggestion_data">ජංගම දත්ත සක්‍රිය කරන්න</string>
+    <string name="unknown">නොදන්නා</string>
+    <string name="smart_search">ස්මාර්ට් සෙවුම</string>
+    <string name="smart_search_type_major">One UI යාවත්කාලීනය</string>
+    <string name="smart_search_type_minor">සුළු යාවත්කාලීනය</string>
+    <string name="smart_search_type_rollback">පසුබැසීම</string>
+    <string name="smart_search_downgrade_possible">ඩවුන්ග්‍රේඩ් කළ හැක</string>
+    <string name="smart_search_downgrade_impossible">ඩවුන්ග්‍රේඩ් කළ නොහැක</string>
+    <string name="official_previous">පෙර නිල ස්ථිරාංගය</string>
 </resources>

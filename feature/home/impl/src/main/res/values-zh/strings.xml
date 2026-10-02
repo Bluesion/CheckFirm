@@ -10,4 +10,20 @@
     <string name="notification_permission_required_button_grant">授予</string>
     <string name="notification_permission_required_message">CheckFirm 提供 Info Catcher，当找到新固件时会通知您。要使用此功能，您必须授予通知权限。</string>
     <string name="notification_permission_required_title">需要权限</string>
+    <string name="main_network_error_title">网络错误</string>
+    <string name="main_network_error_text">网络未连接或太慢。</string>
+    <string name="main_search_error_title">搜索错误</string>
+    <string name="main_search_error_text">型号或CSC不正确。</string>
+    <string name="suggestion_title">还在寻找其他东西吗？</string>
+    <string name="suggestion_check_my_device_info">检查我的设备信息</string>
+    <string name="suggestion_wifi">打开 Wi-Fi</string>
+    <string name="suggestion_data">打开移动数据</string>
+    <string name="unknown">未知</string>
+    <string name="smart_search">智能搜索</string>
+    <string name="smart_search_type_major">One UI 更新</string>
+    <string name="smart_search_type_minor">次要更新</string>
+    <string name="smart_search_type_rollback">回滚</string>
+    <string name="smart_search_downgrade_possible">可降级</string>
+    <string name="smart_search_downgrade_impossible">不可降级</string>
+    <string name="official_previous">上一个官方固件</string>
 </resources>

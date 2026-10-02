@@ -77,7 +77,9 @@ class WelcomeSearchViewModel @Inject constructor(
     }
 
     fun addDevice(model: String, csc: String) = viewModelScope.launch {
-        welcomeSearchRepository.insert(Device(model.trim(), csc.trim()))
+        val device = Device(model.trim().uppercase(java.util.Locale.US), csc.trim().uppercase(java.util.Locale.US))
+        if (!device.isValidDevice() || welcomeSearchRepository.allDevices.first().size >= 5) return@launch
+        welcomeSearchRepository.insert(device)
         _localState.update { LocalState() }
     }
 

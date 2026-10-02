@@ -29,4 +29,9 @@
     <string name="switch_on">On</string>
     <string name="test_latest">Latest test firmware</string>
     <string name="welcome_search">Welcome Search</string>
+    <string name="navigate_back">Back</string>
+    <string name="clear_text">Clear text</string>
+    <string name="delete_item">Delete</string>
+    <string name="edit_item">Edit</string>
+    <string name="sherlock" translatable="false">Sherlock</string>
 </resources>

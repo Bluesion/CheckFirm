@@ -5,9 +5,11 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,6 +40,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
@@ -54,7 +57,7 @@ fun OneSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
-    val darkTheme = isSystemInDarkTheme()
+    val darkTheme = MaterialTheme.colorScheme.background.luminance() < 0.5f
     val checkedTrackColor = MaterialTheme.colorScheme.primary
     val uncheckedTrackColor = if (darkTheme) Color(0xFF44474E) else Color(0xFF99999E)
     val thumbColor = Color(0xFFFCFCFF)
@@ -85,11 +88,12 @@ fun OneSwitch(
     val interactionSource = remember { MutableInteractionSource() }
 
     val baseModifier = if (onCheckedChange != null) {
-        modifier.clickable(
+        modifier.toggleable(
+            value = checked,
             interactionSource = interactionSource,
             indication = null,
             role = Role.Switch,
-            onClick = { onCheckedChange(!checked) },
+            onValueChange = onCheckedChange,
         )
     } else modifier
 
@@ -137,7 +141,7 @@ fun OneSwitchCard(
     textOn: String = stringResource(R.string.switch_on),
     textOff: String = stringResource(R.string.switch_off),
 ) {
-    val darkTheme = isSystemInDarkTheme()
+    val darkTheme = MaterialTheme.colorScheme.background.luminance() < 0.5f
     val cardOff = if (darkTheme) Color(0xFF171719) else Color(0xFFFDFCFF)
     val cardOn = if (darkTheme) Color(0xFF053053) else Color(0xFFE3EAF0)
 
@@ -145,20 +149,21 @@ fun OneSwitchCard(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable(role = Role.Switch) { onCheckedChange(!checked) },
-        shape = RoundedCornerShape(size = 32.dp),
+            .toggleable(value = checked, role = Role.Switch, onValueChange = onCheckedChange),
+        shape = OneCardShape,
         colors = CardDefaults.cardColors(containerColor = if (checked) cardOn else cardOff),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .heightIn(min = 64.dp)
                 .padding(horizontal = 14.dp, vertical = 13.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = if (checked) textOn else textOff,
-                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
+                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
                 color = MaterialTheme.colorScheme.onSurface,
             )
             Spacer(modifier = Modifier.weight(1f))

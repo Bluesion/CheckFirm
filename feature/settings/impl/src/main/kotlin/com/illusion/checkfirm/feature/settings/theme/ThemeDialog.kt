@@ -11,6 +11,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.TextButton
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.Role
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -49,7 +53,7 @@ fun ThemeDialog(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { current = if (isSystem) "light" else "system" }
+                .toggleable(value = isSystem, role = Role.Switch) { current = if (it) "system" else "light" }
                 .padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -87,7 +91,7 @@ fun ThemeDialog(
 
         Spacer(Modifier.height(16.dp))
 
-        Button(
+        TextButton(
             onClick = {
                 onConfirm(current)
                 onDismiss()
@@ -109,7 +113,7 @@ private fun ThemePreview(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.clickable(onClick = onClick),
+        modifier = modifier.selectable(selected = selected, role = Role.RadioButton, onClick = onClick),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
@@ -122,9 +126,10 @@ private fun ThemePreview(
         Text(
             text = label,
             style = MaterialTheme.typography.bodyMedium,
+            color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(top = 8.dp),
         )
-        OneRadioButton(selected = selected, onClick = onClick)
+        OneRadioButton(selected = selected, onClick = null)
     }
 }
 

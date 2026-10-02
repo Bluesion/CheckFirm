@@ -74,4 +74,10 @@
     <string name="welcome_search_add_device">デバイスを追加</string>
     <string name="welcome_search_description">アプリ起動時にファームウェアを検索します。\n起動時に検索したいデバイスを入力してください。</string>
     <string name="welcome_search_empty_device_list">最大5台のデバイスを追加できます。</string>
+    <string name="unknown">不明</string>
+    <string name="help_device_info_edit">編集</string>
+    <string name="help_device_name">デバイス名</string>
+    <string name="help_device_info_bookmark">ブックマークが保存されました。</string>
+    <string name="suggestion_title">他に探しているものはありますか？</string>
+    <string name="suggestion_bookmark_my_device">マイデバイスをブックマークに追加</string>
 </resources>

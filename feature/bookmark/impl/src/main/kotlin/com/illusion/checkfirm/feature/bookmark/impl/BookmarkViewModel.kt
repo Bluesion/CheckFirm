@@ -25,6 +25,7 @@ import kotlinx.coroutines.launch
 class BookmarkViewModel @Inject constructor(
     private val repository: BCRepository,
     private val resultBus: NavResultBus,
+    private val preferenceRepository: com.illusion.checkfirm.core.preference.api.PreferenceRepository,
 ) : ViewModel() {
 
     // Empty selectedCategory is the "All" sentinel; the screen substitutes the
@@ -32,15 +33,12 @@ class BookmarkViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(BookmarkUiState())
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val bookmarksFlow = _uiState
-        .map { it.selectedCategory }
-        .distinctUntilChanged()
-        .flatMapLatest { category ->
-            if (category.isBlank()) {
-                repository.getAllBookmark("date", true)
-            } else {
-                repository.getBookmarkByCategory("date", true, category)
-            }
+    private val bookmarksFlow = combine(
+        _uiState.map { it.selectedCategory }.distinctUntilChanged(), preferenceRepository.getSettings(),
+    ) { category, preference -> category to preference }
+        .flatMapLatest { (category, preference) ->
+            if (category.isBlank()) repository.getAllBookmark(preference.bookmarkOrder, !preference.isBookmarkAscOrder)
+            else repository.getBookmarkByCategory(preference.bookmarkOrder, !preference.isBookmarkAscOrder, category)
         }
 
     val uiState: StateFlow<BookmarkUiState> = combine(
@@ -87,12 +85,10 @@ class BookmarkViewModel @Inject constructor(
         viewModelScope.launch { repository.deleteCategory(name) }
     }
 
-    fun emitItemPicked(bookmark: Bookmark) {
-        viewModelScope.launch {
+    suspend fun emitItemPicked(bookmark: Bookmark) {
             resultBus.emit(
                 NavResultKey.HomeBookmarkPick,
                 bookmark.device.model to bookmark.device.csc,
             )
-        }
     }
 }

@@ -3,6 +3,8 @@ package com.illusion.checkfirm.core.designsystem.component
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -31,15 +33,17 @@ fun <T> OneSpinner(
     val textColor = MaterialTheme.colorScheme.onSurface
 
     Box(modifier = modifier) {
-        Text(
-            text = itemToString(selectedItem),
-            color = textColor,
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { expanded = true }
-                .padding(16.dp)
-        )
+        androidx.compose.foundation.layout.Row(
+            modifier = Modifier.fillMaxWidth().clickable(role = androidx.compose.ui.semantics.Role.Button) { expanded = true }.padding(8.dp),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+        ) {
+            Text(itemToString(selectedItem), Modifier.weight(1f), color = textColor, style = MaterialTheme.typography.bodyLarge)
+            androidx.compose.material3.Icon(
+                androidx.compose.material.icons.Icons.Default.ArrowDropDown,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+            )
+        }
 
         DropdownMenu(
             expanded = expanded,

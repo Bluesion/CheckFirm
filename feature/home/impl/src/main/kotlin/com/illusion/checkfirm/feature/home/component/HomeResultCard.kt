@@ -37,7 +37,7 @@ import com.illusion.checkfirm.core.designsystem.component.OneCardShape
 import com.illusion.checkfirm.core.domain.model.SearchResult
 
 @Composable
-internal fun HomeResultCard(result: SearchResult, onCardClick: () -> Unit) {
+internal fun HomeResultCard(result: SearchResult, onCardClick: (Boolean) -> Unit, isFirebaseEnabled: Boolean = true) {
     val context = LocalContext.current
     val official = result.firmware.officialFirmware
     val test = result.firmware.testFirmware
@@ -60,17 +60,17 @@ internal fun HomeResultCard(result: SearchResult, onCardClick: () -> Unit) {
                         R.drawable.ic_smart_search_discovered_date to official.releaseDate,
                         R.drawable.ic_smart_search_android_version to official.androidVersion,
                     ),
-                    modifier = Modifier.weight(1f), onClick = onCardClick,
+                    modifier = Modifier.weight(1f), onClick = { onCardClick(true) },
                     onLongClick = { copyToClipboard(context, official.latestFirmware) },
                 )
                 FirmwareSummary(
                     label = stringResource(R.string.test_latest), firmware = testBuild,
                     details = listOf(
-                        R.drawable.ic_smart_search_discoverer to test.watson.ifBlank { test.discoverer },
-                        R.drawable.ic_smart_search_discovered_date to test.discoveryDate,
+                        R.drawable.ic_smart_search_discoverer to if (isFirebaseEnabled) test.watson.ifBlank { test.discoverer } else stringResource(com.illusion.checkfirm.feature.home.R.string.unknown),
+                        R.drawable.ic_smart_search_discovered_date to if (isFirebaseEnabled) test.discoveryDate else java.time.LocalDate.now().toString(),
                         R.drawable.ic_smart_search_android_version to test.androidVersion,
                     ),
-                    modifier = Modifier.weight(1f), onClick = onCardClick,
+                    modifier = Modifier.weight(1f), onClick = { onCardClick(false) },
                     onLongClick = { copyToClipboard(context, testBuild) },
                 )
             }
@@ -122,7 +122,7 @@ private fun FirmwareSummary(
 
 private fun shortBuild(firmware: String): String {
     val build = firmware.substringBefore('/').substringBefore('_').substringBefore('.')
-    return if (build.length >= 6 && !build.matches(Regex("[a-fA-F0-9]{32}"))) build.takeLast(4) else build
+    return if (build.length >= 6) build.takeLast(4) else build
 }
 
 private fun copyToClipboard(context: Context, text: String) {

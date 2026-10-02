@@ -74,4 +74,10 @@
     <string name="welcome_search_add_device">Cihaz ekle</string>
     <string name="welcome_search_description">Uygulama başladığında firmware ara.\nBaşlangıçta aramak istediğiniz cihazı girin.</string>
     <string name="welcome_search_empty_device_list">En fazla 5 cihaz ekleyebilirsiniz.</string>
+    <string name="unknown">Bilinmeyen</string>
+    <string name="help_device_info_edit">Düzenle</string>
+    <string name="help_device_name">Cihaz adı</string>
+    <string name="help_device_info_bookmark">Yer imi kaydedildi.</string>
+    <string name="suggestion_title">Başka bir şey mi arıyorsunuz?</string>
+    <string name="suggestion_bookmark_my_device">Cihazımı yer imine ekle</string>
 </resources>

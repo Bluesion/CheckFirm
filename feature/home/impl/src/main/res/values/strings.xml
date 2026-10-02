@@ -14,4 +14,21 @@
     <string name="notification_permission_required_button_grant">Grant</string>
     <string name="notification_permission_required_message">CheckFirm provides Info Catcher, which alerts you when there is a newfound firmware. To use this feature, you should grant notification permission.</string>
     <string name="notification_permission_required_title">Permission required</string>
+    <string name="main_network_error_title">Network error</string>
+    <string name="main_network_error_text">Network is not connected or too slow.</string>
+    <string name="main_search_error_title">Search error</string>
+    <string name="main_search_error_text">Model or CSC is incorrect.</string>
+    <string name="suggestion_title">Looking for something else?</string>
+    <string name="suggestion_check_my_device_info">Check my device information</string>
+    <string name="suggestion_wifi">Turn on Wi-Fi</string>
+    <string name="suggestion_data">Turn on mobile data</string>
+
+    <string name="unknown">Unknown</string>
+    <string name="smart_search">Smart Search</string>
+    <string name="smart_search_type_major">One UI update</string>
+    <string name="smart_search_type_minor">Minor update</string>
+    <string name="smart_search_type_rollback">Roll back</string>
+    <string name="smart_search_downgrade_possible">Downgrade possible</string>
+    <string name="smart_search_downgrade_impossible">Downgrade impossible</string>
+    <string name="official_previous">Previous official firmware</string>
 </resources>

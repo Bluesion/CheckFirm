@@ -55,18 +55,12 @@ internal fun BookmarkItem(
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(bookmark.device.model, style = MaterialTheme.typography.bodyMedium)
-                    Text(" / ", style = MaterialTheme.typography.bodyMedium)
+                    Text(" · ", style = MaterialTheme.typography.bodyMedium)
                     Text(bookmark.device.csc, style = MaterialTheme.typography.bodyMedium)
-                    if (bookmark.category.isNotBlank()) {
-                        Text(
-                            "  ·  ${bookmark.category}",
-                            style = MaterialTheme.typography.labelMedium
-                        )
-                    }
                 }
             }
-            IconButton(onClick = onEditClick) { Icon(Icons.Rounded.Edit, "Edit") }
-            IconButton(onClick = onDeleteClick) { Icon(Icons.Rounded.Delete, "Delete") }
+            IconButton(onClick = onEditClick) { Icon(androidx.compose.ui.res.painterResource(com.illusion.checkfirm.core.designsystem.R.drawable.oneui_ic_edit), androidx.compose.ui.res.stringResource(com.illusion.checkfirm.core.designsystem.R.string.edit_item)) }
+            IconButton(onClick = onDeleteClick) { Icon(androidx.compose.ui.res.painterResource(com.illusion.checkfirm.core.designsystem.R.drawable.oneui_ic_delete), androidx.compose.ui.res.stringResource(com.illusion.checkfirm.core.designsystem.R.string.delete_item)) }
         }
     }
 }

@@ -77,4 +77,10 @@
     <string name="welcome_search_add_device">Add device</string>
     <string name="welcome_search_description">Search firmware on app start.\nPlease input device that you want to search on start.</string>
     <string name="welcome_search_empty_device_list">You can add up to 5 devices.</string>
+    <string name="unknown">Unknown</string>
+    <string name="help_device_info_edit">Edit</string>
+    <string name="help_device_name">Device name</string>
+    <string name="help_device_info_bookmark">Bookmark saved.</string>
+    <string name="suggestion_title">Looking for something else?</string>
+    <string name="suggestion_bookmark_my_device">Add my device to bookmark</string>
 </resources>

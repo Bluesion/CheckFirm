@@ -56,7 +56,7 @@ internal suspend fun restoreBackup(repository: com.illusion.checkfirm.core.domai
     }
     // Row-id order is the legacy time order. Insert in ascending order when ids must be remapped.
     backup.bookmarkList.sortedBy { it.id ?: Long.MAX_VALUE }.forEach { item ->
-        val existing = bookmarks.firstOrNull { it.device == item.toDomain().device }
+        val existing = bookmarks.firstOrNull { it.device == item.toDomain().device && it.name == item.name }
         val bookmark = item.toDomain().copy(id = existing?.id ?: item.id.takeIf { bookmarks.isEmpty() })
         if (existing == null) repository.addBookmark(bookmark) else repository.editBookmark(bookmark)
     }

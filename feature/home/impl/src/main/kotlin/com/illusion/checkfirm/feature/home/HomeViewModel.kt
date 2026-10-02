@@ -13,6 +13,8 @@ import com.illusion.checkfirm.core.navigation.NavResultKey
 import com.illusion.checkfirm.core.preference.api.PreferenceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -40,9 +42,10 @@ class HomeViewModel @Inject constructor(
     private val _selectedCategory = MutableStateFlow<String?>(null) // null = show all
     private val _showCategoryDialog = MutableStateFlow(false)
 
+    private var searchJob: Job? = null
     private val _results = MutableStateFlow<List<SearchResult>>(emptyList())
     private val _resultState = MutableStateFlow<ResultState>(ResultState.Idle)
-    private val _openedDialog = MutableStateFlow<SearchResult?>(null)
+    private val _openedDialog = MutableStateFlow<Pair<SearchResult, Boolean>?>(null)
 
     init {
         // Auto-run a welcome search on startup if the preference is on; otherwise idle.
@@ -75,7 +78,7 @@ class HomeViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     private val bookmarksFlow = preferenceRepository.getSettings()
         .flatMapLatest { p ->
-            bcRepository.getAllBookmark(p.bookmarkOrder, p.isBookmarkAscOrder)
+            bcRepository.getAllBookmark(p.bookmarkOrder, !p.isBookmarkAscOrder)
         }
 
     val uiState: StateFlow<HomeUiState> = combine(
@@ -99,7 +102,8 @@ class HomeViewModel @Inject constructor(
             showCategoryDialog = values[4] as Boolean,
             results = values[5] as List<SearchResult>,
             resultState = values[6] as ResultState,
-            openedDialog = values[7] as SearchResult?,
+            openedDialog = (values[7] as Pair<SearchResult, Boolean>?)?.first,
+            openedDialogIsOfficial = (values[7] as Pair<SearchResult, Boolean>?)?.second ?: true,
         )
     }.stateIn(
         scope = viewModelScope,
@@ -115,8 +119,8 @@ class HomeViewModel @Inject constructor(
         _showCategoryDialog.value = show
     }
 
-    fun openResultDialog(result: SearchResult) {
-        _openedDialog.value = result
+    fun openResultDialog(result: SearchResult, isOfficial: Boolean) {
+        _openedDialog.value = result to isOfficial
     }
 
     fun closeResultDialog() {
@@ -129,7 +133,8 @@ class HomeViewModel @Inject constructor(
 
     /** Run firmware fetches in parallel for [devices], updating state as we go. */
     private fun fetch(devices: List<Device>) {
-        viewModelScope.launch {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
             _resultState.value = ResultState.Loading
             val results = try {
                 coroutineScope {
@@ -149,7 +154,9 @@ class HomeViewModel @Inject constructor(
                         }
                     }.awaitAll()
                 }
-            } catch (_: Throwable) {
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (_: Exception) {
                 _results.value = emptyList()
                 _resultState.value = ResultState.NetworkError
                 return@launch
@@ -157,7 +164,7 @@ class HomeViewModel @Inject constructor(
             _results.value = results
             _resultState.value = when {
                 results.isEmpty() -> ResultState.Empty
-                results.all { it.firmware.officialFirmware.latestFirmware.isBlank() } ->
+                results.all { it.firmware.officialFirmware.latestFirmware.isBlank() && it.firmware.testFirmware.latestFirmware.isBlank() } ->
                     ResultState.Empty
 
                 else -> ResultState.Success

@@ -80,8 +80,10 @@ class InfoCatcherViewModel @Inject constructor(
 
     fun addDevice(model: String, csc: String) {
         viewModelScope.launch {
-            repository.insert(Device(model, csc))
-            FirebaseMessaging.getInstance().subscribeToTopic(model + csc)
+            val device = Device(model.trim().uppercase(java.util.Locale.US), csc.trim().uppercase(java.util.Locale.US))
+            if (!device.isValidDevice()) return@launch
+            repository.insert(device)
+            FirebaseMessaging.getInstance().subscribeToTopic(device.asDevice())
             _uiState.update { it.copy(showDialog = false, dialogModel = "SM-", dialogCsc = "") }
         }
     }

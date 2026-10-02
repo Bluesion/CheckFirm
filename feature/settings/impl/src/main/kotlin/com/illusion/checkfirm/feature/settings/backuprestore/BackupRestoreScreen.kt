@@ -1,6 +1,10 @@
 package com.illusion.checkfirm.feature.settings.backuprestore
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.offset
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -38,6 +42,7 @@ fun BackupRestoreScreen(
     onNavigateBack: () -> Unit,
 ) {
     OneScaffold(
+        expandable = false,
         navigationIcon = {
             OneNavButton(
                 onClick = onNavigateBack,
@@ -46,74 +51,48 @@ fun BackupRestoreScreen(
             ) {
                 Icon(
                     imageVector = OneIcons.Back,
-                    contentDescription = null,
+                    contentDescription = stringResource(com.illusion.checkfirm.core.designsystem.R.string.navigate_back),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
             }
         },
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                text = stringResource(FeatureR.string.settings_bookmark_backup_restore_description),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
-            )
-
-            Spacer(Modifier.height(36.dp))
-
-            TextButton(onClick = onBackupClick) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(
-                        painter = painterResource(R.drawable.ic_btn_up),
-                        contentDescription = null,
-                        modifier = Modifier.size(48.dp),
-                    )
-                    Text(
-                        text = stringResource(FeatureR.string.backup),
-                        color = MaterialTheme.colorScheme.onBackground,
-                    )
-                }
-            }
-
-            Spacer(Modifier.height(32.dp))
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.65f)
-                    .height(220.dp),
-                contentAlignment = Alignment.Center,
+        BoxWithConstraints(Modifier.fillMaxSize().padding(bottom = innerPadding.calculateBottomPadding())) {
+            val imageHeight = maxHeight * 0.5f
+            Column(
+                modifier = Modifier.fillMaxWidth().height(imageHeight).padding(horizontal = 16.dp).padding(bottom = 32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Bottom,
             ) {
-                Image(
-                    painter = painterResource(R.drawable.img_device_line),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize(),
+                Text(
+                    text = stringResource(FeatureR.string.settings_bookmark_backup_restore_description),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    textAlign = TextAlign.Center,
                 )
+                Spacer(Modifier.height(36.dp))
+                TransferButton(FeatureR.string.backup, R.drawable.ic_btn_up, !uiState.isWorking, onBackupClick)
             }
-
-            Spacer(Modifier.height(32.dp))
-
-            TextButton(onClick = onRestoreClick) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(
-                        painter = painterResource(R.drawable.ic_btn_down),
-                        contentDescription = null,
-                        modifier = Modifier.size(48.dp),
-                    )
-                    Text(
-                        text = stringResource(FeatureR.string.restore),
-                        color = MaterialTheme.colorScheme.onBackground,
-                    )
-                }
+            Image(
+                painter = painterResource(R.drawable.img_device_line),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth(0.65f).height(imageHeight),
+            )
+            Box(Modifier.align(Alignment.TopCenter).offset(y = imageHeight + 32.dp)) {
+                TransferButton(FeatureR.string.restore, R.drawable.ic_btn_down, !uiState.isWorking, onRestoreClick)
             }
+        }
+    }
+}
+
+@Composable
+private fun TransferButton(label: Int, icon: Int, enabled: Boolean, onClick: () -> Unit) {
+    TextButton(onClick = onClick, enabled = enabled) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(painterResource(icon), null, Modifier.size(48.dp))
+            Text(stringResource(label), color = MaterialTheme.colorScheme.onBackground)
         }
     }
 }

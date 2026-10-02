@@ -14,6 +14,7 @@ import com.illusion.checkfirm.feature.search.util.isValid
 import com.illusion.checkfirm.feature.search.util.SearchValidationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -28,12 +29,16 @@ class SearchViewModel @Inject constructor(
     bcRepository: BCRepository,
     private val historyRepository: HistoryRepository,
     private val resultBus: NavResultBus,
+    preferenceRepository: com.illusion.checkfirm.core.preference.api.PreferenceRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SearchUiState())
     val uiState: StateFlow<SearchUiState> = _uiState.asStateFlow()
 
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     val bookmarks: StateFlow<List<Bookmark>> =
-        bcRepository.getAllBookmark("date", true).stateIn(
+        preferenceRepository.getSettings().flatMapLatest { preference ->
+            bcRepository.getAllBookmark(preference.bookmarkOrder, !preference.isBookmarkAscOrder)
+        }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = emptyList()
@@ -110,17 +115,19 @@ class SearchViewModel @Inject constructor(
         insert(list)
     }
 
-    fun confirmAndEmit() = viewModelScope.launch {
+    suspend fun confirmAndEmit() {
         val devices = _uiState.value.searchList
-        if (devices.isEmpty()) return@launch
-        insert(devices)
+        if (devices.isEmpty()) return
+        persistHistory(devices)
         resultBus.emit(
             NavResultKey.HomeSearch,
             devices.map { it.device.model to it.device.csc },
         )
     }
 
-    fun insert(list: List<SearchDeviceItem>) = viewModelScope.launch {
+    fun insert(list: List<SearchDeviceItem>) = viewModelScope.launch { persistHistory(list) }
+
+    private suspend fun persistHistory(list: List<SearchDeviceItem>) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
@@ -134,14 +141,14 @@ class SearchViewModel @Inject constructor(
 
             for (history in previousHistoryList) {
                 if (history.device.model == model && history.device.csc == csc) {
-                    delete(model, csc)
+                    historyRepository.delete(history)
                 }
             }
 
             historyRepository.insert(SearchHistory(Device(model, csc), Date(year, month, day)))
         }
 
-        cleanUpHistory()
+        historyRepository.cleanUpHistory()
     }
 
     fun update(model: String, csc: String, year: Int, month: Int, day: Int) =

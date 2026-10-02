@@ -74,4 +74,10 @@
     <string name="welcome_search_add_device">Adicionar Dispositivo</string>
     <string name="welcome_search_description">Pesquise firmware ao iniciar o aplicativo.\nPor favor, insira o dispositivo que deseja pesquisar ao iniciar.</string>
     <string name="welcome_search_empty_device_list">Você pode adicionar até 5 dispositivos.</string>
+    <string name="unknown">Desconhecido</string>
+    <string name="help_device_info_edit">Editar</string>
+    <string name="help_device_name">Nome do Dispositivo</string>
+    <string name="help_device_info_bookmark">Favorito salvo.</string>
+    <string name="suggestion_title">Procurando por algo mais?</string>
+    <string name="suggestion_bookmark_my_device">Adicionar meu dispositivo aos favoritos</string>
 </resources>

@@ -53,6 +53,11 @@ fun InfoCatcherScreen(
 ) {
     OneScaffold(
         title = stringResource(R.string.info_catcher),
+        actions = {
+            OneNavButton(onAddDeviceClick, CircleShape, Modifier.size(48.dp)) {
+                Icon(Icons.Rounded.Add, stringResource(FeatureR.string.welcome_search_add_device))
+            }
+        },
         navigationIcon = {
             OneNavButton(
                 onClick = onNavigationIconClick,
@@ -61,7 +66,7 @@ fun InfoCatcherScreen(
             ) {
                 Icon(
                     imageVector = OneIcons.Back,
-                    contentDescription = null,
+                    contentDescription = stringResource(com.illusion.checkfirm.core.designsystem.R.string.navigate_back),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
@@ -92,39 +97,13 @@ fun InfoCatcherScreen(
                     .padding(top = 16.dp, bottom = 24.dp),
             )
 
-            OneCard(
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Column {
-                    if (uiState.devices.isEmpty()) {
-                        Text(
-                            text = stringResource(FeatureR.string.info_catcher_no_device),
-                            modifier = Modifier.padding(16.dp),
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
-                    } else {
-                        uiState.devices.forEach { device ->
-                            InfoCatcherItem(
-                                deviceText = "${device.model} / ${device.csc}",
-                                onDelete = { onDeleteDevice(device) }
-                            )
-                        }
-                    }
+            if (uiState.devices.isNotEmpty()) OneCard(modifier = Modifier.fillMaxWidth()) {
+                uiState.devices.forEachIndexed { index, device ->
+                    InfoCatcherItem(deviceText = "${device.model} (${device.csc})", onDelete = { onDeleteDevice(device) })
+                    if (index < uiState.devices.lastIndex) androidx.compose.material3.HorizontalDivider(Modifier.padding(horizontal = 12.dp))
                 }
             }
 
-            Spacer(modifier = Modifier.height(48.dp))
-
-            Button(
-                onClick = onAddDeviceClick,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            ) {
-                Icon(Icons.Rounded.Add, contentDescription = null)
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(text = stringResource(FeatureR.string.welcome_search_add_device))
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 
@@ -156,7 +135,7 @@ fun InfoCatcherItem(
     ) {
         Text(
             text = deviceText,
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier
                 .weight(1f)
                 .padding(horizontal = 12.dp),
@@ -167,10 +146,9 @@ fun InfoCatcherItem(
             onClick = onDelete,
             modifier = Modifier
                 .size(48.dp)
-                .padding(12.dp)
                 .clip(CircleShape)
         ) {
-            Icon(Icons.Rounded.Close, contentDescription = "Delete")
+            Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.delete_item))
         }
     }
 }

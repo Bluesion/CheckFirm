@@ -10,4 +10,21 @@
     <string name="notification_permission_required_button_grant">Udělit</string>
     <string name="notification_permission_required_message">CheckFirm poskytuje Info Catcher, který vás upozorní na nově nalezený firmware. Chcete-li tuto funkci používat, musíte udělit povolení k oznámení.</string>
     <string name="notification_permission_required_title">Je vyžadováno povolení</string>
+    <string name="main_network_error_title">Chyba sítě</string>
+    <string name="main_network_error_text">Síť není připojena nebo je příliš pomalá.</string>
+    <string name="main_search_error_title">Chyba vyhledávání</string>
+    <string name="main_search_error_text">Model nebo CSC je nesprávný.</string>
+    <string name="suggestion_title">Hledáte něco jiného?</string>
+    <string name="suggestion_check_my_device_info">Zkontrolovat informace o mém zařízení</string>
+    <string name="suggestion_wifi">Zapnout Wi-Fi</string>
+    <string name="suggestion_data">Zapnout mobilní data</string>
+
+    <string name="unknown">Neznámý</string>
+    <string name="smart_search">Chytré vyhledávání</string>
+    <string name="smart_search_type_major">Aktualizace One UI</string>
+    <string name="smart_search_type_minor">Menší aktualizace</string>
+    <string name="smart_search_type_rollback">Návrat</string>
+    <string name="smart_search_downgrade_possible">Snížení verze možné</string>
+    <string name="smart_search_downgrade_impossible">Snížení verze nemožné</string>
+    <string name="official_previous">Předchozí oficiální firmware</string>
 </resources>

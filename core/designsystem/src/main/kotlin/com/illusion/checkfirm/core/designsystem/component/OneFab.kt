@@ -1,6 +1,6 @@
 package com.illusion.checkfirm.core.designsystem.component
 
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -24,7 +24,7 @@ fun OneFab(
     containerColor: Color? = null,
     contentColor: Color = MaterialTheme.colorScheme.primary,
 ) {
-    val darkTheme = isSystemInDarkTheme()
+    val darkTheme = MaterialTheme.colorScheme.background.luminance() < 0.5f
     val defaultContainerColor = if (darkTheme) Color(0xFF3A3A3A) else Color(0xFFFCFCFC)
 
     FloatingActionButton(

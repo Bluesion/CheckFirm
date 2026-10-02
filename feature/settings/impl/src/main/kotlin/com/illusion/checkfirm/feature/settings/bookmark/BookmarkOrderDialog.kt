@@ -1,6 +1,10 @@
 package com.illusion.checkfirm.feature.settings.bookmark
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.Role
+import androidx.compose.material3.TextButton
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -49,7 +53,7 @@ fun BookmarkOrderDialog(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { onConfirm(key, isAscending) }
+                        .selectable(selected = selectedOrder == key, role = Role.RadioButton) { onConfirm(key, isAscending) }
                         .padding(vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -60,7 +64,7 @@ fun BookmarkOrderDialog(
                     )
                     OneRadioButton(
                         selected = selectedOrder == key,
-                        onClick = { onConfirm(key, isAscending) },
+                        onClick = null,
                     )
                 }
             }
@@ -68,7 +72,7 @@ fun BookmarkOrderDialog(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onConfirm(selectedOrder, !isAscending) }
+                    .toggleable(value = !isAscending, role = Role.Switch) { onConfirm(selectedOrder, !it) }
                     .padding(vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -80,10 +84,11 @@ fun BookmarkOrderDialog(
                 )
                 OneSwitch(
                     checked = !isAscending,
-                    onCheckedChange = { onConfirm(selectedOrder, !it) },
+                    onCheckedChange = null,
                 )
             }
         }
+        TextButton(onDismiss, Modifier.fillMaxWidth()) { Text(stringResource(android.R.string.ok), color = MaterialTheme.colorScheme.onSurface) }
     }
 }
 

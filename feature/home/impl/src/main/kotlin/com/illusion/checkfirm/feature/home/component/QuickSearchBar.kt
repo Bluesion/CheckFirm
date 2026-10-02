@@ -62,7 +62,7 @@ internal fun QuickSearchBar(
         LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             items(
                 count = bookmarks.size,
-                key = { bookmarks[it].device.model + bookmarks[it].device.csc },
+                key = { bookmarks[it].id ?: "${bookmarks[it].name}:${bookmarks[it].device}" },
             ) { idx ->
                 val bookmark = bookmarks[idx]
                 AssistChip(

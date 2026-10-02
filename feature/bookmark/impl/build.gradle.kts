@@ -7,6 +7,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.preference.api)
     implementation(projects.feature.bookmark.api)
     implementation(projects.feature.category.api)
 }

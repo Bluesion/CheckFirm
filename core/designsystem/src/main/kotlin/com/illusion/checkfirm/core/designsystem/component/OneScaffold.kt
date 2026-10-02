@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -53,8 +54,8 @@ import kotlin.math.abs
 
 private val ToolbarHeight = 56.dp
 
-// The fixed toolbar always shows its title, so its nav button never shows a background.
-private val NavButtonBackgroundHidden: () -> Float = { 0f }
+// The fixed toolbar always shows its title, so its toolbar buttons never show a background.
+private val ToolbarButtonBackgroundHidden: () -> Float = { 0f }
 
 @Composable
 fun OneScaffold(
@@ -81,7 +82,7 @@ fun OneScaffold(
 
     val windowInfo = LocalWindowInfo.current
     val screenHeight = windowInfo.containerDpSize.height
-    val expandedHeight = remember(screenHeight) { screenHeight * 0.38f }
+    val expandedHeight = remember(screenHeight) { screenHeight * 0.3976f }
 
     val density = LocalDensity.current
     val limitPx = with(density) { (expandedHeight - ToolbarHeight).toPx() }
@@ -108,15 +109,16 @@ fun OneScaffold(
         },
     )
 
-    // Show the nav button's background only once content has scrolled up behind the toolbar
-    // (title hidden); keep it hidden while the title is shown. Crossfades over the same
-    // distance as the collapsed title fade. Evaluated at draw time (see OneNavButton).
+    // Show the toolbar buttons' background (nav button and actions) only once content has
+    // scrolled up behind the toolbar (title hidden); keep it hidden while the title is shown.
+    // Crossfades over the same distance as the collapsed title fade. Evaluated at draw time
+    // (see OneNavButton and OneCollapsingControls).
     val topBarState = scrollBehavior.state
-    val navFadePx = with(density) { (ToolbarHeight / 2).toPx() }
-    val navButtonBackgroundAlpha = remember(topBarState, navFadePx) {
+    val buttonFadePx = with(density) { (ToolbarHeight / 2).toPx() }
+    val toolbarButtonBackgroundAlpha = remember(topBarState, buttonFadePx) {
         {
             val overlap = (-topBarState.contentOffset).coerceAtLeast(0f)
-            (overlap / navFadePx).coerceIn(0f, 1f)
+            (overlap / buttonFadePx).coerceIn(0f, 1f)
         }
     }
 
@@ -127,7 +129,7 @@ fun OneScaffold(
             // Only the navigation/action icons live in the topBar, so they stay drawn
             // on top of the content (content scrolls behind them, never over them).
             CompositionLocalProvider(
-                LocalOneNavButtonBackgroundAlpha provides navButtonBackgroundAlpha,
+                LocalOneToolbarButtonBackgroundAlpha provides toolbarButtonBackgroundAlpha,
             ) {
                 OneCollapsingControls(
                     modifier = dragModifier,
@@ -180,7 +182,7 @@ private fun OneFixedScaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             CompositionLocalProvider(
-                LocalOneNavButtonBackgroundAlpha provides NavButtonBackgroundHidden,
+                LocalOneToolbarButtonBackgroundAlpha provides ToolbarButtonBackgroundHidden,
             ) {
                 OneFixedToolbar(
                     title = title,
@@ -212,6 +214,7 @@ private fun OneFixedToolbar(
             .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
+            .padding(top = 20.dp)
             .height(ToolbarHeight)
             .padding(horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -226,7 +229,8 @@ private fun OneFixedToolbar(
             color = CheckFirmTheme.colors.toolbarText,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleLarge,
+            fontSize = 22.sp,
         )
 
         Row(
@@ -264,10 +268,14 @@ private fun OneCollapsingControls(
         scrollBehavior.state.heightOffsetLimit = -(expandedPx - collapsedPx)
     }
 
+    val backgroundColor = MaterialTheme.colorScheme.surfaceBright
+    val backgroundAlpha = LocalOneToolbarButtonBackgroundAlpha.current
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .windowInsetsPadding(insets = WindowInsets.statusBars)
+            .padding(top = 20.dp)
             .height(currentHeight)
             .then(other = modifier),
     ) {
@@ -285,11 +293,31 @@ private fun OneCollapsingControls(
             // OneCollapsingTitle behind the content so content can scroll over it.
             Spacer(modifier = Modifier.weight(1f))
 
-            Row(
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically,
-                content = actions,
-            )
+            // The actions share a single pill background that fades in with scroll, mirroring
+            // the nav button (see OneNavButton). The fill and its drop shadow both track the
+            // same draw-time alpha, and the action icons sit on top so their own ripples stay
+            // unaffected by the fill.
+            Box(contentAlignment = Alignment.Center) {
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .graphicsLayer {
+                            val visible = backgroundAlpha()
+                            alpha = visible
+                            shadowElevation =
+                                ToolbarButtonBackgroundShadowElevation.toPx() * visible
+                            shape = CircleShape
+                            clip = true
+                        }
+                        .background(color = backgroundColor, shape = CircleShape),
+                )
+
+                Row(
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically,
+                    content = actions,
+                )
+            }
         }
     }
 }
@@ -317,6 +345,7 @@ private fun OneCollapsingTitle(
         modifier = Modifier
             .fillMaxWidth()
             .windowInsetsPadding(insets = WindowInsets.statusBars)
+            .padding(top = 20.dp)
             .height(currentHeight),
     ) {
         // Expanded centered big title
@@ -379,7 +408,7 @@ private fun OneCollapsingTitle(
                     },
                 color = CheckFirmTheme.colors.toolbarText,
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 20.sp,
+                fontSize = 22.sp,
                 maxLines = 1,
                 style = MaterialTheme.typography.titleLarge,
             )

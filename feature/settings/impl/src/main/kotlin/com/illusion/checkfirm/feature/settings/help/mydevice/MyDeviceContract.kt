@@ -1,9 +1,8 @@
 package com.illusion.checkfirm.feature.settings.help.mydevice
 
 data class MyDeviceUiState(
+    val userName: String = "",
+    val deviceName: String = "",
+    val csc: String = "",
     val model: String = "",
-    val hardware: String = "",
-    val manufacturer: String = "",
-    val sdk: String = "",
-    val release: String = "",
 )

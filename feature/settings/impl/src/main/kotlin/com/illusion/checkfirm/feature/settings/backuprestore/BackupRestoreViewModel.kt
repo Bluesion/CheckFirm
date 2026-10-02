@@ -47,6 +47,8 @@ class BackupRestoreViewModel @Inject constructor(
     }
 
     fun backup(uri: Uri) {
+        if (_uiState.value.isWorking) return
+        _uiState.value = BackupRestoreUiState(isWorking = true)
         viewModelScope.launch {
             _uiState.value = BackupRestoreUiState(isWorking = true)
             val ok = try {
@@ -74,6 +76,8 @@ class BackupRestoreViewModel @Inject constructor(
     }
 
     fun restore(uri: Uri) {
+        if (_uiState.value.isWorking) return
+        _uiState.value = BackupRestoreUiState(isWorking = true)
         viewModelScope.launch {
             _uiState.value = BackupRestoreUiState(isWorking = true)
             val ok = try {

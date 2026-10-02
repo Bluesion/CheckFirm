@@ -10,4 +10,21 @@
     <string name="notification_permission_required_button_grant">授予</string>
     <string name="notification_permission_required_message">CheckFirm 提供 Info Catcher，當找到新韌體時會通知您。若要使用此功能，您必須授予通知權限。</string>
     <string name="notification_permission_required_title">需要權限</string>
+    <string name="main_network_error_title">網路錯誤</string>
+    <string name="main_network_error_text">網路未連線或太慢。</string>
+    <string name="main_search_error_title">搜尋錯誤</string>
+    <string name="main_search_error_text">型號或CSC不正確。</string>
+    <string name="suggestion_title">還在尋找其他東西嗎？</string>
+    <string name="suggestion_check_my_device_info">檢查我的裝置資訊</string>
+    <string name="suggestion_wifi">開啟 Wi-Fi</string>
+    <string name="suggestion_data">開啟行動數據</string>
+
+    <string name="unknown">未知</string>
+    <string name="smart_search">智慧搜尋</string>
+    <string name="smart_search_type_major">One UI 更新</string>
+    <string name="smart_search_type_minor">次要更新</string>
+    <string name="smart_search_type_rollback">回滾</string>
+    <string name="smart_search_downgrade_possible">可降級</string>
+    <string name="smart_search_downgrade_impossible">不可降級</string>
+    <string name="official_previous">先前官方韌體</string>
 </resources>

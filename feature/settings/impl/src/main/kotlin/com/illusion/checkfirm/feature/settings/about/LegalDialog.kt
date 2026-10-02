@@ -3,9 +3,7 @@ package com.illusion.checkfirm.feature.settings.about
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -42,8 +40,7 @@ fun LegalDialog(onDismiss: () -> Unit) {
             text = linked,
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState()),
+                .fillMaxWidth(),
         )
         Spacer(Modifier.height(16.dp))
         Button(

@@ -3,6 +3,9 @@ package com.illusion.checkfirm.feature.sherlock
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -72,6 +75,7 @@ fun SherlockScreen(
 
     OneScaffold(
         title = stringResource(FeatureR.string.sherlock),
+        expandable = false,
         navigationIcon = {
             OneNavButton(
                 onClick = onNavigationIconClick,
@@ -80,7 +84,7 @@ fun SherlockScreen(
             ) {
                 Icon(
                     imageVector = OneIcons.Back,
-                    contentDescription = null,
+                    contentDescription = stringResource(com.illusion.checkfirm.core.designsystem.R.string.navigate_back),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
@@ -90,67 +94,38 @@ fun SherlockScreen(
             IconButton(onClick = onShowInfo) {
                 Icon(
                     imageVector = Icons.Outlined.Info,
-                    contentDescription = null,
+                    contentDescription = stringResource(R.string.help),
                     tint = CheckFirmTheme.colors.toolbarIconTint,
                 )
             }
         },
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(
-                    top = innerPadding.calculateTopPadding(),
-                    bottom = innerPadding.calculateBottomPadding(),
-                )
-                .fillMaxSize(),
-        ) {
-            OneTab(
-                titles = listOf(
-                    stringResource(FeatureR.string.sherlock_tab_manual),
-                    stringResource(FeatureR.string.sherlock_tab_script),
-                ),
-                selectedTabIndex = uiState.selectedTab,
-                onTabSelected = onTabChange,
-            )
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 12.dp, vertical = 12.dp)
-                    .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                StatusFace(status = uiState.status)
-                StatusBanner(status = uiState.status)
-
+        Column(Modifier.fillMaxSize().padding(bottom = innerPadding.calculateBottomPadding())) {
+            BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
+            val minimumHeight = maxHeight - 24.dp
+            Column(Modifier.fillMaxWidth().padding(12.dp).verticalScroll(rememberScrollState()).heightIn(min = minimumHeight),
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                StatusFace(uiState.status)
+                Spacer(Modifier.height(12.dp))
+                if (uiState.status == SherlockStatus.INITIAL) Text(
+                    stringResource(if (uiState.selectedTab == 0) FeatureR.string.sherlock_manual_description else FeatureR.string.sherlock_script_description),
+                    style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp),
+                ) else StatusBanner(uiState.status)
                 if (uiState.status == SherlockStatus.SUCCESS && uiState.decryptedFirmware.isNotBlank()) {
-                    SuccessCard(
-                        firmware = uiState.decryptedFirmware,
-                        onCopy = { copyToClipboard(context, uiState.decryptedFirmware) },
-                    )
+                    Spacer(Modifier.height(32.dp))
+                    SuccessCard(uiState.decryptedFirmware) { copyToClipboard(context, uiState.decryptedFirmware) }
                 }
-
-                when (uiState.selectedTab) {
-                    0 -> ManualTab(
-                        state = uiState,
-                        onBuildPrefixChange = onBuildPrefixChange,
-                        onCscPrefixChange = onCscPrefixChange,
-                        onBasebandPrefixChange = onBasebandPrefixChange,
-                        onManualBuildChange = onManualBuildChange,
-                        onManualCscChange = onManualCscChange,
-                        onManualBasebandChange = onManualBasebandChange,
-                    )
-
-                    else -> ScriptTab(
-                        start = uiState.scriptStart,
-                        end = uiState.scriptEnd,
-                        running = uiState.status == SherlockStatus.RUNNING,
-                        onStartChange = onScriptStartChange,
-                        onEndChange = onScriptEndChange,
-                        onStart = onStartScript,
-                    )
-                }
+                Spacer(Modifier.height(24.dp))
+                // Keep the controls near the bottom as in the XML fragments, while allowing short windows to scroll.
+                Spacer(Modifier.weight(1f))
+                if (uiState.selectedTab == 0) ManualTab(uiState, onBuildPrefixChange, onCscPrefixChange, onBasebandPrefixChange,
+                    onManualBuildChange, onManualCscChange, onManualBasebandChange)
+                else ScriptTab(uiState.scriptStart, uiState.scriptEnd, uiState.status == SherlockStatus.RUNNING,
+                    onScriptStartChange, onScriptEndChange, onStartScript)
             }
+            }
+            OneTab(listOf(stringResource(FeatureR.string.sherlock_tab_manual), stringResource(FeatureR.string.sherlock_tab_script)), uiState.selectedTab, onTabChange)
         }
     }
 
@@ -175,13 +150,18 @@ private fun StatusFace(status: SherlockStatus) {
 
         else -> R.drawable.ic_sherlock_normal_face
     }
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        Image(
-            painter = painterResource(drawable),
-            contentDescription = null,
-            modifier = Modifier.size(96.dp),
-        )
-    }
+    androidx.compose.ui.viewinterop.AndroidView(
+        factory = { android.widget.ImageView(it) },
+        modifier = Modifier.size(120.dp),
+        update = { image ->
+            if (image.tag != drawable) {
+                (image.drawable as? android.graphics.drawable.Animatable)?.stop()
+                image.setImageDrawable(image.context.getDrawable(drawable))
+                image.tag = drawable
+                (image.drawable as? android.graphics.drawable.Animatable)?.start()
+            }
+        },
+    )
 }
 
 @Composable
@@ -208,8 +188,9 @@ private fun StatusBanner(status: SherlockStatus) {
     }
     Text(
         text = message,
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.titleMedium,
         color = color,
+        textAlign = TextAlign.Center,
         modifier = Modifier.fillMaxWidth(),
     )
 }
@@ -255,10 +236,6 @@ private fun ManualTab(
     onManualCscChange: (String) -> Unit,
     onManualBasebandChange: (String) -> Unit,
 ) {
-    Text(
-        text = stringResource(FeatureR.string.sherlock_manual_description),
-        style = MaterialTheme.typography.bodyMedium,
-    )
     PrefixSplitField(
         label = stringResource(R.string.sherlock_build),
         prefix = state.buildPrefix,
@@ -268,15 +245,17 @@ private fun ManualTab(
         onPrefixChange = onBuildPrefixChange,
         onBodyChange = onManualBuildChange,
     )
+    Spacer(Modifier.height(8.dp))
     PrefixSplitField(
         label = "CSC",
         prefix = state.cscPrefix,
         body = state.manualCsc,
-        bodyMaxLen = 6,
+        bodyMaxLen = 5,
         status = state.status,
         onPrefixChange = onCscPrefixChange,
         onBodyChange = onManualCscChange,
     )
+    Spacer(Modifier.height(8.dp))
     PrefixSplitField(
         label = stringResource(R.string.sherlock_baseband),
         prefix = state.basebandPrefix,
@@ -297,26 +276,21 @@ private fun ScriptTab(
     onEndChange: (String) -> Unit,
     onStart: () -> Unit,
 ) {
-    Text(
-        text = stringResource(FeatureR.string.sherlock_script_description),
-        style = MaterialTheme.typography.bodyMedium,
-    )
-    SimpleField(
-        label = stringResource(FeatureR.string.sherlock_script_start_value),
-        value = start,
-        onChange = onStartChange,
-    )
-    SimpleField(
-        label = stringResource(FeatureR.string.sherlock_script_end_value),
-        value = end,
-        onChange = onEndChange,
-    )
-    Button(
-        onClick = onStart,
-        enabled = !running,
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Text(text = stringResource(FeatureR.string.sherlock_script_start))
+    OneCard {
+        Column(Modifier.padding(12.dp)) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                OutlinedTextField(start, { if (it.length <= 6) onStartChange(it.uppercase()) },
+                    label = { Text(stringResource(FeatureR.string.sherlock_script_start_value)) },
+                    singleLine = true, modifier = Modifier.weight(1f))
+                OutlinedTextField(end, { if (it.length <= 6) onEndChange(it.uppercase()) },
+                    label = { Text(stringResource(FeatureR.string.sherlock_script_end_value)) },
+                    singleLine = true, modifier = Modifier.weight(1f))
+            }
+            Spacer(Modifier.height(8.dp))
+            Button(onClick = onStart, enabled = !running, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(FeatureR.string.sherlock_script_start))
+            }
+        }
     }
 }
 
@@ -354,21 +328,14 @@ private fun PrefixSplitField(
                 color = MaterialTheme.colorScheme.primary,
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
-                OutlinedTextField(
-                    value = prefix,
-                    onValueChange = { onPrefixChange(it.uppercase()) },
-                    singleLine = true,
+                BasicTextField(prefix, { onPrefixChange(it.uppercase()) },
+                    singleLine = true, textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
-                    modifier = Modifier.weight(1f),
-                )
-                Spacer(Modifier.width(8.dp))
-                OutlinedTextField(
-                    value = body,
-                    onValueChange = { if (it.length <= bodyMaxLen) onBodyChange(it.uppercase()) },
-                    singleLine = true,
+                    modifier = Modifier.width(IntrinsicSize.Min).widthIn(min = 32.dp).padding(vertical = 4.dp))
+                BasicTextField(body, { if (it.length <= bodyMaxLen) onBodyChange(it.uppercase()) },
+                    singleLine = true, textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
-                    modifier = Modifier.weight(1f),
-                )
+                    modifier = Modifier.weight(1f).padding(start = 2.dp, top = 4.dp, bottom = 4.dp))
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.illusion.checkfirm.feature.category.impl
 
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -54,7 +56,7 @@ fun CategoryScreen(
             ) {
                 Icon(
                     imageVector = OneIcons.Back,
-                    contentDescription = null,
+                    contentDescription = stringResource(com.illusion.checkfirm.core.designsystem.R.string.navigate_back),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
@@ -64,107 +66,57 @@ fun CategoryScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 12.dp)
                 .padding(
-                    top = innerPadding.calculateTopPadding(),
+                    top = 0.dp,
                     bottom = innerPadding.calculateBottomPadding(),
                 ),
         ) {
-            OutlinedTextField(
-                value = uiState.name,
-                onValueChange = onNameChange,
-                label = { Text(stringResource(FeatureR.string.category_name)) },
-                singleLine = true,
-                isError = uiState.nameError != null,
-                supportingText = {
-                    when (uiState.nameError) {
-                        NameError.Blank -> Text(stringResource(FeatureR.string.category_name_error_empty))
-                        NameError.Reserved -> Text(stringResource(FeatureR.string.category_name_error_all))
-                        NameError.NoDevices -> Text(stringResource(FeatureR.string.category_devices_error_empty))
-                        NameError.Duplicate -> Text(stringResource(FeatureR.string.category_name_error_duplicate))
-                        null -> {}
+            com.illusion.checkfirm.core.designsystem.component.OneCard(
+                Modifier.weight(1f).fillMaxWidth().padding(top = 12.dp),
+            ) {
+                Column(Modifier.fillMaxSize().padding(12.dp)) {
+                    androidx.compose.foundation.text.BasicTextField(
+                        value = uiState.name, onValueChange = onNameChange, singleLine = true,
+                        modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+                        textStyle = MaterialTheme.typography.headlineSmall.copy(color = MaterialTheme.colorScheme.onSurface),
+                        cursorBrush = androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.onSurface),
+                        decorationBox = { field ->
+                            if (uiState.name.isEmpty()) Text(stringResource(FeatureR.string.category_name), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            field()
+                        },
+                    )
+                    uiState.nameError?.let { error ->
+                        Text(stringResource(when (error) {
+                            NameError.Blank -> FeatureR.string.category_name_error_empty
+                            NameError.Reserved -> FeatureR.string.category_name_error_all
+                            NameError.NoDevices -> FeatureR.string.category_devices_error_empty
+                            NameError.Duplicate -> FeatureR.string.category_name_error_duplicate
+                        }), color = MaterialTheme.colorScheme.error)
                     }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 12.dp),
-            )
-
-            Spacer(Modifier.height(16.dp))
-
-            Text(
-                text = stringResource(FeatureR.string.category_devices_title),
-                style = MaterialTheme.typography.titleMedium,
-            )
-
-            if (uiState.bookmarks.isEmpty()) {
-                Text(
-                    text = stringResource(R.string.search_no_bookmark),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(vertical = 16.dp),
-                )
-            } else {
-                LazyColumn(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
-                    items(
-                        items = uiState.bookmarks,
-                        key = { it.device.toString() },
-                    ) { bookmark ->
-                        DeviceCheckRow(
-                            bookmark = bookmark,
-                            checked = DeviceKey(bookmark.device.toString()) in uiState.selected,
-                            onCheckedChange = { onToggleBookmark(bookmark) },
-                        )
+                    Text(stringResource(FeatureR.string.category_devices_title), Modifier.padding(top = 16.dp, bottom = 8.dp), style = MaterialTheme.typography.bodyMedium)
+                    LazyColumn(Modifier.weight(1f).fillMaxWidth()) {
+                        items(uiState.bookmarks, key = { it.id ?: "${it.name}:${it.device}" }) { bookmark ->
+                            DeviceCheckRow(bookmark, bookmark.deviceKey() in uiState.selected) { onToggleBookmark(bookmark) }
+                        }
                     }
                 }
             }
-
-            Button(
-                onClick = onSave,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp),
-            ) {
-                Text(stringResource(R.string.bookmark_save))
+            androidx.compose.material3.TextButton(onSave, Modifier.fillMaxWidth().height(56.dp)) {
+                Text(stringResource(R.string.bookmark_save), color = MaterialTheme.colorScheme.onSurface, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
             }
         }
     }
 }
 
 @Composable
-private fun DeviceCheckRow(
-    bookmark: Bookmark,
-    checked: Boolean,
-    onCheckedChange: () -> Unit,
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { onCheckedChange() }
-            .padding(vertical = 8.dp, horizontal = 4.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = bookmark.name,
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Text(
-                text = "${bookmark.device.model} / ${bookmark.device.csc}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+private fun DeviceCheckRow(bookmark: Bookmark, checked: Boolean, onCheckedChange: () -> Unit) {
+    Row(Modifier.fillMaxWidth().toggleable(checked, role = androidx.compose.ui.semantics.Role.Checkbox) { onCheckedChange() }.padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text(bookmark.name, style = MaterialTheme.typography.titleLarge, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+            Text("${bookmark.device.model} · ${bookmark.device.csc}", style = MaterialTheme.typography.bodyMedium)
         }
-        OneCheckbox(
-            isChecked = checked,
-            onCheckedChange = { onCheckedChange() }
-        )
+        OneCheckbox(checked, { onCheckedChange() }, Modifier.clearAndSetSemantics {})
     }
 }
 

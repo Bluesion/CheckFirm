@@ -10,4 +10,20 @@
     <string name="notification_permission_required_button_grant">İzin Ver</string>
     <string name="notification_permission_required_message">CheckFirm, yeni firmware bulunduğunda sizi bilgilendiren Info Catcher özelliği sunar. Bu özelliği kullanmak için bildirim izni vermelisiniz.</string>
     <string name="notification_permission_required_title">İzin gerekli</string>
+    <string name="main_network_error_title">Ağ hatası</string>
+    <string name="main_network_error_text">Ağa bağlanılamıyor veya çok yavaş.</string>
+    <string name="main_search_error_title">Arama hatası</string>
+    <string name="main_search_error_text">Model veya CSC hatalı.</string>
+    <string name="suggestion_title">Başka bir şey mi arıyorsunuz?</string>
+    <string name="suggestion_check_my_device_info">Cihaz bilgilerini kontrol et</string>
+    <string name="suggestion_wifi">Wi-Fi\'ı aç</string>
+    <string name="suggestion_data">Mobil veriyi aç</string>
+    <string name="unknown">Bilinmeyen</string>
+    <string name="smart_search">Akıllı Arama</string>
+    <string name="smart_search_type_major">One UI güncellemesi</string>
+    <string name="smart_search_type_minor">Küçük güncelleme</string>
+    <string name="smart_search_type_rollback">Geri alma</string>
+    <string name="smart_search_downgrade_possible">Sürüm düşürme mümkün</string>
+    <string name="smart_search_downgrade_impossible">Sürüm düşürme mümkün değil</string>
+    <string name="official_previous">Önceki resmi firmware</string>
 </resources>

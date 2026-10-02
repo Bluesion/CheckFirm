@@ -74,4 +74,10 @@
     <string name="welcome_search_add_device">උපාංගය එක් කරන්න</string>
     <string name="welcome_search_description">යෙදුම ආරම්භයේදී ස්ථිරාංගය සොයන්න.\nකරුණාකර යෙදුම ආරම්භයේදී සෙවීමට අවශ්‍ය උපාංගය ඇතුළත් කරන්න.</string>
     <string name="welcome_search_empty_device_list">ඔබට උපාංග 5ක් දක්වා එක් කළ හැක.</string>
+    <string name="unknown">නොදන්නා</string>
+    <string name="help_device_info_edit">සංස්කරණය කරන්න</string>
+    <string name="help_device_name">උපාංග නම</string>
+    <string name="help_device_info_bookmark">Bookmak සුරැකිනි.</string>
+    <string name="suggestion_title">වෙනත් දෙයක් සොයනවාද?</string>
+    <string name="suggestion_bookmark_my_device">මගේ උපාංගය Bookmak එකට එක් කරන්න</string>
 </resources>

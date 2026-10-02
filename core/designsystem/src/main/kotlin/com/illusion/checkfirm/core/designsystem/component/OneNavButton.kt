@@ -19,15 +19,15 @@ import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 
-private val NavButtonShadowElevation = 6.dp
+internal val ToolbarButtonBackgroundShadowElevation = 6.dp
 
 /**
- * Visibility of [OneNavButton]'s background, evaluated lazily at draw time. Defaults to fully
- * visible. [OneScaffold] overrides it so the background only appears once content has scrolled
- * up behind the collapsing toolbar (i.e. when the toolbar title is hidden), and is always
- * hidden on the fixed toolbar.
+ * Visibility of a toolbar button's background ([OneNavButton] and the actions group), evaluated
+ * lazily at draw time. Defaults to fully visible. [OneScaffold] overrides it so the background
+ * only appears once content has scrolled up behind the collapsing toolbar (i.e. when the toolbar
+ * title is hidden), and is always hidden on the fixed toolbar.
  */
-val LocalOneNavButtonBackgroundAlpha = compositionLocalOf<() -> Float> { { 1f } }
+val LocalOneToolbarButtonBackgroundAlpha = compositionLocalOf<() -> Float> { { 1f } }
 
 @Composable
 fun OneNavButton(
@@ -37,7 +37,7 @@ fun OneNavButton(
     content: @Composable () -> Unit,
 ) {
     val backgroundColor = MaterialTheme.colorScheme.surfaceBright
-    val backgroundAlpha = LocalOneNavButtonBackgroundAlpha.current
+    val backgroundAlpha = LocalOneToolbarButtonBackgroundAlpha.current
 
     // No clip on the outer box, otherwise the drop shadow would be clipped away.
     Box(
@@ -53,7 +53,7 @@ fun OneNavButton(
                 .graphicsLayer {
                     val visible = backgroundAlpha()
                     alpha = visible
-                    shadowElevation = NavButtonShadowElevation.toPx() * visible
+                    shadowElevation = ToolbarButtonBackgroundShadowElevation.toPx() * visible
                     this.shape = shape
                     clip = true
                 }
@@ -66,7 +66,7 @@ fun OneNavButton(
             modifier = Modifier
                 .matchParentSize()
                 .clip(shape)
-                .clickable(onClick = onClick),
+                .clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onClick),
             contentAlignment = Alignment.Center,
         ) {
             content()

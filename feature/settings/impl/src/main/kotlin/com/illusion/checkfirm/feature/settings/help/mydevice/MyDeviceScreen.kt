@@ -1,88 +1,47 @@
 package com.illusion.checkfirm.feature.settings.help.mydevice
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
-import com.illusion.checkfirm.core.designsystem.component.OneCard
-import com.illusion.checkfirm.core.designsystem.component.OneIcons
-import com.illusion.checkfirm.core.designsystem.component.OneNavButton
-import com.illusion.checkfirm.core.designsystem.component.OneScaffold
-import com.illusion.checkfirm.core.designsystem.preview.ScreenPreview
+import com.illusion.checkfirm.core.designsystem.component.*
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.feature.settings.R as FeatureR
 
 @Composable
 fun MyDeviceScreen(
-    uiState: MyDeviceUiState,
-    onNavigationIconClick: () -> Unit,
+    uiState: MyDeviceUiState, onNavigationIconClick: () -> Unit,
+    onEditDeviceName: () -> Unit = {}, onAddBookmark: () -> Unit = {},
 ) {
-    OneScaffold(
-        title = stringResource(FeatureR.string.help_device_info),
-        navigationIcon = {
-            OneNavButton(
-                onClick = onNavigationIconClick,
-                shape = CircleShape,
-                modifier = Modifier.size(48.dp),
-            ) {
-                Icon(
-                    imageVector = OneIcons.Back,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.size(24.dp),
-                )
+    OneScaffold(title = stringResource(FeatureR.string.help_device_info), expandable = false,
+        navigationIcon = { OneNavButton(onNavigationIconClick, CircleShape, Modifier.size(48.dp)) {
+            Icon(OneIcons.Back, stringResource(R.string.navigate_back))
+        } },
+    ) { padding ->
+        Column(Modifier.fillMaxSize().padding(bottom = padding.calculateBottomPadding())) {
+            Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(uiState.userName, style = MaterialTheme.typography.headlineSmall, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                AssistChip(onClick = onEditDeviceName, label = { Text(stringResource(FeatureR.string.help_device_info_edit)) })
+                Spacer(Modifier.height(16.dp))
+                DeviceRow(stringResource(FeatureR.string.help_device_name), uiState.deviceName)
+                DeviceRow(stringResource(R.string.model), uiState.model)
+                DeviceRow(stringResource(R.string.csc), uiState.csc)
             }
-        },
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 12.dp)
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(
-                    top = innerPadding.calculateTopPadding(),
-                    bottom = innerPadding.calculateBottomPadding() + 16.dp,
-                ),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            OneCard(
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    Text(
-                        text = stringResource(FeatureR.string.help_device_info),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
-                    )
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-                    InfoRow(label = stringResource(R.string.model), value = uiState.model)
-                    InfoRow(label = "Manufacturer", value = uiState.manufacturer)
-                    InfoRow(label = "Hardware", value = uiState.hardware)
-                    InfoRow(label = "Android", value = "${uiState.release} (SDK ${uiState.sdk})")
+            Card(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+                colors = CardDefaults.cardColors(containerColor = CheckFirmTheme.colors.tipCardBackground), shape = OneCardShape) {
+                Column(Modifier.padding(16.dp)) {
+                    Text(stringResource(FeatureR.string.suggestion_title), style = MaterialTheme.typography.bodyLarge)
+                    TextButton(onClick = onAddBookmark) {
+                        Text(stringResource(FeatureR.string.suggestion_bookmark_my_device), color = CheckFirmTheme.colors.tipText)
+                    }
                 }
             }
         }
@@ -90,41 +49,10 @@ fun MyDeviceScreen(
 }
 
 @Composable
-private fun InfoRow(label: String, value: String) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyMedium,
-            color = CheckFirmTheme.colors.settingsDescription,
-            modifier = Modifier.weight(1f),
-        )
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
-    }
-}
-
-@ScreenPreview
-@Composable
-private fun MyDeviceScreenPreview() {
-    CheckFirmTheme {
-        Surface {
-            MyDeviceScreen(
-                uiState = MyDeviceUiState(
-                    model = "SM-S928B",
-                    hardware = "e3q",
-                    manufacturer = "Samsung",
-                    sdk = "35",
-                    release = "15",
-                ),
-                onNavigationIconClick = {},
-            )
-        }
+private fun DeviceRow(label: String, value: String) {
+    Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        Text(label, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, color = CheckFirmTheme.colors.settingsDescription)
+        Text(value.ifBlank { stringResource(FeatureR.string.unknown) }, modifier = Modifier.weight(1f),
+            style = MaterialTheme.typography.bodyMedium, textAlign = androidx.compose.ui.text.style.TextAlign.End)
     }
 }

@@ -74,4 +74,10 @@
     <string name="welcome_search_add_device">添加设备</string>
     <string name="welcome_search_description">应用启动时搜索固件。\n请输入您希望在启动时搜索的设备。</string>
     <string name="welcome_search_empty_device_list">您最多可以添加5台设备。</string>
+    <string name="unknown">未知</string>
+    <string name="help_device_info_edit">编辑</string>
+    <string name="help_device_name">设备名称</string>
+    <string name="help_device_info_bookmark">书签已保存。</string>
+    <string name="suggestion_title">还在寻找其他东西吗？</string>
+    <string name="suggestion_bookmark_my_device">将我的设备添加到书签</string>
 </resources>

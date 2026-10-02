@@ -2,6 +2,8 @@ package com.illusion.checkfirm.feature.settings.help
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -43,7 +45,7 @@ fun HelpScreen(
             ) {
                 Icon(
                     imageVector = OneIcons.Back,
-                    contentDescription = null,
+                    contentDescription = stringResource(com.illusion.checkfirm.core.designsystem.R.string.navigate_back),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
@@ -56,26 +58,14 @@ fun HelpScreen(
                 .padding(horizontal = 12.dp)
                 .verticalScroll(rememberScrollState())
                 .padding(
-                    top = innerPadding.calculateTopPadding(),
+                    top = innerPadding.calculateTopPadding() + 12.dp,
                     bottom = innerPadding.calculateBottomPadding() + 16.dp,
                 ),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            OneCard {
-                OneCardItem(
-                    title = stringResource(FeatureR.string.help_manual),
-                    description = stringResource(FeatureR.string.help_manual_description),
-                    iconVector = OneIcons.HelpManual,
-                    onClick = onNavigateToFirmwareManual,
-                )
-                OneDivider()
-                OneCardItem(
-                    title = stringResource(FeatureR.string.help_device_info),
-                    description = stringResource(FeatureR.string.help_device_info_description),
-                    iconVector = OneIcons.HelpDevice,
-                    onClick = onNavigateToMyDevice,
-                )
-            }
+            HelpItem(stringResource(FeatureR.string.help_manual), stringResource(FeatureR.string.help_manual_description), R.drawable.ic_help_manual, onNavigateToFirmwareManual)
+            HelpItem(stringResource(FeatureR.string.help_device_info), stringResource(FeatureR.string.help_device_info_description), R.drawable.ic_help_device, onNavigateToMyDevice)
+
         }
     }
 }
@@ -90,6 +80,20 @@ private fun HelpScreenPreview() {
                 onNavigateToFirmwareManual = {},
                 onNavigateToMyDevice = {},
             )
+        }
+    }
+}
+
+@Composable
+private fun HelpItem(title: String, description: String, icon: Int, onClick: () -> Unit) {
+    androidx.compose.material3.Card(onClick = onClick, shape = com.illusion.checkfirm.core.designsystem.component.OneCardShape,
+        colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
+        androidx.compose.foundation.layout.Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            Icon(androidx.compose.ui.res.painterResource(icon), null, Modifier.size(40.dp), tint = androidx.compose.ui.graphics.Color.Unspecified)
+            Column(Modifier.padding(start = 12.dp)) {
+                Text(title, style = MaterialTheme.typography.bodyLarge)
+                Text(description, style = MaterialTheme.typography.bodyMedium, color = CheckFirmTheme.colors.settingsDescription)
+            }
         }
     }
 }

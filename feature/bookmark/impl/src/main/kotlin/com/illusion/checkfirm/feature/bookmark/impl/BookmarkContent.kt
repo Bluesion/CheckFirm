@@ -38,38 +38,11 @@ fun BookmarkContent(
     val displayedSelection = uiState.selectedCategory.ifBlank { allLabel }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        ExposedDropdownMenuBox(
-            expanded = uiState.expanded,
-            onExpandedChange = onExpandedChange,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 8.dp)
-        ) {
-            OutlinedTextField(
-                value = displayedSelection,
-                onValueChange = {},
-                readOnly = true,
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = uiState.expanded) },
-                modifier = Modifier
-                    .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true)
-                    .fillMaxWidth()
-            )
-            ExposedDropdownMenu(
-                expanded = uiState.expanded,
-                onDismissRequest = { onExpandedChange(false) }
-            ) {
-                categories.forEach { category ->
-                    DropdownMenuItem(
-                        text = { Text(category) },
-                        onClick = {
-                            // Convert "All" label back to empty-string sentinel
-                            onCategoryChange(if (category == allLabel) "" else category)
-                            onExpandedChange(false)
-                        }
-                    )
-                }
-            }
-        }
+        com.illusion.checkfirm.core.designsystem.component.OneSpinner(
+            items = categories, selectedItem = displayedSelection,
+            onItemSelected = { onCategoryChange(if (it == allLabel) "" else it) },
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
+        )
 
         if (uiState.bookmarks.isEmpty()) {
             Box(
@@ -90,7 +63,7 @@ fun BookmarkContent(
             ) {
                 items(
                     items = uiState.bookmarks,
-                    key = { it.device.model + it.device.csc }
+                    key = { it.id ?: "${it.name}:${it.device}" }
                 ) { item ->
                     BookmarkItem(
                         bookmark = item,

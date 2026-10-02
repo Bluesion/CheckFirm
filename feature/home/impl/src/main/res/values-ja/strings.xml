@@ -10,4 +10,21 @@
     <string name="notification_permission_required_button_grant">許可</string>
     <string name="notification_permission_required_message">CheckFirmは、新しいファームウェアが見つかったときに通知するInfo Catcherを提供します。この機能を使用するには、通知の許可を付与する必要があります。</string>
     <string name="notification_permission_required_title">権限が必要です</string>
+    <string name="main_network_error_title">ネットワークエラー</string>
+    <string name="main_network_error_text">ネットワークに接続されていないか、遅すぎます。</string>
+    <string name="main_search_error_title">検索エラー</string>
+    <string name="main_search_error_text">モデルまたはCSCが正しくありません。</string>
+    <string name="suggestion_title">他に探しているものはありますか？</string>
+    <string name="suggestion_check_my_device_info">マイデバイス情報を確認する</string>
+    <string name="suggestion_wifi">Wi-Fiをオンにする</string>
+    <string name="suggestion_data">モバイルデータをオンにする</string>
+
+    <string name="unknown">不明</string>
+    <string name="smart_search">スマート検索</string>
+    <string name="smart_search_type_major">One UIアップデート</string>
+    <string name="smart_search_type_minor">マイナーアップデート</string>
+    <string name="smart_search_type_rollback">ロールバック</string>
+    <string name="smart_search_downgrade_possible">ダウングレード可能</string>
+    <string name="smart_search_downgrade_impossible">ダウングレード不可能</string>
+    <string name="official_previous">以前の公式ファームウェア</string>
 </resources>

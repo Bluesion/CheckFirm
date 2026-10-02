@@ -14,6 +14,7 @@ data class HomeUiState(
     val results: List<SearchResult> = emptyList(),
     val resultState: ResultState = ResultState.Idle,
     val openedDialog: SearchResult? = null,
+    val openedDialogIsOfficial: Boolean = true,
 )
 
 sealed interface ResultState {

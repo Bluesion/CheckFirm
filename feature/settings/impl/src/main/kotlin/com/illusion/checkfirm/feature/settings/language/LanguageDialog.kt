@@ -7,9 +7,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.TextButton
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.ui.semantics.Role
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -62,14 +63,13 @@ fun LanguageDialog(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState()),
+                .fillMaxWidth(),
         ) {
             LANGUAGES.forEach { entry ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { current = entry.tag }
+                        .selectable(selected = current == entry.tag, role = Role.RadioButton) { current = entry.tag }
                         .padding(vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -80,13 +80,13 @@ fun LanguageDialog(
                     )
                     OneRadioButton(
                         selected = current == entry.tag,
-                        onClick = { current = entry.tag },
+                        onClick = null,
                     )
                 }
             }
         }
         Spacer(Modifier.height(16.dp))
-        Button(
+        TextButton(
             onClick = {
                 onConfirm(current)
                 onDismiss()

@@ -49,6 +49,14 @@ class BackupItemTest {
         assertEquals(importedId, repository.bookmarks.last().id)
         assertEquals(7, repository.bookmarks.last().position)
     }
+    @Test fun multipleNamedBookmarksForOneDeviceRetainDistinctIdsOnReimport() = runBlocking {
+        val repository = FakeRepository()
+        val backup = BackupItem(listOf(BookmarkDto("first alias",device.model,device.csc,"",1), BookmarkDto("second alias",device.model,device.csc,"",2)))
+        restoreBackup(repository, backup)
+        restoreBackup(repository, backup)
+        assertEquals(listOf(1L, 2L), repository.bookmarks.map { it.id })
+        assertEquals(listOf("first alias", "second alias"), repository.bookmarks.map { it.name })
+    }
     private class FakeRepository : BCRepository {
         val bookmarks = mutableListOf<Bookmark>()
         val categories = mutableListOf<Category>()

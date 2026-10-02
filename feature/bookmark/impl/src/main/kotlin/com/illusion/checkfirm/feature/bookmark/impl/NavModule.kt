@@ -20,7 +20,8 @@ object NavModule {
         entry<BookmarkRouteNavKey> {
             BookmarkRoute(
                 onNavigationIconClick = navigator::goBack,
-                onCategoryClick = { navigator.goTo(CategoryRouteNavKey) },
+                onCategoryClick = { navigator.goTo(com.illusion.checkfirm.feature.category.api.CategoryEditRouteNavKey()) },
+                onEditCategory = { navigator.goTo(com.illusion.checkfirm.feature.category.api.CategoryEditRouteNavKey(it)) },
             )
         }
     }
