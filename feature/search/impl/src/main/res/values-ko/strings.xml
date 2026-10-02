@@ -1,3 +1,5 @@
 <resources>
     <string name="multi_search_limit">최대 5개까지 검색이 가능합니다.</string>
+    <string name="search_add_bookmark">북마크 추가</string>
+    <string name="suggestion_search_my_device">이 기기 검색</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.TextButton
@@ -34,13 +35,12 @@ import com.illusion.checkfirm.feature.settings.R as FeatureR
 private data class LanguageEntry(val tag: String, val labelRes: Int)
 
 private val LANGUAGES = listOf(
-    LanguageEntry("", FeatureR.string.settings_language_default),
     LanguageEntry("cs", R.string.settings_language_cs),
     LanguageEntry("en-US", R.string.settings_language_en),
     LanguageEntry("ja", R.string.settings_language_ja),
     LanguageEntry("ko", R.string.settings_language_ko),
-    LanguageEntry("pt-BR", R.string.settings_language_pt_rBR),
     LanguageEntry("pt-PT", R.string.settings_language_pt_rPT),
+    LanguageEntry("pt-BR", R.string.settings_language_pt_rBR),
     LanguageEntry("ro", R.string.settings_language_ro),
     LanguageEntry("ru", R.string.settings_language_ru),
     LanguageEntry("si", R.string.settings_language_si),
@@ -70,6 +70,7 @@ fun LanguageDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .selectable(selected = current == entry.tag, role = Role.RadioButton) { current = entry.tag }
+                        .heightIn(min = 48.dp)
                         .padding(vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -94,7 +95,7 @@ fun LanguageDialog(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
         ) {
-            Text(text = stringResource(android.R.string.ok))
+            Text(text = stringResource(android.R.string.ok), color = MaterialTheme.colorScheme.onSurface)
         }
     }
 }

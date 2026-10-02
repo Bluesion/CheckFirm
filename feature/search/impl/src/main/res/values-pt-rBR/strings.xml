@@ -1,3 +1,5 @@
 <resources>
     <string name="multi_search_limit">Você pode pesquisar até 5 dispositivos</string>
+    <string name="search_add_bookmark">Adicionar favorito</string>
+    <string name="suggestion_search_my_device">Pesquisar este dispositivo</string>
 </resources>

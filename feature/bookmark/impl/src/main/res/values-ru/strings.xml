@@ -6,4 +6,5 @@
     <string name="category_edit_name">Название категории</string>
     <string name="category_edit_name_error_all">Название категории не может быть «Все».</string>
     <string name="category_edit_name_error_empty">Название категории не должно быть пустым!</string>
+    <string name="bookmark_name_error">Пожалуйста, назовите эту закладку!</string>
 </resources>

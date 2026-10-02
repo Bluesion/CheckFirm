@@ -72,7 +72,7 @@ fun InfoCatcherDialog(
 
         OutlinedTextField(
             value = model,
-            onValueChange = { onModelChange(it.uppercase()) },
+            onValueChange = { onModelChange(it.uppercase(java.util.Locale.US)) },
             label = { Text(stringResource(R.string.model)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
@@ -83,7 +83,7 @@ fun InfoCatcherDialog(
 
         OutlinedTextField(
             value = csc,
-            onValueChange = { if (it.length <= 3) onCscChange(it.uppercase()) },
+            onValueChange = { if (it.length <= 3) onCscChange(it.uppercase(java.util.Locale.US)) },
             label = { Text(stringResource(R.string.csc)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
@@ -98,7 +98,7 @@ fun InfoCatcherDialog(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {
-                Text(stringResource(android.R.string.cancel))
+                Text(stringResource(android.R.string.cancel), color = MaterialTheme.colorScheme.onSurface)
             }
             Spacer(Modifier.width(8.dp))
             TextButton(
@@ -111,7 +111,7 @@ fun InfoCatcherDialog(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {
-                Text(stringResource(FeatureR.string.add_item))
+                Text(stringResource(FeatureR.string.add_item), color = MaterialTheme.colorScheme.onSurface)
             }
         }
     }

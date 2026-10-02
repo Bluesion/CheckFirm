@@ -10,17 +10,28 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun SearchRoute(
     onNavigationIconClick: () -> Unit,
+    onAddBookmarkClick: () -> Unit,
     viewModel: SearchViewModel = hiltViewModel(),
 ) {
     val scope = rememberCoroutineScope()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val historyList by viewModel.historyList.collectAsStateWithLifecycle()
     val bookmarks by viewModel.bookmarks.collectAsStateWithLifecycle()
+    val categories by viewModel.categories.collectAsStateWithLifecycle()
 
     SearchScreen(
         uiState = uiState,
         historyList = historyList,
         bookmarks = bookmarks,
+        categories = categories,
+        onAddBookmarkClick = onAddBookmarkClick,
+        onSearchThisDevice = {
+            val csc = runCatching {
+                Runtime.getRuntime().exec(arrayOf("/system/bin/getprop", "ro.csc.sales_code"))
+                    .inputStream.bufferedReader().use { it.readLine().orEmpty().uppercase(java.util.Locale.US) }
+            }.getOrDefault("")
+            viewModel.addToSearchList(com.illusion.checkfirm.core.domain.model.Device(android.os.Build.MODEL, csc))
+        },
         onModelChange = viewModel::updateModel,
         onCscChange = viewModel::updateCsc,
         onAddClick = viewModel::onAddClick,

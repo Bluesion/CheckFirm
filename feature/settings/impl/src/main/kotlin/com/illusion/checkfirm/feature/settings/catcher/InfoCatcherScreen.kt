@@ -54,7 +54,7 @@ fun InfoCatcherScreen(
     OneScaffold(
         title = stringResource(R.string.info_catcher),
         actions = {
-            OneNavButton(onAddDeviceClick, CircleShape, Modifier.size(48.dp)) {
+            if (uiState.devices.isNotEmpty()) OneNavButton(onAddDeviceClick, CircleShape, Modifier.size(48.dp)) {
                 Icon(Icons.Rounded.Add, stringResource(FeatureR.string.welcome_search_add_device))
             }
         },
@@ -97,6 +97,14 @@ fun InfoCatcherScreen(
                     .padding(top = 16.dp, bottom = 24.dp),
             )
 
+            if (uiState.devices.isEmpty()) {
+                androidx.compose.foundation.layout.Box(Modifier.fillMaxWidth().padding(top = 24.dp), contentAlignment = Alignment.Center) {
+                    Button(onClick = onAddDeviceClick) {
+                        Icon(Icons.Rounded.Add, null, Modifier.size(18.dp))
+                        Text(stringResource(FeatureR.string.welcome_search_add_device), Modifier.padding(start = 4.dp))
+                    }
+                }
+            }
             if (uiState.devices.isNotEmpty()) OneCard(modifier = Modifier.fillMaxWidth()) {
                 uiState.devices.forEachIndexed { index, device ->
                     InfoCatcherItem(deviceText = "${device.model} (${device.csc})", onDelete = { onDeleteDevice(device) })

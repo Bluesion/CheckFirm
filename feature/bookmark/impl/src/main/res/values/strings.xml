@@ -7,4 +7,5 @@
     <string name="category_edit_name_error_all">Category name cannot be All.</string>
     <string name="category_edit_name_error_empty">Category name should not be empty.</string>
     <string name="search_no_category">No category</string>
+    <string name="bookmark_name_error">Please name this bookmark!</string>
 </resources>

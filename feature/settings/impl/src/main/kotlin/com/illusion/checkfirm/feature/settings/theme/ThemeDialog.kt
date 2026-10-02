@@ -99,7 +99,7 @@ fun ThemeDialog(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
         ) {
-            Text(text = stringResource(R.string.close))
+            Text(text = stringResource(R.string.close), color = MaterialTheme.colorScheme.onSurface)
         }
     }
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="multi_search_limit">您最多可搜尋 5 台裝置</string>
+    <string name="search_add_bookmark">新增書籤</string>
+    <string name="suggestion_search_my_device">搜尋此裝置</string>
 </resources>

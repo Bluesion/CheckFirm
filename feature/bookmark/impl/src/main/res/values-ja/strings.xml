@@ -6,4 +6,5 @@
     <string name="category_edit_name">カテゴリ名</string>
     <string name="category_edit_name_error_all">カテゴリ名は「すべて」にできません。</string>
     <string name="category_edit_name_error_empty">カテゴリ名は空にできません。</string>
+    <string name="bookmark_name_error">ブックマークに名前を付けてください！</string>
 </resources>

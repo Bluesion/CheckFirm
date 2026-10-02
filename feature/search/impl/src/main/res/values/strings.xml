@@ -11,4 +11,6 @@
     <string name="search_add_device">Add device</string>
     <string name="search_device_count">%1$d devices</string>
     <string name="search_selected_devices">Selected devices</string>
+    <string name="search_add_bookmark">Add bookmark</string>
+    <string name="suggestion_search_my_device">Search this device</string>
 </resources>

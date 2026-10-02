@@ -24,6 +24,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.material3.MaterialTheme
+import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,6 +50,7 @@ fun BookmarkDialog(
     onDismiss: () -> Unit,
     onConfirm: (Bookmark) -> Unit,
 ) {
+    val context = LocalContext.current
     val allLabel = stringResource(R.string.category_all)
     var name by remember { mutableStateOf(initial?.name.orEmpty()) }
     var model by remember { mutableStateOf(initial?.device?.model ?: "SM-") }
@@ -87,11 +91,14 @@ fun BookmarkDialog(
 
         Spacer(Modifier.height(16.dp))
         Row(Modifier.fillMaxWidth()) {
-            TextButton(onDismiss, Modifier.weight(1f)) { Text(stringResource(android.R.string.cancel)) }
+            TextButton(onDismiss, Modifier.weight(1f)) { Text(stringResource(android.R.string.cancel), color = MaterialTheme.colorScheme.onSurface) }
             TextButton(onClick = {
-                onConfirm(Bookmark(name.trim(), Device(model.trim(), csc.trim()), category, initial?.id, initial?.position ?: 0))
-            }, enabled = name.isNotBlank() && Device(model.trim(), csc.trim()).isValidDevice(), modifier = Modifier.weight(1f)) {
-                Text(stringResource(R.string.bookmark_save))
+                val device = Device(model.trim().uppercase(java.util.Locale.US), csc.trim().uppercase(java.util.Locale.US))
+                val error = if (name.isBlank()) FeatureR.string.bookmark_name_error else if (!device.isValidDevice()) R.string.check_device else null
+                if (error != null) Toast.makeText(context, context.getString(error), Toast.LENGTH_SHORT).show()
+                else onConfirm(Bookmark(name.trim(), device, category, initial?.id, initial?.position ?: 0))
+            }, modifier = Modifier.weight(1f)) {
+                Text(stringResource(R.string.bookmark_save), color = MaterialTheme.colorScheme.onSurface)
             }
         }
 

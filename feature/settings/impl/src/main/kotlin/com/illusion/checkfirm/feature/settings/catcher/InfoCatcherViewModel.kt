@@ -33,7 +33,7 @@ class InfoCatcherViewModel @Inject constructor(
             _uiState,
             repository.allDevices,
             preferenceRepository.getSettings(),
-            bcRepository.getAllBookmark("date", true),
+            bcRepository.getAllBookmark("date", false),
         ) { state, devices, prefs, bookmarks ->
             state.copy(
                 devices = devices,

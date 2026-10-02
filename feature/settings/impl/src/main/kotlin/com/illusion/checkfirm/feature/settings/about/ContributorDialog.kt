@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
@@ -57,7 +59,7 @@ fun ContributorDialog(onDismiss: () -> Unit) {
             SectionHeader(stringResource(FeatureR.string.contributor_application))
             APPLICATION.forEach { row -> ContributorRow(row) }
 
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(0.dp))
 
             SectionHeader(stringResource(FeatureR.string.contributor_translator))
             TRANSLATORS.forEach { row -> ContributorRow(row) }
@@ -65,12 +67,12 @@ fun ContributorDialog(onDismiss: () -> Unit) {
 
         Spacer(Modifier.height(16.dp))
 
-        Button(
+        TextButton(
             onClick = onDismiss,
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
         ) {
-            Text(text = stringResource(android.R.string.ok))
+            Text(text = stringResource(android.R.string.ok), color = MaterialTheme.colorScheme.onSurface)
         }
     }
 }
@@ -88,8 +90,7 @@ private fun SectionHeader(text: String) {
 private fun ContributorRow(row: ContributorRow) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
@@ -102,6 +103,7 @@ private fun ContributorRow(row: ContributorRow) {
             text = stringResource(row.nameRes),
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.weight(0.6f),
+            textAlign = TextAlign.End,
         )
     }
 }

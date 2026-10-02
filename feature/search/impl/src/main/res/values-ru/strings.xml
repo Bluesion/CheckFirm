@@ -1,3 +1,5 @@
 <resources>
     <string name="multi_search_limit">Вы можете искать до 5 устройств</string>
+    <string name="search_add_bookmark">Добавить закладку</string>
+    <string name="suggestion_search_my_device">Искать это устройство</string>
 </resources>

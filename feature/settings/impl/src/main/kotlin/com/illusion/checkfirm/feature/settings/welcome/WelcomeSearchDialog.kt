@@ -71,7 +71,7 @@ fun WelcomeSearchDialog(
 
         OutlinedTextField(
             value = uiState.model,
-            onValueChange = { onModelChange(it.uppercase()) },
+            onValueChange = { onModelChange(it.uppercase(java.util.Locale.US)) },
             label = { Text(text = stringResource(R.string.model)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
@@ -80,7 +80,7 @@ fun WelcomeSearchDialog(
 
         OutlinedTextField(
             value = uiState.csc,
-            onValueChange = { if (it.length <= 3) onCscChange(it.uppercase()) },
+            onValueChange = { if (it.length <= 3) onCscChange(it.uppercase(java.util.Locale.US)) },
             label = { Text(text = stringResource(R.string.csc)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
@@ -99,7 +99,7 @@ fun WelcomeSearchDialog(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {
-                Text(text = stringResource(android.R.string.cancel))
+                Text(text = stringResource(android.R.string.cancel), color = MaterialTheme.colorScheme.onSurface)
             }
             Spacer(Modifier.width(8.dp))
             TextButton(
@@ -112,7 +112,7 @@ fun WelcomeSearchDialog(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(22.dp),
             ) {
-                Text(text = stringResource(FeatureR.string.add_item))
+                Text(text = stringResource(FeatureR.string.add_item), color = MaterialTheme.colorScheme.onSurface)
             }
         }
     }

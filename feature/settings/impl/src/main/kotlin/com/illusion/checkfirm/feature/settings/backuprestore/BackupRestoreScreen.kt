@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -59,9 +60,10 @@ fun BackupRestoreScreen(
         },
     ) { innerPadding ->
         BoxWithConstraints(Modifier.fillMaxSize().padding(bottom = innerPadding.calculateBottomPadding())) {
-            val imageHeight = maxHeight * 0.5f
+            val imageHeight = androidx.compose.ui.platform.LocalWindowInfo.current.containerDpSize.height * 0.5f
+            val imageTop = maxHeight - imageHeight
             Column(
-                modifier = Modifier.fillMaxWidth().height(imageHeight).padding(horizontal = 16.dp).padding(bottom = 32.dp),
+                modifier = Modifier.fillMaxWidth().height(imageTop).padding(horizontal = 16.dp).padding(bottom = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Bottom,
             ) {
@@ -74,13 +76,11 @@ fun BackupRestoreScreen(
                 Spacer(Modifier.height(36.dp))
                 TransferButton(FeatureR.string.backup, R.drawable.ic_btn_up, !uiState.isWorking, onBackupClick)
             }
-            Image(
-                painter = painterResource(R.drawable.img_device_line),
-                contentDescription = null,
-                contentScale = ContentScale.FillBounds,
+            androidx.compose.ui.viewinterop.AndroidView(
+                factory = { android.widget.ImageView(it).apply { setImageResource(R.drawable.img_device_line); scaleType = android.widget.ImageView.ScaleType.FIT_XY } },
                 modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth(0.65f).height(imageHeight),
             )
-            Box(Modifier.align(Alignment.TopCenter).offset(y = imageHeight + 32.dp)) {
+            Box(Modifier.align(Alignment.TopCenter).offset(y = imageTop + 32.dp)) {
                 TransferButton(FeatureR.string.restore, R.drawable.ic_btn_down, !uiState.isWorking, onRestoreClick)
             }
         }
@@ -89,10 +89,11 @@ fun BackupRestoreScreen(
 
 @Composable
 private fun TransferButton(label: Int, icon: Int, enabled: Boolean, onClick: () -> Unit) {
-    TextButton(onClick = onClick, enabled = enabled) {
+    TextButton(onClick = onClick, enabled = enabled, modifier = Modifier.widthIn(min = 88.dp)) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Image(painterResource(icon), null, Modifier.size(48.dp))
-            Text(stringResource(label), color = MaterialTheme.colorScheme.onBackground)
+            Spacer(Modifier.height(6.dp))
+            Text(stringResource(label), color = MaterialTheme.colorScheme.primary)
         }
     }
 }

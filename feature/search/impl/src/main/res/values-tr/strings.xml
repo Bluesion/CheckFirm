@@ -1,3 +1,5 @@
 <resources>
     <string name="multi_search_limit">En fazla 5 cihaz arayabilirsiniz</string>
+    <string name="search_add_bookmark">Yer imi ekle</string>
+    <string name="suggestion_search_my_device">Bu cihazı ara</string>
 </resources>

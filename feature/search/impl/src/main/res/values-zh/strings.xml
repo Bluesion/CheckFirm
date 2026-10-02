@@ -1,3 +1,5 @@
 <resources>
     <string name="multi_search_limit">您最多可以搜索5台设备</string>
+    <string name="search_add_bookmark">添加书签</string>
+    <string name="suggestion_search_my_device">搜索此设备</string>
 </resources>

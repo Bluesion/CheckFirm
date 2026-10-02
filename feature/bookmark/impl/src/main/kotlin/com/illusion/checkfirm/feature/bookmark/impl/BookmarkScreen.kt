@@ -70,7 +70,7 @@ fun BookmarkScreen(
         actions = {
             OneNavButton(onClick = { if (tab == 0) onShowNewBookmarkChange(true) else onCategoryClick() }, shape = CircleShape,
                 modifier = Modifier.size(48.dp)) {
-                Icon(Icons.Rounded.Add, contentDescription = stringResource(com.illusion.checkfirm.feature.bookmark.R.string.bookmark_new))
+                Icon(Icons.Rounded.Add, contentDescription = stringResource(if (tab == 0) com.illusion.checkfirm.feature.bookmark.R.string.bookmark_new else R.string.category))
             }
         },
     ) { innerPadding ->

@@ -72,7 +72,7 @@ fun WelcomeSearchScreen(
     OneScaffold(
         title = stringResource(R.string.welcome_search),
         actions = {
-            OneNavButton({
+            if (uiState.devices.isNotEmpty()) OneNavButton({
                 if (uiState.devices.size < 5) onShowDialogChange(true)
                 else Toast.makeText(context, context.getString(FeatureR.string.welcome_search_empty_device_list), Toast.LENGTH_SHORT).show()
             }, CircleShape, Modifier.size(48.dp)) {
@@ -115,6 +115,16 @@ fun WelcomeSearchScreen(
                     .padding(horizontal = 12.dp)
             )
 
+            if (uiState.devices.isEmpty()) {
+                Column(Modifier.fillMaxWidth().padding(top = 48.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Button(onClick = { onShowDialogChange(true) }) {
+                        Icon(Icons.Rounded.Add, null, Modifier.size(18.dp))
+                        Text(stringResource(FeatureR.string.welcome_search_add_device), Modifier.padding(start = 4.dp))
+                    }
+                    Text(stringResource(FeatureR.string.welcome_search_empty_device_list), style = MaterialTheme.typography.bodyMedium,
+                        color = CheckFirmTheme.colors.settingsDescription, modifier = Modifier.padding(top = 4.dp))
+                }
+            }
             if (uiState.devices.isNotEmpty()) {
                 OneCard(Modifier.fillMaxWidth().padding(top = 24.dp)) {
                     uiState.devices.forEachIndexed { index, device ->

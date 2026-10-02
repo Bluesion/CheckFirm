@@ -6,4 +6,5 @@
     <string name="category_edit_name">Kategori adı</string>
     <string name="category_edit_name_error_all">Kategori adı "Tümü" olamaz.</string>
     <string name="category_edit_name_error_empty">Kategori adı boş olmamalı.</string>
+    <string name="bookmark_name_error">Lütfen bu yer imine bir ad verin!</string>
 </resources>

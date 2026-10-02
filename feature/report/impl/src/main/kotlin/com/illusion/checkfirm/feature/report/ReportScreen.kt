@@ -25,7 +25,13 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -48,12 +54,13 @@ fun ReportScreen(
     onSubmitClick: () -> Unit,
     onNavigationIconClick: () -> Unit,
 ) {
+    var messageFocused by remember { mutableStateOf(false) }
     OneScaffold(
         title = stringResource(DesignSystemR.string.report),
         actions = {
-            androidx.compose.material3.TextButton(onClick = onSubmitClick, enabled = !uiState.isSubmitting) {
+            androidx.compose.material3.IconButton(onClick = onSubmitClick, enabled = !uiState.isSubmitting) {
                 if (uiState.isSubmitting) OneLoadingIndicator(Modifier.size(24.dp))
-                else Text(stringResource(R.string.report_submit), color = MaterialTheme.colorScheme.onSurface)
+                else Icon(androidx.compose.ui.res.painterResource(DesignSystemR.drawable.ic_send), stringResource(R.string.report_submit), tint = MaterialTheme.colorScheme.onSurface)
             }
         },
         navigationIcon = {
@@ -104,7 +111,7 @@ fun ReportScreen(
                     Modifier.fillMaxWidth().toggleable(value = type in uiState.bugTypes, role = Role.Checkbox) { onBugTypeToggle(type) },
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Checkbox(checked = type in uiState.bugTypes, onCheckedChange = null, modifier = Modifier.size(48.dp))
+                    com.illusion.checkfirm.core.designsystem.component.OneCheckbox(type in uiState.bugTypes, { onBugTypeToggle(type) }, Modifier.padding(12.dp).then(Modifier.clearAndSetSemantics {}))
                     Text(stringResource(label), style = MaterialTheme.typography.bodyMedium)
                 }
             }
@@ -113,14 +120,14 @@ fun ReportScreen(
                 value = uiState.userMessage,
                 onValueChange = onUserMessageUpdate,
                 textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp).onFocusChanged { messageFocused = it.isFocused },
                 decorationBox = { inner ->
                     Column {
                         Box(Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
-                            if (uiState.userMessage.isEmpty()) Text(stringResource(R.string.report_detail), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            if (uiState.userMessage.isEmpty()) Text(stringResource(R.string.report_detail), color = MaterialTheme.colorScheme.outline)
                             inner()
                         }
-                        HorizontalDivider(color = MaterialTheme.colorScheme.primary)
+                        HorizontalDivider(color = if (messageFocused) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline)
                     }
                 },
             )

@@ -39,6 +39,9 @@ import com.illusion.checkfirm.feature.search.R as FeatureR
 @Composable
 fun SearchScreen(
     uiState: SearchUiState = SearchUiState(),
+    categories: List<String> = emptyList(),
+    onAddBookmarkClick: () -> Unit = {},
+    onSearchThisDevice: () -> SearchValidationResult = { SearchValidationResult.SUCCESS },
     historyList: List<SearchHistory> = emptyList(), bookmarks: List<Bookmark> = emptyList(),
     onModelChange: (String) -> Unit = {}, onCscChange: (String) -> Unit = {},
     onAddClick: () -> SearchValidationResult = { SearchValidationResult.SUCCESS },
@@ -88,9 +91,9 @@ fun SearchScreen(
         OneCard(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 12.dp)) {
             if (tab == 0) {
                 val all = stringResource(R.string.category_all)
-                OneSpinner(listOf(all) + bookmarks.map { it.category }.filter { it.isNotBlank() }.distinct(), category.ifBlank { all }, { category = if (it == all) "" else it }, Modifier.padding(12.dp))
+                if (categories.isNotEmpty()) OneSpinner(listOf(all) + categories, category.ifBlank { all }, { category = if (it == all) "" else it }, Modifier.padding(12.dp))
                 val visible = bookmarks.filter { category.isBlank() || it.category == category }
-                if (visible.isEmpty()) Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Text(stringResource(R.string.search_no_bookmark)) }
+                if (visible.isEmpty()) SearchEmptyState(stringResource(R.string.search_no_bookmark), onAddBookmarkClick) { validate(onSearchThisDevice()) }
                 else LazyColumn {
                     items(visible, key = { it.id ?: "${it.name}:${it.device}" }) { bookmark ->
                         val selected = uiState.searchList.any { it.device == bookmark.device }
@@ -106,7 +109,7 @@ fun SearchScreen(
                 }
             } else {
                 if (historyList.isNotEmpty()) TextButton(onDeleteAllHistory, Modifier.align(Alignment.End)) { Text(stringResource(R.string.delete_item)) }
-                if (historyList.isEmpty()) Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Text(stringResource(R.string.search_no_history)) }
+                if (historyList.isEmpty()) SearchEmptyState(stringResource(R.string.search_no_history), null) { validate(onSearchThisDevice()) }
                 else LazyColumn {
                     items(historyList, key = { it.device.toString() }) { history ->
                         Row(Modifier.fillMaxWidth().clickable { validate(onDeviceClick(history.device)) }.padding(start = 16.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -139,6 +142,26 @@ fun SearchScreen(
             }
         }
     }
+    }
+}
+
+@Composable
+private fun SearchEmptyState(label: String, addBookmark: (() -> Unit)?, searchDevice: () -> Unit) {
+    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(label, style = MaterialTheme.typography.bodyMedium)
+            Spacer(Modifier.height(16.dp))
+            if (addBookmark != null) {
+                OutlinedButton(addBookmark, colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary), contentPadding = PaddingValues(horizontal = 12.dp)) {
+                    Icon(OneIcons.Bookmark, null, Modifier.size(18.dp))
+                    Text(stringResource(FeatureR.string.search_add_bookmark), Modifier.padding(start = 4.dp))
+                }
+            }
+            OutlinedButton(searchDevice, colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary), contentPadding = PaddingValues(horizontal = 12.dp)) {
+                Icon(OneIcons.Search, null, Modifier.size(18.dp))
+                Text(stringResource(FeatureR.string.suggestion_search_my_device), Modifier.padding(start = 4.dp))
+            }
+        }
     }
 }
 

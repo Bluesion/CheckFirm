@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -54,32 +57,27 @@ fun BookmarkOrderDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .selectable(selected = selectedOrder == key, role = Role.RadioButton) { onConfirm(key, isAscending) }
+                        .heightIn(min = 48.dp)
                         .padding(vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(
-                        text = label,
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.weight(1f),
-                    )
-                    OneRadioButton(
-                        selected = selectedOrder == key,
-                        onClick = null,
-                    )
+                    OneRadioButton(selected = selectedOrder == key, onClick = null, modifier = Modifier.width(48.dp))
+                    Text(label, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
                 }
             }
-            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+            androidx.compose.foundation.layout.Spacer(Modifier.padding(top = 16.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .toggleable(value = !isAscending, role = Role.Switch) { onConfirm(selectedOrder, !it) }
-                    .padding(vertical = 8.dp),
+                    .heightIn(min = 56.dp)
+                        .padding(vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
                     text = stringResource(R.string.settings_bookmark_order_by_desc),
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.weight(1f),
                 )
                 OneSwitch(
@@ -88,6 +86,7 @@ fun BookmarkOrderDialog(
                 )
             }
         }
+        androidx.compose.foundation.layout.Spacer(Modifier.height(16.dp))
         TextButton(onDismiss, Modifier.fillMaxWidth()) { Text(stringResource(android.R.string.ok), color = MaterialTheme.colorScheme.onSurface) }
     }
 }

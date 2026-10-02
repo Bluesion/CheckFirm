@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.illusion.checkfirm.core.designsystem.R
 import com.illusion.checkfirm.core.designsystem.component.*
 import com.illusion.checkfirm.feature.settings.R as FeatureR
@@ -44,7 +45,7 @@ fun FirmwareManualScreen(
             .padding(bottom = padding.calculateBottomPadding() + 12.dp)) {
             ManualCard(stringResource(FeatureR.string.help_firmware_manual_description), Modifier.padding(12.dp))
             OneTab(listOf("BUILD\nA720SKSU3BRK1", "CSC\nA720SSKC3BRK1", "BASEBAND\nA720NKOU3BRK1"),
-                tab, { tab = it }, Modifier.padding(top = 16.dp), textStyle = MaterialTheme.typography.bodyMedium)
+                tab, { tab = it }, Modifier.padding(top = 16.dp), indicatorColor = MaterialTheme.colorScheme.primary, textStyle = MaterialTheme.typography.bodySmall)
             ManualCard(stringResource(when (tab) {
                 0 -> FeatureR.string.help_firmware_manual_build_description
                 1 -> FeatureR.string.help_firmware_manual_csc_description
@@ -56,7 +57,7 @@ fun FirmwareManualScreen(
                     codes.forEachIndexed { index, code ->
                         Card(onClick = { detail = index }, shape = OneCardShape,
                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
-                            Box(Modifier.defaultMinSize(minWidth = 32.dp, minHeight = 48.dp).padding(8.dp), contentAlignment = Alignment.Center) { Text(code) }
+                            Box(Modifier.padding(8.dp), contentAlignment = Alignment.Center) { Text(code, style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 16.sp)) }
                         }
                     }
                 }
@@ -74,6 +75,6 @@ fun FirmwareManualScreen(
 @Composable
 private fun ManualCard(text: String, modifier: Modifier = Modifier) {
     OneCard(modifier.fillMaxWidth()) {
-        Text(text, Modifier.padding(12.dp), style = MaterialTheme.typography.bodyMedium)
+        Text(text, Modifier.padding(12.dp), style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 16.sp))
     }
 }

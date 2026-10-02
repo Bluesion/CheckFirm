@@ -1,3 +1,5 @@
 <resources>
     <string name="multi_search_limit">Puteți căuta până la 5 dispozitive</string>
+    <string name="search_add_bookmark">Adaugă marcaj</string>
+    <string name="suggestion_search_my_device">Caută acest dispozitiv</string>
 </resources>

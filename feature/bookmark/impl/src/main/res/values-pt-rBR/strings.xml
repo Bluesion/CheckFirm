@@ -6,4 +6,5 @@
     <string name="category_edit_name">Nome da Categoria</string>
     <string name="category_edit_name_error_all">O nome da categoria não pode ser Todos.</string>
     <string name="category_edit_name_error_empty">O nome da categoria não pode estar vazio!</string>
+    <string name="bookmark_name_error">Por favor, nomeie este favorito!</string>
 </resources>

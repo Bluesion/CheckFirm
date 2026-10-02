@@ -18,6 +18,7 @@ object NavModule {
         entry<SearchRouteNavKey> {
             SearchRoute(
                 onNavigationIconClick = navigator::goBack,
+                onAddBookmarkClick = { navigator.goTo(com.illusion.checkfirm.feature.bookmark.api.BookmarkRouteNavKey) },
             )
         }
     }

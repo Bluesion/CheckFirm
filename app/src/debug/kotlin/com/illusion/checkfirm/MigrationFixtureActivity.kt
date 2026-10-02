@@ -51,7 +51,7 @@ private val resultFixture = SearchResult(devices.first(), Firmware(
 private fun Fixture(screen: String, populated: Boolean, theme: String, back: () -> Unit) {
     val bookmarks = if (populated) bookmarksFixture.asReversed() else emptyList()
     val categories = if (populated) listOf(Category("Phones", 1, 0), Category("A long category name for truncation checks", 2, 1)) else emptyList()
-    var preference by remember { mutableStateOf(Preference(theme = theme, isFirebaseEnabled = false, isQuickSearchBarEnabled = populated, profileName = if (populated) "Fixture user with a long profile name" else "Unknown")) }
+    var preference by remember { mutableStateOf(Preference(isBookmarkAscOrder = false, theme = theme, isFirebaseEnabled = false, isQuickSearchBarEnabled = populated, profileName = if (populated) "Fixture user with a long profile name" else "Unknown")) }
     var dialog by remember { mutableStateOf(when (screen) {
         "profile" -> PreferenceDialog.Profile; "theme" -> PreferenceDialog.Theme; "language" -> PreferenceDialog.Language;
         "order" -> PreferenceDialog.BookmarkOrder; "reset" -> PreferenceDialog.BookmarkReset; else -> PreferenceDialog.None
@@ -73,7 +73,7 @@ private fun Fixture(screen: String, populated: Boolean, theme: String, back: () 
             onWelcomeSearchClick = {}, onInfoCatcherClick = {}, onCategoryIconClick = {}, onCategoryPick = {}, onBookmarkChipClick = {},
             onCategoryDialogDismiss = {}, onResultClick = { result, official -> openedResult = result; openedOfficial = official }, onResultDismiss = { openedResult = null }, onCopy = {}, onOpenOfficialDoc = {}, onOpenSherlock = {}, onOpenReport = {}, onOpenFirmwareManual = {},
         )
-        "search" -> SearchScreen(uiState = search, onModelChange = { search = search.copy(model = it) }, onCscChange = { search = search.copy(csc = it) }, onDeviceClick = { device -> search = search.copy(searchList = if (search.searchList.any { it.device == device }) search.searchList.filterNot { it.device == device } else search.searchList + SearchDeviceItem(device)); com.illusion.checkfirm.feature.search.util.SearchValidationResult.SUCCESS }, onRemoveFromSearchList = { device -> search = search.copy(searchList = search.searchList.filterNot { it.device == device }) }, historyList = if (populated) devices.mapIndexed { i, d -> SearchHistory(d, Date(2026, 9, 24 + i)) }.asReversed() else emptyList(), bookmarks = bookmarks, onNavigationIconClick = back)
+        "search" -> SearchScreen(categories = categories.map { it.name }, uiState = search, onModelChange = { search = search.copy(model = it) }, onCscChange = { search = search.copy(csc = it) }, onDeviceClick = { device -> search = search.copy(searchList = if (search.searchList.any { it.device == device }) search.searchList.filterNot { it.device == device } else search.searchList + SearchDeviceItem(device)); com.illusion.checkfirm.feature.search.util.SearchValidationResult.SUCCESS }, onRemoveFromSearchList = { device -> search = search.copy(searchList = search.searchList.filterNot { it.device == device }) }, historyList = if (populated) devices.mapIndexed { i, d -> SearchHistory(d, Date(2026, 9, 24 + i)) }.asReversed() else emptyList(), bookmarks = bookmarks, onNavigationIconClick = back)
         "bookmark", "bookmarkdialog", "category" -> BookmarkScreen(
             uiState = bookmarkState, initialTab = if (screen == "category") 1 else 0,
             onExpandedChange = { bookmarkState = bookmarkState.copy(expanded = it) }, onCategoryChange = { selected -> bookmarkState = bookmarkState.copy(selectedCategory = selected, bookmarks = bookmarks.filter { selected.isBlank() || it.category == selected }) }, onEditingBookmarkChange = { bookmarkState = bookmarkState.copy(editingBookmark = it) }, onShowNewBookmarkChange = { bookmarkState = bookmarkState.copy(showNewBookmark = it) }, onAddBookmark = {}, onEditBookmark = {}, onDeleteBookmark = {}, onItemClick = {}, onNavigationIconClick = back,
@@ -82,8 +82,18 @@ private fun Fixture(screen: String, populated: Boolean, theme: String, back: () 
             var state by remember { mutableStateOf(CategoryEditUiState(name = if (populated) "Phones" else "", bookmarks = bookmarks, selected = bookmarks.filter { it.category == "Phones" }.map { it.deviceKey() }.toSet())) }
             CategoryScreen(state, { state = state.copy(name = it) }, { b -> state = state.copy(selected = if (b.deviceKey() in state.selected) state.selected - b.deviceKey() else state.selected + b.deviceKey()) }, {}, back)
         }
-        "welcome", "welcomedialog" -> WelcomeSearchScreen(uiState = WelcomeSearchUiState(isWelcomeSearchEnabled = false, devices = if (populated) devices.sortedBy { it.storageKey } else emptyList(), bookmarks = bookmarks, showDialog = screen == "welcomedialog"), onNavigationIconClick = back)
-        "catcher", "catcherdialog" -> InfoCatcherScreen(uiState = InfoCatcherUiState(devices = if (populated) devices.sortedBy { it.storageKey } else emptyList(), bookmarks = bookmarks, showDialog = screen == "catcherdialog"), onNavigationIconClick = back, onEnableChange = {}, onAddDeviceClick = {}, onDeleteDevice = {}, onDialogDismiss = back, onDialogModelChange = {}, onDialogCscChange = {}, onSelectBookmark = {}, onAddDevice = { _, _ -> })
+        "welcome", "welcomedialog" -> {
+            var state by remember { mutableStateOf(WelcomeSearchUiState(isWelcomeSearchEnabled = false, devices = if (populated) devices.sortedBy { it.storageKey } else emptyList(), bookmarks = bookmarks, showDialog = screen == "welcomedialog")) }
+            WelcomeSearchScreen(state, onNavigationIconClick = back, onShowDialogChange = { state = state.copy(showDialog = it) },
+                onModelChange = { state = state.copy(model = it) }, onCscChange = { state = state.copy(csc = it) },
+                onSelectBookmark = { state = state.copy(model = it.device.model, csc = it.device.csc) })
+        }
+        "catcher", "catcherdialog" -> {
+            var state by remember { mutableStateOf(InfoCatcherUiState(devices = if (populated) devices.sortedBy { it.storageKey } else emptyList(), bookmarks = if (populated) bookmarksFixture else emptyList(), showDialog = screen == "catcherdialog")) }
+            InfoCatcherScreen(state, back, onEnableChange = {}, onAddDeviceClick = { state = state.copy(showDialog = true) }, onDeleteDevice = {},
+                onDialogDismiss = { state = state.copy(showDialog = false) }, onDialogModelChange = { state = state.copy(dialogModel = it) },
+                onDialogCscChange = { state = state.copy(dialogCsc = it) }, onSelectBookmark = { state = state.copy(dialogModel = it.device.model, dialogCsc = it.device.csc) }, onAddDevice = { _, _ -> })
+        }
         "report" -> ReportScreen(reportState, { bug -> reportState = reportState.copy(bugTypes = if (bug in reportState.bugTypes) reportState.bugTypes - bug else reportState.bugTypes + bug) }, { reportState = reportState.copy(userMessage = it) }, {}, back)
         "sherlock" -> {
             var state by remember { mutableStateOf(SherlockUiState(buildPrefix = "S928BXX", cscPrefix = "S928BOXM", basebandPrefix = "S928BXX", manualBuild = "U3AXL5", manualCsc = "3AXL5", manualBaseband = "U3AXL5", scriptStart = "U3AXL5", scriptEnd = "U3A${"ZJ"}Z")) }

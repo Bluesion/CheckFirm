@@ -1,3 +1,5 @@
 <resources>
     <string name="multi_search_limit">ඔබට උපාංග 5ක් දක්වා සෙවිය හැක</string>
+    <string name="search_add_bookmark">Bookmak එකතු කරන්න</string>
+    <string name="suggestion_search_my_device">මෙම උපාංගය සොයන්න</string>
 </resources>

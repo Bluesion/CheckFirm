@@ -5,6 +5,13 @@ import android.content.Intent
 import android.os.Build
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import com.illusion.checkfirm.core.designsystem.component.OneBottomSheetDialog
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -178,15 +185,22 @@ fun PreferenceScreen(
             onConfirm = { order, ascending -> onBookmarkOrderChange(order, ascending) },
         )
 
-        PreferenceDialog.BookmarkReset -> OneAlertDialog(
+        PreferenceDialog.BookmarkReset -> OneBottomSheetDialog(
             title = stringResource(FeatureR.string.settings_bookmark_reset_dialog_title),
-            text = stringResource(FeatureR.string.settings_bookmark_reset_dialog_message),
-            onConfirmButtonClick = {
-                onResetBookmarks()
-                onActiveDialogChange(PreferenceDialog.None)
-            },
-            onDismissButtonClick = { onActiveDialogChange(PreferenceDialog.None) },
-        )
+            titleColor = MaterialTheme.colorScheme.error,
+            onDismiss = { onActiveDialogChange(PreferenceDialog.None) },
+        ) {
+            Text(stringResource(FeatureR.string.settings_bookmark_reset_dialog_message), style = MaterialTheme.typography.bodyMedium)
+            Spacer(Modifier.height(16.dp))
+            Row(Modifier.fillMaxWidth()) {
+                TextButton({ onActiveDialogChange(PreferenceDialog.None) }, Modifier.weight(1f)) {
+                    Text(stringResource(android.R.string.cancel), color = MaterialTheme.colorScheme.onSurface)
+                }
+                TextButton({ onResetBookmarks(); onActiveDialogChange(PreferenceDialog.None) }, Modifier.weight(1f)) {
+                    Text(stringResource(android.R.string.ok), color = MaterialTheme.colorScheme.error)
+                }
+            }
+        }
 
         PreferenceDialog.None -> Unit
     }

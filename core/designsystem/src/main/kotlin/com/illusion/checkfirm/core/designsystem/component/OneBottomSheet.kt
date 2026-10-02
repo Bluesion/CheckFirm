@@ -30,6 +30,7 @@ import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 fun OneBottomSheetDialog(
     title: String,
     onDismiss: () -> Unit,
+    titleColor: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
     content: @Composable ColumnScope.() -> Unit,
@@ -53,6 +54,7 @@ fun OneBottomSheetDialog(
         ) {
             Text(
                 text = title,
+                color = titleColor,
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
             )

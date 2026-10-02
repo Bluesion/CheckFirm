@@ -1,3 +1,5 @@
 <resources>
     <string name="multi_search_limit">Můžete vyhledat až 5 zařízení</string>
+    <string name="search_add_bookmark">Přidat záložku</string>
+    <string name="suggestion_search_my_device">Vyhledat toto zařízení</string>
 </resources>

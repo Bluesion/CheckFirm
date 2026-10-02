@@ -6,4 +6,5 @@
     <string name="category_edit_name">ප්‍රවර්ග නාමය</string>
     <string name="category_edit_name_error_all">ප්‍රවර්ග නාමය සියල්ල විය නොහැක.</string>
     <string name="category_edit_name_error_empty">ප්‍රවර්ග නාමය හිස් විය නොහැක!</string>
+    <string name="bookmark_name_error">කරුණාකර මෙම Bookmak නම් කරන්න!</string>
 </resources>
