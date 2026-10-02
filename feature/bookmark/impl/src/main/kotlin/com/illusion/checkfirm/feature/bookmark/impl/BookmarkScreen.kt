@@ -36,6 +36,7 @@ fun BookmarkScreen(
     onDeleteBookmark: (Device) -> Unit,
     onItemClick: (Bookmark) -> Unit,
     onNavigationIconClick: () -> Unit,
+    onCategoryClick: () -> Unit = {},
 ) {
     OneScaffold(
         title = stringResource(R.string.bookmark),
@@ -51,6 +52,11 @@ fun BookmarkScreen(
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(24.dp),
                 )
+            }
+        },
+        actions = {
+            OneNavButton(shape = androidx.compose.foundation.shape.CircleShape, modifier = Modifier.size(48.dp), onClick = onCategoryClick) {
+                Icon(OneIcons.Category, contentDescription = stringResource(R.string.category))
             }
         },
         floatingActionButton = {

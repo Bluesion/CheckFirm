@@ -43,12 +43,13 @@ fun BookmarkDialog(
     onDismiss: () -> Unit,
     onConfirm: (Bookmark) -> Unit,
 ) {
+    val allLabel = stringResource(R.string.category_all)
     var name by remember { mutableStateOf(initial?.name.orEmpty()) }
     var model by remember { mutableStateOf(initial?.device?.model.orEmpty()) }
     var csc by remember { mutableStateOf(initial?.device?.csc.orEmpty()) }
     var category by remember {
         mutableStateOf(
-            initial?.category ?: categories.firstOrNull().orEmpty()
+            initial?.category.orEmpty()
         )
     }
     var categoryExpanded by remember { mutableStateOf(false) }
@@ -88,7 +89,7 @@ fun BookmarkDialog(
             )
             Box(modifier = Modifier.fillMaxWidth()) {
                 OutlinedTextField(
-                    value = category,
+                    value = category.ifBlank { allLabel },
                     onValueChange = {},
                     readOnly = true,
                     label = { Text(stringResource(R.string.category)) },
@@ -109,7 +110,7 @@ fun BookmarkDialog(
                         DropdownMenuItem(
                             text = { Text(item) },
                             onClick = {
-                                category = item
+                                category = if (item == allLabel) "" else item
                                 categoryExpanded = false
                             },
                         )
@@ -120,9 +121,10 @@ fun BookmarkDialog(
         Spacer(Modifier.height(16.dp))
         Button(
             onClick = {
-                onConfirm(Bookmark(name.trim(), Device(model.trim(), csc.trim()), category))
+                onConfirm(Bookmark(name.trim(), Device(model.trim(), csc.trim()), category,
+                    id = initial?.id, position = initial?.position ?: 0))
             },
-            enabled = name.isNotBlank() && model.isNotBlank() && csc.length == 3 && category.isNotBlank(),
+            enabled = name.isNotBlank() && model.isNotBlank() && csc.length == 3,
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(22.dp),
         ) {

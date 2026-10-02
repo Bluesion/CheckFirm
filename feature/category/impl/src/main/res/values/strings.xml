@@ -3,4 +3,9 @@
     <string name="category_name">Category name</string>
     <string name="category_name_error_all">Category name cannot be All.</string>
     <string name="category_name_error_empty">Category name should not be empty.</string>
+    <string name="navigate_back">Back</string>
+    <string name="category_add">Add category</string>
+    <string name="category_delete">Delete %1$s</string>
+    <string name="category_devices_error_empty">Select at least one device.</string>
+    <string name="category_name_error_duplicate">A category with this name already exists.</string>
 </resources>

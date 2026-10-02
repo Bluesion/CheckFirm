@@ -2,7 +2,8 @@ package com.illusion.checkfirm.feature.category.impl
 
 import com.illusion.checkfirm.core.navigation.EntryProviderInstaller
 import com.illusion.checkfirm.core.navigation.Navigator
-import com.illusion.checkfirm.feature.bookmark.api.CategoryRouteNavKey
+import com.illusion.checkfirm.feature.category.api.CategoryRouteNavKey
+import com.illusion.checkfirm.feature.category.api.CategoryEditRouteNavKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,12 +18,18 @@ object NavModule {
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
         entry<CategoryRouteNavKey> {
-            CategoryRoute(
+            CategoryListRoute(
                 onNavigationIconClick = navigator::goBack,
                 onEditCategory = { name ->
                     navigator.goTo(CategoryEditRouteNavKey(categoryName = name))
                 },
                 onNewCategory = { navigator.goTo(CategoryEditRouteNavKey(categoryName = null)) },
+            )
+        }
+        entry<CategoryEditRouteNavKey> { key ->
+            CategoryRoute(
+                initialName = key.categoryName,
+                onNavigationIconClick = navigator::goBack,
             )
         }
     }

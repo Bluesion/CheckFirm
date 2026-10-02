@@ -8,12 +8,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun BookmarkRoute(
     onNavigationIconClick: () -> Unit,
+    onCategoryClick: () -> Unit,
     viewModel: BookmarkViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     BookmarkScreen(
         uiState = uiState,
+        onCategoryClick = onCategoryClick,
         onExpandedChange = viewModel::updateExpanded,
         onCategoryChange = viewModel::updateSelectedCategory,
         onEditingBookmarkChange = viewModel::updateEditingBookmark,

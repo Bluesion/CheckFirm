@@ -3,6 +3,7 @@ package com.illusion.checkfirm.feature.bookmark.impl
 import com.illusion.checkfirm.core.navigation.EntryProviderInstaller
 import com.illusion.checkfirm.core.navigation.Navigator
 import com.illusion.checkfirm.feature.bookmark.api.BookmarkRouteNavKey
+import com.illusion.checkfirm.feature.category.api.CategoryRouteNavKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +20,7 @@ object NavModule {
         entry<BookmarkRouteNavKey> {
             BookmarkRoute(
                 onNavigationIconClick = navigator::goBack,
+                onCategoryClick = { navigator.goTo(CategoryRouteNavKey) },
             )
         }
     }

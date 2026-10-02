@@ -29,12 +29,15 @@ class CategoryViewModel @Inject constructor(
     val events: SharedFlow<CategoryEditEvent> = _events.asSharedFlow()
 
     private var initialized = false
+    private var initialCategory: Category? = null
 
     fun initialize(initialName: String?) {
         if (initialized) return
         initialized = true
         viewModelScope.launch {
+            initialCategory = repository.getAllCategory().first().find { it.name == initialName }
             val bookmarks = repository.getAllBookmark("date", true).first()
+                .filter { it.category.isBlank() || it.category == initialName }
             val preselected = if (initialName != null) {
                 bookmarks.filter { it.category == initialName }.map { it.deviceKey() }.toSet()
             } else emptySet()
@@ -79,11 +82,19 @@ class CategoryViewModel @Inject constructor(
             return@launch
         }
 
-        // Rename: delete old + add new (Category has no ID; name is the key).
-        if (state.initialName != null && state.initialName != newName) {
-            repository.deleteCategory(state.initialName)
+        if (state.selected.isEmpty()) {
+            _uiState.update { it.copy(nameError = NameError.NoDevices) }
+            return@launch
         }
-        repository.addCategory(Category(newName))
+        if (repository.getAllCategory().first().any {
+                it.name == newName && it.name != state.initialName
+            }) {
+            _uiState.update { it.copy(nameError = NameError.Duplicate) }
+            return@launch
+        }
+        val existing = initialCategory
+        if (existing == null) repository.addCategory(Category(newName))
+        else repository.editCategory(existing.copy(name = newName))
 
         val previouslySelected = state.bookmarks
             .filter { it.category == state.initialName }

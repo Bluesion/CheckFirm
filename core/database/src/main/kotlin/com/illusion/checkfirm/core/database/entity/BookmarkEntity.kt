@@ -22,16 +22,18 @@ class BookmarkEntity(
 
 fun BookmarkEntity.asExternalModel() = Bookmark(
     name = name,
+    id = id,
+    position = position,
     device = Device(model, csc),
     category = category,
 )
 
 fun Bookmark.asEntity() = BookmarkEntity(
-    id = null,
+    id = id,
     name = name,
     model = device.model,
     csc = device.csc,
     device = device.toString(),
     category = category,
-    position = 0
+    position = position
 )

@@ -10,13 +10,14 @@ import com.illusion.checkfirm.core.designsystem.R
 
 @Composable
 fun CategoryRoute(
+    initialName: String?,
     onNavigationIconClick: () -> Unit,
     viewModel: CategoryViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val reservedAllLabel = stringResource(R.string.category_all)
 
-    LaunchedEffect("All") { viewModel.initialize(initialName = "All") }
+    LaunchedEffect(initialName) { viewModel.initialize(initialName) }
 
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->

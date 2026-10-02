@@ -1,6 +1,5 @@
 package com.illusion.checkfirm.core.designsystem.component
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
@@ -24,10 +23,9 @@ fun OneTab(
     modifier: Modifier = Modifier,
     indicatorColor: Color? = null,
 ) {
-    val darkTheme = isSystemInDarkTheme()
     val containerColor = MaterialTheme.colorScheme.background
-    val contentColor = if (darkTheme) Color(0xFFFFFFFF) else Color(0xFF000000)
-    val unselectedContentColor = if (darkTheme) Color(0xFFA9A9A9) else Color(0xFF636363)
+    val contentColor = MaterialTheme.colorScheme.onSurface
+    val unselectedContentColor = CheckFirmTheme.colors.settingsDescription
     val resolvedIndicator = indicatorColor ?: contentColor
 
     TabRow(

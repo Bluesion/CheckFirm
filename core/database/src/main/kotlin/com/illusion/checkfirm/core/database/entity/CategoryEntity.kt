@@ -17,10 +17,12 @@ class CategoryEntity(
 
 fun CategoryEntity.asExternalModel() = Category(
     name = name,
+    id = id,
+    position = position,
 )
 
 fun Category.asEntity() = CategoryEntity(
-    id = null,
+    id = id,
     name = name,
-    position = 0
+    position = position
 )

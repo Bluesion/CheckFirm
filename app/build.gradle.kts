@@ -87,6 +87,9 @@ dependencies {
     implementation(projects.feature.bookmark.api)
     implementation(projects.feature.bookmark.impl)
 
+    implementation(projects.feature.category.api)
+    implementation(projects.feature.category.impl)
+
     // Force update
     implementation(projects.feature.forceupdate.api)
     implementation(projects.feature.forceupdate.impl)

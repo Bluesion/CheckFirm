@@ -44,7 +44,8 @@ fun CategoryScreen(
     onNavigationIconClick: () -> Unit,
 ) {
     OneScaffold(
-        title = stringResource(R.string.category),
+        title = "",
+        expandable = false,
         navigationIcon = {
             OneNavButton(
                 onClick = onNavigationIconClick,
@@ -79,6 +80,8 @@ fun CategoryScreen(
                     when (uiState.nameError) {
                         NameError.Blank -> Text(stringResource(FeatureR.string.category_name_error_empty))
                         NameError.Reserved -> Text(stringResource(FeatureR.string.category_name_error_all))
+                        NameError.NoDevices -> Text(stringResource(FeatureR.string.category_devices_error_empty))
+                        NameError.Duplicate -> Text(stringResource(FeatureR.string.category_name_error_duplicate))
                         null -> {}
                     }
                 },

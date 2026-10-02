@@ -54,7 +54,7 @@ fun CategoryDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
-                            onCategoryPick(name)
+                            onCategoryPick(if (name == all) "" else name)
                             onDismiss()
                         }
                         .padding(vertical = 8.dp),
@@ -68,7 +68,7 @@ fun CategoryDialog(
                     OneRadioButton(
                         selected = name == selected,
                         onClick = {
-                            onCategoryPick(name)
+                            onCategoryPick(if (name == all) "" else name)
                             onDismiss()
                         },
                     )

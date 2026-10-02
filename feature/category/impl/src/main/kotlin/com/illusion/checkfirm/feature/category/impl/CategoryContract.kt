@@ -12,7 +12,7 @@ data class CategoryEditUiState(
     val selected: Set<DeviceKey> = emptySet(),
 )
 
-enum class NameError { Blank, Reserved }
+enum class NameError { Blank, Reserved, NoDevices, Duplicate }
 
 /** Stable key derived from device.toString() — matches DB device-column shape. */
 @JvmInline
