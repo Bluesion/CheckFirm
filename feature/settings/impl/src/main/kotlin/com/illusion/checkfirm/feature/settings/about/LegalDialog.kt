@@ -27,8 +27,6 @@ import com.illusion.checkfirm.core.designsystem.preview.ComponentPreview
 import com.illusion.checkfirm.core.designsystem.theme.CheckFirmTheme
 import com.illusion.checkfirm.feature.settings.R as FeatureR
 
-private val URL_PATTERN = Regex("https?://[^\\s]+")
-
 @Composable
 fun LegalDialog(onDismiss: () -> Unit) {
     val rawText = stringResource(FeatureR.string.legal_text)
@@ -58,26 +56,28 @@ fun LegalDialog(onDismiss: () -> Unit) {
 
 private fun String.linkify(linkColor: Color): AnnotatedString = buildAnnotatedString {
     val text = this@linkify
+    val nativeLinks = android.text.SpannableString(text)
+    android.text.util.Linkify.addLinks(nativeLinks, android.text.util.Linkify.WEB_URLS)
     var lastEnd = 0
-    URL_PATTERN.findAll(text).forEach { match ->
-        if (match.range.first > lastEnd) {
-            append(text.substring(lastEnd, match.range.first))
-        }
-        withLink(
-            LinkAnnotation.Url(
-                url = match.value,
-                styles = TextLinkStyles(
-                    style = SpanStyle(color = linkColor, textDecoration = TextDecoration.Underline),
+    nativeLinks.getSpans(0, text.length, android.text.style.URLSpan::class.java)
+        .sortedBy(nativeLinks::getSpanStart)
+        .forEach { span ->
+            val start = nativeLinks.getSpanStart(span)
+            val end = nativeLinks.getSpanEnd(span)
+            append(text.substring(lastEnd, start))
+            withLink(
+                LinkAnnotation.Url(
+                    url = span.url,
+                    styles = TextLinkStyles(
+                        style = SpanStyle(color = linkColor, textDecoration = TextDecoration.Underline),
+                    ),
                 ),
-            ),
-        ) {
-            append(match.value)
+            ) {
+                append(text.substring(start, end))
+            }
+            lastEnd = end
         }
-        lastEnd = match.range.last + 1
-    }
-    if (lastEnd < text.length) {
-        append(text.substring(lastEnd))
-    }
+    append(text.substring(lastEnd))
 }
 
 @ComponentPreview
