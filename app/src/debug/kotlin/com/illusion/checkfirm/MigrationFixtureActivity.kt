@@ -32,7 +32,8 @@ class MigrationFixtureActivity : ComponentActivity() {
         val screen = intent.getStringExtra("screen") ?: "home"
         val populated = intent.getBooleanExtra("populated", false)
         val theme = intent.getStringExtra("theme") ?: "light"
-        setContent { CheckFirmTheme(theme) { Surface { Fixture(screen, populated, theme) { finish() } } } }
+        val categoryCount = intent.getIntExtra("categoryCount", 2).coerceIn(0, 100)
+        setContent { CheckFirmTheme(theme) { Surface { Fixture(screen, populated, theme, categoryCount) { finish() } } } }
     }
 }
 
@@ -48,9 +49,10 @@ private val resultFixture = SearchResult(devices.first(), Firmware(
 ))
 
 @Composable
-private fun Fixture(screen: String, populated: Boolean, theme: String, back: () -> Unit) {
+private fun Fixture(screen: String, populated: Boolean, theme: String, categoryCount: Int, back: () -> Unit) {
     val bookmarks = if (populated) bookmarksFixture.asReversed() else emptyList()
-    val categories = if (populated) listOf(Category("Phones", 1, 0), Category("A long category name for truncation checks", 2, 1)) else emptyList()
+    val categories = if (populated) (listOf(Category("Phones", 1, 0), Category("A long category name for truncation checks", 2, 1)) +
+        List((categoryCount - 2).coerceAtLeast(0)) { i -> Category("Fixture category ${i + 3}", (i + 3).toLong(), i + 2) }).take(categoryCount) else emptyList()
     var preference by remember { mutableStateOf(Preference(isBookmarkAscOrder = false, theme = theme, isFirebaseEnabled = false, isQuickSearchBarEnabled = populated, profileName = if (populated) "Fixture user with a long profile name" else "Unknown")) }
     var dialog by remember { mutableStateOf(when (screen) {
         "profile" -> PreferenceDialog.Profile; "theme" -> PreferenceDialog.Theme; "language" -> PreferenceDialog.Language;
@@ -60,18 +62,21 @@ private fun Fixture(screen: String, populated: Boolean, theme: String, back: () 
     var bookmarkState by remember { mutableStateOf(BookmarkUiState(bookmarks = bookmarks, categories = categories, showNewBookmark = screen == "bookmarkdialog")) }
     var openedResult by remember { mutableStateOf<SearchResult?>(if (screen == "firmware") resultFixture else null) }
     var openedOfficial by remember { mutableStateOf(true) }
+    var showCategoryDialog by remember { mutableStateOf(false) }
+    var selectedCategory by remember { mutableStateOf("") }
     var reportState by remember { mutableStateOf(ReportUiState(userMessage = if (populated) "Fixture report with enough text to verify multiline input and wrapping." else "", bugTypes = if (populated) setOf(BugType.FIRMWARE_INFO_ERROR) else emptySet())) }
     when (screen) {
         "storage" -> StorageCompatibilityFixture()
         "lifetime" -> NavigationLifetimeFixture()
         "home", "firmware", "network" -> HomeScreen(
             uiState = HomeUiState(preference = preference.copy(isQuickSearchBarEnabled = populated), bookmarks = bookmarks, categories = categories,
+                showCategoryDialog = showCategoryDialog, selectedCategory = selectedCategory,
                 results = if (populated) listOf(resultFixture, resultFixture.copy(device = devices[1])) else emptyList(),
                 resultState = if (screen == "network") ResultState.NetworkError else if (populated) ResultState.Success else ResultState.Idle,
                 openedDialog = openedResult, openedDialogIsOfficial = openedOfficial),
-            visibleBookmarks = bookmarks, onSearchIconClick = {}, onBookmarkIconClick = {}, onPreferenceIconClick = {},
-            onWelcomeSearchClick = {}, onInfoCatcherClick = {}, onCategoryIconClick = {}, onCategoryPick = {}, onBookmarkChipClick = {},
-            onCategoryDialogDismiss = {}, onResultClick = { result, official -> openedResult = result; openedOfficial = official }, onResultDismiss = { openedResult = null }, onCopy = {}, onOpenOfficialDoc = {}, onOpenSherlock = {}, onOpenReport = {}, onOpenFirmwareManual = {},
+            visibleBookmarks = bookmarks.filter { selectedCategory.isBlank() || it.category == selectedCategory }, onSearchIconClick = {}, onBookmarkIconClick = {}, onPreferenceIconClick = {},
+            onWelcomeSearchClick = {}, onInfoCatcherClick = {}, onCategoryIconClick = { showCategoryDialog = true }, onCategoryPick = { selectedCategory = it }, onBookmarkChipClick = {},
+            onCategoryDialogDismiss = { showCategoryDialog = false }, onResultClick = { result, official -> openedResult = result; openedOfficial = official }, onResultDismiss = { openedResult = null }, onCopy = {}, onOpenOfficialDoc = {}, onOpenSherlock = {}, onOpenReport = {}, onOpenFirmwareManual = {},
         )
         "search" -> SearchScreen(categories = categories.map { it.name }, uiState = search, onModelChange = { search = search.copy(model = it) }, onCscChange = { search = search.copy(csc = it) }, onDeviceClick = { device -> search = search.copy(searchList = if (search.searchList.any { it.device == device }) search.searchList.filterNot { it.device == device } else search.searchList + SearchDeviceItem(device)); com.illusion.checkfirm.feature.search.util.SearchValidationResult.SUCCESS }, onRemoveFromSearchList = { device -> search = search.copy(searchList = search.searchList.filterNot { it.device == device }) }, historyList = if (populated) devices.mapIndexed { i, d -> SearchHistory(d, Date(2026, 9, 24 + i)) }.asReversed() else emptyList(), bookmarks = bookmarks, onNavigationIconClick = back)
         "bookmark", "bookmarkdialog", "category" -> BookmarkScreen(

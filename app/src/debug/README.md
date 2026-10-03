@@ -14,6 +14,8 @@ Screen values: `home`, `firmware`, `search`, `bookmark`, `category`, `categoryed
 
 Use `--ez populated false` for empty states. Populated fixtures include five devices, multiple categories, a long bookmark/profile name, report text, and official/test firmware histories. Selection and navigation-only controls can be exercised without database or service writes. Submission callbacks intentionally do nothing.
 
+The populated `home` fixture supports opening the QuickSearchBar category sheet, selecting a category to filter bookmark chips, and dismissing or reopening the sheet. Add `--ei categoryCount 30` to verify scrolling through a long list, or `--ei categoryCount 0` to verify the All-only sheet (default: 2, maximum: 100).
+
 Two additional screens verify behavior without personal records:
 
 - `storage` runs eight legacy identity, category assignment and delete assertions against disposable in-memory Room databases.
